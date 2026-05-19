@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sessions with Coach Tobi | Vocal Coaching</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --border: #1e1e2e;
+    --text: #e4e4ef;
+    --muted: #7878a0;
+    --accent: #a78bfa;
+    --accent-glow: rgba(167, 139, 250, 0.15);
+    --accent2: #818cf8;
+    --success: #34d399;
+    --gradient: linear-gradient(135deg, #a78bfa, #818cf8, #6366f1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  nav .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+  nav .logo span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin-left: 28px; transition: color 0.2s; }
+  nav a:hover { color: var(--text); }
+  nav .nav-cta {
+    background: var(--gradient); color: #fff !important; padding: 8px 20px; border-radius: 8px;
+    font-weight: 600; margin-left: 28px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+  .hero .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-glow); border: 1px solid rgba(167,139,250,0.25);
+    color: var(--accent); padding: 6px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px;
+  }
+  .hero h1 .highlight { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: var(--muted); font-size: 1.15rem; max-width: 520px; margin: 0 auto 36px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gradient); color: #fff; padding: 14px 32px; border-radius: 12px;
+    font-weight: 700; font-size: 1rem; text-decoration: none;
+    border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(167,139,250,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(167,139,250,0.4); }
+  .btn-secondary {
+    background: var(--surface); color: var(--text); padding: 14px 32px; border-radius: 12px;
+    font-weight: 600; font-size: 1rem; text-decoration: none;
+    border: 1px solid var(--border); transition: border-color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex; justify-content: center; gap: 48px;
+    padding: 48px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .num { font-size: 2rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat .label { color: var(--muted); font-size: 0.85rem; font-weight: 500; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    color: var(--accent); font-size: 0.8rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 560px; }
+
+  /* ── SERVICES ── */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 48px; }
+  .service-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px; transition: border-color 0.2s, transform 0.2s;
+  }
+  .service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .service-card .icon { font-size: 2rem; margin-bottom: 16px; }
+  .service-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+  .service-card p { color: var(--muted); font-size: 0.925rem; }
+
+  /* ── PRICING ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
+  .pricing-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 40px 32px; position: relative; transition: border-color 0.2s, transform 0.2s;
+  }
+  .pricing-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .pricing-card.featured { border-color: var(--accent); }
+  .pricing-card.featured::before {
+    content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--gradient); color: #fff; padding: 4px 16px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .pricing-card .plan-name { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .pricing-card .price { font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .pricing-card .price span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+  .pricing-card .price-note { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
+  .pricing-card ul { list-style: none; margin-bottom: 32px; }
+  .pricing-card ul li { padding: 8px 0; font-size: 0.925rem; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .pricing-card ul li::before { content: '✓'; color: var(--success); font-weight: 700; }
+  .pricing-card .btn-primary { display: block; text-align: center; width: 100%; }
+
+  /* ── LEAD CAPTURE ── */
+  .lead-section {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+    padding: 60px 40px; text-align: center; max-width: 640px; margin: 0 auto;
+  }
+  .lead-section input, .lead-section select {
+    width: 100%; padding: 14px 18px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; color: var(--text); font-size: 1rem; font-family: inherit;
+    margin-bottom: 12px; outline: none; transition: border-color 0.2s;
+  }
+  .lead-section input:focus, .lead-section select:focus { border-color: var(--accent); }
+  .lead-section .btn-primary { width: 100%; margin-top: 4px; }
+
+  /* ── SOCIAL PROOF ── */
+  .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 48px; }
+  .testimonial {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
+  }
+  .testimonial .stars { color: #fbbf24; margin-bottom: 12px; font-size: 0.9rem; }
+  .testimonial p { color: var(--muted); font-size: 0.925rem; font-style: italic; margin-bottom: 16px; }
+  .testimonial .author { font-weight: 600; font-size: 0.875rem; }
+  .testimonial .author span { color: var(--muted); font-weight: 400; }
+
+  /* ── FAQ ── */
+  .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+  .faq-item summary { font-weight: 600; font-size: 1rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-item summary::after { content: '+'; color: var(--accent); font-size: 1.2rem; }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p { color: var(--muted); font-size: 0.925rem; margin-top: 12px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); padding: 40px 24px; text-align: center;
+    color: var(--muted); font-size: 0.85rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 12px 16px; }
+    nav a:not(.nav-cta) { display: none; }
+    .stats { gap: 28px; }
+    .lead-section { padding: 36px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Sessions with <span>Coach Tobi</span></div>
+  <div>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#book" class="nav-cta">Book a Session</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="badge">🎤 1-on-1 Vocal Coaching</div>
+    <h1>Find Your <span class="highlight">Real Voice</span>.<br>Sing With Power &amp; Confidence.</h1>
+    <p>Personalized vocal coaching for beginners to advanced singers. Train from anywhere in the world — online, 1-on-1, at your pace.</p>
+    <div class="hero-buttons">
+      <a href="#book" class="btn-primary">Book Your First Session</a>
+      <a href="#pricing" class="btn-secondary">View Pricing</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="num">50+</div><div class="label">Students Coached</div></div>
+  <div class="stat"><div class="num">10+</div><div class="label">Countries</div></div>
+  <div class="stat"><div class="num">4.9★</div><div class="label">Average Rating</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What You Get</div>
+  <h2 class="section-title">Coaching That Actually Transforms</h2>
+  <p class="section-sub">Every session is tailored to your voice, your goals, and your level. No cookie-cutter lessons.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="icon">🎯</div>
+      <h3>Technique &amp; Tone</h3>
+      <p>Breath control, compression, resonance, plosives, and building a fuller, stronger sound — wherever you are now.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🎵</div>
+      <h3>Repertoire &amp; Style</h3>
+      <p>Find songs that fit your voice and range. Learn to sing like your idols — even if your voice type is different.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">📈</div>
+      <h3>Progress Tracking</h3>
+      <p>Every session is logged. You'll see exactly how you're improving — because real growth is measurable.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🎙️</div>
+      <h3>Performance Prep</h3>
+      <p>Recording sessions, live performance coaching, stage confidence — ready for the studio or the stage.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">🌍</div>
+      <h3>Online, Anywhere</h3>
+      <p>WhatsApp, Telegram, or Google Meet. Train from Lagos, London, Toronto — wherever you are.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">💡</div>
+      <h3>Personalized Homework</h3>
+      <p>Custom exercises after every session so you keep improving between lessons — not just during them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Simple, Transparent Pricing</h2>
+  <p class="section-sub">No hidden fees. No subscriptions unless you want one. Pay per session or save with a monthly plan.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Single Session</div>
+      <div class="price">$50<span>/session</span></div>
+      <div class="price-note">Perfect to try it out</div>
+      <ul>
+        <li>60-minute 1-on-1 session</li>
+        <li>Personalized vocal exercises</li>
+        <li>Session summary &amp; notes</li>
+        <li>Homework assignment</li>
+        <li>WhatsApp / Telegram / Google Meet</li>
+      </ul>
+      <a href="https://app.raenest.com/invoice/payment/RNM3A232T" class="btn-primary" target="_blank" rel="noopener">Pay $50 — Book Now</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="plan-name">Monthly Package</div>
+      <div class="price">$200<span>/month</span></div>
+      <div class="price-note">4 sessions + best value</div>
+      <ul>
+        <li>4 x 60-minute sessions</li>
+        <li>Priority scheduling</li>
+        <li>Progress tracking report</li>
+        <li>WhatsApp check-ins between sessions</li>
+        <li>Personalized practice plan</li>
+        <li>Recording &amp; performance prep</li>
+      </ul>
+      <a href="https://app.raenest.com/invoice/payment/RNM56B3LH" class="btn-primary" target="_blank" rel="noopener">Pay $200 — Get Started</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Nigeria — Single</div>
+      <div class="price">₦70,000<span>/session</span></div>
+      <div class="price-note">First Bank transfer (Naira)</div>
+      <ul>
+        <li>60-minute 1-on-1 session</li>
+        <li>All standard inclusions</li>
+        <li>Pay via Nigerian bank transfer</li>
+        <li>No conversion fees</li>
+      </ul>
+      <a href="#book" class="btn-primary">Pay in NGN</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Nigeria — Monthly</div>
+      <div class="price">₦300,000<span>/month</span></div>
+      <div class="price-note">First Bank transfer (Naira)</div>
+      <ul>
+        <li>4 x 60-minute sessions</li>
+        <li>Priority scheduling</li>
+        <li>Progress tracking report</li>
+        <li>WhatsApp check-ins between sessions</li>
+        <li>No conversion fees</li>
+      </ul>
+      <a href="#book" class="btn-primary">Pay in NGN</a>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:32px; padding:24px; background:var(--surface); border:1px solid var(--border); border-radius:16px;">
+    <p style="font-weight:600; margin-bottom:8px;">🏦 Nigerian Bank Transfer (NGN)</p>
+    <p style="color:var(--muted); font-size:0.9rem;">Bank: <strong>First Bank PLC</strong></p>
+    <p style="color:var(--muted); font-size:0.9rem;">Account: <strong>3110071863</strong></p>
+    <p style="color:var(--muted); font-size:0.9rem;">Name: <strong>PROSPER TOBI OLUMO</strong></p>
+    <p style="color:var(--muted); font-size:0.85rem; margin-top:8px;">Single: ₦70,000 · Monthly: ₦300,000</p>
+  </div>
+</section>
+
+<!-- LEAD CAPTURE -->
+<section id="book">
+  <div class="lead-section">
+    <div class="section-label">Start Here</div>
+    <h2 class="section-title" style="font-size:1.6rem;">Book Your Free Consultation</h2>
+    <p class="section-sub" style="margin: 0 auto 32px;">Tell us about your singing goals. Coach Tobi will reach out within 24 hours.</p>
+    <form action="https://formsubmit.co/prosperolumotobi@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Lead — Sessions with Coach Tobi">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="text" name="whatsapp" placeholder="WhatsApp Number (with country code)">
+      <select name="interest" required>
+        <option value="" disabled selected>I'm interested in...</option>
+        <option value="single">Single Session ($50)</option>
+        <option value="monthly">Monthly Package ($200/mo)</option>
+        <option value="ngn">Nigeria Rate (₦50,000/session)</option>
+        <option value="consult">Free Consultation First</option>
+      </select>
+      <select name="level">
+        <option value="" disabled selected>Your singing level</option>
+        <option value="beginner">Complete Beginner</option>
+        <option value="intermediate">Some Experience</option>
+        <option value="advanced">Advanced / Performing</option>
+      </select>
+      <textarea name="message" placeholder="Tell us about your singing goals..." rows="3" style="width:100%; padding:14px 18px; background:var(--bg); border:1px solid var(--border); border-radius:12px; color:var(--text); font-size:1rem; font-family:inherit; margin-bottom:12px; outline:none; resize:vertical;"></textarea>
+      <button type="submit" class="btn-primary">Send My Request →</button>
+    </form>
+    <p style="color:var(--muted); font-size:0.8rem; margin-top:16px;">Or book directly on Calendly: <a href="https://calendly.com/d/cx3t-9f8-b7r" style="color:var(--accent);" target="_blank" rel="noopener">Schedule a Call</a></p>
+    <p style="color:var(--muted); font-size:0.8rem; margin-top:8px;">Or WhatsApp Coach Tobi directly: <a href="https://wa.me/2349160106084" style="color:var(--accent);">+234 916 010 6084</a></p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-label">Results</div>
+  <h2 class="section-title">What Students Say</h2>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"I went from being afraid of my high notes to actually enjoying them. Coach Tobi knows exactly what your voice needs."</p>
+      <div class="author">David K. <span>— Low Tenor, Nigeria</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"The plosives exercise alone changed my tone completely. I sound fuller and more confident now."</p>
+      <div class="author">Sarah M. <span>— Beginner, UK</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"I was inspired by artists outside my range and thought I could never sound like them. Coach Tobi showed me how."</p>
+      <div class="author">James T. <span>— Intermediate, Canada</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common Questions</h2>
+  <div style="margin-top:32px;">
+    <details class="faq-item"><summary>Do I need any experience?</summary><p>No. Complete beginners welcome. Every session is tailored to your current level.</p></details>
+    <details class="faq-item"><summary>What platform do we use?</summary><p>WhatsApp call, Telegram call, or Google Meet — whichever works best for you.</p></details>
+    <details class="faq-item"><summary>How do I pay?</summary><p>International: PayPal or bank transfer. Nigeria: direct bank transfer in Naira (₦50,000/session).</p></details>
+    <details class="faq-item"><summary>What if I need to reschedule?</summary><p>Just give 24 hours notice and we'll move your session — no extra charge.</p></details>
+    <details class="faq-item"><summary>Is there a free trial?</summary><p>Yes — fill out the form above for a free 15-minute consultation to see if we're a good fit.</p></details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sessions with Coach Tobi. All rights reserved.</p>
+  <p style="margin-top:8px;">WhatsApp: <a href="https://wa.me/2349160106084">+234 916 010 6084</a> · <a href="mailto:prosperolumotobi@gmail.com">Email</a></p>
+</footer>
+
+</body>
+</html>
