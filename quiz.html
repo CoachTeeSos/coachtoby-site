@@ -53,6 +53,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .thank-you .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(167,139,250,.3)}
 .back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.82rem;cursor:pointer;margin-bottom:20px;background:none;border:none;font-family:inherit;padding:0;transition:color .2s}
 .back-btn:hover{color:var(--text)}
+.badge-free{display:inline-block;background:rgba(34,197,94,0.15);color:#22c55e;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:700;margin-right:6px;vertical-align:middle}
+.badge-paid{display:inline-block;background:rgba(167,139,250,0.15);color:var(--accent);padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:700;margin-right:6px;vertical-align:middle}
 @media(max-width:640px){.container{padding:60px 16px 40px}.quiz-card{padding:28px 20px}}
 </style>
 </head>
@@ -124,10 +126,10 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h2>If you could afford it, what would you do?</h2>
 <p class="subtitle">Be real. This stays between us.</p>
 <div class="options">
-<label class="option"><input type="radio" name="q6" value="free_community"> I'd join the free singers' community to start learning with others</label>
-<label class="option"><input type="radio" name="q6" value="paid_community"> I'd join the paid community — ₦2,000/month for weekly tips, Q&As, and feedback</label>
+<label class="option"><input type="radio" name="q6" value="free_community"> <span class="badge-free">FREE</span> Join the free singers' community — learn with others</label>
+<label class="option"><input type="radio" name="q6" value="paid_community"> <span class="badge-paid">₦2,000/mo</span> Join the paid community — weekly tips, Q&As, feedback</label>
 <label class="option"><input type="radio" name="q6" value="lesson"> I'd take a 1-on-1 lesson immediately</label>
-<label class="option"><input type="radio" name="q6" value="both"> Both — I want personal coaching AND the paid community</label>
+<label class="option"><input type="radio" name="q6" value="both"> <span class="badge-paid">₦2,000/mo</span> Both — 1-on-1 coaching AND the paid community</label>
 <label class="option"><input type="radio" name="q6" value="nothing"> Honestly? I'd probably still do nothing</label>
 </div>
 </div>
@@ -355,13 +357,13 @@ var downloadBtn=document.getElementById('downloadBtn');
 downloadBtn.href=pdfUrl;
 downloadBtn.download=name.replace(/\s+/g,'_')+'_Singing_Guide.pdf';
 
-// Submit lead data
-var f=document.createElement('form');f.method='POST';f.action='https://formsubmit.co/prosperolumotobi@gmail.com';
+// Submit lead data via AJAX (so page doesn't navigate away)
+var leadData=new URLSearchParams();
 var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
-Object.keys(h).forEach(function(ky){var i=document.createElement('input');i.type='hidden';i.name=ky;i.value=h[ky];f.appendChild(i);});
-document.body.appendChild(f);f.submit();
+Object.keys(h).forEach(function(ky){leadData.append(ky,h[ky]);});
+fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:leadData,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
 
-// Show thank you
+// Show thank you immediately
 document.getElementById('thankYouName').textContent=name;
 document.querySelector('.quiz-card').style.display='none';
 document.getElementById('thankYou').classList.add('active');
