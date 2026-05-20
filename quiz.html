@@ -63,7 +63,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <h1>Which Singer Are You?</h1>
 <p>Take this 30-second quiz. Find out what's actually holding you back — and get a free personalized guide.</p>
 </div>
-<div class="quiz-progress" id="progressBar"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+<div class="quiz-progress" id="progressBar"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
 <div class="quiz-card">
 <div class="quiz-step active" data-step="1">
 <h2>What best describes where you are right now?</h2>
@@ -73,6 +73,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <label class="option"><input type="radio" name="q1" value="record"> Singing for years without a single record</label>
 <label class="option"><input type="radio" name="q1" value="choir"> Choir member, but never the Lead Singer</label>
 <label class="option"><input type="radio" name="q1" value="md"> MD struggling to hold the team together (Vocally or managerially)</label>
+<label class="option"><input type="radio" name="q1" value="beginner"> I sound good in my head till I open my mouth. I want to learn.</label>
 </div>
 </div>
 <div class="quiz-step" data-step="2">
@@ -108,6 +109,27 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <label class="option"><input type="radio" name="q4" value="decade"> So long I've almost given up on it</label>
 </div>
 </div>
+<div class="quiz-step" data-step="5">
+<button class="back-btn" onclick="goBack()">&larr; Back</button>
+<h2>Is getting a solution a priority for you right now?</h2>
+<p class="subtitle">No wrong answer. This helps me serve you better.</p>
+<div class="options">
+<label class="option"><input type="radio" name="q5" value="yes"> Yes — I'm ready to do something about this</label>
+<label class="option"><input type="radio" name="q5" value="thinking"> I'm thinking about it — still figuring things out</label>
+<label class="option"><input type="radio" name="q5" value="curious"> Just curious — not sure yet</label>
+</div>
+</div>
+<div class="quiz-step" data-step="6">
+<button class="back-btn" onclick="goBack()">&larr; Back</button>
+<h2>If you could afford it, what would you do?</h2>
+<p class="subtitle">Be real. This stays between us.</p>
+<div class="options">
+<label class="option"><input type="radio" name="q6" value="lesson"> I'd take a 1-on-1 lesson immediately</label>
+<label class="option"><input type="radio" name="q6" value="community"> I'd rather join a community of singers learning together</label>
+<label class="option"><input type="radio" name="q6" value="both"> Both — I want personal coaching AND community</label>
+<label class="option"><input type="radio" name="q6" value="nothing"> Honestly? I'd probably still do nothing</label>
+</div>
+</div>
 <div class="email-step" data-step="email">
 <div class="result-icon">&#x1F3AF;</div>
 <span class="result-type" id="resultType">The Hidden Gem</span>
@@ -123,11 +145,21 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <div class="thank-you" id="thankYou">
 <div class="icon">&#x1F4DC;</div>
 <h2>Your guide is ready, <span id="thankYouName"></span>.</h2>
-<p>Download your personalized PDF below. It contains insights specific to your situation — and a hint of what the solution looks like.</p>
+<p>Download your personalized PDF below.</p>
 <a href="#" class="btn-primary" id="downloadBtn" download="my-singing-guide.pdf">Download My Guide (PDF)</a>
 <br><br>
-<p style="color:var(--muted);font-size:.85rem;margin-top:16px;">Want the full solution? Let's talk.</p>
-<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Book a Session with Toby</a>
+<div id="communitySection" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:20px;text-align:left;">
+<p style="color:var(--accent);font-weight:700;font-size:1rem;margin-bottom:8px;">&#x1F3A4; The Singers' Community</p>
+<p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;">A private community of singers learning together. Weekly vocal tips, live Q&As, feedback on your recordings, and accountability. All for <strong style="color:var(--text);">&#x20A6;2,000/month</strong>.</p>
+<p style="color:var(--text);font-size:.85rem;font-weight:600;margin-bottom:8px;">To join, pay &#x20A6;2,000 to:</p>
+<div style="background:var(--bg);border-radius:10px;padding:16px;margin-bottom:16px;">
+<p style="font-size:.85rem;margin:0;"><strong>Bank:</strong> First Bank PLC</p>
+<p style="font-size:.85rem;margin:0;"><strong>Account:</strong> 3110071863</p>
+<p style="font-size:.85rem;margin:0;"><strong>Name:</strong> PROSPER TOBI OLUMO</p>
+</div>
+<p style="color:var(--muted);font-size:.82rem;">After payment, send your name and email to <strong style="color:var(--text);">+234 916 010 6084</strong> on WhatsApp to get added.</p>
+</div>
+<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Book a 1-on-1 Session</a>
 </div>
 </div>
 <script>
@@ -146,9 +178,10 @@ lead:{t:"The Future Lead",d:"You were made to lead — vocally and otherwise. Bu
 months:{t:"The New Awakening",d:"You just realized something needs to change. That's good. Most people never get here. Now act on it.",s:"The solution is simple: start now. Book a session. Get an assessment. The sooner you start, the sooner you see results."},
 year:{t:"The Tired Grinder",d:"A year of trying to figure it out alone. That's enough. You've proven you're committed. Now get the guidance that shortcuts the next 3 years.",s:"The solution is expert guidance — someone who's seen your exact problem a hundred times and knows the fastest path through it."},
 years:{t:"The Long Waiter",d:"Multiple years of feeling stuck. You should've done this sooner — but you're here now. Let's make up for lost time.",s:"The solution is an intensive reset — a focused 4-week program that addresses years of accumulated bad habits and missed techniques in one concentrated push."},
-decade:{t:"The Almost-Given-Up",d:"You've been carrying this for so long you've almost accepted it. But you're still here. It's not too late.",s:"The solution is proof — one session where someone shows you what your voice can actually do. Not theory. Not promises. Real, audible proof that it's not too late."}
+decade:{t:"The Almost-Given-Up",d:"You've been carrying this for so long you've almost accepted it. But you're still here. It's not too late.",s:"The solution is proof — one session where someone shows you what your voice can actually do. Not theory. Not promises. Real, audible proof that it's not too late."},
+beginner:{t:"The Raw Beginner",d:"You know you have something in you — but every time you open your mouth, it doesn't come out right. You don't need advanced technique. You need the right foundation.",s:"The solution is a beginner-first vocal program — starting from absolute zero. Breath support, pitch matching, tone building. No jargon. No assumptions. Just clear, simple steps that get you from 'I can't' to 'I can.'"}
 };
-var A={},cs=1,ts=4;
+var A={},cs=1,ts=6;
 document.querySelectorAll('.option input').forEach(function(el){
 el.addEventListener('change',function(){
 var s=this.closest('.quiz-step');
@@ -329,6 +362,12 @@ document.getElementById('thankYouName').textContent=name;
 document.querySelector('.quiz-card').style.display='none';
 document.getElementById('thankYou').classList.add('active');
 document.getElementById('progressBar').style.display='none';
+
+// Show community section if they chose community or both
+var q6=A.q6||'';
+if(q6==='community'||q6==='both'){
+  document.getElementById('communitySection').style.display='block';
+}
 }
 </script>
 </body>
