@@ -18,117 +18,76 @@
   }
   .header { text-align: center; margin-bottom: 48px; }
   .header .logo {
-    font-weight: 800;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 32px;
+    font-weight: 800; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: 32px;
   }
   .header .logo span {
     background: linear-gradient(135deg, #a78bfa, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 900;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
-    margin-bottom: 12px;
-  }
-  .subtitle {
-    color: #7878a0;
-    font-size: 0.95rem;
-  }
+  h1 { font-size: 1.8rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .subtitle { color: #7878a0; font-size: 0.95rem; }
   .intro {
-    background: #101018;
-    border: 1px solid #1e1e2e;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 40px;
-    font-size: 0.9rem;
-    color: #a0a0b8;
+    background: #101018; border: 1px solid #1e1e2e; border-radius: 16px;
+    padding: 24px; margin-bottom: 40px; font-size: 0.9rem; color: #a0a0b8;
   }
   .exercise {
-    margin-bottom: 36px;
-    padding-bottom: 36px;
+    margin-bottom: 40px; padding-bottom: 40px;
     border-bottom: 1px solid #1e1e2e;
   }
   .exercise:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .ex-num {
     display: inline-block;
     background: linear-gradient(135deg, #a78bfa, #818cf8);
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.7rem;
-    padding: 4px 12px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 12px;
+    color: #fff; font-weight: 800; font-size: 0.7rem;
+    padding: 4px 12px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px;
   }
-  .exercise h2 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
+  .exercise h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+  .exercise .problem { font-size: 0.88rem; color: #c084fc; margin-bottom: 12px; font-weight: 600; }
   .exercise p { font-size: 0.9rem; color: #a0a0b8; margin-bottom: 10px; }
-  .exercise .how {
-    background: #101018;
-    border-left: 3px solid #a78bfa;
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.88rem;
-    color: #c8c8d8;
-    margin-top: 10px;
+  .steps { margin: 14px 0; }
+  .steps ol { padding-left: 20px; }
+  .steps ol li { font-size: 0.88rem; color: #c8c8d8; margin-bottom: 6px; line-height: 1.6; }
+  .feel {
+    background: #101018; border-left: 3px solid #a78bfa;
+    padding: 14px 18px; border-radius: 0 8px 8px 0;
+    font-size: 0.88rem; color: #c8c8d8; margin-top: 10px;
   }
-  .exercise .why {
-    font-size: 0.82rem;
-    color: #7878a0;
-    font-style: italic;
-    margin-top: 8px;
+  .feel strong { color: #e8e8f0; }
+  .why {
+    font-size: 0.82rem; color: #7878a0; font-style: italic;
+    margin-top: 10px; padding: 10px 14px;
+    background: rgba(167,139,250,0.04); border-radius: 8px;
+  }
+  .pro-tip {
+    font-size: 0.8rem; color: #d4a853; margin-top: 8px;
+    padding: 8px 14px;
+    background: rgba(212,168,83,0.06); border-radius: 8px;
+    border: 1px solid rgba(212,168,83,0.12);
   }
   .rule {
     background: linear-gradient(135deg, rgba(167,139,250,0.08), rgba(129,140,248,0.08));
-    border: 1px solid #1e1e2e;
-    border-radius: 16px;
-    padding: 28px;
-    text-align: center;
-    margin-top: 48px;
+    border: 1px solid #1e1e2e; border-radius: 16px;
+    padding: 28px; text-align: center; margin-top: 48px;
   }
-  .rule h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
+  .rule h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
   .rule p { font-size: 0.88rem; color: #a0a0b8; }
   .cta {
-    text-align: center;
-    margin-top: 48px;
-    padding: 32px;
-    background: #101018;
-    border: 1px solid #1e1e2e;
-    border-radius: 16px;
+    text-align: center; margin-top: 48px; padding: 32px;
+    background: #101018; border: 1px solid #1e1e2e; border-radius: 16px;
   }
   .cta h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
   .cta p { font-size: 0.88rem; color: #7878a0; margin-bottom: 20px; }
   .cta a {
     display: inline-block;
     background: linear-gradient(135deg, #a78bfa, #818cf8);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 14px 32px;
-    border-radius: 10px;
-    text-decoration: none;
+    color: #fff; font-weight: 700; font-size: 0.9rem;
+    padding: 14px 32px; border-radius: 10px; text-decoration: none;
   }
   .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #1e1e2e;
-    font-size: 0.78rem;
-    color: #4a4a6a;
+    text-align: center; margin-top: 48px; padding-top: 24px;
+    border-top: 1px solid #1e1e2e; font-size: 0.78rem; color: #4a4a6a;
   }
   @media print {
     body { background: #fff; color: #111; padding: 24px; }
@@ -150,44 +109,99 @@
   <strong>How to use this guide:</strong> Do all 5 exercises in order, every day, for 10 minutes total. No equipment needed. No warm-up required — these ARE the warm-up. After 2 weeks, your tone will be noticeably fuller, more connected, and more confident.
 </div>
 
+<!-- EXERCISE 1 -->
 <div class="exercise">
   <span class="ex-num">Exercise 1</span>
   <h2>The Hum Slide</h2>
-  <p>Hum gently on "mmm" — from your lowest comfortable note to your highest, then back down. Keep it light. Feel the vibration move from your chest to your face.</p>
-  <div class="how"><strong>How:</strong> 2 minutes. Slow and steady. Don't push — let the sound find its own path.</div>
-  <p class="why">💡 Why it works: Connects your chest and head voice without strain. Most singers have a "break" between the two — this smooths it out.</p>
+  <p class="problem">Fixes: Disconnected chest and head voice (the "break" in your voice)</p>
+  <p>Most singers have a noticeable crack or flip when they go from low notes to high notes. This exercise smooths that transition by gently connecting your two vocal registers.</p>
+  <div class="steps">
+    <ol>
+      <li>Close your lips gently and hum on "mmm"</li>
+      <li>Start on your lowest comfortable note</li>
+      <li>Slowly slide up to your highest comfortable note — like a siren</li>
+      <li>Slide back down. That's one rep.</li>
+    </ol>
+  </div>
+  <div class="feel"><strong>What to feel:</strong> Vibration moving from your chest (low notes) up to your face/nose (high notes). The transition should feel smooth — no sudden "flip."</div>
+  <p class="why">💡 <strong>Why it works:</strong> Humming keeps your vocal folds gently connected. The slow slide trains your voice to transition between registers without the sudden "break" most singers experience.</p>
+  <p class="pro-tip">⭐ <strong>Pro tip:</strong> If you feel a crack, don't stop. Keep humming through it. The crack is just your voice "switching gears" — with practice, the gears shift smoothly.</p>
 </div>
 
+<!-- EXERCISE 2 -->
 <div class="exercise">
   <span class="ex-num">Exercise 2</span>
   <h2>The Lip Trill Scale</h2>
-  <p>Blow air through loose lips (like a horse) while singing a 5-note scale. If your lips stop trilling, you're pushing too hard.</p>
-  <div class="how"><strong>How:</strong> 3 rounds, ascending by half-step each time. Keep it bouncy and relaxed.</div>
-  <p class="why">💡 Why it works: Forces proper breath support and eliminates throat tension. Your lips regulate the air so your throat can't tighten up.</p>
+  <p class="problem">Fixes: Throat tension and breath support (the #1 killer of good tone)</p>
+  <p>If your throat hurts when you sing, you're pushing too hard. The lip trill forces your breath to do the work instead of your throat muscles.</p>
+  <div class="steps">
+    <ol>
+      <li>Relax your lips completely — loose and floppy</li>
+      <li>Push air through them so they vibrate (like a horse sound)</li>
+      <li>While trilling, sing a 5-note scale: do-re-mi-fa-sol-fa-mi-re-do</li>
+      <li>Repeat, starting one half-step higher each time</li>
+    </ol>
+  </div>
+  <div class="feel"><strong>What to feel:</strong> Your lips should flutter the entire time. If they stop, you're using too much throat pressure. Your stomach should be working — that's your diaphragm doing its job.</div>
+  <p class="why">💡 <strong>Why it works:</strong> Your lips act as a "pressure regulator." They won't vibrate if you're pushing too hard, so your body naturally finds the right balance of air and vocal cord engagement.</p>
+  <p class="pro-tip">⭐ <strong>Pro tip:</strong> Place your hand on your stomach. It should push out when you breathe in and slowly pull in as you sing. If your stomach isn't moving, you're singing from your throat.</p>
 </div>
 
+<!-- EXERCISE 3 -->
 <div class="exercise">
   <span class="ex-num">Exercise 3</span>
-  <h2>The "Ng" Exercise</h2>
-  <p>Sing "ng" (like the end of "sing") on a comfortable note. Feel the resonance buzz in your nasal cavity and cheekbones — that's "forward placement."</p>
-  <div class="how"><strong>How:</strong> Hold each note for 5 seconds. 5 reps. Focus on the buzz in your face, not your throat.</div>
-  <p class="why">💡 Why it works: Places your voice in the "mask" — the resonant space that makes your tone sound full and professional instead of thin and breathy.</p>
+  <h2>The "Ng" Resonance Builder</h2>
+  <p class="problem">Fixes: Thin, breathy tone (sounds like air is escaping)</p>
+  <p>A thin tone usually means your voice isn't "placed" forward. This exercise forces resonance into your mask — the area around your nose and cheekbones — which gives you that full, professional sound.</p>
+  <div class="steps">
+    <ol>
+      <li>Say the word "sing" — hold the "ng" at the end</li>
+      <li>Feel where the vibration is: your nose and cheekbones should buzz</li>
+      <li>Now sing a comfortable note on just "ng" — keep that buzz going</li>
+      <li>Hold for 5 seconds. Rest. Repeat 5 times.</li>
+    </ol>
+  </div>
+  <div class="feel"><strong>What to feel:</strong> A strong buzz/tingle in your nasal cavity and cheekbones. If you feel it in your throat instead, you're doing it wrong — back off and find the buzz in your face.</div>
+  <p class="why">💡 <strong>Why it works:</strong> The "ng" sound naturally directs resonance forward into the "mask." This is the same resonance that makes opera singers sound powerful without a microphone.</p>
+  <p class="pro-tip">⭐ <strong>Pro tip:</strong> Once you can feel the buzz on "ng," try opening to "ah" while keeping the same placement. That's the secret to a full, resonant tone on any vowel.</p>
 </div>
 
+<!-- EXERCISE 4 -->
 <div class="exercise">
   <span class="ex-num">Exercise 4</span>
   <h2>The Siren on "Wee"</h2>
-  <p>Slide from your lowest note to your highest on "wee" — like a siren. Let it crack and break naturally. Don't force a smooth transition.</p>
-  <div class="how"><strong>How:</strong> 5 reps, slow and controlled. Glide, don't jump.</div>
-  <p class="why">💡 Why it works: Maps your full range and teaches your voice to transition between registers without the dreaded "crack."</p>
+  <p class="problem">Fixes: Limited range and fear of high notes</p>
+  <p>Most singers don't actually have a range problem — they have a coordination problem. This exercise maps your full range and teaches your voice to glide instead of jump between notes.</p>
+  <div class="steps">
+    <ol>
+      <li>Take a relaxed breath</li>
+      <li>On "wee," slide from your lowest note to your highest — like a fire truck siren</li>
+      <li>Let it crack, let it break, let it do whatever it wants</li>
+      <li>Slide back down. That's one rep. Do 5.</li>
+    </ol>
+  </div>
+  <div class="feel"><strong>What to feel:</strong> A continuous glide — no stepping, no jumping. It might feel weird in the middle where your voice "flips." That's normal. Don't try to control it.</div>
+  <p class="why">💡 <strong>Why it works:</strong> Sirens bypass your brain's tendency to "grab" at high notes. By gliding instead of stepping, you train your voice to stay relaxed through the entire range.</p>
+  <p class="pro-tip">⭐ <strong>Pro tip:</strong> Do this exercise every morning for a week. You'll notice your "crack point" moves higher. That's your range expanding in real time.</p>
 </div>
 
+<!-- EXERCISE 5 -->
 <div class="exercise">
   <span class="ex-num">Exercise 5</span>
   <h2>The Whisper Sing</h2>
-  <p>Sing your favorite song at full pitch but whisper volume. Keep the tone placement correct even though you're barely making sound.</p>
-  <div class="how"><strong>How:</strong> 3 minutes with any song you know well. Whisper the words but sing the notes.</div>
-  <p class="why">💡 Why it works: Builds muscle memory for proper placement without any strain. Your brain learns the right position without your throat getting in the way.</p>
+  <p class="problem">Fixes: Singing too hard / straining for volume</p>
+  <p>Most beginners think singing louder means singing better. It doesn't. This exercise builds proper muscle memory at whisper volume — so when you add volume later, the technique is already correct.</p>
+  <div class="steps">
+    <ol>
+      <li>Pick a song you know well</li>
+      <li>Sing it at full pitch — but whisper volume</li>
+      <li>Keep your tone placement exactly where it would be if you were singing out loud</li>
+      <li>Do this for 3 minutes straight</li>
+    </ol>
+  </div>
+  <div class="feel"><strong>What to feel:</strong> Your voice is "singing" but barely making sound. You should feel the resonance in your mask (like Exercise 3) even at whisper volume.</div>
+  <p class="why">💡 <strong>Why it works:</strong> When you whisper-sing, you can't rely on volume to "power through" bad technique. Your brain is forced to use the right muscles. When you go back to full volume, those muscles are already trained.</p>
+  <p class="pro-tip">⭐ <strong>Pro tip:</strong> This is also a great exercise when you're sick or your voice is tired. You're training without straining.</p>
 </div>
 
 <div class="rule">
