@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Which Singer Are You? | Sessions with Toby</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -36,8 +37,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .email-step h2{font-size:1.4rem;font-weight:800;margin-bottom:8px}
 .email-step .result-type{display:inline-block;background:var(--accent-glow);color:var(--accent);padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:700;margin-bottom:16px}
 .email-step .result-desc{color:var(--muted);font-size:.92rem;margin-bottom:28px;line-height:1.7}
-.email-step input[type="email"]{width:100%;padding:14px 18px;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:1rem;font-family:inherit;margin-bottom:12px;outline:none;transition:border-color .2s}
-.email-step input[type="email"]:focus{border-color:var(--accent)}
+.email-step input[type="text"],.email-step input[type="email"]{width:100%;padding:14px 18px;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:1rem;font-family:inherit;margin-bottom:12px;outline:none;transition:border-color .2s}
+.email-step input:focus{border-color:var(--accent)}
 .email-step .btn{display:block;width:100%;background:var(--gradient);color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s}
 .email-step .btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(167,139,250,.3)}
 .email-step .privacy{color:var(--muted);font-size:.75rem;margin-top:12px}
@@ -45,9 +46,11 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .thank-you.active{display:block;animation:fadeIn .4s ease}
 .thank-you .icon{font-size:3rem;margin-bottom:16px}
 .thank-you h2{font-size:1.4rem;font-weight:800;margin-bottom:12px}
-.thank-you p{color:var(--muted);font-size:.92rem;margin-bottom:24px}
-.thank-you .btn-outline{display:inline-block;padding:12px 28px;border:1px solid var(--border);border-radius:12px;color:var(--text);text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s}
+.thank-you p{color:var(--muted);font-size:.92rem;margin-bottom:24px;line-height:1.7}
+.thank-you .btn-outline{display:inline-block;padding:12px 28px;border:1px solid var(--border);border-radius:12px;color:var(--text);text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;margin:6px}
 .thank-you .btn-outline:hover{border-color:var(--accent)}
+.thank-you .btn-primary{display:inline-block;padding:12px 28px;background:var(--gradient);border-radius:12px;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;margin:6px}
+.thank-you .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(167,139,250,.3)}
 .back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.82rem;cursor:pointer;margin-bottom:20px;background:none;border:none;font-family:inherit;padding:0;transition:color .2s}
 .back-btn:hover{color:var(--text)}
 @media(max-width:640px){.container{padding:60px 16px 40px}.quiz-card{padding:28px 20px}}
@@ -58,7 +61,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <div class="brand">
 <div class="logo">Sessions with <span>Toby</span></div>
 <h1>Which Singer Are You?</h1>
-<p>Take this 30-second quiz. Find out what's actually holding you back.</p>
+<p>Take this 30-second quiz. Find out what's actually holding you back — and get a free personalized guide.</p>
 </div>
 <div class="quiz-progress" id="progressBar"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
 <div class="quiz-card">
@@ -110,35 +113,40 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <span class="result-type" id="resultType">The Hidden Gem</span>
 <h2>Here's what I see.</h2>
 <p class="result-desc" id="resultDesc"></p>
-<input type="email" id="emailInput" placeholder="Enter your email to get your full result" required>
-<button class="btn" onclick="submitEmail()">Send Me My Result &rarr;</button>
+<p style="color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:20px;">&#x1F4E7; Enter your name and email to receive your personalized guide (PDF).</p>
+<input type="text" id="nameInput" placeholder="Your first name" required>
+<input type="email" id="emailInput" placeholder="Your email address" required>
+<button class="btn" onclick="submitEmail()">Send Me My Guide &rarr;</button>
 <p class="privacy">No spam. Unsubscribe anytime.</p>
 </div>
 </div>
 <div class="thank-you" id="thankYou">
-<div class="icon">&#x2705;</div>
-<h2>Check your inbox.</h2>
-<p>Your result is on its way. Keep an eye on your email.</p>
-<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Back to Sessions with Toby</a>
+<div class="icon">&#x1F4DC;</div>
+<h2>Your guide is ready, <span id="thankYouName"></span>.</h2>
+<p>Download your personalized PDF below. It contains insights specific to your situation — and a hint of what the solution looks like.</p>
+<a href="#" class="btn-primary" id="downloadBtn" download="my-singing-guide.pdf">Download My Guide (PDF)</a>
+<br><br>
+<p style="color:var(--muted);font-size:.85rem;margin-top:16px;">Want the full solution? Let's talk.</p>
+<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Book a Session with Toby</a>
 </div>
 </div>
 <script>
 var R={
-gigs:{t:"The Skilled But Unseen",d:"You can sing. People who hear you know it. But the gigs aren't coming. The problem isn't your voice — it's your positioning, your network, and your stage confidence."},
-record:{t:"The Bedroom Singer",d:"You've been singing for years but have nothing to show for it. You need structure, accountability, and someone who pushes you to actually release."},
-choir:{t:"The Background Voice",d:"You've been singing in choirs for years but never step to the front. You have the range. What you don't have is the confidence and technique to own a lead."},
-md:{t:"The Reluctant Leader",d:"You're holding the team together — vocally or managerially — but you're burning out. You need to develop your own voice while leading others."},
-execute:{t:"The Eternal Learner",d:"You consume every tutorial, every course, every tip. But you never execute. The problem isn't knowledge — it's the gap between knowing and doing."},
-imposter:{t:"The Imposter",d:"You keep telling yourself you're not ready. But you've been 'not ready' for years. The truth? You're ready. You just need someone to see it and prove it."},
-technique:{t:"The Stage-Shy Singer",d:"You say you just want to refine your technique. But deep down, you want the stage. Stop hiding behind 'practice' and start preparing."},
-stuck:{t:"The Frustrated Talent",d:"You know you're better than where you are. Something's holding you back — technique, confidence, direction."},
-confidence:{t:"The Fearful Singer",d:"High notes scare you. Performing scares you. Your voice has so much more to give, but fear is caging it."},
-sound:{t:"The Copycat",d:"You sound like your idols — but not like yourself. Your signature voice is in there. We just need to excavate it."},
-lead:{t:"The Future Lead",d:"You were made to lead — vocally and otherwise. But leading vocals is a different skill from singing."},
-months:{t:"The New Awakening",d:"You just realized something needs to change. That's good. Most people never get here. Now act on it."},
-year:{t:"The Tired Grinder",d:"A year of trying to figure it out alone. That's enough. Now get the guidance that shortcuts the next 3 years."},
-years:{t:"The Long Waiter",d:"Multiple years of feeling stuck. You should've done this sooner — but you're here now. Let's make up for lost time."},
-decade:{t:"The Almost-Given-Up",d:"You've been carrying this for so long you've almost accepted it. But you're still here. It's not too late."}
+gigs:{t:"The Skilled But Unseen",d:"You can sing. People who hear you know it. But the gigs aren't coming. The problem isn't your voice — it's your positioning, your network, and your stage confidence.",s:"The solution starts with learning how to package your talent so the right people notice. Think of it as personal branding for singers — your sound, your story, your stage presence, all working together."},
+record:{t:"The Bedroom Singer",d:"You've been singing for years but have nothing to show for it. You need structure, accountability, and someone who pushes you to actually release.",s:"The solution is a structured release plan — one song, one video, one step at a time. Most singers wait for perfection. The ones who win start before they're ready."},
+choir:{t:"The Background Voice",d:"You've been singing in choirs for years but never step to the front. You have the range. What you don't have is the confidence and technique to own a lead.",s:"The solution is targeted lead-vocal training — breath support for sustained phrases, projection without strain, and the mindset shift from 'supporting' to 'leading.'"},
+md:{t:"The Reluctant Leader",d:"You're holding the team together — vocally or managerially — but you're burning out. You need to develop your own voice while leading others.",s:"The solution is dual-track development — strengthening your personal vocal identity while learning leadership techniques that don't drain you."},
+execute:{t:"The Eternal Learner",d:"You consume every tutorial, every course, every tip. But you never execute. The problem isn't knowledge — it's the gap between knowing and doing.",s:"The solution is an accountability framework — weekly targets, recorded check-ins, and someone who calls you out when you hide behind 'research.'"},
+imposter:{t:"The Imposter",d:"You keep telling yourself you're not ready. But you've been 'not ready' for years. The truth? You're ready. You just need someone to see it and prove it.",s:"The solution is a structured breakthrough session — one session where someone with experience listens to you, identifies your exact gaps, and shows you the path. Most people cry. Then they book another."},
+technique:{t:"The Stage-Shy Singer",d:"You say you just want to refine your technique. But deep down, you want the stage. Stop hiding behind 'practice' and start preparing.",s:"The solution is performance-first training — technique in service of the stage, not the other way around. You'll practice performing, not just singing."},
+stuck:{t:"The Frustrated Talent",d:"You know you're better than where you are. Something's holding you back — technique, confidence, direction.",s:"The solution starts with a vocal assessment — a deep dive into exactly what's holding you back. Once you see it clearly, the path forward becomes obvious."},
+confidence:{t:"The Fearful Singer",d:"High notes scare you. Performing scares you. Your voice has so much more to give, but fear is caging it.",s:"The solution is progressive exposure — starting where you're comfortable and expanding your range note by note, performance by performance, until fear becomes fuel."},
+sound:{t:"The Copycat",d:"You sound like your idols — but not like yourself. Your signature voice is in there. We just need to excavate it.",s:"The solution is a voice identity session — stripping away the imitations and finding the raw, unique instrument underneath. Your voice is not a copy. It's an original."},
+lead:{t:"The Future Lead",d:"You were made to lead — vocally and otherwise. But leading vocals is a different skill from singing.",s:"The solution is leadership-specific vocal training — commanding a room, holding a congregation, directing a team. It's not just singing. It's leading with your voice."},
+months:{t:"The New Awakening",d:"You just realized something needs to change. That's good. Most people never get here. Now act on it.",s:"The solution is simple: start now. Book a session. Get an assessment. The sooner you start, the sooner you see results."},
+year:{t:"The Tired Grinder",d:"A year of trying to figure it out alone. That's enough. You've proven you're committed. Now get the guidance that shortcuts the next 3 years.",s:"The solution is expert guidance — someone who's seen your exact problem a hundred times and knows the fastest path through it."},
+years:{t:"The Long Waiter",d:"Multiple years of feeling stuck. You should've done this sooner — but you're here now. Let's make up for lost time.",s:"The solution is an intensive reset — a focused 4-week program that addresses years of accumulated bad habits and missed techniques in one concentrated push."},
+decade:{t:"The Almost-Given-Up",d:"You've been carrying this for so long you've almost accepted it. But you're still here. It's not too late.",s:"The solution is proof — one session where someone shows you what your voice can actually do. Not theory. Not promises. Real, audible proof that it's not too late."}
 };
 var A={},cs=1,ts=4;
 document.querySelectorAll('.option input').forEach(function(el){
@@ -164,13 +172,160 @@ document.getElementById('resultType').textContent=r.t;
 document.getElementById('resultDesc').textContent=r.d;
 document.querySelectorAll('.quiz-progress .dot').forEach(function(d){d.classList.add('active')});
 }
+
+function generatePDF(name,resultKey){
+var r=R[resultKey]||R.stuck;
+var doc=new jsPDF();
+var pageWidth=doc.internal.pageSize.getWidth();
+var margin=20;
+var y=25;
+
+// Background accent
+doc.setFillColor(10,10,15);
+doc.rect(0,0,210,297,'F');
+
+// Top accent bar
+doc.setFillColor(167,139,250);
+doc.rect(0,0,210,6,'F');
+
+// Brand
+doc.setTextColor(167,139,250);
+doc.setFontSize(10);
+doc.setFont('helvetica','bold');
+doc.text('SESSIONS WITH TOBY',margin,y);
+y+=4;
+doc.setTextColor(120,120,160);
+doc.setFontSize(8);
+doc.setFont('helvetica','normal');
+doc.text('To Be Come',margin,y);
+y+=12;
+
+// Divider
+doc.setDrawColor(30,30,46);
+doc.setLineWidth(0.5);
+doc.line(margin,y,pageWidth-margin,y);
+y+=12;
+
+// Title
+doc.setTextColor(232,232,240);
+doc.setFontSize(22);
+doc.setFont('helvetica','bold');
+doc.text('Your Singing Profile',margin,y);
+y+=10;
+
+// Result type badge
+doc.setFillColor(167,139,250);
+var badgeWidth=doc.getTextWidth(r.t)+10;
+doc.roundedRect(margin,y-5,badgeWidth,8,2,2,'F');
+doc.setTextColor(255,255,255);
+doc.setFontSize(11);
+doc.setFont('helvetica','bold');
+doc.text(r.t,margin+5,y);
+y+=14;
+
+// Personalized greeting
+doc.setTextColor(232,232,240);
+doc.setFontSize(12);
+doc.setFont('helvetica','normal');
+doc.text('Prepared for: '+name,margin,y);
+y+=14;
+
+// Divider
+doc.setDrawColor(30,30,46);
+doc.line(margin,y,pageWidth-margin,y);
+y+=12;
+
+// Section: What I See
+doc.setTextColor(167,139,250);
+doc.setFontSize(10);
+doc.setFont('helvetica','bold');
+doc.text('WHAT I SEE',margin,y);
+y+=8;
+doc.setTextColor(180,180,200);
+doc.setFontSize(10);
+doc.setFont('helvetica','normal');
+var lines=doc.splitTextToSize(r.d,pageWidth-2*margin);
+doc.text(lines,margin,y);
+y+=lines.length*5+10;
+
+// Section: The Solution Hint
+doc.setTextColor(167,139,250);
+doc.setFontSize(10);
+doc.setFont('helvetica','bold');
+doc.text('WHAT THE SOLUTION LOOKS LIKE',margin,y);
+y+=8;
+doc.setTextColor(180,180,200);
+doc.setFontSize(10);
+doc.setFont('helvetica','normal');
+var solLines=doc.splitTextToSize(r.s,pageWidth-2*margin);
+doc.text(solLines,margin,y);
+y+=solLines.length*5+14;
+
+// Divider
+doc.setDrawColor(30,30,46);
+doc.line(margin,y,pageWidth-margin,y);
+y+=12;
+
+// CTA Box
+doc.setFillColor(16,16,24);
+doc.roundedRect(margin,y,pageWidth-2*margin,36,3,3,'F');
+doc.setDrawColor(167,139,250);
+doc.roundedRect(margin,y,pageWidth-2*margin,36,3,3,'S');
+y+=10;
+doc.setTextColor(167,139,250);
+doc.setFontSize(11);
+doc.setFont('helvetica','bold');
+doc.text('READY TO GO DEEPER?',margin+6,y);
+y+=7;
+doc.setTextColor(180,180,200);
+doc.setFontSize(9);
+doc.setFont('helvetica','normal');
+doc.text('Book a 1-on-1 session with Toby and get a custom plan built around your voice.',margin+6,y);
+y+=10;
+doc.setTextColor(167,139,250);
+doc.setFontSize(9);
+doc.setFont('helvetica','bold');
+doc.text('coachteesos.github.io/coachtoby-site',margin+6,y);
+
+// Footer
+y=280;
+doc.setDrawColor(30,30,46);
+doc.line(margin,y,pageWidth-margin,y);
+y+=6;
+doc.setTextColor(100,100,120);
+doc.setFontSize(7);
+doc.setFont('helvetica','normal');
+doc.text('Sessions with Toby | To Be Come | prosperolumotobi@gmail.com | +234 916 010 6084',margin,y);
+
+return doc;
+}
+
 function submitEmail(){
-var e=document.getElementById('emailInput').value;
-if(!e||e.indexOf('@')===-1){alert('Please enter a valid email.');return;}
+var name=document.getElementById('nameInput').value.trim();
+var email=document.getElementById('emailInput').value.trim();
+if(!name){alert('Please enter your name.');return;}
+if(!email||email.indexOf('@')===-1){alert('Please enter a valid email.');return;}
+
+var k=A.q1||A.q2||'stuck';
+
+// Generate PDF
+var doc=generatePDF(name,k);
+var pdfBlob=doc.output('blob');
+var pdfUrl=URL.createObjectURL(pdfBlob);
+
+// Set download button
+var downloadBtn=document.getElementById('downloadBtn');
+downloadBtn.href=pdfUrl;
+downloadBtn.download=name.replace(/\s+/g,'_')+'_Singing_Guide.pdf';
+
+// Submit lead data
 var f=document.createElement('form');f.method='POST';f.action='https://formsubmit.co/prosperolumotobi@gmail.com';
-var h={_subject:'New Quiz Lead',_captcha:'false',Name:'Quiz Lead',Email:e,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+document.getElementById('resultType').textContent};
-Object.keys(h).forEach(function(k){var i=document.createElement('input');i.type='hidden';i.name=k;i.value=h[k];f.appendChild(i);});
+var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
+Object.keys(h).forEach(function(ky){var i=document.createElement('input');i.type='hidden';i.name=ky;i.value=h[ky];f.appendChild(i);});
 document.body.appendChild(f);f.submit();
+
+// Show thank you
+document.getElementById('thankYouName').textContent=name;
 document.querySelector('.quiz-card').style.display='none';
 document.getElementById('thankYou').classList.add('active');
 document.getElementById('progressBar').style.display='none';
