@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Toby | Vocal & Life Coach</title>
+<meta name="description" content="Meet Prosper Tobi Olumo — Nigerian vocal and life coach. 50+ students. 10+ countries. Here's his story.">
+<meta name="theme-color" content="#08080c">
+<meta property="og:title" content="About Toby | Vocal & Life Coach">
+<meta property="og:description" content="Meet Prosper Tobi Olumo — Nigerian vocal and life coach. 50+ students. 10+ countries.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.about-hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px;position:relative;overflow:hidden}
+.about-hero::before{content:'';position:absolute;top:-30%;left:50%;transform: translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 65%);pointer-events:none;animation:heroPulse 8s ease-in-out infinite}
+.about-hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.04em;margin-bottom:16px}
+.about-hero h1 .highlight{background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.about-hero .tagline{color:var(--muted);font-size:1.1rem;max-width:500px;margin:0 auto}
+.timeline{position:relative;max-width:700px;margin:0 auto;padding:40px 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--border);transform:translateX(-50%)}
+.timeline-item{display:flex;justify-content:flex-end;padding-right:calc(50% + 30px);position:relative;margin-bottom:40px;text-align:right}
+.timeline-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:calc(50% + 30px);text-align:left}
+.timeline-item::before{content:'';position:absolute;left:50%;top:6px;width:12px;height:12px;background:var(--accent);border-radius:50%;transform:translateX(-50%);border:3px solid var(--bg)}
+.timeline-content{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;max-width:380px}
+.timeline-content .tl-year{color:var(--accent);font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.timeline-content h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.timeline-content p{color:var(--muted);font-size:0.85rem;line-height:1.6}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.value-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;transition:all .25s}
+.value-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.value-card .v-icon{font-size:2rem;margin-bottom:12px}
+.value-card h3{font-size:0.95rem;font-weight:700;margin-bottom:6px}
+.value-card p{color:var(--muted);font-size:0.82rem;line-height:1.6}
+@media(max-width:768px){.timeline::before{left:20px}.timeline-item,.timeline-item:nth-child(even){padding-left:50px;padding-right:0;text-align:left;justify-content:flex-start}.timeline-item::before{left:20px}.values-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="mesh-bg"><div class="mesh-orb"></div><div class="mesh-orb"></div><div class="mesh-orb"></div></div>
+<div class="progress-bar"></div>
+
+<nav>
+  <div class="logo"><a href="/coachtoby-site/" style="text-decoration:none;color:inherit">Sessions with <span>Toby</span></a></div>
+  <div class="nav-links">
+    <a href="/coachtoby-site/#services">Services</a>
+    <a href="/coachtoby-site/#pricing">Pricing</a>
+    <a href="/coachtoby-site/#faq">FAQ</a>
+    <a href="/coachtoby-site/#start" class="nav-cta">Get Started</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="sticky-cta"><a href="/coachtoby-site/#start" class="sticky-btn">🎤 Start Your Journey →</a></div>
+
+<div class="side-rail">
+  <button class="rail-btn" onclick="openRail()">Book a Session →</button>
+  <div class="rail-overlay" onclick="closeRail()"></div>
+  <div class="rail-panel">
+    <button class="rail-close" onclick="closeRail()">×</button>
+    <h3>Let's Talk.</h3>
+    <p class="rail-sub">Pick a path. Pay. Show up. Become.</p>
+    <div class="rail-pricing-item">
+      <div class="rp-name">Single Session</div>
+      <div class="rp-price">$50 <span>/session</span></div>
+      <div class="rp-note">Card payment — no commitment</div>
+      <button class="btn-primary" onclick="payWithFlutterwaveUSD(50, 'Single Session $50')">Pay $50 — Book Now</button>
+    </div>
+    <div class="rail-pricing-item">
+      <div class="rp-name">Monthly Package</div>
+      <div class="rp-price">$200 <span>/month</span></div>
+      <div class="rp-note">4 sessions + priority + WhatsApp check-ins</div>
+      <button class="btn-primary" onclick="payWithFlutterwaveUSD(200, 'Monthly Package $200')">Pay $200 — Get Started</button>
+    </div>
+    <div class="rail-divider">or schedule a call</div>
+    <div class="rail-calendly"><a href="https://calendly.com/d/cx3t-9f8-b7r" target="_blank" rel="noopener">📅 Free Call</a></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="hero-content">
+    <div class="brand-mark">About</div>
+    <h1>I Help People<br><span class="highlight">Become.</span></h1>
+    <p class="tagline">Not become someone else. Become who they already are. Here's how that started.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section>
+  <div class="section-label reveal">The Story</div>
+  <h2 class="section-title reveal">It Started With a Seven-Year-Old</h2>
+  <p class="section-sub reveal-delay-1" style="max-width:650px">A kid was struggling in school. Everyone said: "Make him study harder." But I watched — and I saw something else. He wasn't lazy. He was lost.<br><br>So instead of forcing academics, I found what lit him up. Built around <em>that</em>. Two weeks later, grades went up. Not because he studied more. Because he had a reason to.<br><br>That's when I understood: <strong style="color:var(--text)">coaching isn't about fixing. It's about finding.</strong></p>
+</section>
+
+<!-- TIMELINE -->
+<section style="padding-top:0">
+  <div class="section-label reveal">The Journey</div>
+  <h2 class="section-title reveal">How We Got Here</h2>
+  <div class="timeline reveal-delay-2">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="tl-year">2018</div>
+        <h3>The First Student</h3>
+        <p>Started informal vocal coaching. One church singer at a time. Word spread.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="tl-year">2020</div>
+        <h3>Going Online</h3>
+        <p>Pandemic forced the move online. Turns out, WhatsApp calls work just fine. Students from different countries started showing up.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="tl-year">2022</div>
+        <h3>Life Coaching</h3>
+        <p>Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="tl-year">2024</div>
+        <h3>50+ Students</h3>
+        <p>Crossed 50 students across 10+ countries. Still hands-on. Still personal.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="tl-year">2026</div>
+        <h3>To Be Come</h3>
+        <p>Built a full coaching ecosystem: quiz, community, group and 1-on-1. The mission stays the same — help people become.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="padding-top:0">
+  <div class="section-label reveal">What I Believe</div>
+  <h2 class="section-title reveal">Non-Negotiables</h2>
+  <div class="values-grid reveal-delay-1">
+    <div class="value-card">
+      <div class="v-icon">🔥</div>
+      <h3>Your voice is not the problem</h3>
+      <p>Technique is. And technique is fixable. Every voice has something extraordinary in it.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">🎯</div>
+      <h3>Find the thing. Fan the flame.</h3>
+      <p>Whether it's a seven-year-old or a 28-year-old — the process is the same. Discover. Build. Become.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">💪</div>
+      <h3>No coddling</h3>
+      <p>I will push you. Not because I'm harsh — because I see what you can become and I won't let you settle.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">🌍</div>
+      <h3>From anywhere</h3>
+      <p>Abuja. Lagos. London. Toronto. Geography is not a barrier. Show up online. Do the work.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">🎵</div>
+      <h3>Music is purpose</h3>
+      <p>Not just performance. Not just entertainment. Music is how some people fulfil their calling. That's serious.</p>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">🤝</div>
+      <h3>It's personal</h3>
+      <p>I don't do factory coaching. If you work with me, you get <em>me</em>. All in.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="reveal" style="text-align:center">
+  <div class="hook-question">Ready to become<br><span class="highlight">who you were made to be?</span></div>
+  <p class="section-sub" style="margin:0 auto 32px">Book a session. Take the quiz. Or just say hello.</p>
+  <a href="/coachtoby-site/#start" class="btn-primary" style="font-size:1.1rem;padding:18px 40px;margin:6px">Start Your Journey →</a>
+  <a href="quiz.html" class="btn-secondary" style="margin:6px">Take the Quiz 🎯</a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Sessions with <span>Toby</span></div>
+      <p>Vocal & life coaching for people who are done staying the same. "To Be Come."</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="/coachtoby-site/">Home</a>
+      <a href="about.html">About</a>
+      <a href="/coachtoby-site/#pricing">Pricing</a>
+      <a href="/coachtoby-site/#start">Book a Session</a>
+      <a href="quiz.html">Quiz</a>
+    </div>
+    <div class="footer-col">
+      <h4>Social</h4>
+      <a href="https://wa.me/2349160106084">WhatsApp</a>
+      <a href="mailto:prosperolumotobi@gmail.com">Email</a>
+      <a href="https://calendly.com/d/cx3t-9f8-b7r">Calendly</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sessions with Toby · "To Be Come"</p>
+  </div>
+</footer>
+
+<script src="assets/scripts.js"></script>
+</body>
+</html>

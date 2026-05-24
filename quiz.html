@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Which Singer Are You? | Sessions with Toby</title>
+<meta name="description" content="Take this 30-second quiz to find out what's holding you back as a singer. Get a free personalized vocal guide.">
+<meta name="theme-color" content="#08080c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#08080c;--surface:#101018;--border:#1e1e2e;--text:#e8e8f0;--muted:#7878a0;--accent:#a78bfa;--accent-glow:rgba(167,139,250,0.12);--gradient:linear-gradient(135deg,#a78bfa,#818cf8)}
+:root{--bg:#08080c;--surface:#101018;--border:#1e1e2e;--text:#e8e8f0;--muted:#7878a0;--accent:#a78bfa;--accent-glow:rgba(167,139,250,0.12);--gradient:linear-gradient(135deg,#a78bfa,#818cf8);--success:#34d399}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
 .container{max-width:680px;margin:0 auto;padding:80px 24px 60px}
@@ -167,7 +169,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <a id="communityLink" href="#" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;text-decoration:none;">Join the Community &rarr;</a>
 </div>
 <br><br>
-<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Book a 1-on-1 Session</a>
+<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Back to Main Site</a>
 </div>
 </div>
 <script>
@@ -221,29 +223,18 @@ var location=document.getElementById('locationInput').value.trim();
 if(!name){alert('Please enter your name.');return;}
 if(!email||email.indexOf('@')===-1){alert('Please enter a valid email.');return;}
 if(!location){alert('Please enter your location.');return;}
-
 var k=A.q1||A.q2||'stuck';
-
-// Submit lead data via AJAX
 var leadData=new URLSearchParams();
 var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Location:location,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
 Object.keys(h).forEach(function(ky){leadData.append(ky,h[ky]);});
 fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:leadData,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
-
-// Build WhatsApp message
 var msg=encodeURIComponent("Hi Toby! I just completed the 'Which Singer Are You' quiz. My name is "+name+", I'm based in "+location+", and my result was: "+R[k].t+". I'd like to get my free guide, please!");
 var waLink="https://wa.me/2349160106084?text="+msg;
-
-// Set WhatsApp button
 document.getElementById('whatsappBtn').href=waLink;
-
-// Show thank you
 document.getElementById('thankYouName').textContent=name;
 document.querySelector('.quiz-card').style.display='none';
 document.getElementById('thankYou').classList.add('active');
 document.getElementById('progressBar').style.display='none';
-
-// Show community section if they chose a community option
 var q6=A.q6||'';
 if(q6==='free_community'||q6==='paid_community'||q6==='both'){
   document.getElementById('communitySection').style.display='block';
