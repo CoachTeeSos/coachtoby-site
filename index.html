@@ -245,7 +245,8 @@
         <li>Session summary & notes</li>
         <li>Homework assignment</li>
       </ul>
-      <button class="btn-primary" onclick="openRail()">Pay $50 — Book Now</button>
+      <button class="btn-primary" onclick="raenestPay('single')">Pay $50 — Book Now</button>
+      <p style="margin-top:10px;font-size:0.78rem;color:var(--muted);">or <a href="#" style="color:var(--accent);" onclick="payWithFlutterwaveUSD(50,'Single $50');return false;">pay with Flutterwave</a></p>
     </div>
     <div class="pricing-card featured reveal-delay-2">
       <div class="plan-name">Monthly Package</div>
@@ -258,7 +259,8 @@
         <li>WhatsApp check-ins between sessions</li>
         <li>Personalized practice plan</li>
       </ul>
-      <button class="btn-primary" onclick="openRail()">Pay $200 — Get Started</button>
+      <button class="btn-primary" onclick="raenestPay('monthly')">Pay $200 — Get Started</button>
+      <p style="margin-top:10px;font-size:0.78rem;color:var(--muted);">or <a href="#" style="color:var(--accent);" onclick="payWithFlutterwaveUSD(200,'Monthly $200');return false;">pay with Flutterwave</a></p>
     </div>
     <div class="pricing-card reveal-delay-3">
       <div class="plan-name">Nigeria — Single</div>

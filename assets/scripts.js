@@ -105,6 +105,44 @@ function toggleMobileMenu() {
   if (links) links.classList.toggle('mobile-open');
 }
 
+// ── RAEVENEST PAYMENT ──
+function raenestPay(plan) {
+  var links = {
+    single: 'https://app.raenest.com/invoice/payment/RNM3A232T',
+    monthly: 'https://app.raenest.com/invoice/payment/RNM56B3LH'
+  };
+  var planLabel = plan === 'single' ? 'Single Session $50' : 'Monthly Package $200';
+  var amt = plan === 'single' ? 50 : 200;
+
+  var name = prompt('Enter your first name:');
+  if (!name) return;
+  var email = prompt('Enter your email:');
+  if (!email) return;
+
+  var data = new URLSearchParams();
+  data.append('Name', name);
+  data.append('Email', email);
+  data.append('Plan', planLabel);
+  data.append('Amount', amt);
+  data.append('Status', 'Pending Confirmation');
+  data.append('Payment Method', 'Raenest');
+  data.append('Source', 'Website');
+  data.append('_subject', 'New Raenest Payment: ' + name + ' - ' + planLabel);
+
+  fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
+    method: 'POST',
+    body: data,
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  }).catch(function(){});
+
+  window.open(links[plan], '_blank');
+  setTimeout(function() {
+    window.open('https://t.me/Retpipebot?start=' + encodeURIComponent(name + '|' + planLabel), '_blank');
+  }, 2000);
+
+  alert("Complete your payment on Raenest, then tap 'Start' in your Telegram. Welcome, " + name + "! 🎤");
+}
+
 // ── FLUTTERWAVE PAYMENT ──
 function payWithFlutterwaveNGN(amount, planName) {
   var publicKey = 'FLWPUBK_TEST-xxxxxxxxxxxxx'; // Replace with live key when ready
