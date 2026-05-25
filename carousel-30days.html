@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What 30 Days with Toby Looks Like — Carousel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #08080c;
+    color: #e8e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 24px;
+    gap: 32px;
+  }
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+  .hint {
+    color: #7878a0;
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+  .slides {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 8px 0 16px;
+    scroll-snap-type: x mandatory;
+  }
+  .slide {
+    flex-shrink: 0;
+    width: 360px;
+    height: 360px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    scroll-snap-align: center;
+    border: 2px solid #1e1e2e;
+  }
+
+  /* ═══ SLIDE 1: COVER ═══ */
+  .s1 {
+    background: linear-gradient(160deg, #08080c 0%, #151020 40%, #1a1025 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 36px;
+    position: relative; overflow: hidden;
+  }
+  .s1::before {
+    content: ''; position: absolute;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, #a78bfa22 0%, transparent 70%);
+    top: -50px; right: -50px; border-radius: 50%;
+  }
+  .s1::after {
+    content: ''; position: absolute;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, #818cf818 0%, transparent 70%);
+    bottom: -40px; left: -40px; border-radius: 50%;
+  }
+  .s1-emoji { font-size: 2.8rem; margin-bottom: 20px; position: relative; z-index: 1; }
+  .s1-headline {
+    font-size: 1.5rem; font-weight: 900;
+    color: #e8e8f0; text-align: center;
+    line-height: 1.3; margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .s1-sub {
+    font-size: 0.82rem; color: #7878a0;
+    text-align: center; line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+  .s1-line {
+    width: 50px; height: 3px;
+    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    border-radius: 3px; margin: 18px 0;
+    position: relative; z-index: 1;
+  }
+  .s1-tag {
+    font-size: 0.65rem; color: #a78bfa;
+    font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* ═══ SLIDE 2: DAY 1-7 ═══ */
+  .s2 {
+    background: linear-gradient(180deg, #101018 0%, #08080c 100%);
+    display: flex; flex-direction: column;
+    padding: 32px 28px;
+    position: relative;
+  }
+  .s2-phase {
+    font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.15em; color: #d4a853;
+    font-weight: 700; margin-bottom: 12px;
+  }
+  .s2-title {
+    font-size: 1.2rem; font-weight: 800;
+    color: #e8e8f0; margin-bottom: 16px;
+  }
+  .s2-item {
+    display: flex; align-items: flex-start;
+    gap: 10px; margin-bottom: 10px;
+  }
+  .s2-check {
+    color: #a78bfa; font-weight: 700;
+    font-size: 0.9rem; flex-shrink: 0; margin-top: 1px;
+  }
+  .s2-text {
+    font-size: 0.78rem; color: #7878a0;
+    line-height: 1.6;
+  }
+  .s2-cta {
+    position: absolute; bottom: 20px;
+    left: 50%; transform: translateX(-50%);
+    font-size: 0.6rem; color: #7878a0;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* ═══ SLIDE 3: DAY 8-14 ═══ */
+  .s3 {
+    background: linear-gradient(180deg, #0d0d14 0%, #151020 100%);
+    display: flex; flex-direction: column;
+    padding: 32px 28px;
+    position: relative;
+  }
+
+  /* ═══ SLIDE 4: DAY 15-21 ═══ */
+  .s4 {
+    background: linear-gradient(180deg, #151020 0%, #08080c 100%);
+    display: flex; flex-direction: column;
+    padding: 32px 28px;
+    position: relative;
+  }
+
+  /* ═══ SLIDE 5: DAY 22-30 + CTA ═══ */
+  .s5 {
+    background: linear-gradient(145deg, #08080c 0%, #1a1025 50%, #101018 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 36px 32px;
+    position: relative;
+  }
+  .s5-result {
+    font-size: 0.6rem; text-transform: uppercase;
+    letter-spacing: 0.15em; color: #34d399;
+    font-weight: 700; margin-bottom: 14px;
+  }
+  .s5-headline {
+    font-size: 1.3rem; font-weight: 800;
+    color: #e8e8f0; text-align: center;
+    line-height: 1.3; margin-bottom: 14px;
+  }
+  .s5-body {
+    font-size: 0.8rem; color: #7878a0;
+    text-align: center; line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .s5-features {
+    list-style: none; margin-bottom: 20px;
+  }
+  .s5-features li {
+    font-size: 0.76rem; color: #e8e8f0;
+    padding: 3px 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .s5-features li::before {
+    content: '✓'; color: #a78bfa;
+    font-weight: 700; font-size: 0.85rem;
+  }
+  .s5-cta {
+    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    color: #fff; font-size: 0.8rem; font-weight: 700;
+    padding: 12px 28px; border-radius: 10px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .s5-wa {
+    font-size: 0.65rem; color: #7878a0; margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<h2>🎤 What 30 Days with Toby Looks Like</h2>
+<p class="hint">5-slide carousel · Screenshot each at 1080×1080 for Instagram</p>
+
+<div class="slides">
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide">
+    <div class="s1">
+      <div class="s1-emoji">🎤</div>
+      <div class="s1-headline">What 30 Days with Toby Looks Like</div>
+      <div class="s1-line"></div>
+      <div class="s1-sub">The exact journey my students go through — from "I don't know where to start" to "I can't believe this is me."</div>
+      <div style="flex:1"></div>
+      <div class="s1-tag">Sessions with Toby</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: DAY 1-7 -->
+  <div class="slide">
+    <div class="s2">
+      <div class="s2-phase">📅 Phase 1 · Days 1–7</div>
+      <div class="s2-title">Foundation &amp; Assessment</div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Full vocal assessment — where are you RIGHT now?</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Identify your biggest bottleneck (it's never what you think)</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Set your 30-day transformation goal</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">First technique session — most students cry (the good kind)</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Daily check-in begins — one question, every day</span></div>
+      <div style="flex:1"></div>
+      <div class="s2-cta">Slide 2 of 5</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: DAY 8-14 -->
+  <div class="slide">
+    <div class="s3">
+      <div class="s2-phase">📅 Phase 2 · Days 8–14</div>
+      <div class="s2-title">Building the Machine</div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Technique drills — diaphragm, pitch control, resonance</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">You'll hear yourself differently by day 10 (guaranteed)</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">First real song run-through — raw but REAL</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Mindset work — removing the mental blocks holding you back</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Accountability check: are you doing the work between sessions?</span></div>
+      <div style="flex:1"></div>
+      <div class="s2-cta">Slide 3 of 5</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: DAY 15-21 -->
+  <div class="slide">
+    <div class="s4">
+      <div class="s2-phase">📅 Phase 3 · Days 15–21</div>
+      <div class="s2-title">Breaking Through</div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">This is where most people quit. You won't.</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Advanced techniques — runs, dynamics, emotional delivery</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Record your first "before vs after" comparison</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Performance prep — singing for others, not just yourself</span></div>
+      <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Your confidence shifts. People around you notice.</span></div>
+      <div style="flex:1"></div>
+      <div class="s2-cta">Slide 4 of 5</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: DAY 22-30 + CTA -->
+  <div class="slide">
+    <div class="s5">
+      <div class="s5-result">🏆 Phase 4 · Days 22–30</div>
+      <div class="s5-headline">The Transformation</div>
+      <div class="s5-body">By day 30, my students don't just sing better.<br>They carry themselves differently.<br>They speak differently.<br>They believe differently.</div>
+      <ul class="s5-features">
+        <li>Full performance-ready vocal ability</li>
+        <li>Confidence that shows up everywhere</li>
+        <li>A practice system you can keep forever</li>
+        <li>Direct access to me for ongoing support</li>
+      </ul>
+      <div class="s5-cta">Start Your 30 Days →</div>
+      <div class="s5-wa">wa.me/2349160106084</div>
+    </div>
+  </div>
+
+</div>
+
+<p class="hint">Open in browser → screenshot each slide at 1080×1080px → post to Instagram</p>
+</body>
+</html>
