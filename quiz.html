@@ -228,36 +228,26 @@ var leadData=new URLSearchParams();
 var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Location:location,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
 Object.keys(h).forEach(function(ky){leadData.append(ky,h[ky]);});
 fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:leadData,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
-var msg=encodeURIComponent("Hi Toby! I just completed the 'Which Singer Are You' quiz. My name is "+name+", I'm based in "+location+", and my result was: "+R[k].t+". I'd like to get my free guide, please!");
-var waLink="https://wa.me/2349160106084?text="+msg;
-document.getElementById('whatsappBtn').href=waLink;
+var q6=A.q6||'';
+// Map Q6 answer to bot service key
+var serviceKey='quiz';
+if(q6==='free_community') serviceKey='free-community';
+else if(q6==='paid_community') serviceKey='paid-community';
+else if(q6==='lesson') serviceKey='single';
+else if(q6==='both') serviceKey='paid-community';
+// Redirect to bot with name + service
+window.open('https://t.me/Retpipebot?start='+encodeURIComponent(name+'|'+serviceKey),'_blank');
+// Show thank you on page
 document.getElementById('thankYouName').textContent=name;
 document.querySelector('.quiz-card').style.display='none';
 document.getElementById('thankYou').classList.add('active');
 document.getElementById('progressBar').style.display='none';
-var q6=A.q6||'';
-if(q6==='free_community'||q6==='paid_community'||q6==='both'){
-  document.getElementById('communitySection').style.display='block';
-  var desc=document.getElementById('communityDesc');
-  var bank=document.getElementById('communityBank');
-  var link=document.getElementById('communityLink');
-  if(q6==='free_community'){
-    desc.textContent="A free community of singers learning together. Ask questions, share recordings, and grow with others on the same journey.";
-    bank.style.display='none';
-    link.href='https://t.me/+sgObJePICPgyYjc0';
-    link.textContent='Join the Free Community \u2192';
-  } else if(q6==='paid_community'){
-    desc.textContent="The paid singers' community \u2014 weekly vocal tips, live Q&As, feedback on your recordings, and accountability. \u20A62,000/month.";
-    bank.style.display='block';
-    link.href='https://t.me/+tNuSfo5LnthiOWNk';
-    link.textContent='Join the Paid Community \u2192';
-  } else {
-    desc.textContent="You get both \u2014 1-on-1 coaching AND the paid singers' community. Weekly tips, Q&As, feedback, and accountability for \u20A62,000/month.";
-    bank.style.display='block';
-    link.href='https://t.me/+tNuSfo5LnthiOWNk';
-    link.textContent='Join the Paid Community \u2192';
-  }
-}
+// Update thank-you message based on choice
+var tyMsg='Your guide is ready. Check your Telegram for next steps! 🎤';
+if(q6==='free_community') tyMsg="Check your Telegram — I'll add you to the Free Singers' Community! 🎤";
+else if(q6==='paid_community'||q6==='both') tyMsg="Check your Telegram — I'll send you the Paid Community details! ⭐";
+else if(q6==='lesson') tyMsg="Check your Telegram — let's get your first session booked! 🎯";
+document.querySelector('.thank-you p').textContent=tyMsg;
 }
 </script>
 </body>

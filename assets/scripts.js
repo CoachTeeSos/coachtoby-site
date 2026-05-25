@@ -1,5 +1,7 @@
 /* ═══════════════════════════════════════
    COACH TOBY — CORE SCRIPTS
+   Every "action" button routes through goToBot(serviceKey)
+   so the bot knows EXACTLY what the user picked
    ═══════════════════════════════════════ */
 
 // ── PROGRESS BAR ──
@@ -20,9 +22,7 @@
   if (!reveals.length) return;
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
   reveals.forEach(function(el) { observer.observe(el); });
@@ -69,7 +69,7 @@
   stats.forEach(function(el) { observer.observe(el); });
 })();
 
-// ── STICKY CTA (appears after hero) ──
+// ── STICKY CTA ──
 (function() {
   var sticky = document.querySelector('.sticky-cta');
   var hero = document.querySelector('.hero');
@@ -95,9 +95,7 @@ function closeRail() {
   if (overlay) overlay.classList.remove('open');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeRail();
-});
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeRail(); });
 
 // ── HAMBURGER TOGGLE ──
 function toggleMobileMenu() {
@@ -105,82 +103,85 @@ function toggleMobileMenu() {
   if (links) links.classList.toggle('mobile-open');
 }
 
-// ── RAEVENEST PAYMENT ──
-function raenestPay(plan) {
-  var links = {
-    single: 'https://app.raenest.com/invoice/payment/RNM3A232T',
-    monthly: 'https://app.raenest.com/invoice/payment/RNM56B3LH'
-  };
-  var planLabel = plan === 'single' ? 'Single Session $50' : 'Monthly Package $200';
-  var amt = plan === 'single' ? 50 : 200;
+// ══════════════════════════════════════
+// BOT ROUTER — Every button calls this
+// ══════════════════════════════════════
+const BOT_USERNAME = 'Retpipebot';
+
+const SERVICES = {
+  single:      { label: 'Single Session — $50',           price: 50,     currency: 'USD', type: 'coaching' },
+  monthly:     { label: 'Monthly Package — $200',          price: 200,    currency: 'USD', type: 'coaching' },
+  'ngn-single':{ label: 'Single Session — ₦70,000',       price: 70000,  currency: 'NGN', type: 'coaching' },
+  'ngn-monthly':{ label: 'Monthly Package — ₦300,000',    price: 300000, currency: 'NGN', type: 'coaching' },
+  'free-community': { label: "Free Singers' Community",    price: 0,      currency: '',    type: 'community', link: 'https://t.me/+LGYumO9JZOc1M2M0' },
+  'paid-community': { label: "Paid Singers' Community — ₦2,000/mo", price: 2000, currency: 'NGN', type: 'community', link: 'https://t.me/+SMnit5TdCuBlOWE0' },
+  'abuja-collective': { label: 'Abuja Music Collective',   price: 0,      currency: '',    type: 'community', link: 'https://t.me/+qv5hIOIBKgtmNjhk' },
+  quiz:        { label: 'Which Singer Are You? Quiz',      price: 0,      currency: '',    type: 'content',   link: 'https://coachteesos.github.io/coachtoby-site/quiz.html' },
+  'lead-magnet': { label: '5 Vocal Exercises Guide',       price: 0,      currency: '',    type: 'content',   link: 'https://coachteesos.github.io/coachtoby-site/lead-magnet.html' },
+  'free-call': { label: 'Free Consultation Call',          price: 0,      currency: '',    type: 'call',      link: 'https://calendly.com/d/cx3t-9f8-b7r' },
+};
+
+// ── MAIN ROUTER FUNCTION ──
+function goToBot(serviceKey) {
+  var svc = SERVICES[serviceKey];
+  if (!svc) { alert('Something went wrong. Please try again.'); return; }
 
   var name = prompt('Enter your first name:');
-  if (!name) return;
-  var email = prompt('Enter your email:');
-  if (!email) return;
+  if (!name || !name.trim()) return;
+  name = name.trim();
 
-  var data = new URLSearchParams();
-  data.append('Name', name);
-  data.append('Email', email);
-  data.append('Plan', planLabel);
-  data.append('Amount', amt);
-  data.append('Status', 'Pending Confirmation');
-  data.append('Payment Method', 'Raenest');
-  data.append('Source', 'Website');
-  data.append('_subject', 'New Raenest Payment: ' + name + ' - ' + planLabel);
+  // For paid coaching: collect email + open payment
+  if (svc.type === 'coaching' && svc.price > 0) {
+    var email = prompt('Enter your email:');
+    if (!email || !email.trim()) return;
+    email = email.trim();
 
-  fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
-    method: 'POST',
-    body: data,
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  }).catch(function(){});
+    // Log to Airtable via formsubmit
+    var data = new URLSearchParams();
+    data.append('Name', name);
+    data.append('Email', email);
+    data.append('Plan', svc.label);
+    data.append('Amount', svc.price);
+    data.append('Currency', svc.currency);
+    data.append('Status', 'Pending Confirmation');
+    data.append('Source', 'Website');
+    data.append('_subject', 'New Booking: ' + name + ' — ' + svc.label);
+    fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
+      method: 'POST', body: data,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).catch(function(){});
 
-  window.open(links[plan], '_blank');
-  setTimeout(function() {
-    window.open('https://t.me/Retpipebot?start=' + encodeURIComponent(name + '|' + planLabel), '_blank');
-  }, 2000);
+    // Open payment
+    if (svc.currency === 'USD') {
+      var raenestLinks = { single: 'RNM3A232T', monthly: 'RNM56B3LH' };
+      var key = serviceKey === 'single' ? 'single' : 'monthly';
+      window.open('https://app.raenest.com/invoice/payment/' + raenestLinks[key], '_blank');
+    } else {
+      // Naira — show bank details
+      alert('Pay ₦' + svc.price.toLocaleString() + ' to:\n\nBank: First Bank PLC\nAccount: 3110071863\nName: PROSPER TOBI OLUMO\n\nAfter payment, tap OK to continue to Telegram.');
+    }
 
-  alert("Complete your payment on Raenest, then tap 'Start' in your Telegram. Welcome, " + name + "! 🎤");
+    // Redirect to bot with service key
+    setTimeout(function() {
+      window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey), '_blank');
+    }, 2000);
+
+    alert("Complete your payment, then tap 'Start' in Telegram. Welcome, " + name + "! 🎤");
+    return;
+  }
+
+  // For free/community/content/call: redirect to bot directly
+  window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey), '_blank');
 }
 
-// ── FLUTTERWAVE PAYMENT ──
+// ── LEGACY COMPATIBILITY (for any old onclick still in HTML) ──
+function raenestPay(plan) { goToBot(plan); }
 function payWithFlutterwaveNGN(amount, planName) {
-  var publicKey = 'FLWPUBK_TEST-xxxxxxxxxxxxx'; // Replace with live key when ready
-  getpaidSetup({
-    PBFPubKey: publicKey,
-    customer_email: '',
-    customer_firstname: '',
-    amount: amount,
-    currency: 'NGN',
-    txref: 'Toby-' + Date.now(),
-    meta: [{ metaname: 'plan', metavalue: planName }],
-    onclose: function() {},
-    callback: function(response) {
-      if (response.tx.chargeResponseCode === '00') {
-        // Redirect to WhatsApp to confirm
-        var waMsg = encodeURIComponent('Hi Toby! I just paid for the ' + planName + ' plan. Here\'s my receipt: ' + response.tx.txRef);
-        window.open('https://wa.me/2349160106084?text=' + waMsg, '_blank');
-      }
-    }
-  });
+  // Map old calls to service keys
+  if (planName && planName.includes('300')) goToBot('ngn-monthly');
+  else goToBot('ngn-single');
 }
-
 function payWithFlutterwaveUSD(amount, planName) {
-  var publicKey = 'FLWPUBK_TEST-xxxxxxxxxxxxx'; // Replace with live key
-  getpaidSetup({
-    PBFPubKey: publicKey,
-    customer_email: '',
-    customer_firstname: '',
-    amount: amount,
-    currency: 'USD',
-    txref: 'Toby-' + Date.now(),
-    meta: [{ metaname: 'plan', metavalue: planName }],
-    onclose: function() {},
-    callback: function(response) {
-      if (response.tx.chargeResponseCode === '00') {
-        var waMsg = encodeURIComponent('Hi Toby! I just paid for the ' + planName + ' plan. Here\'s my receipt: ' + response.tx.txRef);
-        window.open('https://wa.me/2349160106084?text=' + waMsg, '_blank');
-      }
-    }
-  });
+  if (planName && planName.includes('200')) goToBot('monthly');
+  else goToBot('single');
 }

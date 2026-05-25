@@ -46,9 +46,6 @@
 
 <!-- Plausible Analytics -->
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
-
-<!-- Flutterwave JS -->
-<script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 <body>
 
@@ -88,14 +85,14 @@
       <div class="rp-name">Single Session</div>
       <div class="rp-price">$50 <span>/session</span></div>
       <div class="rp-note">Card payment — no commitment</div>
-      <button class="btn-primary" onclick="payWithFlutterwaveUSD(50, 'Single Session $50')">Pay $50 — Book Now</button>
+      <button class="btn-primary" onclick="goToBot('single')">Pay $50 — Book Now</button>
     </div>
 
     <div class="rail-pricing-item">
       <div class="rp-name">Monthly Package</div>
       <div class="rp-price">$200 <span>/month</span></div>
       <div class="rp-note">4 sessions + priority + WhatsApp check-ins</div>
-      <button class="btn-primary" onclick="payWithFlutterwaveUSD(200, 'Monthly Package $200')">Pay $200 — Get Started</button>
+      <button class="btn-primary" onclick="goToBot('monthly')">Pay $200 — Get Started</button>
     </div>
 
     <div class="rail-divider">or pay in Naira</div>
@@ -104,19 +101,58 @@
       <div class="rp-name">Nigeria — Single</div>
       <div class="rp-price">₦70,000 <span>/session</span></div>
       <div class="rp-note">via Flutterwave</div>
-      <button class="btn-primary" onclick="payWithFlutterwaveNGN(70000, 'Single Session ₦70k')">Pay ₦70,000</button>
+      <button class="btn-primary" onclick="goToBot('ngn-single')">Pay ₦70,000</button>
     </div>
 
     <div class="rail-pricing-item">
       <div class="rp-name">Nigeria — Monthly</div>
       <div class="rp-price">₦300,000 <span>/month</span></div>
       <div class="rp-note">4 sessions + priority + WhatsApp check-ins</div>
-      <button class="btn-primary" onclick="payWithFlutterwaveNGN(300000, 'Monthly Package ₦300k')">Pay ₦300,000</button>
+      <button class="btn-primary" onclick="goToBot('ngn-monthly')">Pay ₦300,000</button>
+    </div>
+
+    <div class="rail-divider">or join a community</div>
+
+    <div class="rail-pricing-item">
+      <div class="rp-name">🎤 Free Singers' Community</div>
+      <div class="rp-price" style="font-size:1rem;color:var(--success);">FREE</div>
+      <div class="rp-note">Learn with others — no cost</div>
+      <button class="btn-primary" onclick="goToBot('free-community')">Join Free →</button>
+    </div>
+
+    <div class="rail-pricing-item">
+      <div class="rp-name">⭐ Paid Singers' Community</div>
+      <div class="rp-price">₦2,000 <span>/month</span></div>
+      <div class="rp-note">Weekly tips, Q&As, feedback</div>
+      <button class="btn-primary" onclick="goToBot('paid-community')">Join Paid →</button>
+    </div>
+
+    <div class="rail-pricing-item">
+      <div class="rp-name">🏙️ Abuja Music Collective</div>
+      <div class="rp-price" style="font-size:1rem;color:var(--success);">FREE</div>
+      <div class="rp-note">For singers in Abuja</div>
+      <button class="btn-primary" onclick="goToBot('abuja-collective')">Join →</button>
+    </div>
+
+    <div class="rail-divider">or free resources</div>
+
+    <div class="rail-pricing-item">
+      <div class="rp-name">🎯 Which Singer Are You? Quiz</div>
+      <div class="rp-price" style="font-size:1rem;color:var(--success);">FREE</div>
+      <div class="rp-note">30-second quiz + personalized guide</div>
+      <button class="btn-primary" onclick="goToBot('quiz')">Take Quiz →</button>
+    </div>
+
+    <div class="rail-pricing-item">
+      <div class="rp-name">📖 5 Vocal Exercises Guide</div>
+      <div class="rp-price" style="font-size:1rem;color:var(--success);">FREE</div>
+      <div class="rp-note">Instant download</div>
+      <button class="btn-primary" onclick="goToBot('lead-magnet')">Get Guide →</button>
     </div>
 
     <div class="rail-divider">or schedule a call</div>
     <div class="rail-calendly">
-      <a href="https://calendly.com/d/cx3t-9f8-b7r" target="_blank" rel="noopener">📅 Schedule a Free Call</a>
+      <button class="btn-primary" onclick="goToBot('free-call')" style="width:100%;">📅 Schedule a Free Call</button>
     </div>
   </div>
 </div>
@@ -245,8 +281,8 @@
         <li>Session summary & notes</li>
         <li>Homework assignment</li>
       </ul>
-      <button class="btn-primary" onclick="raenestPay('single')">Pay $50 — Book Now</button>
-      <p style="margin-top:10px;font-size:0.78rem;color:var(--muted);">or <a href="#" style="color:var(--accent);" onclick="payWithFlutterwaveUSD(50,'Single $50');return false;">pay with Flutterwave</a></p>
+      <button class="btn-primary" onclick="goToBot('single')">Pay $50 — Book Now</button>
+      <p style="margin-top:10px;font-size:0.78rem;color:var(--muted);">or <a href="#" style="color:var(--accent);" onclick="goToBot('single');return false;">pay with Flutterwave</a></p>
     </div>
     <div class="pricing-card featured reveal-delay-2">
       <div class="plan-name">Monthly Package</div>
@@ -259,8 +295,8 @@
         <li>WhatsApp check-ins between sessions</li>
         <li>Personalized practice plan</li>
       </ul>
-      <button class="btn-primary" onclick="raenestPay('monthly')">Pay $200 — Get Started</button>
-      <p style="margin-top:10px;font-size:0.78rem;color:var(--muted);">or <a href="#" style="color:var(--accent);" onclick="payWithFlutterwaveUSD(200,'Monthly $200');return false;">pay with Flutterwave</a></p>
+      <button class="btn-primary" onclick="goToBot('monthly')">Pay $200 — Get Started</button>
+      <p style="margin-top:10px;font-size:0.78rem;color:var(--muted);">or <a href="#" style="color:var(--accent);" onclick="goToBot('monthly');return false;">pay with Flutterwave</a></p>
     </div>
     <div class="pricing-card reveal-delay-3">
       <div class="plan-name">Nigeria — Single</div>
@@ -272,7 +308,7 @@
         <li>Pay in Naira — no conversion</li>
         <li>Instant confirmation</li>
       </ul>
-      <button class="btn-primary" onclick="payWithFlutterwaveNGN(70000, 'Single Session ₦70k')">Pay ₦70,000</button>
+      <button class="btn-primary" onclick="goToBot('ngn-single')">Pay ₦70,000</button>
     </div>
     <div class="pricing-card reveal-delay-3">
       <div class="plan-name">Nigeria — Monthly</div>
@@ -285,7 +321,59 @@
         <li>WhatsApp check-ins</li>
         <li>No conversion fees</li>
       </ul>
-      <button class="btn-primary" onclick="payWithFlutterwaveNGN(300000, 'Monthly Package ₦300k')">Pay ₦300,000</button>
+      <button class="btn-primary" onclick="goToBot('ngn-monthly')">Pay ₦300,000</button>
+    </div>
+  </div>
+
+  <!-- ═══ COMMUNITY CARDS ═══ -->
+  <div style="margin-top:48px;">
+    <div class="section-label reveal" style="text-align:center;">Communities & Free Resources</div>
+    <div class="pricing-grid" style="margin-top:24px;">
+      <div class="pricing-card reveal-delay-2">
+        <div class="plan-name">🎤 Free Singers' Community</div>
+        <div class="price" style="font-size:1.4rem;color:var(--success);">FREE</div>
+        <div class="price-note">Learn with others — no cost</div>
+        <ul>
+          <li>Active singers' community</li>
+          <li>Share recordings & get feedback</li>
+          <li>Ask questions, grow together</li>
+        </ul>
+        <button class="btn-primary" onclick="goToBot('free-community')">Join Free →</button>
+      </div>
+      <div class="pricing-card featured reveal-delay-2">
+        <div class="plan-name">⭐ Paid Singers' Community</div>
+        <div class="price">₦2,000<span>/month</span></div>
+        <div class="price-note">Weekly tips, Q&As, feedback</div>
+        <ul>
+          <li>Weekly vocal tips from Toby</li>
+          <li>Live Q&A sessions</li>
+          <li>Personalized feedback on recordings</li>
+          <li>Accountability partners</li>
+        </ul>
+        <button class="btn-primary" onclick="goToBot('paid-community')">Join Paid →</button>
+      </div>
+      <div class="pricing-card reveal-delay-3">
+        <div class="plan-name">🏙️ Abuja Music Collective</div>
+        <div class="price" style="font-size:1.4rem;color:var(--success);">FREE</div>
+        <div class="price-note">For singers in Abuja</div>
+        <ul>
+          <li>Local community of singers</li>
+          <li>Meetups & jam sessions</li>
+          <li>Collaboration opportunities</li>
+        </ul>
+        <button class="btn-primary" onclick="goToBot('abuja-collective')">Join →</button>
+      </div>
+      <div class="pricing-card reveal-delay-3">
+        <div class="plan-name">📅 Free Consultation Call</div>
+        <div class="price" style="font-size:1.4rem;color:var(--success);">FREE</div>
+        <div class="price-note">No-pressure intro call</div>
+        <ul>
+          <li>15-minute clarity call</li>
+          <li>Discuss your goals</li>
+          <li>See if coaching is right for you</li>
+        </ul>
+        <button class="btn-primary" onclick="goToBot('free-call')">Schedule Call →</button>
+      </div>
     </div>
   </div>
 </section>
