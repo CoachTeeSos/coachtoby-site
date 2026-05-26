@@ -20,11 +20,18 @@
 (function() {
   var reveals = document.querySelectorAll('.reveal');
   if (!reveals.length) return;
+
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        // Re-animate when scrolling back up then down again
+        entry.target.classList.remove('visible');
+      }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px' });
+
   reveals.forEach(function(el) { observer.observe(el); });
 })();
 
