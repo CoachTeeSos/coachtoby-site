@@ -113,7 +113,7 @@ function toggleMobileMenu() {
 // ══════════════════════════════════════
 // BOT ROUTER — Every button calls this
 // ══════════════════════════════════════
-const BOT_USERNAME = 'Retpipebot';
+const BOT_USERNAME = 'TobyTourGuideBot';
 
 const SERVICES = {
   single:      { label: 'Single Session — $50',           price: 50,     currency: 'USD', type: 'coaching' },
@@ -121,11 +121,12 @@ const SERVICES = {
   'ngn-single':{ label: 'Single Session — ₦70,000',       price: 70000,  currency: 'NGN', type: 'coaching' },
   'ngn-monthly':{ label: 'Monthly Package — ₦300,000',    price: 300000, currency: 'NGN', type: 'coaching' },
   'free-community': { label: "Free Singers' Community",    price: 0,      currency: '',    type: 'community', link: 'https://t.me/+LGYumO9JZOc1M2M0' },
-  'paid-community': { label: "Paid Singers' Community — ₦2,000/mo", price: 2000, currency: 'NGN', type: 'community', link: 'https://t.me/+SMnit5TdCuBlOWE0' },
+  'paid-community': { label: "Paid Singers' Community — ₦20,000/mo", price: 20000, currency: 'NGN', type: 'community', link: 'https://t.me/+SMnit5TdCuBlOWE0' },
   'abuja-collective': { label: 'Abuja Music Collective',   price: 0,      currency: '',    type: 'community', link: 'https://t.me/+qv5hIOIBKgtmNjhk' },
   quiz:        { label: 'Which Singer Are You? Quiz',      price: 0,      currency: '',    type: 'content',   link: 'https://coachteesos.github.io/coachtoby-site/quiz.html' },
   'lead-magnet': { label: '5 Vocal Exercises Guide',       price: 0,      currency: '',    type: 'content',   link: 'https://coachteesos.github.io/coachtoby-site/lead-magnet.html' },
-  'free-call': { label: 'Free Consultation Call',          price: 0,      currency: '',    type: 'call',      link: 'https://calendly.com/d/cx3t-9f8-b7r' },
+  'speaking': { label: 'Speaking Engagement — ₦200,000', price: 200000, currency: 'NGN', type: 'speaking' },
+  'custom-plan': { label: 'Design Your Own Plan', price: 0, currency: '', type: 'custom' },
 };
 
 // ── MAIN ROUTER FUNCTION ──
@@ -138,7 +139,7 @@ function goToBot(serviceKey) {
   name = name.trim();
 
   // For paid coaching: collect email + open payment
-  if (svc.type === 'coaching' && svc.price > 0) {
+  if ((svc.type === 'coaching' || svc.type === 'speaking') && svc.price > 0) {
     var email = prompt('Enter your email:');
     if (!email || !email.trim()) return;
     email = email.trim();
@@ -174,6 +175,32 @@ function goToBot(serviceKey) {
     }, 2000);
 
     alert("Complete your payment, then tap 'Start' in Telegram. Welcome, " + name + "! 🎤");
+    return;
+  }
+
+  // For custom plan: collect details then redirect
+  if (svc.type === 'custom') {
+    var budget = prompt("What's your budget? (e.g., ₦50,000 - ₦500,000)");
+    if (!budget || !budget.trim()) return;
+    var needs = prompt("What do you need help with? (e.g., vocal coaching, life coaching, speaking, community access)");
+    if (!needs || !needs.trim()) return;
+
+    // Log to Airtable
+    var data = new URLSearchParams();
+    data.append('Name', name);
+    data.append('Plan', 'Custom Plan');
+    data.append('Budget', budget.trim());
+    data.append('Needs', needs.trim());
+    data.append('Status', 'Pending Review');
+    data.append('Source', 'Website');
+    data.append('_subject', 'Custom Plan Request: ' + name);
+    fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
+      method: 'POST', body: data,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).catch(function(){});
+
+    // Redirect to bot with custom plan info
+    window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|custom-plan|' + budget.trim() + '|' + needs.trim()), '_blank');
     return;
   }
 
