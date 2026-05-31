@@ -32,10 +32,14 @@ from telegram.ext import (
 # ═══════════════════════════════════════
 # CONFIG
 # ═══════════════════════════════════════
-BOT_TOKEN = os.environ["BOT_TOKEN"]
+from dotenv import load_dotenv
+
+# Load .env file (works regardless of shell env)
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 AIRTABLE_BASE = "app3N2MFPvfDSuYxk"
 AIRTABLE_TABLE = "Students"
-AIRTABLE_TOKEN = os.environ["AIRTABLE_TOKEN"]
+AIRTABLE_TOKEN = os.environ.get("AIRTABLE_TOKEN", "")
 AIRTABLE_API = f"https://api.airtable.com/v0/{AIRTABLE_BASE}/{AIRTABLE_TABLE}"
 
 # Your Telegram user ID (Toby) — you'll need to set this

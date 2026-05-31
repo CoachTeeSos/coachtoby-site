@@ -11,17 +11,16 @@ Also handles Flutterwave payment webhooks for auto-verification.
 import os
 import logging
 import json
-from datetime import datetime
-
 import requests
+from datetime import datetime
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
-# ═══════════════════════════════════════
-# CONFIG
-# ═══════════════════════════════════════
+# Load .env file (tokens loaded from file, never hardcoded)
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'))
 AIRTABLE_BASE = "app3N2MFPvfDSuYxk"
 AIRTABLE_TABLE = "Students"
-AIRTABLE_TOKEN = os.environ["AIRTABLE_TOKEN"]
+AIRTABLE_TOKEN = os.environ.get("AIRTABLE_TOKEN", "")
 AIRTABLE_API = f"https://api.airtable.com/v0/{AIRTABLE_BASE}/{AIRTABLE_TABLE}"
 
 # Secret key to authenticate webhook calls from this server to the bot
