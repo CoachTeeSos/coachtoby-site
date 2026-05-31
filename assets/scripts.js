@@ -1,7 +1,6 @@
 /* ═════════════════════════════════════════
-   COACH TOBY — CORE SCRIPTS
-   Every "action" button routes through goToBot(serviceKey)
-   so the bot knows EXACTLY what the user picked
+   COACH TOBY — CORE SCRIPTS v2
+   Inline form → Airtable API → Telegram bot
    ════════════════════════════════════════ */
 
 /* ── PROGRESS BAR ──*/
@@ -108,9 +107,14 @@ function toggleMobileMenu() {
 }
 
 /* ═══════════════════════════════════════
-   BOT ROUTER — Every button calls this
+   CONFIG
    ═══════════════════════════════════════ */
-const BOT_USERNAME = 'TobyTourGuideBot';
+const BOT_USERNAME = 'Retpipebot';
+
+// Proxy server URL — change this when you deploy the Flask server
+const PROXY_URL = window.location.origin + '/api';
+// For local testing: const PROXY_URL = 'http://localhost:5000/api';
+// For production: set this to your deployed server URL
 
 const SERVICES = {
   single:      { label: 'Single Session — $50',           price: 50,     currency: 'USD', type: 'coaching' },
@@ -124,10 +128,10 @@ const SERVICES = {
   'lead-magnet': { label: '5 Vocal Exercises Guide',       price: 0,      currency: '',    type: 'content',   link: 'https://coachteesos.github.io/coachtoby-site/lead-magnet.html' },
   'speaking': { label: 'Speaking Engagement — ₦200,000', price: 200000, currency: 'NGN', type: 'speaking' },
   'custom-plan': { label: 'Design Your Own Plan', price: 0, currency: '', type: 'custom' },
-  'group3-5': { label: 'Group of 3-5 — ₦20,000/month', price: 20000, currency: 'NGN', type: 'paid-community' }
+  'group3-5': { label: 'Group of 3-5 — ₦20,000/month', price: 20000, currency: 'NGN', type: 'paid-community' },
+  'free-call': { label: 'Free Clarity Call', price: 0, currency: '', type: 'call' }
 };
 
-// ── FLUTTERWAVE PAYMENT LINKS (LIVE) ──
 const FLUTTERWAVE = {
   single:         'https://flutterwave.com/pay/ictjiqq30sz7',
   monthly:        'https://flutterwave.com/pay/b0hjfvjhv8x4',
@@ -138,77 +142,192 @@ const FLUTTERWAVE = {
   'speaking':     'https://flutterwave.com/pay/wdod0tyeqedw'
 };
 
-/* ── MAIN ROUTER FUNCTION ──*/
-function goToBot(serviceKey) {
-  var svc = SERVICES[serviceKey];
-  if (!svc) { alert('Something went wrong. Please try again.'); return; }
+/* ═══════════════════════════════════════
+   INLINE FORM MODAL
+   ═══════════════════════════════════════ */
+var currentServiceKey = null;
+var formModal = null;
 
-  var name = prompt('Enter your first name:');
-  if (!name || !name.trim()) return;
-  name = name.trim();
+function ensureModal() {
+  if (formModal) return;
+  var d = document.createElement('div');
+  d.id = 'cta-modal';
+  d.innerHTML = [
+    '<div class="cta-modal-overlay" onclick="closeModal()"></div>',
+    '<div class="cta-modal-box">',
+      '<button class="cta-modal-close" onclick="closeModal()">×</button>',
+      '<h3 id="cta-modal-title">Let\'s Get Started</h3>',
+      '<p class="cta-modal-sub" id="cta-modal-sub">Fill this out and we\'ll take it from here.</p>',
+      '<form id="cta-form" onsubmit="return submitForm(event)">',
+        '<div class="cta-field"><label>First Name *</label><input type="text" id="cta-name" required placeholder="Your first name"></div>',
+        '<div class="cta-field"><label>Email *</label><input type="email" id="cta-email" required placeholder="you@example.com"></div>',
+        '<div class="cta-field"><label>Phone (with country code) *</label><input type="tel" id="cta-phone" required placeholder="+234 800 000 0000"></div>',
+        '<div class="cta-field"><label>Telegram @username *</label><input type="text" id="cta-telegram" required placeholder="@yourusername"></div>',
+        '<div class="cta-field" id="cta-budget-field" style="display:none;"><label>Your Budget</label><input type="text" id="cta-budget" placeholder="₦50,000 – ₦500,000"></div>',
+        '<div class="cta-field" id="cta-needs-field" style="display:none;"><label>What do you need help with?</label><input type="text" id="cta-needs" placeholder="Vocal coaching, life coaching, etc."></div>',
+        '<div class="cta-field" id="cta-payment-row" style="display:none;">',
+          '<button type="button" id="cta-pay-btn" class="btn-primary" style="width:100%;">💳 Pay Now</button>',
+          '<p id="cta-pay-status" style="font-size:0.78rem;color:var(--muted);margin-top:8px;text-align:center;"></p>',
+        '</div>',
+        '<button type="submit" class="btn-primary" style="width:100%;margin-top:8px;">Continue →</button>',
+        '<p style="font-size:0.72rem;color:var(--muted);margin-top:10px;text-align:center;">No spam. We respect your privacy.</p>',
+      '</form>',
+    '</div>'
+  ].join('');
 
-  // For paid services: collect email + open Flutterwave payment
-  if (svc.price > 0) {
-    var email = prompt('Enter your email:');
-    if (!email || !email.trim()) return;
-    email = email.trim();
+  // Inject modal styles
+  var s = document.createElement('style');
+  s.textContent = [
+    '.cta-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:1000;}',
+    '.cta-modal-box{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0e0e14;border:1px solid #1c1c28;border-radius:20px;padding:32px 28px;width:90%;max-width:440px;z-index:1001;max-height:90vh;overflow-y:auto;}',
+    '.cta-modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#6e6e8a;font-size:1.4rem;cursor:pointer;padding:4px;line-height:1;}',
+    '.cta-modal-box h3{font-size:1.2rem;font-weight:800;margin-bottom:6px;}',
+    '.cta-modal-sub{color:#6e6e8a;font-size:0.85rem;margin-bottom:20px;}',
+    '.cta-field{margin-bottom:14px;}',
+    '.cta-field label{display:block;font-size:0.78rem;font-weight:600;color:#c8c8d8;margin-bottom:4px;}',
+    '.cta-field input{width:100%;padding:12px 14px;background:#06060a;border:1px solid #1c1c28;border-radius:10px;color:#ededf4;font-size:0.92rem;font-family:inherit;outline:none;transition:border-color .2s;}',
+    '.cta-field input:focus{border-color:#c084fc;}',
+    '.cta-field input::placeholder{color:#4a4a6a;}'
+  ].join('');
 
-    // Log to Airtable via formsubmit
-    var data = new URLSearchParams();
-    data.append('Name', name);
-    data.append('Email', email);
-    data.append('Plan', svc.label);
-    data.append('Amount', svc.price);
-    data.append('Currency', svc.currency);
-    data.append('Status', 'Pending Confirmation');
-    data.append('Source', 'Website');
-    data.append('_subject', 'New Booking: ' + name + ' — ' + svc.label);
-    fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
-      method: 'POST', body: data,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    }).catch(function(){});
+  document.head.appendChild(s);
+  document.body.appendChild(d);
+  formModal = d;
 
-    // Open Flutterwave payment link
-    var fwLink = FLUTTERWAVE[serviceKey];
+  // Payment button handler
+  document.getElementById('cta-pay-btn').addEventListener('click', function() {
+    var fwLink = FLUTTERWAVE[currentServiceKey];
     if (fwLink) {
       window.open(fwLink, '_blank');
+      document.getElementById('cta-pay-status').textContent = 'Payment page opened. Come back here after paying.';
+      document.getElementById('cta-pay-status').style.color = 'var(--success)';
     }
+  });
+}
 
-    // Redirect to bot with service key
-    setTimeout(function() {
-      window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey), '_blank');
-    }, 2000);
+function openModal(serviceKey) {
+  currentServiceKey = serviceKey;
+  var svc = SERVICES[serviceKey];
+  if (!svc) return;
 
-    alert("Complete your payment, then tap 'Start' in Telegram. Welcome, " + name + " 🎤");
-    return;
+  ensureModal();
+
+  document.getElementById('cta-modal-title').textContent = svc.label;
+  document.getElementById('cta-modal-sub').textContent = svc.price > 0
+    ? 'Fill this out, then complete payment to secure your spot.'
+    : 'Fill this out and we\'ll get you started right away.';
+
+  // Show/hide fields based on service type
+  var isCustom = svc.type === 'custom';
+  var isPaid = svc.price > 0;
+  document.getElementById('cta-budget-field').style.display = isCustom ? '' : 'none';
+  document.getElementById('cta-needs-field').style.display = isCustom ? '' : 'none';
+  document.getElementById('cta-payment-row').style.display = isPaid ? '' : 'none';
+  document.getElementById('cta-pay-status').textContent = '';
+
+  // Reset form
+  document.getElementById('cta-form').reset();
+  document.getElementById('cta-name').focus();
+
+  document.getElementById('cta-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  if (formModal) formModal.style.display = 'none';
+  document.body.style.overflow = '';
+  currentServiceKey = null;
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ── FORM SUBMIT ──*/
+function submitForm(e) {
+  e.preventDefault();
+  var serviceKey = currentServiceKey;
+  var svc = SERVICES[serviceKey];
+  if (!svc) return false;
+
+  var name = document.getElementById('cta-name').value.trim();
+  var email = document.getElementById('cta-email').value.trim();
+  var phone = document.getElementById('cta-phone').value.trim();
+  var telegram = document.getElementById('cta-telegram').value.trim();
+  var budget = document.getElementById('cta-budget') ? document.getElementById('cta-budget').value.trim() : '';
+  var needs = document.getElementById('cta-needs') ? document.getElementById('cta-needs').value.trim() : '';
+
+  if (!name || !email || !phone || !telegram) {
+    alert('Please fill in all required fields.');
+    return false;
   }
 
-  // For custom plan: collect details then redirect
-  if (svc.type === 'custom') {
-    var budget = prompt("What's your budget? (e.g., ₦50,000 - ₦500,000)");
-    if (!budget || !budget.trim()) return;
-    var needs = prompt("What do you need help with? (e.g., vocal coaching, life coaching, speaking, community access)");
-    if (!needs || !needs.trim()) return;
+  // Normalize telegram handle
+  if (telegram.indexOf('@') !== 0) telegram = '@' + telegram;
 
-    var data = new URLSearchParams();
-    data.append('Name', name);
-    data.append('Plan', 'Custom Plan');
-    data.append('Budget', budget.trim());
-    data.append('Needs', needs.trim());
-    data.append('Status', 'Pending Review');
-    data.append('Source', 'Website');
-    data.append('_subject', 'Custom Plan Request: ' + name);
-    fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
-      method: 'POST', body: data,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    }).catch(function(){});
-
-    window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|custom-plan|' + budget.trim() + '|' + needs.trim()), '_blank');
-    return;
+  // Build Airtable record
+  var fields = {
+    'Name': name,
+    'Email': email,
+    'Phone': phone,
+    'Telegram': telegram,
+    'Plan': svc.label,
+    'Status': svc.price > 0 ? 'pending_payment' : 'active',
+    'Source': 'Website'
+  };
+  if (svc.price > 0) {
+    fields['Amount'] = svc.price;
+    fields['Currency'] = svc.currency;
   }
+  if (budget) fields['Budget'] = budget;
+  if (needs) fields['Needs'] = needs;
 
-  // For free/community/content/call: redirect to bot directly
-  window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey), '_blank');
+  // Write to Airtable
+  var submitBtn = e.target.querySelector('button[type="submit"]');
+  var originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
+  // Write to Airtable via proxy server (token stays server-side)
+  fetch(PROXY_URL + '/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(fields)
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('Registration failed ' + res.status);
+    return res.json();
+  })
+  .then(function() {
+    closeModal();
+
+    // For paid services: open Flutterwave then redirect to bot
+    if (svc.price > 0) {
+      var fwLink = FLUTTERWAVE[serviceKey];
+      if (fwLink) window.open(fwLink, '_blank');
+      setTimeout(function() {
+        window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram), '_blank');
+      }, 1500);
+      alert('✅ Registered! Complete your payment, then tap "Start" in Telegram.\n\nWelcome, ' + name + ' 🎤');
+    } else {
+      // For free services: redirect to bot directly
+      window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram), '_blank');
+    }
+  })
+  .catch(function(err) {
+    console.error('Airtable write failed:', err);
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again or WhatsApp us directly: +234 916 010 6084');
+  });
+
+  return false;
+}
+
+/* ═══════════════════════════════════════
+   MAIN ROUTER — Every button calls this
+   ═══════════════════════════════════════ */
+function goToBot(serviceKey) {
+  openModal(serviceKey);
 }
 
 /* ── LEGACY COMPATIBILITY ──*/
