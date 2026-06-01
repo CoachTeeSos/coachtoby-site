@@ -111,20 +111,6 @@ function toggleMobileMenu() {
    ═══════════════════════════════════════ */
 const BOT_USERNAME = 'Retpipebot';
 
-// Proxy server URL — Railway Flask proxy (set after deployment)
-const PROXY_URL = '';
-
-// Send registration data to Airtable via proxy
-// Returns true if successful, false if skipped/failed
-function sendToProxy(fields) {
-  if (!PROXY_URL) return Promise.resolve(false);
-  return fetch(PROXY_URL + '/register', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(fields),
-  }).then(function(res) { return res.ok; });
-}
-
 const SERVICES = {
   single:      { label: 'Single Session — $50',           price: 50,     currency: 'USD', type: 'coaching' },
   monthly:     { label: 'Monthly Package — $200',          price: 200,    currency: 'USD', type: 'coaching' },
@@ -293,25 +279,22 @@ function submitForm(e) {
   submitBtn.textContent = 'Submitting...';
   submitBtn.disabled = true;
 
-  // Try to write to Airtable via proxy (non-blocking for UX)
-  sendToProxy(fields).then(function(written) {
-    if (written) console.log('Airtable write OK');
-  }).catch(function() {});
-
-  // Close modal and redirect — always, even if proxy fails
+  // Close modal and redirect to Telegram bot
+  // Bot will collect all details via conversation
   closeModal();
 
-  // For paid services: open Flutterwave then redirect to bot
   var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram);
 
   if (svc.price > 0) {
+    // Paid: open Flutterwave payment, then redirect to bot after delay
     var fwLink = FLUTTERWAVE[serviceKey];
     if (fwLink) window.open(fwLink, '_blank');
     setTimeout(function() {
       window.open(botUrl, '_blank');
-    }, 1500);
-    alert('✅ Registered! Complete your payment, then tap "Start" in Telegram.\n\nWelcome, ' + name + ' 🎤');
+    }, 2000);
+    alert('✅ Almost done!\n\n1. Complete your payment\n2. Tap "Start" in Telegram\n\nWelcome, ' + name + ' 🎤');
   } else {
+    // Free: go straight to bot
     window.open(botUrl, '_blank');
   }
 
