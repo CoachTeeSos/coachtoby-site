@@ -111,10 +111,19 @@ function toggleMobileMenu() {
    ═══════════════════════════════════════ */
 const BOT_USERNAME = 'Retpipebot';
 
-// Proxy server URL — change this when you deploy the Flask server
-const PROXY_URL = window.location.origin + '/api';
-// For local testing: const PROXY_URL = 'http://localhost:5000/api';
-// For production: set this to your deployed server URL
+// Proxy server URL — Railway Flask proxy (set after deployment)
+const PROXY_URL = '';
+
+// Send registration data to Airtable via proxy
+// Returns true if successful, false if skipped/failed
+function sendToProxy(fields) {
+  if (!PROXY_URL) return Promise.resolve(false);
+  return fetch(PROXY_URL + '/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(fields),
+  }).then(function(res) { return res.ok; });
+}
 
 const SERVICES = {
   single:      { label: 'Single Session — $50',           price: 50,     currency: 'USD', type: 'coaching' },
@@ -265,7 +274,7 @@ function submitForm(e) {
   // Normalize telegram handle
   if (telegram.indexOf('@') !== 0) telegram = '@' + telegram;
 
-  // Build Airtable record (only use fields that exist in the table)
+  // Build record for Airtable (field names match Students table exactly)
   var fields = {
     'Name': name,
     'Plan': svc.label,
@@ -278,43 +287,33 @@ function submitForm(e) {
   if (budget) fields['Budget'] = budget;
   if (needs) fields['Needs'] = needs;
 
-  // Write to Airtable
+  // Disable submit button
   var submitBtn = e.target.querySelector('button[type="submit"]');
   var originalText = submitBtn.textContent;
   submitBtn.textContent = 'Submitting...';
   submitBtn.disabled = true;
-  // Write to Airtable via proxy server (token stays server-side)
-  fetch(PROXY_URL + '/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(fields)
-  })
-  .then(function(res) {
-    if (!res.ok) throw new Error('Registration failed ' + res.status);
-    return res.json();
-  })
-  .then(function() {
-    closeModal();
 
-    // For paid services: open Flutterwave then redirect to bot
-    if (svc.price > 0) {
-      var fwLink = FLUTTERWAVE[serviceKey];
-      if (fwLink) window.open(fwLink, '_blank');
-      setTimeout(function() {
-        window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram), '_blank');
-      }, 1500);
-      alert('✅ Registered! Complete your payment, then tap "Start" in Telegram.\n\nWelcome, ' + name + ' 🎤');
-    } else {
-      // For free services: redirect to bot directly
-      window.open('https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram), '_blank');
-    }
-  })
-  .catch(function(err) {
-    console.error('Airtable write failed:', err);
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-    alert('Something went wrong. Please try again or WhatsApp us directly: +234 916 010 6084');
-  });
+  // Try to write to Airtable via proxy (non-blocking for UX)
+  sendToProxy(fields).then(function(written) {
+    if (written) console.log('Airtable write OK');
+  }).catch(function() {});
+
+  // Close modal and redirect — always, even if proxy fails
+  closeModal();
+
+  // For paid services: open Flutterwave then redirect to bot
+  var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram);
+
+  if (svc.price > 0) {
+    var fwLink = FLUTTERWAVE[serviceKey];
+    if (fwLink) window.open(fwLink, '_blank');
+    setTimeout(function() {
+      window.open(botUrl, '_blank');
+    }, 1500);
+    alert('✅ Registered! Complete your payment, then tap "Start" in Telegram.\n\nWelcome, ' + name + ' 🎤');
+  } else {
+    window.open(botUrl, '_blank');
+  }
 
   return false;
 }
