@@ -154,10 +154,9 @@ function ensureModal() {
       '<h3 id="cta-modal-title">Let\'s Get Started</h3>',
       '<p class="cta-modal-sub" id="cta-modal-sub">Fill this out and we\'ll take it from here.</p>',
       '<form id="cta-form" onsubmit="return submitForm(event)">',
-        '<div class="cta-field"><label>First Name *</label><input type="text" id="cta-name" required placeholder="Your first name"></div>',
+        '<div class="cta-field"><label>Full Name *</label><input type="text" id="cta-name" required placeholder="Your full name"></div>',
         '<div class="cta-field"><label>Email *</label><input type="email" id="cta-email" required placeholder="you@example.com"></div>',
         '<div class="cta-field"><label>Phone (with country code) *</label><input type="tel" id="cta-phone" required placeholder="+234 800 000 0000"></div>',
-        '<div class="cta-field"><label>Telegram @username *</label><input type="text" id="cta-telegram" required placeholder="@yourusername"></div>',
         '<div class="cta-field" id="cta-budget-field" style="display:none;"><label>Your Budget</label><input type="text" id="cta-budget" placeholder="₦50,000 – ₦500,000"></div>',
         '<div class="cta-field" id="cta-needs-field" style="display:none;"><label>What do you need help with?</label><input type="text" id="cta-needs" placeholder="Vocal coaching, life coaching, etc."></div>',
         '<div class="cta-field" id="cta-payment-row" style="display:none;">',
@@ -248,42 +247,18 @@ function submitForm(e) {
   var name = document.getElementById('cta-name').value.trim();
   var email = document.getElementById('cta-email').value.trim();
   var phone = document.getElementById('cta-phone').value.trim();
-  var telegram = document.getElementById('cta-telegram').value.trim();
   var budget = document.getElementById('cta-budget') ? document.getElementById('cta-budget').value.trim() : '';
   var needs = document.getElementById('cta-needs') ? document.getElementById('cta-needs').value.trim() : '';
 
-  if (!name || !email || !phone || !telegram) {
+  if (!name || !email || !phone) {
     alert('Please fill in all required fields.');
     return false;
   }
 
-  // Normalize telegram handle
-  if (telegram.indexOf('@') !== 0) telegram = '@' + telegram;
-
-  // Build record for Airtable (field names match Students table exactly)
-  var fields = {
-    'Name': name,
-    'Plan': svc.label,
-    'Service Key': serviceKey,
-    'Status': svc.price > 0 ? 'Awaiting Receipt' : 'Active',
-    'Source': 'Website',
-    'Total Sessions': svc.price > 0 ? (serviceKey === 'monthly' || serviceKey === 'ngn-monthly' ? 4 : 1) : 0,
-    'Sessions Used': 0
-  };
-  if (budget) fields['Budget'] = budget;
-  if (needs) fields['Needs'] = needs;
-
-  // Disable submit button
-  var submitBtn = e.target.querySelector('button[type="submit"]');
-  var originalText = submitBtn.textContent;
-  submitBtn.textContent = 'Submitting...';
-  submitBtn.disabled = true;
-
-  // Close modal and redirect to Telegram bot
-  // Bot will collect all details via conversation
   closeModal();
 
-  var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey + '|' + telegram);
+  // Redirect to bot — it will capture @username + ID automatically from Telegram
+  var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey);
 
   if (svc.price > 0) {
     // Paid: open Flutterwave payment, then redirect to bot after delay
