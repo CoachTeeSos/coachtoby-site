@@ -106,8 +106,8 @@ def main():
 
     # ── Job Queue ──
     job_queue = app.job_queue
-    job_queue.run_repeating(payment_poll_job, interval=60, first=10, name="payment_poll")
-    job_queue.run_repeating(verify_payments_job, interval=120, first=30, name="fw_verify")
+    job_queue.run_repeating(payment_poll_job, interval=300, first=30, name="payment_poll")
+    job_queue.run_repeating(verify_payments_job, interval=300, first=60, name="fw_verify")
 
     # ── Handlers ──
     # Registration conversation (must be before /start CommandHandler)
