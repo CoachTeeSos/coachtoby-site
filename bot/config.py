@@ -29,9 +29,11 @@ FIELD_TG_USERNAME  = "Telegram Username"     # ADD THIS column in Airtable (sing
 FIELD_EMAIL       = "Email"                  # ADD IF NOT PRESENT
 FIELD_PHONE       = "Phone"                  # ADD IF NOT PRESENT
 
-# Status values (Airtable uses "Active" with capital A)
+# Status values (must match Airtable singleSelect choices exactly)
 STATUS_ACTIVE       = "Active"
-STATUS_PENDING      = "Pending Payment"
+STATUS_PENDING      = "Pending Review"
+STATUS_AWAITING     = "Awaiting Receipt"
+STATUS_EXPIRED      = "Expired"
 STATUS_REJECTED     = "Rejected"
 
 # ── Links ──

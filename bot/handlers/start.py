@@ -61,10 +61,10 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_sessions = student.get("total_sessions", 0)
     sessions_left = max(0, total_sessions - sessions_used)
 
-    # Normalize status (Airtable uses "Active", "Pending Payment", etc.)
+    # Normalize status (Airtable uses "Active", "Pending Review", etc.)
     status = (student.get("status") or "").strip().lower()
 
-    if status in ("pending payment", "pending", "pending_payment"):
+    if status in ("pending review", "awaiting receipt", "pending_payment"):
         from config import SERVICES, FLUTTERWAVE
         svc_key = student.get("service_key", "single")
         svc = SERVICES.get(svc_key, SERVICES["single"])
@@ -81,7 +81,7 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    if status in ("inactive", "churned", "rejected"):
+    if status in ("expired", "rejected"):
         await update.message.reply_text(
             PAYMENT_STATUS_OVERDUE,
             parse_mode="Markdown",

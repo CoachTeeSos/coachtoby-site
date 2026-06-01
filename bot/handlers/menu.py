@@ -66,7 +66,7 @@ async def menu_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
 
     if data == "menu:payment":
         student = await airtable.find_student(user.id)
-        if student and student.get("status") == "active":
+        if student and student.get("status") == "Active":
             sessions_used = student.get("sessions_used", 0)
             total = student.get("total_sessions", 0)
             await query.edit_message_text(
@@ -79,7 +79,7 @@ async def menu_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
                 parse_mode="Markdown",
                 reply_markup=_back_keyboard(),
             )
-        elif student and student.get("status") == "pending_payment":
+        elif student and student.get("status") in ("Pending Review", "Awaiting Receipt"):
             from config import SERVICES, FLUTTERWAVE
             svc_key = student.get("service_key", "single")
             svc = SERVICES.get(svc_key, SERVICES["single"])
@@ -148,7 +148,7 @@ async def dm_message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         )
         return
 
-    if student.get("status") == "pending_payment":
+    if student.get("status") in ("Pending Review", "Awaiting Receipt"):
         from templates.messages import PENDING_PAYMENT
         from config import SERVICES, FLUTTERWAVE
         svc_key = student.get("service_key", "single")
@@ -170,7 +170,7 @@ async def dm_message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         )
         return
 
-    if student.get("status") in ("inactive", "churned"):
+    if student.get("status") in ("Expired", "Rejected"):
         from templates.messages import PAYMENT_STATUS_OVERDUE
         await update.message.reply_text(
             PAYMENT_STATUS_OVERDUE,

@@ -160,7 +160,7 @@ class AirtableService:
         """Get all pending payment students."""
         try:
             # Airtable Status values: "pending_payment" or "Pending" — try both
-            formula = "OR({Status}='pending_payment',{Status}='Pending')"
+            formula = "OR({Status}='Pending Review',{Status}='Awaiting Receipt')"
             records = self.table.all(formula=formula)
             return [self._row_to_dict(r) for r in records]
         except Exception as e:

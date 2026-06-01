@@ -83,7 +83,7 @@ async def approve_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    if student.get("status") == "active":
+    if student.get("status") == "Active":
         await update.message.reply_text(
             APPROVE_ALREADY.format(telegram_id=target_id),
             parse_mode="Markdown",
@@ -99,7 +99,7 @@ async def approve_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_sessions = 4 if "monthly" in svc_key.lower() or svc.get("type") == "coaching" else 1
 
     success = await airtable.update_student(record_id, {
-        "Status": "active",
+        "Status": "Active",
         "Total Sessions": total_sessions,
         "Sessions Used": 0,
     })
