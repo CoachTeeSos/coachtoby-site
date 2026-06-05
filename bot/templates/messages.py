@@ -3,7 +3,7 @@ templates/messages.py — ALL pre-written responses.
 Zero AI. Zero tokens. Every string is final.
 """
 
-# ── Commands ──
+# ── Main Menu ──
 WELCOME_NEW = (
     "👋 **Welcome!**\n\n"
     "I'm here to help with:\n"
@@ -63,6 +63,37 @@ PENDING_PAYMENT = (
     "Your coach will confirm within 24 hours."
 )
 
+# ── Custom Plan Flow ──
+CUSTOM_AMOUNT_PROMPT = (
+    "💰 **Custom Plan**\n\n"
+    "How much would you like to pay?\n\n"
+    "Enter any amount (e.g., 50000 for ₦50,000 or 100 for $100).\n\n"
+    "_Your coach will review and confirm._"
+)
+
+CUSTOM_NEEDS_PROMPT = (
+    "Got it! **{amount}** noted.\n\n"
+    "What do you need help with?\n\n"
+    "_Describe your goals — vocal coaching, life coaching, or both._"
+)
+
+CUSTOM_SUBMITTED = (
+    "✅ **Custom Plan Request Submitted!**\n\n"
+    "Amount: {amount}\n"
+    "Needs: {needs}\n\n"
+    "Your coach will review and get back to you within 24 hours.\n"
+    "You'll receive a payment link once approved."
+)
+
+CUSTOM_APPROVED = (
+    "✅ **Custom Plan Approved!**\n\n"
+    "Plan: {plan}\n"
+    "Amount: {amount}\n"
+    "Sessions: {sessions}\n\n"
+    "Pay here: {payment_link}\n\n"
+    "After payment, send **PAID** ✅"
+)
+
 WELCOME_BACK = (
     "👋 Welcome back, **{name}**!\n\n"
     "📋 Plan: {plan}\n"
@@ -117,6 +148,14 @@ PAYMENT_STATUS_OVERDUE = (
     "📞 Tap 'Contact Admin' below."
 )
 
+PAYMENT_STATUS_CUSTOM_PENDING = (
+    "💳 **Custom Plan Status**\n\n"
+    "⏳ Awaiting coach review\n"
+    "Amount offered: {amount}\n"
+    "Needs: {needs}\n\n"
+    "Your coach will respond within 24 hours."
+)
+
 BOTTLENECK_RESPONSE = (
     "❓ **What's blocking you?**\n\n"
     "Describe your specific problem below.\n"
@@ -149,7 +188,6 @@ ESCALATION_ADMIN_FWD = (
 )
 
 REPLY_SENT = "✅ Reply sent to {student_name}."
-
 REPLY_NOT_FOUND = "❌ Escalation #{esc_id} not found or already resolved."
 
 # ── Admin Commands ──
@@ -163,7 +201,6 @@ APPROVE_SUCCESS = (
 )
 
 APPROVE_NOT_FOUND = "❌ No pending payment found for ID: `{telegram_id}`."
-
 APPROVE_ALREADY = "ℹ️ Payment already approved for `{telegram_id}`."
 
 REJECT_SUCCESS = (
@@ -174,7 +211,6 @@ REJECT_SUCCESS = (
 )
 
 BROADCAST_USAGE = "Usage: `/broadcast <message>`\n\nSends to ALL active students."
-
 BROADCAST_SENT = "✅ Broadcast sent to {count} students."
 
 PENDING_HEADER = "💳 **Pending Payments**\n\n"
@@ -188,6 +224,21 @@ ESCALATION_ITEM = (
     "  `/reply {esc_id} <message>`\n\n"
 )
 ESCALATIONS_EMPTY = "No pending escalations. 👍"
+
+# ── Custom Plan Admin ──
+CUSTOM_APPROVE_USAGE = (
+    "Usage: `/setprice <telegram_id> <amount> <sessions>`\n\n"
+    "Example: `/setprice 12345 50000 4`\n"
+    "This sets the custom plan price and sends payment link to student."
+)
+
+CUSTOM_SET_SUCCESS = (
+    "✅ **Custom Plan Priced**\n\n"
+    "Student: {name} (@{telegram_id})\n"
+    "Amount: {amount}\n"
+    "Sessions: {sessions}\n\n"
+    "Student has been sent the payment link."
+)
 
 # ── Rate Limit ──
 RATE_LIMITED = "⏳ Please wait a moment before sending another message."
@@ -220,7 +271,8 @@ ADMIN_HELP = (
     "/reply `<esc_id> <message>` — Reply to escalated msg\n"
     "/escalations — List pending escalations\n"
     "/broadcast `<message>` — Message all active students\n"
-    "/stats — Student statistics\n\n"
+    "/stats — Student statistics\n"
+    "/setprice `<telegram_id> <amount> <sessions>` — Set custom plan price\n\n"
     "All commands work in this DM."
 )
 

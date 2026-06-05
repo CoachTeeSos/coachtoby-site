@@ -8,14 +8,19 @@ from telegram.ext import ContextTypes
 
 from handlers.start import get_main_menu_keyboard
 from services.airtable import AirtableService
+from services.rate_limit import RateLimiter
 from services.router import categorize
 from templates.messages import (
     SCHEDULE_RESPONSE, ASSIGNMENT_RESPONSE,
     PAYMENT_STATUS_ACTIVE, PAYMENT_STATUS_PENDING,
+    PAYMENT_STATUS_CUSTOM_PENDING,
     BOTTLENECK_RESPONSE, CONTACT_RESPONSE,
     ESCALATION_ACK, ESCALATION_ADMIN_FWD,
-    WELCOME_NEW, HELP_TEXT,
+    WELCOME_NEW, HELP_TEXT, RATE_LIMITED,
 )
+
+# Global rate limiter instance
+_rate_limiter = RateLimiter()
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +32,11 @@ async def menu_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
 
     data = query.data
     user = query.from_user
+
+    # Rate limit check
+    if not _rate_limiter.check(user.id, "menu_button"):
+        return  # Silently ignore spam button presses
+
     airtable: AirtableService = context.bot_data["airtable"]
 
     if data == "menu:home":
@@ -126,6 +136,14 @@ async def dm_message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
     text = update.message.text or ""
     airtable: AirtableService = context.bot_data["airtable"]
 
+    # Rate limit check
+    if not _rate_limiter.check(user.id, "dm_message"):
+        retry = _rate_limiter.get_retry_after(user.id, "dm_message")
+        await update.message.reply_text(
+            RATE_LIMITED.format(retry_after=retry) if retry > 0 else RATE_LIMITED
+        )
+        return
+
     # Ignore non-text (voices, stickers, etc.)
     if not update.message.text:
         from templates.messages import INVALID_INPUT
@@ -144,6 +162,21 @@ async def dm_message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         from config import REGISTRATION_URL
         await update.message.reply_text(
             NOT_REGISTERED.format(registration_url=REGISTRATION_URL),
+            parse_mode="Markdown",
+        )
+        return
+
+    # Custom plan pending → handle "PAID" claim
+    if student.get("status") == "Custom Plan Pending":
+        if text.strip().upper() in ("PAID", "✅", "DONE", "I PAID", "PAYMENT DONE"):
+            from handlers.payment import handle_paid_claim
+            await handle_paid_claim(update, context, student)
+            return
+        await update.message.reply_text(
+            PAYMENT_STATUS_CUSTOM_PENDING.format(
+                amount=student.get("budget", ""),
+                needs=student.get("needs", ""),
+            ),
             parse_mode="Markdown",
         )
         return

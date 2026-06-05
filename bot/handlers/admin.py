@@ -1,5 +1,6 @@
 """
-handlers/admin.py — Admin-only commands: /reply, /broadcast, /stats, /escalations.
+handlers/admin.py — Admin-only commands: /reply, /broadcast, /stats, /escalations, /setprice.
+Also handles command polling from Hermes via Airtable.
 """
 import logging
 from datetime import datetime
@@ -42,7 +43,6 @@ async def reply_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_text = " ".join(context.args[1:])
     airtable: AirtableService = context.bot_data["airtable"]
 
-    # Find the escalation
     esc = await airtable.get_escalation(int(esc_id))
     if not esc:
         await update.message.reply_text(
@@ -51,7 +51,6 @@ async def reply_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    # Forward reply to student
     student_id = esc["telegram_id"]
     try:
         await context.bot.send_message(
@@ -64,9 +63,7 @@ async def reply_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"❌ Could not reach student {student_id}.")
         return
 
-    # Mark escalation as replied
     await airtable.reply_escalation(int(esc_id), reply_text)
-
     await update.message.reply_text(
         REPLY_SENT.format(student_name=f"Student #{student_id}"),
     )
@@ -109,7 +106,6 @@ async def broadcast_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     broadcast_text = " ".join(context.args)
     airtable: AirtableService = context.bot_data["airtable"]
 
-    # Get all active students
     active_students = await airtable.get_all_active_students()
 
     if not active_students:
@@ -151,7 +147,6 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     total_sessions = sum(s.get("sessions_used", 0) for s in active)
 
-    # Calculate revenue
     from config import SERVICES
     revenue = 0
     for s in active:
@@ -168,3 +163,94 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ),
         parse_mode="Markdown",
     )
+
+
+async def menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handle /menu — show main menu to any user."""
+    from handlers.start import get_main_menu_keyboard, WELCOME_NEW
+    await update.message.reply_text(
+        WELCOME_NEW,
+        parse_mode="Markdown",
+        reply_markup=get_main_menu_keyboard(),
+    )
+
+
+# ── Hermes Command Polling ──
+
+async def poll_commands_job(context: ContextTypes.DEFAULT_TYPE):
+    """Poll SQLite commands table for pending commands from Hermes."""
+    airtable: AirtableService = context.bot_data["airtable"]
+    bot = context.bot
+
+    try:
+        commands = await airtable.poll_pending_commands()
+        for cmd in commands:
+            cmd_id = cmd["id"]
+            command = cmd["command"]
+            target_id = cmd["target_id"]
+            params = cmd["params"] or ""
+
+            result = ""
+
+            if command == "approve":
+                # Approve a student's payment
+                student = await airtable.find_student(int(target_id))
+                if student and student.get("status") != "Active":
+                    svc_key = student.get("service_key", "single")
+                    svc = __import__("config", fromlist=["SERVICES"]).SERVICES.get(svc_key, {})
+                    total_sessions = 4 if "monthly" in svc_key.lower() else 1
+                    await airtable.update_student(student["record_id"], {
+                        "Status": "Active",
+                        "Total Sessions": total_sessions,
+                        "Sessions Used": 0,
+                    })
+                    # Notify student
+                    try:
+                        from handlers.start import get_main_menu_keyboard
+                        await bot.send_message(
+                            chat_id=int(target_id),
+                            text=f"✅ **Payment Confirmed!**\n\nWelcome aboard!",
+                            parse_mode="Markdown",
+                            reply_markup=get_main_menu_keyboard(),
+                        )
+                    except Exception:
+                        pass
+                    result = f"Approved {target_id}"
+                else:
+                    result = f"Already active or not found: {target_id}"
+
+            elif command == "reject":
+                student = await airtable.find_student(int(target_id))
+                if student:
+                    await airtable.update_student(student["record_id"], {"Status": "Rejected"})
+                    result = f"Rejected {target_id}"
+                else:
+                    result = f"Not found: {target_id}"
+
+            elif command == "setprice":
+                # params = "amount,sessions"
+                parts = params.split(",")
+                if len(parts) >= 2:
+                    amount = int(parts[0])
+                    sessions = int(parts[1])
+                    student = await airtable.find_student(int(target_id))
+                    if student:
+                        await airtable.update_student(student["record_id"], {
+                            "Status": "Pending Review",
+                            "Budget": str(amount),
+                            "Total Sessions": sessions,
+                        })
+                        result = f"Set price {amount} / {sessions} sessions for {target_id}"
+                    else:
+                        result = f"Not found: {target_id}"
+                else:
+                    result = f"Invalid params: {params}"
+
+            else:
+                result = f"Unknown command: {command}"
+
+            await airtable.mark_command_executed(cmd_id, result)
+            logger.info(f"Command #{cmd_id} executed: {result}")
+
+    except Exception as e:
+        logger.error(f"Command poll job failed: {e}")

@@ -43,6 +43,9 @@ class AirtableService:
                     total_sessions  INTEGER DEFAULT 0,
                     source          TEXT,
                     service_key     TEXT,
+                    budget          TEXT,
+                    needs           TEXT,
+                    amount_paid     INTEGER DEFAULT 0,
                     last_synced     TEXT
                 )
             """)
@@ -67,6 +70,18 @@ class AirtableService:
                     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+            await db.execute("""
+                CREATE TABLE IF NOT EXISTS commands (
+                    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                    command         TEXT,
+                    target_id       TEXT,
+                    params          TEXT,
+                    status          TEXT DEFAULT 'pending',
+                    result          TEXT,
+                    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    executed_at     TEXT
+                )
+            """)
             await db.commit()
 
     def _row_to_dict(self, record: dict) -> dict:
@@ -81,6 +96,9 @@ class AirtableService:
             "total_sessions": f.get("Total Sessions", 0) or 0,
             "source": (f.get("Source", "") or "").strip(),
             "service_key": (f.get("Service Key", "") or "").strip(),
+            "budget": (f.get("Budget", "") or "").strip(),
+            "needs": (f.get("Needs", "") or "").strip(),
+            "amount_paid": f.get("Amount Paid", 0) or 0,
             "record_id": record.get("id", ""),
         }
 
@@ -109,7 +127,6 @@ class AirtableService:
             return None
         except Exception as e:
             logger.error(f"Airtable query failed: {e}")
-            # Fallback to stale cache
             if cached:
                 logger.warning(f"Using stale cache for {tid}")
                 return cached
@@ -148,7 +165,6 @@ class AirtableService:
     async def get_all_active_students(self) -> list[dict]:
         """Get all active students (for /broadcast)."""
         try:
-            # Airtable Status values: "Active" (capital A)
             formula = "{Status}='Active'"
             records = self.table.all(formula=formula)
             return [self._row_to_dict(r) for r in records]
@@ -159,13 +175,33 @@ class AirtableService:
     async def get_pending_payments(self) -> list[dict]:
         """Get all pending payment students."""
         try:
-            # Airtable Status values: "pending_payment" or "Pending" — try both
             formula = "OR({Status}='Pending Review',{Status}='Awaiting Receipt')"
             records = self.table.all(formula=formula)
             return [self._row_to_dict(r) for r in records]
         except Exception as e:
             logger.error(f"Airtable pending fetch failed: {e}")
             return []
+
+    # ── Commands table (Hermes → Retpipebot) ──
+
+    async def poll_pending_commands(self) -> list[dict]:
+        """Poll for pending commands from Hermes. Returns list of command dicts."""
+        async with aiosqlite.connect(self.db_path) as db:
+            db.row_factory = aiosqlite.Row
+            cur = await db.execute(
+                "SELECT * FROM commands WHERE status='pending' ORDER BY created_at"
+            )
+            rows = await cur.fetchall()
+            return [dict(r) for r in rows]
+
+    async def mark_command_executed(self, cmd_id: int, result: str):
+        """Mark a command as executed with result."""
+        async with aiosqlite.connect(self.db_path) as db:
+            await db.execute(
+                "UPDATE commands SET status='done', result=?, executed_at=? WHERE id=?",
+                (result, datetime.utcnow().isoformat(), cmd_id)
+            )
+            await db.commit()
 
     # ── SQLite Cache ──
 
@@ -185,12 +221,14 @@ class AirtableService:
             await db.execute("""
                 INSERT OR REPLACE INTO students_cache
                 (telegram_id, name, plan, status, sessions_used, total_sessions,
-                 source, service_key, last_synced)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 source, service_key, budget, needs, amount_paid, last_synced)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 student["telegram_id"], student["name"], student["plan"],
                 student["status"], student["sessions_used"], student["total_sessions"],
                 student["source"], student["service_key"],
+                student.get("budget", ""), student.get("needs", ""),
+                student.get("amount_paid", 0),
                 datetime.utcnow().isoformat()
             ))
             await db.commit()

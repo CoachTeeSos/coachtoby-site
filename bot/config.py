@@ -24,10 +24,13 @@ FIELD_NAME        = "Name"
 FIELD_STATUS      = "Status"
 FIELD_PLAN        = "Plan"
 FIELD_SERVICE_KEY = "Service Key"
-FIELD_TG_ID       = "Telegram Chat ID"       # existing text column
-FIELD_TG_USERNAME  = "Telegram Username"     # ADD THIS column in Airtable (single line text)
-FIELD_EMAIL       = "Email"                  # ADD IF NOT PRESENT
-FIELD_PHONE       = "Phone"                  # ADD IF NOT PRESENT
+FIELD_TG_ID       = "Telegram Chat ID"
+FIELD_TG_USERNAME  = "Telegram Username"
+FIELD_EMAIL       = "Email"
+FIELD_PHONE       = "Phone"
+FIELD_BUDGET      = "Budget"
+FIELD_NEEDS       = "Needs"
+FIELD_AMOUNT_PAID = "Amount Paid"
 
 # Status values (must match Airtable singleSelect choices exactly)
 STATUS_ACTIVE       = "Active"
@@ -35,6 +38,7 @@ STATUS_PENDING      = "Pending Review"
 STATUS_AWAITING     = "Awaiting Receipt"
 STATUS_EXPIRED      = "Expired"
 STATUS_REJECTED     = "Rejected"
+STATUS_CUSTOM      = "Custom Plan Pending"  # NEW: custom plan awaiting admin pricing
 
 # ── Links ──
 REGISTRATION_URL: str = "https://coachteesos.github.io/coachtoby-site/"

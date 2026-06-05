@@ -20,18 +20,22 @@ from telegram.ext import (
 from config import BOT_TOKEN, ADMIN_IDS
 from services.airtable import AirtableService
 from services.payment_verifier import verify_payments_job
-from handlers.start import start_handler
+from handlers.start import start_handler, MAIN_MENU_KEYBOARD, NAME_CUSTOM
 from handlers.registration import (
     receive_name, receive_email, receive_phone,
     confirm_registration, cancel_registration,
+    register_command,
     NAME, EMAIL, PHONE, CONFIRM,
 )
 from handlers.menu import menu_callback_handler, dm_message_handler
 from handlers.group import group_message_handler
-from handlers.payment import approve_command, reject_command, pending_command
+from handlers.payment import (
+    approve_command, reject_command, pending_command, setprice_command,
+)
 from handlers.admin import (
     admin_help_command, reply_command, escalations_command,
-    broadcast_command, stats_command,
+    broadcast_command, stats_command, menu_command,
+    poll_commands_job,
 )
 
 logging.basicConfig(
@@ -43,7 +47,7 @@ logger = logging.getLogger(__name__)
 
 
 async def payment_poll_job(context: ContextTypes.DEFAULT_TYPE):
-    """Recurring job: check Airtable for newly activated students."""
+    """Recurring job: auto-welcome students whose status changed to Active."""
     airtable: AirtableService = context.bot_data["airtable"]
     bot = context.bot
 
@@ -57,10 +61,9 @@ async def payment_poll_job(context: ContextTypes.DEFAULT_TYPE):
                 continue
 
             record = await airtable.find_student(int(tid))
-            if not record or record.get("status", "").lower() != "active":
+            if not record or record.get("status", "") != "Active":
                 continue
 
-            from handlers.start import get_main_menu_keyboard
             name = record.get("name", "there")
             plan = record.get("plan", "")
             sessions_used = record.get("sessions_used", 0)
@@ -78,7 +81,7 @@ async def payment_poll_job(context: ContextTypes.DEFAULT_TYPE):
                         f"Here's what I can help you with:"
                     ),
                     parse_mode="Markdown",
-                    reply_markup=get_main_menu_keyboard(),
+                    reply_markup=MAIN_MENU_KEYBOARD,
                 )
                 welcomed_set.add(tid)
                 context.bot_data["_welcomed"] = welcomed_set
@@ -108,11 +111,15 @@ def main():
     job_queue = app.job_queue
     job_queue.run_repeating(payment_poll_job, interval=300, first=30, name="payment_poll")
     job_queue.run_repeating(verify_payments_job, interval=300, first=60, name="fw_verify")
+    job_queue.run_repeating(poll_commands_job, interval=30, first=15, name="cmd_poll")
 
     # ── Handlers ──
-    # Registration conversation (must be before /start CommandHandler)
+    # Registration conversation — entry via /start (with payload) or /register (fresh)
     reg_conv = ConversationHandler(
-        entry_points=[CommandHandler("start", start_handler)],
+        entry_points=[
+            CommandHandler("start", start_handler),
+            CommandHandler("register", register_command),
+        ],
         states={
             NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_name)],
             EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_email)],
@@ -127,14 +134,19 @@ def main():
     )
     app.add_handler(reg_conv)
 
+    # Admin commands
     app.add_handler(CommandHandler("approve", approve_command))
     app.add_handler(CommandHandler("reject", reject_command))
     app.add_handler(CommandHandler("pending", pending_command))
+    app.add_handler(CommandHandler("setprice", setprice_command))
     app.add_handler(CommandHandler("reply", reply_command))
     app.add_handler(CommandHandler("escalations", escalations_command))
     app.add_handler(CommandHandler("broadcast", broadcast_command))
     app.add_handler(CommandHandler("stats", stats_command))
     app.add_handler(CommandHandler("adminhelp", admin_help_command))
+    app.add_handler(CommandHandler("menu", menu_command))
+
+    # Callbacks and messages
     app.add_handler(CallbackQueryHandler(menu_callback_handler))
     app.add_handler(MessageHandler(filters.ChatType.GROUPS, group_message_handler), group=1)
     app.add_handler(
