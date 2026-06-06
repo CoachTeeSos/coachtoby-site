@@ -302,18 +302,20 @@ function handleCTASubmit(e) {
   e.preventDefault();
   var name = document.getElementById('cta-name').value.trim();
   var email = document.getElementById('cta-email').value.trim();
-  var phone = document.getElementById('cta-phone').value.trim();
+  var whatsapp = document.getElementById('cta-whatsapp').value.trim();
+  var location = document.getElementById('cta-location').value.trim();
   var service = document.getElementById('cta-service').value;
 
-  if (!name || !email || !phone || !service) {
+  if (!name || !email || !whatsapp || !location || !service) {
     alert('Please fill in all required fields.');
     return false;
   }
 
   closeModal();
 
-  // Redirect to bot — it will capture @username + ID automatically from Telegram
-  var botUrl = 'https://t.me/Retpipebot?start=' + encodeURIComponent(name + '|' + service);
+  // Build start payload: name|email|whatsapp|location|service
+  var payload = [name, email, whatsapp, location, service].join('|');
+  var botUrl = 'https://t.me/Retpipebot?start=' + encodeURIComponent(payload);
 
   var FLUTTERWAVE = {
     single: 'https://flutterwave.com/pay/ictjiqq30sz7',

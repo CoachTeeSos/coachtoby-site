@@ -8,7 +8,7 @@ import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, ConversationHandler
 
-from config import ADMIN_IDS, SERVICES, FLUTTERWAVE, STATUS_CUSTOM
+from config import ADMIN_IDS, SERVICES, FLUTTERWAVE, STATUS_CUSTOM, STATUS_ACTIVE, STATUS_PENDING
 from services.airtable import AirtableService
 from templates.messages import (
     WELCOME_NEW, NOT_REGISTERED, PENDING_PAYMENT, WELCOME_BACK,
@@ -127,20 +127,136 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return ConversationHandler.END
 
     # ── NEW STUDENT ──
-    # Check if this is a returning student who re-registered (same telegram_id but no record)
     context.user_data["reg_tg_id"] = str(user.id)
     context.user_data["reg_tg_username"] = user.username or ""
 
-    # Parse start payload: name|serviceKey or name only
+    # Parse start payload from website form:
+    #   name|email|whatsapp|location|service   (5 parts = full form)
+    #   name|serviceKey                          (2 parts = old modal)
+    #   name only                                (1 part)
     payload = (update.message.text or "").replace("/start", "").strip()
-    if payload:
-        parts = payload.split("|")
-        context.user_data["reg_plan"] = parts[1].strip() if len(parts) >= 2 else "single"
+    parts = payload.split("|") if payload else []
+
+    if len(parts) >= 5:
+        # ── FULL FORM SUBMISSION FROM WEBSITE ──
+        # All data collected at once — skip step-by-step, write to Airtable directly
+        student_name  = parts[0].strip()
+        student_email = parts[1].strip()
+        student_phone = parts[2].strip()
+        student_loc   = parts[3].strip()
+        plan_key      = parts[4].strip()
+
+        context.user_data["reg_name"]  = student_name
+        context.user_data["reg_email"] = student_email
+        context.user_data["reg_phone"] = student_phone
+        context.user_data["reg_plan"]  = plan_key
+        context.user_data["reg_source"] = "Website Form"
+
+        svc = SERVICES.get(plan_key, SERVICES["single"])
+        is_free = svc.get("price", 0) == 0 and svc.get("type") == "community"
+
+        # Build Airtable fields
+        fields = {
+            "Name": student_name,
+            "Email": student_email,
+            "Phone": student_phone,
+            "Location": student_loc,
+            "Telegram Username": user.username or "",
+            "Telegram Chat ID": str(user.id),
+            "Service Key": plan_key,
+            "Plan": svc["label"],
+            "Source": "Website Form",
+            "Status": STATUS_CUSTOM if svc.get("type") == "custom" else (STATUS_ACTIVE if is_free else STATUS_PENDING),
+        }
+
+        # Check if student already exists (by Telegram Chat ID via cache lookup)
+        existing = None
+        try:
+            existing = await airtable.find_student(user.id)
+        except Exception:
+            pass
+
+        if existing:
+            await airtable.update_student(existing["record_id"], fields)
+            logger.info(f"Updated existing student from website form: {user.id} ({student_name})")
+        else:
+            await airtable.create_student(fields)
+            logger.info(f"Created new student from website form: {user.id} ({student_name})")
+
+        # Respond based on service type
+        if svc.get("type") == "custom":
+            # Custom plan — notify admin, show pending
+            from handlers.registration import STATUS_CUSTOM as _sc
+            for admin_id in ADMIN_IDS:
+                try:
+                    await context.bot.send_message(
+                        chat_id=admin_id,
+                        text=(
+                            "🔔 **Custom Plan Request (Website)**\n\n"
+                            f"Student: {student_name} (`{user.id}`)\n"
+                            f"Email: {student_email}\n"
+                            f"WhatsApp: {student_phone}\n"
+                            f"Location: {student_loc}\n\n"
+                            f"Review in Airtable and use `/setprice {user.id} <amount> <sessions>`"
+                        ),
+                        parse_mode="Markdown",
+                    )
+                except Exception:
+                    pass
+            await update.message.reply_text(
+                f"✅ **Thanks, {student_name}!**\n\n"
+                f"Your custom plan request has been submitted.\n"
+                f"📧 {student_email}\n"
+                f"📱 {student_phone}\n"
+                f"📍 {student_loc}\n\n"
+                f"Your coach will review within 24 hours and send you a payment link.\n"
+                f"You'll get a message here when it's ready. 🎤",
+                parse_mode="Markdown",
+            )
+        elif is_free:
+            # Free service — activate immediately
+            await update.message.reply_text(
+                f"✅ **Welcome, {student_name}!**\n\n"
+                f"You're all set — your free community access is active.\n\n"
+                f"Here's what I can help with:",
+                parse_mode="Markdown",
+                reply_markup=MAIN_MENU_KEYBOARD,
+            )
+        else:
+            # Paid — show payment link
+            fw_link = FLUTTERWAVE.get(plan_key, "")
+            amount_display = f"${svc['price']}" if svc['currency'] == 'USD' else f"₦{svc['price']:,}"
+            await update.message.reply_text(
+                f"✅ **Thanks, {student_name}!**\n\n"
+                f"📋 Plan: {svc['label']}\n"
+                f"💰 Amount: {amount_display}\n"
+                f"📧 {student_email}\n"
+                f"📱 {student_phone}\n\n"
+                f"Complete your payment to activate:\n"
+                f"💳 {fw_link}\n\n"
+                f"After payment, your coach will verify and activate your account.\n"
+                f"You'll get a message herewhen you're approved. 🎤",
+                parse_mode="Markdown",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💳 Pay Now", url=fw_link)],
+                    [InlineKeyboardButton("📞 Contact Admin", callback_data="menu:contact")],
+                ]),
+            )
+
+        context.user_data.clear()
+        return ConversationHandler.END
+
+    elif len(parts) >= 2:
+        # Old modal format: name|serviceKey
+        context.user_data["reg_plan"] = parts[1].strip()
     else:
         context.user_data["reg_plan"] = "single"
 
     plan_key = context.user_data["reg_plan"]
     svc = SERVICES.get(plan_key, SERVICES["single"])
+
+    # Validate required fields for non-website flows
+    context.user_data["reg_name"] = parts[0].strip() if parts else user.first_name or "there"
 
     # Custom plan → ask for amount first
     if svc.get("type") == "custom":
@@ -156,7 +272,6 @@ async def start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Free service → no payment needed, just register
     if svc.get("price", 0) == 0 and svc.get("type") == "community":
-        # Direct registration — name → email → phone → confirm → active immediately
         context.user_data["reg_free"] = True
         await update.message.reply_text(REG_NAME_PROMPT, parse_mode="Markdown")
         return NAME
