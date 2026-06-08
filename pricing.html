@@ -3,252 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing | Sessions with Toby</title>
+<title>Pricing — Sessions with Toby</title>
 <meta name="description" content="Vocal coaching, life coaching, and community memberships. Transparent pricing in USD and Naira. Session 1 guarantee.">
-<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#008060">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
 </head>
-<body class="pricing-page">
+<body>
 
-<div class="mesh-bg"><div class="mesh-orb"></div><div class="mesh-orb"></div><div class="mesh-orb"></div></div>
-<div class="progress-bar"></div>
+  <div id="pageLoader"><div style="text-align:center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
-<nav>
-  <div class="logo"><a href="/coachtoby-site/">Sessions with <span>Toby</span></a></div>
-  <div class="nav-links">
-    <a href="/coachtoby-site/#services">Services</a>
-    <a href="/coachtoby-site/#how-it-works">How It Works</a>
-    <a href="pricing.html" style="color:var(--text);font-weight:700;">Pricing</a>
-    <a href="community.html">Community</a>
-    <a href="content.html">Resources</a>
-    <a href="about.html">About</a>
-    <a href="/coachtoby-site/#start" class="nav-cta">Book a Session</a>
-  </div>
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-
-<div class="sticky-cta">
-  <a href="/coachtoby-site/#start" class="sticky-btn">Book Your First Session →</a>
-</div>
-
-<section class="text-center" style="padding-top:120px;">
-  <div class="section-label">Pricing</div>
-  <h1 class="section-title" style="font-size:clamp(2rem,5vw,3rem);">Invest in Your Voice.<br>Invest in Your Direction.</h1>
-  <p class="section-sub" style="margin:0 auto 16px;">Transparent pricing. No hidden fees. Pay in USD or Naira.</p>
-  <p style="color:var(--accent);font-size:0.88rem;font-weight:600;">🛡️ Session 1 guarantee applies to all coaching plans</p>
-</section>
-
-<!-- COACHING PLANS -->
-<section>
-  <div class="section-label reveal text-center" style="text-align:center;">Coaching Plans</div>
-  <h2 class="section-title reveal text-center" style="text-align:center;">Start Where You Are.</h2>
-  <div class="pricing-grid">
-    <div class="pricing-card reveal-delay-2">
-      <div class="plan-name">Starter — Single Session</div>
-      <div class="price">$50<span>/session</span></div>
-      <div class="price-note">Try it out — no commitment</div>
-      <ul>
-        <li>60-minute 1-on-1 session</li>
-        <li>Personalized exercises</li>
-        <li>Session summary & notes</li>
-        <li>Homework assignment</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('single')">Pay $50 — Book Now</button>
-      <p style="color:var(--muted);font-size:0.75rem;text-align:center;margin-top:10px;">Or <a href="#" onclick="goToBot('ngn-single');return false;" style="color:var(--accent);">pay ₦70,000 in Naira</a></p>
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold" style="color:#002D21;letter-spacing:-0.02em">SESSIONS WITH TOBY</span></a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="home.html#services" class="nav-link text-sm">Services</a>
+          <a href="home.html#pricing" class="nav-link text-sm">Pricing</a>
+          <a href="home.html#community" class="nav-link text-sm">Community</a>
+          <a href="home.html#reviews" class="nav-link text-sm">Reviews</a>
+        </div>
+        <div class="hidden md:flex items-center gap-3"><a href="book.html" class="btn-cta text-sm">Try Free Demo</a></div>
+        <button class="md:hidden p-2 rounded-lg" style="color:#002D21" onclick="toggleMobile()" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
     </div>
-    <div class="pricing-card featured reveal-delay-2">
-      <div class="plan-tag">Best Value · Only 4 spots/month</div>
-      <div class="plan-name">Growth — Monthly Package</div>
-      <div class="price">$200<span>/month</span></div>
-      <div class="price-note">4 sessions — priority access</div>
-      <ul>
-        <li>4 x 60-minute sessions</li>
-        <li>Priority scheduling</li>
-        <li>Progress tracking report</li>
-        <li>WhatsApp check-ins between sessions</li>
-        <li>Personalized practice plan</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('monthly')">Pay $200 — Get Started</button>
-      <p style="color:var(--muted);font-size:0.75rem;text-align:center;margin-top:10px;">Or <a href="#" onclick="goToBot('ngn-monthly');return false;" style="color:var(--accent);">pay ₦300,000 in Naira</a></p>
+    <div class="mobile-menu md:hidden flex-col bg-white border-t border-slate-200 px-4 py-4 gap-3" id="mobMenu">
+      <a href="home.html#services" class="nav-link py-2" onclick="toggleMobile()">Services</a>
+      <a href="home.html#pricing" class="nav-link py-2" onclick="toggleMobile()">Pricing</a>
+      <a href="home.html#community" class="nav-link py-2" onclick="toggleMobile()">Community</a>
+      <a href="home.html#reviews" class="nav-link py-2" onclick="toggleMobile()">Reviews</a>
+      <a href="book.html" class="btn-cta text-sm mt-2">Try Free Demo</a>
     </div>
-    <div class="pricing-card reveal-delay-3">
-      <div class="plan-name">Group of 3-5</div>
-      <div class="price">₦20,000<span>/month</span></div>
-      <div class="price-note">Per person — save 70%</div>
-      <ul>
-        <li>4 x 60-minute group sessions</li>
-        <li>Group practice & feedback</li>
-        <li>Progress tracking</li>
-        <li>WhatsApp group support</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('group3-5')">Pay ₦20,000 — Join Group</button>
-    </div>
-    <div class="pricing-card reveal-delay-3">
-      <div class="plan-name">✏️ Design Your Own Plan</div>
-      <div class="price" style="font-size:1.2rem;color:var(--accent);">Custom</div>
-      <div class="price-note">Mix coaching + community + speaking</div>
-      <ul>
-        <li>Flexible pricing</li>
-        <li>Personalized to your goals</li>
-        <li>Mix vocal + life coaching</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('custom-plan')">Design Plan →</button>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<!-- COMMUNITY PLANS -->
-<section>
-  <div class="section-label reveal text-center" style="text-align:center;">Community</div>
-  <h2 class="section-title reveal text-center" style="text-align:center;">Grow With Others.</h2>
-  <div class="pricing-grid">
-    <div class="pricing-card reveal-delay-2">
-      <div class="plan-name">Free Singers' Community</div>
-      <div class="price" style="font-size:1.4rem;color:var(--success);">FREE</div>
-      <div class="price-note">Learn with others — no cost</div>
-      <ul>
-        <li>Active singers' community</li>
-        <li>Share recordings & get feedback</li>
-        <li>Ask questions, grow together</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('free-community')">Join Free →</button>
+  <!-- HERO -->
+  <section class="hero-gradient" style="padding-top:7rem;padding-bottom:4rem;position:relative;overflow:hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <p class="text-emerald-300 font-semibold text-sm uppercase tracking-wider mb-3">Pricing</p>
+      <h1 class="text-white text-3xl sm:text-4xl lg:text-5xl font-black mb-4">Invest in Your Voice.<br>Invest in Your Direction.</h1>
+      <p class="text-emerald-100 text-lg max-w-2xl mx-auto mb-2">Transparent pricing. No hidden fees. Pay in USD or Naira.</p>
+      <p class="text-emerald-300 text-sm font-semibold">🛡️ Session 1 guarantee applies to all coaching plans</p>
     </div>
-    <div class="pricing-card featured reveal-delay-2">
-      <div class="plan-tag">Most Engaged</div>
-      <div class="plan-name">Paid Singers' Community</div>
-      <div class="price">₦20,000<span>/month</span></div>
-      <div class="price-note">Weekly tips, Q&As, feedback</div>
-      <ul>
-        <li>Weekly vocal tips from Toby</li>
-        <li>Live Q&A sessions</li>
-        <li>Personalized feedback on recordings</li>
-        <li>Accountability partners</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('paid-community')">Join Paid →</button>
-    </div>
-    <div class="pricing-card reveal-delay-3">
-      <div class="plan-name">Abuja Music Collective</div>
-      <div class="price" style="font-size:1.4rem;color:var(--success);">FREE</div>
-      <div class="price-note">For singers in Abuja</div>
-      <ul>
-        <li>Local community of singers</li>
-        <li>Meetups & jam sessions</li>
-        <li>Collaboration opportunities</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('abuja-collective')">Join →</button>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- SPEAKING -->
-<section>
-  <div class="section-label reveal text-center" style="text-align:center;">Speaking & Events</div>
-  <h2 class="section-title reveal text-center" style="text-align:center;">Book Toby for Your Event.</h2>
-  <div class="pricing-grid" style="max-width:400px;margin-left:auto;margin-right:auto;">
-    <div class="pricing-card reveal-delay-2" style="text-align:center;">
-      <div class="plan-name">Speaking Engagement</div>
-      <div class="price">₦200,000<span>/event</span></div>
-      <div class="price-note">Corporate, weddings, conferences</div>
-      <ul>
-        <li>Custom performance or talk</li>
-        <li>Professional stage presence</li>
-        <li>Nationwide availability</li>
-        <li>Ideal for brands & organizations</li>
-      </ul>
-      <button class="btn-primary" onclick="goToBot('speaking')">Book Speaking →</button>
+  <!-- COACHING PLANS -->
+  <section class="section-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Coaching Plans</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Start Where You Are.</h2></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div class="pricing-card">
+          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Starter — Single Session</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">$50</span><span class="text-slate-400 text-sm">/session</span></div>
+          <p class="text-slate-400 text-sm mt-2">Try it out — no commitment</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ 60-minute 1-on-1 session</li><li class="flex items-center gap-2">✓ Personalized exercises</li><li class="flex items-center gap-2">✓ Session summary & notes</li><li class="flex items-center gap-2">✓ Homework assignment</li></ul>
+          <a href="book.html" class="btn-cta w-full">Book Now</a>
+          <p class="text-slate-400 text-xs text-center mt-2">Or pay ₦70,000 in Naira</p>
+        </div>
+        <div class="pricing-card featured">
+          <div class="text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">Best Value · Only 4 spots/month</div>
+          <h3 class="text-lg font-bold text-emerald-600 uppercase tracking-wider mb-2">Growth — Monthly Package</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">$200</span><span class="text-slate-400 text-sm">/month</span></div>
+          <p class="text-slate-400 text-sm mt-2">4 sessions — priority access</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ 4 x 60-minute sessions</li><li class="flex items-center gap-2">✓ Priority scheduling</li><li class="flex items-center gap-2">✓ Progress tracking report</li><li class="flex items-center gap-2">✓ WhatsApp check-ins between sessions</li><li class="flex items-center gap-2">✓ Personalized practice plan</li></ul>
+          <a href="book.html" class="btn-cta w-full">Get Started</a>
+          <p class="text-slate-400 text-xs text-center mt-2">Or pay ₦300,000 in Naira</p>
+        </div>
+        <div class="pricing-card">
+          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Group of 3-5</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">₦20K</span><span class="text-slate-400 text-sm">/month</span></div>
+          <p class="text-slate-400 text-sm mt-2">Per person — save 70%</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ 4 x 60-minute group sessions</li><li class="flex items-center gap-2">✓ Group practice & feedback</li><li class="flex items-center gap-2">✓ Progress tracking</li><li class="flex items-center gap-2">✓ WhatsApp group support</li></ul>
+          <a href="book.html" class="btn-cta-outline w-full">Join Group</a>
+        </div>
+        <div class="pricing-card">
+          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">✏️ Design Your Own Plan</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-2xl font-black text-emerald-600">Custom</span></div>
+          <p class="text-slate-400 text-sm mt-2">Mix coaching + community + speaking</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Flexible pricing</li><li class="flex items-center gap-2">✓ Personalized to your goals</li><li class="flex items-center gap-2">✓ Mix vocal + life coaching</li></ul>
+          <a href="book.html" class="btn-cta-outline w-full">Design Plan →</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- COMPARISON TABLE -->
-<section>
-  <div class="section-label reveal text-center" style="text-align:center;">Compare Plans</div>
-  <div class="pricing-compare reveal-delay-1">
-    <table>
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Free Community</th>
-          <th>Single Session</th>
-          <th>Monthly Package</th>
-          <th>Paid Community</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1-on-1 coaching</td><td>—</td><td>✅ 1 session</td><td>✅ 4 sessions</td><td>—</td></tr>
-        <tr><td>Personalized exercises</td><td>—</td><td>✅</td><td>✅</td><td>—</td></tr>
-        <tr><td>WhatsApp support</td><td>—</td><td>—</td><td>✅</td><td>✅</td></tr>
-        <tr><td>Priority scheduling</td><td>—</td><td>—</td><td>✅</td><td>—</td></tr>
-        <tr><td>Progress tracking</td><td>—</td><td>—</td><td>✅</td><td>—</td></tr>
-        <tr><td>Community access</td><td>✅</td><td>—</td><td>—</td><td>✅</td></tr>
-        <tr><td>Weekly tips from Toby</td><td>—</td><td>—</td><td>—</td><td>✅</td></tr>
-        <tr><td>Live Q&A sessions</td><td>—</td><td>—</td><td>—</td><td>✅</td></tr>
-        <tr><td>Session 1 guarantee</td><td>—</td><td>✅</td><td>✅</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- GUARANTEE -->
-<section class="reveal">
-  <div class="guarantee-box">
-    <div style="font-size:2.5rem;margin-bottom:16px;">🛡️</div>
-    <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">The Session 1 Guarantee</h2>
-    <p style="color:var(--text);font-size:1rem;line-height:1.7;max-width:520px;margin:0 auto 12px;">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop. I've never had to pay this guarantee out. Not once. Not with 50 students.</p>
-    <p style="color:var(--muted);font-size:0.82rem;">Because the work is real. And your voice is not the problem.</p>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section>
-  <div class="section-label reveal">FAQ</div>
-  <h2 class="section-title reveal">Questions About Pricing</h2>
-  <div style="margin-top:28px;">
-    <details class="faq-item reveal-delay-1"><summary>Can I pay in Naira?</summary><p>Yes. All plans have Naira equivalents via Flutterwave. Click the Naira link on any plan above.</p></details>
-    <details class="faq-item reveal-delay-2"><summary>What if I'm not satisfied?</summary><p>Session 1 guarantee: if you don't hear a measurable difference, you don't pay. Full stop.</p></details>
-    <details class="faq-item reveal-delay-2"><summary>Can I cancel my monthly package?</summary><p>Yes. Cancel anytime. You'll keep access until the end of your billing period.</p></details>
-    <details class="faq-item reveal-delay-3"><summary>Do you offer payment plans?</summary><p>For custom plans, yes. Tell us your budget and we'll design something that works.</p></details>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="text-center">
-  <h2 class="section-title reveal" style="font-size:1.6rem;">Still Not Sure?</h2>
-  <p class="section-sub reveal-delay-1" style="margin:0 auto 28px;">Take the 30-second quiz. It'll tell you exactly what you need.</p>
-  <a href="quiz.html" class="btn-primary" style="margin-right:8px;">🎯 Take the Quiz</a>
-  <a href="https://calendly.com/d/cx3t-9f8-b7r" class="btn-secondary" target="_blank" rel="noopener">📅 Book a Free Call</a>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">Sessions with <span>Toby</span></div>
-      <p>Vocal & life coaching for people who are done staying the same.</p>
+  <!-- COMMUNITY PLANS -->
+  <section class="section-offwhite py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Community</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Grow With Others.</h2></div>
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="pricing-card">
+          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Free Singers' Community</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-2xl font-black text-emerald-600">FREE</span></div>
+          <p class="text-slate-400 text-sm mt-2">Learn with others — no cost</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Active singers' community</li><li class="flex items-center gap-2">✓ Share recordings & get feedback</li><li class="flex items-center gap-2">✓ Ask questions, grow together</li></ul>
+          <a href="https://t.me/+LGYumO9JZOc1M2M0" target="_blank" rel="noopener" class="btn-cta w-full">Join Free →</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">Most Engaged</div>
+          <h3 class="text-lg font-bold text-emerald-600 uppercase tracking-wider mb-2">Paid Singers' Community</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">₦20K</span><span class="text-slate-400 text-sm">/month</span></div>
+          <p class="text-slate-400 text-sm mt-2">Weekly tips, Q&As, feedback</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Weekly vocal tips from Toby</li><li class="flex items-center gap-2">✓ Live Q&A sessions</li><li class="flex items-center gap-2">✓ Personalized feedback on recordings</li><li class="flex items-center gap-2">✓ Accountability partners</li></ul>
+          <a href="book.html" class="btn-cta w-full">Join Paid →</a>
+        </div>
+        <div class="pricing-card">
+          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Abuja Music Collective</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-2xl font-black text-emerald-600">FREE</span></div>
+          <p class="text-slate-400 text-sm mt-2">For singers in Abuja</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Local community of singers</li><li class="flex items-center gap-2">✓ Meetups & jam sessions</li><li class="flex items-center gap-2">✓ Collaboration opportunities</li></ul>
+          <a href="https://t.me/+qv5hIOIBKgtmNjhk" target="_blank" rel="noopener" class="btn-cta-outline w-full">Join →</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Pages</h4>
-      <a href="/coachtoby-site/">Home</a>
-      <a href="about.html">About</a>
-      <a href="community.html">Community</a>
-      <a href="content.html">Resources</a>
-    </div>
-    <div class="footer-col">
-      <h4>Free Tools</h4>
-      <a href="quiz.html">Quiz</a>
-      <a href="lead-magnet.html">Free Guide</a>
-    </div>
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <a href="https://wa.me/2349160106084">WhatsApp</a>
-      <a href="mailto:prosperolumotobi@gmail.com">Email</a>
-    </div>
-  </div>
-  <div class="footer-bottom"><p>© 2026 Sessions with Toby · "To Be Come"</p></div>
-</footer>
+  </section>
 
-<script src="assets/scripts.js"></script>
-<script src="assets/capture.js"></script>
+  <!-- SPEAKING -->
+  <section class="section-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Speaking & Events</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Book Toby for Your Event.</h2></div>
+      <div class="max-w-md mx-auto">
+        <div class="pricing-card text-center">
+          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Speaking Engagement</h3>
+          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">₦200K</span><span class="text-slate-400 text-sm">/event</span></div>
+          <p class="text-slate-400 text-sm mt-2">Corporate, weddings, conferences</p>
+          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Custom performance or talk</li><li class="flex items-center gap-2">✓ Professional stage presence</li><li class="flex items-center gap-2">✓ Nationwide availability</li><li class="flex items-center gap-2">✓ Ideal for brands & organizations</li></ul>
+          <a href="book.html" class="btn-cta w-full">Book Speaking →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="section-offwhite py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Compare Plans</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Feature Comparison</h2></div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left" style="border-collapse:collapse">
+          <thead><tr style="border-bottom:1px solid #e2e8f0"><th class="py-3 px-4 font-semibold" style="color:#002D21">Feature</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Free Community</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Single Session</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Monthly Package</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Paid Community</th></tr></thead>
+          <tbody class="text-slate-600">
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">1-on-1 coaching</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅ 1 session</td><td class="py-3 px-4">✅ 4 sessions</td><td class="py-3 px-4">—</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Personalized exercises</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">WhatsApp support</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Priority scheduling</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Progress tracking</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Community access</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Weekly tips from Toby</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
+            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Live Q&A sessions</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
+            <tr><td class="py-3 px-4">Session 1 guarantee</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="section-white py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="card">
+        <div class="text-4xl mb-4">🛡️</div>
+        <h2 class="text-2xl font-black mb-4">The Session 1 Guarantee</h2>
+        <p class="text-slate-600 text-base leading-relaxed max-w-xl mx-auto mb-3">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop. I've never had to pay this guarantee out. Not once. Not with 50 students.</p>
+        <p class="text-slate-400 text-sm">Because the work is real. And your voice is not the problem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-offwhite py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">FAQ</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Questions About Pricing</h2></div>
+      <div class="space-y-4">
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">Can I pay in Naira?</summary><p class="text-slate-500 mt-2 text-sm">Yes. All plans have Naira equivalents. Contact us via WhatsApp or book a session to pay in Naira.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">What if I'm not satisfied?</summary><p class="text-slate-500 mt-2 text-sm">Session 1 guarantee: if you don't hear a measurable difference, you don't pay. Full stop.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">Can I cancel my monthly package?</summary><p class="text-slate-500 mt-2 text-sm">Yes. Cancel anytime. You'll keep access until the end of your billing period.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">Do you offer payment plans?</summary><p class="text-slate-500 mt-2 text-sm">For custom plans, yes. Tell us your budget and we'll design something that works.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="hero-gradient py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-white text-3xl sm:text-4xl font-black mb-4">Still Not Sure?</h2>
+      <p class="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">Take the 30-second quiz. It'll tell you exactly what you need.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="quiz.html" class="btn-cta bg-white text-base px-8 py-4" style="color:#002D21">🎯 Take the Quiz</a>
+        <a href="book.html" class="btn-cta-outline border-white/30 text-white hover:bg-white/10 text-base px-8 py-4">📅 Book a Free Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div><div class="flex items-center gap-2 mb-4"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold text-white tracking-tight">SESSIONS WITH TOBY</span></div><p class="text-emerald-200/70 text-sm">Vocal & life coaching for people who are done staying the same.</p></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Pages</h4><ul class="space-y-2 text-sm"><li><a href="home.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="community.html">Community</a></li><li><a href="content.html">Resources</a></li></ul></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Free Tools</h4><ul class="space-y-2 text-sm"><li><a href="quiz.html">Quiz</a></li><li><a href="lead-magnet.html">Free Guide</a></li></ul></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Connect</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/2349160106084">WhatsApp</a></li><li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li></ul></div>
+      </div>
+      <div class="border-t border-emerald-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-emerald-200/50 text-sm">© 2026 Sessions with Toby. All rights reserved.</p>
+        <a href="book.html" class="btn-cta text-sm">Try a Free Demo →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?'\\u00A0':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+  function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
+  </script>
 </body>
 </html>
