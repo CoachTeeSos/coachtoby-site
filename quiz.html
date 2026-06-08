@@ -3,260 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Which Singer Are You? | Sessions with Toby</title>
+<title>Which Singer Are You? — Sessions with Toby</title>
 <meta name="description" content="Take this 30-second quiz to find out what's holding you back as a singer. Get a free personalized vocal guide.">
-<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#008060">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-:root{--bg:#ffffff;--surface:#f8f9fc;--border:#e4e6f0;--text:#0f1120;--muted:#6b7094;--accent:#6d28d9;--accent-glow:rgba(109,40,217,0.08);--gradient:linear-gradient(135deg,#6d28d9,#4f46e5);--success:#16a34a}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
-.container{max-width:680px;margin:0 auto;padding:80px 24px 60px}
-.brand{text-align:center;margin-bottom:48px}
-.brand .logo{font-weight:800;font-size:1rem;margin-bottom:24px}
-.brand .logo span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.brand h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:12px}
-.brand p{color:var(--muted);font-size:1rem;max-width:480px;margin:0 auto}
-.quiz-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px 32px;margin-bottom:24px}
-.quiz-progress{display:flex;gap:6px;margin-bottom:32px}
-.quiz-progress .dot{flex:1;height:4px;border-radius:4px;background:var(--border);transition:background .3s}
-.quiz-progress .dot.active{background:var(--accent)}
+/* Quiz-specific styles — warm/white/clean emerald */
+.quiz-wrap{max-width:680px;margin:0 auto;padding:100px 24px 60px}
+.quiz-brand{text-align:center;margin-bottom:48px}
+.quiz-brand h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:12px;color:#002D21}
+.quiz-brand p{color:#64748b;font-size:1rem;max-width:480px;margin:0 auto}
+.quiz-dots{display:flex;gap:6px;margin-bottom:32px;justify-content:center}
+.quiz-dots .dot{width:40px;height:4px;border-radius:4px;background:#e2e8f0;transition:background .3s}
+.quiz-dots .dot.active{background:#008060}
+.quiz-card{background:#F4F7F6;border:1px solid #e2e8f0;border-radius:8px;padding:40px 32px;margin-bottom:24px}
 .quiz-step{display:none}
 .quiz-step.active{display:block;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.quiz-step h2{font-size:1.15rem;font-weight:700;margin-bottom:8px;line-height:1.4}
-.quiz-step .subtitle{color:var(--muted);font-size:.88rem;margin-bottom:28px}
-.options{display:flex;flex-direction:column;gap:10px}
-.option{display:block;padding:16px 20px;background:var(--bg);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:all .2s;font-size:.9rem;line-height:1.5;color:var(--text)}
-.option:hover{border-color:var(--accent);background:rgba(167,139,250,.06)}
-.option input{display:none}
-.option.selected{border-color:var(--accent);background:rgba(167,139,250,.1)}
+.quiz-step h2{font-size:1.15rem;font-weight:700;margin-bottom:8px;line-height:1.4;color:#002D21}
+.quiz-step .subtitle{color:#64748b;font-size:.88rem;margin-bottom:28px}
+.quiz-options{display:flex;flex-direction:column;gap:10px}
+.quiz-opt{display:block;padding:16px 20px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:.9rem;line-height:1.5;color:#1E293B;text-align:left;font-family:'Inter',sans-serif;width:100%}
+.quiz-opt:hover{border-color:#008060;background:rgba(0,128,96,0.04)}
+.quiz-opt.selected{border-color:#008060;background:rgba(0,128,96,0.08)}
+.quiz-opt input{display:none}
 .email-step{display:none;text-align:center}
 .email-step.active{display:block;animation:fadeIn .4s ease}
 .email-step .result-icon{font-size:3rem;margin-bottom:16px}
-.email-step h2{font-size:1.4rem;font-weight:800;margin-bottom:8px}
-.email-step .result-type{display:inline-block;background:var(--accent-glow);color:var(--accent);padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:700;margin-bottom:16px}
-.email-step .result-desc{color:var(--muted);font-size:.92rem;margin-bottom:28px;line-height:1.7}
-.email-step input[type="text"],.email-step input[type="email"]{width:100%;padding:14px 18px;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:1rem;font-family:inherit;margin-bottom:12px;outline:none;transition:border-color .2s}
-.email-step input:focus{border-color:var(--accent)}
-.email-step .btn{display:block;width:100%;background:var(--gradient);color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s}
-.email-step .btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(167,139,250,.3)}
-.email-step .privacy{color:var(--muted);font-size:.75rem;margin-top:12px}
+.email-step h2{font-size:1.4rem;font-weight:800;margin-bottom:8px;color:#002D21}
+.email-step .result-type{display:inline-block;background:rgba(0,128,96,0.08);color:#008060;padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:700;margin-bottom:16px}
+.email-step .result-desc{color:#64748b;font-size:.92rem;margin-bottom:28px;line-height:1.7}
+.email-step input[type="text"],.email-step input[type="email"]{width:100%;padding:14px 18px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;color:#1E293B;font-size:1rem;font-family:inherit;margin-bottom:12px;outline:none;transition:border-color .2s}
+.email-step input:focus{border-color:#008060}
+.email-step .btn{display:block;width:100%;background:#008060;color:#fff;padding:14px;border-radius:8px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.email-step .btn:hover{background:#00694f;transform:translateY(-1px)}
+.email-step .privacy{color:#64748b;font-size:.75rem;margin-top:12px}
 .thank-you{display:none;text-align:center;padding:60px 0}
 .thank-you.active{display:block;animation:fadeIn .4s ease}
 .thank-you .icon{font-size:3rem;margin-bottom:16px}
-.thank-you h2{font-size:1.4rem;font-weight:800;margin-bottom:12px}
-.thank-you p{color:var(--muted);font-size:.92rem;margin-bottom:24px;line-height:1.7}
-.thank-you .btn-outline{display:inline-block;padding:12px 28px;border:1px solid var(--border);border-radius:12px;color:var(--text);text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;margin:6px}
-.thank-you .btn-outline:hover{border-color:var(--accent)}
-.thank-you .btn-primary{display:inline-block;padding:12px 28px;background:var(--gradient);border-radius:12px;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;margin:6px}
-.thank-you .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(167,139,250,.3)}
-.thank-you .btn-whatsapp{display:inline-block;padding:14px 32px;background:#25D366;border-radius:12px;color:#fff;text-decoration:none;font-weight:700;font-size:1rem;transition:all .2s;margin:12px 6px}
-.thank-you .btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,.3)}
-.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.82rem;cursor:pointer;margin-bottom:20px;background:none;border:none;font-family:inherit;padding:0;transition:color .2s}
-.back-btn:hover{color:var(--text)}
+.thank-you h2{font-size:1.4rem;font-weight:800;margin-bottom:12px;color:#002D21}
+.thank-you p{color:#64748b;font-size:.92rem;margin-bottom:24px;line-height:1.7}
+.thank-you .btn-outline{display:inline-block;padding:12px 28px;border:1px solid #e2e8f0;border-radius:8px;color:#1E293B;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;margin:6px}
+.thank-you .btn-outline:hover{border-color:#008060}
+.thank-you .btn-primary{display:inline-block;padding:12px 28px;background:#008060;border-radius:8px;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;margin:6px}
+.thank-you .btn-primary:hover{background:#00694f}
+.thank-you .btn-whatsapp{display:inline-block;padding:14px 32px;background:#25D366;border-radius:8px;color:#fff;text-decoration:none;font-weight:700;font-size:1rem;transition:all .2s;margin:12px 6px}
+.thank-you .btn-whatsapp:hover{background:#1da851}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:#64748b;font-size:.82rem;cursor:pointer;margin-bottom:20px;background:none;border:none;font-family:inherit;padding:0;transition:color .2s}
+.back-btn:hover{color:#1E293B}
 .badge-free{display:inline-block;background:rgba(34,197,94,0.15);color:#22c55e;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:700;margin-right:6px;vertical-align:middle}
-.badge-paid{display:inline-block;background:rgba(167,139,250,0.15);color:var(--accent);padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:700;margin-right:6px;vertical-align:middle}
-@media(max-width:640px){.container{padding:60px 16px 40px}.quiz-card{padding:28px 20px}}
+.badge-paid{display:inline-block;background:rgba(0,128,96,0.08);color:#008060;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:700;margin-right:6px;vertical-align:middle}
+@media(max-width:640px){.quiz-wrap{padding:80px 16px 40px}.quiz-card{padding:28px 20px}}
 </style>
-<link rel="stylesheet" href="assets/style.css">
-<script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
-<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(15,17,32,0.04);">
-  <div class="logo" style="font-weight:900;font-size:1.05rem;letter-spacing:-.02em;text-transform:uppercase;"><a href="/coachtoby-site/" style="text-decoration:none;color:inherit">Sessions with <span style="background:linear-gradient(135deg,#c084fc,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Toby</span></a></div>
-  <a href="/coachtoby-site/" style="color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:500;padding:8px 14px;border-radius:8px;">← Back to Home</a>
-</nav>
-<div style="height:64px;"></div>
-<div class="container">
-<div class="brand">
-<div class="logo">Sessions with <span>Toby</span></div>
-<h1>Which Singer Are You?</h1>
-<p>Take this 30-second quiz. Find out what's actually holding you back — and get a free personalized guide.</p>
-</div>
-<div class="quiz-progress" id="progressBar"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-<div class="quiz-card">
-<div class="quiz-step active" data-step="1">
-<h2>What best describes where you are right now?</h2>
-<p class="subtitle">Be honest. This stays between us.</p>
-<div class="options">
-<label class="option"><input type="radio" name="q1" value="gigs"> Skillful musician with few to no gigs... 😭</label>
-<label class="option"><input type="radio" name="q1" value="record"> Singing for years without a single record</label>
-<label class="option"><input type="radio" name="q1" value="choir"> Choir member, but never the Lead Singer</label>
-<label class="option"><input type="radio" name="q1" value="md"> MD struggling to hold the team together (Vocally or managerially)</label>
-<label class="option"><input type="radio" name="q1" value="beginner"> I sound good in my head till I open my mouth. I want to learn.</label>
-</div>
-</div>
-<div class="quiz-step" data-step="2">
-<button class="back-btn" onclick="goBack()">&larr; Back</button>
-<h2>What's your biggest frustration?</h2>
-<p class="subtitle">The thing that keeps you up at night.</p>
-<div class="options">
-<label class="option"><input type="radio" name="q2" value="execute"> Ever learning, never executing</label>
-<label class="option"><input type="radio" name="q2" value="imposter"> Imposter syndrome: "Maybe I'm just not ready yet."</label>
-<label class="option"><input type="radio" name="q2" value="technique"> "I just want to refine my technique; I'm not looking for the stage yet." (A huge lie, but you're still welcome!)</label>
-<label class="option"><input type="radio" name="q2" value="stuck"> I feel stuck. I know I'm better than this.</label>
-</div>
-</div>
-<div class="quiz-step" data-step="3">
-<button class="back-btn" onclick="goBack()">&larr; Back</button>
-<h2>What would change everything for you?</h2>
-<p class="subtitle">If you could fix one thing right now.</p>
-<div class="options">
-<label class="option"><input type="radio" name="q3" value="confidence"> Sing with confidence — no more fear of high notes</label>
-<label class="option"><input type="radio" name="q3" value="gigs"> Start getting booked — gigs, features, opportunities</label>
-<label class="option"><input type="radio" name="q3" value="sound"> Finally sound like *me* — not a copy of someone else</label>
-<label class="option"><input type="radio" name="q3" value="lead"> Step into leadership — lead vocals, lead worship, lead the room</label>
-</div>
-</div>
-<div class="quiz-step" data-step="4">
-<button class="back-btn" onclick="goBack()">&larr; Back</button>
-<h2>How long have you been feeling this way?</h2>
-<p class="subtitle">No judgment. Just context.</p>
-<div class="options">
-<label class="option"><input type="radio" name="q4" value="months"> A few months — I'm just starting to realize the problem</label>
-<label class="option"><input type="radio" name="q4" value="year"> About a year — I've been trying to figure it out alone</label>
-<label class="option"><input type="radio" name="q4" value="years"> Multiple years — I should've done this sooner</label>
-<label class="option"><input type="radio" name="q4" value="decade"> So long I've almost given up on it</label>
-</div>
-</div>
-<div class="quiz-step" data-step="5">
-<button class="back-btn" onclick="goBack()">&larr; Back</button>
-<h2>Is getting a solution a priority for you right now?</h2>
-<p class="subtitle">No wrong answer. This helps me serve you better.</p>
-<div class="options">
-<label class="option"><input type="radio" name="q5" value="yes"> Yes — I'm ready to do something about this</label>
-<label class="option"><input type="radio" name="q5" value="thinking"> I'm thinking about it — still figuring things out</label>
-<label class="option"><input type="radio" name="q5" value="curious"> Just curious — not sure yet</label>
-</div>
-</div>
-<div class="quiz-step" data-step="6">
-<button class="back-btn" onclick="goBack()">&larr; Back</button>
-<h2>If you could afford it, what would you do?</h2>
-<p class="subtitle">Be real. This stays between us.</p>
-<div class="options">
-<label class="option"><input type="radio" name="q6" value="free_community"> <span class="badge-free">FREE</span> Join the free singers' community — learn with others</label>
-<label class="option"><input type="radio" name="q6" value="paid_community"> <span class="badge-paid">₦2,000/mo</span> Join the paid community — weekly tips, Q&As, feedback</label>
-<label class="option"><input type="radio" name="q6" value="lesson"> I'd take a 1-on-1 lesson immediately</label>
-<label class="option"><input type="radio" name="q6" value="both"> <span class="badge-paid">₦2,000/mo</span> Both — 1-on-1 coaching AND the paid community</label>
-<label class="option"><input type="radio" name="q6" value="nothing"> Honestly? I'd probably still do nothing</label>
-</div>
-</div>
-<div class="email-step" data-step="email">
-<div class="result-icon">&#x1F3AF;</div>
-<span class="result-type" id="resultType">The Hidden Gem</span>
-<h2>Here's what I see.</h2>
-<p class="result-desc" id="resultDesc"></p>
-<p style="color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:20px;">&#x1F4E7; Enter your name and email to get your free guide.</p>
-<input type="text" id="nameInput" placeholder="Your first name" required>
-<input type="email" id="emailInput" placeholder="Your email address" required>
-<input type="text" id="locationInput" placeholder="Where are you based? (city or country)" required>
-<button class="btn" onclick="submitForm()">Get My Free Guide &rarr;</button>
-<p class="privacy">No spam. Unsubscribe anytime.</p>
-</div>
-</div>
-<div class="thank-you" id="thankYou">
-<div class="icon">&#x2705;</div>
-<h2>Thank you, <span id="thankYouName"></span>!</h2>
-<p>Your guide is ready. Click the button below to get it via WhatsApp.</p>
-<a id="whatsappBtn" href="#" target="_blank" class="btn-whatsapp">&#x1F4AC; Get My Free Guide on WhatsApp</a>
-<div id="communitySection" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:24px;text-align:left;">
-<p style="color:var(--accent);font-weight:700;font-size:1rem;margin-bottom:8px;">&#x1F3A4; The Singers' Community</p>
-<p id="communityDesc" style="color:var(--muted);font-size:.88rem;margin-bottom:16px;"></p>
-<div id="communityBank" style="display:none;">
-<p style="color:var(--text);font-size:.85rem;font-weight:600;margin-bottom:8px;">To join the paid community, pay &#x20A6;2,000 to:</p>
-<div style="background:var(--bg);border-radius:10px;padding:16px;margin-bottom:16px;">
-<p style="font-size:.85rem;margin:0;"><strong>Bank:</strong> First Bank PLC</p>
-<p style="font-size:.85rem;margin:0;"><strong>Account:</strong> 3110071863</p>
-<p style="font-size:.85rem;margin:0;"><strong>Name:</strong> PROSPER TOBI OLUMO</p>
-</div>
-<p style="color:var(--muted);font-size:.82rem;">After payment, send your name and email to <strong style="color:var(--text);">+234 916 010 6084</strong> on WhatsApp to get added.</p>
-</div>
-<a id="communityLink" href="#" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;text-decoration:none;">Join the Community &rarr;</a>
-</div>
-<br><br>
-<a href="https://coachteesos.github.io/coachtoby-site/" class="btn-outline">&larr; Back to Main Site</a>
-</div>
-</div>
-<script>
-var R={
-gigs:{t:"The Skilled But Unseen",d:"You can sing. People who hear you know it. But the gigs aren't coming. The problem isn't your voice — it's your positioning, your network, and your stage confidence."},
-record:{t:"The Bedroom Singer",d:"You've been singing for years but have nothing to show for it. You need structure, accountability, and someone who pushes you to actually release."},
-choir:{t:"The Background Voice",d:"You've been singing in choirs for years but never step to the front. You have the range. What you don't have is the confidence and technique to own a lead."},
-md:{t:"The Reluctant Leader",d:"You're holding the team together — vocally or managerially — but you're burning out. You need to develop your own voice while leading others."},
-execute:{t:"The Eternal Learner",d:"You consume every tutorial, every course, every tip. But you never execute. The problem isn't knowledge — it's the gap between knowing and doing."},
-imposter:{t:"The Imposter",d:"You keep telling yourself you're not ready. But you've been 'not ready' for years. The truth? You're ready. You just need someone to see it and prove it."},
-technique:{t:"The Stage-Shy Singer",d:"You say you just want to refine your technique. But deep down, you want the stage. Stop hiding behind 'practice' and start preparing."},
-stuck:{t:"The Frustrated Talent",d:"You know you're better than where you are. Something's holding you back — technique, confidence, direction."},
-confidence:{t:"The Fearful Singer",d:"High notes scare you. Performing scares you. Your voice has so much more to give, but fear is caging it."},
-sound:{t:"The Copycat",d:"You sound like your idols — but not like yourself. Your signature voice is in there. We just need to excavate it."},
-lead:{t:"The Future Lead",d:"You were made to lead — vocally and otherwise. But leading vocals is a different skill from singing."},
-months:{t:"The New Awakening",d:"You just realized something needs to change. That's good. Most people never get here. Now act on it."},
-year:{t:"The Tired Grinder",d:"A year of trying to figure it out alone. That's enough. You've proven you're committed. Now get the guidance that shortcuts the next 3 years."},
-years:{t:"The Long Waiter",d:"Multiple years of feeling stuck. You should've done this sooner — but you're here now. Let's make up for lost time."},
-decade:{t:"The Almost-Given-Up",d:"You've been carrying this for so long you've almost accepted it. But you're still here. It's not too late."},
-beginner:{t:"The Raw Beginner",d:"You know you have something in you — but every time you open your mouth, it doesn't come out right. You don't need advanced technique. You need the right foundation."}
-};
-var A={},cs=1,ts=6;
-document.querySelectorAll('.option input').forEach(function(el){
-el.addEventListener('change',function(){
-var s=this.closest('.quiz-step');
-s.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected')});
-this.closest('.option').classList.add('selected');
-A[this.name]=this.value;
-setTimeout(function(){var n=parseInt(s.dataset.step);if(n<ts)g(n+1);else se();},400);
-});
-});
-function g(n){
-document.querySelectorAll('.quiz-step').forEach(function(s){s.classList.remove('active')});
-document.querySelector('[data-step="'+n+'"]').classList.add('active');cs=n;
-document.querySelectorAll('.quiz-progress .dot').forEach(function(d,i){d.classList.toggle('active',i<n)});
-}
-function goBack(){if(cs>1)g(cs-1);}
-function se(){
-document.querySelectorAll('.quiz-step').forEach(function(s){s.classList.remove('active')});
-document.querySelector('[data-step="email"]').classList.add('active');
-var k=A.q1||A.q2||'stuck',r=R[k]||R.stuck;
-document.getElementById('resultType').textContent=r.t;
-document.getElementById('resultDesc').textContent=r.d;
-document.querySelectorAll('.quiz-progress .dot').forEach(function(d){d.classList.add('active')});
-}
 
-function submitForm(){
-var name=document.getElementById('nameInput').value.trim();
-var email=document.getElementById('emailInput').value.trim();
-var location=document.getElementById('locationInput').value.trim();
-if(!name){alert('Please enter your name.');return;}
-if(!email||email.indexOf('@')===-1){alert('Please enter a valid email.');return;}
-if(!location){alert('Please enter your location.');return;}
-var k=A.q1||A.q2||'stuck';
-var leadData=new URLSearchParams();
-var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Location:location,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
-Object.keys(h).forEach(function(ky){leadData.append(ky,h[ky]);});
-fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:leadData,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
-var q6=A.q6||'';
-// Map Q6 answer to bot service key
-var serviceKey='quiz';
-if(q6==='free_community') serviceKey='free-community';
-else if(q6==='paid_community') serviceKey='paid-community';
-else if(q6==='lesson') serviceKey='single';
-else if(q6==='both') serviceKey='paid-community';
-// Redirect to bot with name + service
-window.open('https://t.me/Retpipebot?start='+encodeURIComponent(name+'|'+serviceKey),'_blank');
-// Show thank you on page
-document.getElementById('thankYouName').textContent=name;
-document.querySelector('.quiz-card').style.display='none';
-document.getElementById('thankYou').classList.add('active');
-document.getElementById('progressBar').style.display='none';
-// Update thank-you message based on choice
-var tyMsg='Your guide is ready. Check your Telegram for next steps! 🎤';
-if(q6==='free_community') tyMsg="Check your Telegram — I'll add you to the Free Singers' Community! 🎤";
-else if(q6==='paid_community'||q6==='both') tyMsg="Check your Telegram — I'll send you the Paid Community details! ⭐";
-else if(q6==='lesson') tyMsg="Check your Telegram — let's get your first session booked! 🎯";
-document.querySelector('.thank-you p').textContent=tyMsg;
-}
-</script>
-<script src="assets/capture.js"></script>
+  <div id="pageLoader"><div style="text-align:center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold" style="color:#002D21;letter-spacing:-0.02em">SESSIONS WITH TOBY</span></a>
+        <a href="home.html" class="text-sm nav-link">← Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="quiz-wrap">
+    <div class="quiz-brand">
+      <div style="font-weight:800;font-size:1rem;margin-bottom:24px;color:#002D21">SESSIONS WITH TOBY</div>
+      <h1>Which Singer Are You?</h1>
+      <p>Take this 30-second quiz. Find out what's actually holding you back — and get a free personalized guide.</p>
+    </div>
+    <div class="quiz-dots" id="progressBar"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div class="quiz-card">
+      <div class="quiz-step active" data-step="1">
+        <h2>What best describes where you are right now?</h2>
+        <p class="subtitle">Be honest. This stays between us.</p>
+        <div class="quiz-options">
+          <label class="quiz-opt"><input type="radio" name="q1" value="gigs"> Skillful musician with few to no gigs... 😭</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="record"> Singing for years without a single record</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="choir"> Choir member, but never the Lead Singer</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="md"> MD struggling to hold the team together (Vocally or managerially)</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="beginner"> I sound good in my head till I open my mouth. I want to learn.</label>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="2">
+        <button class="back-btn" onclick="goBack()">&larr; Back</button>
+        <h2>What's your biggest frustration?</h2>
+        <p class="subtitle">The thing that keeps you up at night.</p>
+        <div class="quiz-options">
+          <label class="quiz-opt"><input type="radio" name="q2" value="execute"> Ever learning, never executing</label>
+          <label class="quiz-opt"><input type="radio" name="q2" value="imposter"> Imposter syndrome: "Maybe I'm just not ready yet."</label>
+          <label class="quiz-opt"><input type="radio" name="q2" value="technique"> "I just want to refine my technique; I'm not looking for the stage yet." (A huge lie, but you're still welcome!)</label>
+          <label class="quiz-opt"><input type="radio" name="q2" value="stuck"> I feel stuck. I know I'm better than this.</label>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="3">
+        <button class="back-btn" onclick="goBack()">&larr; Back</button>
+        <h2>What would change everything for you?</h2>
+        <p class="subtitle">If you could fix one thing right now.</p>
+        <div class="quiz-options">
+          <label class="quiz-opt"><input type="radio" name="q3" value="confidence"> Sing with confidence — no more fear of high notes</label>
+          <label class="quiz-opt"><input type="radio" name="q3" value="gigs"> Start getting booked — gigs, features, opportunities</label>
+          <label class="quiz-opt"><input type="radio" name="q3" value="sound"> Finally sound like *me* — not a copy of someone else</label>
+          <label class="quiz-opt"><input type="radio" name="q3" value="lead"> Step into leadership — lead vocals, lead worship, lead the room</label>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="4">
+        <button class="back-btn" onclick="goBack()">&larr; Back</button>
+        <h2>How long have you been feeling this way?</h2>
+        <p class="subtitle">No judgment. Just context.</p>
+        <div class="quiz-options">
+          <label class="quiz-opt"><input type="radio" name="q4" value="months"> A few months — I'm just starting to realize the problem</label>
+          <label class="quiz-opt"><input type="radio" name="q4" value="year"> About a year — I've been trying to figure it out alone</label>
+          <label class="quiz-opt"><input type="radio" name="q4" value="years"> Multiple years — I should've done this sooner</label>
+          <label class="quiz-opt"><input type="radio" name="q4" value="decade"> So long I've almost given up on it</label>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="5">
+        <button class="back-btn" onclick="goBack()">&larr; Back</button>
+        <h2>Is getting a solution a priority for you right now?</h2>
+        <p class="subtitle">No wrong answer. This helps me serve you better.</p>
+        <div class="quiz-options">
+          <label class="quiz-opt"><input type="radio" name="q5" value="yes"> Yes — I'm ready to do something about this</label>
+          <label class="quiz-opt"><input type="radio" name="q5" value="thinking"> I'm thinking about it — still figuring things out</label>
+          <label class="quiz-opt"><input type="radio" name="q5" value="curious"> Just curious — not sure yet</label>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="6">
+        <button class="back-btn" onclick="goBack()">&larr; Back</button>
+        <h2>If you could afford it, what would you do?</h2>
+        <p class="subtitle">Be real. This stays between us.</p>
+        <div class="quiz-options">
+          <label class="quiz-opt"><input type="radio" name="q6" value="free_community"> <span class="badge-free">FREE</span> Join the free singers' community — learn with others</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="paid_community"> <span class="badge-paid">₦2,000/mo</span> Join the paid community — weekly tips, Q&As, feedback</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="lesson"> I'd take a 1-on-1 lesson immediately</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="both"> <span class="badge-paid">₦2,000/mo</span> Both — 1-on-1 coaching AND the paid community</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="nothing"> Honestly? I'd probably still do nothing</label>
+        </div>
+      </div>
+      <div class="email-step" data-step="email">
+        <div class="result-icon">&#x1F3AF;</div>
+        <span class="result-type" id="resultType">The Hidden Gem</span>
+        <h2>Here's what I see.</h2>
+        <p class="result-desc" id="resultDesc"></p>
+        <p style="color:#008060;font-size:.85rem;font-weight:600;margin-bottom:20px;">&#x1F4E7; Enter your name and email to get your free guide.</p>
+        <input type="text" id="nameInput" placeholder="Your first name" required>
+        <input type="email" id="emailInput" placeholder="Your email address" required>
+        <input type="text" id="locationInput" placeholder="Where are you based? (city or country)" required>
+        <button class="btn" onclick="submitForm()">Get My Free Guide &rarr;</button>
+        <p class="privacy">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+    <div class="thank-you" id="thankYou">
+      <div class="icon">&#x2705;</div>
+      <h2>Thank you, <span id="thankYouName"></span>!</h2>
+      <p>Your guide is ready. Click the button below to get it via WhatsApp.</p>
+      <a id="whatsappBtn" href="#" target="_blank" class="btn-whatsapp">&#x1F4AC; Get My Free Guide on WhatsApp</a>
+      <div id="communitySection" style="display:none;background:#F4F7F6;border:1px solid #e2e8f0;border-radius:8px;padding:24px;margin-top:24px;text-align:left;">
+        <p style="color:#008060;font-weight:700;font-size:1rem;margin-bottom:8px;">&#x1F3A4; The Singers' Community</p>
+        <p id="communityDesc" style="color:#64748b;font-size:.88rem;margin-bottom:16px;"></p>
+        <div id="communityBank" style="display:none;">
+          <p style="color:#1E293B;font-size:.85rem;font-weight:600;margin-bottom:8px;">To join the paid community, pay &#x20A6;2,000 to:</p>
+          <div style="background:#fff;border-radius:8px;padding:16px;margin-bottom:16px;border:1px solid #e2e8f0;">
+            <p style="font-size:.85rem;margin:0;"><strong>Bank:</strong> First Bank PLC</p>
+            <p style="font-size:.85rem;margin:0;"><strong>Account:</strong> 3110071863</p>
+            <p style="font-size:.85rem;margin:0;"><strong>Name:</strong> PROSPER TOBI OLUMO</p>
+          </div>
+          <p style="color:#64748b;font-size:.82rem;">After payment, send your name and email to <strong style="color:#1E293B;">+234 916 010 6084</strong> on WhatsApp to get added.</p>
+        </div>
+        <a id="communityLink" href="#" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;text-decoration:none;">Join the Community &rarr;</a>
+      </div>
+      <br><br>
+      <a href="home.html" class="btn-outline">&larr; Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?'\\u00A0':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+  var R={
+  gigs:{t:"The Skilled But Unseen",d:"You can sing. People who hear you know it. But the gigs aren't coming. The problem isn't your voice — it's your positioning, your network, and your stage confidence."},
+  record:{t:"The Bedroom Singer",d:"You've been singing for years but have nothing to show for it. You need structure, accountability, and someone who pushes you to actually release."},
+  choir:{t:"The Background Voice",d:"You've been singing in choirs for years but never step to the front. You have the range. What you don't have is the confidence and technique to own a lead."},
+  md:{t:"The Reluctant Leader",d:"You're holding the team together — vocally or managerially — but you're burning out. You need to develop your own voice while leading others."},
+  execute:{t:"The Eternal Learner",d:"You consume every tutorial, every course, every tip. But you never execute. The problem isn't knowledge — it's the gap between knowing and doing."},
+  imposter:{t:"The Imposter",d:"You keep telling yourself you're not ready. But you've been 'not ready' for years. The truth? You're ready. You just need someone to see it and prove it."},
+  technique:{t:"The Stage-Shy Singer",d:"You say you just want to refine your technique. But deep down, you want the stage. Stop hiding behind 'practice' and start preparing."},
+  stuck:{t:"The Frustrated Talent",d:"You know you're better than where you are. Something's holding you back — technique, confidence, direction."},
+  confidence:{t:"The Fearful Singer",d:"High notes scare you. Performing scares you. Your voice has so much more to give, but fear is caging it."},
+  sound:{t:"The Copycat",d:"You sound like your idols — but not like yourself. Your signature voice is in there. We just need to excavate it."},
+  lead:{t:"The Future Lead",d:"You were made to lead — vocally and otherwise. But leading vocals is a different skill from singing."},
+  months:{t:"The New Awakening",d:"You just realized something needs to change. That's good. Most people never get here. Now act on it."},
+  year:{t:"The Tired Grinder",d:"A year of trying to figure it out alone. That's enough. You've proven you're committed. Now get the guidance that shortcuts the next 3 years."},
+  years:{t:"The Long Waiter",d:"Multiple years of feeling stuck. You should've done this sooner — but you're here now. Let's make up for lost time."},
+  decade:{t:"The Almost-Given-Up",d:"You've been carrying this for so long you've almost accepted it. But you're still here. It's not too late."},
+  beginner:{t:"The Raw Beginner",d:"You know you have something in you — but every time you open your mouth, it doesn't come out right. You don't need advanced technique. You need the right foundation."}
+  };
+  var A={},cs=1,ts=6;
+  document.querySelectorAll('.quiz-opt input').forEach(function(el){
+    el.addEventListener('change',function(){
+      var s=this.closest('.quiz-step');
+      s.querySelectorAll('.quiz-opt').forEach(function(o){o.classList.remove('selected')});
+      this.closest('.quiz-opt').classList.add('selected');
+      A[this.name]=this.value;
+      setTimeout(function(){var n=parseInt(s.dataset.step);if(n<ts)g(n+1);else se();},400);
+    });
+  });
+  function g(n){
+    document.querySelectorAll('.quiz-step').forEach(function(s){s.classList.remove('active')});
+    document.querySelector('[data-step="'+n+'"]').classList.add('active');cs=n;
+    document.querySelectorAll('.quiz-dots .dot').forEach(function(d,i){d.classList.toggle('active',i<n)});
+  }
+  function goBack(){if(cs>1)g(cs-1);}
+  function se(){
+    document.querySelectorAll('.quiz-step').forEach(function(s){s.classList.remove('active')});
+    document.querySelector('[data-step="email"]').classList.add('active');
+    var k=A.q1||A.q2||'stuck',r=R[k]||R.stuck;
+    document.getElementById('resultType').textContent=r.t;
+    document.getElementById('resultDesc').textContent=r.d;
+    document.querySelectorAll('.quiz-dots .dot').forEach(function(d){d.classList.add('active')});
+  }
+  function submitForm(){
+    var name=document.getElementById('nameInput').value.trim();
+    var email=document.getElementById('emailInput').value.trim();
+    var location=document.getElementById('locationInput').value.trim();
+    if(!name){alert('Please enter your name.');return;}
+    if(!email||email.indexOf('@')===-1){alert('Please enter a valid email.');return;}
+    if(!location){alert('Please enter your location.');return;}
+    var k=A.q1||A.q2||'stuck';
+    var leadData=new URLSearchParams();
+    var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Location:location,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
+    Object.keys(h).forEach(function(ky){leadData.append(ky,h[ky]);});
+    fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:leadData,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
+    var q6=A.q6||'';
+    var serviceKey='quiz';
+    if(q6==='free_community') serviceKey='free-community';
+    else if(q6==='paid_community') serviceKey='paid-community';
+    else if(q6==='lesson') serviceKey='single';
+    else if(q6==='both') serviceKey='paid-community';
+    window.open('https://t.me/Retpipebot?start='+encodeURIComponent(name+'|'+serviceKey),'_blank');
+    document.getElementById('thankYouName').textContent=name;
+    document.querySelector('.quiz-card').style.display='none';
+    document.getElementById('thankYou').classList.add('active');
+    document.getElementById('progressBar').style.display='none';
+    var tyMsg='Your guide is ready. Check your Telegram for next steps! 🎤';
+    if(q6==='free_community') tyMsg="Check your Telegram — I'll add you to the Free Singers' Community! 🎤";
+    else if(q6==='paid_community'||q6==='both') tyMsg="Check your Telegram — I'll send you the Paid Community details! ⭐";
+    else if(q6==='lesson') tyMsg="Check your Telegram — let's get your first session booked! 🎯";
+    document.querySelector('.thank-you p').textContent=tyMsg;
+  }
+  </script>
+  <script src="assets/capture.js"></script>
 </body>
 </html>
