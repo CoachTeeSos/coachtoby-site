@@ -111,6 +111,20 @@ function toggleMobileMenu() {
    ═══════════════════════════════════════ */
 const BOT_USERNAME = 'Retpipebot';
 
+// Proxy server URL — Railway Flask proxy (set after deployment)
+const PROXY_URL = '';
+
+// Send registration data to Airtable via proxy
+// Returns true if successful, false if skipped/failed
+function sendToProxy(fields) {
+  if (!PROXY_URL) return Promise.resolve(false);
+  return fetch(PROXY_URL + '/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(fields),
+  }).then(function(res) { return res.ok; });
+}
+
 const SERVICES = {
   single:      { label: 'Single Session — $50',           price: 50,     currency: 'USD', type: 'coaching' },
   monthly:     { label: 'Monthly Package — $200',          price: 200,    currency: 'USD', type: 'coaching' },
@@ -154,9 +168,11 @@ function ensureModal() {
       '<h3 id="cta-modal-title">Let\'s Get Started</h3>',
       '<p class="cta-modal-sub" id="cta-modal-sub">Fill this out and we\'ll take it from here.</p>',
       '<form id="cta-form" onsubmit="return submitForm(event)">',
-        '<div class="cta-field"><label>Full Name *</label><input type="text" id="cta-name" required placeholder="Your full name"></div>',
+        '<div class="cta-field"><label>First Name *</label><input type="text" id="cta-name" required placeholder="Your first name"></div>',
         '<div class="cta-field"><label>Email *</label><input type="email" id="cta-email" required placeholder="you@example.com"></div>',
         '<div class="cta-field"><label>Phone (with country code) *</label><input type="tel" id="cta-phone" required placeholder="+234 800 000 0000"></div>',
+        '<div class="cta-field"><label>Telegram @username *</label><input type="text" id="cta-telegram" required placeholder="@yourusername"></div>',
+        '<div class="cta-field"><label>Location (City, Country) *</label><input type="text" id="cta-location" required placeholder="Lagos, Nigeria"></div>',
         '<div class="cta-field" id="cta-budget-field" style="display:none;"><label>Your Budget</label><input type="text" id="cta-budget" placeholder="₦50,000 – ₦500,000"></div>',
         '<div class="cta-field" id="cta-needs-field" style="display:none;"><label>What do you need help with?</label><input type="text" id="cta-needs" placeholder="Vocal coaching, life coaching, etc."></div>',
         '<div class="cta-field" id="cta-payment-row" style="display:none;">',
@@ -247,41 +263,87 @@ function submitForm(e) {
   var name = document.getElementById('cta-name').value.trim();
   var email = document.getElementById('cta-email').value.trim();
   var phone = document.getElementById('cta-phone').value.trim();
+  var telegram = document.getElementById('cta-telegram').value.trim();
+  var location = document.getElementById('cta-location') ? document.getElementById('cta-location').value.trim() : '';
   var budget = document.getElementById('cta-budget') ? document.getElementById('cta-budget').value.trim() : '';
   var needs = document.getElementById('cta-needs') ? document.getElementById('cta-needs').value.trim() : '';
 
-  if (!name || !email || !phone) {
+  var location = document.getElementById('cta-location') ? document.getElementById('cta-location').value.trim() : '';
+  if (!name || !email || !phone || !telegram || !location) {
     alert('Please fill in all required fields.');
     return false;
   }
 
+  // Normalize telegram handle
+  if (telegram.indexOf('@') !== 0) telegram = '@' + telegram;
+
+  // Build record for Airtable (field names match Students table exactly)
+  var fields = {
+    'Name': name,
+    'Plan': svc.label,
+    'Service Key': serviceKey,
+    'Status': svc.price > 0 ? 'Awaiting Receipt' : 'Active',
+    'Source': 'Website',
+    'Total Sessions': svc.price > 0 ? (serviceKey === 'monthly' || serviceKey === 'ngn-monthly' ? 4 : 1) : 0,
+    'Sessions Used': 0
+  };
+  if (budget) fields['Budget'] = budget;
+  if (needs) fields['Needs'] = needs;
+
+  // Disable submit button
+  var submitBtn = e.target.querySelector('button[type="submit"]');
+  var originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
+
+  // Try to write to Airtable via proxy (non-blocking for UX)
+  sendToProxy(fields).then(function(written) {
+    if (written) console.log('Airtable write OK');
+  }).catch(function() {});
+
+  // Close modal and redirect — always, even if proxy fails
   closeModal();
 
-  // Redirect to bot — it will capture @username + ID automatically from Telegram
-  var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + serviceKey);
+  // Community services: show group link on site + open bot
+  if (svc.type === 'community') {
+    closeModal();
+    var groupLink = svc.link || '';
+    if (groupLink) {
+      // Show success with group link on site
+      alert('✅ Welcome, ' + name + '!\n\nYour community link: ' + groupLink + '\n\nJoin now! The bot will also welcome you in Telegram.');
+      // Write to Airtable
+      sendToProxy(fields).catch(function(){});
+      // Open group and bot simultaneously
+      window.open(groupLink, '_blank');
+      setTimeout(function() {
+        var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + email + '|' + phone + '|' + location + '|' + serviceKey);
+        window.open(botUrl, '_blank');
+      }, 1500);
+    } else {
+      // No link defined — just go to bot
+      var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + email + '|' + phone + '|community|' + serviceKey);
+      window.open(botUrl, '_blank');
+    }
+    return false;
+  }
+
+  // For paid services: open Flutterwave then redirect to bot
+  var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + email + '|' + phone + '|' + location + '|' + serviceKey);
 
   if (svc.price > 0) {
-    // Paid: open Flutterwave payment, then redirect to bot after delay
     var fwLink = FLUTTERWAVE[serviceKey];
     if (fwLink) window.open(fwLink, '_blank');
     setTimeout(function() {
       window.open(botUrl, '_blank');
-    }, 2000);
-    alert('✅ Almost done!\n\n1. Complete your payment\n2. Tap "Start" in Telegram\n\nWelcome, ' + name + ' 🎤');
+    }, 1500);
+    alert('✅ Registered! Complete your payment, then tap "Start" in Telegram.\n\nWelcome, ' + name + ' 🎤');
   } else {
-    // Free: go straight to bot
     window.open(botUrl, '_blank');
   }
 
   return false;
 }
 
-/* AI ASSISTANT JS */
-function toggleAI(){var o=document.getElementById('aiChatOverlay');o.classList.toggle('open');if(o.classList.contains('open'))document.getElementById('aiInput').focus()}
-function closeAI(e){if(e.target===document.getElementById('aiChatOverlay'))document.getElementById('aiChatOverlay').classList.remove('open')}
-function aiSend(){var i=document.getElementById('aiInput'),t=i.value.trim();if(!t)return;aiAsk(t);i.value=''}
-function aiAsk(q){var m=document.getElementById('aiMessages');var u=document.createElement('div');u.className='ai-msg ai-msg-user';u.textContent=q;m.appendChild(u);var b=document.createElement('div');b.className='ai-msg ai-msg-bot';b.innerHTML=aiReply(q);m.appendChild(b);m.scrollTop=m.scrollHeight}
-function aiReply(q){var l=q.toLowerCase();if(l.includes('service')||l.includes('offer'))return'Services: Single $50/₦70K, Monthly $200/₦300K, Group ₦20K/mo, Life Coaching, Free/Paid Community';if(l.includes('price')||l.includes('cost')||l.includes('how much'))return'Pricing: Single $50/₦70K, Monthly $200/₦300K, Group ₦20K/mo. All with guarantee.';if(l.includes('experience')||l.includes('beginner'))return'No experience needed! Complete beginners welcome.';if(l.includes('pay')||l.includes('payment'))return'Payment: Card via Flutterwave (int\'l) or Naira (Nigeria). Secure link after selection.';if(l.includes('platform')||l.includes('whatsapp')||l.includes('telegram'))return'Platforms: WhatsApp, Telegram, or Google Meet. 1-on-1 sessions.';if(l.includes('book')||l.includes('start')||l.includes('join'))return'Get started: Fill form → Telegram bot → 3 questions → Confirm → Pay → In! No accounts needed.';if(l.includes('guarantee')||l.includes('refund'))return'Guarantee: Don\'t hear a difference after session 1? Don\'t pay. Full stop.';if(l.includes('reschedule'))return'Reschedule: 24h notice, no extra charge.';if(l.includes('life coach'))return'Life Coaching: Ages 18–28, direction/purpose/focus. Also parents mentoring children.';if(l.includes('vocal')||l.includes('voice')||l.includes('sing'))return'Vocal Coaching: Breath, pitch, tone, resonance, confidence. 50+ students, 10+ countries.';if(l.includes('community')||l.includes('group'))return'Communities: Free Singers (free), Paid (₦20K/mo), Abuja Collective.';if(l.includes('where')||l.includes('location')||l.includes('nigeria'))return'Online sessions! Based in Kabba, Kogi. Students from 10+ countries.';if(l.includes('contact')||l.includes('reach')||l.includes('email'))return'Contact: WhatsApp +234 916 010 6084, Email prosperolumotobi@gmail.com, Telegram @Retpipebot';if(l.includes('faq')||l.includes('common'))return'FAQ: No experience needed. Pay via Flutterwave. Platforms: WhatsApp/Telegram/Meet. Reschedule 24h free. Guarantee: don\'t pay if no difference.';return'Ask me about: Services, Pricing, Experience, Payment, Platforms, Booking, Guarantee, Contact!';}
 /* ═══════════════════════════════════════
    MAIN ROUTER — Every button calls this
    ═══════════════════════════════════════ */
@@ -295,55 +357,7 @@ function payWithFlutterwaveNGN(amount, planName) {
   if (planName && planName.includes('300')) goToBot('ngn-monthly');
   else goToBot('ngn-single');
 }
-
-
-/* ── CTA FORM SUBMIT (replaces Airtable iframe) ── */
-function handleCTASubmit(e) {
-  e.preventDefault();
-  var name = document.getElementById('cta-name').value.trim();
-  var email = document.getElementById('cta-email').value.trim();
-  var whatsapp = document.getElementById('cta-whatsapp').value.trim();
-  var location = document.getElementById('cta-location').value.trim();
-  var service = document.getElementById('cta-service').value;
-
-  if (!name || !email || !whatsapp || !location || !service) {
-    alert('Please fill in all required fields.');
-    return false;
-  }
-
-  closeModal();
-
-  // Build start payload: name|email|whatsapp|location|service
-  var payload = [name, email, whatsapp, location, service].join('|');
-  var botUrl = 'https://t.me/Retpipebot?start=' + encodeURIComponent(payload);
-
-  var FLUTTERWAVE = {
-    single: 'https://flutterwave.com/pay/ictjiqq30sz7',
-    monthly: 'https://flutterwave.com/pay/b0hjfvjhv8x4',
-    'ngn-single': 'https://flutterwave.com/pay/xnddgkfjeheq',
-    'ngn-monthly': 'https://flutterwave.com/pay/wdod0tyeqedw',
-    'group3-5': 'https://flutterwave.com/pay/lrgz2vk3xez3',
-    'paid-community': 'https://flutterwave.com/pay/lrgz2vk3xez3',
-    speaking: 'https://flutterwave.com/pay/wdod0tyeqedw'
-  };
-
-  var isPaid = ['single','monthly','ngn-single','ngn-monthly','group3-5','paid-community','speaking'].indexOf(service) !== -1;
-
-  if (isPaid) {
-    var fwLink = FLUTTERWAVE[service];
-    if (fwLink) window.open(fwLink, '_blank');
-    setTimeout(function() { window.open(botUrl, '_blank'); }, 2000);
-    alert('✅ Almost done!\n\n1. Complete your payment\n2. Tap "Start" in Telegram\n\nWelcome, ' + name + ' 🎤');
-  } else {
-    window.open(botUrl, '_blank');
-  }
-
-  return false;
+function payWithFlutterwaveUSD(amount, planName) {
+  if (planName && planName.includes('200')) goToBot('monthly');
+  else goToBot('single');
 }
-
-/* AI ASSISTANT JS */
-function toggleAI(){var o=document.getElementById('aiChatOverlay');o.classList.toggle('open');if(o.classList.contains('open'))document.getElementById('aiInput').focus()}
-function closeAI(e){if(e.target===document.getElementById('aiChatOverlay'))document.getElementById('aiChatOverlay').classList.remove('open')}
-function aiSend(){var i=document.getElementById('aiInput'),t=i.value.trim();if(!t)return;aiAsk(t);i.value=''}
-function aiAsk(q){var m=document.getElementById('aiMessages');var u=document.createElement('div');u.className='ai-msg ai-msg-user';u.textContent=q;m.appendChild(u);var b=document.createElement('div');b.className='ai-msg ai-msg-bot';b.innerHTML=aiReply(q);m.appendChild(b);m.scrollTop=m.scrollHeight}
-function aiReply(q){var l=q.toLowerCase();if(l.includes('service')||l.includes('offer'))return'Services: Single $50/₦70K, Monthly $200/₦300K, Group ₦20K/mo, Life Coaching, Free/Paid Community';if(l.includes('price')||l.includes('cost')||l.includes('how much'))return'Pricing: Single $50/₦70K, Monthly $200/₦300K, Group ₦20K/mo. All with guarantee.';if(l.includes('experience')||l.includes('beginner'))return'No experience needed! Complete beginners welcome.';if(l.includes('pay')||l.includes('payment'))return'Payment: Card via Flutterwave (int\'l) or Naira (Nigeria). Secure link after selection.';if(l.includes('platform')||l.includes('whatsapp')||l.includes('telegram'))return'Platforms: WhatsApp, Telegram, or Google Meet. 1-on-1 sessions.';if(l.includes('book')||l.includes('start')||l.includes('join'))return'Get started: Fill form → Telegram bot → 3 questions → Confirm → Pay → In! No accounts needed.';if(l.includes('guarantee')||l.includes('refund'))return'Guarantee: Don\'t hear a difference after session 1? Don\'t pay. Full stop.';if(l.includes('reschedule'))return'Reschedule: 24h notice, no extra charge.';if(l.includes('life coach'))return'Life Coaching: Ages 18–28, direction/purpose/focus. Also parents mentoring children.';if(l.includes('vocal')||l.includes('voice')||l.includes('sing'))return'Vocal Coaching: Breath, pitch, tone, resonance, confidence. 50+ students, 10+ countries.';if(l.includes('community')||l.includes('group'))return'Communities: Free Singers (free), Paid (₦20K/mo), Abuja Collective.';if(l.includes('where')||l.includes('location')||l.includes('nigeria'))return'Online sessions! Based in Kabba, Kogi. Students from 10+ countries.';if(l.includes('contact')||l.includes('reach')||l.includes('email'))return'Contact: WhatsApp +234 916 010 6084, Email prosperolumotobi@gmail.com, Telegram @Retpipebot';if(l.includes('faq')||l.includes('common'))return'FAQ: No experience needed. Pay via Flutterwave. Platforms: WhatsApp/Telegram/Meet. Reschedule 24h free. Guarantee: don\'t pay if no difference.';return'Ask me about: Services, Pricing, Experience, Payment, Platforms, Booking, Guarantee, Contact!';}
