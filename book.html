@@ -8,20 +8,9 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#008060">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
-  <script>tailwind.config={theme:{extend:{colors:{brand:{dark:'#002D21',body:'#1E293B',offwhite:'#F4F7F6',cta:'#008060'}},fontFamily:{inter:['Inter','system-ui','sans-serif']},borderRadius:{brand:'8px'}}}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
-  <style>
-    #pageLoader{position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#002D21 0%,#004d38 50%,#008060 100%);display:flex;align-items:center;justify-content:center;transition:opacity 0.5s ease}
-    #pageLoader.fade-out{opacity:0;pointer-events:none}
-    .loader-text{font-family:'Inter',sans-serif;font-size:1.75rem;font-weight:800;color:#fff;letter-spacing:0.05em}
-    .loader-text span{display:inline-block;opacity:0;animation:letterReveal 0.5s ease forwards}
-    @keyframes letterReveal{from{opacity:0;transform:translateY(16px) scale(0.8);filter:blur(6px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-    .loader-bar{width:180px;height:3px;background:rgba(255,255,255,0.15);border-radius:999px;margin-top:1.5rem;overflow:hidden}
-    .loader-bar-fill{height:100%;background:#008060;border-radius:999px;animation:loaderBar 2s ease-in-out infinite}
-    @keyframes loaderBar{0%{width:0%}50%{width:70%}100%{width:100%}}
-  </style>
 </head>
 <body>
 
@@ -31,7 +20,7 @@
   <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold text-brand-dark tracking-tight">SESSIONS WITH TOBY</span></a>
+        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold" style="color:#002D21;letter-spacing:-0.02em">SESSIONS WITH TOBY</span></a>
         <div class="hidden md:flex items-center gap-6"><a href="home.html#services" class="nav-link text-sm">Services</a><a href="home.html#pricing" class="nav-link text-sm">Pricing</a><a href="home.html#reviews" class="nav-link text-sm">Reviews</a></div>
         <a href="home.html" class="text-sm nav-link">← Back to Home</a>
       </div>
@@ -39,7 +28,7 @@
   </nav>
 
   <!-- BOOKING SECTION -->
-  <section class="pt-28 pb-20 lg:pt-36 lg:pb-28 section-offwhite min-h-screen">
+  <section class="section-offwhite" style="padding-top:7rem;padding-bottom:5rem;min-height:100vh">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
         <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-4 py-1.5 mb-4"><span class="text-emerald-600 text-sm font-medium">🎤 No credit card. No obligation.</span></div>
@@ -49,17 +38,17 @@
 
       <div class="card max-w-lg mx-auto">
         <form id="bookForm" onsubmit="submitBooking(event)">
-          <div class="space-y-5">
+          <div style="display:flex;flex-direction:column;gap:1.25rem">
             <div><label class="form-label" for="bName">Your Name *</label><input type="text" id="bName" class="form-input" placeholder="What should we call you?" required></div>
             <div><label class="form-label" for="bEmail">Email *</label><input type="email" id="bEmail" class="form-input" placeholder="you@example.com" required></div>
             <div><label class="form-label" for="bWhatsApp">WhatsApp Number *</label><input type="tel" id="bWhatsApp" class="form-input" placeholder="+234..." required></div>
             <div><label class="form-label" for="bService">What do you want to work on? *</label><select id="bService" class="form-input" required><option value="">Pick one...</option><option value="riffs">Riffs, runs & vocal agility</option><option value="pitch">Pitch accuracy & range</option><option value="speaking">Public speaking & executive presence</option><option value="confidence">Confidence & stage presence</option><option value="mindset">Life coaching & mindset shift</option><option value="all">All of the above</option></select></div>
             <div><label class="form-label" for="bLevel">Your experience level</label><select id="bLevel" class="form-input"><option value="beginner">Complete beginner</option><option value="intermediate">Intermediate — I sing but want to level up</option><option value="advanced">Advanced — I perform but want mastery</option><option value="professional">Professional — working artist</option></select></div>
-            <div><label class="form-label" for="bMessage">What's your biggest challenge right now?</label><textarea id="bMessage" class="form-input" rows="3" placeholder="Be honest — this helps Coach Toby prepare for your session. E.g., I can't hit high notes, I freeze on stage, I want to master riffs and runs..."></textarea></div>
+            <div><label class="form-label" for="bMessage">What's your biggest challenge right now?</label><textarea id="bMessage" class="form-input" rows="3" placeholder="Be honest — this helps Coach Toby prepare for your session..."></textarea></div>
           </div>
-          <div class="mt-8 space-y-3">
+          <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.75rem">
             <button type="submit" class="btn-cta w-full text-base py-4">Book My Free Demo →</button>
-            <p class="text-xs text-slate-400 text-center">We'll reach out within 24 hours via WhatsApp or email to schedule your session. No spam, ever.</p>
+            <p class="text-xs text-slate-400 text-center">We'll reach out within 24 hours via WhatsApp or email. No spam, ever.</p>
           </div>
         </form>
       </div>
@@ -82,12 +71,12 @@
   </footer>
 
   <script>
-  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?'\u00A0':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?'\\u00A0':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
   async function submitBooking(e){
     e.preventDefault();
     var d={name:document.getElementById('bName').value.trim(),email:document.getElementById('bEmail').value.trim(),whatsapp:document.getElementById('bWhatsApp').value.trim(),service:document.getElementById('bService').value,level:document.getElementById('bLevel').value,message:document.getElementById('bMessage').value.trim()};
     try{var t='',admin='1688731002';if(t){var msg='🆕 *Demo Booking*\n\n👤 '+d.name+'\n📧 '+d.email+'\n📱 '+d.whatsapp+'\n🎯 '+d.service+'\n📊 '+d.level+'\n\n📝 '+(d.message||'N/A');await fetch('https://api.telegram.org/bot'+t+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:admin,text:msg,parse_mode:'Markdown'})});}}catch(err){}
-    document.getElementById('bookForm').innerHTML='<div class="text-center py-8"><div class="text-5xl mb-4">🎉</div><h3 class="text-xl font-bold text-brand-dark mb-2">You\'re all set, '+d.name+'!</h3><p class="text-slate-500 mb-4">Coach Toby has received your booking and will reach out within 24 hours via WhatsApp or email to schedule your free demo.</p><a href="home.html" class="btn-cta">← Back to Home</a></div>';
+    document.getElementById('bookForm').innerHTML='<div class="text-center py-8"><div class="text-5xl mb-4">🎉</div><h3 class="text-xl font-bold mb-2" style="color:#002D21">You\'re all set, '+d.name+'!</h3><p class="text-slate-500 mb-4">Coach Toby has received your booking and will reach out within 24 hours via WhatsApp or email to schedule your free demo.</p><a href="home.html" class="btn-cta">← Back to Home</a></div>';
   }
   </script>
 </body>
