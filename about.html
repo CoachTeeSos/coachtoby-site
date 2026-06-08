@@ -3,185 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Toby | Vocal & Life Coach</title>
+<title>About Toby — Vocal & Life Coach | Sessions with Toby</title>
 <meta name="description" content="Meet Prosper Tobi Olumo — Nigerian vocal and life coach. 50+ students. 10+ countries. Here's his story.">
-<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#008060">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 
-<div class="mesh-bg"><div class="mesh-orb"></div><div class="mesh-orb"></div><div class="mesh-orb"></div></div>
-<div class="progress-bar"></div>
+  <div id="pageLoader"><div style="text-align:center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
-<nav>
-  <div class="logo"><a href="/coachtoby-site/">Sessions with <span>Toby</span></a></div>
-  <div class="nav-links">
-    <a href="/coachtoby-site/#services">Services</a>
-    <a href="/coachtoby-site/#how-it-works">How It Works</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="community.html">Community</a>
-    <a href="content.html">Resources</a>
-    <a href="about.html" style="color:var(--text);font-weight:700;">About</a>
-    <a href="/coachtoby-site/#start" class="nav-cta">Book a Session</a>
-  </div>
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold" style="color:#002D21;letter-spacing:-0.02em">SESSIONS WITH TOBY</span></a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="home.html#services" class="nav-link text-sm">Services</a>
+          <a href="home.html#pricing" class="nav-link text-sm">Pricing</a>
+          <a href="home.html#community" class="nav-link text-sm">Community</a>
+          <a href="home.html#reviews" class="nav-link text-sm">Reviews</a>
+        </div>
+        <div class="hidden md:flex items-center gap-3"><a href="book.html" class="btn-cta text-sm">Try Free Demo</a></div>
+        <button class="md:hidden p-2 rounded-lg" style="color:#002D21" onclick="toggleMobile()" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+    </div>
+    <div class="mobile-menu md:hidden flex-col bg-white border-t border-slate-200 px-4 py-4 gap-3" id="mobMenu">
+      <a href="home.html#services" class="nav-link py-2" onclick="toggleMobile()">Services</a>
+      <a href="home.html#pricing" class="nav-link py-2" onclick="toggleMobile()">Pricing</a>
+      <a href="home.html#community" class="nav-link py-2" onclick="toggleMobile()">Community</a>
+      <a href="home.html#reviews" class="nav-link py-2" onclick="toggleMobile()">Reviews</a>
+      <a href="book.html" class="btn-cta text-sm mt-2">Try Free Demo</a>
+    </div>
+  </nav>
 
-<div class="sticky-cta">
-  <a href="/coachtoby-site/#start" class="sticky-btn">🎤 Start Your Journey →</a>
-</div>
+  <!-- HERO -->
+  <section class="hero-gradient" style="padding-top:7rem;padding-bottom:4rem;position:relative;overflow:hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <p class="text-emerald-300 font-semibold text-sm uppercase tracking-wider mb-3">About</p>
+      <h1 class="text-white text-3xl sm:text-4xl lg:text-5xl font-black mb-4">I Help People<br><span class="text-emerald-300">Become.</span></h1>
+      <p class="text-emerald-100 text-lg max-w-2xl mx-auto">Not become someone else. Become who they already are. Here's how that started.</p>
+    </div>
+  </section>
 
-<div class="side-rail">
-  <button class="rail-btn" onclick="openRail()">Book a Session →</button>
-  <div class="rail-overlay" onclick="closeRail()"></div>
-  <div class="rail-panel">
-    <button class="rail-close" onclick="closeRail()">×</button>
-    <h3>Let's Talk.</h3>
-    <p class="rail-sub">Pick a path. Pay. Show up. Become.</p>
-    <div class="rail-pricing-item">
-      <div class="rp-name">Single Session</div>
-      <div class="rp-price">$50 <span>/session</span></div>
-      <button class="btn-primary" onclick="goToBot('single')">Pay $50 — Book Now</button>
+  <!-- STORY -->
+  <section class="section-white py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">The Story</p>
+      <h2 class="text-3xl sm:text-4xl font-black mb-6">It Started With a Seven-Year-Old</h2>
+      <div class="text-slate-600 text-lg leading-relaxed space-y-4">
+        <p>A kid was struggling in school. Everyone said: "Make him study harder." But I watched — and I saw something else. He wasn't lazy. He was lost.</p>
+        <p>So instead of forcing academics, I found what lit him up. Built around <em>that</em>. Two weeks later, grades went up. Not because he studied more. Because he had a reason to.</p>
+        <p>That's when I understood: <strong>coaching isn't about fixing. It's about finding.</strong></p>
+      </div>
     </div>
-    <div class="rail-pricing-item">
-      <div class="rp-name">Monthly Package</div>
-      <div class="rp-price">$200 <span>/month</span></div>
-      <button class="btn-primary" onclick="goToBot('monthly')">Pay $200</button>
-    </div>
-    <div class="rail-divider">or explore</div>
-    <div class="rail-pricing-item">
-      <div class="rp-name">Take the Quiz</div>
-      <div class="rp-note" style="color:var(--success);font-weight:600;">FREE</div>
-      <button class="btn-primary" onclick="goToBot('quiz')">Start Quiz →</button>
-    </div>
-    <div class="rail-calendly"><a href="https://calendly.com/d/cx3t-9f8-b7r" target="_blank" rel="noopener">📅 Free Call</a></div>
-  </div>
-</div>
+  </section>
 
-<!-- HERO -->
-<div class="hero" style="min-height:60vh;padding-bottom:40px;">
-  <div class="hero-content">
-    <div class="brand-mark">About</div>
-    <h1>
-      <span class="line">I Help People</span>
-      <span class="line"><span class="highlight">Become.</span></span>
-    </h1>
-    <p>Not become someone else. Become who they already are. Here's how that started.</p>
-  </div>
-</div>
+  <!-- TIMELINE -->
+  <section class="section-offwhite py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3 text-center">The Journey</p>
+      <h2 class="text-3xl sm:text-4xl font-black mb-12 text-center">How We Got Here</h2>
+      <div class="space-y-8">
+        <div class="flex gap-6 items-start"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0"><span class="text-emerald-600 font-black text-sm">2018</span></div><div><h4 class="font-bold text-lg mb-1" style="color:#002D21">The First Student</h4><p class="text-slate-500">Started informal vocal coaching. One church singer at a time. Word spread.</p></div></div>
+        <div class="flex gap-6 items-start"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0"><span class="text-emerald-600 font-black text-sm">2020</span></div><div><h4 class="font-bold text-lg mb-1" style="color:#002D21">Going Online</h4><p class="text-slate-500">Pandemic forced the move online. Turns out, WhatsApp calls work just fine. Students from different countries started showing up.</p></div></div>
+        <div class="flex gap-6 items-start"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0"><span class="text-emerald-600 font-black text-sm">2022</span></div><div><h4 class="font-bold text-lg mb-1" style="color:#002D21">Life Coaching</h4><p class="text-slate-500">Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</p></div></div>
+        <div class="flex gap-6 items-start"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0"><span class="text-emerald-600 font-black text-sm">2024</span></div><div><h4 class="font-bold text-lg mb-1" style="color:#002D21">50+ Students</h4><p class="text-slate-500">Crossed 50 students across 10+ countries. Still hands-on. Still personal.</p></div></div>
+        <div class="flex gap-6 items-start"><div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0" style="border:2px solid #6ee7b7"><span class="text-emerald-700 font-black text-sm">2026</span></div><div><h4 class="font-bold text-lg mb-1" style="color:#002D21">To Be Come</h4><p class="text-slate-500">Built a full coaching ecosystem: quiz, community, group and 1-on-1. The mission stays the same — help people become.</p></div></div>
+      </div>
+    </div>
+  </section>
 
-<!-- STORY -->
-<section>
-  <div class="section-label reveal">The Story</div>
-  <h2 class="section-title reveal">It Started With a Seven-Year-Old</h2>
-  <p class="section-sub reveal-delay-1" style="max-width:620px">A kid was struggling in school. Everyone said: "Make him study harder." But I watched — and I saw something else. He wasn't lazy. He was lost.<br><br>So instead of forcing academics, I found what lit him up. Built around <em>that</em>. Two weeks later, grades went up. Not because he studied more. Because he had a reason to.<br><br>That's when I understood: <strong style="color:var(--text)">coaching isn't about fixing. It's about finding.</strong></p>
-</section>
+  <!-- VALUES -->
+  <section class="section-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3 text-center">What I Believe</p>
+      <h2 class="text-3xl sm:text-4xl font-black mb-12 text-center">Non-Negotiables</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card text-center"><div class="text-3xl mb-4">🔥</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">Your voice is not the problem</h3><p class="text-slate-500 text-sm">Technique is. And technique is fixable. Every voice has something extraordinary in it.</p></div>
+        <div class="card text-center"><div class="text-3xl mb-4">🎯</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">Find the thing. Fan the flame.</h3><p class="text-slate-500 text-sm">Whether it's a seven-year-old or a 28-year-old — the process is the same. Discover. Build. Become.</p></div>
+        <div class="card text-center"><div class="text-3xl mb-4">💪</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">No coddling</h3><p class="text-slate-500 text-sm">I will push you. Not because I'm harsh — because I see what you can become and I won't let you settle.</p></div>
+        <div class="card text-center"><div class="text-3xl mb-4">🌍</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">From anywhere</h3><p class="text-slate-500 text-sm">Abuja. Lagos. London. Toronto. Geography is not a barrier. Show up online. Do the work.</p></div>
+        <div class="card text-center"><div class="text-3xl mb-4">🎵</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">Music is purpose</h3><p class="text-slate-500 text-sm">Not just performance. Not just entertainment. Music is how some people fulfil their calling. That's serious.</p></div>
+        <div class="card text-center"><div class="text-3xl mb-4">🤝</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">It's personal</h3><p class="text-slate-500 text-sm">I don't do factory coaching. If you work with me, you get <em>me</em>. All in.</p></div>
+      </div>
+    </div>
+  </section>
 
-<!-- TIMELINE -->
-<section style="padding-top:20px;">
-  <div class="section-label reveal">The Journey</div>
-  <h2 class="section-title reveal">How We Got Here</h2>
-  <div class="steps reveal-delay-1" style="margin-top:32px;">
-    <div class="step">
-      <div class="step-num">2018</div>
-      <div><strong>The First Student</strong><p>Started informal vocal coaching. One church singer at a time. Word spread.</p></div>
+  <!-- CTA -->
+  <section class="hero-gradient py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-white text-3xl sm:text-4xl font-black mb-4">Ready to become who you were made to be?</h2>
+      <p class="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">Book a session. Take the quiz. Or just say hello.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="book.html" class="btn-cta bg-white text-base px-8 py-4" style="color:#002D21">Start Your Journey →</a>
+        <a href="quiz.html" class="btn-cta-outline border-white/30 text-white hover:bg-white/10 text-base px-8 py-4">Take the Quiz 🎯</a>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">2020</div>
-      <div><strong>Going Online</strong><p>Pandemic forced the move online. Turns out, WhatsApp calls work just fine. Students from different countries started showing up.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2022</div>
-      <div><strong>Life Coaching</strong><p>Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2024</div>
-      <div><strong>50+ Students</strong><p>Crossed 50 students across 10+ countries. Still hands-on. Still personal.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2026</div>
-      <div><strong>To Be Come</strong><p>Built a full coaching ecosystem: quiz, community, group and 1-on-1. The mission stays the same — help people become.</p></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- VALUES -->
-<section style="padding-top:20px;">
-  <div class="section-label reveal">What I Believe</div>
-  <h2 class="section-title reveal">Non-Negotiables</h2>
-  <div class="pillars reveal-delay-1" style="margin-top:32px;grid-template-columns:1fr 1fr 1fr;">
-    <div class="pillar" style="text-align:center;">
-      <div class="pillar-icon">🔥</div>
-      <h3>Your voice is not the problem</h3>
-      <p>Technique is. And technique is fixable. Every voice has something extraordinary in it.</p>
+  <!-- FOOTER -->
+  <footer class="footer py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div><div class="flex items-center gap-2 mb-4"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold text-white tracking-tight">SESSIONS WITH TOBY</span></div><p class="text-emerald-200/70 text-sm">Vocal & life coaching for people who are done staying the same. "To Be Come."</p></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Pages</h4><ul class="space-y-2 text-sm"><li><a href="home.html">Home</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="community.html">Community</a></li><li><a href="content.html">Resources</a></li></ul></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Free Tools</h4><ul class="space-y-2 text-sm"><li><a href="quiz.html">Quiz</a></li><li><a href="lead-magnet.html">Free Guide</a></li></ul></div>
+        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Connect</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/2349160106084">WhatsApp</a></li><li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li><li><a href="https://calendly.com/d/cx3t-9f8-b7r">Calendly</a></li></ul></div>
+      </div>
+      <div class="border-t border-emerald-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-emerald-200/50 text-sm">© 2026 Sessions with Toby. All rights reserved.</p>
+        <a href="book.html" class="btn-cta text-sm">Try a Free Demo →</a>
+      </div>
     </div>
-    <div class="pillar" style="text-align:center;">
-      <div class="pillar-icon">🎯</div>
-      <h3>Find the thing. Fan the flame.</h3>
-      <p>Whether it's a seven-year-old or a 28-year-old — the process is the same. Discover. Build. Become.</p>
-    </div>
-    <div class="pillar" style="text-align:center;">
-      <div class="pillar-icon">💪</div>
-      <h3>No coddling</h3>
-      <p>I will push you. Not because I'm harsh — because I see what you can become and I won't let you settle.</p>
-    </div>
-    <div class="pillar" style="text-align:center;">
-      <div class="pillar-icon">🌍</div>
-      <h3>From anywhere</h3>
-      <p>Abuja. Lagos. London. Toronto. Geography is not a barrier. Show up online. Do the work.</p>
-    </div>
-    <div class="pillar" style="text-align:center;">
-      <div class="pillar-icon">🎵</div>
-      <h3>Music is purpose</h3>
-      <p>Not just performance. Not just entertainment. Music is how some people fulfil their calling. That's serious.</p>
-    </div>
-    <div class="pillar" style="text-align:center;">
-      <div class="pillar-icon">🤝</div>
-      <h3>It's personal</h3>
-      <p>I don't do factory coaching. If you work with me, you get <em>me</em>. All in.</p>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<!-- CTA -->
-<section class="text-center">
-  <h2 class="section-title reveal" style="font-size:1.6rem;">Ready to become<br><span style="background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">who you were made to be?</span></h2>
-  <p class="section-sub reveal-delay-1" style="margin:0 auto 28px;">Book a session. Take the quiz. Or just say hello.</p>
-  <a href="/coachtoby-site/#start" class="btn-primary" style="margin-right:8px;">Start Your Journey →</a>
-  <a href="quiz.html" class="btn-secondary">Take the Quiz 🎯</a>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">Sessions with <span>Toby</span></div>
-      <p>Vocal & life coaching for people who are done staying the same. "To Be Come."</p>
-    </div>
-    <div class="footer-col">
-      <h4>Pages</h4>
-      <a href="/coachtoby-site/">Home</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="community.html">Community</a>
-      <a href="content.html">Resources</a>
-    </div>
-    <div class="footer-col">
-      <h4>Free Tools</h4>
-      <a href="quiz.html">Quiz</a>
-      <a href="lead-magnet.html">Free Guide</a>
-    </div>
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <a href="https://wa.me/2349160106084">WhatsApp</a>
-      <a href="mailto:prosperolumotobi@gmail.com">Email</a>
-      <a href="https://calendly.com/d/cx3t-9f8-b7r">Calendly</a>
-    </div>
-  </div>
-  <div class="footer-bottom"><p>© 2026 Sessions with Toby · "To Be Come"</p></div>
-</footer>
-
-<script src="assets/scripts.js"></script>
-<script src="assets/capture.js"></script>
+  <script>
+  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?'\\u00A0':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+  function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
+  </script>
 </body>
 </html>
