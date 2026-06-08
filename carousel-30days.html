@@ -9,8 +9,8 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Inter', sans-serif;
-    background: #08080c;
-    color: #e8e8f0;
+    background: #004B49;
+    color: #FDFBF7;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,13 +20,13 @@
   h2 {
     font-size: 1.1rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    background: linear-gradient(135deg, #D2E823, #D2E823);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 4px;
   }
   .hint {
-    color: #7878a0;
+    color: #5A7D7C;
     font-size: 0.75rem;
     margin-bottom: 8px;
   }
@@ -46,12 +46,12 @@
     overflow: hidden;
     position: relative;
     scroll-snap-align: center;
-    border: 2px solid #1e1e2e;
+    border: 2px solid #004B49;
   }
 
   /* ═══ SLIDE 1: COVER ═══ */
   .s1 {
-    background: linear-gradient(160deg, #08080c 0%, #151020 40%, #1a1025 100%);
+    background: linear-gradient(160deg, #004B49 0%, #151020 40%, #1a1025 100%);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     padding: 40px 36px;
@@ -60,35 +60,35 @@
   .s1::before {
     content: ''; position: absolute;
     width: 220px; height: 220px;
-    background: radial-gradient(circle, #a78bfa22 0%, transparent 70%);
+    background: radial-gradient(circle, #D2E82322 0%, transparent 70%);
     top: -50px; right: -50px; border-radius: 50%;
   }
   .s1::after {
     content: ''; position: absolute;
     width: 160px; height: 160px;
-    background: radial-gradient(circle, #818cf818 0%, transparent 70%);
+    background: radial-gradient(circle, #D2E82318 0%, transparent 70%);
     bottom: -40px; left: -40px; border-radius: 50%;
   }
   .s1-emoji { font-size: 2.8rem; margin-bottom: 20px; position: relative; z-index: 1; }
   .s1-headline {
     font-size: 1.5rem; font-weight: 900;
-    color: #e8e8f0; text-align: center;
+    color: #FDFBF7; text-align: center;
     line-height: 1.3; margin-bottom: 12px;
     position: relative; z-index: 1;
   }
   .s1-sub {
-    font-size: 0.82rem; color: #7878a0;
+    font-size: 0.82rem; color: #5A7D7C;
     text-align: center; line-height: 1.6;
     position: relative; z-index: 1;
   }
   .s1-line {
     width: 50px; height: 3px;
-    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    background: linear-gradient(135deg, #D2E823, #D2E823);
     border-radius: 3px; margin: 18px 0;
     position: relative; z-index: 1;
   }
   .s1-tag {
-    font-size: 0.65rem; color: #a78bfa;
+    font-size: 0.65rem; color: #D2E823;
     font-weight: 700; letter-spacing: 0.1em;
     text-transform: uppercase;
     position: relative; z-index: 1;
@@ -96,36 +96,36 @@
 
   /* ═══ SLIDE 2: DAY 1-7 ═══ */
   .s2 {
-    background: linear-gradient(180deg, #101018 0%, #08080c 100%);
+    background: linear-gradient(180deg, #101018 0%, #004B49 100%);
     display: flex; flex-direction: column;
     padding: 32px 28px;
     position: relative;
   }
   .s2-phase {
     font-size: 0.6rem; text-transform: uppercase;
-    letter-spacing: 0.15em; color: #d4a853;
+    letter-spacing: 0.15em; color: #780016;
     font-weight: 700; margin-bottom: 12px;
   }
   .s2-title {
     font-size: 1.2rem; font-weight: 800;
-    color: #e8e8f0; margin-bottom: 16px;
+    color: #FDFBF7; margin-bottom: 16px;
   }
   .s2-item {
     display: flex; align-items: flex-start;
     gap: 10px; margin-bottom: 10px;
   }
   .s2-check {
-    color: #a78bfa; font-weight: 700;
+    color: #D2E823; font-weight: 700;
     font-size: 0.9rem; flex-shrink: 0; margin-top: 1px;
   }
   .s2-text {
-    font-size: 0.78rem; color: #7878a0;
+    font-size: 0.78rem; color: #5A7D7C;
     line-height: 1.6;
   }
   .s2-cta {
     position: absolute; bottom: 20px;
     left: 50%; transform: translateX(-50%);
-    font-size: 0.6rem; color: #7878a0;
+    font-size: 0.6rem; color: #5A7D7C;
     letter-spacing: 0.1em; text-transform: uppercase;
   }
 
@@ -139,7 +139,7 @@
 
   /* ═══ SLIDE 4: DAY 15-21 ═══ */
   .s4 {
-    background: linear-gradient(180deg, #151020 0%, #08080c 100%);
+    background: linear-gradient(180deg, #151020 0%, #004B49 100%);
     display: flex; flex-direction: column;
     padding: 32px 28px;
     position: relative;
@@ -147,7 +147,7 @@
 
   /* ═══ SLIDE 5: DAY 22-30 + CTA ═══ */
   .s5 {
-    background: linear-gradient(145deg, #08080c 0%, #1a1025 50%, #101018 100%);
+    background: linear-gradient(145deg, #004B49 0%, #1a1025 50%, #101018 100%);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     padding: 36px 32px;
@@ -155,16 +155,16 @@
   }
   .s5-result {
     font-size: 0.6rem; text-transform: uppercase;
-    letter-spacing: 0.15em; color: #34d399;
+    letter-spacing: 0.15em; color: #58CC02;
     font-weight: 700; margin-bottom: 14px;
   }
   .s5-headline {
     font-size: 1.3rem; font-weight: 800;
-    color: #e8e8f0; text-align: center;
+    color: #FDFBF7; text-align: center;
     line-height: 1.3; margin-bottom: 14px;
   }
   .s5-body {
-    font-size: 0.8rem; color: #7878a0;
+    font-size: 0.8rem; color: #5A7D7C;
     text-align: center; line-height: 1.7;
     margin-bottom: 20px;
   }
@@ -172,22 +172,22 @@
     list-style: none; margin-bottom: 20px;
   }
   .s5-features li {
-    font-size: 0.76rem; color: #e8e8f0;
+    font-size: 0.76rem; color: #FDFBF7;
     padding: 3px 0;
     display: flex; align-items: center; gap: 8px;
   }
   .s5-features li::before {
-    content: '✓'; color: #a78bfa;
+    content: '✓'; color: #D2E823;
     font-weight: 700; font-size: 0.85rem;
   }
   .s5-cta {
-    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    background: linear-gradient(135deg, #D2E823, #D2E823);
     color: #fff; font-size: 0.8rem; font-weight: 700;
     padding: 12px 28px; border-radius: 10px;
     text-transform: uppercase; letter-spacing: 0.05em;
   }
   .s5-wa {
-    font-size: 0.65rem; color: #7878a0; margin-top: 12px;
+    font-size: 0.65rem; color: #5A7D7C; margin-top: 12px;
   }
 </style>
 </head>
@@ -205,7 +205,7 @@
       <div class="s1-headline">What 30 Days with Toby Looks Like</div>
       <div class="s1-line"></div>
       <div class="s1-sub">The exact journey my students go through — from "I don't know where to start" to "I can't believe this is me."</div>
-      <div style="flex:1"></div>
+      <div class="flex-spacer"></div>
       <div class="s1-tag">Sessions with Toby</div>
     </div>
   </div>
@@ -220,7 +220,7 @@
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Set your 30-day transformation goal</span></div>
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">First technique session — most students cry (the good kind)</span></div>
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Daily check-in begins — one question, every day</span></div>
-      <div style="flex:1"></div>
+      <div class="flex-spacer"></div>
       <div class="s2-cta">Slide 2 of 5</div>
     </div>
   </div>
@@ -235,7 +235,7 @@
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">First real song run-through — raw but REAL</span></div>
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Mindset work — removing the mental blocks holding you back</span></div>
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Accountability check: are you doing the work between sessions?</span></div>
-      <div style="flex:1"></div>
+      <div class="flex-spacer"></div>
       <div class="s2-cta">Slide 3 of 5</div>
     </div>
   </div>
@@ -250,7 +250,7 @@
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Record your first "before vs after" comparison</span></div>
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Performance prep — singing for others, not just yourself</span></div>
       <div class="s2-item"><span class="s2-check">→</span><span class="s2-text">Your confidence shifts. People around you notice.</span></div>
-      <div style="flex:1"></div>
+      <div class="flex-spacer"></div>
       <div class="s2-cta">Slide 4 of 5</div>
     </div>
   </div>
@@ -277,5 +277,8 @@
 <p class="hint">Open in browser → screenshot each slide at 1080×1080px → post to Instagram</p>
 
 <script src="assets/capture.js"></script>
+  <script defer src="assets/js/pricing.js"></script>
+  <script defer src="assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>

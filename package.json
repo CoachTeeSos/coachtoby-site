@@ -1,0 +1,13 @@
+{
+  "name": "coachtoby-site",
+  "version": "4.0.0",
+  "description": "Sessions with Toby — Vocal Coaching Site",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7"
+  }
+}

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Abuja Music Collective — a community of singers building their craft together in Abuja, Nigeria. Join the movement.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#004B49">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 <title>Abuja Music Collective</title>
 <style>
@@ -13,18 +13,18 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #06060a;
-    --surface: #0e0e14;
-    --surface2: #16161e;
-    --border: #1c1c28;
-    --text: #ededf4;
-    --muted: #6e6e8a;
-    --accent: #c084fc;
-    --accent2: #818cf8;
-    --gradient: linear-gradient(135deg, #c084fc, #818cf8, #38bdf8);
-    --gradient-text: linear-gradient(135deg, #c084fc, #38bdf8);
-    --success: #34d399;
-    --gold: #d4a853;
+    --bg: #FDFBF7;
+    --surface: #FFFFFF;
+    --surface2: #F5F0E8;
+    --border: rgba(0,75,73,0.12);
+    --text: #004B49;
+    --muted: #5A7D7C;
+    --accent: #D2E823;
+    --accent2: #58CC02;
+    --gradient: linear-gradient(135deg, #D2E823, #58CC02, #D2E823);
+    --gradient-text: linear-gradient(135deg, #004B49, #5A7D7C);
+    --success: #1C8B4A;
+    --gold: #780016;
   }
 
   html { scroll-behavior: smooth; }
@@ -50,7 +50,7 @@
     font-weight: 900; font-size: 1rem; letter-spacing: -0.02em;
     text-transform: uppercase;
   }
-  nav .logo span { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  nav .logo span { color: var(--text); }
   nav .nav-cta {
     background: var(--gradient);
     color: #fff;
@@ -79,7 +79,7 @@
     position: absolute;
     top: -30%; left: 50%;
     width: 900px; height: 900px;
-    background: radial-gradient(circle, rgba(192,132,252,0.06) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(210,232,35,0.06) 0%, transparent 65%);
     transform: translateX(-50%);
     pointer-events: none;
   }
@@ -116,9 +116,7 @@
   .hero h1 .line1 { display: block; }
   .hero h1 .line2 {
     display: block;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
   }
   .hero .hero-sub {
     font-size: clamp(1rem, 2vw, 1.2rem);
@@ -154,7 +152,7 @@
     border: 1px solid var(--border);
     transition: all 0.2s;
   }
-  .btn-outline:hover { border-color: var(--accent); background: var(--surface); }
+  .btn-outline:hover { border-color: var(--accent-lime); background: var(--surface); }
 
   /* ── BELONG ── */
   .belong {
@@ -196,7 +194,7 @@
     white-space: nowrap;
   }
   .belong-card:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-lime);
     background: var(--surface2);
   }
   .belong-card .icon { margin-right: 6px; }
@@ -216,9 +214,7 @@
     margin-bottom: 16px;
   }
   .pain-header h2 span {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
   }
   .pain-header p {
     font-size: 1.05rem;
@@ -239,7 +235,7 @@
     transition: all 0.25s;
   }
   .pain-card:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-lime);
     background: var(--surface2);
     transform: translateY(-2px);
   }
@@ -262,7 +258,7 @@
     position: absolute;
     top: 50%; left: 50%;
     width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(192,132,252,0.05) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(210,232,35,0.05) 0%, transparent 65%);
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -275,9 +271,7 @@
     margin-bottom: 28px;
   }
   .manifesto h2 span {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
   }
   .manifesto p {
     font-size: 1.1rem;
@@ -333,7 +327,7 @@
     transition: all 0.25s;
   }
   .sp-card:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-lime);
     background: var(--surface2);
     transform: translateY(-2px);
   }
@@ -365,7 +359,7 @@
     display: flex; gap: 20px; align-items: flex-start;
     transition: all 0.2s;
   }
-  .code-card:hover { border-color: var(--accent); }
+  .code-card:hover { border-color: var(--accent-lime); }
   .code-card .cc-icon {
     font-size: 1.6rem; flex-shrink: 0; margin-top: 3px;
   }
@@ -384,7 +378,7 @@
     position: absolute;
     top: 50%; left: 50%;
     width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(192,132,252,0.08) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(210,232,35,0.08) 0%, transparent 65%);
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -397,9 +391,7 @@
     margin-bottom: 24px;
   }
   .cta h2 span {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
   }
   .cta p {
     font-size: 1.1rem;
@@ -442,7 +434,7 @@
     transition: border-color 0.2s;
   }
   .form-row input::placeholder { color: var(--muted); }
-  .form-row input:focus { border-color: var(--accent); }
+  .form-row input:focus { border-color: var(--accent-lime); }
 
   /* ── THANK YOU MODAL ── */
   .thankyou-overlay {
@@ -476,9 +468,7 @@
     letter-spacing: -0.02em;
   }
   .thankyou-box h2 span {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
   }
   .thankyou-box p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
   .thankyou-box .btn-primary { text-transform: none; font-weight: 700; }
@@ -613,7 +603,7 @@
     <p>
       Not a course. Not a competition. Not another WhatsApp group that dies in two weeks.<br><br>
       A collective of real people, making real music, in a city that's ready to hear it.<br><br>
-      Here, you will become. It is <strong style="color: var(--text);">inevitable</strong>.
+      Here, you will become. It is <strong class="text-brand">inevitable</strong>.
     </p>
     <div class="manifesto-quote">
       🎵 Here, you will become. It is <span class="gold">INEVITABLE</span>. 🎵
@@ -714,7 +704,7 @@
         <input type="text" name="Name" placeholder="Your name" required>
         <input type="email" name="Email" placeholder="Your email" required>
       </div>
-      <button type="submit" class="btn-primary" style="width:100%; border:none; cursor:pointer;">Count Me In</button>
+      <button type="submit" class="btn-primary btn-full">Count Me In</button>
     </form>
   </div>
 </section>
@@ -768,5 +758,8 @@
 </script>
 
 <script src="assets/capture.js"></script>
+  <script defer src="assets/js/pricing.js"></script>
+  <script defer src="assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>

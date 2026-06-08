@@ -5,10 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Community | Sessions with Toby</title>
 <meta name="description" content="Join the free or paid singers' community. Weekly tips, Q&As, accountability. Abuja Music Collective for local singers.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#004B49">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
+<style>
+.comm-hero{padding-top:7.5rem}
+.comm-hero-title{font-size:clamp(2rem,5vw,3rem)}
+.comm-hero-sub{margin:0 auto}
+.comm-card{background:var(--bg-card);border:3px solid var(--border);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);transition:all var(--transition);position:relative}
+.comm-card:hover{transform:translateY(-2px)}
+.comm-card-featured{border-color:var(--accent-lime)}
+.comm-card-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.comm-card h3{font-family:var(--font-heading);font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;margin-bottom:0.5rem;color:var(--text)}
+.comm-card p{font-size:0.95rem;color:var(--muted);line-height:1.7;margin-bottom:1rem}
+.comm-badge-free{display:inline-block;background:rgba(210,232,35,0.15);color:var(--text);font-size:0.7rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:999px;border:2px solid var(--border);margin-right:0.5rem}
+.comm-badge-paid{display:inline-block;background:rgba(120,0,22,0.1);color:var(--accent-crimson);font-size:0.7rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:999px;border:2px solid var(--accent-crimson);margin-right:0.5rem}
+.comm-list{list-style:none;margin:1rem 0 1.25rem;text-align:left}
+.comm-list-item{padding:0.375rem 0;font-size:0.88rem;color:var(--muted);display:flex;gap:0.5rem}
+.comm-list-check{color:var(--success)}
+.comm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:var(--max-w);margin:0 auto;padding:0 1.5rem}
+.comm-steps{display:grid;gap:1.5rem;max-width:var(--max-w);margin:2rem auto 0;padding:0 1.5rem}
+.comm-step{display:flex;gap:1.5rem;align-items:flex-start;background:var(--bg-card);border:3px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)}
+.comm-step-num{font-family:var(--font-heading);font-weight:800;font-size:0.8rem;color:var(--accent-crimson);background:rgba(120,0,22,0.08);padding:0.5rem 0.75rem;border-radius:var(--radius-sm);flex-shrink:0;min-width:3.5rem;text-align:center}
+.comm-step strong{font-size:1rem;display:block;margin-bottom:0.25rem}
+.comm-step p{font-size:0.9rem;color:var(--muted);line-height:1.6}
+.comm-proof-heading{margin-bottom:1.5rem}
+.comm-proof-blockquote{font-size:1.1rem;color:var(--text);font-style:italic;line-height:1.7;background:var(--bg-alt);border-radius:var(--radius);padding:2rem;border-left:4px solid var(--accent-crimson);max-width:var(--max-w);margin:0 auto}
+.comm-proof-attribution{font-size:0.85rem;color:var(--muted);font-weight:600;margin-top:1rem}
+.comm-cta-title{font-size:1.6rem}
+.comm-cta-sub{margin:0 auto 1.75rem}
+.comm-cta-btn{margin-right:0.5rem}
+.comm-cta-alt{margin-top:1.5rem;font-size:0.88rem;color:var(--muted)}
+.comm-cta-alt a{color:var(--accent-crimson)}
+.section-title{font-family:var(--font-heading);font-weight:800;font-size:clamp(2rem,5vw,3.5rem);line-height:1;letter-spacing:-0.05em;color:var(--text)}
+.section-sub{font-size:1rem;line-height:1.75;color:var(--muted);max-width:65ch}
+.footer-inner{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-logo{font-family:var(--font-heading);font-weight:900;font-size:1.1rem;letter-spacing:-0.04em;color:var(--bg);margin-bottom:1rem}
+.footer-col h4{font-family:var(--font-body);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:rgba(253,251,247,0.4);margin-bottom:1rem}
+.footer-col a{display:block;color:rgba(253,251,247,0.6);text-decoration:none;transition:color var(--transition);font-size:0.9rem;margin-bottom:0.5rem}
+.footer-col a:hover{color:var(--bg)}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 600ms cubic-bezier(0.4,0,0.2,1),transform 600ms cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 
@@ -21,7 +63,7 @@
     <a href="/coachtoby-site/#services">Services</a>
     <a href="/coachtoby-site/#how-it-works">How It Works</a>
     <a href="pricing.html">Pricing</a>
-    <a href="community.html" style="color:var(--text);font-weight:700;">Community</a>
+    <a href="community.html" class="comm-nav-active">Community</a>
     <a href="content.html">Resources</a>
     <a href="about.html">About</a>
     <a href="/coachtoby-site/#start" class="nav-cta">Book a Session</a>
@@ -34,49 +76,49 @@
 </div>
 
 <!-- HERO -->
-<section class="text-center" style="padding-top:120px;">
+<section class="text-center comm-hero">
   <div class="section-label">Community</div>
-  <h1 class="section-title" style="font-size:clamp(2rem,5vw,3rem);">You Don't Grow Alone.</h1>
-  <p class="section-sub" style="margin:0 auto 16px;">Join 50+ singers from 10+ countries. Get feedback, stay accountable, and grow with people who get it.</p>
+  <h1 class="section-title comm-hero-title">You Don't Grow Alone.</h1>
+  <p class="section-sub comm-hero-sub">Join 50+ singers from 10+ countries. Get feedback, stay accountable, and grow with people who get it.</p>
 </section>
 
 <!-- COMMUNITY OPTIONS -->
 <section>
-  <div class="community-grid">
-    <div class="community-card reveal">
-      <div class="cc-icon">🎤</div>
-      <h3><span class="badge-free">FREE</span> Singers' Community</h3>
+  <div class="comm-grid">
+    <div class="comm-card reveal">
+      <div class="comm-card-icon">🎤</div>
+      <h3><span class="comm-badge-free">FREE</span> Singers' Community</h3>
       <p>An active Telegram group where singers share recordings, ask questions, and give feedback. No cost. No pressure. Just growth.</p>
-      <ul style="list-style:none;margin:16px 0 20px;text-align:left;">
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Active singers' group</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Share recordings & get feedback</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Ask questions, grow together</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Open to all levels</li>
+      <ul class="comm-list">
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Active singers' group</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Share recordings & get feedback</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Ask questions, grow together</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Open to all levels</li>
       </ul>
       <button class="btn-primary" onclick="goToBot('free-community')">Join Free →</button>
     </div>
-    <div class="community-card featured reveal-delay-1" style="border-color:var(--accent);">
-      <div class="cc-icon">⭐</div>
-      <h3><span class="badge-paid">₦20,000/mo</span> Paid Singers' Community</h3>
+    <div class="comm-card comm-card-featured reveal-delay-1">
+      <div class="comm-card-icon">⭐</div>
+      <h3><span class="comm-badge-paid">₦20,000/mo</span> Paid Singers' Community</h3>
       <p>The premium experience. Weekly tips from Toby, live Q&As, personalized feedback on your recordings, and accountability partners.</p>
-      <ul style="list-style:none;margin:16px 0 20px;text-align:left;">
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Everything in Free Community</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Weekly vocal tips from Toby</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Live Q&A sessions</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Personalized feedback on recordings</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Accountability partners</li>
+      <ul class="comm-list">
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Everything in Free Community</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Weekly vocal tips from Toby</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Live Q&A sessions</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Personalized feedback on recordings</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Accountability partners</li>
       </ul>
       <button class="btn-primary" onclick="goToBot('paid-community')">Join Paid →</button>
     </div>
-    <div class="community-card reveal-delay-2">
-      <div class="cc-icon">🏙️</div>
-      <h3><span class="badge-free">FREE</span> Abuja Music Collective</h3>
+    <div class="comm-card reveal-delay-2">
+      <div class="comm-card-icon">🏙️</div>
+      <h3><span class="comm-badge-free">FREE</span> Abuja Music Collective</h3>
       <p>For singers in Abuja. Local meetups, jam sessions, collaborations. Because some things are better in person.</p>
-      <ul style="list-style:none;margin:16px 0 20px;text-align:left;">
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Local community of singers</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Meetups & jam sessions</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Collaboration opportunities</li>
-        <li style="padding:6px 0;font-size:0.88rem;color:var(--muted);display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Must be based in Abuja</li>
+      <ul class="comm-list">
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Local community of singers</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Meetups & jam sessions</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Collaboration opportunities</li>
+        <li class="comm-list-item"><span class="comm-list-check">✓</span> Must be based in Abuja</li>
       </ul>
       <button class="btn-primary" onclick="goToBot('abuja-collective')">Join →</button>
     </div>
@@ -85,23 +127,23 @@
 
 <!-- WHAT HAPPENS INSIDE -->
 <section>
-  <div class="section-label reveal text-center" style="text-align:center;">What Happens Inside</div>
-  <h2 class="section-title reveal text-center" style="text-align:center;">A Week in the Community</h2>
-  <div class="steps reveal-delay-1" style="margin-top:32px;">
-    <div class="step">
-      <div class="step-num">Mon</div>
+  <div class="section-label reveal text-center">What Happens Inside</div>
+  <h2 class="section-title reveal text-center comm-proof-heading">A Week in the Community</h2>
+  <div class="comm-steps reveal-delay-1">
+    <div class="comm-step">
+      <div class="comm-step-num">Mon</div>
       <div><strong>Weekly Exercise</strong><p>A new vocal exercise every Monday. Do it, post your attempt, get feedback.</p></div>
     </div>
-    <div class="step">
-      <div class="step-num">Wed</div>
+    <div class="comm-step">
+      <div class="comm-step-num">Wed</div>
       <div><strong>Midweek Check-in</strong><p>What's your biggest struggle right now? Post it. The community helps.</p></div>
     </div>
-    <div class="step">
-      <div class="step-num">Fri</div>
+    <div class="comm-step">
+      <div class="comm-step-num">Fri</div>
       <div><strong>Recording Challenge</strong><p>Record yourself singing. Share it. Get honest, helpful feedback.</p></div>
     </div>
-    <div class="step">
-      <div class="step-num">Sun</div>
+    <div class="comm-step">
+      <div class="comm-step-num">Sun</div>
       <div><strong>Rest & Reflection</strong><p>Rest your voice. Watch a performance. Study the technique. Come back Monday ready.</p></div>
     </div>
   </div>
@@ -109,20 +151,20 @@
 
 <!-- TESTIMONIALS -->
 <section>
-  <div class="section-label reveal text-center" style="text-align:center;">What Members Say</div>
-  <div class="proof-section reveal-delay-1" style="margin-top:24px;">
+  <div class="section-label reveal text-center">What Members Say</div>
+  <div class="comm-proof-blockquote reveal-delay-1">
     <blockquote>"The community changed everything. Getting feedback on my recordings every week — I improved more in a month than in a year of watching YouTube."</blockquote>
-    <div class="attribution">— Community Member</div>
+    <div class="comm-proof-attribution">— Community Member</div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="text-center">
-  <h2 class="section-title reveal" style="font-size:1.6rem;">Ready to Grow With Others?</h2>
-  <p class="section-sub reveal-delay-1" style="margin:0 auto 28px;">Start with the free community. Upgrade when you want more.</p>
-  <button class="btn-primary" onclick="goToBot('free-community')" style="margin-right:8px;">Join Free →</button>
+  <h2 class="section-title reveal comm-cta-title">Ready to Grow With Others?</h2>
+  <p class="section-sub reveal-delay-1 comm-cta-sub">Start with the free community. Upgrade when you want more.</p>
+  <button class="btn-primary comm-cta-btn" onclick="goToBot('free-community')">Join Free →</button>
   <button class="btn-secondary" onclick="goToBot('paid-community')">Join Paid →</button>
-  <p style="margin-top:24px;font-size:0.88rem;color:var(--muted);">Not sure? <a href="quiz.html" style="color:var(--accent);">Take the quiz first →</a></p>
+  <p class="comm-cta-alt">Not sure? <a href="quiz.html">Take the quiz first →</a></p>
 </section>
 
 <footer>
@@ -154,5 +196,11 @@
 
 <script src="assets/scripts.js"></script>
 <script src="assets/capture.js"></script>
+<style>
+.comm-nav-active{color:var(--text);font-weight:700}
+</style>
+  <script defer src="assets/js/pricing.js"></script>
+  <script defer src="assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>

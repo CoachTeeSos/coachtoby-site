@@ -6,56 +6,80 @@
 <title>About Toby — Vocal & Life Coach | Sessions with Toby</title>
 <meta name="description" content="Meet Prosper Tobi Olumo — Nigerian vocal and life coach. 50+ students. 10+ countries. Here's his story.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#008060">
+<meta name="theme-color" content="#004B49">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
+<style>
+.about-hero{padding-top:7rem;padding-bottom:4rem}
+.about-hero-sub{color:rgba(253,251,247,0.6);max-width:36rem;margin:0 auto}
+.about-story-wrap{max-width:42rem;margin:0 auto}
+.about-story-text{font-size:1.125rem;display:flex;flex-direction:column;gap:1rem}
+.about-story-heading{margin-bottom:1.5rem}
+.about-timeline-section{background:var(--bg-alt)}
+.about-timeline-wrap{max-width:42rem;margin:0 auto}
+.about-timeline-heading{margin-bottom:3rem}
+.about-timeline-left{border-left:2px solid var(--border-subtle);padding-left:2rem}
+.about-timeline-item{margin-bottom:2.5rem;position:relative}
+.about-timeline-item:last-child{margin-bottom:0}
+.about-timeline-dot{position:absolute;left:-2.65rem;top:0;width:12px;height:12px;border-radius:50%;background:var(--accent-lime);border:2px solid var(--bg-alt)}
+.about-timeline-dot-latest{background:var(--accent-crimson)}
+.about-timeline-year{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent-crimson);margin-bottom:0.5rem}
+.about-timeline-title{font-family:var(--font-heading);font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;margin-bottom:0.375rem}
+.about-timeline-text{font-size:0.95rem;color:var(--muted);line-height:1.7}
+.about-values-heading{margin-bottom:3rem}
+.about-cta-heading{margin-bottom:1rem}
+.about-cta{max-width:48rem;margin:0 auto}
+.about-cta-sub{color:rgba(253,251,247,0.6);margin:0 auto 2rem}
+.about-cta-white{background:var(--bg);color:var(--text)}
+.about-cta-outline{border-color:rgba(253,251,247,0.3);color:var(--bg)}
+</style>
 </head>
 <body>
 
-  <div id="pageLoader"><div style="text-align:center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+  <div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold" style="color:#002D21;letter-spacing:-0.02em">SESSIONS WITH TOBY</span></a>
-        <div class="hidden md:flex items-center gap-8">
-          <a href="home.html#services" class="nav-link text-sm">Services</a>
-          <a href="home.html#pricing" class="nav-link text-sm">Pricing</a>
-          <a href="home.html#community" class="nav-link text-sm">Community</a>
-          <a href="home.html#reviews" class="nav-link text-sm">Reviews</a>
-        </div>
-        <div class="hidden md:flex items-center gap-3"><a href="book.html" class="btn-cta text-sm">Try Free Demo</a></div>
-        <button class="md:hidden p-2 rounded-lg" style="color:#002D21" onclick="toggleMobile()" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">🎤 SESSIONS WITH TOBY</a>
+      <div class="nav-links">
+        <a href="home.html#services" class="nav-link">Services</a>
+        <a href="home.html#pricing" class="nav-link">Pricing</a>
+        <a href="home.html#community" class="nav-link">Community</a>
+        <a href="home.html#reviews" class="nav-link">Reviews</a>
+        <a href="book.html" class="nav-cta">Try Free Demo</a>
       </div>
+      <button class="btn-mobile-toggle" onclick="toggleMobile()" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
-    <div class="mobile-menu md:hidden flex-col bg-white border-t border-slate-200 px-4 py-4 gap-3" id="mobMenu">
-      <a href="home.html#services" class="nav-link py-2" onclick="toggleMobile()">Services</a>
-      <a href="home.html#pricing" class="nav-link py-2" onclick="toggleMobile()">Pricing</a>
-      <a href="home.html#community" class="nav-link py-2" onclick="toggleMobile()">Community</a>
-      <a href="home.html#reviews" class="nav-link py-2" onclick="toggleMobile()">Reviews</a>
-      <a href="book.html" class="btn-cta text-sm mt-2">Try Free Demo</a>
+    <div class="mobile-menu" id="mobMenu">
+      <a href="home.html#services" class="nav-link" onclick="toggleMobile()">Services</a>
+      <a href="home.html#pricing" class="nav-link" onclick="toggleMobile()">Pricing</a>
+      <a href="home.html#community" class="nav-link" onclick="toggleMobile()">Community</a>
+      <a href="home.html#reviews" class="nav-link" onclick="toggleMobile()">Reviews</a>
+      <a href="book.html" class="nav-cta" onclick="toggleMobile()">Try Free Demo</a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero-gradient" style="padding-top:7rem;padding-bottom:4rem;position:relative;overflow:hidden">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <p class="text-emerald-300 font-semibold text-sm uppercase tracking-wider mb-3">About</p>
-      <h1 class="text-white text-3xl sm:text-4xl lg:text-5xl font-black mb-4">I Help People<br><span class="text-emerald-300">Become.</span></h1>
-      <p class="text-emerald-100 text-lg max-w-2xl mx-auto">Not become someone else. Become who they already are. Here's how that started.</p>
+  <section class="hero-gradient about-hero">
+    <div class="container text-center">
+      <p class="section-label">About</p>
+      <h1 class="hero-headline">I Help People<br><span class="accent-highlight">Become.</span></h1>
+      <p class="about-hero-sub">Not become someone else. Become who they already are. Here's how that started.</p>
     </div>
   </section>
 
   <!-- STORY -->
-  <section class="section-white py-20 lg:py-28">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">The Story</p>
-      <h2 class="text-3xl sm:text-4xl font-black mb-6">It Started With a Seven-Year-Old</h2>
-      <div class="text-slate-600 text-lg leading-relaxed space-y-4">
+  <section class="section-pad">
+    <div class="about-story-wrap">
+      <p class="section-label">The Story</p>
+      <h2 class="section-headline about-story-heading">It Started With a Seven-Year-Old</h2>
+      <div class="about-story-text body-text">
         <p>A kid was struggling in school. Everyone said: "Make him study harder." But I watched — and I saw something else. He wasn't lazy. He was lost.</p>
         <p>So instead of forcing academics, I found what lit him up. Built around <em>that</em>. Two weeks later, grades went up. Not because he studied more. Because he had a reason to.</p>
         <p>That's when I understood: <strong>coaching isn't about fixing. It's about finding.</strong></p>
@@ -64,68 +88,119 @@
   </section>
 
   <!-- TIMELINE -->
-  <section class="section-offwhite py-20 lg:py-28">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3 text-center">The Journey</p>
-      <h2 class="text-3xl sm:text-4xl font-black mb-12 text-center">How We Got Here</h2>
-      <div class="space-y-0 relative">
-        <div class="absolute left-8 top-0 bottom-0 w-px bg-emerald-100 hidden sm:block"></div>
-        <div class="flex gap-6 items-start relative"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0 relative z-10"><span class="text-emerald-600 font-black text-sm">2018</span></div><div class="pt-3"><h4 class="font-bold text-lg mb-1" style="color:#002D21">The First Student</h4><p class="text-slate-500">Started informal vocal coaching. One church singer at a time. Word spread.</p></div></div>
-        <div class="flex gap-6 items-start relative"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0 relative z-10"><span class="text-emerald-600 font-black text-sm">2020</span></div><div class="pt-3"><h4 class="font-bold text-lg mb-1" style="color:#002D21">Going Online</h4><p class="text-slate-500">Pandemic forced the move online. Turns out, WhatsApp calls work just fine. Students from different countries started showing up.</p></div></div>
-        <div class="flex gap-6 items-start relative"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0 relative z-10"><span class="text-emerald-600 font-black text-sm">2022</span></div><div class="pt-3"><h4 class="font-bold text-lg mb-1" style="color:#002D21">Life Coaching</h4><p class="text-slate-500">Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</p></div></div>
-        <div class="flex gap-6 items-start relative"><div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0 relative z-10"><span class="text-emerald-600 font-black text-sm">2024</span></div><div class="pt-3"><h4 class="font-bold text-lg mb-1" style="color:#002D21">50+ Students</h4><p class="text-slate-500">Crossed 50 students across 10+ countries. Still hands-on. Still personal.</p></div></div>
-        <div class="flex gap-6 items-start relative"><div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 relative z-10" style="border:2px solid #6ee7b7"><span class="text-emerald-700 font-black text-sm">2026</span></div><div class="pt-3"><h4 class="font-bold text-lg mb-1" style="color:#002D21">To Be Come</h4><p class="text-slate-500">Built a full coaching ecosystem: quiz, community, group and 1-on-1. The mission stays the same — help people become.</p></div></div>
+  <section class="section-pad about-timeline-section">
+    <div class="about-timeline-wrap">
+      <p class="section-label text-center">The Journey</p>
+      <h2 class="section-headline text-center about-timeline-heading">How We Got Here</h2>
+      <div class="about-timeline-left">
+        <div class="about-timeline-item">
+          <div class="about-timeline-dot"></div>
+          <div class="about-timeline-year">2018</div>
+          <div class="about-timeline-title">The First Student</div>
+          <div class="about-timeline-text">Started informal vocal coaching. One church singer at a time. Word spread.</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-dot"></div>
+          <div class="about-timeline-year">2020</div>
+          <div class="about-timeline-title">Going Online</div>
+          <div class="about-timeline-text">Pandemic forced the move online. Turns out, WhatsApp calls work just fine. Students from different countries started showing up.</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-dot"></div>
+          <div class="about-timeline-year">2022</div>
+          <div class="about-timeline-title">Life Coaching</div>
+          <div class="about-timeline-text">Students kept asked: "Can you help with the other stuff too?" Life coaching became official.</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-dot"></div>
+          <div class="about-timeline-year">2024</div>
+          <div class="about-timeline-title">50+ Students</div>
+          <div class="about-timeline-text">Crossed 50 students across 10+ countries. Still hands-on. Still personal.</div>
+        </div>
+        <div class="about-timeline-item">
+          <div class="about-timeline-dot about-timeline-dot-latest"></div>
+          <div class="about-timeline-year">2026</div>
+          <div class="about-timeline-title">To Be Come</div>
+          <div class="about-timeline-text">Built a full coaching ecosystem: quiz, community, group and 1-on-1. The mission stays the same — help people become.</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- VALUES -->
-  <section class="section-white py-20 lg:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3 text-center">What I Believe</p>
-      <h2 class="text-3xl sm:text-4xl font-black mb-12 text-center">Non-Negotiables</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="card text-center"><div class="text-3xl mb-4">🔥</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">Your voice is not the problem</h3><p class="text-slate-500 text-sm">Technique is. And technique is fixable. Every voice has something extraordinary in it.</p></div>
-        <div class="card text-center"><div class="text-3xl mb-4">🎯</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">Find the thing. Fan the flame.</h3><p class="text-slate-500 text-sm">Whether it's a seven-year-old or a 28-year-old — the process is the same. Discover. Build. Become.</p></div>
-        <div class="card text-center"><div class="text-3xl mb-4">💪</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">No coddling</h3><p class="text-slate-500 text-sm">I will push you. Not because I'm harsh — because I see what you can become and I won't let you settle.</p></div>
-        <div class="card text-center"><div class="text-3xl mb-4">🌍</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">From anywhere</h3><p class="text-slate-500 text-sm">Abuja. Lagos. London. Toronto. Geography is not a barrier. Show up online. Do the work.</p></div>
-        <div class="card text-center"><div class="text-3xl mb-4">🎵</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">Music is purpose</h3><p class="text-slate-500 text-sm">Not just performance. Not just entertainment. Music is how some people fulfil their calling. That's serious.</p></div>
-        <div class="card text-center"><div class="text-3xl mb-4">🤝</div><h3 class="font-bold text-lg mb-2" style="color:#002D21">It's personal</h3><p class="text-slate-500 text-sm">I don't do factory coaching. If you work with me, you get <em>me</em>. All in.</p></div>
+  <section class="section-pad">
+    <div class="container">
+      <p class="section-label text-center">What I Believe</p>
+      <h2 class="section-headline text-center about-values-heading">Non-Negotiables</h2>
+      <div class="card-grid-3">
+        <div class="card text-center"><div class="card-icon">🔥</div><h3 class="card-title">Your voice is not the problem</h3><p class="card-text">Technique is. And technique is fixable. Every voice has something extraordinary in it.</p></div>
+        <div class="card text-center"><div class="card-icon">🎯</div><h3 class="card-title">Find the thing. Fan the flame.</h3><p class="card-text">Whether it's a seven-year-old or a 28-year-old — the process is the same. Discover. Build. Become.</p></div>
+        <div class="card text-center"><div class="card-icon">💪</div><h3 class="card-title">No coddling</h3><p class="card-text">I will push you. Not because I'm harsh — because I see what you can become and I won't let you settle.</p></div>
+        <div class="card text-center"><div class="card-icon">🌍</div><h3 class="card-title">From anywhere</h3><p class="card-text">Abuja. Lagos. London. Toronto. Geography is not a barrier. Show up online. Do the work.</p></div>
+        <div class="card text-center"><div class="card-icon">🎵</div><h3 class="card-title">Music is purpose</h3><p class="card-text">Not just performance. Not just entertainment. Music is how some people fulfil their calling. That's serious.</p></div>
+        <div class="card text-center"><div class="card-icon">🤝</div><h3 class="card-title">It's personal</h3><p class="card-text">I don't do factory coaching. If you work with me, you get <em>me</em>. All in.</p></div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="hero-gradient py-20 lg:py-28">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-white text-3xl sm:text-4xl font-black mb-4">Ready to become who you were made to be?</h2>
-      <p class="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">Book a session. Take the quiz. Or just say hello.</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="book.html" class="btn-cta bg-white text-base px-8 py-4" style="color:#002D21">Start Your Journey →</a>
-        <a href="quiz.html" class="btn-cta-outline border-white/30 text-white hover:bg-white/10 text-base px-8 py-4">Take the Quiz 🎯</a>
+  <section class="hero-gradient section-pad">
+    <div class="container text-center about-cta">
+      <h2 class="section-headline section-headline-light about-cta-heading">Ready to become who you were made to be?</h2>
+      <p class="about-cta-sub">Book a session. Take the quiz. Or just say hello.</p>
+      <div class="hero-actions">
+        <a href="book.html" class="about-cta-white btn-primary">Start Your Journey →</a>
+        <a href="quiz.html" class="about-cta-outline btn-secondary">Take the Quiz 🎯</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div><div class="flex items-center gap-2 mb-4"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold text-white tracking-tight">SESSIONS WITH TOBY</span></div><p class="text-emerald-200/70 text-sm">Vocal & life coaching for people who are done staying the same. "To Be Come."</p></div>
-        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Pages</h4><ul class="space-y-2 text-sm"><li><a href="home.html">Home</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="home.html#community">Community</a></li><li><a href="home.html#services">Services</a></li></ul></div>
-        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Free Tools</h4><ul class="space-y-2 text-sm"><li><a href="quiz.html">Quiz</a></li><li><a href="book.html">Book a Demo</a></li></ul></div>
-        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Connect</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/2349160106084">WhatsApp</a></li><li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li><li><a href="https://calendly.com/d/cx3t-9f8-b7r">Calendly</a></li></ul></div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">🎤 SESSIONS WITH TOBY</div>
+          <p class="footer-tagline">Vocal & life coaching for people who are done staying the same. "To Be Come."</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Pages</h4>
+          <ul class="footer-list">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="home.html#community">Community</a></li>
+            <li><a href="home.html#services">Services</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Free Tools</h4>
+          <ul class="footer-list">
+            <li><a href="quiz.html">Quiz</a></li>
+            <li><a href="book.html">Book a Demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Connect</h4>
+          <ul class="footer-list">
+            <li><a href="https://wa.me/2349160106084">WhatsApp</a></li>
+            <li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li>
+            <li><a href="https://calendly.com/d/cx3t-9f8-b7r">Calendly</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="border-t border-emerald-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-emerald-200/50 text-sm">© 2026 Sessions with Toby. All rights reserved.</p>
-        <a href="book.html" class="btn-cta text-sm">Try a Free Demo →</a>
+      <div class="footer-bottom">
+        <p>© 2026 Sessions with Toby. All rights reserved.</p>
+        <a href="book.html" class="btn-cta">Try a Free Demo →</a>
       </div>
     </div>
   </footer>
 
   <script>
-  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
   function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
   </script>
+  <script defer src="assets/js/pricing.js"></script>
+  <script defer src="assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>

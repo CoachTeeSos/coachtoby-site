@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Vocal Coaching Tips & Guides | Sessions with Toby</title>
 <meta name="description" content="Expert vocal coaching articles by Toby Wina. Learn breathing techniques, pitch training, stage confidence, and more.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#004B49">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/css/main.css">
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
 <style>
 .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
-.blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; text-decoration: none; color: var(--text); transition: all var(--transition); display: block; }
-.blog-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.blog-card { background: var(--surface); border: 3px solid var(--border); border-radius: var(--radius); padding: 28px; text-decoration: none; color: var(--text); transition: all var(--transition); display: block; }
+.blog-card:hover { border-color: var(--accent-lime); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
 .blog-card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
 .blog-card-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px; }
-.blog-card-link { color: var(--accent); font-weight: 600; font-size: 0.85rem; }
+.blog-card-link { color: var(--accent-crimson); font-weight: 600; font-size: 0.85rem; }
 </style>
 </head>
 <body>
@@ -29,16 +29,16 @@
     <a href="pricing.html">Pricing</a>
     <a href="community.html">Community</a>
     <a href="content.html">Resources</a>
-    <a href="blog.html" style="color:var(--text);font-weight:700;">Blog</a>
+    <a href="blog.html" >Blog</a>
     <a href="about.html">About</a>
     <a href="/coachtoby-site/#start" class="nav-cta">Book a Session</a>
   </div>
   <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-<section class="text-center" style="padding-top:120px;">
+<section class="text-center blog-hero-pad">
   <div class="section-label">Blog</div>
-  <h1 class="section-title" style="font-size:clamp(2rem,5vw,3rem);">Vocal Coaching<br>Tips & Guides.</h1>
-  <p class="section-sub" style="margin:0 auto 16px;">Expert articles on voice training, breathing, confidence, and performance.</p>
+  <h1 class="section-title blog-hero-title">Vocal Coaching<br>Tips & Guides.</h1>
+  <p class="section-sub">Expert articles on voice training, breathing, confidence, and performance.</p>
 </section>
 <section>
   <div class="blog-grid">
@@ -75,20 +75,23 @@
   </div>
 </section>
 <section class="text-center">
-  <h2 class="section-title reveal" style="font-size:1.6rem;">Ready to transform your voice?</h2>
-  <p class="section-sub reveal-delay-1" style="margin:0 auto 28px;">Articles are great. But nothing beats a coach who listens to YOUR voice.</p>
-  <a href="quiz.html" class="btn-primary" style="margin-right:8px;">🎯 Take the Quiz</a>
+  <h2 class="section-title reveal blog-cta-title">Ready to transform your voice?</h2>
+  <p class="section-sub reveal-delay-1">Articles are great. But nothing beats a coach who listens to YOUR voice.</p>
+  <a href="quiz.html" class="btn-primary blog-cta-btn">🎯 Take the Quiz</a>
   <a href="/coachtoby-site/#start" class="btn-secondary">Book a Session</a>
 </section>
 <footer>
   <div class="footer-inner">
     <div class="footer-brand"><div class="footer-logo">Sessions with <span>Toby</span></div><p>Vocal & life coaching for people who are done staying the same.</p></div>
     <div class="footer-col"><h4>Pages</h4><a href="/coachtoby-site/">Home</a><a href="about.html">About</a><a href="pricing.html">Pricing</a><a href="community.html">Community</a></div>
-    <div class="footer-col"><h4>Free Tools</h4><a href="quiz.html">Quiz</a><a href="lead-magnet.html">Free Guide</a><a href="blog.html">Blog</a></div>
+    <div class="footer-col"><h4>Free Tools</h4><a href="quiz.html">Quiz</a><a href="lead-magnet.html">Free Guide</a><a href="blog.html" class="blog-nav-active">Blog</a></div>
     <div class="footer-col"><h4>Connect</h4><a href="https://wa.me/2349160106084">WhatsApp</a><a href="mailto:prosperolumotobi@gmail.com">Email</a></div>
   </div>
   <div class="footer-bottom"><p>© 2026 Sessions with Toby · "To Be Come"</p></div>
 </footer>
 <script src="assets/scripts.js"></script>
+  <script defer src="assets/js/pricing.js"></script>
+  <script defer src="assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>

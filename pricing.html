@@ -6,86 +6,150 @@
 <title>Pricing — Sessions with Toby</title>
 <meta name="description" content="Vocal coaching, life coaching, and community memberships. Transparent pricing in USD and Naira. Session 1 guarantee.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#008060">
+<meta name="theme-color" content="#004B49">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+/* ── Pricing Page Utilities ── */
+.hero-pad-top{padding-top:7rem}
+.hero-subtitle{color:rgba(253,251,247,0.8);font-size:1.1rem;max-width:36rem;margin:0 auto 0.5rem}
+.hero-guarantee{color:var(--accent-lime);margin-top:0.75rem}
+.section-label-crimson{color:var(--accent-crimson)}
+.section-label-lime{color:var(--accent-lime)}
+.card-heading{color:var(--muted)}
+.card-heading-accent{color:var(--text)}
+.price-row{margin-top:0.5rem}
+.price-muted{color:var(--muted)}
+.card-desc{color:var(--muted);margin-top:0.5rem}
+.card-list{color:var(--muted);margin:1.5rem 0;list-style:none;padding:0}
+.card-list-item{margin-bottom:0.5rem}
+.card-fineprint{color:var(--muted);margin-top:0.5rem}
+.stat-sm{font-size:1.5rem;color:var(--accent-crimson)}
+.stat-custom{font-size:1.5rem;color:var(--accent-crimson)}
+.guarantee-text{max-width:36rem;margin:0 auto 0.75rem}
+.guarantee-sub{color:var(--muted);opacity:0.7}
+.faq-summary{font-size:0.95rem}
+.faq-body{color:var(--muted);margin-top:0.5rem;font-size:0.875rem}
+.cta-headline{color:var(--white);margin-bottom:1rem}
+.cta-sub{color:rgba(253,251,247,0.8);font-size:1.1rem;margin-bottom:2rem;max-width:36rem;margin-left:auto;margin-right:auto}
+.footer-logo-text{color:var(--white);font-size:1rem}
+.footer-desc{color:rgba(253,251,247,0.5);font-size:0.875rem}
+.footer-col-title{color:rgba(253,251,247,0.7)}
+.footer-copy{color:rgba(253,251,247,0.4);font-size:0.875rem}
+.table-collapse{border-collapse:collapse}
+.table-header-bottom{border-bottom:3px solid var(--border)}
+.table-header-text{font-size:0.85rem}
+.table-row-bottom{border-bottom:1px solid var(--border-subtle)}
+.table-body-text{color:var(--muted)}
+.loader-center{text-align:center}
+.hero-headline-sm{font-size:clamp(2rem,5vw,3.5rem);margin-top:1rem;margin-bottom:1rem}
+.section-headline-spacing{margin-top:1rem;margin-bottom:1rem}
+.guarantee-headline{font-size:1.5rem;margin-bottom:1rem}
+.cta-btn-outline{border-color:rgba(253,251,247,0.3);color:var(--white)}
+</style>
 <script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 
-  <div id="pageLoader"><div style="text-align:center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+  <div id="pageLoader"><div class="loader-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold" style="color:#002D21;letter-spacing:-0.02em">SESSIONS WITH TOBY</span></a>
-        <div class="hidden md:flex items-center gap-8">
-          <a href="home.html#services" class="nav-link text-sm">Services</a>
-          <a href="home.html#pricing" class="nav-link text-sm">Pricing</a>
-          <a href="home.html#community" class="nav-link text-sm">Community</a>
-          <a href="home.html#reviews" class="nav-link text-sm">Reviews</a>
-        </div>
-        <div class="hidden md:flex items-center gap-3"><a href="book.html" class="btn-cta text-sm">Try Free Demo</a></div>
-        <button class="md:hidden p-2 rounded-lg" style="color:#002D21" onclick="toggleMobile()" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span>🎤</span>&nbsp;SESSIONS WITH TOBY</a>
+      <div class="nav-links">
+        <a href="home.html#services" class="nav-link">Services</a>
+        <a href="home.html#pricing" class="nav-link">Pricing</a>
+        <a href="home.html#community" class="nav-link">Community</a>
+        <a href="home.html#reviews" class="nav-link">Reviews</a>
+        <a href="book.html" class="nav-cta">Try Free Demo</a>
       </div>
+      <button class="md:hidden p-2 rounded-lg nav-logo" onclick="toggleMobile()" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     </div>
-    <div class="mobile-menu md:hidden flex-col bg-white border-t border-slate-200 px-4 py-4 gap-3" id="mobMenu">
-      <a href="home.html#services" class="nav-link py-2" onclick="toggleMobile()">Services</a>
-      <a href="home.html#pricing" class="nav-link py-2" onclick="toggleMobile()">Pricing</a>
-      <a href="home.html#community" class="nav-link py-2" onclick="toggleMobile()">Community</a>
-      <a href="home.html#reviews" class="nav-link py-2" onclick="toggleMobile()">Reviews</a>
-      <a href="book.html" class="btn-cta text-sm mt-2">Try Free Demo</a>
+    <div class="mobile-menu" id="mobMenu">
+      <a href="home.html#services" class="nav-link" onclick="toggleMobile()">Services</a>
+      <a href="home.html#pricing" class="nav-link" onclick="toggleMobile()">Pricing</a>
+      <a href="home.html#community" class="nav-link" onclick="toggleMobile()">Community</a>
+      <a href="home.html#reviews" class="nav-link" onclick="toggleMobile()">Reviews</a>
+      <a href="book.html" class="nav-cta" onclick="toggleMobile()">Try Free Demo</a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero-gradient" style="padding-top:7rem;padding-bottom:4rem;position:relative;overflow:hidden">
+  <section class="hero-gradient section-pad hero-pad-top">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <p class="text-emerald-300 font-semibold text-sm uppercase tracking-wider mb-3">Pricing</p>
-      <h1 class="text-white text-3xl sm:text-4xl lg:text-5xl font-black mb-4">Invest in Your Voice.<br>Invest in Your Direction.</h1>
-      <p class="text-emerald-100 text-lg max-w-2xl mx-auto mb-2">Transparent pricing. No hidden fees. Pay in USD or Naira.</p>
-      <p class="text-emerald-300 text-sm font-semibold">🛡️ Session 1 guarantee applies to all coaching plans</p>
+      <p class="label-text section-label-lime">Pricing</p>
+      <h1 class="hero-headline hero-headline-sm">Invest in Your Voice.<br>Invest in Your Direction.</h1>
+      <p class="body-text hero-subtitle">Transparent pricing. No hidden fees. Pay in USD or Naira.</p>
+      <p class="label-text hero-guarantee">🛡️ Session 1 guarantee applies to all coaching plans</p>
     </div>
   </section>
 
   <!-- COACHING PLANS -->
   <section class="section-white py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Coaching Plans</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Start Where You Are.</h2></div>
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="label-text section-label-crimson">Coaching Plans</p><h2 class="section-headline section-headline-spacing">Start Where You Are.</h2></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         <div class="pricing-card">
-          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Starter — Single Session</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">$50</span><span class="text-slate-400 text-sm">/session</span></div>
-          <p class="text-slate-400 text-sm mt-2">Try it out — no commitment</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ 60-minute 1-on-1 session</li><li class="flex items-center gap-2">✓ Personalized exercises</li><li class="flex items-center gap-2">✓ Session summary & notes</li><li class="flex items-center gap-2">✓ Homework assignment</li></ul>
-          <a href="book.html" class="btn-cta w-full">Book Now</a>
-          <p class="text-slate-400 text-xs text-center mt-2">Or pay ₦70,000 in Naira</p>
+          <h3 class="label-text card-heading">Starter — Single Session</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number" data-price-usd="50" data-price-ngn="70000">$50</span><span class="text-sm price-muted">/session</span>
+          </div>
+          <p class="text-sm card-desc">Try it out — no commitment</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ 60-minute 1-on-1 session</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Personalized exercises</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Session summary & notes</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Homework assignment</li>
+          </ul>
+          <a href="book.html" class="btn-cta w-full" data-currency="USD">Book Now</a>
+          <p class="text-xs text-center card-fineprint">Or pay ₦70,000 in Naira</p>
         </div>
         <div class="pricing-card featured">
-          <div class="text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">Best Value · Only 4 spots/month</div>
-          <h3 class="text-lg font-bold text-emerald-600 uppercase tracking-wider mb-2">Growth — Monthly Package</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">$200</span><span class="text-slate-400 text-sm">/month</span></div>
-          <p class="text-slate-400 text-sm mt-2">4 sessions — priority access</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ 4 x 60-minute sessions</li><li class="flex items-center gap-2">✓ Priority scheduling</li><li class="flex items-center gap-2">✓ Progress tracking report</li><li class="flex items-center gap-2">✓ WhatsApp check-ins between sessions</li><li class="flex items-center gap-2">✓ Personalized practice plan</li></ul>
-          <a href="book.html" class="btn-cta w-full">Get Started</a>
-          <p class="text-slate-400 text-xs text-center mt-2">Or pay ₦300,000 in Naira</p>
+          <div class="label-text section-label-crimson">Best Value · Only 4 spots/month</div>
+          <h3 class="label-text card-heading-accent price-row">Growth — Monthly Package</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number" data-price-usd="200" data-price-ngn="300000">$200</span><span class="text-sm price-muted">/month</span>
+          </div>
+          <p class="text-sm card-desc">4 sessions — priority access</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ 4 x 60-minute sessions</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Priority scheduling</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Progress tracking report</li>
+            <li class="flex items-center gap-2 card-list-item">✓ WhatsApp check-ins between sessions</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Personalized practice plan</li>
+          </ul>
+          <a href="book.html" class="btn-cta w-full" data-currency="USD">Get Started</a>
+          <p class="text-xs text-center card-fineprint">Or pay ₦300,000 in Naira</p>
         </div>
         <div class="pricing-card">
-          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Group of 3-5</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">₦20K</span><span class="text-slate-400 text-sm">/month</span></div>
-          <p class="text-slate-400 text-sm mt-2">Per person — save 70%</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ 4 x 60-minute group sessions</li><li class="flex items-center gap-2">✓ Group practice & feedback</li><li class="flex items-center gap-2">✓ Progress tracking</li><li class="flex items-center gap-2">✓ WhatsApp group support</li></ul>
-          <a href="book.html" class="btn-cta-outline w-full">Join Group</a>
+          <h3 class="label-text card-heading">Group of 3-5</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number" data-price-usd="14" data-price-ngn="20000">₦20K</span><span class="text-sm price-muted">/month</span>
+          </div>
+          <p class="text-sm card-desc">Per person — save 70%</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ 4 x 60-minute group sessions</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Group practice & feedback</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Progress tracking</li>
+            <li class="flex items-center gap-2 card-list-item">✓ WhatsApp group support</li>
+          </ul>
+          <a href="book.html" class="btn-cta-outline w-full" data-currency="NGN">Join Group</a>
         </div>
         <div class="pricing-card">
-          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">✏️ Design Your Own Plan</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-2xl font-black text-emerald-600">Custom</span></div>
-          <p class="text-slate-400 text-sm mt-2">Mix coaching + community + speaking</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Flexible pricing</li><li class="flex items-center gap-2">✓ Personalized to your goals</li><li class="flex items-center gap-2">✓ Mix vocal + life coaching</li></ul>
-          <a href="book.html" class="btn-cta-outline w-full">Design Plan →</a>
+          <h3 class="label-text card-heading">✏️ Design Your Own Plan</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number stat-custom">Custom</span>
+          </div>
+          <p class="text-sm card-desc">Mix coaching + community + speaking</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ Flexible pricing</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Personalized to your goals</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Mix vocal + life coaching</li>
+          </ul>
+          <a href="book.html" class="btn-cta-outline w-full" data-currency="USD">Design Plan →</a>
         </div>
       </div>
     </div>
@@ -94,29 +158,48 @@
   <!-- COMMUNITY PLANS -->
   <section class="section-offwhite py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Community</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Grow With Others.</h2></div>
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="label-text section-label-crimson">Community</p><h2 class="section-headline section-headline-spacing">Grow With Others.</h2></div>
       <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         <div class="pricing-card">
-          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Free Singers' Community</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-2xl font-black text-emerald-600">FREE</span></div>
-          <p class="text-slate-400 text-sm mt-2">Learn with others — no cost</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Active singers' community</li><li class="flex items-center gap-2">✓ Share recordings & get feedback</li><li class="flex items-center gap-2">✓ Ask questions, grow together</li></ul>
-          <a href="https://t.me/+LGYumO9JZOc1M2M0" target="_blank" rel="noopener noreferrer" class="btn-cta w-full">Join Free →</a>
+          <h3 class="label-text card-heading">Free Singers' Community</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number stat-sm" data-price-usd="0" data-price-ngn="0">FREE</span>
+          </div>
+          <p class="text-sm card-desc">Learn with others — no cost</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ Active singers' community</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Share recordings & get feedback</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Ask questions, grow together</li>
+          </ul>
+          <a href="https://t.me/+LGYumO9JZOc1M2M0" target="_blank" rel="noopener noreferrer" class="btn-cta w-full" data-currency="USD">Join Free →</a>
         </div>
         <div class="pricing-card featured">
-          <div class="text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">Most Engaged</div>
-          <h3 class="text-lg font-bold text-emerald-600 uppercase tracking-wider mb-2">Paid Singers' Community</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">₦20K</span><span class="text-slate-400 text-sm">/month</span></div>
-          <p class="text-slate-400 text-sm mt-2">Weekly tips, Q&As, feedback</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Weekly vocal tips from Toby</li><li class="flex items-center gap-2">✓ Live Q&A sessions</li><li class="flex items-center gap-2">✓ Personalized feedback on recordings</li><li class="flex items-center gap-2">✓ Accountability partners</li></ul>
-          <a href="book.html" class="btn-cta w-full">Join Paid →</a>
+          <div class="label-text section-label-crimson">Most Engaged</div>
+          <h3 class="label-text card-heading-accent price-row">Paid Singers' Community</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number" data-price-usd="14" data-price-ngn="20000">₦20K</span><span class="text-sm price-muted">/month</span>
+          </div>
+          <p class="text-sm card-desc">Weekly tips, Q&As, feedback</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ Weekly vocal tips from Toby</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Live Q&A sessions</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Personalized feedback on recordings</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Accountability partners</li>
+          </ul>
+          <a href="book.html" class="btn-cta w-full" data-currency="NGN">Join Paid →</a>
         </div>
         <div class="pricing-card">
-          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Abuja Music Collective</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-2xl font-black text-emerald-600">FREE</span></div>
-          <p class="text-slate-400 text-sm mt-2">For singers in Abuja</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Local community of singers</li><li class="flex items-center gap-2">✓ Meetups & jam sessions</li><li class="flex items-center gap-2">✓ Collaboration opportunities</li></ul>
-          <a href="https://t.me/+qv5hIOIBKgtmNjhk" target="_blank" rel="noopener noreferrer" class="btn-cta-outline w-full">Join →</a>
+          <h3 class="label-text card-heading">Abuja Music Collective</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number stat-sm" data-price-usd="0" data-price-ngn="0">FREE</span>
+          </div>
+          <p class="text-sm card-desc">For singers in Abuja</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ Local community of singers</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Meetups & jam sessions</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Collaboration opportunities</li>
+          </ul>
+          <a href="https://t.me/+qv5hIOIBKgtmNjhk" target="_blank" rel="noopener noreferrer" class="btn-cta-outline w-full" data-currency="NGN">Join →</a>
         </div>
       </div>
     </div>
@@ -125,14 +208,21 @@
   <!-- SPEAKING -->
   <section class="section-white py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Speaking & Events</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Book Toby for Your Event.</h2></div>
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="label-text section-label-crimson">Speaking & Events</p><h2 class="section-headline section-headline-spacing">Book Toby for Your Event.</h2></div>
       <div class="max-w-md mx-auto">
         <div class="pricing-card text-center">
-          <h3 class="text-lg font-bold text-slate-500 uppercase tracking-wider mb-2">Speaking Engagement</h3>
-          <div class="flex items-baseline justify-center gap-1"><span class="text-4xl font-black" style="color:#002D21">₦200K</span><span class="text-slate-400 text-sm">/event</span></div>
-          <p class="text-slate-400 text-sm mt-2">Corporate, weddings, conferences</p>
-          <ul class="text-left text-sm text-slate-600 my-6 space-y-2"><li class="flex items-center gap-2">✓ Custom performance or talk</li><li class="flex items-center gap-2">✓ Professional stage presence</li><li class="flex items-center gap-2">✓ Nationwide availability</li><li class="flex items-center gap-2">✓ Ideal for brands & organizations</li></ul>
-          <a href="book.html" class="btn-cta w-full">Book Speaking →</a>
+          <h3 class="label-text card-heading">Speaking Engagement</h3>
+          <div class="flex items-baseline justify-center gap-1 price-row">
+            <span class="stat-number" data-price-usd="140" data-price-ngn="200000">₦200K</span><span class="text-sm price-muted">/event</span>
+          </div>
+          <p class="text-sm card-desc">Corporate, weddings, conferences</p>
+          <ul class="text-left text-sm card-list">
+            <li class="flex items-center gap-2 card-list-item">✓ Custom performance or talk</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Professional stage presence</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Nationwide availability</li>
+            <li class="flex items-center gap-2 card-list-item">✓ Ideal for brands & organizations</li>
+          </ul>
+          <a href="book.html" class="btn-cta w-full" data-currency="NGN">Book Speaking →</a>
         </div>
       </div>
     </div>
@@ -141,19 +231,19 @@
   <!-- COMPARISON TABLE -->
   <section class="section-offwhite py-20 lg:py-28">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">Compare Plans</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Feature Comparison</h2></div>
+      <div class="text-center max-w-2xl mx-auto mb-16"><p class="label-text section-label-crimson">Compare Plans</p><h2 class="section-headline section-headline-spacing">Feature Comparison</h2></div>
       <div class="overflow-x-auto">
-        <table class="w-full text-sm text-left" style="border-collapse:collapse">
-          <thead><tr style="border-bottom:1px solid #e2e8f0"><th class="py-3 px-4 font-semibold" style="color:#002D21">Feature</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Free Community</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Single Session</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Monthly Package</th><th class="py-3 px-4 font-semibold" style="color:#002D21">Paid Community</th></tr></thead>
-          <tbody class="text-slate-600">
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">1-on-1 coaching</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅ 1 session</td><td class="py-3 px-4">✅ 4 sessions</td><td class="py-3 px-4">—</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Personalized exercises</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">WhatsApp support</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Priority scheduling</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Progress tracking</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Community access</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Weekly tips from Toby</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
-            <tr style="border-bottom:1px solid #f1f5f9"><td class="py-3 px-4">Live Q&A sessions</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
+        <table class="w-full text-sm text-left table-collapse">
+          <thead><tr class="table-header-bottom"><th class="py-3 px-4 font-semibold nav-logo table-header-text">Feature</th><th class="py-3 px-4 font-semibold nav-logo table-header-text">Free Community</th><th class="py-3 px-4 font-semibold nav-logo table-header-text">Single Session</th><th class="py-3 px-4 font-semibold nav-logo table-header-text">Monthly Package</th><th class="py-3 px-4 font-semibold nav-logo table-header-text">Paid Community</th></tr></thead>
+          <tbody class="table-body-text">
+            <tr class="table-row-bottom"><td class="py-3 px-4">1-on-1 coaching</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅ 1 session</td><td class="py-3 px-4">✅ 4 sessions</td><td class="py-3 px-4">—</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">Personalized exercises</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">WhatsApp support</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">Priority scheduling</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">Progress tracking</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">Community access</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">Weekly tips from Toby</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
+            <tr class="table-row-bottom"><td class="py-3 px-4">Live Q&A sessions</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td></tr>
             <tr><td class="py-3 px-4">Session 1 guarantee</td><td class="py-3 px-4">—</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">✅</td><td class="py-3 px-4">—</td></tr>
           </tbody>
         </table>
@@ -166,9 +256,9 @@
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="card">
         <div class="text-4xl mb-4">🛡️</div>
-        <h2 class="text-2xl font-black mb-4">The Session 1 Guarantee</h2>
-        <p class="text-slate-600 text-base leading-relaxed max-w-xl mx-auto mb-3">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop. I've never had to pay this guarantee out. Not once. Not with 50 students.</p>
-        <p class="text-slate-400 text-sm">Because the work is real. And your voice is not the problem.</p>
+        <h2 class="section-headline guarantee-headline">The Session 1 Guarantee</h2>
+        <p class="body-text guarantee-text">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop. I've never had to pay this guarantee out. Not once. Not with 50 students.</p>
+        <p class="text-sm guarantee-sub">Because the work is real. And your voice is not the problem.</p>
       </div>
     </div>
   </section>
@@ -176,12 +266,12 @@
   <!-- FAQ -->
   <section class="section-offwhite py-20 lg:py-28">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12"><p class="text-emerald-600 font-semibold text-sm uppercase tracking-wider mb-3">FAQ</p><h2 class="text-3xl sm:text-4xl font-black mb-4">Questions About Pricing</h2></div>
+      <div class="text-center mb-12"><p class="label-text section-label-crimson">FAQ</p><h2 class="section-headline section-headline-spacing">Questions About Pricing</h2></div>
       <div class="space-y-4">
-        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">Can I pay in Naira?</summary><p class="text-slate-500 mt-2 text-sm">Yes. All plans have Naira equivalents. Contact us via WhatsApp or book a session to pay in Naira.</p></details>
-        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">What if I'm not satisfied?</summary><p class="text-slate-500 mt-2 text-sm">Session 1 guarantee: if you don't hear a measurable difference, you don't pay. Full stop.</p></details>
-        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">Can I cancel my monthly package?</summary><p class="text-slate-500 mt-2 text-sm">Yes. Cancel anytime. You'll keep access until the end of your billing period.</p></details>
-        <details class="card p-5 cursor-pointer"><summary class="font-semibold" style="color:#002D21">Do you offer payment plans?</summary><p class="text-slate-500 mt-2 text-sm">For custom plans, yes. Tell us your budget and we'll design something that works.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold nav-logo faq-summary">Can I pay in Naira?</summary><p class="faq-body">Yes. All plans have Naira equivalents. Contact us via WhatsApp or book a session to pay in Naira.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold nav-logo faq-summary">What if I'm not satisfied?</summary><p class="faq-body">Session 1 guarantee: if you don't hear a measurable difference, you don't pay. Full stop.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold nav-logo faq-summary">Can I cancel my monthly package?</summary><p class="faq-body">Yes. Cancel anytime. You'll keep access until the end of your billing period.</p></details>
+        <details class="card p-5 cursor-pointer"><summary class="font-semibold nav-logo faq-summary">Do you offer payment plans?</summary><p class="faq-body">For custom plans, yes. Tell us your budget and we'll design something that works.</p></details>
       </div>
     </div>
   </section>
@@ -189,11 +279,11 @@
   <!-- CTA -->
   <section class="hero-gradient py-20 lg:py-28">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-white text-3xl sm:text-4xl font-black mb-4">Still Not Sure?</h2>
-      <p class="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">Take the 30-second quiz. It'll tell you exactly what you need.</p>
+      <h2 class="section-headline cta-headline">Still Not Sure?</h2>
+      <p class="body-text cta-sub">Take the 30-second quiz. It'll tell you exactly what you need.</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="quiz.html" class="btn-cta bg-white text-base px-8 py-4" style="color:#002D21">🎯 Take the Quiz</a>
-        <a href="book.html" class="btn-cta-outline border-white/30 text-white hover:bg-white/10 text-base px-8 py-4">📅 Book a Free Call</a>
+        <a href="quiz.html" class="btn-cta text-base px-8 py-4" data-currency="USD">🎯 Take the Quiz</a>
+        <a href="book.html" class="btn-cta-outline cta-btn-outline text-base px-8 py-4" data-currency="USD">📅 Book a Free Call</a>
       </div>
     </div>
   </section>
@@ -202,21 +292,38 @@
   <footer class="footer py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div><div class="flex items-center gap-2 mb-4"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold text-white tracking-tight">SESSIONS WITH TOBY</span></div><p class="text-emerald-200/70 text-sm">Vocal & life coaching for people who are done staying the same.</p></div>
-        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Pages</h4><ul class="space-y-2 text-sm"><li><a href="home.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="home.html#community">Community</a></li><li><a href="home.html#services">Services</a></li></ul></div>
-        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Free Tools</h4><ul class="space-y-2 text-sm"><li><a href="quiz.html">Quiz</a></li><li><a href="book.html">Book a Demo</a></li></ul></div>
-        <div><h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Connect</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/2349160106084">WhatsApp</a></li><li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li></ul></div>
+        <div><div class="flex items-center gap-2 mb-4"><span class="text-2xl">🎤</span><span class="nav-logo footer-logo-text">SESSIONS WITH TOBY</span></div><p class="footer-desc">Vocal & life coaching for people who are done staying the same.</p></div>
+        <div><h4 class="footer-heading footer-col-title">Pages</h4><ul class="space-y-2 text-sm"><li><a href="home.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="home.html#community">Community</a></li><li><a href="home.html#services">Services</a></li></ul></div>
+        <div><h4 class="footer-heading footer-col-title">Free Tools</h4><ul class="space-y-2 text-sm"><li><a href="quiz.html">Quiz</a></li><li><a href="book.html">Book a Demo</a></li></ul></div>
+        <div><h4 class="footer-heading footer-col-title">Connect</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/2349160106084">WhatsApp</a></li><li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li></ul></div>
       </div>
       <div class="border-t border-emerald-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-emerald-200/50 text-sm">© 2026 Sessions with Toby. All rights reserved.</p>
+        <p class="footer-copy">© 2026 Sessions with Toby. All rights reserved.</p>
         <a href="book.html" class="btn-cta text-sm">Try a Free Demo →</a>
       </div>
     </div>
   </footer>
 
   <script>
-  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+  // Page Loader
+  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+
+  // Mobile Menu Toggle
   function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
+
+  // Nav Scroll Effect
+  (function(){
+    var nav = document.getElementById('mainNav');
+    function onScroll(){
+      if(window.scrollY > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  })();
   </script>
+  <script defer src="assets/js/pricing.js"></script>
+  <script defer src="assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>
