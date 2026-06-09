@@ -12,36 +12,38 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 
-<!-- Google Analytics conversion tracking -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-  // Track conversion
-  gtag('event', 'purchase', {
-    transaction_id: new URLSearchParams(window.location.search).get('ref') || '',
-    value: parseFloat(new URLSearchParams(window.location.search).get('amount') || 0),
-    currency: new URLSearchParams(window.location.search).get('currency') || 'USD'
-  });
-</script>
-
 <style>
 .thankyou-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
-.thankyou-card{max-width:520px;width:100%;text-align:center}
+.thankyou-card{max-width:560px;width:100%;text-align:center}
 .thankyou-emoji{font-size:4rem;display:block;margin-bottom:1rem}
 .thankyou-name{font-family:var(--font-heading);font-weight:800;font-size:1.75rem;color:var(--accent-lime);margin-bottom:0.5rem}
 .thankyou-amount{font-size:1.1rem;color:var(--muted);margin-bottom:1.5rem}
-.thankyou-steps{text-align:left;max-width:400px;margin:0 auto 2rem}
+.thankyou-steps{text-align:left;max-width:420px;margin:0 auto 2rem}
 .thankyou-step{display:flex;align-items:flex-start;gap:1rem;padding:0.75rem 0}
 .thankyou-step-num{font-family:var(--font-heading);font-weight:800;font-size:1.25rem;color:var(--accent-lime);flex-shrink:0;width:2rem}
 .thankyou-step-text{font-size:0.9rem;color:var(--text);line-height:1.6}
-.thankyou-telegram-btn{display:inline-flex;align-items:center;gap:0.75rem;padding:1.25rem 2.5rem;background:var(--actuator);color:var(--text);font-family:var(--font-body);font-size:1.1rem;font-weight:700;text-decoration:none;border:3px solid var(--border);border-radius:var(--radius-sm);transition:all var(--transition);box-shadow:0px 4px 0px 0px var(--actuator-depth);margin-bottom:1rem}
-.thankyou-telegram-btn:hover{transform:translateY(2px);box-shadow:0px 2px 0px 0px var(--actuator-depth);background:#4DBA00}
-.thankyou-telegram-btn svg{width:24px;height:24px}
-.thankyou-note{font-size:0.8rem;color:var(--muted);margin-top:1.5rem}
-.thankyou-ref{font-size:0.75rem;color:var(--muted);margin-top:0.5rem;opacity:0.6}
+.big-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;width:100%;padding:1.25rem 2rem;font-family:var(--font-body);font-size:1.05rem;font-weight:700;text-decoration:none;border:3px solid var(--border);border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;text-align:center;margin-bottom:0.75rem}
+.big-btn-primary{background:var(--actuator);color:var(--text);box-shadow:0px 4px 0px 0px var(--actuator-depth)}
+.big-btn-primary:hover{transform:translateY(2px);box-shadow:0px 2px 0px 0px var(--actuator-depth);background:#4DBA00}
+.big-btn-secondary{background:var(--bg);color:var(--text)}
+.big-btn-secondary:hover{background:var(--accent-lime)}
+.big-btn svg{width:24px;height:24px;flex-shrink:0}
+.divider{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:var(--muted);font-size:0.85rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border-subtle)}
+.email-form{display:none;text-align:left;max-width:400px;margin:0 auto}
+.email-form.active{display:block}
+.email-form input{width:100%;padding:0.875rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:1rem;color:var(--text);background:var(--bg-card);margin-bottom:0.75rem;outline:none;transition:border-color var(--transition)}
+.email-form input:focus{border-color:var(--accent-lime);box-shadow:0 0 0 3px rgba(210,232,35,0.15)}
+.email-form input::placeholder{color:var(--muted);opacity:0.5}
+.telegram-yes{display:none}
+.telegram-yes.active{display:block}
+.telegram-no{display:none}
+.telegram-no.active{display:block}
+.confirmation-box{display:none;text-align:center;padding:2rem 0}
+.confirmation-box.active{display:block}
+.confirmation-box .emoji{font-size:3rem;display:block;margin-bottom:1rem}
+.confirmation-box h3{font-family:var(--font-heading);font-weight:800;font-size:1.25rem;color:var(--text);margin-bottom:0.5rem}
+.confirmation-box p{color:var(--muted);line-height:1.7}
 </style>
 </head>
 <body style="background:var(--text)">
@@ -49,101 +51,175 @@
 <div class="thankyou-hero">
   <div class="card thankyou-card">
 
-    <span class="thankyou-emoji">🎉</span>
+    <!-- STEP 1: Confirmation + Telegram question -->
+    <div id="step1">
+      <span class="thankyou-emoji">🎉</span>
+      <h1 class="hero-headline" style="font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.5rem">Payment Confirmed!</h1>
+      <p class="thankyou-name" id="userName">Friend</p>
+      <p class="thankyou-amount" id="amountPaid"></p>
+      <p class="body-text" style="margin-bottom:2rem">Welcome to Sessions with Toby. You're officially on the path to transforming your voice.</p>
 
-    <h1 class="hero-headline" style="font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.5rem">Payment Confirmed!</h1>
+      <p class="body-text" style="font-weight:600;margin-bottom:1rem;text-align:center">Do you have Telegram?</p>
 
-    <p class="thankyou-name" id="userName">Friend</p>
+      <button class="big-btn big-btn-primary" onclick="answerTelegram(true)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Yes, I have Telegram
+      </button>
 
-    <p class="thankyou-amount" id="amountPaid"></p>
-
-    <p class="body-text" style="margin-bottom:1.5rem">Welcome to Sessions with Toby. You're officially on the path to transforming your voice.</p>
-
-    <div class="thankyou-steps">
-      <div class="thankyou-step">
-        <span class="thankyou-step-num">1</span>
-        <span class="thankyou-step-text">Tap the button below to open Telegram and connect with Coach Toby directly.</span>
-      </div>
-      <div class="thankyou-step">
-        <span class="thankyou-step-num">2</span>
-        <span class="thankyou-step-text">Toby will confirm your booking and share your personalized plan within 24 hours.</span>
-      </div>
-      <div class="thankyou-step">
-        <span class="thankyou-step-num">3</span>
-        <span class="thankyou-step-text">Your first session gets scheduled. Show up ready to transform.</span>
-      </div>
+      <button class="big-btn big-btn-secondary" onclick="answerTelegram(false)">
+        📧 No, use Email instead
+      </button>
     </div>
 
-    <a id="telegramBtn" href="https://t.me/Retpipebot" class="thankyou-telegram-btn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-      Start Coaching on Telegram →
-    </a>
+    <!-- STEP 2A: Telegram Yes → show onboarding + CTA -->
+    <div id="telegramYes" class="telegram-yes">
+      <span class="thankyou-emoji">🚀</span>
+      <h2 class="section-headline" style="font-size:clamp(1.25rem,3vw,1.75rem);margin-bottom:0.5rem">You're all set, <span id="tgName">Friend</span>!</h2>
+      <p class="body-text" style="margin-bottom:1.5rem">Here's what happens next:</p>
 
-    <p class="thankyou-note">Not on Telegram? No problem — <a href="mailto:prosperolumotobi@gmail.com" style="color:var(--accent-lime);text-decoration:underline">email Coach Toby</a> and he'll set you up manually.</p>
+      <div class="thankyou-steps">
+        <div class="thankyou-step">
+          <span class="thankyou-step-num">1</span>
+          <span class="thankyou-step-text">Tap the button below to open Telegram and message Coach Toby directly.</span>
+        </div>
+        <div class="thankyou-step">
+          <span class="thankyou-step-num">2</span>
+          <span class="thankyou-step-text">Toby will confirm your booking and share your personalized vocal plan within 24 hours.</span>
+        </div>
+        <div class="thankyou-step">
+          <span class="thankyou-step-num">3</span>
+          <span class="thankyou-step-text">Your first session gets scheduled. Show up ready to transform.</span>
+        </div>
+      </div>
 
-    <p class="thankyou-ref" id="refCode"></p>
+      <a id="telegramBtn" href="https://t.me/Retpipebot" class="big-btn big-btn-primary" target="_blank" rel="noopener" style="margin-bottom:0.75rem">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Open Telegram & Start Coaching →
+      </a>
+
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:1rem">Ref: <span id="tgRef"></span></p>
+    </div>
+
+    <!-- STEP 2B: No Telegram → ask for email -->
+    <div id="telegramNo" class="telegram-no">
+      <span class="thankyou-emoji">📧</span>
+      <h2 class="section-headline" style="font-size:clamp(1.25rem,3vw,1.75rem);margin-bottom:0.5rem">No problem, <span id="emName">Friend</span>!</h2>
+      <p class="body-text" style="margin-bottom:1.5rem">We'll send everything to your email — your onboarding guide, how to schedule, and a direct line to Coach Toby.</p>
+
+      <div id="emailForm" class="email-form active">
+        <label class="form-label" for="onboardEmail">Your Email Address *</label>
+        <input type="email" id="onboardEmail" placeholder="you@example.com" required>
+        <button class="big-btn big-btn-primary" onclick="submitEmailOnboarding()" style="margin-top:0.5rem">
+          📬 Send Me My Onboarding Guide →
+        </button>
+        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:0.75rem">No spam. Unsubscribe anytime.</p>
+      </div>
+
+      <div id="emailConfirmation" class="confirmation-box">
+        <span class="emoji">✅</span>
+        <h3>Check your inbox, <span id="confirmName"></span>!</h3>
+        <p>We've sent your onboarding guide to <span id="confirmEmail" style="font-weight:600;color:var(--text)"></span>. Coach Toby will also reach out within 24 hours to schedule your first session.</p>
+        <p style="margin-top:1rem;font-size:0.85rem;color:var(--muted)">Didn't get it? Check your spam folder or <a href="mailto:prosperolumotobi@gmail.com" style="color:var(--accent-lime);text-decoration:underline">email Coach Toby directly</a>.</p>
+      </div>
+    </div>
 
   </div>
 </div>
 
 <script>
 (function(){
-  // Parse URL params from Flutterwave redirect
+  // Parse URL params
   var params = new URLSearchParams(window.location.search);
   var ref = params.get('ref') || params.get('tx_ref') || '';
-  var status = params.get('status') || '';
-  var amount = params.get('amount') || params.get('custom_amount') || '';
+  var amount = params.get('amount') || '';
   var currency = params.get('currency') || 'USD';
-  
-  // Also check localStorage for payment data stored before redirect
+
+  // Check localStorage for stored payment data
   var stored = null;
   try { stored = JSON.parse(localStorage.getItem('ct_payment') || 'null'); } catch(e) {}
-  
-  // Get name from URL or stored data or localStorage
+
+  // Get name
   var name = params.get('name') || '';
   if (!name && stored) name = stored.name || '';
-  if (!name) {
-    var nm = localStorage.getItem('ct_lead_name');
-    if (nm) name = nm;
-  }
-  
-  // Get amount from stored if not in URL
+  if (!name) name = localStorage.getItem('ct_lead_name') || '';
+  if (!name) name = 'Friend';
+  name = decodeURIComponent(name.replace(/\+/g, ' '));
+
+  // Get amount
   if (!amount && stored) amount = stored.amount || '';
   if (!currency && stored) currency = stored.currency || 'USD';
-  
-  // Display name
-  document.getElementById('userName').textContent = name ? 'Hey, ' + decodeURIComponent(name.replace(/\+/g, ' ')) + '!' : 'Hey there!';
-  
-  // Display amount
+
+  // Display
+  document.getElementById('userName').textContent = 'Hey, ' + name + '!';
+  document.getElementById('tgName').textContent = name;
+  document.getElementById('emName').textContent = name;
+
   if (amount && currency) {
     var sym = currency === 'NGN' ? '₦' : '$';
     document.getElementById('amountPaid').textContent = sym + parseFloat(amount).toLocaleString() + ' ' + currency + ' paid successfully';
   } else {
     document.getElementById('amountPaid').textContent = 'Payment received successfully';
   }
-  
-  // Display ref
-  if (ref) {
-    document.getElementById('refCode').textContent = 'Ref: ' + ref;
-  }
-  
-  // Build Telegram deep link with ref
-  var telegramBase = 'https://t.me/Retpipebot?start=payment_';
-  var telegramUrl = telegramBase + encodeURIComponent(ref);
-  document.getElementById('telegramBtn').href = telegramUrl;
-  
-  // If no ref in URL, try to complete payment verification via Flutterwave API
-  if (!ref && stored && stored.ref) {
-    document.getElementById('refCode').textContent = 'Ref: ' + stored.ref;
-    document.getElementById('telegramBtn').href = telegramBase + encodeURIComponent(stored.ref);
-  }
-  
-  // Fallback: if still no ref at all, show generic message
-  if (!ref && (!stored || !stored.ref)) {
-    document.getElementById('refCode').textContent = '';
-    document.getElementById('telegramBtn').href = 'https://t.me/Retpipebot';
-  }
+
+  // Telegram deep link
+  var finalRef = ref || (stored && stored.ref) || '';
+  var tgUrl = 'https://t.me/Retpipebot?start=payment_' + encodeURIComponent(finalRef);
+  document.getElementById('telegramBtn').href = tgUrl;
+  document.getElementById('tgRef').textContent = finalRef || 'N/A';
+
+  // Store name for email step
+  localStorage.setItem('ct_lead_name', name);
 })();
+
+function answerTelegram(hasTelegram) {
+  document.getElementById('step1').style.display = 'none';
+  if (hasTelegram) {
+    document.getElementById('telegramYes').classList.add('active');
+  } else {
+    document.getElementById('telegramNo').classList.add('active');
+  }
+}
+
+function submitEmailOnboarding() {
+  var email = document.getElementById('onboardEmail').value.trim();
+  if (!email || email.indexOf('@') === -1) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  var name = localStorage.getItem('ct_lead_name') || 'Friend';
+  var btn = document.querySelector('#emailForm button');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  // Send onboarding data to formsubmit
+  var formData = new URLSearchParams({
+    _subject: 'New Paid Lead (Email Onboarding): ' + name,
+    _captcha: 'false',
+    Name: name,
+    Email: email,
+    Source: 'Thank-you page (no Telegram)',
+    Status: 'Awaiting Onboarding',
+    Notes: 'Paid via Flutterwave. Does not have Telegram. Needs email onboarding.'
+  });
+
+  fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: formData.toString()
+  }).then(function() {
+    document.getElementById('emailForm').classList.remove('active');
+    document.getElementById('emailConfirmation').classList.add('active');
+    document.getElementById('confirmName').textContent = name;
+    document.getElementById('confirmEmail').textContent = email;
+  }).catch(function() {
+    // Show confirmation anyway — don't block the user
+    document.getElementById('emailForm').classList.remove('active');
+    document.getElementById('emailConfirmation').classList.add('active');
+    document.getElementById('confirmName').textContent = name;
+    document.getElementById('confirmEmail').textContent = email;
+  });
+}
 </script>
 
 <script defer src="assets/js/pricing.js"></script>
