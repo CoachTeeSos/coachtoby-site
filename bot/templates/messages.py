@@ -272,7 +272,9 @@ ADMIN_HELP = (
     "/escalations — List pending escalations\n"
     "/broadcast `<message>` — Message all active students\n"
     "/stats — Student statistics\n"
-    "/setprice `<telegram_id> <amount> <sessions>` — Set custom plan price\n\n"
+    "/setprice `<telegram_id> <amount> <sessions>` — Set custom plan price\n"
+    "/log `Name | Amount | Plan | Method | Notes` — Log manual payment\n"
+    "/sessions `<name>` — View student session status\n\n"
     "All commands work in this DM."
 )
 

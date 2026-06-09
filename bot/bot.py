@@ -32,6 +32,7 @@ from handlers.group import group_message_handler
 from handlers.payment import (
     approve_command, reject_command, pending_command, setprice_command,
 )
+from handlers.log_manual import log_command, sessions_command
 from handlers.admin import (
     admin_help_command, reply_command, escalations_command,
     broadcast_command, stats_command, menu_command,
@@ -144,7 +145,10 @@ def main():
     app.add_handler(CommandHandler("broadcast", broadcast_command))
     app.add_handler(CommandHandler("stats", stats_command))
     app.add_handler(CommandHandler("adminhelp", admin_help_command))
-    app.add_handler(CommandHandler("menu", menu_command))
+
+    # Manual logging
+    app.add_handler(CommandHandler("log", log_command))
+    app.add_handler(CommandHandler("sessions", sessions_command))
 
     # Callbacks and messages
     app.add_handler(CallbackQueryHandler(menu_callback_handler))
