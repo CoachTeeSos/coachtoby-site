@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🎉 Payment Confirmed — Sessions with Toby</title>
+<meta name="description" content="Your payment has been confirmed. Welcome to Sessions with Toby.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#004B49">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+
+<!-- Google Analytics conversion tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+  // Track conversion
+  gtag('event', 'purchase', {
+    transaction_id: new URLSearchParams(window.location.search).get('ref') || '',
+    value: parseFloat(new URLSearchParams(window.location.search).get('amount') || 0),
+    currency: new URLSearchParams(window.location.search).get('currency') || 'USD'
+  });
+</script>
+
+<style>
+.thankyou-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.thankyou-card{max-width:520px;width:100%;text-align:center}
+.thankyou-emoji{font-size:4rem;display:block;margin-bottom:1rem}
+.thankyou-name{font-family:var(--font-heading);font-weight:800;font-size:1.75rem;color:var(--accent-lime);margin-bottom:0.5rem}
+.thankyou-amount{font-size:1.1rem;color:var(--muted);margin-bottom:1.5rem}
+.thankyou-steps{text-align:left;max-width:400px;margin:0 auto 2rem}
+.thankyou-step{display:flex;align-items:flex-start;gap:1rem;padding:0.75rem 0}
+.thankyou-step-num{font-family:var(--font-heading);font-weight:800;font-size:1.25rem;color:var(--accent-lime);flex-shrink:0;width:2rem}
+.thankyou-step-text{font-size:0.9rem;color:var(--text);line-height:1.6}
+.thankyou-telegram-btn{display:inline-flex;align-items:center;gap:0.75rem;padding:1.25rem 2.5rem;background:var(--actuator);color:var(--text);font-family:var(--font-body);font-size:1.1rem;font-weight:700;text-decoration:none;border:3px solid var(--border);border-radius:var(--radius-sm);transition:all var(--transition);box-shadow:0px 4px 0px 0px var(--actuator-depth);margin-bottom:1rem}
+.thankyou-telegram-btn:hover{transform:translateY(2px);box-shadow:0px 2px 0px 0px var(--actuator-depth);background:#4DBA00}
+.thankyou-telegram-btn svg{width:24px;height:24px}
+.thankyou-note{font-size:0.8rem;color:var(--muted);margin-top:1.5rem}
+.thankyou-ref{font-size:0.75rem;color:var(--muted);margin-top:0.5rem;opacity:0.6}
+</style>
+</head>
+<body style="background:var(--text)">
+
+<div class="thankyou-hero">
+  <div class="card thankyou-card">
+
+    <span class="thankyou-emoji">🎉</span>
+
+    <h1 class="hero-headline" style="font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.5rem">Payment Confirmed!</h1>
+
+    <p class="thankyou-name" id="userName">Friend</p>
+
+    <p class="thankyou-amount" id="amountPaid"></p>
+
+    <p class="body-text" style="margin-bottom:1.5rem">Welcome to Sessions with Toby. You're officially on the path to transforming your voice.</p>
+
+    <div class="thankyou-steps">
+      <div class="thankyou-step">
+        <span class="thankyou-step-num">1</span>
+        <span class="thankyou-step-text">Tap the button below to open Telegram and connect with Coach Toby directly.</span>
+      </div>
+      <div class="thankyou-step">
+        <span class="thankyou-step-num">2</span>
+        <span class="thankyou-step-text">Toby will confirm your booking and share your personalized plan within 24 hours.</span>
+      </div>
+      <div class="thankyou-step">
+        <span class="thankyou-step-num">3</span>
+        <span class="thankyou-step-text">Your first session gets scheduled. Show up ready to transform.</span>
+      </div>
+    </div>
+
+    <a id="telegramBtn" href="https://t.me/Retpipebot" class="thankyou-telegram-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Start Coaching on Telegram →
+    </a>
+
+    <p class="thankyou-note">Not on Telegram? No problem — <a href="mailto:prosperolumotobi@gmail.com" style="color:var(--accent-lime);text-decoration:underline">email Coach Toby</a> and he'll set you up manually.</p>
+
+    <p class="thankyou-ref" id="refCode"></p>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  // Parse URL params from Flutterwave redirect
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref') || params.get('tx_ref') || '';
+  var status = params.get('status') || '';
+  var amount = params.get('amount') || params.get('custom_amount') || '';
+  var currency = params.get('currency') || 'USD';
+  
+  // Also check localStorage for payment data stored before redirect
+  var stored = null;
+  try { stored = JSON.parse(localStorage.getItem('ct_payment') || 'null'); } catch(e) {}
+  
+  // Get name from URL or stored data or localStorage
+  var name = params.get('name') || '';
+  if (!name && stored) name = stored.name || '';
+  if (!name) {
+    var nm = localStorage.getItem('ct_lead_name');
+    if (nm) name = nm;
+  }
+  
+  // Get amount from stored if not in URL
+  if (!amount && stored) amount = stored.amount || '';
+  if (!currency && stored) currency = stored.currency || 'USD';
+  
+  // Display name
+  document.getElementById('userName').textContent = name ? 'Hey, ' + decodeURIComponent(name.replace(/\+/g, ' ')) + '!' : 'Hey there!';
+  
+  // Display amount
+  if (amount && currency) {
+    var sym = currency === 'NGN' ? '₦' : '$';
+    document.getElementById('amountPaid').textContent = sym + parseFloat(amount).toLocaleString() + ' ' + currency + ' paid successfully';
+  } else {
+    document.getElementById('amountPaid').textContent = 'Payment received successfully';
+  }
+  
+  // Display ref
+  if (ref) {
+    document.getElementById('refCode').textContent = 'Ref: ' + ref;
+  }
+  
+  // Build Telegram deep link with ref
+  var telegramBase = 'https://t.me/Retpipebot?start=payment_';
+  var telegramUrl = telegramBase + encodeURIComponent(ref);
+  document.getElementById('telegramBtn').href = telegramUrl;
+  
+  // If no ref in URL, try to complete payment verification via Flutterwave API
+  if (!ref && stored && stored.ref) {
+    document.getElementById('refCode').textContent = 'Ref: ' + stored.ref;
+    document.getElementById('telegramBtn').href = telegramBase + encodeURIComponent(stored.ref);
+  }
+  
+  // Fallback: if still no ref at all, show generic message
+  if (!ref && (!stored || !stored.ref)) {
+    document.getElementById('refCode').textContent = '';
+    document.getElementById('telegramBtn').href = 'https://t.me/Retpipebot';
+  }
+})();
+</script>
+
+<script defer src="assets/js/pricing.js"></script>
+<script defer src="assets/js/payment.js"></script>
+</body>
+</html>

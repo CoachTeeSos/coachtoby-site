@@ -1,99 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book a Free Demo — Sessions with Toby</title>
-  <meta name="description" content="Book your free demo session with Coach Toby. No commitment, no credit card. 30 minutes of personalized vocal coaching to see if we're a fit.">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#004B49">
-  <link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/book.html">
-  <meta property="og:title" content="Book a Free Demo — Sessions with Toby">
-  <meta property="og:description" content="Book your free demo session with Coach Toby. No commitment, no credit card. 30 minutes of personalized vocal coaching.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/book.html">
-  <meta property="og:site_name" content="Sessions with Toby">
-  <meta property="og:image" content="https://coachteesos.github.io/coachtoby-site/assets/og-image.svg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Get Started — Sessions with Toby</title>
+<meta name="description" content="Choose your path: pay now and start immediately, or schedule a free 30-minute demo with Coach Toby. No pressure, no commitment.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#004B49">
+<link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/book.html">
+<meta property="og:title" content="Get Started — Sessions with Toby">
+<meta property="og:description" content="Choose your path: pay now and start immediately, or schedule a free 30-minute demo with Coach Toby.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/book.html">
+<meta property="og:site_name" content="Sessions with Toby">
+<meta property="og:image" content="https://coachteesos.github.io/coachtoby-site/assets/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+.getstarted-hero{padding-top:7rem;padding-bottom:2rem}
+.getstarted-card{max-width:540px;margin:0 auto}
+.getstarted-card-inner{padding:2.5rem}
+.getstarted-or{display:flex;align-items:center;gap:1rem;margin:2rem 0;color:var(--muted);font-size:0.85rem}
+.getstarted-or::before,.getstarted-or::after{content:'';flex:1;height:1px;background:var(--border-subtle)}
+.pay-btn{display:block;width:100%;padding:1.125rem;margin-bottom:0.75rem;background:var(--actuator);color:var(--text);font-family:var(--font-body);font-size:0.95rem;font-weight:700;text-decoration:none;border:3px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition);text-align:center;box-shadow:0px 4px 0px 0px var(--actuator-depth)}
+.pay-btn:hover{transform:translateY(2px);box-shadow:0px 2px 0px 0px var(--actuator-depth);background:#4DBA00}
+.pay-btn-secondary{background:var(--bg);color:var(--text)}
+.pay-btn-secondary:hover{background:var(--accent-lime)}
+.demo-btn{display:block;width:100%;padding:1.125rem;background:transparent;color:var(--text);font-family:var(--font-body);font-size:0.95rem;font-weight:600;text-decoration:none;border:3px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition);text-align:center}
+.demo-btn:hover{background:var(--accent-lime)}
+.form-input{width:100%;padding:0.75rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:1rem;color:var(--text);transition:border-color var(--transition);background:var(--bg-card)}
+.form-input:focus{outline:none;border-color:var(--accent-lime);box-shadow:0 0 0 3px rgba(210,232,35,0.15)}
+.form-input::placeholder{color:var(--muted);opacity:0.5}
+.form-label{display:block;font-weight:600;font-size:0.85rem;color:var(--text);margin-bottom:0.375rem}
+.form-group{margin-bottom:1rem}
+.demo-section{display:none}
+.demo-section.active{display:block}
+.pay-section{display:none}
+.pay-section.active{display:block}
+.path-selector{display:flex;gap:0.75rem;margin-bottom:2rem}
+.path-option{flex:1;padding:1.25rem 1rem;border:3px solid var(--border-subtle);border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition);text-align:center;background:var(--bg-card)}
+.path-option:hover{border-color:var(--accent-lime)}
+.path-option.active{border-color:var(--actuator);box-shadow:0px 4px 0px 0px var(--actuator-depth)}
+.path-option-icon{font-size:1.75rem;display:block;margin-bottom:0.5rem}
+.path-option-title{font-family:var(--font-heading);font-weight:800;font-size:0.95rem;color:var(--text);display:block;margin-bottom:0.25rem}
+.path-option-desc{font-size:0.78rem;color:var(--muted)}
+.trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2rem;font-size:0.8rem;color:var(--muted)}
+.trust-item{display:flex;align-items:center;gap:0.375rem}
+</style>
 </head>
 <body>
 
-  <div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+<div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm nav-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-2"><span class="text-2xl">🎤</span><span class="text-lg font-extrabold text-brand tracking-tight">SESSIONS WITH TOBY</span></a>
-        <div class="hidden md:flex items-center gap-6"><a href="home.html#services" class="nav-link text-sm">Services</a><a href="home.html#pricing" class="nav-link text-sm">Pricing</a><a href="home.html#community" class="nav-link text-sm">Community</a><a href="home.html#reviews" class="nav-link text-sm">Reviews</a></div>
-        <a href="home.html" class="text-sm nav-link">← Back to Home</a>
-      </div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">&#x1F3A4; SESSIONS WITH TOBY</a>
+    <div class="nav-links">
+      <a href="home.html#services" class="nav-link">Services</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="home.html#community" class="nav-link">Community</a>
     </div>
-  </nav>
+    <a href="home.html" class="text-sm nav-link">&#x2190; Back to Home</a>
+  </div>
+</nav>
 
-  <!-- BOOKING SECTION -->
-  <section class="section-offwhite booking-section">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10">
-        <div class="inline-flex items-center gap-2 bg-emerald-50 border-emerald-200 rounded-full px-4 py-1.5 mb-4"><span class="text-emerald-600 text-sm font-medium">🎤 No credit card. No obligation.</span></div>
-        <h1 class="text-3xl sm:text-4xl font-black mb-3">Try a Free Demo Session</h1>
-        <p class="text-slate-500 text-lg">30 minutes with Coach Toby. We'll assess your voice, discuss your goals, and show you exactly how we can help. Zero pressure.</p>
+<!-- HERO -->
+<section class="hero-gradient getstarted-hero">
+  <div class="container text-center">
+    <h1 class="hero-headline" style="font-size:clamp(2rem,5vw,3rem);margin-bottom:0.75rem">Choose Your Path</h1>
+    <p class="body-text" style="color:rgba(253,251,247,0.7);max-width:36rem;margin:0 auto">Pay now and start immediately, or schedule a free 30-minute demo. No pressure either way.</p>
+  </div>
+</section>
+
+<!-- MAIN CARD -->
+<section class="section-pad-sm">
+  <div class="getstarted-card">
+    <div class="card getstarted-card-inner">
+
+      <!-- PATH SELECTOR -->
+      <div class="path-selector">
+        <div class="path-option active" id="pathPay" onclick="selectPath('pay')">
+          <span class="path-option-icon">&#x1F4B0;</span>
+          <span class="path-option-title">Pay Now</span>
+          <span class="path-option-desc">Start immediately</span>
+        </div>
+        <div class="path-option" id="pathDemo" onclick="selectPath('demo')">
+          <span class="path-option-icon">&#x1F3A4;</span>
+          <span class="path-option-title">Free Demo</span>
+          <span class="path-option-desc">30-min session</span>
+        </div>
       </div>
 
-      <div class="card max-w-lg mx-auto">
-        <form id="bookForm" onsubmit="submitBooking(event)">
-          <div class="flex flex-col gap-lg">
-            <div><label class="form-label" for="bName">Your Name *</label><input type="text" id="bName" class="form-input" placeholder="What should we call you?" required></div>
-            <div><label class="form-label" for="bEmail">Email *</label><input type="email" id="bEmail" class="form-input" placeholder="you@example.com" required></div>
-            <div><label class="form-label" for="bWhatsApp">WhatsApp Number *</label><input type="tel" id="bWhatsApp" class="form-input" placeholder="+234..." required></div>
-            <div><label class="form-label" for="bService">What do you want to work on? *</label><select id="bService" class="form-input" required><option value="">Pick one...</option><option value="riffs">Riffs, runs & vocal agility</option><option value="pitch">Pitch accuracy & range</option><option value="speaking">Public speaking & executive presence</option><option value="confidence">Confidence & stage presence</option><option value="mindset">Life coaching & mindset shift</option><option value="all">All of the above</option></select></div>
-            <div><label class="form-label" for="bLevel">Your experience level</label><select id="bLevel" class="form-input"><option value="beginner">Complete beginner</option><option value="intermediate">Intermediate — I sing but want to level up</option><option value="advanced">Advanced — I perform but want mastery</option><option value="professional">Professional — working artist</option></select></div>
-            <div><label class="form-label" for="bMessage">What's your biggest challenge right now?</label><textarea id="bMessage" class="form-input" rows="3" placeholder="Be honest — this helps Coach Toby prepare for your session..."></textarea></div>
+      <!-- PAY NOW SECTION -->
+      <div class="pay-section active" id="paySection">
+        <p class="body-text" style="margin-bottom:1.5rem;text-align:center">Select a plan to pay now. You'll be redirected to a secure payment page, then straight to Telegram to get started.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="pName">Your Name *</label>
+          <input type="text" id="pName" class="form-input" placeholder="What should we call you?" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="pEmail">Email *</label>
+          <input type="email" id="pEmail" class="form-input" placeholder="you@example.com" required>
+        </div>
+
+        <button class="pay-btn" onclick="startPayment('single',50,'USD','Single Session — 1-on-1 Vocal Coaching')">&#x1F3A4; Single Session &mdash; <span data-price-usd="50" data-price-ngn="70000">$50</span></button>
+        <button class="pay-btn" onclick="startPayment('monthly',200,'USD','Monthly Package — 4 Sessions + Priority')">&#x1F4C8; Monthly Package &mdash; <span data-price-usd="200" data-price-ngn="300000">$200</span></button>
+        <button class="pay-btn pay-btn-secondary" onclick="startPayment('ngn-single',70000,'NGN','Single Session — 1-on-1 Vocal Coaching')">&#x1F3A4; Single Session &mdash; &#x20A6;70,000</button>
+        <button class="pay-btn pay-btn-secondary" onclick="startPayment('ngn-monthly',300000,'NGN','Monthly Package — 4 Sessions + Priority')">&#x1F4C8; Monthly Package &mdash; &#x20A6;300,000</button>
+
+        <div class="getstarted-or">or pay what works for you</div>
+
+        <div class="form-group">
+          <label class="form-label">Custom Amount (USD)</label>
+          <input type="number" id="customAmount" class="form-input" placeholder="Enter amount (min 10)" min="10">
+        </div>
+        <button class="pay-btn" onclick="startCustomPayment()" style="background:var(--text);color:var(--bg)">&#x27A1; Pay Custom Amount</button>
+      </div>
+
+      <!-- DEMO SECTION -->
+      <div class="demo-section" id="demoSection">
+        <p class="body-text" style="margin-bottom:1.5rem;text-align:center">No payment needed. Fill this out and Coach Toby will reach out within 24 hours to schedule your free 30-minute session.</p>
+
+        <form id="demoForm" onsubmit="submitDemo(event)">
+          <div class="form-group">
+            <label class="form-label" for="dName">Your Name *</label>
+            <input type="text" id="dName" class="form-input" placeholder="What should we call you?" required>
           </div>
-          <div class="mt-lg flex flex-col gap-sm">
-            <button type="submit" class="btn-cta w-full text-base py-4">Book My Free Demo →</button>
-            <p class="text-xs text-slate-400 text-center">We'll reach out within 24 hours via WhatsApp or email. No spam, ever.</p>
+          <div class="form-group">
+            <label class="form-label" for="dEmail">Email *</label>
+            <input type="email" id="dEmail" class="form-input" placeholder="you@example.com" required>
           </div>
+          <div class="form-group">
+            <label class="form-label" for="dWhatsApp">WhatsApp Number *</label>
+            <input type="tel" id="dWhatsApp" class="form-input" placeholder="+234..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="dService">What do you want to work on? *</label>
+            <select id="dService" class="form-input" required>
+              <option value="">Pick one...</option>
+              <option value="riffs">Riffs, runs &amp; vocal agility</option>
+              <option value="pitch">Pitch accuracy &amp; range</option>
+              <option value="speaking">Public speaking &amp; executive presence</option>
+              <option value="confidence">Confidence &amp; stage presence</option>
+              <option value="mindset">Life coaching &amp; mindset shift</option>
+              <option value="all">All of the above</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="dLevel">Your experience level</label>
+            <select id="dLevel" class="form-input">
+              <option value="beginner">Complete beginner</option>
+              <option value="intermediate">Intermediate &mdash; I sing but want to level up</option>
+              <option value="advanced">Advanced &mdash; I perform but want mastery</option>
+              <option value="professional">Professional &mdash; working artist</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="dMessage">What's your biggest challenge right now?</label>
+            <textarea id="dMessage" class="form-input" rows="3" placeholder="Be honest &mdash; this helps Coach Toby prepare for your session..."></textarea>
+          </div>
+          <button type="submit" class="pay-btn" style="margin-top:0.5rem">&#x1F3A4; Schedule My Free Demo &#x2192;</button>
+          <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-top:0.75rem">We'll reach out within 24 hours via WhatsApp or email. No spam, ever.</p>
         </form>
       </div>
 
-      <!-- Trust badges -->
-      <div class="flex flex-wrap items-center justify-center gap-6 mt-10 text-slate-400 text-sm">
-        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>100% Free</div>
-        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>No Credit Card</div>
-        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>30 Minutes</div>
-        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Session 1 Guarantee</div>
+      <!-- TRUST BADGES -->
+      <div class="trust-row">
+        <div class="trust-item">&#x2714; Secure payment</div>
+        <div class="trust-item">&#x2714; No credit card for demo</div>
+        <div class="trust-item">&#x2714; Session 1 guarantee</div>
+        <div class="trust-item">&#x2714; Cancel anytime</div>
       </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="footer py-8">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <p class="text-emerald-200/50 text-sm">© 2026 Sessions with Toby. All rights reserved.</p>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
-  async function submitBooking(e){
-    e.preventDefault();
-    var d={name:document.getElementById('bName').value.trim(),email:document.getElementById('bEmail').value.trim(),whatsapp:document.getElementById('bWhatsApp').value.trim(),service:document.getElementById('bService').value,level:document.getElementById('bLevel').value,message:document.getElementById('bMessage').value.trim()};
-    var btn=document.querySelector('#bookForm button[type="submit"]');
-    btn.textContent='Booking...';btn.disabled=true;
-    try{
-      var msg='🆕 *Demo Booking*\n\n👤 '+d.name+'\n📧 '+d.email+'\n📱 '+d.whatsapp+'\n🎯 '+d.service+'\n📊 '+d.level+'\n\n📝 '+(d.message||'N/A');
-      await fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({_subject:'Demo Booking: '+d.name,_captcha:'false',Name:d.name,Email:d.email,WhatsApp:d.whatsapp,Service:d.service,Level:d.level,Message:d.message||'N/A'}).toString()});
-    }catch(err){}
-    document.getElementById('bookForm').innerHTML='<div class="text-center py-8"><div class="text-5xl mb-4">🎉</div><h3 class="text-xl font-bold mb-2 text-brand">You\'re all set, '+d.name+'!</h3><p class="text-slate-500 mb-4">Coach Toby has received your booking and will reach out within 24 hours via WhatsApp or email to schedule your free demo.</p><a href="home.html" class="btn-cta">← Back to Home</a></div>';
+<!-- FOOTER -->
+<footer class="footer py-8">
+  <div class="container text-center">
+    <p style="color:rgba(253,251,247,0.4);font-size:0.85rem">&copy; 2026 Sessions with Toby. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+
+function selectPath(path){
+  document.getElementById('pathPay').classList.toggle('active',path==='pay');
+  document.getElementById('pathDemo').classList.toggle('active',path==='demo');
+  document.getElementById('paySection').classList.toggle('active',path==='pay');
+  document.getElementById('demoSection').classList.toggle('active',path==='demo');
+}
+
+var FW_LINKS={
+  'single':'https://flutterwave.com/pay/ictjiqq30sz7',
+  'monthly':'https://flutterwave.com/pay/b0hjfvjhv8x4',
+  'ngn-single':'https://flutterwave.com/pay/xnddgkfjeheq',
+  'ngn-monthly':'https://flutterwave.com/pay/wdod0tyeqedw'
+};
+
+function startPayment(plan,amount,currency,desc){
+  var name='',email='';
+  // Capture name from demo form fields (user fills these regardless of path)
+  if(document.getElementById('dName')) name=document.getElementById('dName').value.trim();
+  if(document.getElementById('dEmail')) email=document.getElementById('dEmail').value.trim();
+  // Also check pay-specific fields
+  var pName=document.getElementById('pName');
+  var pEmail=document.getElementById('pEmail');
+  if(pName && pName.value.trim()) name=pName.value.trim();
+  if(pEmail && pEmail.value.trim()) email=pEmail.value.trim();
+  if(!name) name='Friend';
+  var ref='CT-'+Date.now()+'-'+Math.random().toString(36).substr(2,6).toUpperCase();
+  // Store payment data for thank-you page
+  localStorage.setItem('ct_payment',JSON.stringify({ref:ref,plan:plan,amount:amount,currency:currency,name:name,email:email,ts:Date.now()}));
+  localStorage.setItem('ct_lead_name',name);
+  if(FW_LINKS[plan]){
+    // Redirect to Flutterwave with return URL for thank-you page
+    var returnUrl=encodeURIComponent(window.location.origin+window.location.pathname.replace('book.html','')+'thank-you.html?ref='+ref+'&amount='+amount+'&currency='+currency+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email));
+    window.location.href=FW_LINKS[plan]+'?ref='+ref+'&amount='+amount+'&currency='+currency+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&redirect_url='+returnUrl;
+  }else if(plan==='custom'){
+    // For custom amounts, store and redirect to a generic payment link
+    var customAmt=document.getElementById('customAmount').value;
+    if(!customAmt||customAmt<10){alert('Please enter a valid amount (minimum $10)');return;}
+    localStorage.setItem('ct_payment',JSON.stringify({ref:ref,plan:'custom',amount:customAmt,currency:'USD',name:name,email:email,ts:Date.now()}));
+    window.location.href='https://flutterwave.com/pay/sessionswithtoby?ref='+ref+'&amount='+customAmt+'&currency=USD&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
+  }else{
+    alert('Payment link not found. Please contact Coach Toby on WhatsApp.');
   }
-  </script>
-  <script defer src="assets/js/pricing.js"></script>
-  <script defer src="assets/js/payment.js"></script>
-  <script src="https://checkout.flutterwave.com/v3.js"></script>
+}
+
+function startCustomPayment(){
+  var customAmt=parseFloat(document.getElementById('customAmount').value);
+  if(!customAmt||customAmt<10){alert('Please enter a valid amount (minimum $10)');return;}
+  startPayment('custom',customAmt,'USD','Custom Amount Payment');
+}
+
+async function submitDemo(e){
+  e.preventDefault();
+  var d={
+    name:document.getElementById('dName').value.trim(),
+    email:document.getElementById('dEmail').value.trim(),
+    whatsapp:document.getElementById('dWhatsApp').value.trim(),
+    service:document.getElementById('dService').value,
+    level:document.getElementById('dLevel').value,
+    message:document.getElementById('dMessage').value.trim()
+  };
+  var btn=document.querySelector('#demoForm button[type="submit"]');
+  btn.textContent='Scheduling...';btn.disabled=true;
+  try{
+    await fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({_subject:'Demo Booking: '+d.name,_captcha:'false',Name:d.name,Email:d.email,WhatsApp:d.whatsapp,Service:d.service,Level:d.level,Message:d.message||'N/A'}).toString()
+    });
+  }catch(err){}
+  localStorage.setItem('ct_lead_name',d.name);
+  document.getElementById('demoForm').innerHTML='<div class="text-center" style="padding:2rem 0"><div style="font-size:3rem;margin-bottom:1rem">&#x1F389;</div><h3 style="font-family:var(--font-heading);font-weight:800;font-size:1.25rem;color:var(--text);margin-bottom:0.5rem">You\'re all set, '+d.name+'!</h3><p style="color:var(--muted);margin-bottom:1.5rem">Coach Toby has received your booking and will reach out within 24 hours via WhatsApp or email to schedule your free demo.</p><a href="home.html" class="btn-cta">&#x2190; Back to Home</a></div>';
+}
+</script>
+<script defer src="assets/js/pricing.js"></script>
+<script defer src="assets/js/payment.js"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>
