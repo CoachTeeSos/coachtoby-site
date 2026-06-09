@@ -12,6 +12,22 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J9V395RPDH');
+  // Track purchase conversion
+  var ref = new URLSearchParams(window.location.search).get('ref') || localStorage.getItem('ct_payment_ref') || '';
+  var amount = parseFloat(new URLSearchParams(window.location.search).get('amount') || localStorage.getItem('ct_payment_amount') || 0);
+  var currency = new URLSearchParams(window.location.search).get('currency') || localStorage.getItem('ct_payment_currency') || 'USD';
+  if (ref && amount) {
+    gtag('event', 'purchase', { transaction_id: ref, value: amount, currency: currency });
+  }
+</script>
+
 <style>
 .thankyou-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
 .thankyou-card{max-width:560px;width:100%;text-align:center}
