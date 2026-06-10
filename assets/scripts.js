@@ -321,12 +321,11 @@ document.addEventListener('DOMContentLoaded', initBudgetCalculator);
 /* ═══════════════════════════════════════════════════════════════
    CONFIG
    ═══════════════════════════════════════════════════════════════ */
-const BOT_USERNAME = 'Retpipebot';
-const PROXY_URL = '';
+const PROXY_URL = '';  // Set this to your bot server URL, e.g. 'https://your-bot-server.railway.app'
 
 function sendToProxy(fields) {
   if (!PROXY_URL) return Promise.resolve(false);
-  return fetch(PROXY_URL + '/register', {
+  return fetch(PROXY_URL + '/api/register', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(fields),
@@ -377,7 +376,7 @@ function ensureModal() {
         '<div class="cta-field"><label>First Name *</label><input type="text" id="cta-name" required placeholder="Your first name"></div>',
         '<div class="cta-field"><label>Email *</label><input type="email" id="cta-email" required placeholder="you@example.com"></div>',
         '<div class="cta-field"><label>Phone (with country code) *</label><input type="tel" id="cta-phone" required placeholder="+234 800 000 0000"></div>',
-        '<div class="cta-field"><label>Telegram @username *</label><input type="text" id="cta-telegram" required placeholder="@yourusername"></div>',
+        '<div class="cta-field"><label>Telegram @username (optional)</label><input type="text" id="cta-telegram" placeholder="@yourusername — we\'ll email you for now"></div>',
         '<div class="cta-field"><label>Location (City, Country) *</label><input type="text" id="cta-location" required placeholder="Lagos, Nigeria"></div>',
         '<div class="cta-field" id="cta-budget-field" style="display:none;"><label>Your Budget</label><input type="text" id="cta-budget" placeholder="₦50,000 – ₦500,000"></div>',
         '<div class="cta-field" id="cta-needs-field" style="display:none;"><label>What do you need help with?</label><input type="text" id="cta-needs" placeholder="Riffs and runs, breath control, stage presence..."></div>',
@@ -465,15 +464,19 @@ function submitForm(e) {
   var budget = document.getElementById('cta-budget') ? document.getElementById('cta-budget').value.trim() : '';
   var needs = document.getElementById('cta-needs') ? document.getElementById('cta-needs').value.trim() : '';
 
-  if (!name || !email || !phone || !telegram || !location) {
+  if (!name || !email || !phone || !location) {
     alert('Please fill in all required fields.');
     return false;
   }
 
-  if (telegram.indexOf('@') !== 0) telegram = '@' + telegram;
+  if (telegram && telegram.indexOf('@') !== 0) telegram = '@' + telegram;
 
   var fields = {
     'Name': name,
+    'Email': email,
+    'Phone': phone,
+    'Telegram': telegram || '',
+    'Location': location,
     'Plan': svc.label,
     'Service Key': serviceKey,
     'Status': svc.price > 0 ? 'Awaiting Receipt' : 'Active',
@@ -489,7 +492,7 @@ function submitForm(e) {
   submitBtn.disabled = true;
 
   sendToProxy(fields).then(function(written) {
-    if (written) console.log('Airtable write OK');
+    if (written) console.log('Airtable write OK + welcome email triggered');
   }).catch(function() {});
 
   closeModal();
@@ -497,29 +500,20 @@ function submitForm(e) {
   if (svc.type === 'community') {
     var groupLink = svc.link || '';
     if (groupLink) {
-      alert('✅ Welcome, ' + name + '!\n\nYour community link: ' + groupLink + '\n\nJoin now! The bot will also welcome you in Telegram.');
-      sendToProxy(fields).catch(function(){});
+      alert('✅ Welcome, ' + name + '!\n\nYour community link: ' + groupLink + '\n\nJoin now! A welcome email has also been sent to ' + email + '.');
       window.open(groupLink, '_blank');
-      setTimeout(function() {
-        var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + email + '|' + phone + '|' + location + '|' + serviceKey);
-        window.open(botUrl, '_blank');
-      }, 1500);
     } else {
-      var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + email + '|' + phone + '|community|' + serviceKey);
-      window.open(botUrl, '_blank');
+      alert('✅ Welcome, ' + name + '!\n\nA welcome email has been sent to ' + email + ' with next steps.');
     }
     return false;
   }
 
-  var botUrl = 'https://t.me/' + BOT_USERNAME + '?start=' + encodeURIComponent(name + '|' + email + '|' + phone + '|' + location + '|' + serviceKey);
-
   if (svc.price > 0) {
     var fwLink = FLUTTERWAVE[serviceKey];
     if (fwLink) window.open(fwLink, '_blank');
-    setTimeout(function() { window.open(botUrl, '_blank'); }, 1500);
-    alert('✅ Registered! Complete your payment, then tap "Start" in Telegram.\n\nWelcome, ' + name + ' 🎤');
+    alert('✅ Registered, ' + name + '!\n\nA welcome email has been sent to ' + email + ' with your payment link and next steps.\n\nComplete your payment to activate your plan. 🎤');
   } else {
-    window.open(botUrl, '_blank');
+    alert('✅ Welcome, ' + name + '!\n\nA welcome email has been sent to ' + email + ' with next steps.\n\nLet\'s transform your voice! 🎤');
   }
   return false;
 }
