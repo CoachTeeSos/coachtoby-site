@@ -323,12 +323,21 @@ document.addEventListener('DOMContentLoaded', initBudgetCalculator);
    ═══════════════════════════════════════════════════════════════ */
 const PROXY_URL = '';  // Set this to your bot server URL, e.g. 'https://your-bot-server.railway.app'
 
+// Airtable config — write directly from frontend
+const AIRTABLE_PAT = '';
+const AIRTABLE_BASE = 'app3N2MFPvfDSuYxk';
+const AIRTABLE_TABLE = 'Students';
+const AIRTABLE_API = 'https://api.airtable.com/v0/' + AIRTABLE_BASE + '/' + AIRTABLE_TABLE;
+
 function sendToProxy(fields) {
-  if (!PROXY_URL) return Promise.resolve(false);
-  return fetch(PROXY_URL + '/api/register', {
+  if (!AIRTABLE_PAT) return Promise.resolve(false);
+  return fetch(AIRTABLE_API, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(fields),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + AIRTABLE_PAT,
+    },
+    body: JSON.stringify({fields: fields}),
   }).then(function(res) { return res.ok; });
 }
 
