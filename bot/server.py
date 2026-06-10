@@ -1,13 +1,13 @@
 """
-Coach Toby — Airtable Proxy Server
-====================================
-Lightweight Flask server: website → this → Airtable.
-Token stays server-side. Frontend never sees it.
+Coach Toby — Airtable Proxy Server + Brevo Email Service
+=========================================================
+Lightweight Flask server: website → this → Airtable + Brevo.
 
 Endpoints:
-  POST /api/register    — Student registers from website
+  POST /api/register          — Student registers from website
+  POST /api/brevo/welcome     — Send welcome email via Brevo
   POST /api/flutterwave/webhook — Flutterwave payment confirmation
-  GET  /api/health     — Health check
+  GET  /api/health           — Health check
 """
 
 import os
@@ -45,7 +45,8 @@ def register_student():
     Writes to Airtable Students table.
 
     Expected JSON fields from scripts.js:
-      Name, Plan, Service Key, Status, Source, Total Sessions, Sessions Used
+      Name, Email, Phone, Telegram, Plan, Service Key, Status, Source,
+      Total Sessions, Sessions Used, Location
       Optional: Budget, Needs
     """
     data = request.get_json()
@@ -54,8 +55,9 @@ def register_student():
 
     # Build Airtable record — only include non-empty fields
     fields = {}
-    for key in ["Name", "Plan", "Service Key", "Status", "Source",
-                "Total Sessions", "Sessions Used", "Budget", "Needs"]:
+    for key in ["Name", "Email", "Phone", "Telegram", "Plan", "Service Key",
+                "Status", "Source", "Total Sessions", "Sessions Used",
+                "Location", "Budget", "Needs"]:
         val = data.get(key)
         if val is not None and val != "":
             fields[key] = val
@@ -73,6 +75,25 @@ def register_student():
         resp.raise_for_status()
         record = resp.json()
         logger.info(f"Registered: {fields.get('Name')} — {fields.get('Plan')} — {fields.get('Status')}")
+
+        # Send welcome email via Brevo (non-blocking)
+        email = fields.get("Email", "")
+        if email:
+            try:
+                from brevo_service import send_welcome_email
+                email_result = send_welcome_email(
+                    name=fields.get("Name", ""),
+                    email=email,
+                    service_key=fields.get("Service Key", ""),
+                    plan_label=fields.get("Plan", ""),
+                )
+                if email_result.get("success"):
+                    logger.info(f"Welcome email sent to {email}")
+                else:
+                    logger.warning(f"Welcome email failed for {email}: {email_result.get('error')}")
+            except Exception as e:
+                logger.warning(f"Brevo email error (non-critical): {e}")
+
         return jsonify({
             "success": True,
             "id": record["id"],
@@ -86,12 +107,44 @@ def register_student():
         return jsonify({"error": "Registration failed"}), 500
 
 
+@app.route("/api/brevo/welcome", methods=["POST"])
+def send_brevo_welcome():
+    """
+    Send a welcome email via Brevo.
+    Can be called independently if needed.
+
+    Expected JSON: { "name": "...", "email": "...", "service_key": "...", "plan_label": "..." }
+    """
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    name = data.get("name", "")
+    email = data.get("email", "")
+    service_key = data.get("service_key", "")
+    plan_label = data.get("plan_label", "")
+
+    if not email:
+        return jsonify({"error": "Email is required"}), 400
+
+    try:
+        from brevo_service import send_welcome_email
+        result = send_welcome_email(name, email, service_key, plan_label)
+        if result.get("success"):
+            return jsonify({"success": True, "message_id": result.get("messageId", "")}), 200
+        else:
+            return jsonify({"error": result.get("error", "Unknown error")}), 500
+    except Exception as e:
+        logger.error(f"Brevo welcome error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/api/flutterwave/webhook", methods=["POST"])
 def flutterwave_webhook():
     """
     Handle Flutterwave payment webhook.
     When payment confirmed, update student status from 'Awaiting Receipt' → 'Active'.
-    Matches student by tx_ref or email.
+    Matches student by email.
     """
     data = request.get_json()
     if not data:
@@ -102,9 +155,7 @@ def flutterwave_webhook():
 
     if event == "charge.completed" and tx_data.get("status") == "successful":
         email = tx_data.get("customer", {}).get("email", "")
-        tx_ref = tx_data.get("tx_ref", "")
 
-        # Try to find student by email
         if email:
             formula = f"{{Email}}='{email}'"
             params = {"filterByFormula": formula}
@@ -125,6 +176,16 @@ def flutterwave_webhook():
                         )
                         update_resp.raise_for_status()
                         logger.info(f"Payment verified via webhook: {email} → Active")
+
+                        # Send payment confirmation email
+                        try:
+                            from brevo_service import send_welcome_email
+                            student_name = record["fields"].get("Name", "")
+                            service_key = record["fields"].get("Service Key", "")
+                            send_welcome_email(student_name, email, service_key)
+                        except Exception:
+                            pass
+
             except Exception as e:
                 logger.error(f"Webhook processing failed: {e}")
 
