@@ -80,14 +80,18 @@ def save_state(state):
 
 
 def get_new_students(last_check: str) -> list:
-    """Fetch students created since last check."""
+    """Fetch students created since last check. Uses minimal API calls."""
     if not AIRTABLE_PAT:
         logger.error("AIRTABLE_PAT not set")
         return []
 
-    # Use simpler formula - filter by Created time
+    # Use filterByFormula to only get records created since last check
+    # This minimizes data transfer and API usage
+    formula = f"IS_AFTER({{Created time}}, DATETIME_PARSE('{last_check}'))"
     params = {
+        "filterByFormula": formula,
         "pageSize": 100,
+        "sort": [{"field": "Created time", "direction": "asc"}],
     }
     try:
         r = requests.get(
@@ -97,15 +101,7 @@ def get_new_students(last_check: str) -> list:
             timeout=15,
         )
         r.raise_for_status()
-        all_records = r.json().get("records", [])
-        
-        # Filter by created time client-side
-        new_records = []
-        for rec in all_records:
-            created = rec.get("createdTime", "")
-            if created > last_check:
-                new_records.append(rec)
-        return new_records
+        return r.json().get("records", [])
     except Exception as e:
         logger.error(f"Airtable fetch failed: {e}")
         return []
@@ -201,6 +197,12 @@ def send_brevo_email(name: str, email: str, service_key: str, plan_label: str) -
 
 def main():
     """Main: check for new students and send welcome emails."""
+    # Only run between 6am and 6pm WAT (UTC+1) = 5am-17pm UTC
+    current_hour = datetime.utcnow().hour
+    if current_hour < 5 or current_hour >= 17:
+        logger.info(f"Outside operating hours (6am-6pm WAT). Current UTC hour: {current_hour}. Skipping.")
+        return
+
     state = load_state()
     last_check = state.get("last_check", "")
     now = datetime.utcnow().isoformat()
