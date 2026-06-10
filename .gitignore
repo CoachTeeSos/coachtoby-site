@@ -1,1 +1,5 @@
 bot/.env
+SECRETS*
+COACH_TOBY_HANDOFF*.md
+OWL_HANDOFF*.md
+.env
