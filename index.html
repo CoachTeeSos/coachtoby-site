@@ -45,10 +45,14 @@
 .rec-tags{display:flex;flex-wrap:wrap;gap:8px}
 .rec-tag{background:rgba(0,229,163,0.1);color:var(--brand-kinetic);padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600}
 .funnel-actions{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-.funnel-cta-btn{background:var(--brand-accent);color:var(--bg-canvas);padding:16px;border-radius:var(--radius);font-weight:700;font-size:1rem;font-family:var(--font-display);text-decoration:none;text-align:center;transition:transform var(--transition),box-shadow var(--transition);box-shadow:var(--shadow-accent)}
-.funnel-cta-btn:hover{transform:translateY(-2px)}
-.funnel-secondary{background:transparent;color:var(--text-secondary);border:1px solid var(--border-subtle)}
-.funnel-secondary:hover{border-color:var(--brand-accent);color:var(--brand-accent)}
+.funnel-cta-btn{background:#E4B34F;color:#0D0E12;padding:18px 32px;border-radius:10px;font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all .2s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 20px rgba(228,179,79,0.25),inset 0 1px 0 rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.1);display:inline-block;cursor:pointer}
+.funnel-cta-btn:hover{background:#F0C76A;transform:translateY(-2px);box-shadow:0 8px 28px rgba(228,179,79,0.35),inset 0 1px 0 rgba(255,255,255,0.2)}
+.funnel-cta-btn:active{transform:translateY(0);box-shadow:0 2px 8px rgba(228,179,79,0.2)}
+.funnel-cta-btn:focus-visible{outline:3px solid #E4B34F;outline-offset:3px}
+.funnel-secondary{background:transparent;color:#F4F5F7;border:2px solid #3a3a4a;padding:16px 32px;border-radius:10px;font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all .2s ease;display:inline-block;cursor:pointer}
+.funnel-secondary:hover{border-color:#E4B34F;color:#E4B34F;background:rgba(228,179,79,0.05);transform:translateY(-2px)}
+.funnel-secondary:active{transform:translateY(0);background:rgba(228,179,79,0.1)}
+.funnel-secondary:focus-visible{outline:3px solid #E4B34F;outline-offset:3px}
 .funnel-note{color:var(--text-muted);font-size:0.75rem;margin-top:12px}
 .funnel-back{margin-top:20px;color:var(--text-muted);font-size:0.875rem;font-weight:500;background:none;border:none;cursor:pointer;display:none}
 .funnel-back:hover{color:var(--brand-accent)}
