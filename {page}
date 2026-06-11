@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About Coach Toby — Vocal & Life Coach | Sessions with Toby</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J9V395RPDH');
+</script>
+<meta name="description" content="Meet Prosper Tobi Olumo — Nigerian vocal and life coach. 50+ students across 10+ countries. Learn his story, philosophy, and why singers from Lagos to London trust him.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0D0E12">
+<meta name="google-site-verification" content="LzOxYICYW1RNhOx8rluo_MQrhkoWw1IVAA0TPiVv_xk">
+<link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/about.html">
+<meta property="og:title" content="About Coach Toby — Vocal & Life Coach | Sessions with Toby">
+<meta property="og:description" content="Meet Prosper Tobi Olumo — Nigerian vocal and life coach. 50+ students across 10+ countries.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/about.html">
+<meta property="og:site_name" content="Sessions with Toby">
+<meta property="og:image" content="https://coachteesos.github.io/coachtoby-site/assets/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=5.2">
+<script defer data-domain="coachteesos.github.io/coachtoby-site" src="https://plausible.io/js/script.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Prosper Tobi Olumo",
+  "alternateName": ["Coach Toby"],
+  "jobTitle": "Vocal & Life Coach",
+  "description": "Nigerian vocal and life coach helping singers, performers and creators transform their voice, presence and confidence. 50+ students across 10+ countries.",
+  "url": "https://coachteesos.github.io/coachtoby-site/about.html",
+  "image": "https://coachteesos.github.io/coachtoby-site/assets/og-image.svg",
+  "sameAs": [
+    "https://wa.me/2349160106084",
+    "https://www.instagram.com/coach_tobywina/",
+    "https://x.com/ProsperOlumo",
+    "https://www.facebook.com/share/1D1g1jYMCW/"
+  ],
+  "knowsAbout": ["Vocal Coaching", "Life Coaching", "Singing Technique", "Stage Confidence", "Voice Training", "Performance Coaching", "Breath Control", "Pitch Accuracy"],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Sessions with Toby",
+    "url": "https://coachteesos.github.io/coachtoby-site/"
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Sessions with Toby</a>
+    <div class="nav-links">
+      <a href="home.html#services" class="nav-link">Services</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="home.html#community" class="nav-link">Community</a>
+      <a href="book.html" class="nav-cta">Try Free Demo</a>
+    </div>
+    <button class="btn-mobile-toggle" onclick="toggleMobile()" aria-label="Menu" style="display:none">
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobMenu" style="display:none">
+    <a href="home.html#services" class="nav-link" onclick="toggleMobile()">Services</a>
+    <a href="pricing.html" class="nav-link" onclick="toggleMobile()">Pricing</a>
+    <a href="home.html#community" class="nav-link" onclick="toggleMobile()">Community</a>
+    <a href="book.html" class="nav-cta" onclick="toggleMobile()">Try Free Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-gradient section-pad" style="padding-top:8rem;padding-bottom:5rem">
+  <div class="container text-center">
+    <p class="section-label">About</p>
+    <h1 class="hero-headline">I Help People<br><span style="color:#E4B34F">Become.</span></h1>
+    <p class="body-text" style="max-width:36rem;margin:0 auto;color:#9FA6B5">Not become someone else. Become who they already are. Here's how that started.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section-pad">
+  <div class="container" style="max-width:42rem">
+    <p class="section-label">The Story</p>
+    <h2 class="section-headline" style="margin-bottom:1.5rem">It Started With a Seven-Year-Old</h2>
+    <div style="display:flex;flex-direction:column;gap:1rem;font-size:1.125rem;color:#9FA6B5;line-height:1.8">
+      <p>A kid was struggling in school. Everyone said: "Make him study harder." But I watched — and I saw something else. He wasn't lazy. He was lost.</p>
+      <p>So instead of forcing academics, I found what lit him up. Built around <em>that</em>. Two weeks later, grades went up. Not because he studied more. Because he had a reason to.</p>
+      <p>That's when I understood: <strong style="color:#F4F5F7">coaching isn't about fixing. It's about finding.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- EXTENDED BIO -->
+<section class="section-pad" style="background:#161820">
+  <div class="container" style="max-width:42rem">
+    <div style="display:flex;flex-direction:column;gap:1.25rem;font-size:1.05rem;color:#9FA6B5;line-height:1.8">
+      <p>My name is <strong style="color:#F4F5F7">Prosper Tobi Olumo</strong> — known to most as <strong style="color:#F4F5F7">Coach Toby</strong>. I'm a Nigerian vocal coach and life coach based in Abuja. I work with singers, performers, worship leaders, and creators who are done staying the same.</p>
+      <p>I didn't start out as a vocal coach. I started out as someone who could see what was holding people back — and who refused to let them stay there. That instinct turned into a coaching practice that has now served <strong style="color:#F4F5F7">50+ students across 10+ countries</strong>, from Lagos to London, Abuja to Toronto.</p>
+      <p>My approach is simple but not easy: <strong style="color:#F4F5F7">find the thing that lights you up, build everything around it, and don't settle for less than what you're capable of.</strong> Whether that's hitting a high note you've been avoiding for five years, commanding a room during a presentation, or figuring out what the next chapter of your life actually looks like — the process is the same. Discover. Build. Become.</p>
+      <p>What makes my coaching different? I don't do factory coaching. I don't do one-size-fits-all programs where you're just a number. When you work with me, you get <em>me</em> — all in. I'll push you because I see what you can become, not because I'm harsh. There's a difference.</p>
+      <p>I've been singing and performing for years. I know what it's like to stand on stage and feel your voice crack under pressure. I know what it's like to wonder if you're good enough. And I know what it's like to have someone believe in your voice before you did — and how that changes everything.</p>
+      <p>That's why I built <strong style="color:#F4F5F7">Sessions with Toby</strong> — a full coaching ecosystem that includes a vocal quiz to identify your exact bottleneck, a free singers' community for daily accountability, group coaching for team environments, and 1-on-1 sessions for deep transformation. Every piece is designed to help you become who you already are.</p>
+      <p>If you're reading this, you're already closer than most people get. The fact that you're here means something. <strong style="color:#F4F5F7">Take the quiz. Book a session. Join the community.</strong> Or just say hello. I respond to every message.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="section-pad">
+  <div class="container">
+    <p class="section-label text-center">By the Numbers</p>
+    <h2 class="section-headline text-center" style="margin-bottom:3rem">The Proof</h2>
+    <div class="card-grid-3" style="max-width:42rem;margin:0 auto;grid-template-columns:repeat(4,1fr)">
+      <div class="card text-center" style="padding:1.5rem">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#E4F34F;display:block">50+</span>
+        <span style="font-size:0.8rem;color:#9FA6B5;margin-top:0.25rem">Students Coached</span>
+      </div>
+      <div class="card text-center" style="padding:1.5rem">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#E4B34F;display:block">10+</span>
+        <span style="font-size:0.8rem;color:#9FA6B5;margin-top:0.25rem">Countries Reached</span>
+      </div>
+      <div class="card text-center" style="padding:1.5rem">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#E4B34F;display:block">4.9★</span>
+        <span style="font-size:0.8rem;color:#9FA6B5;margin-top:0.25rem">Average Rating</span>
+      </div>
+      <div class="card text-center" style="padding:1.5rem">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#00E5A3;display:block">100%</span>
+        <span style="font-size:0.8rem;color:#9FA6B5;margin-top:0.25rem">Session 1 Guarantee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section-pad" style="background:#161820">
+  <div class="container" style="max-width:42rem">
+    <p class="section-label text-center">The Journey</p>
+    <h2 class="section-headline text-center" style="margin-bottom:3rem">How We Got Here</h2>
+    <div style="border-left:2px solid #242838;padding-left:2rem">
+      <div style="margin-bottom:2.5rem;position:relative">
+        <div style="position:absolute;left:-2.65rem;top:0;width:12px;height:12px;border-radius:50%;background:#E4B34F;border:2px solid #161820"></div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#00E5A3;margin-bottom:0.5rem">2018</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:0.375rem;color:#F4F5F7">The First Student</div>
+        <div style="font-size:0.95rem;color:#9FA6B5;line-height:1.7">Started informal vocal coaching. One church singer at a time. Word spread.</div>
+      </div>
+      <div style="margin-bottom:2.5rem;position:relative">
+        <div style="position:absolute;left:-2.65rem;top:0;width:12px;height:12px;border-radius:50%;background:#E4B34F;border:2px solid #161820"></div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#00E5A3;margin-bottom:0.5rem">2020</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:0.375rem;color:#F4F5F7">Going Online</div>
+        <div style="font-size:0.95rem;color:#9FA6B5;line-height:1.7">Pandemic forced the move online. Turns out, WhatsApp calls work just fine. Students from different countries started showing up.</div>
+      </div>
+      <div style="margin-bottom:2.5rem;position:relative">
+        <div style="position:absolute;left:-2.65rem;top:0;width:12px;height:12px;border-radius:50%;background:#E4B34F;border:2px solid #161820"></div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#00E5A3;margin-bottom:0.5rem">2022</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:0.375rem;color:#F4F5F7">Life Coaching</div>
+        <div style="font-size:0.95rem;color:#9FA6B5;line-height:1.7">Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</div>
+      </div>
+      <div style="margin-bottom:2.5rem;position:relative">
+        <div style="position:absolute;left:-2.65rem;top:0;width:12px;height:12px;border-radius:50%;background:#E4B34F;border:2px solid #161820"></div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#00E5A3;margin-bottom:0.5rem">2024</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:0.375rem;color:#F4F5F7">50+ Students</div>
+        <div style="font-size:0.95rem;color:#9FA6B5;line-height:1.7">Crossed 50 students across 10+ countries. Still hands-on. Still personal.</div>
+      </div>
+      <div style="position:relative">
+        <div style="position:absolute;left:-2.65rem;top:0;width:12px;height:12px;border-radius:50%;background:#00E5A3;border:2px solid #161820"></div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#E4B34F;margin-bottom:0.5rem">2026</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:0.375rem;color:#F4F5F7">Full Ecosystem</div>
+        <div style="font-size:0.95rem;color:#9FA6B5;line-height:1.7">Built a complete coaching ecosystem: quiz, community, group and 1-on-1. The mission stays the same — help people become.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section-pad">
+  <div class="container">
+    <p class="section-label text-center">What I Believe</p>
+    <h2 class="section-headline text-center" style="margin-bottom:3rem">Non-Negotiables</h2>
+    <div class="card-grid-3">
+      <div class="card text-center">
+        <div style="width:48px;height:48px;background:rgba(228,179,79,0.1);border:1px solid rgba(228,179,79,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem">✦</div>
+        <h3 class="card-title">Your voice is not the problem</h3>
+        <p class="card-text">Technique is. And technique is fixable. Every voice has something extraordinary in it.</p>
+      </div>
+      <div class="card text-center">
+        <div style="width:48px;height:48px;background:rgba(228,179,79,0.1);border:1px solid rgba(228,179,79,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem">◈</div>
+        <h3 class="card-title">Find the thing. Fan the flame.</h3>
+        <p class="card-text">Whether it's a seven-year-old or a 28-year-old — the process is the same. Discover. Build. Become.</p>
+      </div>
+      <div class="card text-center">
+        <div style="width:48px;height:48px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem">⬡</div>
+        <h3 class="card-title">No coddling</h3>
+        <p class="card-text">I will push you. Not because I'm harsh — because I see what you can become and I won't let you settle.</p>
+      </div>
+      <div class="card text-center">
+        <div style="width:48px;height:48px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem">◎</div>
+        <h3 class="card-title">From anywhere</h3>
+        <p class="card-text">Abuja. Lagos. London. Toronto. Geography is not a barrier. Show up online. Do the work.</p>
+      </div>
+      <div class="card text-center">
+        <div style="width:48px;height:48px;background:rgba(228,179,79,0.1);border:1px solid rgba(228,179,79,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem">♫</div>
+        <h3 class="card-title">Music is purpose</h3>
+        <p class="card-text">Not just performance. Not just entertainment. Music is how some people fulfil their calling. That's serious.</p>
+      </div>
+      <div class="card text-center">
+        <div style="width:48px;height:48px;background:rgba(228,179,79,0.1);border:1px solid rgba(228,179,79,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem">⟐</div>
+        <h3 class="card-title">It's personal</h3>
+        <p class="card-text">I don't do factory coaching. If you work with me, you get <em>me</em>. All in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="hero-gradient section-pad">
+  <div class="container text-center" style="max-width:48rem;margin:0 auto">
+    <h2 class="section-headline" style="color:#F4F5F7;margin-bottom:1rem">Ready to become who you were made to be?</h2>
+    <p style="color:#9FA6B5;margin:0 auto 2rem">Book a session. Take the quiz. Or just say hello.</p>
+    <div class="hero-actions">
+      <a href="book.html" class="btn-primary">Start Your Journey →</a>
+      <a href="quiz.html" class="btn-secondary">Take the Quiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Sessions with Toby</div>
+        <p class="footer-tagline">Vocal & life coaching for people who are done staying the same.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Pages</h4>
+        <ul class="footer-list">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="home.html#community">Community</a></li>
+          <li><a href="home.html#services">Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Free Tools</h4>
+        <ul class="footer-list">
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="book.html">Book a Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Connect</h4>
+        <ul class="footer-list">
+          <li><a href="https://wa.me/2349160106084">WhatsApp</a></li>
+          <li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li>
+          <li><a href="https://calendly.com/d/cx3t-9f8-b7r">Calendly</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Sessions with Toby. All rights reserved.</p>
+      <a href="book.html" class="btn-cta">Try a Free Demo →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
+function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
+</script>
+<script defer src="/assets/js/pricing.js"></script>
+<script defer src="/assets/js/payment.js"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+</body>
+</html>
