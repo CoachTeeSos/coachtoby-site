@@ -132,8 +132,8 @@ def print_usage(hours=24):
         print("  No calls recorded")
     for service, calls, tokens, cost in rows:
         print(f"  {service:15} {calls:5} calls  {tokens:8} tokens  ${cost:.4f}")
-    if total:
-        print(f"  {'TOTAL':15} {total[0]:5} calls  {total[1]:8} tokens  ${total[2]::.4f}")
+    if total and total[0]:
+        print(f"  {'TOTAL':15} {total[0]:5} calls  {total[1] or 0:8} tokens  ${total[2] or 0:.4f}")
 
 if __name__ == '__main__':
     print_usage()
