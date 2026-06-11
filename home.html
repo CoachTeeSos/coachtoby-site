@@ -114,6 +114,8 @@
   .section{padding:56px 20px}
   .home-hero{padding:72px 20px 56px}
   .final-cta{padding:56px 20px}
+  .nav-links{display:none!important}
+  .btn-mobile-toggle{display:flex!important}
 }
 </style>
 </head>
@@ -132,11 +134,11 @@
       <a href="#authority" class="nav-link">About</a>
       <a href="book.html" class="nav-cta">Book a Session</a>
     </div>
-    <button class="btn-mobile-toggle" onclick="toggleMobile()" aria-label="Menu">
+    <button class="btn-mobile-toggle" onclick="toggleMobile()" aria-label="Menu" style="display:none">
       <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
   </div>
-  <div class="mobile-menu" id="mobMenu">
+  <div class="mobile-menu" id="mobMenu" style="display:none">
     <a href="#friction" class="nav-link" onclick="toggleMobile()">The Problem</a>
     <a href="#transformation" class="nav-link" onclick="toggleMobile()">Transformation</a>
     <a href="#proof" class="nav-link" onclick="toggleMobile()">Proof</a>
@@ -273,7 +275,7 @@
 <script>
 (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
 (function(){var nav=document.getElementById('mainNav');if(!nav)return;window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);},{passive:true});})();
-function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
+function toggleMobile(){var menu=document.getElementById('mobMenu');menu.style.display=menu.style.display==='none'?'block':'none';}
 document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
 (function(){var els=document.querySelectorAll('.reveal');if(!els.length)return;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});els.forEach(function(el){obs.observe(el);});})();
 </script>
