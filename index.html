@@ -17,132 +17,141 @@
 <meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/">
 <meta property="og:site_name" content="Sessions with Toby">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","alternateName":["Coach Toby"],"url":"https://coachteesos.github.io/coachtoby-site/","founder":{"@type":"Person","name":"Coach Toby"},"sameAs":["https://wa.me/2349160106084"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","url":"https://coachteesos.github.io/coachtoby-site/","founder":{"@type":"Person","name":"Coach Toby"},"sameAs":["https://wa.me/2349160106084"]}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=5.1">
+<link rel="stylesheet" href="assets/css/main.css?v=5.2">
 <style>
-/* Funnel-specific overrides */
-.welcome-screen{background:var(--bg-canvas);min-height:100vh;display:flex;align-items:center;justify-content:center}
-.welcome-content{text-align:center;max-width:560px;padding:32px}
+/* ═══════════════════════════════════════════════════════════
+   QUIZ FUNNEL — Sessions with Toby
+   Design System: Carbon #0D0E12 · Obsidian #161820
+   Gold #E4B34F · Mint #00E5A3 · Text #F4F5F7 · Muted #9FA6B5
+   ═══════════════════════════════════════════════════════════ */
+.funnel-bg{background:var(--bg-canvas);min-height:100vh;display:flex;align-items:center;justify-content:center}
+.funnel-wrap{text-align:center;max-width:560px;padding:40px 24px;width:100%}
 .step-panel{display:none}
-.step-panel.active{display:block}
-.step-panel h1{font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.75rem}
-.step-panel p{color:var(--text-secondary);margin-bottom:2rem}
-.quiz-option{width:100%;padding:18px 22px;margin-bottom:10px;background:var(--bg-surface);border:2px solid var(--border-subtle);border-radius:var(--radius);font-family:var(--font-body);font-size:0.95rem;color:var(--text-primary);cursor:pointer;transition:all var(--transition);text-align:left;display:flex;align-items:center;gap:14px}
-.quiz-option:hover{border-color:var(--brand-accent);transform:translateX(4px);background:rgba(228,179,79,0.05)}
-.quiz-option:active,.quiz-option.selected{border-color:var(--brand-accent);background:rgba(228,179,79,0.1);box-shadow:0 0 0 3px rgba(228,179,79,0.2)}
-.quiz-option .icon{font-size:1.3rem;min-width:28px}
-.progress-bar{width:100%;max-width:200px;margin:0 auto 24px;height:2px;background:var(--border-subtle);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:var(--brand-accent);transition:width 0.4s ease}
-.progress-label{color:var(--text-muted);font-size:0.75rem;margin-top:8px;text-align:right}
-.rec-box{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px;text-align:left}
-.rec-label{color:var(--brand-kinetic);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px}
-.rec-title{color:var(--text-primary);font-size:1.25rem;font-weight:700;font-family:var(--font-display);margin-bottom:6px}
-.rec-desc{color:var(--text-secondary);font-size:0.875rem;margin-bottom:12px}
+.step-panel.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.step-panel h1{font-family:var(--font-display);font-size:clamp(1.4rem,4vw,2rem);margin-bottom:8px;color:var(--text-primary);font-weight:800;letter-spacing:-0.03em}
+.step-panel p{color:var(--text-secondary);margin-bottom:28px;font-size:0.95rem}
+.funnel-opts{display:flex;flex-direction:column;gap:10px;text-align:left}
+.quiz-opt{width:100%;padding:16px 20px;background:var(--bg-surface);border:2px solid var(--border-subtle);border-radius:10px;font-family:var(--font-body);font-size:0.92rem;color:var(--text-secondary);cursor:pointer;transition:all .2s ease;display:flex;align-items:center;gap:14px;text-align:left}
+.quiz-opt:hover{border-color:var(--brand-accent);color:var(--text-primary);background:rgba(228,179,79,0.04)}
+.quiz-opt.selected{border-color:var(--brand-accent);background:rgba(228,179,79,0.08);color:var(--text-primary);box-shadow:0 0 0 3px rgba(228,179,79,0.15)}
+.quiz-opt .opt-icon{width:36px;height:36px;border-radius:8px;background:rgba(228,179,79,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.progress-bar{width:100%;max-width:240px;margin:0 auto 28px;height:3px;background:var(--border-subtle);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--brand-accent);transition:width .4s ease;border-radius:3px}
+.progress-label{color:var(--text-muted);font-size:0.75rem;margin-top:10px;text-align:right;font-family:var(--font-body)}
+/* Rec box */
+.rec-box{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:28px;margin:24px 0;text-align:left}
+.rec-label{color:var(--brand-kinetic);font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.rec-box h3{color:var(--text-primary);font-size:1.2rem;font-weight:700;font-family:var(--font-display);margin-bottom:6px}
+.rec-desc{color:var(--text-secondary);font-size:0.88rem;margin-bottom:14px}
 .rec-tags{display:flex;flex-wrap:wrap;gap:8px}
-.rec-tag{background:rgba(0,229,163,0.1);color:var(--brand-kinetic);padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600}
-.funnel-actions{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-.funnel-cta-btn{background:#E4B34F;color:#0D0E12;padding:18px 32px;border-radius:10px;font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all .2s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 20px rgba(228,179,79,0.25),inset 0 1px 0 rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.1);display:inline-block;cursor:pointer}
-.funnel-cta-btn:hover{background:#F0C76A;transform:translateY(-2px);box-shadow:0 8px 28px rgba(228,179,79,0.35),inset 0 1px 0 rgba(255,255,255,0.2)}
-.funnel-cta-btn:active{transform:translateY(0);box-shadow:0 2px 8px rgba(228,179,79,0.2)}
-.funnel-cta-btn:focus-visible{outline:3px solid #E4B34F;outline-offset:3px}
-.funnel-secondary{background:transparent;color:#F4F5F7;border:2px solid #3a3a4a;padding:16px 32px;border-radius:10px;font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all .2s ease;display:inline-block;cursor:pointer}
-.funnel-secondary:hover{border-color:#E4B34F;color:#E4B34F;background:rgba(228,179,79,0.05);transform:translateY(-2px)}
-.funnel-secondary:active{transform:translateY(0);background:rgba(228,179,79,0.1)}
-.funnel-secondary:focus-visible{outline:3px solid #E4B34F;outline-offset:3px}
-.funnel-note{color:var(--text-muted);font-size:0.75rem;margin-top:12px}
-.funnel-back{margin-top:20px;color:var(--text-muted);font-size:0.875rem;font-weight:500;background:none;border:none;cursor:pointer;display:none}
+.rec-tag{background:rgba(0,229,163,0.08);color:var(--brand-kinetic);padding:4px 12px;border-radius:50px;font-size:0.72rem;font-weight:600;border:1px solid rgba(0,229,163,0.15)}
+/* CTA buttons */
+.funnel-actions{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.funnel-cta{display:block;width:100%;padding:16px;background:var(--brand-accent);color:var(--bg-canvas);border-radius:10px;font-weight:700;font-size:1rem;font-family:var(--font-display);text-decoration:none;text-align:center;transition:all .2s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 20px rgba(228,179,79,0.2),inset 0 1px 0 rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);cursor:pointer}
+.funnel-cta:hover{background:#F0C76A;transform:translateY(-2px);box-shadow:0 8px 28px rgba(228,179,79,0.3)}
+.funnel-cta-outline{display:block;width:100%;padding:16px;background:transparent;color:var(--text-primary);border:2px solid var(--border-subtle);border-radius:10px;font-weight:700;font-size:1rem;font-family:var(--font-display);text-decoration:none;text-align:center;transition:all .2s ease}
+.funnel-cta-outline:hover{border-color:var(--brand-accent);color:var(--brand-accent)}
+.funnel-note{color:var(--text-muted);font-size:0.75rem;margin-top:14px}
+.funnel-back{margin-top:24px;color:var(--text-muted);font-size:0.85rem;font-weight:500;background:none;border:none;cursor:pointer;display:none;font-family:var(--font-body);transition:color .2s}
 .funnel-back:hover{color:var(--brand-accent)}
+/* Welcome emoji */
+.welcome-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(228,179,79,0.1),rgba(0,229,163,0.05));border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:1.8rem}
+@media(max-width:600px){
+  .funnel-wrap{padding:32px 20px}
+  .step-panel h1{font-size:1.3rem}
+}
 </style>
 </head>
 <body style="background:#0D0E12">
 
-<div class="nav" style="position:absolute;top:0;left:0;right:0;background:transparent;border:none">
+<div class="nav" style="position:absolute;top:0;left:0;right:0;background:transparent;border:none;z-index:10">
   <div class="nav-inner">
-    <a href="home.html" class="nav-logo" style="color:#E4F4F5;text-decoration:none">🎤 SESSIONS WITH TOBY</a>
+    <a href="home.html" class="nav-logo" style="color:#F4F5F7;text-decoration:none;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800">Sessions with Toby</a>
   </div>
 </div>
 
 <div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
-<div class="welcome-screen" id="welcomeScreen">
-<div class="welcome-content">
-<div style="font-size:3.5rem;margin-bottom:24px">🎤</div>
-<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
-<p class="progress-label" id="progressText">Step 1 of 5</p>
+<div class="funnel-bg" id="welcomeScreen">
+<div class="funnel-wrap">
+  <div class="welcome-icon">🎤</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+  <p class="progress-label" id="progressText">Step 1 of 5</p>
 
-<div id="step1" class="step-panel active">
-<h1>What brings you here today?</h1>
-<p>Pick what resonates. No wrong answers.</p>
-<div class="funnel-opts">
-<button class="quiz-option" data-step="1" data-value="vocals"><span class="icon">🎤</span><span>I want to sing better — riffs, runs, the whole thing</span></button>
-<button class="quiz-option" data-step="1" data-value="speaking"><span class="icon">🎙️</span><span>I want to speak with more confidence & presence</span></button>
-<button class="quiz-option" data-step="1" data-value="mindset"><span class="icon">💪</span><span>I'm stuck and need a mindset shift</span></button>
-<button class="quiz-option" data-step="1" data-value="community"><span class="icon">🎵</span><span>I want to connect with other creators</span></button>
-</div>
-</div>
+  <div id="step1" class="step-panel active">
+    <h1>What brings you here today?</h1>
+    <p>Pick what resonates. No wrong answers.</p>
+    <div class="funnel-opts">
+      <button class="quiz-opt" data-step="1" data-value="vocals"><span class="opt-icon">✦</span><span>I want to sing better — riffs, runs, the whole thing</span></button>
+      <button class="quiz-opt" data-step="1" data-value="speaking"><span class="opt-icon">◈</span><span>I want to speak with more confidence & presence</span></button>
+      <button class="quiz-opt" data-step="1" data-value="mindset"><span class="opt-icon">⬡</span><span>I'm stuck and need a mindset shift</span></button>
+      <button class="quiz-opt" data-step="1" data-value="community"><span class="opt-icon">⟐</span><span>I want to connect with other creators</span></button>
+    </div>
+  </div>
 
-<div id="step2" class="step-panel">
-<h1>Where are you right now?</h1>
-<p>Be honest — this isn't a test.</p>
-<div class="funnel-opts">
-<button class="quiz-option" data-step="2" data-value="beginner"><span class="icon">🌱</span><span>Complete beginner — I barely sing in the shower</span></button>
-<button class="quiz-option" data-step="2" data-value="intermediate"><span class="icon">🎶</span><span>I can sing but want to level up my technique</span></button>
-<button class="quiz-option" data-step="2" data-value="advanced"><span class="icon">🔥</span><span>I perform but want to master riffs, runs & stage presence</span></button>
-<button class="quiz-option" data-step="2" data-value="professional"><span class="icon">⭐</span><span>I'm a working artist looking for an edge</span></button>
-</div>
-</div>
+  <div id="step2" class="step-panel">
+    <h1>Where are you right now?</h1>
+    <p>Be honest — this isn't a test.</p>
+    <div class="funnel-opts">
+      <button class="quiz-opt" data-step="2" data-value="beginner"><span class="opt-icon">◎</span><span>Complete beginner — I barely sing in the shower</span></button>
+      <button class="quiz-opt" data-step="2" data-value="intermediate"><span class="opt-icon">◉</span><span>I can sing but want to level up my technique</span></button>
+      <button class="quiz-opt" data-step="2" data-value="advanced"><span class="opt-icon">⬢</span><span>I perform but want to master riffs, runs & stage presence</span></button>
+      <button class="quiz-opt" data-step="2" data-value="professional"><span class="opt-icon">✧</span><span>I'm a working artist looking for an edge</span></button>
+    </div>
+  </div>
 
-<div id="step3" class="step-panel">
-<h1>What's the ONE thing holding you back?</h1>
-<p>The thing you'd fix first if you could.</p>
-<div class="funnel-opts">
-<button class="quiz-option" data-step="3" data-value="pitch"><span class="icon">🎵</span><span>I can't hit the right notes consistently</span></button>
-<button class="quiz-option" data-step="3" data-value="range"><span class="icon">📈</span><span>My range is limited — I can't reach high or low notes</span></button>
-<button class="quiz-option" data-step="3" data-value="riffs"><span class="icon">⚡</span><span>I want to master riffs, runs & vocal agility</span></button>
-<button class="quiz-option" data-step="3" data-value="confidence"><span class="icon">😰</span><span>I freeze up when it's time to perform or speak</span></button>
-<button class="quiz-option" data-step="3" data-value="breath"><span class="icon">💨</span><span>I run out of breath and can't sustain notes</span></button>
-</div>
-</div>
+  <div id="step3" class="step-panel">
+    <h1>What's the ONE thing holding you back?</h1>
+    <p>The thing you'd fix first if you could.</p>
+    <div class="funnel-opts">
+      <button class="quiz-opt" data-step="3" data-value="pitch"><span class="opt-icon">♫</span><span>I can't hit the right notes consistently</span></button>
+      <button class="quiz-opt" data-step="3" data-value="range"><span class="opt-icon">↕</span><span>My range is limited — I can't reach high or low notes</span></button>
+      <button class="quiz-opt" data-step="3" data-value="riffs"><span class="opt-icon">⚡</span><span>I want to master riffs, runs & vocal agility</span></button>
+      <button class="quiz-opt" data-step="3" data-value="confidence"><span class="opt-icon">◈</span><span>I freeze up when it's time to perform or speak</span></button>
+      <button class="quiz-opt" data-step="3" data-value="breath"><span class="opt-icon">○</span><span>I run out of breath and can't sustain notes</span></button>
+    </div>
+  </div>
 
-<div id="step4" class="step-panel">
-<h1>When do you want to see results?</h1>
-<p>No pressure — just helps us recommend the right path.</p>
-<div class="funnel-opts">
-<button class="quiz-option" data-step="4" data-value="asap"><span class="icon">🚀</span><span>ASAP — I have a performance, audition or event coming up</span></button>
-<button class="quiz-option" data-step="4" data-value="month"><span class="icon">📅</span><span>Within the next month — I'm serious about this</span></button>
-<button class="quiz-option" data-step="4" data-value="exploring"><span class="icon">🔍</span><span>Just exploring — I want to see what's possible</span></button>
-</div>
-</div>
+  <div id="step4" class="step-panel">
+    <h1>When do you want to see results?</h1>
+    <p>No pressure — just helps us recommend the right path.</p>
+    <div class="funnel-opts">
+      <button class="quiz-opt" data-step="4" data-value="asap"><span class="opt-icon">⏱</span><span>ASAP — I have a performance, audition or event coming up</span></button>
+      <button class="quiz-opt" data-step="4" data-value="month"><span class="opt-icon">📅</span><span>Within the next month — I'm serious about this</span></button>
+      <button class="quiz-opt" data-step="4" data-value="exploring"><span class="opt-icon">🔍</span><span>Just exploring — I want to see what's possible</span></button>
+    </div>
+  </div>
 
-<div id="step5" class="step-panel">
-<div style="font-size:3rem;margin-bottom:12px">🎉</div>
-<h1>Here's what we recommend for you</h1>
-<p>Based on your answers. But first — try a free demo with Coach Toby. No commitment.</p>
-<div class="rec-box">
-<p class="rec-label">Your Personalized Recommendation</p>
-<h3 class="rec-title" id="recTitle">Vocal Mastery — Starter Path</h3>
-<p class="rec-desc" id="recDesc">Personalized 1-on-1 coaching with Coach Toby. Free demo included.</p>
-<div class="rec-tags" id="recTags"><span class="rec-tag">Free Demo</span></div>
-</div>
-<div class="funnel-actions">
-<a href="book.html" class="funnel-cta-btn">🎤 Try a Free Demo Session</a>
-<a href="home.html" class="funnel-cta-btn funnel-secondary">Browse Programs & Pricing →</a>
-</div>
-<p class="funnel-note">No credit card required.</p>
-</div>
+  <div id="step5" class="step-panel">
+    <h1>Here's what we recommend for you</h1>
+    <p>Based on your answers. But first — try a free demo with Coach Toby.</p>
+    <div class="rec-box">
+      <p class="rec-label">Your Personalized Recommendation</p>
+      <h3 id="recTitle">Vocal Mastery — Starter Path</h3>
+      <p class="rec-desc" id="recDesc">Personalized 1-on-1 coaching with Coach Toby. Free demo included.</p>
+      <div class="rec-tags" id="recTags"><span class="rec-tag">Free Demo</span></div>
+    </div>
+    <div class="funnel-actions">
+      <a href="book.html" class="funnel-cta">Try a Free Demo Session →</a>
+      <a href="home.html" class="funnel-cta-outline">Browse Programs & Pricing</a>
+    </div>
+    <p class="funnel-note">No credit card required.</p>
+  </div>
 
-<button id="backBtn" class="funnel-back" onclick="goBack()">← Go back</button>
+  <button id="backBtn" class="funnel-back" onclick="goBack()">← Go back</button>
 </div>
 </div>
 
 <script>
 (function(){
-  var lt=document.getElementById('loaderText'),brand='Sessions with Toby';
-  brand.split('').forEach(function(ch,i){var s=document.createElement('span');s.textContent=ch===' '?' ':ch;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});
+  var lt=document.getElementById('loaderText'),b='Sessions with Toby';
+  b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});
   window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});
   setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);
 })();
@@ -150,18 +159,16 @@ var cs=1,ans={};
 document.getElementById('welcomeScreen').addEventListener('click',function(e){
   var b=e.target.closest('.quiz-option');if(!b)return;
   var s=parseInt(b.dataset.step),v=b.dataset.value;ans[s]=v;
-  // Highlight selected option
   document.querySelectorAll('#step'+s+' .quiz-option').forEach(function(opt){opt.classList.remove('selected');});
   b.classList.add('selected');
-  // Small delay for visual feedback before moving to next step
   setTimeout(function(){
     document.getElementById('step'+s).classList.remove('active');cs=s+1;
     if(cs<=5){document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';}
     if(s===4){genRec();if(typeof gtag!=='undefined'){gtag('event','generate_lead',{value:0,currency:'USD'});}}
     document.getElementById('backBtn').style.display=cs>1?'inline':'none';
-  }, 200);
+  },200);
 });
-function goBack(){if(cs<=1)return;document.getElementById('step'+cs).classList.remove('active');cs--;document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';document.getElementById('backBtn').style.display=cs>1?'inline':'none';}
+function goBack(){if(cs<=1)return;document.getElementById('step'+s).classList.remove('active');cs--;document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';document.getElementById('backBtn').style.display=cs>1?'inline':'none';}
 function genRec(){
   var g=ans[1]||'vocals',l=ans[2]||'beginner';
   var t='Vocal Mastery — Starter Path',d='Personalized 1-on-1 coaching with Coach Toby. Free demo included.',tags=['Free Demo','Personalized Plan','Email Support'];
@@ -174,8 +181,5 @@ function genRec(){
   document.getElementById('recTags').innerHTML=tags.map(function(x){return '<span class="rec-tag">'+x+'</span>';}).join('');
 }
 </script>
-<script defer src="/assets/js/pricing.js"></script>
-<script defer src="/assets/js/payment.js"></script>
-<script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>
