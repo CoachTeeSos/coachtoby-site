@@ -2,12 +2,14 @@
 """
 Cron job: Check local DB for new registrations and send Brevo welcome emails.
 Runs hourly between 6am-6pm WAT.
+Uses smart API tracking to prevent rate limit exhaustion.
 """
-import sys, os, requests, logging
+import sys, os, logging
 from datetime import datetime
 
 sys.path.insert(0, "/home/user/workspace")
 from local_db import init_db, get_unsent_emails, mark_email_sent, get_stats, load_env
+from smart_api import check_limit, log_call
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 logger = logging.getLogger(__name__)
@@ -153,9 +155,19 @@ def main():
     logger.info("Processing " + str(len(unsent)) + " unsent registration(s)")
     sent = 0
     for rec in unsent:
+        # Check rate limit before each email
+        ok, msg = check_limit('brevo')
+        if not ok:
+            logger.warning("Brevo rate limit: " + msg)
+            break
+        
         if send_welcome_email(rec["name"], rec["email"], rec["service_key"], rec["plan"]):
             mark_email_sent(rec["id"])
             sent += 1
+            # Log the API call
+            log_call('brevo', endpoint='/v3/smtp/email', model='brevo', status='ok')
+        else:
+            log_call('brevo', endpoint='/v3/smtp/email', model='brevo', status='error')
 
     logger.info("Done: " + str(sent) + "/" + str(len(unsent)) + " emails sent")
 
