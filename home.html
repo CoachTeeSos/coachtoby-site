@@ -1,310 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sessions with Toby — Where Ordinary Voices Become Impossible to Ignore</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessions with Toby — Where Ordinary Voices Become Impossible to Ignore</title>
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J9V395RPDH');</script>
-<meta name="description" content="Elite vocal transformation for singers, performers, worship leaders, and creators. Train the voice, presence, and confidence that make people stop scrolling, stop talking, and start listening. Session 1 guarantee.">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0D0E12">
-<link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/home.html">
-<meta property="og:title" content="Sessions with Toby — Where Ordinary Voices Become Impossible to Ignore">
-<meta property="og:description" content="Train the voice, presence, and confidence that make people stop scrolling, stop talking, and start listening.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/home.html">
-<meta property="og:site_name" content="Sessions with Toby">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","url":"https://coachteesos.github.io/coachtoby-site/","description":"Elite vocal transformation for singers, performers, worship leaders, and creators.","founder":{"@type":"Person","name":"Coach Toby","jobTitle":"Vocal Coach & Performance Coach"},"sameAs":["https://wa.me/2349160106084"]}</script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=5.2">
-<style>
-/* ═══════════════════════════════════════════════════════════
-   HOME PAGE — Sessions with Toby
-   Design System: Carbon #0D0E12 · Obsidian #161820
-   Gold #E4B34F · Mint #00E5A3 · Text #F4F5F7 · Muted #9FA6B5
-   ═══════════════════════════════════════════════════════════ */
-
-/* ── HERO ── */
-.hero-section{background:linear-gradient(160deg,var(--bg-canvas) 0%,#0f1019 40%,#1a1220 100%);padding:100px 24px 80px;text-align:center;position:relative;overflow:hidden}
-.hero-section::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(228,179,79,0.04) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(0,229,163,0.03) 0%,transparent 50%);pointer-events:none}
-.hero-label{display:inline-block;font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:28px;padding:6px 16px;border:1px solid var(--border-subtle);border-radius:50px;background:var(--bg-surface)}
-.hero-label span{color:var(--brand-accent);font-weight:700}
-.hero-headline{font-family:var(--font-display);font-size:clamp(2.2rem,6vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-0.04em;margin-bottom:20px;color:var(--text-primary);position:relative}
-.hero-headline .gold{color:var(--brand-accent)}
-.hero-subtext{font-size:1.1rem;color:var(--text-secondary);max-width:560px;margin:0 auto 36px;line-height:1.8;position:relative}
-.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
-.hero-scroll-indicator{margin-top:56px;position:relative}
-.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--brand-accent),transparent);margin:0 auto}
-
-/* ── FRICTION ── */
-.friction-section{background:var(--bg-canvas);padding:80px 24px}
-.friction-header{text-align:center;max-width:560px;margin:0 auto 48px}
-.friction-closer{text-align:center;margin-top:40px}
-.friction-closer strong{color:var(--text-primary)}
-
-/* ── CARDS ── */
-.card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
-.card-grid-wide{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
-.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.25rem}
-.card-icon-gold{background:rgba(228,179,79,0.1);color:var(--brand-accent)}
-.card-icon-mint{background:rgba(0,229,163,0.1);color:var(--brand-kinetic)}
-.card-icon-red{background:rgba(255,100,100,0.1);color:#ff6b6b}
-.card-icon-purple{background:rgba(167,139,250,0.1);color:#a78bfa}
-
-/* ── TRANSFORMATION ── */
-.transformation-section{background:linear-gradient(135deg,var(--bg-canvas) 0%,#1a1a2e 100%);padding:80px 24px}
-.transformation-header{text-align:center;max-width:560px;margin:0 auto 48px}
-.transformation-card{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:28px;text-align:center;transition:transform .2s ease}
-.transformation-card:hover{transform:translateY(-2px)}
-.transformation-before{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle)}
-.transformation-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-weight:700}
-.label-muted{color:var(--text-muted)}
-.label-accent{color:var(--brand-accent)}
-.transformation-quote{font-family:var(--font-display);font-weight:700;font-size:1.05rem;line-height:1.5}
-.quote-muted{color:var(--text-muted)}
-.quote-light{color:var(--text-primary)}
-
-/* ── STATS ── */
-.stats-section{background:var(--bg-surface);padding:64px 24px}
-.stats-header{text-align:center;margin-bottom:40px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;max-width:800px;margin:0 auto}
-.stat-number{font-family:var(--font-display);font-weight:800;font-size:2.5rem;color:var(--text-primary);display:block}
-.stat-label{font-size:0.8rem;color:var(--text-secondary);margin-top:4px}
-.stat-star{color:var(--brand-accent)}
-
-/* ── TESTIMONIALS ── */
-.testimonials-section{background:var(--bg-canvas);padding:80px 24px}
-.testimonials-header{text-align:center;max-width:560px;margin:0 auto 48px}
-.testimonial-card{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;overflow:hidden;transition:transform .2s ease}
-.testimonial-card:hover{transform:translateY(-2px)}
-.testimonial-video{background:var(--bg-canvas);height:160px;display:flex;align-items:center;justify-content:center;position:relative}
-.play-button{width:48px;height:48px;background:var(--brand-accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--bg-canvas)}
-.video-caption{position:absolute;bottom:12px;left:12px;font-size:0.75rem;color:var(--text-secondary)}
-.testimonial-body{padding:20px}
-.stars{color:var(--brand-accent);font-size:0.85rem;margin-bottom:8px}
-.testimonial-quote{color:var(--text-secondary);font-size:0.9rem;line-height:1.6}
-.testimonials-footer{text-align:center;margin-top:32px}
-.review-link{color:var(--brand-accent);font-size:0.9rem;text-decoration:none;font-weight:600}
-
-/* ── AUTHORITY ── */
-.authority-section{background:var(--bg-surface);padding:80px 24px}
-.authority-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;max-width:1000px;margin:0 auto}
-.timeline{border-left:2px solid var(--border-subtle);padding-left:24px}
-.timeline-item{margin-bottom:28px;position:relative}
-.timeline-item:last-child{margin-bottom:0}
-.timeline-dot{position:absolute;left:-30px;top:0;width:12px;height:12px;border-radius:50%;background:var(--brand-accent);border:2px solid var(--bg-surface)}
-.timeline-year{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--brand-kinetic);margin-bottom:6px}
-.timeline-title{font-family:var(--font-display);font-weight:800;font-size:1.1rem;margin-bottom:4px;color:var(--text-primary)}
-.timeline-text{font-size:0.95rem;color:var(--text-secondary);line-height:1.7}
-
-/* ── GUARANTEE ── */
-.guarantee-section{background:var(--bg-canvas);padding:64px 24px}
-.guarantee-content{max-width:560px;margin:0 auto;text-align:center}
-.guarantee-icon{font-size:2.5rem;margin-bottom:16px}
-.guarantee-note{font-size:0.85rem;color:var(--text-muted);margin-top:16px}
-
-/* ── FINAL CTA ── */
-.final-cta{background:linear-gradient(135deg,var(--bg-canvas) 0%,#1a1a2e 100%);padding:80px 24px;text-align:center}
-.final-cta-inner{max-width:600px;margin:0 auto}
-.final-cta-email{color:var(--text-muted);font-size:0.9rem;margin-top:24px}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .hero-headline{font-size:2rem}
-  .card-grid-3,.card-grid-wide{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .authority-grid{grid-template-columns:1fr;gap:32px}
-  .hero-section{padding:72px 20px 56px}
-  .friction-section,.transformation-section,.testimonials-section,.authority-section{padding:56px 20px}
-}
-</style>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J9V395RPDH');
+</script>
+  <meta name="description" content="Elite vocal transformation for singers, performers, worship leaders, and creators. Train the voice, presence, and confidence that make people stop scrolling, stop talking, and start listening. Session 1 guarantee.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0D0E12">
+  <link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/home.html">
+  <meta property="og:title" content="Sessions with Toby — Where Ordinary Voices Become Impossible to Ignore">
+  <meta property="og:description" content="Train the voice, presence, and confidence that make people stop scrolling, stop talking, and start listening.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/home.html">
+  <meta property="og:site_name" content="Sessions with Toby">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","url":"https://coachteesos.github.io/coachtoby-site/","description":"Elite vocal transformation for singers, performers, worship leaders, and creators.","founder":{"@type":"Person","name":"Coach Toby","jobTitle":"Vocal Coach & Performance Coach"},"sameAs":["https://t.me/Retpipebot","https://wa.me/2349160106084"]}
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+  <link rel="stylesheet" href="assets/css/main.css?v=5">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- NAV -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">SESSIONS WITH TOBY</a>
+      <div class="nav-links">
+        <a href="#friction" class="nav-link">The Problem</a>
+        <a href="#transformation" class="nav-link">Transformation</a>
+        <a href="#proof" class="nav-link">Proof</a>
+        <a href="#authority" class="nav-link">About</a>
+        <a href="book.html" class="nav-cta">Book a Session</a>
+      </div>
+      <button class="md:hidden btn-mobile-toggle" onclick="toggleMobile()" aria-label="Menu">☰</button>
+    </div>
+  </nav>
 
-<!-- NAV -->
-<nav class="nav" id="mainNav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Sessions with Toby</a>
-    <div class="nav-links">
-      <a href="#friction" class="nav-link">The Problem</a>
-      <a href="#transformation" class="nav-link">Transformation</a>
-      <a href="#proof" class="nav-link">Proof</a>
-      <a href="#authority" class="nav-link">About</a>
-      <a href="book.html" class="nav-cta">Book a Session</a>
-    </div>
-    <button class="btn-mobile-toggle" onclick="toggleMobile()" aria-label="Menu">
-      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-  </div>
-  <div class="mobile-menu" id="mobMenu">
-    <a href="#friction" class="nav-link" onclick="toggleMobile()">The Problem</a>
-    <a href="#transformation" class="nav-link" onclick="toggleMobile()">Transformation</a>
-    <a href="#proof" class="nav-link" onclick="toggleMobile()">Proof</a>
-    <a href="#authority" class="nav-link" onclick="toggleMobile()">About</a>
-    <a href="book.html" class="nav-cta" onclick="toggleMobile()">Book a Session</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero-section">
-  <p class="hero-label"><span>Elite Vocal Transformation</span></p>
-  <h1 class="hero-headline">Your Audience<br>Should Feel<br><span class="gold">Something.</span></h1>
-  <p class="hero-subtext">Train the voice, presence, and confidence that make people stop scrolling, stop talking, and start listening.</p>
-  <div class="hero-actions">
-    <a href="book.html" class="btn-primary">Book a Vocal Breakthrough Session</a>
-    <a href="#transformation" class="btn-secondary">Watch Student Transformations</a>
-  </div>
-  <div class="hero-scroll-indicator"><div class="scroll-line"></div></div>
-</section>
-
-<!-- FRICTION -->
-<section id="friction" class="friction-section">
-  <div class="friction-header">
-    <p class="section-label">Sound Familiar?</p>
-    <h2 class="section-headline">You're Not Struggling<br>Because You Lack Talent.</h2>
-    <p class="body-text">You're struggling because nobody showed you how your voice actually works under pressure.</p>
-  </div>
-  <div class="card-grid-3">
-    <div class="card text-center reveal"><div class="card-icon card-icon-red">✦</div><h3 class="card-title">Range Collapses</h3><p class="card-text">You can hit the note alone. But the moment you perform, your throat tightens and the note disappears.</p></div>
-    <div class="card text-center reveal"><div class="card-icon card-icon-mint">◈</div><h3 class="card-title">Breath Disappears</h3><p class="card-text">You run out of air mid-phrase. Not because you're unfit — because nobody taught you breath management for performance.</p></div>
-    <div class="card text-center reveal"><div class="card-icon card-icon-purple">⬡</div><h3 class="card-title">Confidence Fades</h3><p class="card-text">You sound great in rehearsal. But when it counts, your voice shakes and your presence shrinks.</p></div>
-    <div class="card text-center reveal"><div class="card-icon card-icon-gold">♫</div><h3 class="card-title">Notes Crack</h3><p class="card-text">The high note you've been avoiding for years. It's not a range problem — it's a technique problem.</p></div>
-    <div class="card text-center reveal"><div class="card-icon card-icon-red">⟐</div><h3 class="card-title">Performance Anxiety</h3><p class="card-text">Your body betrays you on stage. Heart racing, palms sweating, voice trembling. It's not nerves — it's untrained response.</p></div>
-    <div class="card text-center reveal"><div class="card-icon card-icon-mint">◎</div><h3 class="card-title">Years Wasted</h3><p class="card-text">You've been "about to start" for years. Watching others pass you by. The gap keeps growing.</p></div>
-  </div>
-  <div class="friction-closer">
-    <p class="body-text">Most singers spend years fixing the wrong problem.<br><strong>The next section explains why.</strong></p>
-  </div>
-</section>
-
-<!-- TRANSFORMATION -->
-<section id="transformation" class="transformation-section">
-  <div class="transformation-header">
-    <p class="section-label">The Shift</p>
-    <h2 class="section-headline section-headline-light">The Voice You Want<br>Is Already There.</h2>
-    <p class="body-text body-text-light">It's not about adding something. It's about removing what's in the way.</p>
-  </div>
-  <div class="card-grid-wide">
-    <div class="transformation-card reveal">
-      <div class="transformation-before"><p class="transformation-label label-muted">Before</p><p class="transformation-quote quote-muted">"You hope people<br>notice your voice."</p></div>
-      <div class="transformation-after"><p class="transformation-label label-accent">After</p><p class="transformation-quote quote-light">"People remember<br>your voice."</p></div>
-    </div>
-    <div class="transformation-card reveal">
-      <div class="transformation-before"><p class="transformation-label label-muted">Before</p><p class="transformation-quote quote-muted">"You avoid<br>difficult songs."</p></div>
-      <div class="transformation-after"><p class="transformation-label label-accent">After</p><p class="transformation-quote quote-light">"You choose them<br>on purpose."</p></div>
-    </div>
-    <div class="transformation-card reveal">
-      <div class="transformation-before"><p class="transformation-label label-muted">Before</p><p class="transformation-quote quote-muted">"You wonder if<br>you're good enough."</p></div>
-      <div class="transformation-after"><p class="transformation-label label-accent">After</p><p class="transformation-quote quote-light">"You know exactly<br>what you bring."</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section id="proof" class="stats-section">
-  <div class="stats-header">
-    <p class="section-label">Proof Beats Promises</p>
-    <h2 class="section-headline">Numbers Don't Perform.<br>But They Don't Lie Either.</h2>
-  </div>
-  <div class="stats-grid">
-    <div class="reveal"><span class="stat-number">50+</span><span class="stat-label">Singers Coached</span></div>
-    <div class="reveal"><span class="stat-number">10+</span><span class="stat-label">Countries Reached</span></div>
-    <div class="reveal"><span class="stat-number">4.9<span class="stat-star">★</span></span><span class="stat-label">Average Rating</span></div>
-    <div class="reveal"><span class="stat-number">100%</span><span class="stat-label">Session 1 Guarantee</span></div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials-section">
-  <div class="testimonials-header">
-    <p class="section-label">Student Results</p>
-    <h2 class="section-headline">What Happens<br>When You Commit.</h2>
-  </div>
-  <div class="card-grid-wide">
-    <div class="testimonial-card reveal">
-      <div class="testimonial-video"><div class="play-button"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="video-caption"><p>David A. · Lagos, Nigeria</p></div></div>
-      <div class="testimonial-body"><p class="stars">★★★★★</p><p class="testimonial-quote">"The riffs and runs I'd been struggling with for years — he broke them down in one session. I went from avoiding auditions to booking gigs."</p></div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-video"><div class="play-button"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="video-caption"><p>Sarah O. · Abuja, Nigeria</p></div></div>
-      <div class="testimonial-body"><p class="stars">★★★★★</p><p class="testimonial-quote">"Within 3 months, I got the promotion I'd been chasing. It wasn't just voice coaching — it was life coaching that actually worked."</p></div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-video"><div class="play-button"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="video-caption"><p>Michael O. · London, UK</p></div></div>
-      <div class="testimonial-body"><p class="stars">★★★★★</p><p class="testimonial-quote">"Weekly challenges accelerated my progress more than any course. The accountability is real. I finally sound like myself."</p></div>
-    </div>
-  </div>
-  <div class="testimonials-footer"><a href="https://g.page/r/CWXuxaUa-T4cEAE/review" target="_blank" rel="noopener noreferrer" class="review-link">Read & leave reviews on Google →</a></div>
-</section>
-
-<!-- AUTHORITY -->
-<section id="authority" class="authority-section">
-  <div class="authority-grid">
-    <div>
-      <p class="section-label">Why Singers Trust This Process</p>
-      <h2 class="section-headline">Built By A Performer.<br>For Performers.</h2>
-      <p class="body-text">This isn't a teaching certificate. It's a performance career. Every technique taught comes from real stages, real pressure, real audiences.</p>
-      <p class="body-text">Coach Toby has spent years studying what separates memorable singers from forgettable ones. The answer is never just "practice more."</p>
-    </div>
-    <div>
-      <div class="timeline">
-        <div class="timeline-item"><div class="timeline-dot"></div><p class="timeline-year">2018</p><h3 class="timeline-title">First Student</h3><p class="timeline-text">Started informal vocal coaching. One church singer at a time. Word spread.</p></div>
-        <div class="timeline-item"><div class="timeline-dot"></div><p class="timeline-year">2020</p><h3 class="timeline-title">Going Online</h3><p class="timeline-text">Pandemic forced the move online. Students from different countries started showing up.</p></div>
-        <div class="timeline-item"><div class="timeline-dot"></div><p class="timeline-year">2022</p><h3 class="timeline-title">Life Coaching Added</h3><p class="timeline-text">Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</p></div>
-        <div class="timeline-item"><div class="timeline-dot"></div><p class="timeline-year">2026</p><h3 class="timeline-title">Full Ecosystem</h3><p class="timeline-text">Quiz, community, group and 1-on-1 coaching. The mission stays the same — help people become.</p></div>
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- HERO — 100vh, cinematic, massive headline -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <p class="hero-label">Elite Vocal Transformation</p>
+      <h1 class="hero-headline">
+        Your Audience<br>Should Feel<br>Something.
+      </h1>
+      <p class="hero-subtext">
+        Train the voice, presence, and confidence that make people stop scrolling, stop talking, and start listening.
+      </p>
+      <div class="hero-actions">
+        <a href="book.html" class="btn-primary">Book A Vocal Breakthrough Session</a>
+        <a href="#transformation" class="btn-secondary">Watch Student Transformations</a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- GUARANTEE -->
-<section class="guarantee-section">
-  <div class="guarantee-content">
-    <div class="guarantee-icon">🛡</div>
-    <h2 class="section-headline">The Session 1 Guarantee</h2>
-    <p class="body-text">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop.</p>
-    <p class="guarantee-note">Never had to pay this guarantee out. Not once. Not with 50 students.</p>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="final-cta-inner">
-    <h2 class="section-headline section-headline-light">The Difference Between<br>A Good Singer And A<br>Memorable One<br><span class="accent-highlight">Is Rarely Talent.</span></h2>
-    <p class="body-text body-text-light">It's training. It's presence. It's the willingness to become who you already are.</p>
-    <div class="hero-actions">
-      <a href="book.html" class="btn-primary">Start Your Breakthrough</a>
-      <a href="https://wa.me/2349160106084" target="_blank" rel="noopener noreferrer" class="btn-secondary">WhatsApp Coach Toby</a>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
     </div>
-    <p class="final-cta-email">Or email: prosperolumotobi@gmail.com</p>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div><div class="footer-brand">Sessions with Toby</div><p class="footer-tagline">Where ordinary voices become impossible to ignore.</p></div>
-      <div><h4 class="footer-heading">Explore</h4><ul class="footer-list"><li><a href="#friction">The Problem</a></li><li><a href="#transformation">Transformation</a></li><li><a href="#proof">Proof</a></li><li><a href="#authority">About</a></li></ul></div>
-      <div><h4 class="footer-heading">Resources</h4><ul class="footer-list"><li><a href="quiz.html">Vocal Quiz</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="book.html">Book a Session</a></li></ul></div>
-      <div><h4 class="footer-heading">Connect</h4><ul class="footer-list"><li><a href="https://wa.me/2349160106084">WhatsApp</a></li><li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li></ul></div>
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- FRICTION — Visitor's pain points -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section id="friction" class="section-pad section-white">
+    <div class="container">
+      <div class="text-center mx-auto friction-header">
+        <span class="section-label">Sound Familiar?</span>
+        <h2 class="section-headline section-headline-md">You're Not Struggling<br>Because You Lack Talent.</h2>
+        <p class="body-text mx-auto">You're struggling because nobody showed you how your voice actually works under pressure.</p>
+      </div>
+
+      <div class="grid card-grid-3">
+        <div class="card reveal">
+          <span class="card-icon">😰</span>
+          <h3 class="card-title">Range Collapses</h3>
+          <p class="card-text">You can hit the note alone. But the moment you perform, your throat tightens and the note disappears.</p>
+        </div>
+        <div class="card reveal">
+          <span class="card-icon">💨</span>
+          <h3 class="card-title">Breath Disappears</h3>
+          <p class="card-text">You run out of air mid-phrase. Not because you're unfit — because nobody taught you breath management for performance.</p>
+        </div>
+        <div class="card reveal">
+          <span class="card-icon">😶</span>
+          <h3 class="card-title">Confidence Fades</h3>
+          <p class="card-text">You sound great in rehearsal. But when it counts, your voice shakes and your presence shrinks.</p>
+        </div>
+        <div class="card reveal">
+          <span class="card-icon">🎵</span>
+          <h3 class="card-title">Notes Crack</h3>
+          <p class="card-text">The high note you've been avoiding for years. It's not a range problem — it's a technique problem.</p>
+        </div>
+        <div class="card reveal">
+          <span class="card-icon">😤</span>
+          <h3 class="card-title">Performance Anxiety</h3>
+          <p class="card-text">Your body betrays you on stage. Heart racing, palms sweating, voice trembling. It's not nerves — it's untrained response.</p>
+        </div>
+        <div class="card card-dark reveal">
+          <span class="card-icon">🔒</span>
+          <h3 class="card-title card-title-light">Years Wasted</h3>
+          <p class="card-text card-text-light">You've been "about to start" for years. Watching others pass you by. The gap between where you are and where you should be keeps growing.</p>
+        </div>
+      </div>
+
+      <!-- Open loop -->
+      <div class="text-center friction-closer">
+        <p class="body-text mx-auto">Most singers spend years fixing the wrong problem.<br><strong>The next section explains why.</strong></p>
+      </div>
     </div>
-    <div class="footer-bottom"><p>© 2026 Sessions with Toby. All rights reserved.</p><a href="book.html" class="btn-cta">Start Your Breakthrough →</a></div>
-  </div>
-</footer>
+  </section>
 
-<script>
-(function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
-(function(){var nav=document.getElementById('mainNav');if(!nav)return;window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);},{passive:true});})();
-function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
-document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
-(function(){var els=document.querySelectorAll('.reveal');if(!els.length)return;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});els.forEach(function(el){obs.observe(el);});})();
-</script>
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- TRANSFORMATION — Before/After identity cards -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section id="transformation" class="section-pad hero-gradient">
+    <div class="container">
+      <div class="text-center mx-auto transformation-header">
+        <span class="section-label section-label-light">The Shift</span>
+        <h2 class="section-headline section-headline-light">The Voice You Want<br>Is Already There.</h2>
+        <p class="body-text mx-auto body-text-light">It's not about adding something. It's about removing what's in the way.</p>
+      </div>
+
+      <div class="grid card-grid-wide">
+        <!-- Card 1 -->
+        <div class="reveal transformation-card">
+          <div class="transformation-before">
+            <p class="transformation-label label-muted">Before</p>
+            <p class="transformation-quote quote-muted">"You hope people<br>notice your voice."</p>
+          </div>
+          <div class="transformation-after">
+            <p class="transformation-label label-accent">After</p>
+            <p class="transformation-quote quote-light">"People remember<br>your voice."</p>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="reveal transformation-card">
+          <div class="transformation-before">
+            <p class="transformation-label label-muted">Before</p>
+            <p class="transformation-quote quote-muted">"You avoid<br>difficult songs."</p>
+          </div>
+          <div class="transformation-after">
+            <p class="transformation-label label-accent">After</p>
+            <p class="transformation-quote quote-light">"You choose them<br>on purpose."</p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="reveal transformation-card">
+          <div class="transformation-before">
+            <p class="transformation-label label-muted">Before</p>
+            <p class="transformation-quote quote-muted">"You wonder if<br>you're good enough."</p>
+          </div>
+          <div class="transformation-after">
+            <p class="transformation-label label-accent">After</p>
+            <p class="transformation-quote quote-light">"You know exactly<br>what you bring."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- PROOF — Massive statistics -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section id="proof" class="section-pad section-offwhite">
+    <div class="container">
+      <div class="text-center proof-header">
+        <span class="section-label">Proof Beats Promises</span>
+        <h2 class="section-headline">Numbers Don't Perform.<br>But They Don't Lie Either.</h2>
+      </div>
+
+      <div class="stats-grid">
+        <div class="reveal">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Singers Coached</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Countries Reached</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-number">4.9<span class="stat-star">★</span></div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Session 1 Guarantee</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- TESTIMONIALS — Video-first, minimal text -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="section-pad section-white">
+    <div class="container">
+      <div class="text-center mx-auto testimonials-header">
+        <span class="section-label">Student Results</span>
+        <h2 class="section-headline">What Happens<br>When You Commit.</h2>
+      </div>
+
+      <div class="grid card-grid-wide">
+        <!-- Testimonial 1 -->
+        <div class="reveal testimonial-card">
+          <div class="testimonial-video">
+            <div class="play-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="video-caption">
+              <p class="caption-text">David A. · Lagos, Nigeria</p>
+            </div>
+          </div>
+          <div class="testimonial-body">
+            <p class="stars">★★★★★</p>
+            <p class="testimonial-quote">"The riffs and runs I'd been struggling with for years — he broke them down in one session. I went from avoiding auditions to booking gigs."</p>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="reveal testimonial-card">
+          <div class="testimonial-video">
+            <div class="play-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="video-caption">
+              <p class="caption-text">Sarah O. · Abuja, Nigeria</p>
+            </div>
+          </div>
+          <div class="testimonial-body">
+            <p class="stars">★★★★★</p>
+            <p class="testimonial-quote">"Within 3 months, I got the promotion I'd been chasing. It wasn't just voice coaching — it was life coaching that actually worked."</p>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="reveal testimonial-card">
+          <div class="testimonial-video">
+            <div class="play-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="video-caption">
+              <p class="caption-text">Michael O. · London, UK</p>
+            </div>
+          </div>
+          <div class="testimonial-body">
+            <p class="stars">★★★★★</p>
+            <p class="testimonial-quote">"Weekly challenges accelerated my progress more than any course. The accountability is real. I finally sound like myself."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center testimonials-footer">
+        <a href="https://g.page/r/CWXuxaUa-T4cEAE/review" target="_blank" rel="noopener noreferrer" class="review-link">Read & leave reviews on Google →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- AUTHORITY — Timeline, credibility (NOT "About Me") -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section id="authority" class="section-pad section-offwhite">
+    <div class="container">
+      <div class="grid authority-grid">
+        <div>
+          <span class="section-label">Why Singers Trust This Process</span>
+          <h2 class="section-headline">Built By A Performer.<br>For Performers.</h2>
+          <p class="body-text">This isn't a teaching certificate. It's a performance career. Every technique taught comes from real stages, real pressure, real audiences.</p>
+          <p class="body-text">Coach Toby has spent years studying what separates memorable singers from forgettable ones. The answer is never just "practice more."</p>
+        </div>
+        <div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-year">2018</p>
+              <h3 class="timeline-title">First Student</h3>
+              <p class="timeline-text">Started informal vocal coaching. One church singer at a time. Word spread.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-year">2020</p>
+              <h3 class="timeline-title">Going Online</h3>
+              <p class="timeline-text">Pandemic forced the move online. Students from different countries started showing up.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-year">2022</p>
+              <h3 class="timeline-title">Life Coaching Added</h3>
+              <p class="timeline-text">Students kept asking: "Can you help with the other stuff too?" Life coaching became official.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <p class="timeline-year">2026</p>
+              <h3 class="timeline-title">Full Ecosystem</h3>
+              <p class="timeline-text">Quiz, community, group and 1-on-1 coaching. The mission stays the same — help people become.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- GUARANTEE -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="section-pad-sm section-white">
+    <div class="container">
+      <div class="text-center mx-auto guarantee-content">
+        <div class="guarantee-icon">🛡️</div>
+        <h2 class="section-headline">The Session 1 Guarantee</h2>
+        <p class="body-text mx-auto">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop.</p>
+        <p class="guarantee-note">Never had to pay this guarantee out. Not once. Not with 50 students.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- FINAL CTA — Conviction close -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2 class="section-headline section-headline-light">The Difference Between<br>A Good Singer And A<br>Memorable One<br><span class="accent-highlight">Is Rarely Talent.</span></h2>
+      <p class="body-text mx-auto body-text-light">It's training. It's presence. It's the willingness to become who you already are.</p>
+      <div class="hero-actions">
+        <a href="book.html" class="btn-primary">Start Your Breakthrough</a>
+        <a href="https://wa.me/2349160106084" target="_blank" rel="noopener noreferrer" class="btn-secondary">WhatsApp Coach Toby</a>
+      </div>
+      <p class="final-cta-email">Or email: prosperolumotobi@gmail.com</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- FOOTER -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand">SESSIONS WITH TOBY</p>
+          <p class="footer-tagline">Where ordinary voices become impossible to ignore.</p>
+        </div>
+        <div>
+          <p class="footer-heading">Explore</p>
+          <ul class="footer-list">
+            <li><a href="#friction">The Problem</a></li>
+            <li><a href="#transformation">Transformation</a></li>
+            <li><a href="#proof">Proof</a></li>
+            <li><a href="#authority">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Resources</p>
+          <ul class="footer-list">
+            <li><a href="quiz.html">Vocal Quiz</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="book.html">Book a Session</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Connect</p>
+          <ul class="footer-list">
+            <li><a href="https://wa.me/2349160106084">WhatsApp</a></li>
+            <li><a href="https://t.me/Retpipebot">Telegram</a></li>
+            <li><a href="mailto:prosperolumotobi@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Sessions with Toby. All rights reserved.</p>
+        <a href="book.html" class="nav-cta">Start Your Breakthrough →</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- SCRIPTS -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <script>
+  /* Nav scroll effect */
+  (function(){
+    var nav=document.getElementById('mainNav');
+    if(!nav)return;
+    window.addEventListener('scroll',function(){
+      nav.classList.toggle('scrolled',window.scrollY>60);
+    },{passive:true});
+  })();
+
+  /* Mobile menu toggle */
+  function toggleMobile(){
+    var links=document.querySelector('.nav-links');
+    if(links)links.style.display=links.style.display==='flex'?'none':'flex';
+  }
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(this.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+
+  /* Scroll reveal */
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!els.length)return;
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting)e.target.classList.add('visible');
+      });
+    },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){obs.observe(el);});
+  })();
+  </script>
+  <script src="assets/capture.js"></script>
+  
+  
+  
+
+  <script defer src="/assets/js/pricing.js"></script>
+  <script defer src="/assets/js/payment.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>
