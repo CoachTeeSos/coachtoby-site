@@ -129,7 +129,25 @@ function checkReady(){
   document.getElementById('bookBtn').disabled=!(name&&wa&&picked);
 }
 document.getElementById('bookingForm').addEventListener('submit',function(){
-  document.getElementById('successDetails').innerHTML='<strong style="color:#F4F5F7">'+picked+'</strong><br><span style="color:#6b7280;font-size:0.85rem">Name: '+document.getElementById('sName').value+' · WhatsApp: '+document.getElementById('sWhatsApp').value+'</span>';
+  var name=document.getElementById('sName').value.trim();
+  var wa=document.getElementById('sWhatsApp').value.trim();
+  
+  // Sync to Airtable via Google Apps Script proxy
+  try{
+    fetch('https://script.google.com/macros/s/AKfycbyni3_tGs1zGtVANw24cQjHAR2o_xNRkbi-_UMrqa62DJVQfzsfQ30jBxHfuz2HEmbzIQ/exec',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        name:name,
+        whatsapp:wa,
+        slot:picked,
+        source:'schedule_page'
+      }),
+      mode:'no-cors'
+    });
+  }catch(e){}
+  
+  document.getElementById('successDetails').innerHTML='<strong style="color:#F4F5F7">'+picked+'</strong><br><span style="color:#6b7280;font-size:0.85rem">Name: '+name+' · WhatsApp: '+wa+'</span>';
   document.getElementById('step1').style.display='none';
   document.getElementById('stepSuccess').style.display='block';
   if(typeof gtag!=='undefined'){gtag('event','schedule_booking',{value:0,currency:'USD'});}
