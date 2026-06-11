@@ -31,9 +31,10 @@
 .step-panel.active{display:block}
 .step-panel h1{font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.75rem}
 .step-panel p{color:var(--text-secondary);margin-bottom:2rem}
-.quiz-option{width:100%;padding:16px 20px;margin-bottom:8px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius);font-family:var(--font-body);font-size:0.95rem;color:var(--text-primary);cursor:pointer;transition:all var(--transition);text-align:left;display:flex;align-items:center;gap:12px}
-.quiz-option:hover{border-color:var(--brand-accent);transform:translateX(4px)}
-.quiz-option .icon{font-size:1.25rem}
+.quiz-option{width:100%;padding:18px 22px;margin-bottom:10px;background:var(--bg-surface);border:2px solid var(--border-subtle);border-radius:var(--radius);font-family:var(--font-body);font-size:0.95rem;color:var(--text-primary);cursor:pointer;transition:all var(--transition);text-align:left;display:flex;align-items:center;gap:14px}
+.quiz-option:hover{border-color:var(--brand-accent);transform:translateX(4px);background:rgba(228,179,79,0.05)}
+.quiz-option:active,.quiz-option.selected{border-color:var(--brand-accent);background:rgba(228,179,79,0.1);box-shadow:0 0 0 3px rgba(228,179,79,0.2)}
+.quiz-option .icon{font-size:1.3rem;min-width:28px}
 .progress-bar{width:100%;max-width:200px;margin:0 auto 24px;height:2px;background:var(--border-subtle);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;background:var(--brand-accent);transition:width 0.4s ease}
 .progress-label{color:var(--text-muted);font-size:0.75rem;margin-top:8px;text-align:right}
@@ -145,10 +146,16 @@ var cs=1,ans={};
 document.getElementById('welcomeScreen').addEventListener('click',function(e){
   var b=e.target.closest('.quiz-option');if(!b)return;
   var s=parseInt(b.dataset.step),v=b.dataset.value;ans[s]=v;
-  document.getElementById('step'+s).classList.remove('active');cs=s+1;
-  if(cs<=5){document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';}
-  if(s===4){genRec();if(typeof gtag!=='undefined'){gtag('event','generate_lead',{value:0,currency:'USD'});}}
-  document.getElementById('backBtn').style.display=cs>1?'inline':'none';
+  // Highlight selected option
+  document.querySelectorAll('#step'+s+' .quiz-option').forEach(function(opt){opt.classList.remove('selected');});
+  b.classList.add('selected');
+  // Small delay for visual feedback before moving to next step
+  setTimeout(function(){
+    document.getElementById('step'+s).classList.remove('active');cs=s+1;
+    if(cs<=5){document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';}
+    if(s===4){genRec();if(typeof gtag!=='undefined'){gtag('event','generate_lead',{value:0,currency:'USD'});}}
+    document.getElementById('backBtn').style.display=cs>1?'inline':'none';
+  }, 200);
 });
 function goBack(){if(cs<=1)return;document.getElementById('step'+cs).classList.remove('active');cs--;document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';document.getElementById('backBtn').style.display=cs>1?'inline':'none';}
 function genRec(){
