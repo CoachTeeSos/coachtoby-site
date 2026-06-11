@@ -6,36 +6,61 @@
 <title>Thank You — Sessions with Toby</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg-canvas: #0D0E12;
-    --bg-surface: #161820;
-    --border-subtle: #242838;
-    --text-primary: #F4F5F7;
-    --text-secondary: #9FA6B5;
-    --brand-accent: #E4B34F;
-    --brand-kinetic: #00E5A3;
-    --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-    --font-body: 'Inter', system-ui, sans-serif;
-}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg-canvas);color:var(--text-primary);font-family:var(--font-body);letter-spacing:-0.01em;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
-.box{max-width:500px;text-align:center;padding:48px 40px;background:var(--bg-surface);border-radius:16px;border:1px solid var(--border-subtle)}
-h1{color:var(--brand-accent);font-size:1.8rem;margin-bottom:16px;font-family:var(--font-display);letter-spacing:-0.03em}
-p{color:var(--text-secondary);line-height:1.7;margin-bottom:16px}
-a{color:var(--brand-accent);text-decoration:none;font-weight:600}
-.check{font-size:3rem;margin-bottom:16px}
+body{background:#0D0E12;color:#F4F5F7;font-family:'Inter',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{max-width:520px;width:100%;background:#161820;border:1px solid #242838;border-radius:20px;padding:40px;text-align:center}
+h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#F4F5F7;margin-bottom:8px}
+p{color:#9FA6B5;font-size:0.95rem;line-height:1.7;margin-bottom:16px}
+.divider{height:1px;background:#242838;margin:24px 0}
+.pain-box{background:#0D0E12;border:1px solid #242838;border-radius:12px;padding:20px;margin:20px 0;text-align:left}
+.pain-box label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:#E4B34F;font-weight:700;display:block;margin-bottom:8px}
+.pain-box p{color:#F4F5F7;font-size:0.9rem;line-height:1.7;margin:0;white-space:pre-wrap}
+.btn{display:inline-block;padding:16px 32px;background:#E4B34F;color:#0D0E12;font-weight:700;text-decoration:none;border-radius:10px;font-size:0.95rem;font-family:'Plus Jakarta Sans',sans-serif;transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(228,179,79,0.2)}
+.subtle{color:#6b7280;font-size:0.8rem}
 </style>
-<link rel="stylesheet" href="assets/css/main.css?v=5.1">
 </head>
 <body>
-<div class="box">
-<div class="check">✓</div>
-<h1>You're In</h1>
-<p>I'll review your voice assessment and get back to you within 24 hours.</p>
-<p>While you're waiting, here's a free exercise that will change how you think about your voice:</p>
-<p><a href="https://coachteesos.github.io/coachtoby-site/sessions-with-toby-2026.html">← Go back to the exercise</a></p>
+<div class="card">
+  <div style="width:48px;height:48px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.3);border-radius:50%;margin:0 auto 20px;"></div>
+  <h1 id="greeting">Got it.</h1>
+  <p>Your first exercise is on its way to your inbox. Check your email (and spam folder, just in case).</p>
+  
+  <div class="divider"></div>
+  
+  <div id="painSection" style="display:none">
+    <p style="font-size:0.85rem;color:#9FA6B5;">Here's what you told me — so I can give you the <em>right</em> exercises:</p>
+    <div class="pain-box">
+      <label>Your Struggle</label>
+      <p id="painText"></p>
+    </div>
+    <div id="storyBox" class="pain-box" style="display:none">
+      <label>Your Story</label>
+      <p id="storyText"></p>
+    </div>
+    <div id="goalBox" class="pain-box" style="display:none">
+      <label>Your Goal</label>
+      <p id="goalText"></p>
+    </div>
+    <div class="divider"></div>
+  </div>
+  
+  <a href="sessions-with-toby-2026.html" class="btn">← Back to Today's Exercise</a>
+  
+  <p class="subtle" style="margin-top:20px;">You'll get a new exercise every day.<br>Each one targets your specific bottleneck.</p>
 </div>
+
+<script>
+var name=localStorage.getItem('ct_lead_name')||'';
+var pain=localStorage.getItem('ct_lead_pain')||'';
+var story=localStorage.getItem('ct_lead_story')||'';
+var goal=localStorage.getItem('ct_lead_goal')||'';
+if(name)document.getElementById('greeting').textContent='Got it, '+(name.split(' ')[0]||'friend');
+if(pain){document.getElementById('painSection').style.display='block';document.getElementById('painText').textContent=pain;}
+if(story){document.getElementById('storyBox').style.display='block';document.getElementById('storyText').textContent=story;}
+if(goal){document.getElementById('goalBox').style.display='block';document.getElementById('goalText').textContent=goal;}
+</script>
 </body>
 </html>
