@@ -17,7 +17,7 @@
 <meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/">
 <meta property="og:site_name" content="Sessions with Toby">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","alternateName":["Coach Toby"],"url":"https://coachteesos.github.io/coachtoby-site/","founder":{"@type":"Person","name":"Coach Toby"},"sameAs":["https://t.me/Retpipebot","https://wa.me/2349160106084"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","alternateName":["Coach Toby"],"url":"https://coachteesos.github.io/coachtoby-site/","founder":{"@type":"Person","name":"Coach Toby"},"sameAs":["https://wa.me/2349160106084"]}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,7 +53,13 @@
 .funnel-back:hover{color:var(--brand-accent)}
 </style>
 </head>
-<body>
+<body style="background:#0D0E12">
+
+<div class="nav" style="position:absolute;top:0;left:0;right:0;background:transparent;border:none">
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo" style="color:#E4F4F5;text-decoration:none">🎤 SESSIONS WITH TOBY</a>
+  </div>
+</div>
 
 <div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
@@ -147,7 +153,7 @@ document.getElementById('welcomeScreen').addEventListener('click',function(e){
 function goBack(){if(cs<=1)return;document.getElementById('step'+cs).classList.remove('active');cs--;document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';document.getElementById('backBtn').style.display=cs>1?'inline':'none';}
 function genRec(){
   var g=ans[1]||'vocals',l=ans[2]||'beginner';
-  var t='Vocal Mastery — Starter Path',d='Personalized 1-on-1 coaching with Coach Toby. Free demo included.',tags=['Free Demo','Personalized Plan','Telegram Support'];
+  var t='Vocal Mastery — Starter Path',d='Personalized 1-on-1 coaching with Coach Toby. Free demo included.',tags=['Free Demo','Personalized Plan','Email Support'];
   if(g==='vocals'&&l==='beginner'){t='Vocal Foundations — Beginner Path';d='Start from scratch. Learn breath control, pitch accuracy, and build toward riffs and runs.';tags=['Free Demo','Beginner-Friendly','Step-by-Step'];}
   else if(g==='vocals'&&(l==='advanced'||l==='professional')){t='Vocal Mastery — Advanced Path';d='Master riffs, runs, melisma, and stage presence.';tags=['Free Demo','Advanced Techniques','Performance Prep'];}
   else if(g==='speaking'){t='Executive Presence Program';d='Command any room with confidence. Voice projection, body language, anxiety management.';tags=['Free Demo','Public Speaking','Confidence Building'];}
