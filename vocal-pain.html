@@ -57,6 +57,7 @@ input::placeholder{color:#6b7280}
     <span id="p3"></span>
     <span id="p4"></span>
     <span id="p5"></span>
+    <span id="p6"></span>
   </div>
 
   <!-- STEP 1 -->
@@ -112,8 +113,26 @@ input::placeholder{color:#6b7280}
     </div>
   </div>
 
-  <!-- STEP 5: THE GOAL -->
+  <!-- STEP 5: THE BUDGET (stylish, not awkward) -->
   <div class="step" id="step5">
+    <h1>One more thing, <span id="nameDisplay3">friend</span>.</h1>
+    <p style="margin-bottom:8px">If someone guaranteed they could fix this for you — what would it be worth?</p>
+    <p class="hint" style="margin-bottom:20px">Don't overthink this. Even a range helps me find the right plan for you. No wrong answer.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+      <div class="slot" onclick="pickBudget(this,'under50')"><span class="day">Under $50</span><span class="time">Budget-friendly</span></div>
+      <div class="slot" onclick="pickBudget(this,'50-100')"><span class="day">$50 – $100</span><span class="time">Standard</span></div>
+      <div class="slot" onclick="pickBudget(this,'100-200')"><span class="day">$100 – $200</span><span class="time">Premium</span></div>
+      <div class="slot" onclick="pickBudget(this,'results')"><span class="day">After Results</span><span class="time">Pay when I see the shift</span></div>
+    </div>
+    <input type="hidden" id="budgetValue" value="">
+    <div style="display:flex;gap:12px;margin-top:20px">
+      <button class="btn btn-sm btn-ghost" onclick="prevStep(4)">← Back</button>
+      <button class="btn btn-sm" onclick="nextStep(6)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: THE GOAL -->
+  <div class="step" id="step6">
     <h1>Last one. I promise.</h1>
     <p style="margin-bottom:8px">If I could wave a magic wand and fix <em>one thing</em> about your voice — what would it be?</p>
     <p class="hint" style="margin-bottom:20px">What does your voice sound like in your head? What are you chasing?</p>
@@ -121,7 +140,7 @@ input::placeholder{color:#6b7280}
     <textarea id="goalInput" placeholder="I want to be able to...&#10;&#10;I want to feel...&#10;&#10;I want to stop..."></textarea>
     <div class="counter" id="goalCounter">0 characters</div>
     <div style="display:flex;gap:12px;margin-top:20px">
-      <button class="btn btn-sm btn-ghost" onclick="prevStep(4)">← Back</button>
+      <button class="btn btn-sm btn-ghost" onclick="prevStep(5)">← Back</button>
       <button class="btn btn-sm" onclick="submitAll()">Send Me My First Exercise →</button>
     </div>
   </div>
@@ -144,23 +163,33 @@ input::placeholder{color:#6b7280}
 </div>
 
 <script>
-var data={name:'',email:'',pain:'',story:'',goal:''};
+var data={name:'',email:'',pain:'',story:'',goal:'',budget:''};
+
+var budgetPicked=false;
+function pickBudget(el,val){
+  document.querySelectorAll('#step5 .slot').forEach(function(s){s.classList.remove('selected');});
+  el.classList.add('selected');
+  document.getElementById('budgetValue').value=val;
+  data.budget=val;
+  budgetPicked=true;
+}
 
 function nextStep(n){
-  if(n===2){var v=document.getElementById('nameInput').value.trim();if(!v){document.getElementById('nameInput').focus();return;}data.name=v;document.getElementById('nameDisplay').textContent=v.split(' ')[0];document.getElementById('nameDisplay2').textContent=v.split(' ')[0];}
+  if(n===2){var v=document.getElementById('nameInput').value.trim();if(!v){document.getElementById('nameInput').focus();return;}data.name=v;document.getElementById('nameDisplay').textContent=v.split(' ')[0];document.getElementById('nameDisplay2').textContent=v.split(' ')[0];document.getElementById('nameDisplay3').textContent=v.split(' ')[0];}
   if(n===3){var v=document.getElementById('emailInput').value.trim();if(!v||!v.includes('@')){document.getElementById('emailInput').focus();return;}data.email=v;}
   if(n===4){data.pain=document.getElementById('painInput').value.trim();}
   if(n===5){data.story=document.getElementById('storyInput').value.trim();}
+  if(n===6){if(!budgetPicked){document.getElementById('budgetValue').focus();return;}data.goal=document.getElementById('goalInput').value.trim();}
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
   document.getElementById('step'+n).classList.add('active');
-  for(var i=1;i<=5;i++){var el=document.getElementById('p'+i);if(i<n)el.className='done';else if(i===n)el.className='current';else el.className='';}
+  for(var i=1;i<=6;i++){var el=document.getElementById('p'+i);if(i<n)el.className='done';else if(i===n)el.className='current';else el.className='';}
   setTimeout(function(){var inp=document.querySelector('#step'+n+' input, #step'+n+' textarea');if(inp)inp.focus();},100);
 }
 
 function prevStep(n){
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
   document.getElementById('step'+n).classList.add('active');
-  for(var i=1;i<=5;i++){var el=document.getElementById('p'+i);if(i<n)el.className='done';else if(i===n)el.className='current';else el.className='';}
+  for(var i=1;i<=6;i++){var el=document.getElementById('p'+i);if(i<n)el.className='done';else if(i===n)el.className='current';else el.className='';}
 }
 
 ['pain','story','goal'].forEach(function(field){
@@ -177,7 +206,7 @@ function prevStep(n){
 
 async function submitAll(){
   data.goal=document.getElementById('goalInput').value.trim();
-  var btn=document.querySelector('#step5 .btn:last-child');
+  var btn=document.querySelector('#step6 .btn:last-child');
   btn.textContent='Sending...';btn.disabled=true;
   localStorage.setItem('ct_lead_name',data.name);
   localStorage.setItem('ct_lead_email',data.email);
@@ -195,6 +224,7 @@ async function submitAll(){
   fd.append('Pain Point',data.pain||'Not provided');
   fd.append('Story',data.story||'Not provided');
   fd.append('Goal',data.goal||'Not provided');
+  fd.append('Budget',data.budget||'Not provided');
   try{await fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:fd,mode:'no-cors'});}catch(e){}
   document.getElementById('successName').textContent=data.name.split(' ')[0];
   document.getElementById('successEmail').textContent=data.email;
