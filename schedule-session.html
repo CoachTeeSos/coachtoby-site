@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Schedule Your Session — Sessions with Toby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0D0E12;color:#F4F5F7;font-family:'Inter',system-ui,sans-serif;min-height:100vh;letter-spacing:-0.01em;line-height:1.6}
+.wrap{max-width:560px;margin:0 auto;padding:48px 24px 40px}
+h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.6rem;color:#F4F5F7;margin-bottom:8px;line-height:1.2}
+h2{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1rem;color:#E4B34F;margin-bottom:12px}
+p{color:#9FA6B5;font-size:0.95rem;line-height:1.7;margin-bottom:16px}
+label{display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:6px}
+input,select{width:100%;padding:14px 16px;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#161820;transition:border-color .2s ease;-webkit-appearance:none;appearance:none}
+input:focus,select:focus{outline:none;border-color:#E4B34F}
+input::placeholder{color:#6b7280}
+.btn{display:inline-block;padding:16px 32px;background:#E4B34F;color:#0D0E12;font-weight:700;text-decoration:none;border-radius:10px;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;border:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;width:100%;text-align:center}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(228,179,79,0.2)}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.back{display:inline-flex;align-items:center;gap:6px;color:#9FA6B5;font-size:0.85rem;text-decoration:none;margin-bottom:20px;transition:color .2s ease}
+.back:hover{color:#E4B34F}
+.step{display:none;animation:fadeIn .3s ease}
+.step.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.divider{height:1px;background:#242838;margin:24px 0}
+.success{text-align:center;padding:40px 0}
+.success-icon{width:64px;height:64px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success h2{color:#F4F5F7;margin-bottom:8px}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.slot{padding:14px;border:2px solid #242838;border-radius:10px;cursor:pointer;transition:all .2s ease;text-align:center;background:#161820}
+.slot:hover{border-color:#E4B34F}
+.slot.selected{border-color:#E4B34F;background:rgba(228,179,79,0.08);box-shadow:0 0 0 1px #E4B34F}
+.slot .day{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.9rem;color:#F4F5F7;display:block}
+.slot .time{font-size:0.8rem;color:#9FA6B5;display:block;margin-top:2px}
+.hint{font-size:0.8rem;color:#6b7280;margin-top:6px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="step active" id="step1">
+    <a href="javascript:history.back()" class="back">← Back</a>
+    <h1>Pick Your First Session</h1>
+    <p style="margin-bottom:8px">Choose a slot that works. Once you confirm, it's yours.</p>
+    <p class="hint" style="margin-bottom:24px">All times are West Africa Time (WAT). Sessions are 30 minutes via WhatsApp call.</p>
+
+    <h2>Available Slots</h2>
+    <div class="slots" id="slotsGrid">
+      <div class="slot" onclick="pickSlot(this,'Monday','10:00 AM')"><span class="day">Monday</span><span class="time">10:00 AM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Monday','2:00 PM')"><span class="day">Monday</span><span class="time">2:00 PM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Tuesday','10:00 AM')"><span class="day">Tuesday</span><span class="time">10:00 AM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Tuesday','4:00 PM')"><span class="day">Tuesday</span><span class="time">4:00 PM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Wednesday','10:00 AM')"><span class="day">Wednesday</span><span class="time">10:00 AM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Wednesday','2:00 PM')"><span class="day">Wednesday</span><span class="time">2:00 PM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Thursday','10:00 AM')"><span class="day">Thursday</span><span class="time">10:00 AM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Thursday','4:00 PM')"><span class="day">Thursday</span><span class="time">4:00 PM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Friday','10:00 AM')"><span class="day">Friday</span><span class="time">10:00 AM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Friday','2:00 PM')"><span class="day">Friday</span><span class="time">2:00 PM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Saturday','10:00 AM')"><span class="day">Saturday</span><span class="time">10:00 AM</span></div>
+      <div class="slot" onclick="pickSlot(this,'Saturday','12:00 PM')"><span class="day">Saturday</span><span class="time">12:00 PM</span></div>
+    </div>
+
+    <div id="step2" class="step" style="margin-top:24px">
+      <div style="background:#161820;border:1px solid #E4B34F;border-radius:12px;padding:20px;margin-bottom:24px;text-align:center">
+        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:1.5px;color:#E4B34F;font-weight:700;display:block;margin-bottom:6px">Your Slot</span>
+        <span id="confirmSlot" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.1rem;color:#F4F5F7"></span>
+      </div>
+      <label for="sName">Your Name</label>
+      <input type="text" id="sName" placeholder="Your first name" autocomplete="given-name">
+      <div style="margin-top:16px">
+        <label for="sWhatsApp">WhatsApp Number (with country code)</label>
+        <input type="tel" id="sWhatsApp" placeholder="+234..." autocomplete="tel">
+      </div>
+      <div style="margin-top:24px">
+        <form id="bookingForm" action="https://formsubmit.co/prosperolumotobi@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Session Booking">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" id="fName" name="Name" value="">
+          <input type="hidden" id="fWhatsApp" name="WhatsApp" value="">
+          <input type="hidden" id="fSlot" name="Slot" value="">
+          <input type="hidden" id="fSource" name="Source" value="Schedule Page">
+          <button type="submit" class="btn" id="bookBtn" disabled>Confirm My Session →</button>
+        </form>
+      </div>
+      <p class="hint" style="margin-top:16px">I'll reach out on WhatsApp within 24 hours to confirm.</p>
+    </div>
+  </div>
+
+  <div class="step" id="stepSuccess">
+    <div class="success">
+      <div class="success-icon">✓</div>
+      <h2>You're Booked</h2>
+      <p id="successDetails" style="margin-bottom:24px"></p>
+      <div class="divider"></div>
+      <p style="font-size:0.9rem;color:#9FA6B5;margin-bottom:20px">I'll reach out on WhatsApp within 24 hours to confirm and share what to prepare before our first session.</p>
+      <a href="sessions-with-toby-2026.html" class="btn" style="width:auto;padding:14px 28px;">← Go to Daily Exercises</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var picked=null;
+function pickSlot(el,day,time){
+  document.querySelectorAll('.slot').forEach(function(s){s.classList.remove('selected');});
+  el.classList.add('selected');
+  picked=day+' at '+time+' WAT';
+  document.getElementById('step2').style.display='block';
+  document.getElementById('confirmSlot').textContent=picked;
+  document.getElementById('fSlot').value=picked;
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+document.getElementById('sName').addEventListener('input',function(){
+  document.getElementById('fName').value=this.value;
+  checkReady();
+});
+document.getElementById('sWhatsApp').addEventListener('input',function(){
+  document.getElementById('fWhatsApp').value=this.value;
+  checkReady();
+});
+function checkReady(){
+  var name=document.getElementById('sName').value.trim();
+  var wa=document.getElementById('sWhatsApp').value.trim();
+  document.getElementById('bookBtn').disabled=!(name&&wa&&picked);
+}
+document.getElementById('bookingForm').addEventListener('submit',function(){
+  document.getElementById('successDetails').innerHTML='<strong style="color:#F4F5F7">'+picked+'</strong><br><span style="color:#6b7280;font-size:0.85rem">Name: '+document.getElementById('sName').value+' · WhatsApp: '+document.getElementById('sWhatsApp').value+'</span>';
+  document.getElementById('step1').style.display='none';
+  document.getElementById('stepSuccess').style.display='block';
+  if(typeof gtag!=='undefined'){gtag('event','schedule_booking',{value:0,currency:'USD'});}
+});
+</script>
+</body>
+</html>
