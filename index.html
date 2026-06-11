@@ -1,184 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sessions with Toby — Find Your Path</title>
-
-<!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sessions with Toby — Find Your Path</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J9V395RPDH');
-</script>
-  <meta name="description" content="Take a 30-second quiz to find your personalized vocal coaching path. Sessions with Toby — elite 1-on-1 vocal coaching for singers, performers & creators.">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0D0E12">
-  <meta name="google-site-verification" content="LzOxYICYW1RNhOx8rluo_MQrhkoWw1IVAA0TPiVv_xk">
-  <link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/">
-  <meta property="og:title" content="Sessions with Toby — Find Your Path">
-  <meta property="og:description" content="Take a 30-second quiz to find your personalized vocal coaching path.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/">
-  <meta property="og:site_name" content="Sessions with Toby">
-  <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","alternateName":["Coach Toby"],"url":"https://coachteesos.github.io/coachtoby-site/","founder":{"@type":"Person","name":"Coach Toby"},"sameAs":["https://t.me/Retpipebot","https://wa.me/2349160106084"]}
-  </script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css?v=5">
-  <style>
-    /* Funnel-specific overrides — Brand: #004B49 dark bg, #D2E823 lime accent */
-    .welcome-screen{background:var(--text)}
-    .welcome-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(210,232,35,0.06) 0%,transparent 70%);pointer-events:none}
-    .step-panel h1{font-family:var(--font-heading);font-weight:800;letter-spacing:-0.04em}
-    .step-panel p{color:rgba(253,251,247,0.55)}
-    .quiz-option{font-family:var(--font-body)}
-    .progress-bar{background:rgba(253,251,247,0.08)}
-    .progress-fill{background:var(--accent-lime);width:20%}
-    .rec-tag{background:rgba(210,232,35,0.15);color:var(--accent-lime)}
-
-    /* Funnel utility classes replacing inline styles */
-    .funnel-loader-inner{text-align:center}
-    .funnel-emoji{font-size:3.5rem;margin-bottom:2rem}
-    .funnel-emoji-lg{font-size:3rem;margin-bottom:1rem}
-    .funnel-progress-wrap{width:100%;max-width:20rem;margin:0 auto 2rem}
-    .funnel-progress-label{color:rgba(253,251,247,0.35);font-size:0.75rem;margin-top:0.5rem;text-align:right}
-    .funnel-step-title{color:var(--bg);font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.75rem}
-    .funnel-step-sub{font-size:1rem;margin-bottom:2rem}
-    .funnel-step-sub-tight{font-size:1rem;margin-bottom:1.5rem}
-    .funnel-opts{display:flex;flex-direction:column;gap:0.75rem}
-    .funnel-rec-box{background:rgba(253,251,247,0.06);border:1px solid rgba(253,251,247,0.08);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;text-align:left}
-    .funnel-rec-label{color:var(--accent-lime);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.5rem}
-    .funnel-rec-title{color:var(--bg);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
-    .funnel-rec-desc{color:rgba(253,251,247,0.5);font-size:0.875rem;margin-bottom:1rem}
-    .funnel-rec-tags{display:flex;flex-wrap:wrap;gap:0.5rem}
-    .funnel-actions{display:flex;flex-direction:column;gap:0.75rem}
-    .funnel-cta-btn{font-size:1rem;padding:1rem}
-    .funnel-note{color:rgba(253,251,247,0.25);font-size:0.75rem;margin-top:1rem}
-    .funnel-back{margin-top:1.5rem;color:rgba(253,251,247,0.35);font-size:0.875rem;font-weight:500;background:none;border:none;cursor:pointer;display:none}
-  </style>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J9V395RPDH');</script>
+<meta name="description" content="Take a 30-second quiz to find your personalized vocal coaching path. Sessions with Toby — elite 1-on-1 vocal coaching for singers, performers & creators.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0D0E12">
+<meta name="google-site-verification" content="LzOxYICYW1RNhOx8rluo_MQrhkoWw1IVAA0TPiVv_xk">
+<link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/">
+<meta property="og:title" content="Sessions with Toby — Find Your Path">
+<meta property="og:description" content="Take a 30-second quiz to find your personalized vocal coaching path.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/">
+<meta property="og:site_name" content="Sessions with Toby">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Sessions with Toby","alternateName":["Coach Toby"],"url":"https://coachteesos.github.io/coachtoby-site/","founder":{"@type":"Person","name":"Coach Toby"},"sameAs":["https://t.me/Retpipebot","https://wa.me/2349160106084"]}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=5.1">
+<style>
+/* Funnel-specific overrides */
+.welcome-screen{background:var(--bg-canvas);min-height:100vh;display:flex;align-items:center;justify-content:center}
+.welcome-content{text-align:center;max-width:560px;padding:32px}
+.step-panel{display:none}
+.step-panel.active{display:block}
+.step-panel h1{font-size:clamp(1.5rem,4vw,2.25rem);margin-bottom:0.75rem}
+.step-panel p{color:var(--text-secondary);margin-bottom:2rem}
+.quiz-option{width:100%;padding:16px 20px;margin-bottom:8px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius);font-family:var(--font-body);font-size:0.95rem;color:var(--text-primary);cursor:pointer;transition:all var(--transition);text-align:left;display:flex;align-items:center;gap:12px}
+.quiz-option:hover{border-color:var(--brand-accent);transform:translateX(4px)}
+.quiz-option .icon{font-size:1.25rem}
+.progress-bar{width:100%;max-width:200px;margin:0 auto 24px;height:2px;background:var(--border-subtle);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--brand-accent);transition:width 0.4s ease}
+.progress-label{color:var(--text-muted);font-size:0.75rem;margin-top:8px;text-align:right}
+.rec-box{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:24px;margin-bottom:20px;text-align:left}
+.rec-label{color:var(--brand-kinetic);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:6px}
+.rec-title{color:var(--text-primary);font-size:1.25rem;font-weight:700;font-family:var(--font-display);margin-bottom:6px}
+.rec-desc{color:var(--text-secondary);font-size:0.875rem;margin-bottom:12px}
+.rec-tags{display:flex;flex-wrap:wrap;gap:8px}
+.rec-tag{background:rgba(0,229,163,0.1);color:var(--brand-kinetic);padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600}
+.funnel-actions{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.funnel-cta-btn{background:var(--brand-accent);color:var(--bg-canvas);padding:16px;border-radius:var(--radius);font-weight:700;font-size:1rem;font-family:var(--font-display);text-decoration:none;text-align:center;transition:transform var(--transition),box-shadow var(--transition);box-shadow:var(--shadow-accent)}
+.funnel-cta-btn:hover{transform:translateY(-2px)}
+.funnel-secondary{background:transparent;color:var(--text-secondary);border:1px solid var(--border-subtle)}
+.funnel-secondary:hover{border-color:var(--brand-accent);color:var(--brand-accent)}
+.funnel-note{color:var(--text-muted);font-size:0.75rem;margin-top:12px}
+.funnel-back{margin-top:20px;color:var(--text-muted);font-size:0.875rem;font-weight:500;background:none;border:none;cursor:pointer;display:none}
+.funnel-back:hover{color:var(--brand-accent)}
+</style>
 </head>
 <body>
 
-  <!-- PAGE LOADER -->
-  <div id="pageLoader"><div class="funnel-loader-inner"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
+<div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
-  <!-- WELCOME FUNNEL -->
-  <div class="welcome-screen" id="welcomeScreen">
-    <div class="welcome-content">
-      <div class="funnel-emoji">🎤</div>
-      <div class="funnel-progress-wrap">
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <p class="funnel-progress-label" id="progressText">Step 1 of 5</p>
-      </div>
+<div class="welcome-screen" id="welcomeScreen">
+<div class="welcome-content">
+<div style="font-size:3.5rem;margin-bottom:24px">🎤</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+<p class="progress-label" id="progressText">Step 1 of 5</p>
 
-      <div id="step1" class="step-panel active">
-        <h1 class="funnel-step-title">What brings you here today?</h1>
-        <p class="funnel-step-sub">Pick what resonates. No wrong answers.</p>
-        <div class="funnel-opts">
-          <button class="quiz-option" data-step="1" data-value="vocals"><span class="icon">🎤</span><span>I want to sing better — riffs, runs, the whole thing</span></button>
-          <button class="quiz-option" data-step="1" data-value="speaking"><span class="icon">🎙️</span><span>I want to speak with more confidence & presence</span></button>
-          <button class="quiz-option" data-step="1" data-value="mindset"><span class="icon">💪</span><span>I'm stuck and need a mindset shift</span></button>
-          <button class="quiz-option" data-step="1" data-value="community"><span class="icon">🎵</span><span>I want to connect with other creators</span></button>
-        </div>
-      </div>
+<div id="step1" class="step-panel active">
+<h1>What brings you here today?</h1>
+<p>Pick what resonates. No wrong answers.</p>
+<div class="funnel-opts">
+<button class="quiz-option" data-step="1" data-value="vocals"><span class="icon">🎤</span><span>I want to sing better — riffs, runs, the whole thing</span></button>
+<button class="quiz-option" data-step="1" data-value="speaking"><span class="icon">🎙️</span><span>I want to speak with more confidence & presence</span></button>
+<button class="quiz-option" data-step="1" data-value="mindset"><span class="icon">💪</span><span>I'm stuck and need a mindset shift</span></button>
+<button class="quiz-option" data-step="1" data-value="community"><span class="icon">🎵</span><span>I want to connect with other creators</span></button>
+</div>
+</div>
 
-      <div id="step2" class="step-panel">
-        <h1 class="funnel-step-title">Where are you right now?</h1>
-        <p class="funnel-step-sub">Be honest — this isn't a test.</p>
-        <div class="funnel-opts">
-          <button class="quiz-option" data-step="2" data-value="beginner"><span class="icon">🌱</span><span>Complete beginner — I barely sing in the shower</span></button>
-          <button class="quiz-option" data-step="2" data-value="intermediate"><span class="icon">🎶</span><span>I can sing but want to level up my technique</span></button>
-          <button class="quiz-option" data-step="2" data-value="advanced"><span class="icon">🔥</span><span>I perform but want to master riffs, runs & stage presence</span></button>
-          <button class="quiz-option" data-step="2" data-value="professional"><span class="icon">⭐</span><span>I'm a working artist looking for an edge</span></button>
-        </div>
-      </div>
+<div id="step2" class="step-panel">
+<h1>Where are you right now?</h1>
+<p>Be honest — this isn't a test.</p>
+<div class="funnel-opts">
+<button class="quiz-option" data-step="2" data-value="beginner"><span class="icon">🌱</span><span>Complete beginner — I barely sing in the shower</span></button>
+<button class="quiz-option" data-step="2" data-value="intermediate"><span class="icon">🎶</span><span>I can sing but want to level up my technique</span></button>
+<button class="quiz-option" data-step="2" data-value="advanced"><span class="icon">🔥</span><span>I perform but want to master riffs, runs & stage presence</span></button>
+<button class="quiz-option" data-step="2" data-value="professional"><span class="icon">⭐</span><span>I'm a working artist looking for an edge</span></button>
+</div>
+</div>
 
-      <div id="step3" class="step-panel">
-        <h1 class="funnel-step-title">What's the ONE thing holding you back?</h1>
-        <p class="funnel-step-sub">The thing you'd fix first if you could.</p>
-        <div class="funnel-opts">
-          <button class="quiz-option" data-step="3" data-value="pitch"><span class="icon">🎵</span><span>I can't hit the right notes consistently</span></button>
-          <button class="quiz-option" data-step="3" data-value="range"><span class="icon">📈</span><span>My range is limited — I can't reach high or low notes</span></button>
-          <button class="quiz-option" data-step="3" data-value="riffs"><span class="icon">⚡</span><span>I want to master riffs, runs & vocal agility</span></button>
-          <button class="quiz-option" data-step="3" data-value="confidence"><span class="icon">😰</span><span>I freeze up when it's time to perform or speak</span></button>
-          <button class="quiz-option" data-step="3" data-value="breath"><span class="icon">💨</span><span>I run out of breath and can't sustain notes</span></button>
-        </div>
-      </div>
+<div id="step3" class="step-panel">
+<h1>What's the ONE thing holding you back?</h1>
+<p>The thing you'd fix first if you could.</p>
+<div class="funnel-opts">
+<button class="quiz-option" data-step="3" data-value="pitch"><span class="icon">🎵</span><span>I can't hit the right notes consistently</span></button>
+<button class="quiz-option" data-step="3" data-value="range"><span class="icon">📈</span><span>My range is limited — I can't reach high or low notes</span></button>
+<button class="quiz-option" data-step="3" data-value="riffs"><span class="icon">⚡</span><span>I want to master riffs, runs & vocal agility</span></button>
+<button class="quiz-option" data-step="3" data-value="confidence"><span class="icon">😰</span><span>I freeze up when it's time to perform or speak</span></button>
+<button class="quiz-option" data-step="3" data-value="breath"><span class="icon">💨</span><span>I run out of breath and can't sustain notes</span></button>
+</div>
+</div>
 
-      <div id="step4" class="step-panel">
-        <h1 class="funnel-step-title">When do you want to see results?</h1>
-        <p class="funnel-step-sub">No pressure — just helps us recommend the right path.</p>
-        <div class="funnel-opts">
-          <button class="quiz-option" data-step="4" data-value="asap"><span class="icon">🚀</span><span>ASAP — I have a performance, audition or event coming up</span></button>
-          <button class="quiz-option" data-step="4" data-value="month"><span class="icon">📅</span><span>Within the next month — I'm serious about this</span></button>
-          <button class="quiz-option" data-step="4" data-value="exploring"><span class="icon">🔍</span><span>Just exploring — I want to see what's possible</span></button>
-        </div>
-      </div>
+<div id="step4" class="step-panel">
+<h1>When do you want to see results?</h1>
+<p>No pressure — just helps us recommend the right path.</p>
+<div class="funnel-opts">
+<button class="quiz-option" data-step="4" data-value="asap"><span class="icon">🚀</span><span>ASAP — I have a performance, audition or event coming up</span></button>
+<button class="quiz-option" data-step="4" data-value="month"><span class="icon">📅</span><span>Within the next month — I'm serious about this</span></button>
+<button class="quiz-option" data-step="4" data-value="exploring"><span class="icon">🔍</span><span>Just exploring — I want to see what's possible</span></button>
+</div>
+</div>
 
-      <div id="step5" class="step-panel">
-        <div class="funnel-emoji-lg">🎉</div>
-        <h1 class="funnel-step-title">Here's what we recommend for you</h1>
-        <p class="funnel-step-sub-tight">Based on your answers. But first — try a free demo with Coach Toby. No commitment.</p>
-        <div class="funnel-rec-box">
-          <p class="funnel-rec-label">Your Personalized Recommendation</p>
-          <h3 class="funnel-rec-title" id="recTitle">Vocal Mastery — Starter Path</h3>
-          <p class="funnel-rec-desc" id="recDesc">Personalized 1-on-1 coaching with Coach Toby. Free demo included.</p>
-          <div class="funnel-rec-tags" id="recTags"><span class="rec-tag">Free Demo</span></div>
-        </div>
-        <div class="funnel-actions">
-          <a href="book.html" class="btn-primary w-full funnel-cta-btn">🎤 Try a Free Demo Session</a>
-          <a href="home.html" class="btn-secondary w-full funnel-cta-btn">Browse Programs & Pricing →</a>
-        </div>
-        <p class="funnel-note">No credit card required.</p>
-      </div>
+<div id="step5" class="step-panel">
+<div style="font-size:3rem;margin-bottom:12px">🎉</div>
+<h1>Here's what we recommend for you</h1>
+<p>Based on your answers. But first — try a free demo with Coach Toby. No commitment.</p>
+<div class="rec-box">
+<p class="rec-label">Your Personalized Recommendation</p>
+<h3 class="rec-title" id="recTitle">Vocal Mastery — Starter Path</h3>
+<p class="rec-desc" id="recDesc">Personalized 1-on-1 coaching with Coach Toby. Free demo included.</p>
+<div class="rec-tags" id="recTags"><span class="rec-tag">Free Demo</span></div>
+</div>
+<div class="funnel-actions">
+<a href="book.html" class="funnel-cta-btn">🎤 Try a Free Demo Session</a>
+<a href="home.html" class="funnel-cta-btn funnel-secondary">Browse Programs & Pricing →</a>
+</div>
+<p class="funnel-note">No credit card required.</p>
+</div>
 
-      <button id="backBtn" class="funnel-back" onclick="goBack()">← Go back</button>
-    </div>
-  </div>
+<button id="backBtn" class="funnel-back" onclick="goBack()">← Go back</button>
+</div>
+</div>
 
-  <script>
-  (function(){
-    var lt=document.getElementById('loaderText'),brand='Sessions with Toby';
-    brand.split('').forEach(function(ch,i){var s=document.createElement('span');s.textContent=ch===' '?' ':ch;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});
-    window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},2000);});
-    setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},4000);
-  })();
-  var cs=1,ans={};
-  document.getElementById('welcomeScreen').addEventListener('click',function(e){
-    var b=e.target.closest('.quiz-option');if(!b)return;
-    var s=parseInt(b.dataset.step),v=b.dataset.value;ans[s]=v;
-    document.getElementById('step'+s).classList.remove('active');cs=s+1;
-    if(cs<=5){document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';}
-    if(s===4){
-      genRec();
-      // GA4: track quiz completion as lead
-      if(typeof gtag!=='undefined'){gtag('event','generate_lead',{value:0,currency:'USD'});}
-    }
-    document.getElementById('backBtn').style.display=cs>1?'inline':'none';
-  });
-  function goBack(){if(cs<=1)return;document.getElementById('step'+cs).classList.remove('active');cs--;document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';document.getElementById('backBtn').style.display=cs>1?'inline':'none';}
-  function genRec(){
-    var g=ans[1]||'vocals',l=ans[2]||'beginner';
-    var t='Vocal Mastery — Starter Path',d='Personalized 1-on-1 coaching with Coach Toby. Free demo included.',tags=['Free Demo','Personalized Plan','Telegram Support'];
-    if(g==='vocals'&&l==='beginner'){t='Vocal Foundations — Beginner Path';d='Start from scratch. Learn breath control, pitch accuracy, and build toward riffs and runs.';tags=['Free Demo','Beginner-Friendly','Step-by-Step'];}
-    else if(g==='vocals'&&(l==='advanced'||l==='professional')){t='Vocal Mastery — Advanced Path';d='Master riffs, runs, melisma, and stage presence.';tags=['Free Demo','Advanced Techniques','Performance Prep'];}
-    else if(g==='speaking'){t='Executive Presence Program';d='Command any room with confidence. Voice projection, body language, anxiety management.';tags=['Free Demo','Public Speaking','Confidence Building'];}
-    else if(g==='mindset'){t='Transformational Coaching';d='Break through mental blocks. Life coaching for high-performers.';tags=['Free Demo','Mindset Shift','1-on-1 Coaching'];}
-    else if(g==='community'){t='Creator Community Access';d='Join musicians and creators. Weekly challenges and feedback.';tags=['Free Tier','Weekly Challenges','Global Network'];}
-    document.getElementById('recTitle').textContent=t;document.getElementById('recDesc').textContent=d;
-    document.getElementById('recTags').innerHTML=tags.map(function(x){return '<span class="rec-tag">'+x+'</span>';}).join('');
-  }
-  </script>
-  
-
-  <script defer src="/assets/js/pricing.js"></script>
-  <script defer src="/assets/js/payment.js"></script>
-  <script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+(function(){
+  var lt=document.getElementById('loaderText'),brand='Sessions with Toby';
+  brand.split('').forEach(function(ch,i){var s=document.createElement('span');s.textContent=ch===' '?' ':ch;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});
+  window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},2000);});
+  setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},4000);
+})();
+var cs=1,ans={};
+document.getElementById('welcomeScreen').addEventListener('click',function(e){
+  var b=e.target.closest('.quiz-option');if(!b)return;
+  var s=parseInt(b.dataset.step),v=b.dataset.value;ans[s]=v;
+  document.getElementById('step'+s).classList.remove('active');cs=s+1;
+  if(cs<=5){document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';}
+  if(s===4){genRec();if(typeof gtag!=='undefined'){gtag('event','generate_lead',{value:0,currency:'USD'});}}
+  document.getElementById('backBtn').style.display=cs>1?'inline':'none';
+});
+function goBack(){if(cs<=1)return;document.getElementById('step'+cs).classList.remove('active');cs--;document.getElementById('step'+cs).classList.add('active');document.getElementById('progressFill').style.width=(cs*20)+'%';document.getElementById('progressText').textContent='Step '+cs+' of 5';document.getElementById('backBtn').style.display=cs>1?'inline':'none';}
+function genRec(){
+  var g=ans[1]||'vocals',l=ans[2]||'beginner';
+  var t='Vocal Mastery — Starter Path',d='Personalized 1-on-1 coaching with Coach Toby. Free demo included.',tags=['Free Demo','Personalized Plan','Telegram Support'];
+  if(g==='vocals'&&l==='beginner'){t='Vocal Foundations — Beginner Path';d='Start from scratch. Learn breath control, pitch accuracy, and build toward riffs and runs.';tags=['Free Demo','Beginner-Friendly','Step-by-Step'];}
+  else if(g==='vocals'&&(l==='advanced'||l==='professional')){t='Vocal Mastery — Advanced Path';d='Master riffs, runs, melisma, and stage presence.';tags=['Free Demo','Advanced Techniques','Performance Prep'];}
+  else if(g==='speaking'){t='Executive Presence Program';d='Command any room with confidence. Voice projection, body language, anxiety management.';tags=['Free Demo','Public Speaking','Confidence Building'];}
+  else if(g==='mindset'){t='Transformational Coaching';d='Break through mental blocks. Life coaching for high-performers.';tags=['Free Demo','Mindset Shift','1-on-1 Coaching'];}
+  else if(g==='community'){t='Creator Community Access';d='Join musicians and creators. Weekly challenges and feedback.';tags=['Free Tier','Weekly Challenges','Global Network'];}
+  document.getElementById('recTitle').textContent=t;document.getElementById('recDesc').textContent=d;
+  document.getElementById('recTags').innerHTML=tags.map(function(x){return '<span class="rec-tag">'+x+'</span>';}).join('');
+}
+</script>
+<script defer src="/assets/js/pricing.js"></script>
+<script defer src="/assets/js/payment.js"></script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
 </body>
 </html>
