@@ -279,7 +279,7 @@
     document.getElementById('thankYouName').textContent=name;
     var tyMsg='Your guide is ready. Check your email for next steps! &#x1F3A4;';
     if(q6==='free_community') tyMsg="I'll add you to the Free Singers' Community! &#x1F3A4;";
-    else if(q6==='paid_community'||q6==='both') tyMsg="Check your Telegram — I'll send you the Paid Community details! &#x2B50;";
+    else if(q6==='paid_community'||q6==='both') tyMsg="I'll send you the Paid Community details! &#x2B50;";
     else if(q6==='lesson') tyMsg="Let's get your first session booked! &#x1F3AF;";
     document.querySelector('.quiz-card').innerHTML='<div class="thank-you active thanks-pad"><div class="icon">&#x2705;</div><h2>Thank you, '+name+'!</h2><p>'+tyMsg+'</p><a href="home.html" class="btn-outline">&larr; Back to Home</a></div>';
     document.getElementById('progressBar').style.display='none';
