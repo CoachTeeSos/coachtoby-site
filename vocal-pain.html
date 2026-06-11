@@ -226,6 +226,25 @@ async function submitAll(){
   fd.append('Goal',data.goal||'Not provided');
   fd.append('Budget',data.budget||'Not provided');
   try{await fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:fd,mode:'no-cors'});}catch(e){}
+  
+  // Sync to Airtable via Google Apps Script proxy
+  try{
+    await fetch('https://script.google.com/macros/s/AKfycbyni3_tGs1zGtVANw24cQjHAR2o_xNRkbi-_UMrqa62DJVQfzsfQ30jBxHfuz2HEmbzIQ/exec',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        name:data.name,
+        email:data.email,
+        pain:data.pain,
+        story:data.story,
+        goal:data.goal,
+        budget:data.budget,
+        source:'vocal_pain_page'
+      }),
+      mode:'no-cors'
+    });
+  }catch(e){}
+  
   document.getElementById('successName').textContent=data.name.split(' ')[0];
   document.getElementById('successEmail').textContent=data.email;
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
