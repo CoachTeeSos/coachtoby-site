@@ -633,47 +633,58 @@ function getSpreadsheet() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// REPLY TRACKER — Polls Gmail for student replies, logs to Sheet
-// Run every 15-30 min via time trigger
+// REPLY TRACKER — Surgical: only searches for emails FROM known student addresses
+// Never touches your general inbox. Only looks for replies from CRM contacts.
+// Runs every 30 min. If no students in CRM, exits immediately.
 // ═══════════════════════════════════════════════════════════
 function checkStudentReplies() {
   try {
-    // Search for replies in threads we initiated
-    // Looks for emails FROM student addresses IN threads we sent to
     var ss = getSpreadsheet();
     var leadsSheet = ss.getSheetByName(CONFIG.LEADS_TAB);
     var leadsData = leadsSheet.getDataRange().getValues();
     
-    // Build list of student emails
+    // Build list of student emails from CRM
     var studentEmails = [];
     for (var i = 1; i < leadsData.length; i++) {
-      if (leadsData[i][1]) studentEmails.push(leadsData[i][1].toLowerCase().trim());
+      var email = (leadsData[i][1] || '').toLowerCase().trim();
+      if (email) studentEmails.push(email);
     }
     
-    if (studentEmails.length === 0) return {success: true, checked: 0, new_replies: 0};
+    // Early exit: no students in CRM = nothing to check
+    if (studentEmails.length === 0) {
+      return {success: true, checked: 0, new_replies: 0, reason: 'no students in CRM'};
+    }
     
-    // Get last check timestamp from script properties
+    // Get last check timestamp
     var props = PropertiesService.getScriptProperties();
     var lastCheck = props.getProperty('last_reply_check');
-    
-    // Build targeted search query using last check timestamp
-    // Format: after:YYYY/MM/DD for Gmail search
     var lastCheckDate = lastCheck ? new Date(lastCheck) : new Date(Date.now() - 24 * 60 * 60 * 1000);
     var afterStr = Utilities.formatDate(lastCheckDate, 'GMT', 'yyyy/MM/dd');
     
-    // Tight query: only threads we sent, with messages AFTER last check, NOT from us
-    // This means: threads where someone replied since we last checked
-    var searchQuery = 'in:sent -from:' + CONFIG.COACH_EMAIL + ' after:' + afterStr;
+    // Build SURGICAL search query: from:(student1 OR student2 OR ...) after:date
+    // This ONLY searches for emails FROM your students — never your whole inbox
+    var fromQuery = 'from:(' + studentEmails.join(' OR ') + ')';
+    var searchQuery = fromQuery + ' after:' + afterStr;
     
-    var threads = GmailApp.search(searchQuery, 0, 50);
+    // Cap at 50 student emails per search (Gmail query length limit)
+    // If more than 50 students, batch the searches
+    var MAX_EMAILS_PER_QUERY = 50;
+    var allThreads = [];
     
-    // Early exit if no threads with new replies
-    if (threads.length === 0) {
+    for (var batch = 0; batch < studentEmails.length; batch += MAX_EMAILS_PER_QUERY) {
+      var batchEmails = studentEmails.slice(batch, batch + MAX_EMAILS_PER_QUERY);
+      var batchQuery = 'from:(' + batchEmails.join(' OR ') + ') after:' + afterStr;
+      var batchThreads = GmailApp.search(batchQuery, 0, 50);
+      allThreads = allThreads.concat(batchThreads);
+    }
+    
+    // Early exit: no emails from students since last check
+    if (allThreads.length === 0) {
       props.setProperty('last_reply_check', new Date().toISOString());
       return {success: true, checked: 0, new_replies: 0};
     }
     
-    var newReplies = 0;
+    // Ensure Reply_Log sheet exists
     var replyLog = ss.getSheetByName('Reply_Log');
     if (!replyLog) {
       replyLog = ss.insertSheet('Reply_Log');
@@ -682,8 +693,22 @@ function checkStudentReplies() {
       replyLog.setFrozenRows(1);
     }
     
-    for (var t = 0; t < threads.length; t++) {
-      var thread = threads[t];
+    // Get already-logged thread IDs to avoid duplicates
+    var logData = replyLog.getDataRange().getValues();
+    var loggedThreadIds = {};
+    for (var ld = 1; ld < logData.length; ld++) {
+      if (logData[ld][4]) loggedThreadIds[logData[ld][4]] = true;
+    }
+    
+    var newReplies = 0;
+    
+    for (var t = 0; t < allThreads.length; t++) {
+      var thread = allThreads[t];
+      var threadId = thread.getId();
+      
+      // Skip if already logged
+      if (loggedThreadIds[threadId]) continue;
+      
       var messages = thread.getMessages();
       
       for (var m = 0; m < messages.length; m++) {
@@ -695,36 +720,37 @@ function checkStudentReplies() {
         if (from.indexOf(CONFIG.COACH_EMAIL.toLowerCase()) !== -1) continue;
         if (msgDate <= lastCheckDate) continue;
         
-        // Check if sender is a known lead
-        var isLead = false;
+        // Verify sender is a known lead
+        var matchedEmail = '';
         for (var s = 0; s < studentEmails.length; s++) {
           if (from.indexOf(studentEmails[s]) !== -1) {
-            isLead = true;
+            matchedEmail = studentEmails[s];
             break;
           }
         }
         
-        if (isLead) {
-          replyLog.appendRow([
-            msgDate,
-            from,
-            msg.getSubject(),
-            msg.getPlainBody().substring(0, 200).replace(/\n/g, ' '),
-            thread.getId()
-          ]);
-          newReplies++;
-          
-          // Update lead status
-          var lead = findLeadByEmail(from.replace(/.*<(.+)>.*/, '$1').trim());
-          if (lead) {
-            leadsSheet.getRange(lead.row, 6).setValue('replied');
-            leadsSheet.getRange(lead.row, 8).setValue(new Date());
-            var notes = leadsSheet.getRange(lead.row, 10).getValue() || '';
-            leadsSheet.getRange(lead.row, 10).setValue(
-              notes + '\n[REPLY ' + Utilities.formatDate(msgDate, CONFIG.TIMEZONE, 'MMM dd HH:mm') + ']: ' + 
-              msg.getPlainBody().substring(0, 100).replace(/\n/g, ' ')
-            );
-          }
+        if (!matchedEmail) continue;
+        
+        // Log the reply
+        replyLog.appendRow([
+          msgDate,
+          matchedEmail,
+          msg.getSubject(),
+          msg.getPlainBody().substring(0, 200).replace(/\n/g, ' '),
+          threadId
+        ]);
+        newReplies++;
+        
+        // Update lead in CRM
+        var lead = findLeadByEmail(matchedEmail);
+        if (lead) {
+          leadsSheet.getRange(lead.row, 6).setValue('replied');
+          leadsSheet.getRange(lead.row, 8).setValue(new Date());
+          var notes = leadsSheet.getRange(lead.row, 10).getValue() || '';
+          leadsSheet.getRange(lead.row, 10).setValue(
+            notes + '\n[REPLY ' + Utilities.formatDate(msgDate, CONFIG.TIMEZONE, 'MMM dd HH:mm') + ']: ' +
+            msg.getPlainBody().substring(0, 100).replace(/\n/g, ' ')
+          );
         }
       }
     }
@@ -732,7 +758,7 @@ function checkStudentReplies() {
     // Update last check timestamp
     props.setProperty('last_reply_check', new Date().toISOString());
     
-    return {success: true, checked: threads.length, new_replies: newReplies};
+    return {success: true, checked: allThreads.length, new_replies: newReplies};
     
   } catch(err) {
     logError('checkStudentReplies', err);
