@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Why You Run Out of Air Mid-Phrase (And How to Fix It) — Sessions with Toby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-canvas: #0D0E12;
+    --bg-surface: #161820;
+    --border-subtle: #242838;
+    --text-primary: #F4F5F7;
+    --text-secondary: #9FA6B5;
+    --brand-accent: #E4B34F;
+    --brand-kinetic: #00E5A3;
+    --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background-color:var(--bg-canvas);color:var(--text-primary);font-family:var(--font-body);letter-spacing:-0.01em;line-height:1.6}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-0.03em;color:var(--text-primary)}
+.wrap{max-width:700px;margin:0 auto}
+.date-bar{background:var(--bg-surface);padding:12px 32px;text-align:center;color:var(--text-secondary);font-size:0.8rem;border-bottom:1px solid var(--border-subtle)}
+.hero{background:linear-gradient(135deg,var(--bg-canvas) 0%,#1a1a2e 100%);padding:56px 32px;text-align:center;border-bottom:2px solid var(--brand-accent)}
+.hero .trust{font-size:0.75rem;color:var(--text-secondary);margin-bottom:24px;letter-spacing:2px;text-transform:uppercase;font-family:var(--font-body)}
+.hero .trust span{color:var(--brand-accent);font-weight:600}
+.hero h1{font-size:2.6rem;margin-bottom:16px;line-height:1.15}
+.hero h1 span{color:var(--brand-accent)}
+.hero .sub{font-size:1.05rem;color:var(--text-secondary);max-width:560px;margin:0 auto 28px;line-height:1.7}
+.cta-btn{display:inline-block;background:var(--brand-accent);color:var(--bg-canvas);padding:18px 44px;border-radius:8px;font-size:1.05rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1),box-shadow 0.2s ease;font-family:var(--font-display);box-shadow:0 4px 14px rgba(228,179,79,0.15)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(228,179,79,0.25)}
+.story-section{background:linear-gradient(180deg,var(--bg-canvas),var(--bg-surface));padding:48px 32px}
+.story-section h2{font-size:1.4rem;color:var(--brand-accent);margin-bottom:24px}
+.story-text{color:var(--text-secondary);margin-bottom:16px;font-size:0.95rem}
+.story-text .hl{color:var(--brand-accent);font-weight:700}
+.story-text .warn{color:var(--text-primary);font-weight:700}
+.exercise{background:var(--bg-canvas);border:1px solid var(--brand-accent);padding:28px;border-radius:12px;margin:28px 0}
+.exercise h3{color:var(--brand-accent);font-size:1.05rem;margin-bottom:18px}
+.step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.step-num{background:var(--brand-accent);color:var(--bg-canvas);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.8rem;min-width:28px;font-family:var(--font-display)}
+.step-text{color:var(--text-secondary);font-size:0.9rem;padding-top:4px}
+.step-text strong{color:var(--text-primary)}
+.timer{text-align:center;color:var(--text-secondary);font-size:0.8rem;margin-top:16px}
+.friction-reducer{background:var(--bg-surface);padding:48px 32px;text-align:center}
+.friction-reducer h2{font-size:1.4rem;color:var(--text-primary);margin-bottom:12px}
+.guarantee{background:var(--bg-canvas);border:1px solid var(--brand-kinetic);padding:16px 24px;border-radius:8px;margin:20px auto;display:inline-block}
+.guarantee span{color:var(--brand-kinetic);font-weight:700}
+.friction-reducer p.description{color:var(--text-secondary);font-size:0.9rem;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.footer{background:var(--bg-canvas);padding:32px;text-align:center;border-top:1px solid var(--border-subtle)}
+.footer p{color:var(--text-secondary);font-size:0.8rem}
+.footer a{color:var(--brand-accent);text-decoration:none}
+@media(max-width:600px){
+.hero h1{font-size:2rem}
+.hero{padding:40px 20px}
+.story-section,.friction-reducer{padding:36px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="date-bar" id="date"></div>
+
+<div class="hero">
+<div class="trust"><span>PROVEN VOCAL SCIENCE</span> // 50+ STUDENTS COACHED</div>
+<h1>Why You Run Out of Air <span>Mid-Phrase</span><br>(And How to Fix It)</h1>
+<p class="sub">You don't have a breath problem. You have a coordination problem. Here's the 2-minute fix that changes everything.</p>
+<a href="#exercise" class="cta-btn">Try Today's Exercise →</a>
+</div>
+
+<div class="story-section">
+<h2>The Singer Who Couldn't Finish a Sentence</h2>
+<p class="story-text">He could hit any note in his range. His tone was warm, full, technically impressive. But every time he performed, <span class="warn">his phrases would die halfway through</span>. He'd run out of air right before the important word — the hook, the climax, the moment that mattered.</p>
+<p class="story-text">"I thought I just needed stronger lungs," he told me. <span class="hl">"I tried breathing exercises every day. Nothing changed."</span></p>
+<p class="story-text">Here's what I told him: <span class="warn">Your lungs are fine. Your vocal folds are leaking air</span>. Every time you sing, you're wasting breath because your folds aren't closing efficiently. You're not running out of air — you're <span class="hl">spending it badly</span>.</p>
+<p class="story-text">We spent one session working on fold closure. <span class="hl">The next day, he sang a full verse without gasping</span>. Same lungs. Same breath. Different coordination.</p>
+<p class="story-text" style="margin-top:20px;font-size:0.85rem;color:var(--text-secondary)">This is the #2 issue I see. Right after voice cracks. <span class="hl">Most singers never connect breath support to fold closure</span>. They're not the same thing.</p>
+</div>
+
+<div class="exercise" id="exercise">
+<h3>The "ZH" Exercise (2 Minutes)</h3>
+<p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:18px">This trains your vocal folds to close efficiently — so you stop wasting air and start finishing phrases.</p>
+<div class="step"><div class="step-num">1</div><div class="step-text"><strong>Say "ZH"</strong> — like the "s" in "measure." Sustain it: "ZZZZHHH." Feel the buzz in your mouth.</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text"><strong>Put a voice behind it.</strong> "VZHH" — like a very exaggerated "V" into a voiced "ZH." Feel the vibration start.</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Sing "ZHee" on a scale:</strong> 1-2-3-4-5-4-3-2-1. The "ZH" onset ensures clean fold closure before the note starts.</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text"><strong>Now sing "See" on the same scale</strong> — but keep the same efficient onset. Notice how less air escapes.</div></div>
+<div class="timer">2 minutes. Do this 3x daily for 1 week. You'll feel the difference immediately.</div>
+</div>
+
+<div class="friction-reducer">
+<h2>Get a New Exercise Every Day</h2>
+<div class="guarantee">✓ <span>Free 7-Day Vocal Training</span> — One targeted exercise delivered to your inbox daily.</div>
+<p class="description">Each exercise targets a specific bottleneck. By Day 7, you'll have a complete warm-up routine that fixes your exact struggles.</p>
+<div class="form-wrap">
+<a href="vocal-pain.html" class="cta-btn" style="display:block;text-align:center;text-decoration:none">Start Your Free Training →</a>
+<p style="font-size:0.75rem;color:var(--text-secondary);margin-top:14px">No commitment. Unsubscribe anytime.</p>
+</div>
+</div>
+
+<div class="footer">
+<p>Sessions with Toby · Vocal Coaching · <a href="https://coachteesos.github.io/coachtoby-site/">coachteesos.github.io/coachtoby-site</a></p>
+</div>
+
+<script>
+document.getElementById('date').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+</script>
+</body>
+</html>

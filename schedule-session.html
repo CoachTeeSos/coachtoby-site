@@ -37,8 +37,7 @@ input::placeholder{color:#6b7280}
 .slot .day{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.9rem;color:#F4F5F7;display:block}
 .slot .time{font-size:0.8rem;color:#9FA6B5;display:block;margin-top:2px}
 .hint{font-size:0.8rem;color:#6b7280;margin-top:6px;font-style:italic}
-<link rel="stylesheet" href="assets/css/main.css?v=5.2">
-<style>
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -73,6 +72,10 @@ input::placeholder{color:#6b7280}
       <label for="sName">Your Name</label>
       <input type="text" id="sName" placeholder="Your first name" autocomplete="given-name">
       <div style="margin-top:16px">
+        <label for="sEmail">Email Address</label>
+        <input type="email" id="sEmail" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div style="margin-top:16px">
         <label for="sWhatsApp">WhatsApp Number (with country code)</label>
         <input type="tel" id="sWhatsApp" placeholder="+234..." autocomplete="tel">
       </div>
@@ -82,6 +85,7 @@ input::placeholder{color:#6b7280}
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" id="fName" name="Name" value="">
+          <input type="hidden" id="fEmail" name="Email" value="">
           <input type="hidden" id="fWhatsApp" name="WhatsApp" value="">
           <input type="hidden" id="fSlot" name="Slot" value="">
           <input type="hidden" id="fSource" name="Source" value="Schedule Page">
@@ -98,26 +102,69 @@ input::placeholder{color:#6b7280}
       <h2>You're Booked</h2>
       <p id="successDetails" style="margin-bottom:24px"></p>
       <div class="divider"></div>
-      <p style="font-size:0.9rem;color:#9FA6B5;margin-bottom:20px">I'll reach out on WhatsApp within 24 hours to confirm and share what to prepare before our first session.</p>
+      <p style="font-size:0.9rem;color:#9FA6B5;margin-bottom:20px">Check your email for confirmation. I'll send the Google Meet link and calendar invite within 24 hours via WhatsApp or email.</p>
       <a href="sessions-with-toby-2026.html" class="btn" style="width:auto;padding:14px 28px;">← Go to Daily Exercises</a>
     </div>
   </div>
 
 </div>
 
-<script>
+    <script>
 var picked=null;
+var pickedDate=null;
 function pickSlot(el,day,time){
   document.querySelectorAll('.slot').forEach(function(s){s.classList.remove('selected');});
   el.classList.add('selected');
   picked=day+' at '+time+' WAT';
+  pickedDate=nextDateForDay(day,time);
   document.getElementById('step2').style.display='block';
   document.getElementById('confirmSlot').textContent=picked;
   document.getElementById('fSlot').value=picked;
   el.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
+function nextDateForDay(dayName,timeStr){
+  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var targetDay=days.indexOf(dayName);
+  if(targetDay===-1) return '';
+  var now=new Date();
+  var currentDay=now.getDay();
+  var diff=(targetDay-currentDay+7)%7;
+  if(diff===0){
+    var parts=timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if(parts){
+      var h=parseInt(parts[1],10);
+      var m=parseInt(parts[2],10);
+      var ampm=parts[3].toUpperCase();
+      if(ampm==='PM'&&h!==12) h+=12;
+      if(ampm==='AM'&&h===12) h=0;
+      var slotToday=new Date(now.getFullYear(),now.getMonth(),now.getDate(),h,m);
+      if(slotToday<=now) diff=7;
+    }
+  }
+  if(diff===0) diff=7;
+  var target=new Date(now.getFullYear(),now.getMonth(),now.getDate()+diff);
+  var parts2=timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if(parts2){
+    var h2=parseInt(parts2[1],10);
+    var m2=parseInt(parts2[2],10);
+    var ampm2=parts2[3].toUpperCase();
+    if(ampm2==='PM'&&h2!==12) h2+=12;
+    if(ampm2==='AM'&&h2===12) h2=0;
+    target.setHours(h2,m2,0,0);
+  }
+  var y=target.getFullYear();
+  var mo=String(target.getMonth()+1).padStart(2,'0');
+  var d=String(target.getDate()).padStart(2,'0');
+  var th=String(target.getHours()).padStart(2,'0');
+  var tm=String(target.getMinutes()).padStart(2,'0');
+  return y+'-'+mo+'-'+d+' '+th+':'+tm;
+}
 document.getElementById('sName').addEventListener('input',function(){
   document.getElementById('fName').value=this.value;
+  checkReady();
+});
+document.getElementById('sEmail').addEventListener('input',function(){
+  document.getElementById('fEmail').value=this.value;
   checkReady();
 });
 document.getElementById('sWhatsApp').addEventListener('input',function(){
@@ -126,29 +173,20 @@ document.getElementById('sWhatsApp').addEventListener('input',function(){
 });
 function checkReady(){
   var name=document.getElementById('sName').value.trim();
+  var email=document.getElementById('sEmail').value.trim();
   var wa=document.getElementById('sWhatsApp').value.trim();
-  document.getElementById('bookBtn').disabled=!(name&&wa&&picked);
+  document.getElementById('bookBtn').disabled=!(name&&email&&wa&&picked);
 }
 document.getElementById('bookingForm').addEventListener('submit',function(){
   var name=document.getElementById('sName').value.trim();
+  var email=document.getElementById('sEmail').value.trim();
   var wa=document.getElementById('sWhatsApp').value.trim();
   
-  // Sync to Airtable via Google Apps Script proxy
-  try{
-    fetch('https://script.google.com/macros/s/AKfycbyni3_tGs1zGtVANw24cQjHAR2o_xNRkbi-_UMrqa62DJVQfzsfQ30jBxHfuz2HEmbzIQ/exec',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        name:name,
-        whatsapp:wa,
-        slot:picked,
-        source:'schedule_page'
-      }),
-      mode:'no-cors'
-    });
-  }catch(e){}
-  
-  document.getElementById('successDetails').innerHTML='<strong style="color:#F4F5F7">'+picked+'</strong><br><span style="color:#6b7280;font-size:0.85rem">Name: '+name+' · WhatsApp: '+wa+'</span>';
+  // Submit to Formsubmit (primary) - writes to email, webhook catches it
+  var formData = new FormData(this);
+  fetch(this.action, { method: 'POST', body: formData, mode: 'no-cors' });
+
+  document.getElementById('successDetails').innerHTML='<strong style="color:#F4F5F7">'+picked+'</strong><br><span style="color:#6b7280;font-size:0.85rem">Name: '+name+' · Email: '+email+' · WhatsApp: '+wa+'</span>';
   document.getElementById('step1').style.display='none';
   document.getElementById('stepSuccess').style.display='block';
   if(typeof gtag!=='undefined'){gtag('event','schedule_booking',{value:0,currency:'USD'});}
