@@ -292,9 +292,34 @@
   </footer>
 
   <script>
-  // Page Loader
-  (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
-
+  // Page Loader — with hard timeout fallback
+  (function(){
+    var lt=document.getElementById('loaderText');
+    if(!lt)return;
+    var b='Sessions with Toby';
+    b.split('').forEach(function(c,i){
+      var s=document.createElement('span');
+      s.textContent=c===' '?' ':c;
+      s.style.animationDelay=(i*0.06)+'s';
+      lt.appendChild(s);
+    });
+    // Normal hide on load
+    window.addEventListener('load',function(){
+      setTimeout(function(){
+        var pl=document.getElementById('pageLoader');
+        if(pl){pl.classList.add('fade-out');setTimeout(function(){pl.style.display='none';},500);}
+      },1800);
+    });
+    // HARD TIMEOUT: Force hide after 5 seconds no matter what
+    setTimeout(function(){
+      var pl=document.getElementById('pageLoader');
+      if(pl){pl.classList.add('fade-out');setTimeout(function(){pl.style.display='none';},500);}
+    },5000);
+  })();
+  </script>
+  <noscript>
+  <style>#pageLoader{display:none!important}</style>
+  </noscript>
   // Mobile Menu Toggle
   function toggleMobile(){document.getElementById('mobMenu').classList.toggle('open');}
 

@@ -3,65 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Thank You — Sessions with Toby</title>
+<title>Payment Confirmed — Sessions with Toby</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0D0E12;color:#F4F5F7;font-family:'Inter',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.card{max-width:520px;width:100%;background:#161820;border:1px solid #242838;border-radius:20px;padding:40px;text-align:center}
+.card{max-width:560px;width:100%;background:#161820;border:1px solid #242838;border-radius:20px;padding:40px;text-align:center}
+.success-icon{width:64px;height:64px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.8rem}
 h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#F4F5F7;margin-bottom:8px}
 p{color:#9FA6B5;font-size:0.95rem;line-height:1.7;margin-bottom:16px}
 .divider{height:1px;background:#242838;margin:24px 0}
-.pain-box{background:#0D0E12;border:1px solid #242838;border-radius:12px;padding:20px;margin:20px 0;text-align:left}
-.pain-box label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:#E4B34F;font-weight:700;display:block;margin-bottom:8px}
-.pain-box p{color:#F4F5F7;font-size:0.9rem;line-height:1.7;margin:0;white-space:pre-wrap}
-.btn{display:inline-block;padding:16px 32px;background:#E4B34F;color:#0D0E12;font-weight:700;text-decoration:none;border-radius:10px;font-size:0.95rem;font-family:'Plus Jakarta Sans',sans-serif;transition:transform .2s ease,box-shadow .2s ease}
+.btn{display:inline-block;padding:16px 32px;background:#E4B34F;color:#0D0E12;font-weight:700;text-decoration:none;border-radius:10px;font-size:0.95rem;font-family:'Plus Jakarta Sans',sans-serif;transition:transform .2s ease,box-shadow .2s ease;margin:8px}
 .btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(228,179,79,0.2)}
+.btn-secondary{background:transparent;color:#F4F5F7;border:2px solid #242838}
+.btn-secondary:hover{border-color:#E4B34F;color:#E4B34F}
+.info-box{background:#0D0E12;border:1px solid #242838;border-radius:12px;padding:20px;margin:20px 0;text-align:left}
+.info-box label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:#E4B34F;font-weight:700;display:block;margin-bottom:8px}
+.info-box p{color:#F4F5F7;font-size:0.9rem;line-height:1.7;margin:0}
+.steps{text-align:left;margin:20px 0}
+.step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.step-num{background:#E4B34F;color:#0D0E12;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.8rem;min-width:28px;font-family:'Plus Jakarta Sans',sans-serif}
+.step-text{color:#9FA6B5;font-size:0.9rem;padding-top:4px}
+.step-text strong{color:#F4F5F7}
 .subtle{color:#6b7280;font-size:0.8rem}
-<link rel="stylesheet" href="assets/css/main.css?v=5.2">
-<style>
+</style>
 </head>
 <body>
 <div class="card">
-  <div style="width:48px;height:48px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.3);border-radius:50%;margin:0 auto 20px;"></div>
-  <h1 id="greeting">Got it.</h1>
-  <p>Your first exercise is on its way to your inbox. Check your email (and spam folder, just in case).</p>
-  
-  <div class="divider"></div>
-  
-  <div id="painSection" style="display:none">
-    <p style="font-size:0.85rem;color:#9FA6B5;">Here's what you told me — so I can give you the <em>right</em> exercises:</p>
-    <div class="pain-box">
-      <label>Your Struggle</label>
-      <p id="painText"></p>
+  <div class="success-icon">✅</div>
+  <h1 id="greeting">Payment Confirmed!</h1>
+  <p>Your payment has been received. Here's what happens next:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Check your email.</strong> A confirmation with your payment details has been sent.</div>
     </div>
-    <div id="storyBox" class="pain-box" style="display:none">
-      <label>Your Story</label>
-      <p id="storyText"></p>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Open Telegram.</strong> Tap the button below to go to @Retpipebot.</div>
     </div>
-    <div id="goalBox" class="pain-box" style="display:none">
-      <label>Your Goal</label>
-      <p id="goalText"></p>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Get verified.</strong> Your coach will verify your payment and activate your account within 24 hours.</div>
     </div>
-    <div class="divider"></div>
   </div>
-  
-  <a href="sessions-with-toby-2026.html" class="btn">← Back to Today's Exercise</a>
-  
-  <p class="subtle" style="margin-top:20px;">You'll get a new exercise every day.<br>Each one targets your specific bottleneck.</p>
+
+  <div class="divider"></div>
+
+  <a id="botLink" href="https://t.me/Retpipebot" class="btn">🎤 Open Telegram & Start →</a>
+  <a href="home.html" class="btn btn-secondary">← Back to Home</a>
+
+  <p class="subtle" style="margin-top:20px;">After payment, your coach will verify and activate your account.<br>You'll get a message on Telegram when you're approved.</p>
 </div>
 
 <script>
-var name=localStorage.getItem('ct_lead_name')||'';
-var pain=localStorage.getItem('ct_lead_pain')||'';
-var story=localStorage.getItem('ct_lead_story')||'';
-var goal=localStorage.getItem('ct_lead_goal')||'';
-if(name)document.getElementById('greeting').textContent='Got it, '+(name.split(' ')[0]||'friend');
-if(pain){document.getElementById('painSection').style.display='block';document.getElementById('painText').textContent=pain;}
-if(story){document.getElementById('storyBox').style.display='block';document.getElementById('storyText').textContent=story;}
-if(goal){document.getElementById('goalBox').style.display='block';document.getElementById('goalText').textContent=goal;}
+// Parse URL params from Flutterwave redirect
+var params=new URLSearchParams(window.location.search);
+var ref=params.get('ref')||'';
+var amount=params.get('amount')||'';
+var currency=params.get('currency')||'';
+var name=params.get('name')||'Friend';
+var email=params.get('email')||'';
+
+// Personalize greeting
+if(name&&name!=='Friend'){
+  document.getElementById('greeting').textContent='Payment Confirmed, '+name.split(' ')[0]+'!';
+}
+
+// Build bot deep link with pre-filled data
+// Format: /start name|email|phone|location|service
+// Since we only have name and email from Flutterwave, we pass what we have
+var botName=name||'Friend';
+var botEmail=email||'';
+var deepLink='https://t.me/Retpipebot?start='+encodeURIComponent(botName+'|'+botEmail);
+document.getElementById('botLink').href=deepLink;
+
+// Store payment info in localStorage for the bot to pick up
+localStorage.setItem('ct_payment_confirmed','true');
+localStorage.setItem('ct_payment_ref',ref);
+localStorage.setItem('ct_payment_amount',amount);
+localStorage.setItem('ct_payment_currency',currency);
+localStorage.setItem('ct_lead_name',name);
+localStorage.setItem('ct_lead_email',email);
+
+// Send notification to admin via Formsubmit (silent)
+if(ref&&amount){
+  var formData=new URLSearchParams({
+    _subject:'💰 Payment Received: '+name+' ('+currency+' '+amount+')',
+    _captcha:'false',
+    Name:name,
+    Email:email,
+    'Payment Reference':ref,
+    'Amount':currency+' '+amount,
+    'Status':'Awaiting Verification',
+    'Source':'Flutterwave'
+  });
+  fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:formData.toString()
+  }).catch(function(){});
+}
 </script>
 </body>
 </html>
