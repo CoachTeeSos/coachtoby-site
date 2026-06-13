@@ -1,6 +1,31 @@
+# Environment & secrets
+.env
 bot/.env
 SECRETS*
 COACH_TOBY_HANDOFF*.md
 OWL_HANDOFF*.md
-.env
 
+# Dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+bot_cache.db
