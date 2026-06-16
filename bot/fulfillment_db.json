@@ -1,0 +1,10 @@
+{
+  "clients": {},
+  "automations": [],
+  "metrics": {
+    "total_clients": 0,
+    "active": 0,
+    "graduated": 0,
+    "revenue_usd": 0
+  }
+}
