@@ -264,7 +264,7 @@ async function submitStudent(e) {
   try {
     var encEmail = encodeURIComponent("AND({Email}='" + email + "')");
     var checkResp = await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students?filterByFormula=' + encEmail + '&maxRecords=1', {
-      headers: {'Authorization': 'Bearer patmLD...92'}
+      headers: {'Authorization': 'Bearer patmLD03CfCJta2sb.d8de1e7e9b2edd49cefa524b166504e856b0248c9ebf8d57f2a574e602e88d92'}
     });
     var checkData = await checkResp.json();
     var existing = checkData.records && checkData.records[0];
@@ -273,14 +273,14 @@ async function submitStudent(e) {
       // Update existing
       await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students/' + existing.id, {
         method: 'PATCH',
-        headers: {'Authorization': 'Bearer patmLD...92', 'Content-Type': 'application/json'},
+        headers: {'Authorization': 'Bearer patmLD03CfCJta2sb.d8de1e7e9b2edd49cefa524b166504e856b0248c9ebf8d57f2a574e602e88d92', 'Content-Type': 'application/json'},
         body: JSON.stringify({fields: fields})
       });
     } else {
       // Create new
       await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students', {
         method: 'POST',
-        headers: {'Authorization': 'Bearer patmLD...92', 'Content-Type': 'application/json'},
+        headers: {'Authorization': 'Bearer patmLD03CfCJta2sb.d8de1e7e9b2edd49cefa524b166504e856b0248c9ebf8d57f2a574e602e88d92', 'Content-Type': 'application/json'},
         body: JSON.stringify({records: [{fields: fields}]})
       });
     }
@@ -290,7 +290,7 @@ async function submitStudent(e) {
   try {
     await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Leads', {
       method: 'POST',
-      headers: {'Authorization': 'Bearer patmLD...92', 'Content-Type': 'application/json'},
+      headers: {'Authorization': 'Bearer patmLD03CfCJta2sb.d8de1e7e9b2edd49cefa524b166504e856b0248c9ebf8d57f2a574e602e88d92', 'Content-Type': 'application/json'},
       body: JSON.stringify({records: [{fields: {
         'Name': name,
         'Email': email,
