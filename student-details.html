@@ -227,7 +227,7 @@ async function submitStudent(e) {
   var fields = {
     'Name': name,
     'Email': email,
-    'WhatsApp': whatsapp,
+    'Phone': whatsapp,
     'Plan': plan,
     'Status': status,
     'Interest': interest,
@@ -244,7 +244,7 @@ async function submitStudent(e) {
       '_csrf': csrfToken,
       'Name': name,
       'Email': email,
-      'WhatsApp': whatsapp,
+      'Phone': whatsapp,
       'Plan': plan,
       'Status': status,
       'Interest': interest,
@@ -294,7 +294,7 @@ async function submitStudent(e) {
       body: JSON.stringify({records: [{fields: {
         'Name': name,
         'Email': email,
-        'WhatsApp': whatsapp,
+        'Phone': whatsapp,
         'Interest': interest,
         'Source': 'Student Portal',
         'Status': status === 'Active' ? 'Converted' : 'Contacted',
@@ -314,7 +314,7 @@ async function submitStudent(e) {
   detailsList.innerHTML = '<li><strong>Plan:</strong> ' + plan + '</li>' +
     '<li><strong>Focus:</strong> ' + interest + '</li>' +
     '<li><strong>Status:</strong> ' + status + '</li>' +
-    '<li><strong>WhatsApp:</strong> ' + whatsapp + '</li>';
+    '<li><strong>Phone:</strong> ' + whatsapp + '</li>';
   document.getElementById('studentFormCard').style.display = 'none';
   document.getElementById('confirmationCard').style.display = 'block';
 
