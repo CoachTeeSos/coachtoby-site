@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="google-site-verification" content="LzOxYICYW1RNhOx8rluo_MQrhkoWw1IVAA0TPiVv_xk">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://checkout.flutterwave.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.google-analytics.com https://plausible.io; frame-src https://checkout.flutterwave.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://checkout.flutterwave.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.google-analytics.com https://plausible.io https://api.airtable.com; frame-src https://checkout.flutterwave.com;">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Which Singer Are You? — Sessions with Toby</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
@@ -277,11 +277,34 @@ function submitForm(){
   if(!email||email.indexOf('@')===-1){alert('Please enter a valid email.');return;}
   if(!location){alert('Please enter your location.');return;}
   var k=A.q1||A.q2||'stuck';
+  var q6=A.q6||'';
+  var interest='Vocal Coaching';
+  if(q6==='free_community'||q6==='paid_community'||q6==='both') interest='Community';
+  else if(q6==='lesson') interest='1-on-1 Coaching';
+  var resultType=R[k].t||'Unknown';
+  // 1. Send to email (existing)
   var leadData=new URLSearchParams();
-  var h={_subject:'Quiz Lead: '+name+' ('+R[k].t+')',_captcha:'false',Name:name,Email:email,Location:location,Interest:'Vocal Coaching',Source:'Quiz',Status:'New',Notes:'Result: '+R[k].t};
+  var h={_subject:'Quiz Lead: '+name+' ('+resultType+')',_captcha:'false',Name:name,Email:email,Location:location,Interest:interest,Source:'Quiz',Status:'New',Notes:'Result: '+resultType};
   Object.keys(h).forEach(function(ky){leadData.append(ky,h[ky]);});
   fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{method:'POST',body:leadData,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(function(){});
-  var q6=A.q6||'';
+  // 2. Push to Airtable Leads table
+  var atData={
+    records:[{fields:{
+      'Name':name,
+      'Email':email,
+      'Location':location,
+      'Interest':interest,
+      'Source':'Quiz',
+      'Status':'New',
+      'Notes':'Quiz result: '+resultType+' | q6='+q6
+    }}]
+  };
+  fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Leads',{
+    method:'POST',
+    headers:{'Authorization':'Bearer patmLD...92','Content-Type':'application/json'},
+    body:JSON.stringify(atData)
+  }).catch(function(){});
+  // 3. Redirect to thank-you / service page
   var serviceKey='quiz';
   if(q6==='free_community') serviceKey='free-community';
   else if(q6==='paid_community') serviceKey='paid-community';

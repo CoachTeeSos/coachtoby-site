@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="google-site-verification" content="LzOxYICYW1RNhOx8rluo_MQrhkoWw1IVAA0TPiVv_xk">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://checkout.flutterwave.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.google-analytics.com https://plausible.io; frame-src https://checkout.flutterwave.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io https://checkout.flutterwave.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.google-analytics.com https://plausible.io https://api.airtable.com; frame-src https://checkout.flutterwave.com;">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Book Your Session — Sessions with Toby</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
@@ -292,6 +292,14 @@ async function submitPayLater(){
       body:new URLSearchParams({_subject:'Payment Plan: '+name+' (₦'+amount.toLocaleString()+')',_captcha:'false',Name:name,Email:email,'Plan':'Custom Plan (Payment Plan)','Service Key':'custom-plan','Status':'Pending Review','Source':'Website Payment Plan','Budget':amount.toString(),'Needs':'Payment date: '+payDate,'Amount Paid':'0','Total Sessions':'0','Sessions Used':'0'}).toString()
     });
   }catch(err){}
+  // Push to Airtable
+  try{
+    await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Leads',{
+      method:'POST',
+      headers:{'Authorization':'Bearer patmLD...92','Content-Type':'application/json'},
+      body:JSON.stringify({records:[{fields:{'Name':name,'Email':email,'Interest':'Vocal Coaching','Source':'Payment Plan','Status':'Pending Payment','Notes':'Amount: ₦'+amount.toLocaleString()+' | Pay date: '+payDate}}]})
+    });
+  }catch(err){}
   if(typeof gtag!=='undefined'){gtag('event','begin_checkout',{value:amount,currency:'NGN'});}
   document.getElementById('payLaterSection').style.display='none';
   document.getElementById('payLaterConfirmation').style.display='block';
@@ -328,6 +336,14 @@ async function submitDemo(e){
       method:'POST',
       headers:{'Content-Type':'application/x-www-form-urlencoded'},
       body:new URLSearchParams({_subject:'Demo Booking: '+d.name,_captcha:'false',Name:d.name,Email:d.email,WhatsApp:d.whatsapp,Service:d.service,Level:d.level,Message:d.message||'N/A',_csrf:typeof CoachTobySecurity!=='undefined'?CoachTobySecurity.csrfToken():''}).toString()
+    });
+  }catch(err){}
+  // Push to Airtable
+  try{
+    await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Leads',{
+      method:'POST',
+      headers:{'Authorization':'Bearer patmLD...92','Content-Type':'application/json'},
+      body:JSON.stringify({records:[{fields:{'Name':d.name,'Email':d.email,'WhatsApp':d.whatsapp||'','Interest':d.service||'Vocal Coaching','Level':d.level||'','Source':'Demo Booking','Status':'New','Notes':d.message||''}}]})
     });
   }catch(err){}
   if(typeof CoachTobySecurity!=='undefined'){CoachTobyStorage.set('ct_lead_name',d.name);}
