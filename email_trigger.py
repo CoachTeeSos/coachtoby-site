@@ -94,7 +94,7 @@ def build_email_html(name, first_name, plan, payment_link, is_free, is_custom):
         '<li><strong>Confirmation email</strong> with session schedule</li>'
         '<li><strong>First session booking link</strong> sent via email</li>'
         '</ol></div>'
-        '<p>Questions? Reply to this email or WhatsApp: <strong>+234 814 152 9507</strong></p>'
+        '<p>Questions? Reply to this email or WhatsApp: <strong>+234 916 010 6084</strong></p>'
         '<p>Let us transform your voice! &#127908;</p>'
         '<p>&mdash; Coach Toby<br><a href="https://coachteesos.github.io/coachtoby-site/">Sessions with Toby</a></p>'
         '</div></body></html>'

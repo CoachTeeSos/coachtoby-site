@@ -173,7 +173,7 @@ def build_welcome_email(name: str, email: str, service_key: str, plan_label: str
 </ol>
 </div>
 
-<p>Questions? Just reply to this email or reach out on WhatsApp: <strong>+234 814 152 9507</strong></p>
+<p>Questions? Just reply to this email or reach out on WhatsApp: <strong>+234 916 010 6084</strong></p>
 
 <p>Let's transform your voice! 🎤</p>
 

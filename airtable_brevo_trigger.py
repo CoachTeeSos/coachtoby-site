@@ -155,7 +155,7 @@ def build_email(name: str, email: str, service_key: str, plan_label: str) -> dic
 <li><strong>First session booking link</strong> sent via email</li>
 </ol>
 </div>
-<p>Questions? Reply to this email or WhatsApp: <strong>+234 814 152 9507</strong></p>
+<p>Questions? Reply to this email or WhatsApp: <strong>+234 916 010 6084</strong></p>
 <p>Let's transform your voice! 🎤</p>
 <p>— Coach Toby<br><em>Sessions with Toby</em><br>
 <a href="https://coachteesos.github.io/coachtoby-site/">coachteesos.github.io/coachtoby-site</a></p>
