@@ -8,8 +8,8 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J9V395RPDH');
+  gtag('js',new Date());
+  gtag('config','G-J9V395RPDH');
 </script>
 <meta name="description" content="Choose your path: pay now and start immediately, or schedule a free 30-minute demo with Coach Toby. No pressure, no commitment.">
 <meta name="robots" content="index, follow">
@@ -26,12 +26,46 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/main.css?v=5.2">
+<style>
+/* ── BOOK PAGE OVERRIDES ── */
+.book-hero{padding:8rem 1.5rem 3rem;text-align:center;max-width:48rem;margin:0 auto}
+.book-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);color:#F4F5F7;margin-bottom:0.5rem}
+.book-hero p{color:#9FA6B5;font-size:1rem;max-width:36rem;margin:0 auto}
+.book-card{max-width:32rem;margin:0 auto;padding:2.5rem;border-radius:1.25rem;border:1px solid #242838;background:#161820}
+.path-selector{display:flex;gap:0.75rem;margin-bottom:1.5rem}
+.path-btn{flex:1;padding:1rem;border:2px solid #242838;border-radius:0.75rem;cursor:pointer;text-align:center;background:#161820;transition:all .2s ease;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.9rem;color:#F4F5F7}
+.path-btn.active{border-color:#E4B34F;background:rgba(228,179,79,0.05)}
+.path-btn span{display:block;font-size:0.75rem;color:#9FA6B5;font-weight:400;margin-top:0.25rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12;transition:border-color .2s ease}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#E4B34F}
+.form-group input::placeholder{color:#6b7280}
+.form-error{color:#ff6b6b;font-size:0.8rem;margin-top:0.25rem;display:none}
+.pay-btn{display:block;width:100%;padding:1rem;border:none;border-radius:0.625rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s ease;text-align:center;margin-bottom:0.75rem}
+.pay-btn.gold{background:#E4B34F;color:#0D0E12;box-shadow:0 4px 20px rgba(228,179,79,0.2)}
+.pay-btn.gold:hover{background:#F0C76A;transform:translateY(-2px)}
+.pay-btn.outline{background:transparent;color:#F4F5F7;border:2px solid #242838}
+.pay-btn.outline:hover{border-color:#E4B34F;color:#E4B34F}
+.pay-btn.dark{background:#0D0E12;color:#F4F5F7;border:1px solid #242838}
+.pay-btn.dark:hover{border-color:#E4B34F}
+.divider-or{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:#6b7280;font-size:0.85rem}
+.divider-or::before,.divider-or::after{content:'';flex:1;height:1px;background:#242838}
+.trust-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid #242838}
+.trust-badge{display:flex;align-items:center;gap:0.375rem;font-size:0.8rem;color:#6b7280}
+.trust-badge span{color:#00E5A3;font-weight:700}
+.confirmation{text-align:center;padding:2rem 0;display:none}
+.confirmation-icon{width:64px;height:64px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:#00E5A3}
+.confirmation h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.25rem;color:#F4F5F7;margin-bottom:0.5rem}
+.confirmation p{color:#9FA6B5;margin-bottom:1rem}
+.spots-left{display:inline-block;background:rgba(228,179,79,0.1);color:#E4B34F;padding:0.25rem 0.75rem;border-radius:50px;font-size:0.75rem;font-weight:700;margin-bottom:1rem}
+@media(max-width:600px){.book-card{padding:1.5rem}.path-selector{flex-direction:column}}
+</style>
 </head>
 <body>
 
 <div id="pageLoader"><div class="text-center"><div class="loader-text" id="loaderText"></div><div class="loader-bar"><div class="loader-bar-fill"></div></div></div></div>
 
-<!-- NAV -->
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">Sessions with Toby</a>
@@ -44,173 +78,142 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero-gradient section-pad" style="padding-top:8rem;padding-bottom:3rem">
-  <div class="container text-center">
-    <p class="section-label">Get Started</p>
-    <h1 class="hero-headline">Choose Your Path</h1>
-    <p class="body-text" style="max-width:36rem;margin:0 auto;color:#9FA6B5">Pay now and start immediately, or schedule a free 30-minute demo. No pressure either way.</p>
-  </div>
+<section class="book-hero">
+  <h1>Choose Your Path</h1>
+  <p>Pay now and start immediately, or schedule a free 30-minute demo. No pressure either way.</p>
 </section>
 
-<!-- MAIN CARD -->
 <section class="section-pad-sm">
-  <div class="container" style="max-width:540px">
-    <div class="card" style="padding:2.5rem;border-radius:20px;border:1px solid #242838">
+  <div class="book-card">
 
-      <!-- PATH SELECTOR -->
-      <div style="display:flex;gap:0.75rem;margin-bottom:2rem">
-        <div id="pathPay" onclick="selectPath('pay')" style="flex:1;padding:1.25rem 1rem;border:2px solid #E4B34F;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:center;background:rgba(228,179,79,0.05)">
-          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:0.95rem;color:#F4F5F7;display:block;margin-bottom:0.25rem">Pay Now</span>
-          <span style="font-size:0.78rem;color:#9FA6B5">Start immediately</span>
-        </div>
-        <div id="pathDemo" onclick="selectPath('demo')" style="flex:1;padding:1.25rem 1rem;border:2px solid #242838;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:center;background:#161820">
-          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:0.95rem;color:#F4F5F7;display:block;margin-bottom:0.25rem">Free Demo</span>
-          <span style="font-size:0.78rem;color:#9FA6B5">30-min session</span>
-        </div>
-      </div>
-
-      <!-- PAY NOW SECTION -->
-      <div id="paySection">
-        <p class="body-text" style="margin-bottom:1.5rem;text-align:center;color:#9FA6B5">Select a plan to pay now. You'll be redirected to a secure payment page, then straight to your inbox to get started.</p>
-
-        <div style="margin-bottom:1rem">
-          <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Your Name *</label>
-          <input type="text" id="pName" placeholder="What should we call you?" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12;transition:border-color .2s ease">
-        </div>
-        <div style="margin-bottom:1.5rem">
-          <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Email *</label>
-          <input type="email" id="pEmail" placeholder="you@example.com" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12;transition:border-color .2s ease">
-        </div>
-
-        <button onclick="startPayment('single',50,'USD','Single Session — 1-on-1 Vocal Coaching')" class="btn-primary w-full" style="margin-bottom:0.75rem">
-          Single Session — $50 <span style="font-size:0.8rem;color:#9FA6B5;font-weight:400">(₦70,000)</span>
-        </button>
-        <button onclick="startPayment('monthly',200,'USD','Monthly Package — 4 Sessions + Priority')" class="btn-primary w-full" style="margin-bottom:0.75rem">
-          Monthly Package — $200 <span style="font-size:0.8rem;color:#9FA6B5;font-weight:400">(₦300,000)</span>
-        </button>
-
-        <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:#6b7280;font-size:0.85rem">
-          <div style="flex:1;height:1px;background:#242838"></div>
-          <span>or pay in Naira</span>
-          <div style="flex:1;height:1px;background:#242838"></div>
-        </div>
-
-        <button onclick="startPayment('ngn-single',70000,'NGN','Single Session — 1-on-1 Vocal Coaching')" class="btn-secondary w-full" style="margin-bottom:0.75rem">
-          Single Session — ₦70,000 <span style="font-size:0.8rem;color:#9FA6B5;font-weight:400">($50)</span>
-        </button>
-        <button onclick="startPayment('ngn-monthly',300000,'NGN','Monthly Package — 4 Sessions + Priority')" class="btn-secondary w-full" style="margin-bottom:0.75rem">
-          Monthly Package — ₦300,000 <span style="font-size:0.8rem;color:#9FA6B5;font-weight:400">($200)</span>
-        </button>
-
-        <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:#6b7280;font-size:0.85rem">
-          <div style="flex:1;height:1px;background:#242838"></div>
-          <span>or set up a payment plan</span>
-          <div style="flex:1;height:1px;background:#242838"></div>
-        </div>
-
-        <div id="payLaterSection">
-          <p class="body-text" style="margin-bottom:1rem;text-align:center;font-size:0.9rem;color:#6b7280">Can't pay the full amount now? Set your proposed amount and payment date. Coach Toby will review and confirm.</p>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Proposed Amount (₦) *</label>
-            <input type="number" id="customAmount" placeholder="e.g. 40000" min="1000" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Currency</label>
-            <select id="customCurrency" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-              <option value="NGN">₦ Naira</option>
-              <option value="USD">$ USD</option>
-            </select>
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">When can you pay? *</label>
-            <input type="date" id="paymentDate" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Notes (optional)</label>
-            <input type="text" id="paymentNotes" placeholder="e.g. ₦30K now, ₦10K later" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-          </div>
-          <button onclick="submitPayLater()" class="btn-dark w-full" style="color:#F4F5F7">Submit Payment Plan</button>
-          <p style="font-size:0.75rem;color:#6b7280;text-align:center;margin-top:0.5rem">Coach Toby will review and send you a payment link within 24 hours.</p>
-        </div>
-      </div>
-
-      <!-- PAY LATER CONFIRMATION -->
-      <div id="payLaterConfirmation" style="display:none;text-align:center;padding:2rem 0">
-        <div style="width:64px;height:64px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:#00E5A3">✓</div>
-        <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.25rem;color:#F4F5F7;margin-bottom:0.5rem">Payment Plan Submitted</h3>
-        <p style="color:#9FA6B5;margin-bottom:1rem">Coach Toby has received your proposal and will confirm within 24 hours. Check your email for updates.</p>
-        <a href="home.html" class="btn-secondary">← Back to Home</a>
-      </div>
-
-      <!-- DEMO SECTION -->
-      <div id="demoSection" style="display:none">
-        <p class="body-text" style="margin-bottom:1.5rem;text-align:center;color:#9FA6B5">No payment needed. Fill this out and Coach Toby will reach out within 24 hours to schedule your free 30-minute session.</p>
-
-        <form id="demoForm" onsubmit="submitDemo(event)">
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Your Name *</label>
-            <input type="text" id="dName" placeholder="What should we call you?" required style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Email *</label>
-            <input type="email" id="dEmail" placeholder="you@example.com" required style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">WhatsApp Number *</label>
-            <input type="tel" id="dWhatsApp" placeholder="+234..." required style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">What do you want to work on? *</label>
-            <select id="dService" required style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-              <option value="">Pick one...</option>
-              <option value="riffs">Riffs, runs & vocal agility</option>
-              <option value="pitch">Pitch accuracy & range</option>
-              <option value="speaking">Public speaking & executive presence</option>
-              <option value="confidence">Confidence & stage presence</option>
-              <option value="mindset">Life coaching & mindset shift</option>
-              <option value="all">All of the above</option>
-            </select>
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">Your experience level</label>
-            <select id="dLevel" style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12">
-              <option value="beginner">Complete beginner</option>
-              <option value="intermediate">Intermediate — I sing but want to level up</option>
-              <option value="advanced">Advanced — I perform but want mastery</option>
-              <option value="professional">Professional — working artist</option>
-            </select>
-          </div>
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem">What's your biggest challenge right now?</label>
-            <textarea id="dMessage" rows="3" placeholder="Be honest — this helps Coach Toby prepare for your session..." style="width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12;resize:vertical"></textarea>
-          </div>
-          <button type="submit" class="btn-primary w-full" style="margin-top:0.5rem">Schedule My Free Demo →</button>
-                    <p style="font-size:0.75rem;color:#6b7280;text-align:center;margin-top:0.75rem">We'll reach out within 24 hours via WhatsApp or email. No spam, ever.</p>
-        </form>
-      </div>
-
-      <!-- TRUST BADGES -->
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid #242838">
-        <div style="display:flex;align-items:center;gap:0.375rem;font-size:0.8rem;color:#6b7280">
-          <span style="color:#00E5A3;font-weight:700">✓</span> Secure payment
-        </div>
-        <div style="display:flex;align-items:center;gap:0.375rem;font-size:0.8rem;color:#6b7280">
-          <span style="color:#00E5A3;font-weight:700">✓</span> No credit card for demo
-        </div>
-        <div style="display:flex;align-items:center;gap:0.375rem;font-size:0.8rem;color:#6b7280">
-          <span style="color:#00E5A3;font-weight:700">✓</span> Session 1 guarantee
-        </div>
-        <div style="display:flex;align-items:center;gap:0.375rem;font-size:0.8rem;color:#6b7280">
-          <span style="color:#00E5A3;font-weight:700">✓</span> Cancel anytime
-        </div>
-      </div>
-
+    <!-- PATH SELECTOR -->
+    <div class="path-selector">
+      <div id="pathPay" class="path-btn active" onclick="selectPath('pay')">Pay Now<br><span>Start immediately</span></div>
+      <div id="pathDemo" class="path-btn" onclick="selectPath('demo')">Free Demo<br><span>30-min session</span></div>
     </div>
+
+    <!-- PAY NOW SECTION -->
+    <div id="paySection">
+      <p style="margin-bottom:1rem;text-align:center;color:#9FA6B5;font-size:0.9rem">Select a plan. Secure payment via Flutterwave. Instant access.</p>
+
+      <!-- Name/Email FIRST (before payment buttons) -->
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" id="pName" placeholder="What should we call you?" onblur="validateField(this)">
+        <div class="form-error" id="pNameErr">Please enter your name</div>
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="pEmail" placeholder="you@example.com" onblur="validateField(this)">
+        <div class="form-error" id="pEmailErr">Please enter a valid email</div>
+      </div>
+
+      <!-- TRUST BADGES (near payment buttons) -->
+      <div class="trust-badges" style="margin:1rem 0;padding:0.75rem 0;border-top:1px solid #242838;border-bottom:1px solid #242838">
+        <div class="trust-badge"><span>✓</span> Secure payment</div>
+        <div class="trust-badge"><span>✓</span> Session 1 guarantee</div>
+        <div class="trust-badge"><span>✓</span> Cancel anytime</div>
+      </div>
+
+      <!-- NGN FIRST (Nigeria is primary market) -->
+      <button onclick="startPayment('ngn-single',70000,'NGN','Single Session — 1-on-1 Vocal Coaching')" class="pay-btn gold">
+        Single Session — ₦70,000 <span style="font-size:0.8rem;color:#0D0E12;font-weight:400">($50)</span>
+      </button>
+      <button onclick="startPayment('ngn-monthly',300000,'NGN','Monthly Package — 4 Sessions + Priority')" class="pay-btn gold" style="margin-bottom:0.75rem">
+        Monthly Package — ₦300,000 <span style="font-size:0.8rem;color:#0D0E12;font-weight:400">($200)</span>
+      </button>
+
+      <div class="divider-or">or pay in USD</div>
+
+      <button onclick="startPayment('single',50,'USD','Single Session — 1-on-1 Vocal Coaching')" class="pay-btn outline">
+        Single Session — $50 <span style="font-size:0.8rem;color:#9FA6B5;font-weight:400">(₦70,000)</span>
+      </button>
+      <button onclick="startPayment('monthly',200,'USD','Monthly Package — 4 Sessions + Priority')" class="pay-btn outline">
+        Monthly Package — $200 <span style="font-size:0.8rem;color:#9FA6B5;font-weight:400">(₦300,000)</span>
+      </button>
+
+      <div class="divider-or">can't pay full amount?</div>
+
+      <div id="payLaterSection">
+        <p style="margin-bottom:1rem;text-align:center;font-size:0.85rem;color:#6b7280">Set your proposed amount and date. Coach Toby will confirm within 24 hours.</p>
+        <div class="form-group">
+          <label>Proposed Amount (₦) *</label>
+          <input type="number" id="customAmount" placeholder="e.g. 40000" min="1000">
+        </div>
+        <div class="form-group">
+          <label>When can you pay? *</label>
+          <input type="date" id="paymentDate">
+        </div>
+        <button onclick="submitPayLater()" class="pay-btn dark">Submit Payment Plan</button>
+      </div>
+    </div>
+
+    <!-- PAY LATER CONFIRMATION -->
+    <div id="payLaterConfirmation" class="confirmation">
+      <div class="confirmation-icon">✓</div>
+      <h3>Payment Plan Submitted</h3>
+      <p>Coach Toby has received your proposal and will confirm within 24 hours. Check your email for updates.</p>
+      <a href="home.html" class="pay-btn outline" style="display:inline-block;width:auto;padding:0.75rem 1.5rem">← Back to Home</a>
+    </div>
+
+    <!-- DEMO SECTION -->
+    <div id="demoSection" style="display:none">
+      <p style="margin-bottom:1.5rem;text-align:center;color:#9FA6B5">No payment needed. Fill this out and Coach Toby will reach out within 24 hours to schedule your free 30-minute session.</p>
+
+      <form id="demoForm" onsubmit="submitDemo(event)">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="dName" placeholder="What should we call you?" required>
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="dEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Number *</label>
+          <input type="tel" id="dWhatsApp" placeholder="+234..." required>
+        </div>
+        <div class="form-group">
+          <label>What do you want to work on? *</label>
+          <select id="dService" required>
+            <option value="">Pick one...</option>
+            <option value="riffs">Riffs, runs & vocal agility</option>
+            <option value="pitch">Pitch accuracy & range</option>
+            <option value="speaking">Public speaking & executive presence</option>
+            <option value="confidence">Confidence & stage presence</option>
+            <option value="mindset">Life coaching & mindset shift</option>
+            <option value="all">All of the above</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your experience level</label>
+          <select id="dLevel">
+            <option value="beginner">Complete beginner</option>
+            <option value="intermediate">Intermediate — I sing but want to level up</option>
+            <option value="advanced">Advanced — I perform but want mastery</option>
+            <option value="professional">Professional — working artist</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>What's your biggest challenge right now?</label>
+          <textarea id="dMessage" rows="3" placeholder="Be honest — this helps Coach Toby prepare for your session..."></textarea>
+        </div>
+        <button type="submit" class="pay-btn gold" style="margin-top:0.5rem">Schedule My Free Demo →</button>
+        <p style="font-size:0.75rem;color:#6b7280;text-align:center;margin-top:0.75rem">We'll reach out within 24 hours via WhatsApp or email. No spam, ever.</p>
+      </form>
+    </div>
+
+    <!-- TRUST BADGES (bottom) -->
+    <div class="trust-badges">
+      <div class="trust-badge"><span>✓</span> Secure payment</div>
+      <div class="trust-badge"><span>✓</span> No credit card for demo</div>
+      <div class="trust-badge"><span>✓</span> Session 1 guarantee</div>
+      <div class="trust-badge"><span>✓</span> Cancel anytime</div>
+    </div>
+
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer" style="padding:2rem 0">
   <div class="container text-center">
     <p style="color:#6b7280;font-size:0.85rem">© 2026 Sessions with Toby. All rights reserved.</p>
@@ -221,21 +224,22 @@
 (function(){var lt=document.getElementById('loaderText'),b='Sessions with Toby';b.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c===' '?' ':c;s.style.animationDelay=(i*0.06)+'s';lt.appendChild(s);});window.addEventListener('load',function(){setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},1800);});setTimeout(function(){document.getElementById('pageLoader').classList.add('fade-out');setTimeout(function(){document.getElementById('pageLoader').style.display='none';},500);},3500);})();
 
 function selectPath(path){
-  var payBtn = document.getElementById('pathPay');
-  var demoBtn = document.getElementById('pathDemo');
-  if(path==='pay'){
-    payBtn.style.borderColor='#E4B34F';
-    payBtn.style.background='rgba(228,179,79,0.05)';
-    demoBtn.style.borderColor='#242838';
-    demoBtn.style.background='#161820';
-  } else {
-    demoBtn.style.borderColor='#E4B34F';
-    demoBtn.style.background='rgba(228,179,79,0.05)';
-    payBtn.style.borderColor='#242838';
-    payBtn.style.background='#161820';
-  }
-  document.getElementById('paySection').style.display = path==='pay' ? 'block' : 'none';
-  document.getElementById('demoSection').style.display = path==='demo' ? 'block' : 'none';
+  var payBtn=document.getElementById('pathPay');
+  var demoBtn=document.getElementById('pathDemo');
+  if(path==='pay'){payBtn.classList.add('active');demoBtn.classList.remove('active');}
+  else{demoBtn.classList.add('active');payBtn.classList.remove('active');}
+  document.getElementById('paySection').style.display=path==='pay'?'block':'none';
+  document.getElementById('demoSection').style.display=path==='demo'?'block':'none';
+  document.getElementById('payLaterConfirmation').style.display='none';
+}
+
+function validateField(el){
+  var err=el.id+'Err';
+  var errEl=document.getElementById(err);
+  if(!el.value.trim()){if(errEl)errEl.style.display='block';el.style.borderColor='#ff6b6b';return false;}
+  if(errEl)errEl.style.display='none';
+  el.style.borderColor='#242838';
+  return true;
 }
 
 var FW_LINKS={
@@ -246,14 +250,10 @@ var FW_LINKS={
 };
 
 function startPayment(plan,amount,currency,desc){
-  var name='',email='';
-  if(document.getElementById('dName')) name=document.getElementById('dName').value.trim();
-  if(document.getElementById('dEmail')) email=document.getElementById('dEmail').value.trim();
-  var pName=document.getElementById('pName');
-  var pEmail=document.getElementById('pEmail');
-  if(pName && pName.value.trim()) name=pName.value.trim();
-  if(pEmail && pEmail.value.trim()) email=pEmail.value.trim();
-  if(!name) name='Friend';
+  var name=document.getElementById('pName').value.trim();
+  var email=document.getElementById('pEmail').value.trim();
+  if(!name){document.getElementById('pNameErr').style.display='block';document.getElementById('pName').style.borderColor='#ff6b6b';document.getElementById('pName').focus();return;}
+  if(!email||!email.includes('@')){document.getElementById('pEmailErr').style.display='block';document.getElementById('pEmail').style.borderColor='#ff6b6b';document.getElementById('pEmail').focus();return;}
   var ref='CT-'+Date.now()+'-'+Math.random().toString(36).substr(2,6).toUpperCase();
   localStorage.setItem('ct_payment',JSON.stringify({ref:ref,plan:plan,amount:amount,currency:currency,name:name,email:email,ts:Date.now()}));
   localStorage.setItem('ct_lead_name',name);
@@ -261,64 +261,33 @@ function startPayment(plan,amount,currency,desc){
   if(FW_LINKS[plan]){
     var returnUrl=encodeURIComponent(window.location.origin+window.location.pathname.replace('book.html','')+'thank-you.html?ref='+ref+'&amount='+amount+'&currency='+currency+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email));
     window.location.href=FW_LINKS[plan]+'?ref='+ref+'&amount='+amount+'&currency='+currency+'&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email)+'&redirect_url='+returnUrl;
-  }else if(plan==='custom'){
-    var customAmt=document.getElementById('customAmount').value;
-    if(!customAmt||customAmt<10){alert('Please enter a valid amount (minimum $10)');return;}
-    localStorage.setItem('ct_payment',JSON.stringify({ref:ref,plan:'custom',amount:customAmt,currency:'USD',name:name,email:email,ts:Date.now()}));
-    window.location.href='https://flutterwave.com/pay/sessionswithtoby?ref='+ref+'&amount='+customAmt+'&currency=USD&name='+encodeURIComponent(name)+'&email='+encodeURIComponent(email);
   }else{
     alert('Payment link not found. Please contact Coach Toby on WhatsApp.');
   }
-}
-
-function startCustomPayment(){
-  var customAmt=parseFloat(document.getElementById('customAmount').value);
-  if(!customAmt||customAmt<10){alert('Please enter a valid amount (minimum $10)');return;}
-  startPayment('custom',customAmt,'USD','Custom Amount Payment');
 }
 
 async function submitPayLater(){
   var name=document.getElementById('pName').value.trim();
   var email=document.getElementById('pEmail').value.trim();
   var amount=parseFloat(document.getElementById('customAmount').value);
-  var currency=document.getElementById('customCurrency').value;
   var payDate=document.getElementById('paymentDate').value;
-  var notes=document.getElementById('paymentNotes').value.trim();
   if(!name){alert('Please enter your name.');return;}
   if(!email){alert('Please enter your email.');return;}
   if(!amount||amount<1000){alert('Please enter a valid amount.');return;}
   if(!payDate){alert('Please select a payment date.');return;}
-  var sym=currency==='NGN'?'₦':'$';
   var btn=document.querySelector('#payLaterSection button');
   btn.textContent='Submitting...';btn.disabled=true;
-  var formData=new URLSearchParams({
-    _subject:'Payment Plan Request: '+name+' ('+sym+amount.toLocaleString()+')',
-    _captcha:'false',
-    Name:name,
-    Email:email,
-    'Plan':'Custom Plan (Payment Plan)',
-    'Service Key':'custom-plan',
-    'Status':'Pending Review',
-    'Source':'Website Payment Plan',
-    'Budget':amount.toString(),
-    'Needs':'Payment date: '+payDate+'. '+notes,
-    'Amount Paid':'0',
-    'Total Sessions':'0',
-    'Sessions Used':'0'
-  });
   try{
     await fetch('https://formsubmit.co/prosperolumotobi@gmail.com',{
       method:'POST',
       headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:formData.toString()
+      body:new URLSearchParams({_subject:'Payment Plan: '+name+' (₦'+amount.toLocaleString()+')',_captcha:'false',Name:name,Email:email,'Plan':'Custom Plan (Payment Plan)','Service Key':'custom-plan','Status':'Pending Review','Source':'Website Payment Plan','Budget':amount.toString(),'Needs':'Payment date: '+payDate,'Amount Paid':'0','Total Sessions':'0','Sessions Used':'0'}).toString()
     });
   }catch(err){}
-  if(typeof gtag!=='undefined'){gtag('event','begin_checkout',{value:amount,currency:currency});}
+  if(typeof gtag!=='undefined'){gtag('event','begin_checkout',{value:amount,currency:'NGN'});}
   document.getElementById('payLaterSection').style.display='none';
   document.getElementById('payLaterConfirmation').style.display='block';
   localStorage.setItem('ct_lead_name',name);
-  localStorage.setItem('ct_payment_amount',amount);
-  localStorage.setItem('ct_payment_currency',currency);
 }
 
 async function submitDemo(e){
@@ -342,7 +311,7 @@ async function submitDemo(e){
     });
   }catch(err){}
   localStorage.setItem('ct_lead_name',d.name);
-  document.getElementById('demoForm').innerHTML='<div style="text-align:center;padding:2rem 0"><div style="width:64px;height:64px;background:rgba(0,229,163,0.1);border:1px solid rgba(0,229,163,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;color:#00E5A3">✓</div><h3 style="font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:800;font-size:1.25rem;color:#F4F5F7;margin-bottom:0.5rem">You\'re all set, '+d.name+'!</h3><p style="color:#9FA6B5;margin-bottom:1.5rem">Coach Toby has received your booking and will reach out within 24 hours via WhatsApp or email to schedule your free demo.</p><a href="home.html" class="btn-secondary">← Back to Home</a></div>';
+  document.getElementById('demoForm').innerHTML='<div class="confirmation"><div class="confirmation-icon">✓</div><h3>You\'re all set, '+d.name+'!</h3><p>Coach Toby has received your booking and will reach out within 24 hours via WhatsApp or email to schedule your free demo.</p><a href="home.html" class="pay-btn outline" style="display:inline-block;width:auto;padding:0.75rem 1.5rem">← Back to Home</a></div>';
 }
 </script>
 

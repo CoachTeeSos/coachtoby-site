@@ -9,7 +9,9 @@ from pathlib import Path
 
 VAULT_DIR = Path('/home/user/workspace/vault')
 SKILLS_DIR = Path('/home/user/workspace/skills/content')
-EXA_KEY = os.environ.get('EXA_API_KEY', 'd52adec4-68c6-4fb5-b0cd-0392f84919a4')
+EXA_KEY = os.environ.get('EXA_API_KEY', '')
+if not EXA_KEY:
+    raise ValueError("EXA_API_KEY not set in environment")
 
 # ── PAIN POINT RESEARCH ─────────────────────────────────────────────────────
 
