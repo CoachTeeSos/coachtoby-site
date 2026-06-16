@@ -43,7 +43,7 @@
     </div>
     <div class="ty-step">
       <div class="ty-step-num">2</div>
-      <div class="ty-step-text"><strong>Open Telegram.</strong> Tap the button below to message @Retpipebot.</div>
+      <div class="ty-step-text"><strong>Open WhatsApp.</strong> Tap the button below to message Coach Toby directly.</div>
     </div>
     <div class="ty-step">
       <div class="ty-step-num">3</div>
@@ -53,7 +53,7 @@
 
   <div class="ty-divider"></div>
 
-  <a id="botLink" href="https://t.me/Retpipebot" class="btn-primary" style="display:block;width:100%;margin-bottom:8px">🎤 Open Telegram & Start →</a>
+  <a id="botLink" href="https://wa.me/2349160106084?text=Hi%20Coach%20Toby!%20I%20just%20completed%20my%20payment%20and%20want%20to%20get%20started." class="btn-primary" style="display:block;width:100%;margin-bottom:8px">💬 Open WhatsApp & Start →</a>
   <a href="home.html" class="btn-secondary" style="display:block;width:100%">← Back to Home</a>
 
   <!-- UPSELL -->
@@ -88,7 +88,7 @@ if(name&&name!=='Friend'){
 
 var botName=name||'Friend';
 var botEmail=email||'';
-var deepLink='https://t.me/Retpipebot?start='+encodeURIComponent(botName+'|'+botEmail);
+var deepLink='https://wa.me/2349160106084?text='+encodeURIComponent('Hi Coach Toby! Name: '+botName+' Email: '+botEmail);
 document.getElementById('botLink').href=deepLink;
 
 // Store only non-sensitive data in sessionStorage (cleared when tab closes)
