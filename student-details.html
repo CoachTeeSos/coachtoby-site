@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="LzOxYICYW1RNhOx8rluo_MQrhkoWw1IVAA0TPiVv_xk">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.google-analytics.com https://plausible.io https://api.airtable.com;">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Update Your Details — Sessions with Toby</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9V395RPDH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());
+  gtag('config','G-J9V395RPDH');
+</script>
+<meta name="description" content="Update your student details with Coach Toby. Keep your profile current so we can serve you better.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0D0E12">
+<link rel="canonical" href="https://coachteesos.github.io/coachtoby-site/student-details.html">
+<meta property="og:title" content="Update Your Details — Sessions with Toby">
+<meta property="og:description" content="Keep your student profile current with Coach Toby.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coachteesos.github.io/coachtoby-site/student-details.html">
+<meta property="og:site_name" content="Sessions with Toby">
+<meta property="og:image" content="https://coachteesos.github.io/coachtoby-site/assets/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=5.2">
+<style>
+.student-hero{padding:8rem 1.5rem 2rem;text-align:center;max-width:48rem;margin:0 auto}
+.student-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(1.6rem,4vw,2.2rem);color:#F4F5F7;margin-bottom:0.5rem}
+.student-hero p{color:#9FA6B5;font-size:1rem;max-width:36rem;margin:0 auto}
+.form-card{max-width:34rem;margin:0 auto;padding:2.5rem;border-radius:1.25rem;border:1px solid #242838;background:#161820}
+.form-card h2{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.2rem;color:#F4F5F7;margin-bottom:0.25rem}
+.form-card .subtitle{color:#9FA6B5;font-size:0.85rem;margin-bottom:1.5rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-weight:600;font-size:0.85rem;color:#F4F5F7;margin-bottom:0.375rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.875rem 1rem;border:2px solid #242838;border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:1rem;color:#F4F5F7;background:#0D0E12;transition:border-color .2s ease}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#E4B34F}
+.form-group input::placeholder{color:#6b7280}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-hint{font-size:0.75rem;color:#6b7280;margin-top:0.25rem}
+.form-error{color:#ff6b6b;font-size:0.8rem;margin-top:0.25rem;display:none}
+.submit-btn{display:block;width:100%;padding:1rem;border:none;border-radius:0.625rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s ease;text-align:center;background:#E4B34F;color:#0D0E12;box-shadow:0 4px 20px rgba(228,179,79,0.2);margin-top:1.5rem}
+.submit-btn:hover{background:#F0C76A;transform:translateY(-2px)}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.confirmation{display:none;text-align:center;padding:2rem 1rem}
+.confirmation-icon{font-size:3rem;margin-bottom:1rem}
+.confirmation h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.3rem;color:#F4F5F7;margin-bottom:0.5rem}
+.confirmation p{color:#9FA6B5;font-size:0.95rem;max-width:28rem;margin:0 auto 1.5rem}
+.next-steps{text-align:left;background:#0D0E12;border:1px solid #242838;border-radius:0.75rem;padding:1.25rem;margin:1.5rem 0}
+.next-steps h4{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.9rem;color:#E4B34F;margin-bottom:0.75rem}
+.next-steps ul{list-style:none;padding:0;margin:0}
+.next-steps li{color:#9FA6B5;font-size:0.85rem;padding:0.375rem 0;padding-left:1.25rem;position:relative}
+.next-steps li::before{content:'✓';position:absolute;left:0;color:#00E5A3;font-weight:700}
+.honeypot{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">🎤 Sessions with Toby</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="book.html">Book</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="book.html" class="nav-cta">Get Started</a>
+    <button class="btn-mobile-toggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<div class="student-hero">
+  <h1>Update Your Details</h1>
+  <p>Coach Toby wants to make sure we have your correct info. Takes 30 seconds.</p>
+</div>
+
+<div style="padding:0 1.5rem 4rem">
+<div class="form-card" id="studentFormCard">
+  <h2>Your Information</h2>
+  <p class="subtitle">Fill in what you can. Already a student? This updates your existing record.</p>
+
+  <form id="studentForm" onsubmit="return submitStudent(event)">
+    <!-- Honeypot -->
+    <div class="honeypot" aria-hidden="true">
+      <input type="text" name="website_url" tabindex="-1" autocomplete="off" data-honeypot>
+    </div>
+
+    <div class="form-group">
+      <label for="sName">Full Name *</label>
+      <input type="text" id="sName" placeholder="Your full name" required>
+      <div class="form-error" id="sNameErr">Please enter your name</div>
+    </div>
+
+    <div class="form-group">
+      <label for="sEmail">Email *</label>
+      <input type="email" id="sEmail" placeholder="you@example.com" required>
+      <div class="form-error" id="sEmailErr">Please enter a valid email</div>
+    </div>
+
+    <div class="form-group">
+      <label for="sWhatsApp">WhatsApp Number *</label>
+      <input type="tel" id="sWhatsApp" placeholder="e.g. 2348012345678" required>
+      <div class="form-hint">Include country code, no + or spaces</div>
+      <div class="form-error" id="sWhatsAppErr">Please enter your WhatsApp number</div>
+    </div>
+
+    <div class="form-group">
+      <label for="sLocation">Location</label>
+      <input type="text" id="sLocation" placeholder="City, Country">
+    </div>
+
+    <div class="form-group">
+      <label for="sPlan">Current Plan *</label>
+      <select id="sPlan" required>
+        <option value="">Select your plan...</option>
+        <option value="Group">Group (₦20K/person)</option>
+        <option value="Single">Single Session (₦70K / $50)</option>
+        <option value="Monthly">Monthly (₦300K / $200)</option>
+        <option value="Community">Free Community Member</option>
+        <option value="Inactive">Not Currently Active</option>
+        <option value="Prospective">Just Exploring</option>
+      </select>
+      <div class="form-error" id="sPlanErr">Please select a plan</div>
+    </div>
+
+    <div class="form-group">
+      <label for="sStatus">Status</label>
+      <select id="sStatus">
+        <option value="Active">Active — currently learning</option>
+        <option value="Inactive">Inactive — taking a break</option>
+        <option value="Completed">Completed — finished my plan</option>
+        <option value="New">New — just getting started</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="sInterest">What do you want to focus on?</label>
+      <select id="sInterest">
+        <option value="Vocal Coaching">Vocal Coaching</option>
+        <option value="Life Coaching">Life Coaching</option>
+        <option value="Both">Both</option>
+        <option value="Speaking Voice">Speaking Voice</option>
+        <option value="Performance">Performance / Stage</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="sNotes">Anything else Coach Toby should know?</label>
+      <textarea id="sNotes" placeholder="e.g. I want to work on my mix voice, or I'm preparing for a gig..."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Save My Details →</button>
+  </form>
+</div>
+
+<!-- Confirmation (hidden until submitted) -->
+<div class="form-card confirmation" id="confirmationCard">
+  <div class="confirmation-icon">✅</div>
+  <h3>All set, <span id="confirmName"></span>!</h3>
+  <p>Your details are saved. Coach Toby has been notified.</p>
+
+  <div class="next-steps">
+    <h4>What's next?</h4>
+    <ul>
+      <li>Coach Toby will reach out via WhatsApp if needed</li>
+      <li>Join the community to connect with other students</li>
+      <li>Check your email for a confirmation</li>
+    </ul>
+  </div>
+
+  <a href="community.html" class="pay-btn gold" style="display:inline-block;width:auto;padding:0.75rem 1.5rem;margin-bottom:0.5rem">Join the Community →</a><br>
+  <a href="home.html" class="pay-btn outline" style="display:inline-block;width:auto;padding:0.75rem 1.5rem">← Back to Home</a>
+</div>
+</div>
+
+<script>
+// CSRF token
+var csrfToken = sessionStorage.getItem('ct_csrf') || (function(){
+  var t = Math.random().toString(36).slice(2)+Date.now().toString(36);
+  sessionStorage.setItem('ct_csrf', t);
+  return t;
+})();
+
+// Rate limiting
+var lastSubmit = 0;
+function rateLimit() {
+  var now = Date.now();
+  if(now - lastSubmit < 30000){alert('Please wait 30 seconds before submitting again.');return false;}
+  lastSubmit = now;
+  return true;
+}
+
+async function submitStudent(e) {
+  e.preventDefault();
+
+  // Honeypot check
+  var hp = document.querySelector('[data-honeypot]');
+  if(hp && hp.value !== ''){return false;}
+
+  // Rate limit
+  if(!rateLimit()){return false;}
+
+  // Get values
+  var name = document.getElementById('sName').value.trim();
+  var email = document.getElementById('sEmail').value.trim().toLowerCase();
+  var whatsapp = document.getElementById('sWhatsApp').value.trim().replace(/[\s+\-]/g,'');
+  var location = document.getElementById('sLocation').value.trim();
+  var plan = document.getElementById('sPlan').value;
+  var status = document.getElementById('sStatus').value;
+  var interest = document.getElementById('sInterest').value;
+  var notes = document.getElementById('sNotes').value.trim();
+
+  // Validate
+  if(!name){document.getElementById('sNameErr').style.display='block';return false;}
+  if(!email || !email.includes('@')){document.getElementById('sEmailErr').style.display='block';return false;}
+  if(!whatsapp || whatsapp.length < 10){document.getElementById('sWhatsAppErr').style.display='block';return false;}
+  if(!plan){document.getElementById('sPlanErr').style.display='block';return false;}
+
+  var btn = document.getElementById('submitBtn');
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+
+  var fields = {
+    'Name': name,
+    'Email': email,
+    'WhatsApp': whatsapp,
+    'Plan': plan,
+    'Status': status,
+    'Interest': interest,
+    'Source': 'Student Portal',
+    'Notes': notes
+  };
+  if(location){fields['Location'] = location;}
+
+  // 1. Send email notification
+  try {
+    var emailBody = new URLSearchParams({
+      '_subject': 'Student Update: ' + name + ' (' + plan + ')',
+      '_captcha': 'false',
+      '_csrf': csrfToken,
+      'Name': name,
+      'Email': email,
+      'WhatsApp': whatsapp,
+      'Plan': plan,
+      'Status': status,
+      'Interest': interest,
+      'Location': location || 'N/A',
+      'Notes': notes || 'N/A',
+      'Source': 'Student Portal'
+    }).toString();
+    await fetch('https://formsubmit.co/prosperolumotobi@gmail.com', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: emailBody
+    });
+  } catch(err) {}
+
+  // 2. Upsert to Airtable Students table
+  // First check if student exists by email
+  try {
+    var encEmail = encodeURIComponent("AND({Email}='" + email + "')");
+    var checkResp = await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students?filterByFormula=' + encEmail + '&maxRecords=1', {
+      headers: {'Authorization': 'Bearer patmLD...92'}
+    });
+    var checkData = await checkResp.json();
+    var existing = checkData.records && checkData.records[0];
+
+    if(existing) {
+      // Update existing
+      await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students/' + existing.id, {
+        method: 'PATCH',
+        headers: {'Authorization': 'Bearer patmLD...92', 'Content-Type': 'application/json'},
+        body: JSON.stringify({fields: fields})
+      });
+    } else {
+      // Create new
+      await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students', {
+        method: 'POST',
+        headers: {'Authorization': 'Bearer patmLD...92', 'Content-Type': 'application/json'},
+        body: JSON.stringify({records: [{fields: fields}]})
+      });
+    }
+  } catch(err) {}
+
+  // 3. Also add/update Leads table for tracking
+  try {
+    await fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Leads', {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer patmLD...92', 'Content-Type': 'application/json'},
+      body: JSON.stringify({records: [{fields: {
+        'Name': name,
+        'Email': email,
+        'WhatsApp': whatsapp,
+        'Interest': interest,
+        'Source': 'Student Portal',
+        'Status': status === 'Active' ? 'Converted' : 'Contacted',
+        'Notes': 'Plan: ' + plan + ' | ' + (notes || '')
+      }}]})
+    });
+  } catch(err) {}
+
+  // 4. GA event
+  if(typeof gtag !== 'undefined'){
+    gtag('event', 'student_details_submitted', {plan: plan, status: status});
+  }
+
+  // Show confirmation
+  document.getElementById('confirmName').textContent = name.split(' ')[0];
+  document.getElementById('studentFormCard').style.display = 'none';
+  document.getElementById('confirmationCard').style.display = 'block';
+
+  // Store name for personalization
+  localStorage.setItem('ct_lead_name', name);
+
+  return false;
+}
+</script>
+
+<script defer src="/assets/js/security.js"></script>
+</body>
+</html>
