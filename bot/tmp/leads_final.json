@@ -1,0 +1,85 @@
+{
+  "typecast": true,
+  "records": [
+    {
+      "fields": {
+        "Name": "Adventurous_Act_9255",
+        "Interest": "Vocal Coaching",
+        "Level": "Beginner",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/singing. Wants to learn singing from 'really bad to just okayish' for campfire songs. Tried online video lessons but too detailed/time-consuming. Looking for efficient 80/20 vocal improvement approach. Quality: 7/10. URL: https://www.reddit.com/r/singing/comments/1u795wv/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "Dizzy-from-life",
+        "Interest": "Vocal Coaching",
+        "Level": "Beginner",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/singing. Acknowledges vocal coach is BEST option but can't afford one right now. Voice is strained and bad. Looking for YouTube alternatives. High potential when budget allows. Quality: 6/10. URL: https://www.reddit.com/r/singing/comments/1u6jfjk/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "_Rusalina_",
+        "Interest": "Vocal Coaching",
+        "Level": "Unknown",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/singing. Directly posted 'Looking for vocal coach'. Clear intent to hire. Short post but unambiguous. Quality: 8/10. URL: https://www.reddit.com/r/singing/comments/1u59qx1/looking_for_vocal_coach/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "Popular_Platform9142",
+        "Interest": "Vocal Coaching",
+        "Level": "Intermediate",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/singing. Singing 1.5 years, first time sharing voice online. 'Desperately looking for an actually good vocal coach for a while'. Actively seeking. Quality: 7/10. URL: https://www.reddit.com/r/singing/comments/1u42b0p/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "Individual-Spray-170",
+        "Interest": "Vocal Coaching",
+        "Level": "Intermediate",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/singing. 27F rock band frontwoman, 8 months of lessons but 4 years of poor technique before. Worried about being stuck with bad technique. Actively in vocal coaching journey. Quality: 6/10. URL: https://www.reddit.com/r/singing/comments/1u3zgir/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "ClassroomOk7243",
+        "Interest": "Life Coaching",
+        "Level": "Beginner",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/getdisciplined. 22M feeling like he missed out on life, exhausted and in pain. Grew up without father, raised by grandmother, recently diagnosed with ADHD. Carrying years of pain, needs someone to listen. Quality: 7/10. URL: https://www.reddit.com/r/getdisciplined/comments/1u7tknf/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "FuzzyPerception4062",
+        "Interest": "Life Coaching",
+        "Level": "Beginner",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/getdisciplined. 22M with ADHD stuck in bad habit cycle (doomscrolling, procrastination, poor sleep). Actively seeking advice to break negative patterns. Quality: 6/10. URL: https://www.reddit.com/r/getdisciplined/comments/1u7mr9f/"
+      }
+    },
+    {
+      "fields": {
+        "Name": "Emergency-Bobcat-572",
+        "Interest": "Life Coaching",
+        "Level": "Beginner",
+        "Source": "Reddit",
+        "Status": "New",
+        "Notes": "Reddit r/socialskills. 23F, became shy in middle school, developed anxiety, still sheltered. Never had job/college/independent living. Wants to overcome being undersocialized. Quality: 7/10. URL: https://www.reddit.com/r/socialskills/comments/1u6picg/"
+      }
+    }
+  ]
+}

@@ -130,7 +130,7 @@ A good coach will:
 
 ## About Toby Wina
 
-Toby Wina (Prosper Tobi Olumo) is a Nigerian vocal and life coach based in Abuja, Kogi State. He has coached 50+ students across 10+ countries, from church choir members to aspiring professionals.
+Toby Wina (Prosper Tobi Olumo) is a Nigerian vocal and life coach based in Abuja. He has coached 50+ students across 10+ countries, from church choir members to aspiring professionals.
 
 **His approach:** Direct, no-fluff, technique-first. No "just believe in yourself" — just real exercises that work.
 
