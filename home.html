@@ -80,7 +80,7 @@
 /* Page-specific overrides */
 .nav{position:sticky;top:0;z-index:100}
 @media(min-width:769px){.btn-mobile-toggle{display:none!important}}
-@media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:#161820;padding:16px;border-bottom:1px solid #242838}}
+@media(max-width:768px){.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--color-surface);padding:16px;border-bottom:1px solid #242838}}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -151,20 +151,20 @@
       <div class="card reveal"><span class="card-icon"><svg width="20" height="20" fill="none" stroke="#E4B34F" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5h4v2H10v-2z"/></svg></span><h3 class="card-title">Confidence Fades</h3><p class="card-text">You sound great in rehearsal. But when it counts, your voice shakes and your presence shrinks.</p></div>
       <div class="card reveal"><span class="card-icon"><svg width="20" height="20" fill="none" stroke="#E4B34F" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></span><h3 class="card-title">Notes Crack</h3><p class="card-text">The high note you've been avoiding for years. It's not a range problem — it's a technique problem.</p></div>
       <div class="card reveal"><span class="card-icon"><svg width="20" height="20" fill="none" stroke="#E4B34F" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg></span><h3 class="card-title">Performance Anxiety</h3><p class="card-text">Your body betrays you on stage. Heart racing, palms sweating, voice trembling. It's not nerves — it's untrained response.</p></div>
-      <div class="card reveal" style="background:#0D0E12"><span class="card-icon"><svg width="20" height="20" fill="none" stroke="#E4B34F" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></span><h3 class="card-title" style="color:#F4F5F7">Years Wasted</h3><p class="card-text" style="color:#9FA6B5">You've been "about to start" for years. Watching others pass you by. The gap keeps growing.</p></div>
+      <div class="card reveal" style="background:var(--color-bg)"><span class="card-icon"><svg width="20" height="20" fill="none" stroke="#E4B34F" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></span><h3 class="card-title" style="color:var(--color-text)">Years Wasted</h3><p class="card-text" style="color:var(--color-text-muted)">You've been "about to start" for years. Watching others pass you by. The gap keeps growing.</p></div>
     </div>
   </div>
   <div class="container text-center" style="margin-top:48px">
-    <p class="body-text mx-auto">Most singers spend years fixing the wrong problem.<br><strong style="color:#F4F5F7">The next section explains why.</strong></p>
+    <p class="body-text mx-auto">Most singers spend years fixing the wrong problem.<br><strong style="color:var(--color-text)">The next section explains why.</strong></p>
   </div>
 </section>
 
 <!-- ═══ TRANSFORMATION ═══ -->
-<section id="transformation" class="section-pad" style="background:linear-gradient(135deg,#0D0E12 0%,#1a1a2e 100%)">
+<section id="transformation" class="section-pad" style="background:linear-gradient(135deg,var(--color-bg) 0%,var(--color-accent-bg) 100%)">
   <div class="container text-center">
-    <span class="section-label" style="color:#E4B34F">The Shift</span>
-    <h2 class="section-headline" style="color:#F4F5F7">The Voice You Want<br>Is Already There.</h2>
-    <p class="body-text mx-auto" style="color:#9FA6B5">It's not about adding something. It's about removing what's in the way.</p>
+    <span class="section-label" style="color:var(--color-gold)">The Shift</span>
+    <h2 class="section-headline" style="color:var(--color-text)">The Voice You Want<br>Is Already There.</h2>
+    <p class="body-text mx-auto" style="color:var(--color-text-muted)">It's not about adding something. It's about removing what's in the way.</p>
   </div>
   <div class="container" style="margin-top:48px">
     <div class="card-grid-wide">
@@ -219,7 +219,7 @@
 </section>
 
 <!-- ═══ TESTIMONIALS — REAL, SPECIFIC, CONVINCING ═══ -->
-<section class="section-pad" style="background:#161820">
+<section class="section-pad" style="background:var(--color-surface)">
   <div class="container text-center">
     <span class="section-label">Student Results</span>
     <h2 class="section-headline">What Happens<br>When You Commit.</h2>
@@ -230,48 +230,48 @@
       <div class="reveal testimonial-card">
         <div class="testimonial-body">
           <p class="stars">★★★★★</p>
-          <p class="testimonial-quote">"I'd been singing in my church choir for 6 years and my throat would <strong style="color:#F4F5F7">tighten every single Sunday</strong>. I thought I just wasn't built for singing. After 3 sessions, I sang a solo for the first time — no tightening, no cracking. I cried afterward. Whatever he's doing, <strong style="color:#F4F5F7">it actually works</strong>."</p>
-          <p style="color:#9FA6B5;font-size:0.8rem;margin-top:12px">— David A. · Lagos, Nigeria · Church Worship Leader</p>
+          <p class="testimonial-quote">"I'd been singing in my church choir for 6 years and my throat would <strong style="color:var(--color-text)">tighten every single Sunday</strong>. I thought I just wasn't built for singing. After 3 sessions, I sang a solo for the first time — no tightening, no cracking. I cried afterward. Whatever he's doing, <strong style="color:var(--color-text)">it actually works</strong>."</p>
+          <p style="color:var(--color-text-muted);font-size:0.8rem;margin-top:12px">— David A. · Lagos, Nigeria · Church Worship Leader</p>
         </div>
       </div>
       <!-- Testimonial 2 — Career impact -->
       <div class="reveal testimonial-card">
         <div class="testimonial-body">
           <p class="stars">★★★★★</p>
-          <p class="testimonial-quote">"I came to Toby because I kept getting <strong style="color:#F4F5F7'>told I was "good" but never booked</strong>. Something was missing. He found it in week 2 — my breath support was collapsing under pressure. Fixed that. Got my first paid gig within a month. It wasn't magic. It was <strong style="color:#F4F5F7'>specific, mechanical work</strong>."</p>
-          <p style="color:#9FA6B5;font-size:0.8rem;margin-top:12px">— Chidera O. · Abuja, Nigeria · Aspiring Recording Artist</p>
+          <p class="testimonial-quote">"I came to Toby because I kept getting <strong style="color:var(--color-text)">told I was "good" but never booked</strong>. Something was missing. He found it in week 2 — my breath support was collapsing under pressure. Fixed that. Got my first paid gig within a month. It wasn't magic. It was <strong style="color:var(--color-text)">specific, mechanical work</strong>."</p>
+          <p style="color:var(--color-text-muted);font-size:0.8rem;margin-top:12px">— Chidera O. · Abuja, Nigeria · Aspiring Recording Artist</p>
         </div>
       </div>
       <!-- Testimonial 3 — International student -->
       <div class="reveal testimonial-card">
         <div class="testimonial-body">
           <p class="stars">★★★★★</p>
-          <p class="testimonial-quote">"I'm in London, he's in Abuja — I was skeptical about online coaching. <strong style="color:#F4F5F7'>I was wrong.</strong> He heard something wrong with my mix voice in the first 10 minutes. Three vocal coaches in London missed it entirely. Six months later, my entire upper range is <strong style="color:#F4F5F7'>completely different</strong>. I recommend him to everyone now."</p>
-          <p style="color:#9FA6B5;font-size:0.8rem;margin-top:12px">— Michael T. · London, UK · Music Production Student</p>
+          <p class="testimonial-quote">"I'm in London, he's in Abuja — I was skeptical about online coaching. <strong style="color:var(--color-text)">I was wrong.</strong> He heard something wrong with my mix voice in the first 10 minutes. Three vocal coaches in London missed it entirely. Six months later, my entire upper range is <strong style="color:var(--color-text)">completely different</strong>. I recommend him to everyone now."</p>
+          <p style="color:var(--color-text-muted);font-size:0.8rem;margin-top:12px">— Michael T. · London, UK · Music Production Student</p>
         </div>
       </div>
       <!-- Testimonial 4 — Student in Canada -->
       <div class="reveal testimonial-card">
         <div class="testimonial-body">
           <p class="stars">★★★★★</p>
-          <p class="testimonial-quote">"Toby doesn't just teach you to sing. He teaches you what's happening inside your body when you do it wrong. That changed everything for me. I went from <strong style="color:#F4F5F7'>avoiding high notes in karaoke</strong> to singing them in front of 200 people at a university event. Same voice. <strong style="color:#F4F5F7'>Different understanding</strong>."</p>
-          <p style="color:#9FA6B5;font-size:0.8rem;margin-top:12px">— Sarah K. · Ottawa, Canada · Biomedical Sciences Student</p>
+          <p class="testimonial-quote">"Toby doesn't just teach you to sing. He teaches you what's happening inside your body when you do it wrong. That changed everything for me. I went from <strong style="color:var(--color-text)">avoiding high notes in karaoke</strong> to singing them in front of 200 people at a university event. Same voice. <strong style="color:var(--color-text)">Different understanding</strong>."</p>
+          <p style="color:var(--color-text-muted);font-size:0.8rem;margin-top:12px">— Sarah K. · Ottawa, Canada · Biomedical Sciences Student</p>
         </div>
       </div>
       <!-- Testimonial 5 — Life coaching crossover -->
       <div class="reveal testimonial-card">
         <div class="testimonial-body">
           <p class="stars">★★★★★</p>
-          <p class="testimonial-quote">"I booked for voice coaching. Left with <strong style="color:#F4F5F7'>a completely different relationship with my own voice — literally and figuratively</strong>. The life coaching component isn't a gimmick. I got the promotion I'd been chasing for 2 years. It turns out confidence in your voice and confidence in your career are the same thing."</p>
-          <p style="color:#9FA6B5;font-size:0.8rem;margin-top:12px">— Emmanuel I. · Port Harcourt, Nigeria · Project Manager</p>
+          <p class="testimonial-quote">"I booked for voice coaching. Left with <strong style="color:var(--color-text)">a completely different relationship with my own voice — literally and figuratively</strong>. The life coaching component isn't a gimmick. I got the promotion I'd been chasing for 2 years. It turns out confidence in your voice and confidence in your career are the same thing."</p>
+          <p style="color:var(--color-text-muted);font-size:0.8rem;margin-top:12px">— Emmanuel I. · Port Harcourt, Nigeria · Project Manager</p>
         </div>
       </div>
       <!-- Testimonial 6 — Long-term student -->
       <div class="reveal testimonial-card">
         <div class="testimonial-body">
           <p class="stars">★★★★★</p>
-          <p class="testimonial-quote">"I've been with Toby for over a year now. What keeps me coming back isn't just the voice work — it's the <strong style="color:#F4F5F7'>weekly challenges, the accountability, the fact that he actually listens</strong>. Most coaches hear what they expect to hear. He hears what's actually there."</p>
-          <p style="color:#9FA6B5;font-size:0.8rem;margin-top:12px">— Grace N. · Accra, Ghana · Worship Leader & Content Creator</p>
+          <p class="testimonial-quote">"I've been with Toby for over a year now. What keeps me coming back isn't just the voice work — it's the <strong style="color:var(--color-text)">weekly challenges, the accountability, the fact that he actually listens</strong>. Most coaches hear what they expect to hear. He hears what's actually there."</p>
+          <p style="color:var(--color-text-muted);font-size:0.8rem;margin-top:12px">— Grace N. · Accra, Ghana · Worship Leader & Content Creator</p>
         </div>
       </div>
     </div>
@@ -324,25 +324,25 @@
 </section>
 
 <!-- ═══ GUARANTEE ═══ -->
-<section class="section-pad-sm" style="background:#161820">
+<section class="section-pad-sm" style="background:var(--color-surface)">
   <div class="container text-center">
     <div class="guarantee-icon"><svg width="48" height="48" fill="none" stroke="#E4B34F" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
     <h2 class="section-headline">The Session 1 Guarantee</h2>
     <p class="body-text mx-auto">If you don't hear a measurable difference in your voice after your first session — you don't pay. Full stop.</p>
-    <p style="color:#6b7280;font-size:0.85rem;margin-top:16px">Never had to pay this guarantee out. Not once. Not with 50+ students.</p>
+    <p style="color:var(--color-text-dim);font-size:0.85rem;margin-top:16px">Never had to pay this guarantee out. Not once. Not with 50+ students.</p>
   </div>
 </section>
 
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta">
   <div class="final-cta-inner">
-    <h2 class="section-headline" style="color:#F4F5F7">The Difference Between<br>A Good Singer And A<br>Memorable One<br><span style="color:#E4B34F">Is Rarely Talent.</span></h2>
-    <p class="body-text mx-auto" style="color:#9FA6B5">It's training. It's presence. It's the willingness to become who you already are.</p>
+    <h2 class="section-headline" style="color:var(--color-text)">The Difference Between<br>A Good Singer And A<br>Memorable One<br><span style="color:var(--color-gold)">Is Rarely Talent.</span></h2>
+    <p class="body-text mx-auto" style="color:var(--color-text-muted)">It's training. It's presence. It's the willingness to become who you already are.</p>
     <div class="hero-actions">
       <a href="book.html" class="btn-primary">Start Your Breakthrough</a>
       <a href="https://wa.me/2349160106084" target="_blank" rel="noopener noreferrer" class="btn-secondary">WhatsApp Coach Toby</a>
     </div>
-    <p style="color:#6b7280;font-size:0.9rem;margin-top:24px">Or email: prosperolumotobi@gmail.com</p>
+    <p style="color:var(--color-text-dim);font-size:0.9rem;margin-top:24px">Or email: prosperolumotobi@gmail.com</p>
   </div>
 </section>
 
@@ -427,10 +427,10 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 </html>
 
 <!-- Sticky mobile CTA -->
-<div id="stickyCta" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#161820;border-top:1px solid #242838;padding:12px 16px;z-index:99;box-shadow:0 -4px 20px rgba(0,0,0,0.4)">
+<div id="stickyCta" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--color-surface);border-top:1px solid var(--color-border);padding:12px 16px;z-index:99;box-shadow:0 -4px 20px rgba(0,0,0,0.15)">
   <div style="display:flex;gap:8px;max-width:480px;margin:0 auto">
-    <a href="book.html" style="flex:1;padding:14px;background:#E4B34F;color:#0D0E12;border-radius:10px;font-weight:700;text-decoration:none;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem">Try Free Demo →</a>
-    <a href="https://wa.me/2349160106084" target="_blank" style="padding:14px 16px;background:transparent;color:#F4F5F7;border:2px solid #242838;border-radius:10px;text-decoration:none;font-size:1.2rem;display:flex;align-items:center" aria-label="WhatsApp"><svg width="20" height="20" fill="#F4F5F7" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <a href="book.html" style="flex:1;padding:14px;background:var(--color-gold);color:var(--color-bg);border-radius:var(--radius-md);font-weight:700;text-decoration:none;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;min-height:48px;display:flex;align-items:center;justify-content:center">Try Free Demo →</a>
+    <a href="https://wa.me/2349160106084" target="_blank" style="padding:14px 16px;background:transparent;color:var(--color-text);border:2px solid var(--color-border);border-radius:var(--radius-md);text-decoration:none;display:flex;align-items:center;min-height:48px" aria-label="WhatsApp"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
   </div>
 </div>
 
