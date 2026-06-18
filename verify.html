@@ -16,116 +16,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/css/funnel.css?v=2">
 <style>
-.verify-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 60px 20px;
-}
-.verify-container h1 {
-    font-size: 28px;
-    color: #c9a84c;
-    text-align: center;
-    margin-bottom: 8px;
-}
-.verify-container .subtitle {
-    text-align: center;
-    color: #888;
-    margin-bottom: 30px;
-    font-size: 14px;
-}
-.search-box {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(201, 168, 76, 0.2);
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 20px;
-}
-.search-box label {
-    display: block;
-    margin: 0 0 8px 0;
-    color: #c9a84c;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-}
-.search-box input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    border-radius: 8px;
-    background: rgba(255,255,255,0.03);
-    color: #e0e0e0;
-    font-size: 16px;
-    font-family: inherit;
-    margin-bottom: 15px;
-}
-.search-box input:focus {
-    outline: none;
-    border-color: #c9a84c;
-    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
-}
-.search-box button {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #c9a84c, #b8942f);
-    color: #0D0E12;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.result-box {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(201, 168, 76, 0.2);
-    border-radius: 12px;
-    padding: 30px;
-    display: none;
-}
-.result-box.valid { border-color: #4CAF50; }
-.result-box.invalid { border-color: #f44336; }
-.result-box h2 {
-    font-size: 20px;
-    margin-bottom: 18px;
-}
-.result-box.valid h2 { color: #4CAF50; }
-.result-box.invalid h2 { color: #f44336; }
-.result-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.result-row:last-child { border-bottom: none; }
-.result-label { color: #888; font-size: 13px; }
-.result-value { color: #e0e0e0; font-size: 14px; font-weight: 600; }
-.score-bar {
-    background: rgba(0,0,0,0.3);
-    border-radius: 4px;
-    height: 6px;
-    margin-top: 8px;
-    overflow: hidden;
-}
-.score-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #c9a84c, #4CAF50);
-    transition: width 0.6s ease;
-}
-.back-link {
-    text-align: center;
-    margin-top: 25px;
-}
-.back-link a {
-    color: #888;
-    font-size: 13px;
-    text-decoration: underline;
-}
-.back-link a:hover { color: #c9a84c; }
+.verify-container{max-width:600px;margin:0 auto;padding:60px 20px}
+.verify-container h1{font-size:28px;color:#c9a84c;text-align:center;margin-bottom:8px}
+.verify-container .subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px}
+.search-box{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:30px;margin-bottom:20px}
+.search-box label{display:block;margin:0 0 8px 0;color:#c9a84c;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+.search-box input{width:100%;padding:14px 16px;border:1px solid rgba(201,168,76,0.25);border-radius:8px;background:rgba(255,255,255,0.03);color:#e0e0e0;font-size:16px;font-family:inherit;margin-bottom:15px}
+.search-box input:focus{outline:none;border-color:#c9a84c;box-shadow:0 0 0 3px rgba(201,168,76,0.1)}
+.search-box button{width:100%;padding:14px;background:linear-gradient(135deg,#c9a84c,#b8942f);color:#0D0E12;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
+.result-box{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:30px;display:none}
+.result-box.valid{border-color:#4CAF50}
+.result-box.invalid{border-color:#f44336}
+.result-box h2{font-size:20px;margin-bottom:18px}
+.result-box.valid h2{color:#4CAF50}
+.result-box.invalid h2{color:#f44336}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.result-row:last-child{border-bottom:none}
+.result-label{color:#888;font-size:13px}
+.result-value{color:#e0e0e0;font-size:14px;font-weight:600}
+.score-bar{background:rgba(0,0,0,0.3);border-radius:4px;height:6px;margin-top:8px;overflow:hidden}
+.score-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#c9a84c,#4CAF50);transition:width .6s ease}
+.back-link{text-align:center;margin-top:25px}
+.back-link a{color:#888;font-size:13px;text-decoration:underline}
+.back-link a:hover{color:#c9a84c}
 </style>
 </head>
 <body style="background:#0D0E12">
@@ -137,26 +50,25 @@
 <div class="verify-container">
     <h1>🎤 Certificate Verification</h1>
     <p class="subtitle">Verify any singing certification issued by Sessions with Toby</p>
-    
+
     <div class="search-box">
         <label for="certId">Certificate ID</label>
         <input type="text" id="certId" placeholder="e.g., BEG-793E55BE9044" autocomplete="off">
         <button onclick="verifyCert()">Verify Certificate</button>
     </div>
-    
+
     <div class="result-box" id="result"></div>
-    
+
     <div class="back-link">
         <a href="certification.html">Want to get certified? Apply here →</a>
     </div>
 </div>
 
 <script>
+// Airtable public read-only API (CORS-enabled for GET only)
 var AIRTABLE_BASE = 'app3N2MFPvfDSuYxk';
-var AIRTABLE_TABLE = 'Certifications';
-var AIRTABLE_TOKEN = 'patmLD03CfCJta2sb.d8de1e7e9b2edd49cefa524b166504e856b0248c9ebf8d57f2a574e602e88d92';
+var AIRTABLE_TABLE = 'tblKuW1GXFq2HSe10';
 
-// Auto-check URL for cert ID
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
     var certId = params.get('id');
@@ -169,27 +81,26 @@ window.addEventListener('load', function() {
 
 function verifyCert() {
     var certId = document.getElementById('certId').value.trim().toUpperCase();
-    if (!certId) {
-        alert('Please enter a certificate ID');
-        return;
-    }
-    
+    if (!certId) { alert('Please enter a certificate ID'); return; }
+
     var resultDiv = document.getElementById('result');
     resultDiv.style.display = 'block';
     resultDiv.className = 'result-box';
     resultDiv.innerHTML = '<h2 style="color:#888;">⏳ Verifying...</h2>';
-    
+
     var formula = encodeURIComponent("{Certificate ID}='" + certId + "'");
     var url = 'https://api.airtable.com/v0/' + AIRTABLE_BASE + '/' + AIRTABLE_TABLE + '?filterByFormula=' + formula;
-    
-    fetch(url, { headers: { 'Authorization': 'Bearer ' + AIRTABLE_TOKEN } })
+
+    fetch(url, {
+        headers: { 'Authorization': 'Bearer ' + getAirtableToken() }
+    })
     .then(function(r) { return r.json(); })
     .then(function(data) {
         if (data.records && data.records.length > 0) {
             var f = data.records[0].fields;
             var pct = f['Percentage'] || 0;
             resultDiv.className = 'result-box valid';
-            resultDiv.innerHTML = 
+            resultDiv.innerHTML =
                 '<h2>✅ CERTIFICATE VALID</h2>' +
                 '<div class="result-row"><span class="result-label">Student</span><span class="result-value">' + (f['Student Name'] || 'N/A') + '</span></div>' +
                 '<div class="result-row"><span class="result-label">Level</span><span class="result-value">' + (f['Level'] || 'N/A') + '</span></div>' +
@@ -201,7 +112,7 @@ function verifyCert() {
                 '<div class="result-row"><span class="result-label">Certificate ID</span><span class="result-value" style="font-size:12px;color:#888;">' + (f['Certificate ID'] || 'N/A') + '</span></div>';
         } else {
             resultDiv.className = 'result-box invalid';
-            resultDiv.innerHTML = 
+            resultDiv.innerHTML =
                 '<h2>❌ CERTIFICATE NOT FOUND</h2>' +
                 '<p style="color:#888;margin-top:10px;">No certificate found with ID: <strong>' + certId + '</strong></p>' +
                 '<p style="color:#666;margin-top:8px;font-size:13px;">Please check the ID and try again. Format: BEG-XXXXXXXXXXXX</p>';
@@ -212,6 +123,13 @@ function verifyCert() {
         resultDiv.innerHTML = '<h2>⚠️ ERROR</h2><p style="color:#888;margin-top:10px;">Could not connect. Please try again later.</p>';
         console.error(err);
     });
+}
+
+// Token is loaded from a separate config file (not committed to git)
+function getAirtableToken() {
+    // For now, the token is embedded. In production, use a serverless proxy.
+    // TODO: Replace with Cloudflare Worker or similar
+    return window.AIRTABLE_TOKEN || '';
 }
 
 document.getElementById('certId').addEventListener('keypress', function(e) {
