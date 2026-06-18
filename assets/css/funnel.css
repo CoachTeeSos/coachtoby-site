@@ -1,44 +1,37 @@
 /* ═══════════════════════════════════════════════════════════
    QUIZ FUNNEL — Sessions with Toby
-   Mobile-first · Auto dark/light · Accessible
    ═══════════════════════════════════════════════════════════ */
-
-.funnel-bg{background:var(--color-bg);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding-top:80px;transition:background var(--transition-fast)}
-.funnel-wrap{text-align:center;max-width:560px;padding:var(--space-xl) var(--space-md);width:100%}
+.funnel-bg{background:#0D0E12;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding-top:80px}
+.funnel-wrap{text-align:center;max-width:560px;padding:40px 24px;width:100%}
 .step-panel{display:none}
 .step-panel.active{display:block;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.step-panel h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.3rem,5vw,2rem);margin-bottom:var(--space-xs);color:var(--color-text);font-weight:800;letter-spacing:-0.03em}
-.step-panel p{color:var(--color-text-muted);margin-bottom:var(--space-lg);font-size:0.9rem}
-.funnel-opts{display:flex;flex-direction:column;gap:var(--space-sm);text-align:left}
-.quiz-opt{width:100%;padding:14px 16px;background:var(--color-surface);border:2px solid var(--color-border);border-radius:var(--radius-md);font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--color-text-muted);cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;gap:var(--space-sm);text-align:left;min-height:48px}
-.quiz-opt:hover{border-color:var(--color-gold);color:var(--color-text);background:rgba(228,179,79,0.04)}
-.quiz-opt.selected{border-color:var(--color-gold);background:rgba(228,179,79,0.08);color:var(--color-text);box-shadow:0 0 0 3px rgba(228,179,79,0.15)}
-.quiz-opt .opt-icon{width:36px;height:36px;border-radius:var(--radius-sm);background:rgba(228,179,79,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.progress-bar{width:100%;max-width:240px;margin:0 auto var(--space-lg);height:3px;background:var(--color-border);border-radius:3px;overflow:hidden}
-.progress-fill{height:100%;background:var(--color-gold);transition:width .4s ease;border-radius:3px}
-.progress-label{color:var(--color-text-dim);font-size:0.7rem;margin-top:var(--space-sm);text-align:right}
-.rec-box{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-lg);margin:var(--space-lg) 0;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-.rec-label{color:var(--color-mint);font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:var(--space-xs)}
-.rec-box h3{color:var(--color-text);font-size:1.1rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:var(--space-xs)}
-.rec-desc{color:var(--color-text-muted);font-size:0.85rem;margin-bottom:var(--space-sm)}
-.rec-tags{display:flex;flex-wrap:wrap;gap:var(--space-xs)}
-.rec-tag{background:rgba(0,229,163,0.1);color:var(--color-mint);padding:4px 10px;border-radius:var(--radius-pill);font-size:0.68rem;font-weight:600;border:1px solid rgba(0,229,163,0.2)}
-.funnel-actions{display:flex;flex-direction:column;gap:var(--space-sm);margin-top:var(--space-lg)}
-.funnel-cta{display:block;width:100%;padding:14px;background:var(--color-gold);color:var(--color-bg);border-radius:var(--radius-md);font-weight:700;font-size:0.95rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all var(--transition-base);box-shadow:var(--shadow-gold),inset 0 1px 0 rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);cursor:pointer;min-height:48px}
-.funnel-cta:hover{background:var(--color-gold-light);transform:translateY(-2px);box-shadow:var(--shadow-gold-lg)}
-.funnel-cta-outline{display:block;width:100%;padding:14px;background:transparent;color:var(--color-text);border:2px solid var(--color-border);border-radius:var(--radius-md);font-weight:700;font-size:0.95rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all var(--transition-fast);min-height:48px}
-.funnel-cta-outline:hover{border-color:var(--color-gold);color:var(--color-gold)}
-.funnel-note{color:var(--color-text-dim);font-size:0.7rem;margin-top:var(--space-sm)}
-.funnel-back{margin-top:var(--space-lg);color:var(--color-text-dim);font-size:0.8rem;font-weight:500;background:none;border:none;cursor:pointer;display:none;font-family:'Inter',sans-serif;transition:color var(--transition-fast)}
-.funnel-back:hover{color:var(--color-gold)}
-.welcome-icon{width:56px;height:56px;border-radius:50%;background:rgba(228,179,79,0.1);border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-lg)}
-
+.step-panel h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.4rem,4vw,2rem);margin-bottom:8px;color:#F4F5F7;font-weight:800;letter-spacing:-0.03em}
+.step-panel p{color:#9FA6B5;margin-bottom:28px;font-size:0.95rem}
+.funnel-opts{display:flex;flex-direction:column;gap:10px;text-align:left}
+.quiz-opt{width:100%;padding:16px 20px;background:#161820;border:2px solid #242838;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.92rem;color:#9FA6B5;cursor:pointer;transition:all .2s ease;display:flex;align-items:center;gap:14px;text-align:left}
+.quiz-opt:hover{border-color:#E4B34F;color:#F4F5F7;background:rgba(228,179,79,0.04)}
+.quiz-opt.selected{border-color:#E4B34F;background:rgba(228,179,79,0.08);color:#F4F5F7;box-shadow:0 0 0 3px rgba(228,179,79,0.15)}
+.quiz-opt .opt-icon{width:36px;height:36px;border-radius:8px;background:rgba(228,179,79,0.08);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.progress-bar{width:100%;max-width:240px;margin:0 auto 28px;height:3px;background:#242838;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:#E4B34F;transition:width .4s ease;border-radius:3px}
+.progress-label{color:#6b7280;font-size:0.75rem;margin-top:10px;text-align:right}
+.rec-box{background:#161820;border:1px solid #242838;border-radius:16px;padding:28px;margin:24px 0;text-align:left}
+.rec-label{color:#00E5A3;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.rec-box h3{color:#F4F5F7;font-size:1.2rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:6px}
+.rec-desc{color:#9FA6B5;font-size:0.88rem;margin-bottom:14px}
+.rec-tags{display:flex;flex-wrap:wrap;gap:8px}
+.rec-tag{background:rgba(0,229,163,0.08);color:#00E5A3;padding:4px 12px;border-radius:50px;font-size:0.72rem;font-weight:600;border:1px solid rgba(0,229,163,0.15)}
+.funnel-actions{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.funnel-cta{display:block;width:100%;padding:16px;background:#E4B34F;color:#0D0E12;border-radius:10px;font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all .2s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 20px rgba(228,179,79,0.2),inset 0 1px 0 rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);cursor:pointer}
+.funnel-cta:hover{background:#F0C76A;transform:translateY(-2px);box-shadow:0 8px 28px rgba(228,179,79,0.3)}
+.funnel-cta-outline{display:block;width:100%;padding:16px;background:transparent;color:#F4F5F7;border:2px solid #242838;border-radius:10px;font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;text-align:center;transition:all .2s ease}
+.funnel-cta-outline:hover{border-color:#E4B34F;color:#E4B34F}
+.funnel-note{color:#6b7280;font-size:0.75rem;margin-top:14px}
+.funnel-back{margin-top:24px;color:#6b7280;font-size:0.85rem;font-weight:500;background:none;border:none;cursor:pointer;display:none;font-family:'Inter',sans-serif;transition:color .2s}
+.funnel-back:hover{color:#E4B34F}
+.welcome-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(228,179,79,0.1),rgba(0,229,163,0.05));border:1px solid #242838;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:1.8rem}
 @media(max-width:600px){
-  .funnel-wrap{padding:var(--space-lg) var(--space-md)}
-  .step-panel h1{font-size:1.2rem}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .step-panel.active{animation:none}
+  .funnel-wrap{padding:32px 20px}
+  .step-panel h1{font-size:1.3rem}
 }
