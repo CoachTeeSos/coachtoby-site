@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Vocal Mastery Academy</title>
+<meta name="theme-color" content="#08080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080c;--surface:#0f0f16;--surface2:#16161f;--border:#1c1c28;--text:#e4e4ef;--muted:#5e5e74;--gold:#d4a843;--mint:#00d4a0;--red:#e05555;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding:0 16px}
+
+/* --- NAV --- */
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,8,12,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-link{font-size:.75rem;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:all .15s}
+.nav-link:hover{color:var(--text);background:var(--surface)}
+.nav-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--bg);cursor:pointer}
+
+/* --- HERO --- */
+.hero{padding:48px 0 32px;text-align:center}
+.hero-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.5rem,5vw,2.2rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+.hero p{color:var(--muted);font-size:.9rem;max-width:360px;margin:0 auto}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:14px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:all .2s}
+.hero-cta:hover{background:#e0b850;transform:translateY(-1px);box-shadow:0 4px 24px rgba(212,168,67,.2)}
+
+/* --- MODULE CARD --- */
+.modules{padding:24px 0}
+.section-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:12px}
+.module{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:all .2s}
+.module:hover{border-color:rgba(212,168,67,.3)}
+.module.locked{opacity:.5;pointer-events:none}
+.module-head{display:flex;align-items:center;gap:12px;padding:16px;cursor:pointer;text-decoration:none;color:var(--text)}
+.module-num{width:32px;height:32px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.75rem;color:var(--gold);flex-shrink:0}
+.module-info{flex:1}
+.module-info h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;letter-spacing:-.01em}
+.module-info p{color:var(--muted);font-size:.75rem;margin-top:2px}
+.module-progress{width:40px;height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;flex-shrink:0}
+.module-progress-fill{height:100%;background:var(--gold);border-radius:4px;transition:width .3s}
+.module-status{font-size:.65rem;font-weight:600;padding:3px 8px;border-radius:6px;flex-shrink:0}
+.module-status.done{background:rgba(0,212,160,.1);color:var(--mint)}
+.module-status.active{background:rgba(212,168,67,.1);color:var(--gold)}
+.module-status.locked{background:rgba(94,94,116,.1);color:var(--muted)}
+
+/* --- LESSON --- */
+.lessons{padding:24px 0}
+.lesson{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden}
+.lesson-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;text-decoration:none;color:var(--text);transition:background .15s}
+.lesson-head:hover{background:var(--surface2)}
+.lesson-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem;transition:all .2s}
+.lesson-check.done{background:var(--mint);border-color:var(--mint);color:var(--bg)}
+.lesson-title{font-size:.85rem;font-weight:500;flex:1}
+.lesson-duration{font-size:.7rem;color:var(--muted);flex-shrink:0}
+
+/* --- CONTENT --- */
+.content{padding:24px 0}
+.content h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.02em;margin-bottom:12px}
+.content h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;margin:20px 0 8px}
+.content p{color:var(--text);font-size:.9rem;line-height:1.7;margin-bottom:12px}
+.content p strong{color:var(--gold)}
+.content ul{margin:8px 0 16px;padding-left:20px}
+.content li{color:var(--text);font-size:.88rem;line-height:1.7;margin-bottom:6px}
+.content-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0}
+.content-box.tip{border-left:3px solid var(--mint)}
+.content-box.key{border-left:3px solid var(--gold)}
+.content-box p:last-child{margin-bottom:0}
+
+/* --- TASK --- */
+.task{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:12px 0}
+.task-label{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:6px}
+.task p{font-size:.85rem;color:var(--text);line-height:1.6}
+.task-done{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;background:rgba(0,212,160,.08);border:1px solid rgba(0,212,160,.2);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--mint);cursor:pointer}
+.task-done:hover{background:rgba(0,212,160,.15)}
+
+/* --- QUIZ --- */
+.quiz{padding:24px 0}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+.q-num{font-size:.65rem;font-weight:600;color:var(--gold);margin-bottom:8px}
+.q-text{font-size:.9rem;font-weight:500;margin-bottom:14px}
+.q-options{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;font-size:.85rem;cursor:pointer;transition:all .15s;text-align:left;color:var(--text)}
+.q-opt:hover{border-color:var(--gold)}
+.q-opt.selected{border-color:var(--gold);background:rgba(212,168,67,.05)}
+.q-opt.correct{border-color:var(--mint);background:rgba(0,212,160,.08)}
+.q-opt.wrong{border-color:var(--red);background:rgba(224,85,85,.08)}
+.q-submit{margin-top:16px;padding:12px 24px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-weight:600;font-size:.85rem;cursor:pointer}
+.q-submit:hover{background:#e0b850}
+.q-result{text-align:center;padding:24px}
+.q-result h3{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.q-result p{color:var(--muted);font-size:.9rem}
+.q-score{font-size:2.5rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+
+/* --- DASHBOARD --- */
+.dash{padding:24px 0}
+.dash-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.dash-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:var(--bg)}
+.dash-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem}
+.dash-level{font-size:.75rem;color:var(--muted)}
+.xp-bar{width:100%;height:6px;background:var(--surface2);border-radius:6px;overflow:hidden;margin-top:4px}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--mint));border-radius:6px;transition:width .5s}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.badge{width:36px;height:36px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s}
+.badge.earned{background:rgba(212,168,67,.1);border-color:rgba(212,168,67,.3)}
+
+/* --- FOOTER --- */
+.footer{padding:32px 0;text-align:center;font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);margin-top:32px}
+
+/* --- RESPONSIVE --- */
+@media(max-width:480px){.hero{padding:32px 0 24px}.nav{padding:10px 12px}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="academy.html" class="nav-brand">Vocal<span>Mastery</span></a>
+  <div class="nav-links">
+    <a href="academy.html#modules" class="nav-link">Modules</a>
+    <a href="dashboard.html" class="nav-link">Progress</a>
+    <div class="nav-avatar" id="navAvatar" title="Student">S</div>
+  </div>
+</div>
+
+<!-- HERO (shown when not logged in) -->
+<div id="heroSection">
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-icon">🎤</div>
+    <h1>Master Your Voice.<br>Step by Step.</h1>
+    <p>A structured vocal training program — from foundations to performance. Built for singers who want real results, not random YouTube tips.</p>
+    <a href="academy.html#modules" class="hero-cta">Start Learning →</a>
+  </div>
+</div>
+</div>
+
+<!-- DASHBOARD (shown when logged in) -->
+<div id="dashSection" style="display:none">
+<div class="wrap">
+  <div class="dash">
+    <div class="section-title">Your Progress</div>
+    <div class="dash-header">
+      <div class="dash-avatar" id="dashAvatar">S</div>
+      <div>
+        <div class="dash-name" id="dashName">Student</div>
+        <div class="dash-level" id="dashLevel">Level 1 · Beginner</div>
+        <div class="xp-bar"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="badges" id="badges">
+      <div class="badge" title="Breath Master">🫁</div>
+      <div class="badge" title="Pitch Perfect">🎯</div>
+      <div class="badge" title="First Performance">🎤</div>
+      <div class="badge" title="7-Day Streak">🔥</div>
+      <div class="badge" title="Theory Scholar">📚</div>
+      <div class="badge" title="Emotional Range">🎭</div>
+      <div class="badge" title="Graduate">🏆</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODULES -->
+<div class="wrap">
+<div class="modules" id="modules">
+  <div class="section-title">Modules</div>
+
+  <div class="module" id="mod1">
+    <a class="module-head" href="module-1.html">
+      <div class="module-num">1</div>
+      <div class="module-info">
+        <h3>Foundations — Know Your Instrument</h3>
+        <p>5 lessons · Breath, posture, range, vocal health</p>
+      </div>
+      <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+      <span class="module-status active">Start</span>
+    </a>
+  </div>
+
+  <div class="module locked" id="mod2">
+    <a class="module-head" href="module-2.html">
+      <div class="module-num">2</div>
+      <div class="module-info">
+        <h3>Technique — Build Your Sound</h3>
+        <p>5 lessons · Resonance, registers, passaggio, vibrato</p>
+      </div>
+      <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+      <span class="module-status locked">🔒</span>
+    </a>
+  </div>
+
+  <div class="module locked" id="mod3">
+    <a class="module-head" href="module-3.html">
+      <div class="module-num">3</div>
+      <div class="module-info">
+        <h3>Music Theory — Understand the Language</h3>
+        <p>5 lessons · Scales, rhythm, intervals, song structure</p>
+      </div>
+      <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+      <span class="module-status locked">🔒</span>
+    </a>
+  </div>
+
+  <div class="module locked" id="mod4">
+    <a class="module-head" href="module-4.html">
+      <div class="module-num">4</div>
+      <div class="module-info">
+        <h3>Song Selection — Choose What Serves You</h3>
+        <p>5 lessons · Voice types, tessitura, transposition</p>
+      </div>
+      <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+      <span class="module-status locked">🔒</span>
+    </a>
+  </div>
+
+  <div class="module locked" id="mod5">
+    <a class="module-head" href="module-5.html">
+      <div class="module-num">5</div>
+      <div class="module-info">
+        <h3>Performance — Move People</h3>
+        <p>6 lessons · Emotion, dynamics, stage presence, mic technique</p>
+      </div>
+      <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+      <span class="module-status locked">🔒</span>
+    </a>
+  </div>
+
+  <div class="module locked" id="mod6">
+    <a class="module-head" href="module-6.html">
+      <div class="module-num">6</div>
+      <div class="module-info">
+        <h3>Advanced Craft — Find Your Voice</h3>
+        <p>6 lessons · Identity, improvisation, longevity, leading</p>
+      </div>
+      <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+      <span class="module-status locked">🔒</span>
+    </a>
+  </div>
+
+</div>
+</div>
+
+<div class="footer">
+  Vocal Mastery Academy · Sessions with Toby · © 2026
+</div>
+
+<script>
+// --- Simple state management ---
+const STORAGE_KEY = 'vma_student';
+
+function getStudent() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
+}
+
+function setStudent(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  render();
+}
+
+function initStudent(name) {
+  const s = {
+    name: name || 'Student',
+    xp: 0,
+    level: 1,
+    modules: [0,0,0,0,0,0], // progress % per module
+    lessons: {}, // { "1-1": true, "1-2": true }
+    quizzes: {}, // { "1": 85, "2": 0 }
+    badges: [],
+    streak: 0,
+    lastPractice: null
+  };
+  setStudent(s);
+  return s;
+}
+
+const LEVELS = [
+  {xp:0, name:'Beginner'},
+  {xp:100, name:'Explorer'},
+  {xp:250, name:'Apprentice'},
+  {xp:500, name:'Practitioner'},
+  {xp:800, name:'Performer'},
+  {xp:1200, name:'Artist'},
+  {xp:1800, name:'Virtuoso'}
+];
+
+function getLevel(xp) {
+  let lvl = 1;
+  for (let i = LEVELS.length - 1; i >= 0; i--) {
+    if (xp >= LEVELS[i].xp) { lvl = i + 1; break; }
+  }
+  return lvl;
+}
+
+function render() {
+  const s = getStudent();
+  if (!s) {
+    document.getElementById('heroSection').style.display = '';
+    document.getElementById('dashSection').style.display = 'none';
+    return;
+  }
+  document.getElementById('heroSection').style.display = 'none';
+  document.getElementById('dashSection').style.display = '';
+  
+  const lvl = getLevel(s.xp);
+  document.getElementById('dashName').textContent = s.name;
+  document.getElementById('dashLevel').textContent = 'Level ' + lvl + ' · ' + LEVELS[lvl-1].name;
+  document.getElementById('xpFill').style.width = Math.min(100, (s.xp / LEVELS[Math.min(lvl, LEVELS.length-1)].xp) * 100) + '%';
+  document.getElementById('navAvatar').textContent = s.name.charAt(0).toUpperCase();
+  document.getElementById('dashAvatar').textContent = s.name.charAt(0).toUpperCase();
+  
+  // Module progress
+  for (let i = 0; i < 6; i++) {
+    const el = document.getElementById('mod' + (i+1));
+    if (!el) continue;
+    const prog = s.modules[i] || 0;
+    el.querySelector('.module-progress-fill').style.width = prog + '%';
+    if (prog >= 100) {
+      el.classList.remove('locked');
+      el.querySelector('.module-status').className = 'module-status done';
+      el.querySelector('.module-status').textContent = '✓';
+    } else if (prog > 0 || i === 0) {
+      el.classList.remove('locked');
+      el.querySelector('.module-status').className = 'module-status active';
+      el.querySelector('.module-status').textContent = 'Continue';
+    }
+  }
+  
+  // Badges
+  const badgeEls = document.querySelectorAll('.badge');
+  const badgeIds = ['breath','pitch','performance','streak','theory','emotion','graduate'];
+  badgeEls.forEach((b, i) => {
+    if (s.badges && s.badges.includes(badgeIds[i])) {
+      b.classList.add('earned');
+    }
+  });
+}
+
+// Terms check — redirect if not agreed
+const TERMS_KEY = 'vma_terms_agreed';
+if (localStorage.getItem(TERMS_KEY) !== 'true') {
+  window.location.href = 'terms.html';
+}
+
+// Init
+render();
+
+// Expose for module pages
+window.VMA = { getStudent, setStudent, initStudent, getLevel, LEVELS };
+</script>
+
+</body>
+</html>
