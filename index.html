@@ -141,6 +141,117 @@ try{var _d=localStorage.getItem('singerOS');if(_d){var p=JSON.parse(d);if(p&&p.s
 function save(){try{localStorage.setItem('singerOS',JSON.stringify(U))}catch(e){}}
 
 // ═══════════════════════════════════════════════════
+// COACH TOBY PERSONALITY SYSTEM
+// Every message, nudge, and interaction carries Toby's voice
+// Warm. Direct. No fluff. Believes in you before you do.
+// ═══════════════════════════════════════════════════
+var TOBY={
+  // Toby's voice characteristics:
+  // - Second person ("you") — direct, personal
+  // - Short sentences. Punchy. No corporate speak.
+  // - Uses "we" for partnership, "you" for accountability
+  // — Celebrates effort, not just results
+  // — Calls out BS gently but firmly
+  // — References specific things the user did (personalization)
+  // — Occasionally uses humor to deflate tension
+
+  greetings:[
+    "Hey {name}. Let us get to work.",
+    "Good to see you, {name}. What are we fixing today?",
+    "{name}. I have been thinking about your voice. Let us talk.",
+    "Welcome back, {name}. I know you did not practice yesterday. That is fine. Today is what matters.",
+    "{name}. Your voice is waiting. It does not judge. It just responds."
+  ],
+
+  encouragement:[
+    "That is the sound I have been waiting to hear from you.",
+    "You just did something most singers cannot do. You know that, right?",
+    "I am not going to lie — that was good. Really good.",
+    "You are closer than you think. Much closer.",
+    "That struggle you just went through? That is the sound of growth.",
+    "I have seen hundreds of singers. You have something most of them do not. You show up.",
+    "Stop overthinking. Your voice already knows what to do. Trust it.",
+    "That was not perfect. But it was REAL. And real is what moves people."
+  ],
+
+  corrections:[
+    "Okay, stop. I hear what is happening. {issue}. Here is the fix: {fix}",
+    "I know this feels weird. That is because your muscles are learning something new. Give it 3 days.",
+    "You are working too hard on this. The fix is actually easier than what you are doing. {fix}",
+    "I am going to say this with love: you are overthinking this. {fix}",
+    "This is the part where most singers quit. Do not be most singers. {fix}",
+    "Your ear is ahead of your voice right now. That is a good problem. It means you can hear what you want. Now we just train the muscles to catch up."
+  ],
+
+  plateauMessages:[
+    "{name}, I have been watching your progress. You have been stuck on {skill} for a while now. This is exactly where a coach saves you months. I can see what you cannot. Let us fix this together.",
+    "You know what I love about you, {name}? You do not quit. But right now, you are trying to figure out {skill} alone. You do not have to. I am here.",
+    "{name}, I am going to be honest with you. {skill} is not going to fix itself with more YouTube videos. You need someone who can hear what you cannot. That is literally what I do.",
+    "I see you grinding on {skill}. Respect. But I have helped 200+ singers through this exact wall. Let me show you the shortcut."
+  ],
+
+  breakthroughMessages:[
+    "{name}. WHAT. That is a breakthrough. I am not exaggerating — that is the moment everything changes. You just proved to yourself that {skill} is possible. Now we build on it.",
+    "I just heard your {skill} data. You have no idea how big this is. This is the thing that separates singers from artists. You are crossing that line.",
+    "Stop everything. You just did {skill} at a level most singers never reach. I am genuinely proud of you. What is next? We go deeper."
+  ],
+
+  dailyNudges:[
+    "{name}, 5 minutes. That is all I am asking. One exercise. One phrase. One moment of focus. That is how voices are built — one focused minute at a time.",
+    "I know you are busy. Your voice does not care about your schedule. 5 minutes. Go.",
+    "{name}, the difference between you and the singer you want to be is about 10 minutes a day. That is it. That is the whole secret.",
+    "Your voice is a muscle. Muscles do not grow from thinking about them. 5 minutes. Now.",
+    "I am not going to guilt you. But I will say this: your future self will thank you for 5 minutes today."
+  ],
+
+  // Generates a personalized message based on user state
+  speak:function(type,data){
+    var msgs=this[type]||this.greetings;
+    var msg=msgs[Math.floor(Math.random()*msgs.length)];
+    msg=msg.replace(/{name}/g,U.name||"Singer");
+    if(data){
+      for(var k in data){msg=msg.replace(new RegExp("{"+k+"}","g"),data[k]);}
+    }
+    return msg;
+  },
+
+  // The "Coach Toby says..." overlay that appears at key moments
+  showMoment:function(type,data){
+    var msg=this.speak(type,data);
+    var c=document.getElementById("v-c");
+    var h="";
+    h+='<div style="text-align:center;padding:28px 20px;margin-bottom:16px;background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(139,92,246,.04));border:1px solid rgba(99,102,241,.2);border-radius:var(--rl)">';
+    h+='<div style="font-size:2.5rem;margin-bottom:12px">🗣️</div>';
+    h+='<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--pri);margin-bottom:8px">Coach Toby says</div>';
+    h+='<div style="font-size:1rem;line-height:1.6;color:var(--tx)">'+msg+'</div>';
+    h+='</div>';
+    return h;
+  },
+
+  // WhatsApp handoff — the bridge from app to human
+  // This is the MOMENT where they realize Toby is real
+  handoff:function(reason,skill){
+    var name=U.name||"Singer";
+    var messages={
+      welcome:"Hey "+name+"! This is Coach Toby. I have been watching your progress in Singer OS and I am impressed. You are serious about this. What is your biggest vocal challenge right now? Reply and I will send you a personalized exercise.",
+
+      plateau:name+", I have been tracking your "+skill+" progress in Singer OS. You have been working hard but you have hit a wall. This is exactly where most singers waste months trying to figure it out alone. I can fix this in one session. Book a 1-on-1 with me: https://wa.me/"+WHATSAPP.number+"?text=Hi%20Toby%2C%20I%20need%20help%20with%20"+encodeURIComponent(skill),
+
+      breakthrough:name+", you just had a "+skill+" breakthrough in Singer OS! That is a big deal. I want to help you build on this momentum before it fades. Book a session: https://wa.me/"+WHATSAPP.number+"?text=Hi%20Toby%2C%20I%20just%20had%20a%20breakthrough%20with%20"+encodeURIComponent(skill)+"%20and%20want%20to%20go%20deeper",
+
+      stuck:name+", I can see you have been struggling with "+skill+" in Singer OS. I am not going to let you waste months on this. I have helped hundreds of singers through this exact issue. Let me help you. Book here: https://wa.me/"+WHATSAPP.number+"?text=Hi%20Toby%2C%20I%20am%20stuck%20on%20"+encodeURIComponent(skill)+"%20and%20need%20your%20help",
+
+      fatigue:name+", your vocal load data in Singer OS shows you have been pushing hard. I am proud of the work ethic. But I need you to rest. Your voice needs recovery, not more training. When you are ready, book a session and I will show you how to train smarter: https://wa.me/"+WHATSAPP.number+"?text=Hi%20Toby%2C%20I%20need%20help%20with%20vocal%20recovery%20and%20training%20smarter",
+
+      completion:name+", you just completed the "+skill+" module in Singer OS! That is real growth. Most people do not finish what they started. You did. Ready for the next level? Book a session: https://wa.me/"+WHATSAPP.number+"?text=Hi%20Toby%2C%20I%20completed%20"+encodeURIComponent(skill)+"%20and%20I%20am%20ready%20for%20what%20is%20next"
+    };
+    return messages[reason]||messages.welcome;
+  }
+};
+
+
+
+// ═══════════════════════════════════════════════════
 // CURRICULUM — All 11 Systems
 // ═══════════════════════════════════════════════════
 var CURRICULUM={
@@ -538,6 +649,35 @@ var WHATSAPP={
   }
 };
 
+function showTobyHandoff(reason,skill){
+  var c=document.getElementById("v-c");
+  var h="";
+  h+=TOBY.showMoment("plateauMessages",{name:U.name,skill:ADAPTIVE.skillName(skill)});
+  h+='<div class="c" style="text-align:center;padding:20px;margin-top:12px">';
+  h+='<div style="font-weight:600;margin-bottom:8px">Get Personal Coaching</div>';
+  h+='<p style="font-size:.8rem;color:var(--tx3);margin-bottom:16px">Toby will send you a targeted exercise for '+ADAPTIVE.skillName(skill)+' directly on WhatsApp.</p>';
+  h+='<input type="email" id="email-input" placeholder="Your email" style="width:100%;padding:12px;border:2px solid var(--bd);border-radius:var(--r);background:var(--card);margin-bottom:10px;text-align:center">';
+  h+='<input type="tel" id="wa-input" placeholder="WhatsApp number (with country code)" style="width:100%;padding:12px;border:2px solid var(--bd);border-radius:var(--r);background:var(--card);margin-bottom:14px;text-align:center">';
+  h+='<button class="btn btn-p" onclick="submitTobyHandoff(''+reason+'',''+skill+'')">Connect with Toby →</button>';
+  h+='<button class="btn btn-g" onclick="go('home')">Maybe Later</button>';
+  h+='</div>';
+  c.innerHTML=h;
+  showSession();
+}
+
+function submitTobyHandoff(reason,skill){
+  var email=document.getElementById("email-input").value.trim();
+  var phone=document.getElementById("wa-input").value.trim();
+  if(!email){toast("Enter your email");return;}
+  U.email=email;
+  if(phone)WHATSAPP.number=phone;
+  save();
+  var msg=TOBY.handoff(reason,skill);
+  console.log("WhatsApp to "+email+": "+msg.substring(0,80));
+  toast("Toby will reach out to you soon. Check WhatsApp!","g");
+  setTimeout(function(){go("home");},2000);
+}
+
 function showEmailCapture(phase,issue){
   var c=document.getElementById("v-c");
   var h="";
@@ -839,8 +979,15 @@ function finishExercise(){
 function finishLesson(){
   if(U.completed.indexOf(curLesson.id)===-1)U.completed.push(curLesson.id);
   var ax=ADAPTIVE.diagnose();
-  if(U.skills[ax.weakest]>=10&&ax.weakest!=="performance"){
-    WHATSAPP.handoff("breakthrough",ax.skillName);
+  if(U.skills[ax.weakest]>=8&&ax.weakest!=="performance"){
+    // Toby celebrates breakthroughs
+    toast(TOBY.speak("breakthroughMessages",{name:U.name,skill:ax.skillName}),"g");
+    // After celebration, offer human coaching
+    setTimeout(function(){
+      var c=document.getElementById("v-c");
+      c.innerHTML+=TOBY.showMoment("breakthroughMessages",{name:U.name,skill:ax.skillName});
+      c.innerHTML+='<button class="btn btn-p" style="margin-top:12px" onclick="showTobyHandoff('breakthrough',''+ax.weakest+'')">Talk to Toby about what is next →</button>';
+    },1500);
   }
   save();
   go("learn");
