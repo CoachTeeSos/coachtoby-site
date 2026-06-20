@@ -658,7 +658,7 @@ function showTobyHandoff(reason,skill){
   h+='<p style="font-size:.8rem;color:var(--tx3);margin-bottom:16px">Toby will send you a targeted exercise for '+ADAPTIVE.skillName(skill)+' directly on WhatsApp.</p>';
   h+='<input type="email" id="email-input" placeholder="Your email" style="width:100%;padding:12px;border:2px solid var(--bd);border-radius:var(--r);background:var(--card);margin-bottom:10px;text-align:center">';
   h+='<input type="tel" id="wa-input" placeholder="WhatsApp number (with country code)" style="width:100%;padding:12px;border:2px solid var(--bd);border-radius:var(--r);background:var(--card);margin-bottom:14px;text-align:center">';
-  h+='<button class="btn btn-p" onclick="submitTobyHandoff(''+reason+'',''+skill+'')">Connect with Toby →</button>';
+  h+='<button class="btn btn-p" onclick="submitTobyHandoff(\'+reason+\',\'+skill+\')">Connect with Toby →</button>';
   h+='<button class="btn btn-g" onclick="go('home')">Maybe Later</button>';
   h+='</div>';
   c.innerHTML=h;
