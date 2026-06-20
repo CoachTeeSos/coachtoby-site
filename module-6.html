@@ -540,7 +540,8 @@ function submitQuiz() {
         st.quizzes['6'] = pct;
         st.modules[5] = 100;
         window.VMA.setStudent(st);
-        window.VMA.showNotification('🏆 Module 6 Complete! +15 XP');
+        VMA.awardBadge('articulation');
+    VMA.showNotification('🏆 Module 6 Complete! +15 XP + Articulation Badge');
       }
     }
     setTimeout(() => {
