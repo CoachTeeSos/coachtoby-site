@@ -463,7 +463,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     <p>You've built real technique. Your voice has more control, more resonance, more freedom.</p>
     <div class="complete-xp">+65 XP Earned</div>
     <br>
-    <a href="module-3.html" class="complete-btn">Continue to Module 3 →</a>
+    <a href="module-3.html" class="complete-btn" style="font-size:1rem;padding:16px 36px">Continue to Module 3 →</a>
+    <a href="#" onclick="showLesson(1);document.getElementById('modComplete').style.display='none';window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:block;margin-top:12px;color:var(--muted);font-size:.8rem;text-decoration:underline">← Review lessons</a>
   </div>
 
   <div class="footer">
@@ -607,6 +608,9 @@ function retryQuiz() {
   document.getElementById('quizSubmit').disabled = true;
   document.getElementById('quizSubmit').style.display = '';
   document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizScore').textContent = '0%';
+  document.getElementById('quizTitle').textContent = 'Quiz Complete';
+  document.getElementById('quizMsg').textContent = 'Review the lessons and try again.';
 }
 
 function showQuiz() {
