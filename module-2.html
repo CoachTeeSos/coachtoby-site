@@ -379,7 +379,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     var c=0,tq=Object.keys(CORRECT).length;
     for(var qid in CORRECT){
       var ci=CORRECT[qid],os=document.querySelectorAll('#'+qid+' .q-opt'),sel=qa[qid];
-      for(var j=0;j<os.length;j++){if(j===ci)os[j].classList.add('correct');if(j===sel&&j!==ci)os[j].classList.add('wrong');}
+      for(var j=0;j<os.length;j++){os[j].classList.remove('correct','wrong');if(j===ci)os[j].classList.add('correct');if(j===sel&&j!==ci)os[j].classList.add('wrong');}
       if(sel===ci)c++;
     }
     var pct=Math.round((c/tq)*100);
@@ -394,15 +394,32 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     }else{
       document.getElementById('quizTitle').textContent='Not quite there';
       document.getElementById('quizMsg').textContent='You scored '+c+'/'+tq+'. You need 80% to pass. Review and try again!';
-      document.getElementById('quizSubmit').style.display='none';document.getElementById('quizResult').style.display='';
+      document.getElementById('quizSubmit').style.display='none';document.getElementById('quizResult').style.display='block';
     }
   };
   window.retryQuiz=function(){
     qa={};qs=false;
+    var allOpts=document.querySelectorAll('.q-opt');
+    for(var i=0;i<allOpts.length;i++){
+      allOpts[i].classList.remove('selected','correct','wrong');
+      allOpts[i].style.pointerEvents='';
+    }
+    var sub=document.getElementById('quizSubmit');
+    sub.disabled=true;sub.style.display='block';sub.textContent='Submit Answers';
+    document.getElementById('quizResult').style.display='none';
+    document.getElementById('quizScore').textContent='0%';
+    document.getElementById('quizTitle').textContent='Quiz Complete';
+    document.getElementById('quizMsg').textContent='Review the lessons and try again.';
+    var quizSec=document.getElementById('quiz-'+MOD);
+    if(quizSec)quizSec.scrollIntoView({behavior:'smooth',block:'start'});
+  };qs=false;
     var os=document.querySelectorAll('.q-opt');for(var i=0;i<os.length;i++)os[i].classList.remove('selected','correct','wrong');
-    document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSubmit').style.display='';
-    document.getElementById('quizResult').style.display='none';document.getElementById('quizScore').textContent='0%';
-    document.getElementById('quizTitle').textContent='Quiz Complete';document.getElementById('quizMsg').textContent='Review the lessons and try again.';
+    document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSubmit').style.display='block';
+    document.getElementById('quizResult').style.display='none';
+    document.getElementById('quizScore').textContent='0%';
+    document.getElementById('quizTitle').textContent='Quiz Complete';
+    document.getElementById('quizMsg').textContent='Review the lessons and try again.';
+    document.getElementById('quiz-'+MOD).scrollIntoView({behavior:'smooth',block:'start'});
   };
   window.showQuiz=function(){document.getElementById('quiz-'+MOD).style.display='';document.getElementById('modComplete').style.display='none';window.scrollTo({top:0,behavior:'smooth'});};
   function upd(){
