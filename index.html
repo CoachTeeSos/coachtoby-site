@@ -681,6 +681,17 @@ function renderHome(){
   html+='<div class="prog mt-12"><div class="prog__fill" style="width:'+pct+'%"></div></div>';
   html+='<div class="text-sm text-muted mt-8">'+U.completed.length+'/'+SONG_DB.length+' songs trained</div>';
   html+='</div>';
+  // Voice Diagnostic (microphone)
+  html+='<div class="card card--highlight mb-12" onclick="SC.startVoiceDiagnosis()">';
+  html+='<div class="flex items-center gap-12">';
+  html+='<div class="list-item__icon list-item__icon--gold">🎤</div>';
+  html+='<div class="list-item__body">';
+  html+='<div class="list-item__title">Voice Diagnostic</div>';
+  html+='<div class="list-item__sub">Sing into your microphone. The system analyzes your voice and prescribes training.</div>';
+  html+='</div>';
+  html+='<span class="btn btn--primary btn--sm">Start</span>';
+  html+='</div>';
+  html+='</div>';
   // Next mission CTA
   html+='<div class="sec-header"><span class="sec-title">Next Mission</span></div>';
   var weakest=null;var lowest=99;
@@ -794,6 +805,17 @@ function renderPractice(){
   var html='';
   html+='<h2 style="margin-bottom:4px">Practice Mode</h2>';
   html+='<p class="text-muted mb-16">Quick drills. Targets your weakest system. Adapts to your feedback.</p>';
+  // Pitch Match game (uses microphone)
+  html+='<div class="card card--highlight mb-12" onclick="PITCH_GAME.start()">';
+  html+='<div class="flex items-center gap-12">';
+  html+='<div class="list-item__icon list-item__icon--gold">🎤</div>';
+  html+='<div class="list-item__body">';
+  html+='<div class="list-item__title">Pitch Match</div>';
+  html+='<div class="list-item__sub">Uses your microphone. Listen to a tone, sing it back. Measures your accuracy.</div>';
+  html+='</div>';
+  html+='<span class="btn btn--primary btn--sm">Start</span>';
+  html+='</div>';
+  html+='</div>';
   // Identify weakest system
   var weakest=null;var lowest=99;
   for(var k in U.skills){if(U.skills[k]<lowest){lowest=U.skills[k];weakest=k;}}
@@ -1195,9 +1217,415 @@ window.SC={
   submitFeedback:submitFeedback,
   completeDrill:completeDrill,
   quickDrill:quickDrill,
+  startVoiceDiagnosis:startVoiceDiagnosis,
   trainSong:function(id){var song=null;for(var s=0;s<SONG_DB.length;s++)if(SONG_DB[s].id===id)song=SONG_DB[s];if(!song)return;var diag={problem:'Song training: '+song.title,root_cause_system:song.technique[0]||'source',coordination_failure:'',severity:'medium',primary_system:song.technique[0]||'source'};var ex=EXERCISE_GEN.generate(diag,U);renderSession(diag,ex,song);},
   openSong:openSong
 };
+
+
+/* ═══════════════════════════════════════════════════
+   PITCH DETECTION ENGINE
+   Web Audio API + Autocorrelation + Harmonic Analysis
+   Measures: fundamental, harmonics, breathiness, strain, stability
+   ═══════════════════════════════════════════════════ */
+var PITCH={
+  ctx:null,analyser:null,stream:null,dataArray:null,
+  isListening:false,samples:[],
+  noteStrings:["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"],
+  init:function(){
+    try{
+      var AC=window.AudioContext||window.webkitAudioContext;
+      this.ctx=new AC();
+      this.analyser=this.ctx.createAnalyser();
+      this.analyser.fftSize=4096;
+      this.analyser.smoothingTimeConstant=0.8;
+      return true;
+    }catch(e){return false;}
+  },
+  start:function(cb){
+    var self=this;
+    if(!this.ctx)this.init();
+    if(this.ctx.state==="suspended")this.ctx.resume();
+    navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(function(stream){
+      self.stream=stream;
+      var src=self.ctx.createMediaStreamSource(stream);
+      src.connect(self.analyser);
+      self.isListening=true;
+      self.dataArray=new Float32Array(self.analyser.fftSize);
+      self.samples=[];
+      if(cb)cb(true);
+    }).catch(function(){if(cb)cb(false);});
+  },
+  stop:function(){
+    if(this.stream)this.stream.getTracks().forEach(function(t){t.stop();});
+    this.isListening=false;this.stream=null;
+  },
+  detectPitch:function(){
+    if(!this.analyser)return 0;
+    this.analyser.getFloatTimeDomainData(this.dataArray);
+    var buf=this.dataArray;
+    var n=buf.length;
+    var max=0;
+    for(var i=0;i<n;i++)if(Math.abs(buf[i])>max)max=Math.abs(buf[i]);
+    if(max<0.01)return 0;
+    for(var i=0;i<n;i++)buf[i]/=max;
+    var rms=0;
+    for(var i=0;i<n;i++)rms+=buf[i]*buf[i];
+    rms=Math.sqrt(rms/n);
+    if(rms<0.01)return 0;
+    var minLag=Math.floor(this.ctx.sampleRate/2000);
+    var maxLag=Math.floor(this.ctx.sampleRate/50);
+    var bestLag=0,bestCorr=-1;
+    for(var lag=minLag;lag<maxLag&&lag<n;lag++){
+      var corr=0,count=0;
+      for(var i=0;i<n-lag;i+=4){corr+=buf[i]*buf[i+lag];count++;}
+      if(count>0)corr/=count;
+      if(corr>bestCorr){bestCorr=corr;bestLag=lag;}
+      if(bestCorr>0.5&&corr<bestCorr*0.8)break;
+    }
+    if(bestLag===0||bestCorr<0.1)return 0;
+    return this.ctx.sampleRate/bestLag;
+  },
+  getHarmonics:function(){
+    if(!this.analyser)return [];
+    var buf=new Float32Array(this.analyser.frequencyBinCount);
+    this.analyser.getFloatFrequencyData(buf);
+    var binWidth=this.ctx.sampleRate/this.analyser.fftSize;
+    var peaks=[];
+    for(var i=1;i<buf.length-1;i++){
+      if(buf[i]>buf[i-1]&&buf[i]>buf[i+1]&&buf[i]>-60){
+        peaks.push({freq:i*binWidth,mag:buf[i]});
+      }
+    }
+    peaks.sort(function(a,b){return b.mag-a.mag;});
+    return peaks.slice(0,20);
+  },
+  analyzeVoice:function(){
+    var pitch=this.detectPitch();
+    if(pitch<50||pitch>2000)return null;
+    var harmonics=this.getHarmonics();
+    if(harmonics.length<2)return null;
+    var fundamental=harmonics[0].freq;
+    for(var i=1;i<harmonics.length;i++){
+      if(harmonics[i].freq<fundamental&&harmonics[i].freq>50)fundamental=harmonics[i].freq;
+    }
+    var h1=0,h2=0,h3=0,h4plus=0;
+    for(var i=0;i<harmonics.length;i++){
+      var ratio=Math.round(harmonics[i].freq/fundamental);
+      if(ratio===1)h1=harmonics[i].mag;
+      else if(ratio===2)h2=harmonics[i].mag;
+      else if(ratio===3)h3=harmonics[i].mag;
+      else if(ratio>=4)h4plus+=harmonics[i].mag;
+    }
+    var nf=0,nc=0;
+    var buf=new Float32Array(this.analyser.frequencyBinCount);
+    this.analyser.getFloatFrequencyData(buf);
+    for(var i=buf.length*0.6;i<buf.length;i++){nf+=buf[i];nc++;}
+    nf=nc>0?nf/nc:-80;
+    var breathiness=nf>-50?Math.min(100,Math.round((nf+50)*2)):0;
+    var strain=h4plus>0&&h1>0?Math.min(100,Math.round((h4plus/h1)*50)):0;
+    this.samples.push(pitch);
+    if(this.samples.length>10)this.samples.shift();
+    var stability=100;
+    if(this.samples.length>=5){
+      var mean=0;
+      for(var i=0;i<this.samples.length;i++)mean+=this.samples[i];
+      mean/=this.samples.length;
+      var variance=0;
+      for(var i=0;i<this.samples.length;i++)variance+=Math.pow(this.samples[i]-mean,2);
+      variance/=this.samples.length;
+      stability=Math.max(0,Math.round(100-Math.sqrt(variance)/mean*1000));
+    }
+    return {
+      pitch:pitch,note:this.freqToNote(pitch),cents:this.freqToCents(pitch),
+      fundamental:fundamental,harmonics:harmonics.slice(0,8),
+      h1:h1,h2:h2,h3:h3,breathiness:breathiness,strain:strain,stability:stability,
+      noiseFloor:nf,register:pitch<150?"low":pitch<300?"mid":pitch<600?"high":"very_high"
+    };
+  },
+  diagnoseFromAudio:function(a){
+    if(!a)return null;
+    var sc={airflow:0,source:0,resonance:0,articulation:0};
+    if(a.breathiness>40)sc.source+=a.breathiness/20;
+    if(a.strain>30)sc.source+=a.strain/15;
+    if(a.stability<60){sc.airflow+=(100-a.stability)/20;sc.source+=(100-a.stability)/30;}
+    if(a.h1<a.h2)sc.resonance+=2;
+    if(a.noiseFloor>-40)sc.airflow+=2;
+    var primary="source",max=0;
+    for(var k in sc)if(sc[k]>max){max=sc[k];primary=k;}
+    if(max===0)primary="source";
+    var sev=max>=3?"high":max>=1.5?"medium":"low";
+    var probs=[];
+    if(a.breathiness>40)probs.push("breathiness");
+    if(a.strain>30)probs.push("strain");
+    if(a.stability<60)probs.push("pitch_instability");
+    if(a.noiseFloor>-40)probs.push("air_leakage");
+    if(probs.length===0)probs.push("general_development");
+    return {problem:probs[0].replace(/_/g," "),root_cause_system:primary,coordination_failure:VOCAL_SYSTEMS[primary].errors[0],severity:sev,primary_system:primary,scores:sc,audioData:a};
+  },
+  freqToNote:function(f){
+    if(f<=0)return "—";
+    var nn=12*(Math.log(f/440)/Math.log(2));
+    var ni=Math.round(nn)+69;
+    if(ni<0||ni>127)return "—";
+    return this.noteStrings[ni%12]+(Math.floor(ni/12)-1);
+  },
+  freqToCents:function(f){
+    if(f<=0)return 0;
+    var nn=12*(Math.log(f/440)/Math.log(2));
+    return Math.round((nn-Math.round(nn))*100);
+  },
+  playTone:function(freq,dur){
+    if(!this.ctx)this.init();
+    if(this.ctx.state==="suspended")this.ctx.resume();
+    var osc=this.ctx.createOscillator();
+    var gain=this.ctx.createGain();
+    osc.type="sine";osc.frequency.value=freq;gain.gain.value=0.3;
+    osc.connect(gain);gain.connect(this.ctx.destination);
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.001,this.ctx.currentTime+dur);
+    osc.stop(this.ctx.currentTime+dur);
+  },
+  noteToFreq:function(note){
+    var notes={C:0,"C#":1,D:2,"D#":3,E:4,F:5,"F#":6,G:7,"G#":8,A:9,"A#":10,B:11};
+    var name=note.replace(/[0-9]/g,"");
+    var oct=parseInt(note.replace(/[^0-9]/g,""))||4;
+    var semi=notes[name];
+    if(semi===undefined)return 440;
+    return 440*Math.pow(2,((oct+1)*12+semi-69)/12);
+  }
+};
+
+/* ═══════════════════════════════════════════════════
+   PITCH MATCHING GAME
+   ═══════════════════════════════════════════════════ */
+var PITCH_GAME={
+  active:false,targetFreq:0,targetNote:"",results:[],round:0,maxRounds:5,
+  notes:["C4","D4","E4","F4","G4","A4","B4","C5"],
+  start:function(){
+    this.active=true;this.results=[];this.round=0;this.nextRound();
+  },
+  nextRound:function(){
+    if(this.round>=this.maxRounds){this.finish();return;}
+    this.round++;
+    var note=this.notes[Math.floor(Math.random()*this.notes.length)];
+    this.targetNote=note;
+    this.targetFreq=PITCH.noteToFreq(note);
+    PITCH.playTone(this.targetFreq,1.5);
+    this.renderRound();
+  },
+  renderRound:function(){
+    var c=document.getElementById("practice-content");
+    var html="";
+    html+="<h2>Round "+this.round+"/"+this.maxRounds+" — Pitch Match</h2>";
+    html+="<p class=\"text-muted mb-16\">Listen to the tone, then sing it back.</p>";
+    html+="<div class=\"card card--highlight text-center mb-12\">";
+    html+="<div style=\"font-size:2.5rem;margin-bottom:8px\">"+this.targetNote+"</div>";
+    html+="<p class=\"text-muted\">"+Math.round(this.targetFreq)+" Hz</p>";
+    html+="<button class=\"btn btn--ghost btn--sm mt-8\" onclick=\"PITCH.playTone("+this.targetFreq+",1.5)\">🔊 Play Again</button>";
+    html+="</div>";
+    html+="<button class=\"btn btn--primary btn--full btn--lg\" id=\"sing-btn\" onclick=\"PITCH_GAME.startListening()\">🎤 Sing Now</button>";
+    html+="<div id=\"pitch-feedback\" class=\"mt-12\"></div>";
+    if(this.results.length>0){
+      html+="<div class=\"sec-header mt-16\"><span class=\"sec-title\">Results</span></div>";
+      for(var i=0;i<this.results.length;i++){
+        var r=this.results[i];
+        var color=r.centsOff<=10?"success":r.centsOff<=25?"primary":"warn";
+        html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">"+r.target+"</span><span class=\"tag tag--"+color+"\">"+r.centsOff+" cents</span></div>";
+      }
+    }
+    c.innerHTML=html;
+  },
+  startListening:function(){
+    var self=this;
+    var btn=document.getElementById("sing-btn");
+    if(btn){btn.textContent="🔴 Listening...";btn.disabled=true;}
+    PITCH.start(function(ok){
+      if(!ok){self.showError("Microphone access denied.");return;}
+      self.listenAndMeasure();
+    });
+  },
+  listenAndMeasure:function(){
+    var self=this;
+    var fb=document.getElementById("pitch-feedback");
+    var measurements=[];
+    var start=Date.now();
+    var iv=setInterval(function(){
+      var a=PITCH.analyzeVoice();
+      if(a&&a.pitch>50){
+        measurements.push(a);
+        if(fb){
+          var cents=Math.abs(a.cents);
+          var col=cents<=10?"success":cents<=25?"primary":"warn";
+          fb.innerHTML="<div class=\"card card--"+col+" text-center\"><div style=\"font-size:1.5rem\">"+a.note+"</div><div class=\"text-sm\">"+a.cents+" cents</div></div>";
+        }
+      }
+      if(Date.now()-start>3000){
+        clearInterval(iv);
+        PITCH.stop();
+        self.processResult(measurements);
+      }
+    },100);
+  },
+  processResult:function(measurements){
+    if(measurements.length===0){this.showError("No voice detected. Try again.");return;}
+    var best=null,bestScore=999;
+    for(var i=0;i<measurements.length;i++){
+      var m=measurements[i];
+      var score=Math.abs(PITCH.freqToCents(m.pitch))+(100-m.stability)*0.5;
+      if(score<bestScore){bestScore=score;best=m;}
+    }
+    var centsOff=Math.abs(PITCH.freqToCents(best.pitch));
+    this.results.push({target:this.targetNote,note:best.note,centsOff:centsOff,stability:best.stability,breathiness:best.breathiness,strain:best.strain});
+    this.showResult(this.results[this.results.length-1]);
+  },
+  showResult:function(r){
+    var c=document.getElementById("practice-content");
+    var html="";
+    html+="<h2>Round "+this.round+" Result</h2>";
+    html+="<div class=\"card card--highlight text-center mb-12\">";
+    html+="<h1 style=\"font-size:2rem;color:var(--"+(r.centsOff<=10?"success":r.centsOff<=25?"primary":"warn")+")\">"+(r.centsOff<=10?"Perfect!":r.centsOff<=25?"Close":"Keep Practicing")+"</h1>";
+    html+="<p class=\"text-muted\">Target: "+r.target+" | You sang: "+r.note+" | "+r.centsOff+" cents off</p>";
+    html+="</div>";
+    html+="<div class=\"card mb-12\"><h3>Voice Analysis</h3>";
+    html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">Breathiness</span><span class=\"tag tag--"+(r.breathiness>40?"warn":"success")+"\">"+r.breathiness+"%</span></div>";
+    html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">Strain</span><span class=\"tag tag--"+(r.strain>30?"warn":"success")+"\">"+r.strain+"%</span></div>";
+    html+="<div class=\"flex items-center justify-between\"><span class=\"text-sm\">Stability</span><span class=\"tag tag--"+(r.stability<60?"warn":"success")+"\">"+r.stability+"%</span></div>";
+    html+="</div>";
+    if(this.round<this.maxRounds){
+      html+="<button class=\"btn btn--primary btn--full btn--lg\" onclick=\"PITCH_GAME.nextRound()\">Next Round →</button>";
+    }else{
+      html+="<button class=\"btn btn--primary btn--full btn--lg\" onclick=\"PITCH_GAME.finish()\">See Final Results →</button>";
+    }
+    html+="<button class=\"btn btn--ghost btn--full mt-8\" onclick=\"SC.nav('practice')\">Back to Practice</button>";
+    c.innerHTML=html;
+  },
+  showError:function(msg){
+    var c=document.getElementById("practice-content");
+    c.innerHTML="<div class=\"card card--surface text-center mb-12\"><p>"+msg+"</p></div><button class=\"btn btn--primary btn--full\" onclick=\"PITCH_GAME.renderRound()\">Try Again</button><button class=\"btn btn--ghost btn--full mt-8\" onclick=\"SC.nav('practice')\">Back</button>";
+  },
+  finish:function(){
+    var total=0,perfect=0;
+    for(var i=0;i<this.results.length;i++){total+=this.results[i].centsOff;if(this.results[i].centsOff<=10)perfect++;}
+    var avg=Math.round(total/this.results.length);
+    U.skills.source=Math.min(10,U.skills.source+(perfect>=3?1:0));
+    U.xp+=perfect*15;U.sessions++;saveState();
+    var c=document.getElementById("practice-content");
+    var html="";
+    html+="<h2>Pitch Match Complete</h2>";
+    html+="<div class=\"card card--gold text-center mb-12\">";
+    html+="<h1 style=\"font-size:2rem;color:var(--gold)\">"+perfect+"/"+this.results.length+" Perfect</h1>";
+    html+="<p class=\"text-muted\">Average: "+avg+" cents off | +"+perfect*15+" XP</p>";
+    html+="</div>";
+    for(var i=0;i<this.results.length;i++){
+      var r=this.results[i];
+      html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">"+r.target+"</span><span class=\"tag tag--"+(r.centsOff<=10?"success":r.centsOff<=25?"primary":"warn")+"\">"+r.centsOff+" cents</span></div>";
+    }
+    html+="<button class=\"btn btn--primary btn--full btn--lg mt-12\" onclick=\"PITCH_GAME.start()\">Play Again</button>";
+    html+="<button class=\"btn btn--ghost btn--full mt-8\" onclick=\"SC.nav('practice')\">Back to Practice</button>";
+    c.innerHTML=html;
+    this.active=false;
+  }
+};
+
+/* ═══════════════════════════════════════════════════
+   VOICE DIAGNOSTIC (MICROPHONE-BASED)
+   ═══════════════════════════════════════════════════ */
+function startVoiceDiagnosis(){
+  var c=document.getElementById("session-content");
+  var html="";
+  html+="<div class=\"mt-12\"><h2>Voice Diagnostic</h2>";
+  html+="<p class=\"text-muted mb-16\">Sing a sustained note. The system analyzes your voice and prescribes training.</p>";
+  html+="<div class=\"card card--highlight text-center mb-12\">";
+  html+="<div style=\"font-size:2.5rem;margin-bottom:8px\">🎤</div>";
+  html+="<p class=\"text-muted\">Grant microphone access, then sing any comfortable note for 3-4 seconds.</p>";
+  html+="</div>";
+  html+="<button class=\"btn btn--primary btn--full btn--lg\" id=\"vd-btn\" onclick=\"runVoiceDiagnostic()\">Start →</button>";
+  html+="<div id=\"vd-status\" class=\"mt-12\"></div>";
+  html+="<button class=\"btn btn--ghost btn--full mt-8\" onclick=\"SC.nav('home')\">Cancel</button>";
+  html+="</div>";
+  c.innerHTML=html;
+  nav("session");
+}
+
+function runVoiceDiagnostic(){
+  var btn=document.getElementById("vd-btn");
+  var status=document.getElementById("vd-status");
+  if(btn){btn.textContent="🔴 Listening...";btn.disabled=true;}
+  PITCH.start(function(ok){
+    if(!ok){
+      status.innerHTML="<div class=\"card card--surface text-center\"><p>Microphone access denied.</p><button class=\"btn btn--primary btn--full mt-8\" onclick=\"startVoiceDiagnosis()\">Retry</button></div>";
+      return;
+    }
+    status.innerHTML="<div class=\"card card--primary text-center\"><p>Sing a comfortable note now... Hold it steady.</p><div class=\"prog mt-12\"><div class=\"prog__fill\" id=\"vd-bar\" style=\"width:0%\"></div></div></div>";
+    var measurements=[];
+    var start=Date.now();
+    var bar=document.getElementById("vd-bar");
+    var iv=setInterval(function(){
+      var a=PITCH.analyzeVoice();
+      if(a&&a.pitch>50)measurements.push(a);
+      if(bar)bar.style.width=Math.min(100,Math.round((Date.now()-start)/4000*100))+"%";
+      if(Date.now()-start>4000){
+        clearInterval(iv);
+        PITCH.stop();
+        processVoiceDiagnosis(measurements);
+      }
+    },80);
+  });
+}
+
+function processVoiceDiagnosis(measurements){
+  if(measurements.length<5){
+    var c=document.getElementById("session-content");
+    c.innerHTML="<div class=\"card card--surface text-center mb-12\"><p>Not enough voice detected. Sing louder and hold steady.</p></div><button class=\"btn btn--primary btn--full\" onclick=\"startVoiceDiagnosis()\">Try Again</button>";
+    return;
+  }
+  var avg={pitch:0,stability:0,breathiness:0,strain:0,noiseFloor:0,h1:0,h2:0,h3:0};
+  for(var i=0;i<measurements.length;i++){
+    var m=measurements[i];
+    avg.pitch+=m.pitch;avg.stability+=m.stability;avg.breathiness+=m.breathiness;
+    avg.strain+=m.strain;avg.noiseFloor+=m.noiseFloor;avg.h1+=m.h1;avg.h2+=m.h2;avg.h3+=m.h3;
+  }
+  var n=measurements.length;
+  avg.pitch/=n;avg.stability/=n;avg.breathiness/=n;avg.strain/=n;avg.noiseFloor/=n;avg.h1/=n;avg.h2/=n;avg.h3/=n;
+  avg.note=PITCH.freqToNote(avg.pitch);avg.cents=PITCH.freqToCents(avg.pitch);
+  var diag=PITCH.diagnoseFromAudio(avg);
+  var ex=EXERCISE_GEN.generate(diag,U);
+  var song=selectSong(diag,U);
+  U.lastDiagnostic=diag;
+  showVoiceDiagResult(diag,avg,ex,song);
+}
+
+function showVoiceDiagResult(diag,avg,ex,song){
+  var c=document.getElementById("session-content");
+  var html="";
+  html+="<h2>Voice Analysis</h2><p class=\"text-muted mb-16\">Here is what your voice told us.</p>";
+  html+="<div class=\"hook mb-12\"><div class=\"hook__label\">Diagnosis</div><div class=\"hook__text\">"+diag.problem+"</div></div>";
+  html+="<div class=\"flex gap-8 mb-16\"><span class=\"tag tag--"+(diag.severity==="high"?"warn":diag.severity==="medium"?"primary":"success")+"\">"+diag.severity+"</span><span class=\"tag tag--primary\">"+VOCAL_SYSTEMS[diag.root_cause_system].name+"</span></div>";
+  html+="<div class=\"card mb-12\"><h3>Measurements</h3>";
+  html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">Note</span><span class=\"font-weight-600\">"+avg.note+" ("+Math.round(avg.pitch)+" Hz)</span></div>";
+  html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">Stability</span><span class=\"tag tag--"+(avg.stability>=70?"success":avg.stability>=50?"primary":"warn")+"\">"+Math.round(avg.stability)+"%</span></div>";
+  html+="<div class=\"flex items-center justify-between mb-8\"><span class=\"text-sm\">Breathiness</span><span class=\"tag tag--"+(avg.breathiness<=30?"success":avg.breathiness<=50?"primary":"warn")+"\">"+Math.round(avg.breathiness)+"%</span></div>";
+  html+="<div class=\"flex items-center justify-between\"><span class=\"text-sm\">Strain</span><span class=\"tag tag--"+(avg.strain<=20?"success":avg.strain<=40?"primary":"warn")+"\">"+Math.round(avg.strain)+"%</span></div>";
+  html+="</div>";
+  html+="<button class=\"btn btn--primary btn--full btn--lg\" onclick=\"renderSession(diag,ex,song)\">Start Prescribed Training →</button>";
+  html+="<button class=\"btn btn--ghost btn--full mt-8\" onclick=\"SC.nav('home')\">Back to Home</button>";
+  c.innerHTML=html;
+}
+
+/* ═══════════════════════════════════════════════════
+   QA: Verify pitch engine
+   ═══════════════════════════════════════════════════ */
+QA.assert("PITCH engine exists",typeof PITCH==="object");
+QA.assert("PITCH.detectPitch is function",typeof PITCH.detectPitch==="function");
+QA.assert("PITCH.analyzeVoice is function",typeof PITCH.analyzeVoice==="function");
+QA.assert("PITCH.diagnoseFromAudio is function",typeof PITCH.diagnoseFromAudio==="function");
+QA.assert("PITCH.freqToNote works",PITCH.freqToNote(440)==="A4");
+QA.assert("PITCH.freqToNote C2",PITCH.freqToNote(65.41)==="C2");
+QA.assert("PITCH.noteToFreq A4",Math.round(PITCH.noteToFreq("A4"))===440);
+QA.assert("PITCH.noteToFreq C4",Math.round(PITCH.noteToFreq("C4"))===262);
+QA.assert("PITCH_GAME exists",typeof PITCH_GAME==="object");
+QA.assert("startVoiceDiagnosis exists",typeof startVoiceDiagnosis==="function");
 
 })();
 </script>
