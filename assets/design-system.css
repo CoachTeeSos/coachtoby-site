@@ -83,22 +83,25 @@ strong { color:var(--text); font-weight:600; }
 .text-cta { color:var(--cta); }
 
 /* ── Layout ── */
-.wrap { width:100%; max-width:1120px; margin:0 auto; padding:0 var(--s-3); }
-
+.wrap { width:100%; max-width:1400px; margin:0 auto; padding:0 24px; }
+.wrap--narrow { max-width:680px; padding:0 24px; }
 /* ── 60/40 Split Viewport ── */
 .academy-layout {
   display:grid;
   grid-template-columns:60% 40%;
-  gap:var(--s-3);
+  gap:32px;
+  align-items:start;
+  max-width:1400px;
+  margin:0 auto;
+  padding:24px;
   min-height:calc(100vh - 120px);
-  padding-top:var(--s-3);
   padding-bottom:80px; /* space for bottom bar */
 }
 .performance-zone {
   position:sticky;
-  top:var(--s-3);
+  top:24px;
   align-self:start;
-  max-height:calc(100vh - var(--s-6));
+  height:calc(100vh - 120px);
   overflow-y:auto;
   scrollbar-width:thin;
   scrollbar-color:var(--border) transparent;
@@ -124,7 +127,8 @@ strong { color:var(--text); font-weight:600; }
 }
 .topbar__inner {
   display:flex; align-items:center; justify-content:space-between;
-  max-width:1120px; margin:0 auto;
+  max-width:1400px; margin:0 auto;
+  padding:0 24px;
 }
 .topbar__brand {
   font-family:var(--font-display);
@@ -323,15 +327,19 @@ strong { color:var(--text); font-weight:600; }
 .audio-bar {
   position:fixed;
   bottom:0; left:0; right:0;
-  z-index:100;
+  z-index:1000;
   background:var(--bg-card);
-  border-top:1px solid var(--border);
-  padding:var(--s-1) var(--s-3);
+  border-top:2px solid #E5E7EB;
+  height:72px;
+  padding:0 32px;
   box-shadow:0 -4px 16px rgba(0,0,0,.06);
+  display:flex;
+  align-items:center;
 }
 .audio-bar__inner {
   display:flex; align-items:center; justify-content:space-between;
-  max-width:1120px; margin:0 auto;
+  max-width:1400px; margin:0 auto;
+  width:100%;
   gap:var(--s-2);
 }
 .audio-bar__controls {
@@ -533,6 +541,9 @@ strong { color:var(--text); font-weight:600; }
 @media(max-width:768px) {
   .wrap { padding:0 var(--s-2); }
   .card { padding:var(--s-3); }
+  .academy-layout { grid-template-columns:1fr; gap:var(--s-2); padding:16px; }
+  .performance-zone { position:static; height:auto; max-height:none; overflow:visible; }
+  .audio-bar { height:auto; padding:var(--s-1) var(--s-2); }
   .audio-bar__inner { flex-wrap:wrap; }
   .audio-bar__volume { display:none; }
 }

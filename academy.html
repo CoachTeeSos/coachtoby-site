@@ -164,14 +164,24 @@
 
 <!-- ═══ LESSON VIEW ═══ -->
 <div class="page" id="page-lesson">
-  <div class="wrap wrap--narrow">
-    <div class="lesson-view">
-      <div class="lesson-view__header">
-        <span class="lesson-view__back" onclick="showPage('dashboard')">← Back</span>
-        <span class="lesson-view__title" id="lessonTitle"></span>
+  <div class="academy-layout">
+    <div class="performance-zone" id="lessonPerformance">
+      <div class="card card--navy" style="text-align:center;padding:var(--s-5) var(--s-3)">
+        <div style="font-size:3rem;margin-bottom:var(--s-2)">🎤</div>
+        <h2 style="color:white;margin-bottom:var(--s-1)" id="perfTitle">Performance Anchor</h2>
+        <p style="color:rgba(255,255,255,.7);font-size:.95rem" id="perfHint">This is your performance zone. Content appears here during lessons.</p>
+        <div id="perfContent" style="margin-top:var(--s-3)"></div>
       </div>
-      <div class="lesson-view__body" id="lessonBody"></div>
-      <div class="lesson-view__nav" id="lessonNav"></div>
+    </div>
+    <div class="reference-zone">
+      <div class="lesson-view">
+        <div class="lesson-view__header">
+          <span class="lesson-view__back" onclick="showPage('dashboard')">← Back</span>
+          <span class="lesson-view__title" id="lessonTitle"></span>
+        </div>
+        <div class="lesson-view__body" id="lessonBody"></div>
+        <div class="lesson-view__nav" id="lessonNav"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1011,9 +1021,36 @@ function showLesson(lessonIdx) {
   document.getElementById('lessonTitle').textContent = lesson.title;
   document.getElementById('lessonBody').innerHTML = lesson.body;
 
-  // Task button
+  // ── Performance Zone ──
   var s = VMA.get();
   var taskDone = s.lessons && s.lessons[mod.id + '-' + lessonIdx + '-task'];
+  var perfHTML = '';
+  // Current key display
+  perfHTML += '<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:var(--s-2)">';
+  perfHTML += '<span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5)">Key</span>';
+  perfHTML += '<span style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:white" id="perfKey">'+KEY_NAMES[currentKeyIndex]+'</span>';
+  perfHTML += '</div>';
+  // Pitch indicator
+  perfHTML += '<div style="background:rgba(0,0,0,.2);border-radius:var(--r);padding:var(--s-2);margin-bottom:var(--s-2)">';
+  perfHTML += '<div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:6px">Reference Pitch</div>';
+  perfHTML += '<button class="btn" style="background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);width:100%;font-size:.9rem" onclick="playKeyTone()">▶ Play '+KEY_NAMES[currentKeyIndex]+' ('+KEY_FREQS[currentKeyIndex].toFixed(1)+' Hz)</button>';
+  perfHTML += '</div>';
+  // Task summary
+  if (taskDone) {
+    perfHTML += '<div style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:var(--r);padding:var(--s-2);text-align:center">';
+    perfHTML += '<span style="font-weight:600;color:#6EE7B7">✓ Task Submitted</span>';
+    perfHTML += '</div>';
+  } else {
+    perfHTML += '<div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:var(--s-2)">';
+    perfHTML += '<div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:4px">'+lesson.task.label+'</div>';
+    perfHTML += '<p style="font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.5">'+lesson.task.text+'</p>';
+    perfHTML += '</div>';
+  }
+  document.getElementById('perfTitle').textContent = 'Module ' + mod.id + '.' + lessonIdx;
+  document.getElementById('perfHint').textContent = lesson.title.replace(/^\d+\.\d+:\s*/, '');
+  document.getElementById('perfContent').innerHTML = perfHTML;
+
+  // Task button (in reference zone)
   var taskHTML = '<div class="task">';
   taskHTML += '<div class="task__label">' + lesson.task.label + '</div>';
   taskHTML += '<div class="task__text">' + lesson.task.text + '</div>';
