@@ -219,8 +219,8 @@ var CURRICULUM={
         },
         {
           id:"l1-2",title:"Breath: The Engine",type:"lesson",
-          content:"<p>Everything starts with breath. Not big breaths — <strong>controlled</strong> breaths. Think of your airflow like a steady stream from a hose, not a fire hydrant blast.</p><p>The muscle that matters most: your <strong>diaphragm</strong>. It's a dome-shaped muscle under your ribs. When it flattens, your lungs fill. When it relaxes, air flows out.</p>",
-          exercise:{name:"Diaphragm Check",steps:["Lie on your back, one hand on chest, one on belly","Breathe in — belly hand should rise, chest hand stays still","Breathe out with a steady 'ssss' sound — aim for 15 seconds","Repeat 5 times, keeping the airflow even"],skill:"airflow",xp:15}
+          content:"<p>Everything starts with breath — but not the way most singers think. The common advice is 'sing from your diaphragm' and 'take big breaths.' <strong>Both are wrong.</strong></p><p>Your diaphragm is an involuntary muscle — you can't directly control it. What you CAN control is the muscular 'cage' around your lungs: your abdominal wall, intercostals (rib muscles), and lower back.</p><p><strong>The NYVC principle:</strong> Good singing isn't about pushing air out. It's about <strong>controlling how fast air escapes</strong>. Think of it like holding a balloon open and letting the air leak out slowly — not squeezing it.</p><p>More air ≠ better singing. <strong>Efficient</strong> singers use LESS air because their vocal folds close properly. Wasted air = breathy, weak tone.</p>",
+          exercise:{name:"Appoggio Expansion",steps:["Stand tall, hands on lower ribs (sides of your torso)","Breathe in through your nose — feel your ribs push your hands outward","Don't lift your shoulders — the expansion is sideways and slightly in your lower belly","Now say 'sss' — hold your ribs open as long as you can DON'T let them collapse","The goal: ribs stay expanded while air flows out slowly. That's appoggio.","Repeat 5 times. Each time, try to keep expansion longer."],skill:"airflow",xp:15}
         },
         {
           id:"l1-3",title:"Vocal Folds: The Source",type:"lesson",
@@ -249,8 +249,8 @@ var CURRICULUM={
         },
         {
           id:"l2-2",title:"Breath Management",type:"lesson",
-          content:"<p>Running out of breath mid-phrase isn't about lung capacity — it's about <strong>air efficiency</strong>. You're either letting too much air escape (breathy tone) or gripping too tight (strained).</p><p>The goal: sustain a phrase evenly from start to finish, with a little air left over.</p>",
-          exercise:{name:"Sustained 'Zzz'",steps:["Take a comfortable breath","Buzz 'zzz' on a steady pitch — like a bee","Goal: 20 seconds of even, steady sound","Notice: if it wavers, your airflow is uneven","Repeat 3 times, trying to beat your time"],skill:"airflow",xp:20}
+          content:"<p>Running out of breath mid-phrase? It's not a lung capacity problem — it's an <strong>efficiency</strong> problem. You're either wasting air (breathy tone) or choking it (strained gripping).</p><p><strong>The NYVC fix:</strong> Your vocal folds are the valve. If they close cleanly, you use minimal air. If they leak (breathy), you blast through air and run out.</p><p>So the real exercise isn't 'take bigger breaths' — it's 'close the valve properly and manage the release.' The sustained buzz exercise trains this exact skill.</p>",
+          exercise:{name:"Sustained Buzz — Efficiency Training",steps:["Take a normal breath — don't overfill","Buzz 'zzz' on a comfortable pitch, medium volume","Goal: 20 seconds of perfectly even sound","Focus: the buzz should be STEADY — no wavering, no dying out","If it wavers: your vocal folds aren't closing consistently","If it dies: you're either out of air (breathy) or gripping (strained)","Repeat 3 times. Beat your time each round"],skill:"airflow",xp:20}
         },
         {
           id:"l2-3",title:"Vowel Shaping",type:"lesson",
@@ -749,7 +749,7 @@ function submitDiagnostic(){
   var primary='source',max=0;
   for(var k in scores)if(scores[k]>max){max=scores[k];primary=k;}
   var exercises={
-    airflow:{name:'Breath Reset',steps:['Stand tall, shoulders relaxed','Breathe in for 4 counts — belly expands','Blow out on "sss" for 15 seconds — even and steady','Repeat 3 times','Now sing a phrase — notice the improved airflow'],xp:20},
+    airflow:{name:'Appoggio Reset',steps:['Stand tall, hands on lower ribs','Breathe in — ribs push hands out (sideways, not just belly)','Hold ribs open — blow "sss" while keeping ribs expanded','Don't let your chest collapse — the ribs stay wide as air flows out','Repeat 5 times — each time, sustain the "sss" longer','Now sing a short phrase — maintain that rib expansion throughout'],xp:20},
     source:{name:'Balanced Onset',steps:['Hum on "m" for 5 seconds — feel the buzz','Open to "mah" — keep the same easy feeling','Sing "ah" 5 times — clean start, no breathy "h", no hard attack','Sing a scale — balanced onset on every note','Sing a phrase from a song — carry that balance into lyrics'],xp:20},
     resonance:{name:'Forward Placement',steps:['Hum on "ng" — feel buzz in nose/lips','Slide up and down on "ng" — keep buzz forward','Sing "mee" — lips should tingle','Sing "mah" — same forward feeling','Sing a phrase — resonance stays forward, not in throat'],xp:20},
     articulation:{name:'Clear Diction',steps:['Speak: "ma-me-mi-mo-mu" — slow, every consonant clear','Say it faster — keep clarity','Sing it on one pitch — same precision','Sing a lyric — every word understandable','Record yourself — can you hear every word?'],xp:20}
