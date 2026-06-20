@@ -8,14 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="assets/vma-engine.js"></script>
 <style>
-:root{--bg:#0a0a10;--surface:#111118;--surface2:#181822;--border:#1e1e2c;--text:#e8e8f0;--text-soft:#a0a0b4;--muted:#5a5a70;--gold:#d4a843;--gold-light:#e8c46a;--mint:#00d4a0;--blue:#4a9eff;--purple:#a06eff;--orange:#ff8a4a;--red:#e05555;--radius:14px;--radius-sm:10px}
+:root{--bg:#0a0a10;--surface:#0f0f16;--surface2:#16161f;--border:#1c1c28;--text:#e8e8f0;--text-soft:#a0a0b4;--muted:#5a5a70;--gold:#d4a843;--gold-light:#e8c46a;--mint:#00d4a0;--blue:#4a9eff;--purple:#a06eff;--orange:#ff8a4a;--red:#e05555;--radius:14px;--radius-sm:10px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
 .wrap{width:100%;max-width:640px;margin:0 auto;padding:0 16px}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.anim-up{animation:fadeInUp .4s ease both}
-
+@keyframes VMAfadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim-up{animation:VMAfadeIn .4s ease both}
 .nav{position:sticky;top:0;z-index:100;background:rgba(10,10,16,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
 .nav-brand span{color:var(--gold)}
@@ -23,21 +23,21 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .nav-link{font-size:.72rem;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--radius-sm);transition:all .15s}
 .nav-link:hover{color:var(--text);background:var(--surface)}
 .nav-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--bg);cursor:pointer}
-
-.mod-head{padding:32px 0 16px;animation:fadeInUp .4s ease}
+.mod-head{padding:32px 0 16px;animation:VMAfadeIn .4s ease}
 .mod-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:20px;font-size:.65rem;font-weight:600;color:var(--gold);margin-bottom:12px}
 .mod-head h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.4rem,4vw,1.8rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:6px}
 .mod-head p{color:var(--text-soft);font-size:.88rem}
+.mod-hook{background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(0,212,160,.04));border:1px solid rgba(212,168,67,.12);border-radius:12px;padding:16px;margin:16px 0}
+.mod-hook-q{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;color:var(--gold);margin-bottom:6px}
+.mod-hook-p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
 .mod-progress-bar{width:100%;height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:16px}
 .mod-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--mint));border-radius:4px;transition:width .5s ease}
-
 .genre-spotlight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;display:flex;align-items:center;gap:12px}
 .genre-icon{font-size:1.6rem}
 .genre-info h4{font-size:.82rem;font-weight:600;margin-bottom:2px}
 .genre-info p{font-size:.75rem;color:var(--muted)}
-.genre-tag{font-size:.62rem;padding:3px 8px;background:rgba(160,110,255,.08);border:1px solid rgba(160,110,255,.15);border-radius:6px;color:var(--purple);font-weight:600;flex-shrink:0}
-
-.content{padding:24px 0;animation:fadeInUp .3s ease}
+.genre-tag{font-size:.62rem;padding:3px 8px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:6px;color:var(--gold);font-weight:600;flex-shrink:0}
+.content{padding:24px 0;animation:VMAfadeIn .3s ease}
 .content h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.02em;margin-bottom:12px}
 .content h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin:20px 0 8px;color:var(--gold)}
 .content p{color:var(--text);font-size:.88rem;line-height:1.75;margin-bottom:12px}
@@ -48,40 +48,24 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .content-box.tip{border-left:3px solid var(--mint)}
 .content-box.key{border-left:3px solid var(--gold)}
 .content-box.info{border-left:3px solid var(--blue)}
-.content-box.warning{border-left:3px solid var(--orange)}
+.content-box.emotion{border-left:3px solid var(--orange)}
 .content-box p:last-child{margin-bottom:0}
-
-/* Emotion wheel */
-.emotion-wheel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
-.emotion-item{padding:12px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;cursor:pointer;transition:all .15s}
-.emotion-item:hover{border-color:var(--gold);transform:translateY(-2px)}
-.emotion-item.selected{border-color:var(--gold);background:rgba(212,168,67,.06)}
-.emotion-emoji{font-size:1.4rem;margin-bottom:4px}
-.emotion-name{font-size:.68rem;color:var(--text-soft);font-weight:500}
-
 .task{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
 .task-label{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:6px}
 .task p{font-size:.85rem;color:var(--text);line-height:1.6}
 .task-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;background:rgba(0,212,160,.06);border:1px solid rgba(0,212,160,.15);border-radius:var(--radius-sm);font-size:.72rem;font-weight:600;color:var(--mint);cursor:pointer;transition:all .15s;font-family:inherit}
 .task-btn:hover{background:rgba(0,212,160,.12)}
 .task-btn.done{background:rgba(74,158,255,.06);border-color:rgba(74,158,255,.15);color:var(--blue);cursor:default}
-
 .bandlab-box{background:linear-gradient(135deg,rgba(74,158,255,.06),rgba(160,110,255,.06));border:1px solid rgba(74,158,255,.15);border-radius:var(--radius);padding:16px;margin:14px 0}
-.bandlab-box h4{font-size:.85rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.bandlab-box h4{font-size:.85rem;font-weight:600;margin-bottom:6px}
 .bandlab-box p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
 .bandlab-box ol{margin:8px 0 0;padding-left:18px}
 .bandlab-box li{font-size:.82rem;color:var(--text-soft);margin-bottom:4px;line-height:1.5}
-
-/* Scenario cards */
-.scenario-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:12px 0}
-.scenario-tag{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--blue);margin-bottom:6px}
-.scenario-card h4{font-size:.9rem;font-weight:600;margin-bottom:6px}
-.scenario-card p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
-.scenario-do{background:rgba(0,212,160,.04);border-left:2px solid var(--mint);padding:8px 12px;margin-top:10px;border-radius:0 8px 8px 0;font-size:.78rem;color:var(--text)}
-.scenario-dont{background:rgba(224,85,85,.04);border-left:2px solid var(--red);padding:8px 12px;margin-top:6px;border-radius:0 8px 8px 0;font-size:.78rem;color:var(--text)}
-
+.scenario-box{background:linear-gradient(135deg,rgba(160,110,255,.06),rgba(212,168,67,.04));border:1px solid rgba(160,110,255,.15);border-radius:var(--radius);padding:16px;margin:14px 0}
+.scenario-box h4{font-size:.85rem;font-weight:600;color:var(--purple);margin-bottom:8px}
+.scenario-box p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
 .quiz-section{padding:24px 0}
-.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;animation:fadeInUp .3s ease}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;animation:VMAfadeIn .3s ease}
 .q-num{font-size:.62rem;font-weight:600;color:var(--gold);margin-bottom:8px}
 .q-text{font-size:.88rem;font-weight:500;margin-bottom:14px;line-height:1.5}
 .q-options{display:flex;flex-direction:column;gap:8px}
@@ -93,25 +77,23 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .q-submit{margin-top:16px;padding:13px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius-sm);font-weight:600;font-size:.85rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all .2s}
 .q-submit:hover{background:var(--gold-light)}
 .q-submit:disabled{opacity:.4;cursor:not-allowed}
-.q-result{text-align:center;padding:32px 20px;animation:fadeInUp .4s ease}
+.q-result{text-align:center;padding:32px 20px;animation:VMAfadeIn .4s ease}
 .q-result h3{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;margin-bottom:8px}
 .q-result p{color:var(--text-soft);font-size:.9rem}
 .q-score{font-size:3rem;font-weight:700;color:var(--gold);margin-bottom:4px}
 .q-retry{margin-top:16px;padding:12px 24px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-weight:500;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .15s}
 .q-retry:hover{border-color:var(--gold)}
-
-.complete{text-align:center;padding:40px 20px;animation:fadeInUp .5s ease}
+.complete{text-align:center;padding:40px 20px;animation:VMAfadeIn .5s ease}
 .complete-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;box-shadow:0 0 48px rgba(212,168,67,.15)}
 .complete h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:8px}
 .complete p{color:var(--text-soft);font-size:.9rem;margin-bottom:20px}
 .complete-xp{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(212,168,67,.08);border-radius:var(--radius-sm);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:20px}
-.complete-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:all .2s}
-.complete-btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 28px rgba(212,168,67,.22)}
-
+.complete-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;text-decoration:none;transition:all .2s}
+.complete-btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 6px 28px rgba(212,168,67,.22)}
+.review-link{display:block;margin-top:12px;color:var(--muted);font-size:.8rem;text-decoration:underline;cursor:pointer}
 .footer{padding:32px 0;text-align:center;font-size:.68rem;color:var(--muted);border-top:1px solid var(--border);margin-top:32px}
-@media(max-width:480px){.mod-head{padding:24px 0 12px}.q-card{padding:16px}.emotion-wheel{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.mod-head{padding:24px 0 12px}.q-card{padding:16px}}
 </style>
-  <script src="assets/vma-engine.js"></script>
 </head>
 <body>
 
@@ -129,286 +111,212 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
   <div class="mod-head anim-up">
     <div class="mod-badge">Module 5 of 7</div>
     <h1>Performance — Move People</h1>
-    <p>Technique gets you to the note. Emotion makes them feel it. This module is about the space between the notes — where the magic lives.</p>
-    <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
-    <div style="background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(0,212,160,.04));border:1px solid rgba(212,168,67,.12);border-radius:12px;padding:16px;margin:16px 0 0">
-      <p style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;color:var(--gold);margin-bottom:6px">Your audience doesn't remember your notes. They remember how you made them feel.</p>
-      <p style="font-size:.82rem;color:var(--text-soft);line-height:1.6">Technique gets you to the note. Emotion makes them cry, dance, or worship. This is the module that transforms singers into communicators.</p>
+    <p>Technique gets you to the note. Emotion makes them cry, dance, or worship. This is the module that transforms singers into communicators.</p>
+    <div class="mod-hook">
+      <p class="mod-hook-q">Your audience doesn't remember your notes. They remember how you made them feel.</p>
+      <p class="mod-hook-p">Technique gets you to the note. Emotion makes them cry, dance, or worship. This is the module that transforms singers into communicators.</p>
     </div>
+    <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
   </div>
 
-  <!-- GENRE SPOTLIGHT -->
   <div class="genre-spotlight">
     <div class="genre-icon">🎤</div>
-    <div class="genre-info">
-      <h4>Genre Spotlight: R&B / Soul</h4>
-      <p>The masters of emotional delivery. Listen to how Sam Cooke, Aretha Franklin, and Tems use dynamics, phrasing, and vulnerability to create intimacy.</p>
-    </div>
+    <div class="genre-info"><h4>Genre Spotlight: Gospel / Worship</h4><p>The heart of Nigerian singing. Listen to how Tasha Cobbs, Nathaniel Bassey, and Sinach use dynamics, pauses, and emotional build.</p></div>
     <div class="genre-tag">Listen</div>
   </div>
 
-  <!-- LESSON 5.1: EMOTIONAL ACCESS -->
+  <!-- LESSON 5.1 -->
   <div class="content" id="lesson-5-1">
-    <h2>Lesson 5.1: Emotional Access — How to Actually Feel Music</h2>
-    
-    <p>Some people say "just feel it" like it's easy. But many of us are emotionally numb — from trauma, from stress, from years of pushing feelings down. <strong>You can't sing what you can't access.</strong> This lesson gives you a structured way in.</p>
-    
-    <h3>Why Some Singers Sound "Dead"</h3>
-    <p>It's not a talent issue. It's usually one of these:</p>
+    <h2>Lesson 5.1: Emotional Access — How to Feel What You Sing</h2>
+    <p>Some people are naturally emotional. Others feel numb — from life, from trauma, from never learning to access feelings on command. This lesson is for everyone.</p>
+    <h3>The Emotional Access System</h3>
+    <p>You don't need to "feel" the emotion to <strong>communicate</strong> it. Acting and singing use the same tools. Here's the framework:</p>
     <ul>
-      <li><strong>Emotional numbness:</strong> Life taught you to suppress feelings. Your voice reflects that wall.</li>
-      <li><strong>Overthinking:</strong> You're so focused on technique that there's no room for feeling.</li>
-      <li><strong>Disconnection from lyrics:</strong> You're singing words, not meaning them.</li>
-      <li><strong>Fear of vulnerability:</strong> Showing emotion feels dangerous. So you stay safe — and flat.</li>
+      <li><strong>Memory recall:</strong> Think of a specific moment when you felt what the song describes. Not the general idea — a specific moment. What did you see? Hear? Smell?</li>
+      <li><strong>Physical anchoring:</strong> Emotions live in the body. Sadness sits in the chest. Joy lifts the face. Anger tightens the jaw. If you can't feel it, <strong>physically place your body in the posture</strong> of that emotion.</li>
+      <li><strong>Sensory imagination:</strong> If you can't remember, imagine. What would it feel like? Your brain can't fully distinguish between real and vividly imagined emotion.</li>
+      <li><strong>Text analysis:</strong> What is the lyric actually saying? What's the story? Who are they singing to? What do they want?</li>
     </ul>
-    
-    <h3>The NYVC Emotional Access System</h3>
-    <p>This is a step-by-step method to access genuine emotion before you sing. It works whether you're numb, distracted, or scared.</p>
-    
-    <div class="content-box key">
-      <p><strong>Step 1: Choose an emotion.</strong> Not "sad" — be specific. Grief? Longing? Gratitude? Joy? Anger? Pick ONE.</p>
-    </div>
-    <div class="content-box key">
-      <p><strong>Step 2: Find the memory.</strong> Think of a specific moment when you felt that emotion. Not the general idea — a specific moment. A place, a face, a smell, a sound. The more specific, the more real it feels.</p>
-    </div>
-    <div class="content-box key">
-      <p><strong>Step 3: Feel it in your body.</strong> Where does this emotion live in your body? Tight chest? Warm throat? Heavy stomach? Light head? Don't analyze — just notice.</p>
-    </div>
-    <div class="content-box key">
-      <p><strong>Step 4: Breathe into it.</strong> Take 3 slow breaths, breathing INTO the place where you feel the emotion. Don't push it away. Don't amplify it. Just let it be there.</p>
-    </div>
-    <div class="content-box key">
-      <p><strong>Step 5: Sing FROM it, not ABOUT it.</strong> Now sing. Don't try to "perform" the emotion. Just let it be present while you sing. The emotion is the fuel, not the performance.</p>
-    </div>
-    
-    <h3>The Emotion Wheel</h3>
-    <p>Use this wheel to identify what you want to access. Click or think about the emotion that fits your song:</p>
-    
-    <div class="emotion-wheel">
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😊</div><div class="emotion-name">Joy</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😢</div><div class="emotion-name">Grief</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😡</div><div class="emotion-name">Anger</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😍</div><div class="emotion-name">Love</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😰</div><div class="emotion-name">Anxiety</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">🙏</div><div class="emotion-name">Gratitude</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😔</div><div class="emotion-name">Longing</div></div>
-      <div class="emotion-item" onclick="selectEmotion(this)"><div class="emotion-emoji">😌</div><div class="emotion-name">Peace</div></div>
-    </div>
-    
-    <div class="content-box tip">
-      <p><strong>If you feel nothing:</strong> That's okay. Start with gratitude — think of one thing, one person, one moment you're genuinely thankful for. Gratitude is the easiest emotion for most people to access. From there, you can build to the others.</p>
-    </div>
-    
+    <div class="content-box emotion"><p><strong>For the emotionally numb:</strong> Start with physical anchoring. You don't need to feel it to communicate it. Place your body in the posture of the emotion, and the audience will feel it. The emotion often follows the body — not the other way around.</p></div>
     <div class="task" id="task-5-1">
       <div class="task-label">Task 5.1</div>
-      <p>Practice the NYVC Emotional Access System 5 times this week — once for each of these emotions: Joy, Grief, Love, Gratitude, Longing. Each time: find the memory, feel it in your body, breathe into it, then sing a simple phrase (even just "ah"). Write down what you noticed each time.</p>
+      <p>Choose a song that moves you. Before singing it, write down: (1) What specific memory does it connect to? (2) Where do you feel the emotion in your body? (3) What's the story? Now sing it with those anchors. Record in BandLab.</p>
       <button class="task-btn" id="taskBtn-5-1" onclick="completeTask('5-1')">Mark as Done ✓</button>
     </div>
   </div>
 
-  <!-- LESSON 5.2: DYNAMICS -->
+  <!-- LESSON 5.2 -->
   <div class="content" id="lesson-5-2" style="display:none">
-    <h2>Lesson 5.2: Dynamics — The Power of Soft and Loud</h2>
-    
-    <p>Dynamics are the volume range of your performance — from the quietest whisper to the fullest belt. <strong>Most amateur singers have one volume: loud.</strong> Great singers use the full range.</p>
-    
-    <h3>The 5 Dynamic Levels</h3>
-    <table class="ipa-table">
-      <thead><tr><th>Level</th><th>Marking</th><th>Feeling</th><th>When to Use</th></tr></thead>
-      <tbody>
-        <tr><td>Very Soft</td><td>pp (pianissimo)</td><td>Intimate, vulnerable, close</td><td>Ballads, emotional moments, endings</td></tr>
-        <tr><td>Soft</td><td>p (piano)</td><td>Gentle, warm, personal</td><td>Verses, storytelling, building tension</td></tr>
-        <tr><td>Medium</td><td>mp/mezzo</td><td>Conversational, natural</td><td>Most of the song, verses</td></tr>
-        <tr><td>Loud</td><td>f (forte)</td><td>Powerful, declarative, bold</td><td>Chorus, climax, moments of strength</td></tr>
-        <tr><td>Very Loud</td><td>ff (fortissimo)</td><td>Explosive, overwhelming, peak</td><td>Final chorus, emotional peak (use sparingly)</td></tr>
-      </tbody>
-    </table>
-    
-    <h3>The Most Important Dynamic: The Crescendo</h3>
-    <p>A <strong>crescendo</strong> is a gradual increase in volume. It's the single most powerful tool in performance. When you gradually get louder over a phrase, the audience leans in. They feel the build. It creates anticipation and release.</p>
-    
-    <div class="content-box key">
-      <p><strong>The rule of contrast:</strong> The louder your loudest moment is, the softer your softest moment must be. If everything is loud, nothing is loud. If you can whisper and make the audience strain to hear you, your belt will feel twice as powerful.</p>
-    </div>
-    
-    <h3>Breath and Dynamics</h3>
-    <p>Dynamics are controlled by breath pressure, not throat pressure. To get louder, you push more air through — not squeeze your throat. To get softer, you reduce airflow — not tighten up. The throat stays open and relaxed at all dynamic levels.</p>
-    
+    <h2>Lesson 5.2: Dynamics and Phrasing — The Art of Contrast</h2>
+    <p><strong>Dynamics</strong> are volume changes. <strong>Phrasing</strong> is how you shape a musical sentence. Together, they're what make a performance captivating instead of monotonous.</p>
+    <h3>The Dynamic Range</h3>
+    <ul>
+      <li><strong>pp (pianissimo):</strong> Very soft. Intimate, vulnerable, draws the listener in</li>
+      <li><strong>mp (mezzo-piano):</strong> Medium soft. Conversational, warm</li>
+      <li><strong>mf (mezzo-forte):</strong> Medium loud. Full, present, confident</li>
+      <li><strong>f (forte):</strong> Loud. Powerful, declarative, commanding</li>
+      <li><strong>ff (fortissimo):</strong> Very loud. Climactic, overwhelming, peak energy</li>
+    </ul>
+    <h3>The Power of the Pause</h3>
+    <p>Silence is the most powerful dynamic. A well-placed pause before a key lyric creates anticipation. A pause after a climax lets it land. Most beginners are afraid of silence — they fill every moment. <strong>Great singers know when to stop singing.</strong></p>
+    <div class="content-box key"><p><strong>NYVC principle:</strong> If you sing everything at the same volume, nothing stands out. Dynamics create contrast. Contrast creates interest. Interest creates connection.</p></div>
     <div class="task" id="task-5-2">
       <div class="task-label">Task 5.2</div>
-      <p>Take a simple phrase (like "Amazing Grace, how sweet the sound"). Sing it 5 times: pp, p, mp, f, ff. Then sing it with a crescendo from pp to ff over the whole phrase. Record all versions in BandLab and listen back — can you hear the difference?</p>
+      <p>Take a simple phrase like "Amazing Grace, how sweet the sound." Sing it 3 ways: (1) emphasize "Amazing" with a crescendo, (2) emphasize "sweet" by getting softer, (3) add a pause before "sound." Record all 3 in BandLab.</p>
       <button class="task-btn" id="taskBtn-5-2" onclick="completeTask('5-2')">Mark as Done ✓</button>
     </div>
   </div>
 
-  <!-- LESSON 5.3: PHRASING AND STORYTELLING -->
+  <!-- LESSON 5.3 -->
   <div class="content" id="lesson-5-3" style="display:none">
-    <h2>Lesson 5.3: Phrasing and Storytelling Through Song</h2>
-    
-    <p>A song is a story. Every phrase is a sentence. Every word is a choice. <strong>How you phrase a melody is how you tell the story.</strong></p>
-    
-    <h3>The 5 Phrasing Tools</h3>
-    <ul>
-      <li><strong>Word emphasis:</strong> Which words do you push? "I will <strong>always</strong> love you" hits differently than "<strong>I</strong> will always love you." Choose intentionally.</li>
-      <li><strong>Breath placement:</strong> Where you breathe changes the meaning. Breathing mid-phrase creates urgency. Breathing at natural pauses creates calm.</li>
-      <li><strong>Rubato:</strong> Stretching or compressing time. Slowing down on a key word. Rushing through a transition. This is what makes phrasing feel human, not robotic.</li>
-      <li><strong>Consonant emphasis:</strong> Punching certain consonants (the "t" in "heart," the "d" in "God") adds emotional weight and clarity.</li>
-      <li><strong>Vowel sustain:</strong> Holding vowels longer than necessary on emotional words. "Looooove" vs "love." The vowel is where the emotion lives.</li>
-    </ul>
-    
-    <h3>The Story Arc of a Song</h3>
-    <p>Every good performance follows a story arc:</p>
-    <ol>
-      <li><strong>Setup (Verse 1):</strong> Draw them in. Soft, intimate, conversational.</li>
-      <li><strong>Development (Verse 2 / Pre-Chorus):</strong> Build tension. Add intensity.</li>
-      <li><strong>Climax (Chorus):</strong> The emotional peak. Fullest expression.</li>
-      <li><strong>Reflection (Bridge):</strong> The twist. Different perspective. Often the most vulnerable moment.</li>
-      <li><strong>Resolution (Final Chorus / Outro):</strong> The release. Can be triumphant, peaceful, or bittersweet.</li>
-    </ol>
-    
-    <div class="content-box tip">
-      <p><strong>NYVC insight:</strong> The bridge is where most singers lose the audience. They treat it like a "break" instead of the emotional peak. The bridge is where you should be MOST vulnerable, MOST connected. It's the moment people remember.</p>
+    <h2>Lesson 5.3: Performance Scenarios — Church, Stage, Studio, Social Media</h2>
+    <p>Different contexts demand different approaches. A worship leader, a concert performer, a studio artist, and a content creator all use the same voice — but very differently.</p>
+
+    <div class="scenario-box">
+      <h4>⛪ Scenario 1: Worship Leading</h4>
+      <p><strong>Goal:</strong> Lead people into God's presence. You're not the center — the worship is.</p>
+      <ul>
+        <li>Sing in keys the congregation can follow (not your personal best key)</li>
+        <li>Make eye contact with individuals — not the back wall</li>
+        <li>Use a microphone but don't rely on it — project naturally</li>
+        <li>Leave space for the Holy Spirit — don't fill every moment</li>
+        <li>Your face and body should reflect what you're singing</li>
+      </ul>
     </div>
-  
+
+    <div class="scenario-box">
+      <h4>🎤 Scenario 2: Stage / Concert</h4>
+      <p><strong>Goal:</strong> Entertain and connect. You're the center of attention.</p>
+      <ul>
+        <li>Use the microphone — pull back on volume, let the PA do the work</li>
+        <li>Move on stage — don't stand still unless it's intentional</li>
+        <li>Use your full dynamic range — whisper to belt</li>
+        <li>Engage the audience — talk between songs, make them part of the show</li>
+        <li>Start with something that grabs attention — not a slow ballad</li>
+      </ul>
+    </div>
+
+    <div class="scenario-box">
+      <h4>🎧 Scenario 3: Studio Recording</h4>
+      <p><strong>Goal:</strong> Capture the perfect take. Precision over performance.</p>
+      <ul>
+        <li>Get close to the mic (5-10cm) — intimacy, not projection</li>
+        <li>Sing with less vibrato than live — it's easier to add later</li>
+        <li>Multiple takes are normal — don't expect perfection in one</li>
+        <li>Listen back critically — fix pitch, timing, and diction issues</li>
+        <li>Hydrate constantly — studio sessions are long</li>
+      </ul>
+    </div>
+
+    <div class="scenario-box">
+      <h4>📱 Scenario 4: Social Media (Instagram, TikTok, YouTube Shorts)</h4>
+      <p><strong>Goal:</strong> Grab attention in 3 seconds. Keep it short.</p>
+      <ul>
+        <li>Start with the hook — the most recognizable part</li>
+        <li>Keep it 15-60 seconds — attention spans are short</li>
+        <li>Add captions — most people watch without sound</li>
+        <li>Good lighting matters as much as good singing</li>
+        <li>Post consistently — one great video per week beats one perfect video per month</li>
+      </ul>
+    </div>
+
+    <div class="scenario-box">
+      <h4>🏠 Scenario 5: Intimate / Small Group</h4>
+      <p><strong>Goal:</strong> Create connection in a small space.</p>
+      <ul>
+        <li>You may not need a microphone — use your natural voice</li>
+        <li>Eye contact is everything — you're singing to individuals</li>
+        <li>Soft, vulnerable singing works best here</li>
+        <li>Read the room — adjust your energy to match</li>
+      </ul>
+    </div>
+
     <div class="task" id="task-5-3">
-      <div class="task-label">Task 5-3</div>
-      <p>Take the phrase "Amazing Grace, how sweet the sound." Sing it 3 ways: (1) emphasize "Amazing", (2) emphasize "sweet", (3) emphasize "sound". Record all 3 in BandLab.</p>
+      <div class="task-label">Task 5.3</div>
+      <p>Choose one scenario. Record a 60-second performance in BandLab as if you're in that context. Write down 3 specific choices you made for that scenario.</p>
       <button class="task-btn" id="taskBtn-5-3" onclick="completeTask('5-3')">Mark as Done ✓</button>
     </div>
-</div>
+  </div>
 
-  <!-- LESSON 5.4: SCENARIOS -->
+  <!-- LESSON 5.4 -->
   <div class="content" id="lesson-5-4" style="display:none">
-    <h2>Lesson 5.4: Performance Scenarios — What Works Across Contexts</h2>
-    
-    <p>Different stages, different rooms, different audiences. Here's how to adapt your performance to any scenario.</p>
-    
-    <div class="scenario-card">
-      <div class="scenario-tag">Scenario 1</div>
-      <h4>🎤 Worship Leading — Unamplified, Large Room</h4>
-      <p>You're leading 500+ people with no mic, a band behind you, and people who may not know the song.</p>
-      <div class="scenario-do"><strong>DO:</strong> Project from your diaphragm, not your throat. Use the room's natural acoustics. Sing slightly slower than the recording — it gives people time to follow. Make eye contact with individuals, not the crowd. Keep your dynamics controlled — the room amplifies everything.</div>
-      <div class="scenario-dont"><strong>DON'T:</strong> Try to belt over the band. You'll strain and they'll hear competition, not worship. Don't rush — the room needs time to "carry" your sound. Don't look down at your lyrics — it kills connection.</div>
-    </div>
-    
-    <div class="scenario-card">
-      <div class="scenario-tag">Scenario 2</div>
-      <h4>🎤 Stage Performance — Amplified, Concert Setting</h4>
-      <p>You have a mic, monitors, a sound engineer, and an audience that came to see you.</p>
-      <div class="scenario-do"><strong>DO:</strong> Use the mic — pull back on volume and let the PA do the work. Move on stage — physical movement amplifies emotional delivery. Use dynamics to their fullest — whisper into the mic for intimacy, belt for power. Read the room — if they're engaged, go deeper; if they're restless, change energy.</div>
-      <div class="scenario-dont"><strong>DON'T:</strong> Sing as loud as you can into the mic — it distorts and sounds harsh. Don't stand still like a statue — movement is part of performance. Don't ignore the audience — they're your partner, not your backdrop.</div>
-    </div>
-    
-    <div class="scenario-card">
-      <div class="scenario-tag">Scenario 3</div>
-      <h4>🎤 Studio Recording — Controlled Environment</h4>
-      <p>You're in a booth with headphones, a producer, and unlimited takes.</p>
-      <div class="scenario-do"><strong>DO:</strong> Focus on nuance — the mic picks up everything. Vary your distance from the mic for dynamic effect (closer = intimate, farther = open). Give multiple emotional takes — the producer will choose. Stay hydrated — studio air is dry. Communicate with the producer about the feeling you want.</div>
-      <div class="scenario-dont"><strong>DON'T:</strong> Perform like it's a concert — studio singing is more conversational. Don't over-sing — subtlety is powerful in a mix. Don't forget to breathe quietly — the mic hears everything.</div>
-    </div>
-    
-    <div class="scenario-card">
-      <div class="scenario-tag">Scenario 4</div>
-      <h4>🎤 Social Media — Phone Camera, Short Format</h4>
-      <p>You're recording a 15-60 second clip on your phone for Instagram, TikTok, or YouTube Shorts.</p>
-      <div class="scenario-do"><strong>DO:</strong> Start with the hook — the first 3 seconds determine if they scroll or stay. Use natural light facing you. Sing to the camera like it's a person. Keep it simple — one emotion, one moment. Add captions — most people watch without sound.</div>
-      <div class="scenario-dont"><strong>DON'T:</strong> Start with the intro — they'll scroll past. Don't use heavy reverb or effects — it sounds muddy on phone speakers. Don't try to show off — authenticity beats technique on social media.</div>
-    </div>
-    
-    <div class="scenario-card">
-      <div class="scenario-tag">Scenario 5</div>
-      <h4>🎤 Small Group / Living Room — Intimate Setting</h4>
-      <p>Singing for 5-20 people in a small space. No amplification. Close proximity.</p>
-      <div class="scenario-do"><strong>DO:</strong> This is where soft singing shines. Use your pp and p dynamics — make them lean in. Make eye contact with each person. Let vulnerability show — small rooms amplify emotion. Use space — pauses are powerful when people are close enough to see your face.</div>
-      <div class="scenario-dont"><strong>DON'T:</strong> Over-project — it feels aggressive in a small room. Don't hide behind "performance" — intimacy requires authenticity. Don't rush — small rooms reward patience.</div>
-    </div>
-    
-    <div class="content-box key">
-      <p><strong>The universal truth:</strong> Across ALL scenarios, the audience connects with VULNERABILITY, not perfection. A slightly cracked note delivered with genuine emotion will always beat a technically perfect performance delivered with a wall. Let them see you.</p>
-    </div>
-    
+    <h2>Lesson 5.4: Stage Presence and Body Language</h2>
+    <p>Your body speaks before your voice does. How you stand, move, and use your face determines whether people trust you, connect with you, or tune out.</p>
+    <h3>The Confidence Posture</h3>
+    <ul>
+      <li>Feet shoulder-width apart, weight even</li>
+      <li>Shoulders down and back — not tense, not slouched</li>
+      <li>Chin parallel to the floor</li>
+      <li>Hands relaxed at your sides or naturally gesturing — not in pockets, not crossed</li>
+    </ul>
+    <h3>Eye Contact</h3>
+    <p>In a large venue, look at sections of the audience — not individuals. In a small group, make eye contact with specific people. On camera, look at the lens — not the screen.</p>
+    <h3>Facial Expression</h3>
+    <p>Your face should reflect what you're singing. If you're singing about joy, your face should show it. If you're singing about pain, let it show. <strong>This isn't acting — it's honesty.</strong></p>
+    <div class="content-box tip"><p><strong>Exercise:</strong> Sing a song in front of a mirror. Watch your face. Does it match the emotion? If not, exaggerate until it does. Then pull back 20%. That's your performance face.</p></div>
     <div class="task" id="task-5-4">
       <div class="task-label">Task 5.4</div>
-      <p>Choose one song. Perform it (even just to yourself) in 3 different "scenarios" — imagine you're in a worship setting, on a stage, and in a living room. How does your dynamics, energy, and phrasing change? Write down 3 differences for each scenario.</p>
+      <p>Record yourself singing a song on video (phone is fine). Watch it back without sound — just watch your body language. Write down 3 things you'd change. Then re-record with those changes.</p>
       <button class="task-btn" id="taskBtn-5-4" onclick="completeTask('5-4')">Mark as Done ✓</button>
     </div>
   </div>
 
-  <!-- LESSON 5.5: MICROPHONE TECHNIQUE -->
+  <!-- LESSON 5.5 -->
   <div class="content" id="lesson-5-5" style="display:none">
     <h2>Lesson 5.5: Microphone Technique</h2>
-    
-    <p>The microphone is an instrument. How you use it changes everything about your sound.</p>
-    
+    <p>The microphone is an instrument. How you use it determines whether you sound professional or amateur.</p>
     <h3>Distance Control</h3>
     <ul>
-      <li><strong>Close (2-5 cm):</strong> Intimate, warm, bass-heavy (proximity effect). Use for soft, emotional moments.</li>
-      <li><strong>Medium (10-20 cm):</strong> Natural, balanced. Your default position for most singing.</li>
-      <li><strong>Far (30+ cm):</strong> Room sound, open, less direct. Use for loud, powerful moments.</li>
+      <li><strong>Close (5-10cm):</strong> Intimate, warm, bass-heavy. Good for soft singing, studio</li>
+      <li><strong>Medium (15-20cm):</strong> Balanced, natural. Good for most singing</li>
+      <li><strong>Far (30cm+):</strong> Room sound, less bass. Good for loud singing, live</li>
     </ul>
-    
-    <h3>The "Pull Back" Technique</h3>
-    <p>When you belt, pull the mic away slightly. When you go soft, bring it closer. This creates natural dynamics without you having to adjust your voice as much. Professional singers do this instinctively.</p>
-    
-    <h3>Handling Noise</h3>
+    <h3>The Proximity Effect</h3>
+    <p>When you get close to a mic, the bass frequencies increase. This is why singers "eat the mic" for intimate moments. But if you're too close, you get plosives (popping on "p" and "b" sounds) and sibilance (harsh "s" sounds).</p>
+    <h3>Handling the Mic</h3>
     <ul>
-      <li><strong>Plosives (P, B sounds):</strong> Hit the mic and create a pop. Angle the mic slightly off-axis (not directly in front of your mouth) to reduce this.</li>
-      <li><strong>Sibilance (S, SH sounds):</strong> Can sound harsh. Pull back slightly on sibilant-heavy phrases.</li>
-      <li><strong>Breath noise:</strong> Turn your head slightly to the side when breathing into the mic.</li>
+      <li>Hold the mic at a slight angle — not directly in front of your mouth</li>
+      <li>Move the mic away when you belt — bring it close when you go soft</li>
+      <li>Don't cup the top of the mic — it causes feedback</li>
+      <li>Test your levels before you start — don't blow out the speakers</li>
     </ul>
-    
-    <div class="content-box tip">
-      <p><strong>For worship singers:</strong> If you're holding a handheld mic, don't grip it at the head (creates handling noise). Hold it mid-shaft. Keep it at chin level, not mouth level — this reduces plosives and gives a more natural sound.</p>
-    </div>
-  
     <div class="task" id="task-5-5">
-      <div class="task-label">Task 5-5</div>
+      <div class="task-label">Task 5.5</div>
       <p>Record yourself singing the same phrase at 3 distances from your phone/mic: close (5cm), medium (15cm), far (30cm). Listen back — which sounds best?</p>
       <button class="task-btn" id="taskBtn-5-5" onclick="completeTask('5-5')">Mark as Done ✓</button>
     </div>
-</div>
+  </div>
 
-  <!-- LESSON 5.6: PERFORMANCE ANXIETY -->
+  <!-- LESSON 5.6 -->
   <div class="content" id="lesson-5-6" style="display:none">
     <h2>Lesson 5.6: Managing Performance Anxiety</h2>
-    
-    <p>Stage fright is normal. Even the greatest singers experience it. The goal isn't to eliminate nerves — it's to <strong>channel them into energy</strong>.</p>
-    
+    <p>Every performer gets nervous. The difference between amateurs and professionals isn't the absence of fear — it's the ability to perform <strong>despite</strong> the fear.</p>
     <h3>Why Anxiety Happens</h3>
-    <p>Your brain perceives performance as a threat. It triggers fight-or-flight: racing heart, shaky hands, dry mouth, tight throat. This is biology, not weakness.</p>
-    
-    <h3>The NYVC Anxiety Protocol</h3>
+    <p>Your brain perceives performance as a threat. Adrenaline floods your body: heart races, hands shake, mouth goes dry, breath gets shallow. This is the fight-or-flight response — and it's designed for running from lions, not singing on stage.</p>
+    <h3>The Pre-Performance Routine</h3>
     <ol>
-      <li><strong>Reframe:</strong> "I'm nervous" → "I'm excited." The physical sensations are identical. Your brain just labels them differently.</li>
-      <li><strong>Breathe:</strong> 4 counts in, hold 4, 4 counts out, hold 4. Do this 3 times before performing. It activates the parasympathetic nervous system.</li>
-      <li><strong>Ground:</strong> Feel your feet on the floor. Press them down. This brings you out of your head and into your body.</li>
-      <li><strong>Focus outward:</strong> Anxiety is inward-focused ("How do I sound? How do I look?"). Shift focus to the audience — "I'm giving them something." Service over self.</li>
-      <li><strong>Pre-performance ritual:</strong> Develop a consistent 2-minute routine before every performance. Same breathing, same warm-up, same mental cue. Consistency creates safety.</li>
+      <li><strong>Breath:</strong> 4 counts in, hold 4, out 4, hold 4. Repeat 4 times. This activates the parasympathetic nervous system.</li>
+      <li><strong>Body scan:</strong> Release tension in your jaw, shoulders, hands, and stomach. Shake them out.</li>
+      <li><strong>Visualization:</strong> Close your eyes. See yourself performing successfully. Hear the audience responding. Feel the confidence.</li>
+      <li><strong>Warm up:</strong> Lip trills, humming, gentle scales. Get the voice ready.</li>
+      <li><strong>Affirmation:</strong> "I am prepared. I am capable. I am here to serve."</li>
     </ol>
-    
-    <div class="content-box warning">
-      <p><strong>If you freeze on stage:</strong> Stop. Breathe. Look at one friendly face. Start again from the last phrase you remember. The audience wants you to succeed — they're on your side. Most people won't even notice a pause if you own it with confidence.</p>
-    </div>
-    
-    <!-- BANDLAB PRACTICAL -->
+    <div class="content-box key"><p><strong>NYVC truth:</strong> Nervous energy and excitement produce the same physical response. The difference is what you tell yourself. "I'm terrified" vs. "I'm excited" — same body, different story.</p></div>
     <div class="bandlab-box">
       <h4>🎹 BandLab Practical — Module 5</h4>
-      <p><strong>Assignment:</strong> Record the same song 3 ways — angry, joyful, heartbroken.</p>
+      <p><strong>Assignment:</strong> Record a full performance with dynamics and emotion.</p>
       <ol>
-        <li>Open BandLab → New Project → Voice/Mic</li>
-        <li>Choose a simple song you know well (e.g., "Amazing Grace" or "Way Maker")</li>
-        <li>Before each take, use the NYVC Emotional Access System (Lesson 5.1)</li>
-        <li>Take 1: Sing it as if you're angry — frustrated, crying out</li>
-        <li>Take 2: Sing it as if you're joyful — grateful, celebrating</li>
-        <li>Take 3: Sing it as if your heart is broken — vulnerable, raw</li>
-        <li>Share the project link and send to Coach Toby</li>
+        <li>Choose a song you know well</li>
+        <li>Plan your dynamics: where will you be soft? Where will you build? Where's the climax?</li>
+        <li>Record your vocals in BandLab</li>
+        <li>Add reverb and EQ to taste</li>
+        <li>Share the link and send to Coach Toby</li>
       </ol>
       <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Submit as:</strong> [Module 5] BandLab Practical - [Your Name]</p>
     </div>
-    
     <div class="task" id="task-5-6">
       <div class="task-label">Task 5.6</div>
-      <p>Complete the BandLab practical above. Also: Write down your personal pre-performance ritual (2-minute routine you'll use before every performance). Practice it at least 3 times this week.</p>
+      <p>Complete the BandLab practical. Also: Write your personal pre-performance routine (5 steps minimum). Practice it before your next singing session.</p>
       <button class="task-btn" id="taskBtn-5-6" onclick="completeTask('5-6')">Mark as Done ✓</button>
     </div>
   </div>
@@ -416,267 +324,44 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
   <!-- QUIZ -->
   <div class="quiz-section" id="quiz-5" style="display:none">
     <div class="section-title" style="margin-bottom:16px">Module 5 Quiz</div>
-    
-    <div class="q-card" id="q5-1">
-      <div class="q-num">Question 1 of 5</div>
-      <div class="q-text">What is the most important dynamic tool in performance?</div>
-      <div class="q-options">
-        <button class="q-opt" onclick="selectOpt(this, 'q5-1')">Singing as loudly as possible</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-1')">The crescendo — a gradual increase in volume that creates anticipation</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-1')">Keeping the same volume throughout</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-1')">Singing softly the entire time</button>
-      </div>
-    </div>
-    
-    <div class="q-card" id="q5-2">
-      <div class="q-num">Question 2 of 5</div>
-      <div class="q-text">What does the NYVC Emotional Access System start with?</div>
-      <div class="q-options">
-        <button class="q-opt" onclick="selectOpt(this, 'q5-2')">Warming up your voice</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-2')">Choosing a specific emotion</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-2')">Picking a song</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-2')">Recording yourself</button>
-      </div>
-    </div>
-    
-    <div class="q-card" id="q5-3">
-      <div class="q-num">Question 3 of 5</div>
-      <div class="q-text">When should you pull the mic away from your mouth?</div>
-      <div class="q-options">
-        <button class="q-opt" onclick="selectOpt(this, 'q5-3')">When singing softly</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-3')">When you're about to belt or sing loudly</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-3')">Between songs only</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-3')">Never — keep it at the same distance</button>
-      </div>
-    </div>
-    
-    <div class="q-card" id="q5-4">
-      <div class="q-num">Question 4 of 5</div>
-      <div class="q-text">What's the best way to manage performance anxiety?</div>
-      <div class="q-options">
-        <button class="q-opt" onclick="selectOpt(this, 'q5-4')">Avoid performing until the anxiety goes away</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-4')">Reframe nerves as excitement, breathe, ground yourself, and focus outward</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-4')">Sing louder to overpower the fear</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-4')">Memorize everything so you don't have to think</button>
-      </div>
-    </div>
-    
-    <div class="q-card" id="q5-5">
-      <div class="q-num">Question 5 of 5</div>
-      <div class="q-text">What connects audiences across ALL performance scenarios?</div>
-      <div class="q-options">
-        <button class="q-opt" onclick="selectOpt(this, 'q5-5')">Technical perfection</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-5')">Singing the most popular songs</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-5')">Vulnerability — letting them see the real you</button>
-        <button class="q-opt" onclick="selectOpt(this, 'q5-5')">Having the loudest voice in the room</button>
-      </div>
-    </div>
-    
+    <div class="q-card" id="q5-1"><div class="q-num">Question 1 of 5</div><div class="q-text">What is the Emotional Access System for singers who feel numb?</div><div class="q-options"><button class="q-opt" onclick="selectOpt(this,'q5-1')">Wait until you feel the emotion naturally</button><button class="q-opt" onclick="selectOpt(this,'q5-1')">Use memory recall, physical anchoring, sensory imagination, and text analysis</button><button class="q-opt" onclick="selectOpt(this,'q5-1')">Only sing songs that make you cry</button><button class="q-opt" onclick="selectOpt(this,'q5-1')">Take acting lessons first</button></div></div>
+    <div class="q-card" id="q5-2"><div class="q-num">Question 2 of 5</div><div class="q-text">Why are dynamics important in performance?</div><div class="q-options"><button class="q-opt" onclick="selectOpt(this,'q5-2')">They make you sound louder</button><button class="q-opt" onclick="selectOpt(this,'q5-2')">They create contrast, which creates interest and connection</button><button class="q-opt" onclick="selectOpt(this,'q5-2')">They help you stay in tune</button><button class="q-opt" onclick="selectOpt(this,'q5-2')">They're only important for classical music</button></div></div>
+    <div class="q-card" id="q5-3"><div class="q-num">Question 3 of 5</div><div class="q-text">What's the most important difference between worship leading and stage performing?</div><div class="q-options"><button class="q-opt" onclick="selectOpt(this,'q5-3')">Worship requires a microphone, stage doesn't</button><button class="q-opt" onclick="selectOpt(this,'q5-3')">Worship is about leading people to God; stage is about entertaining — different goals, different approaches</button><button class="q-opt" onclick="selectOpt(this,'q5-3')">There's no difference</button><button class="q-opt" onclick="selectOpt(this,'q5-3')">Stage requires more technique</button></div></div>
+    <div class="q-card" id="q5-4"><div class="q-num">Question 4 of 5</div><div class="q-text">What is the proximity effect with microphones?</div><div class="q-options"><button class="q-opt" onclick="selectOpt(this,'q5-4')">The closer you are, the more treble you get</button><button class="q-opt" onclick="selectOpt(this,'q5-4')">The closer you are, the more bass frequencies increase</button><button class="q-opt" onclick="selectOpt(this,'q5-4')">The farther you are, the louder you sound</button><button class="q-opt" onclick="selectOpt(this,'q5-4')">Distance doesn't affect microphone sound</button></div></div>
+    <div class="q-card" id="q5-5"><div class="q-num">Question 5 of 5</div><div class="q-text">How can you manage performance anxiety?</div><div class="q-options"><button class="q-opt" onclick="selectOpt(this,'q5-5')">Avoid performing until the anxiety goes away</button><button class="q-opt" onclick="selectOpt(this,'q5-5')">Use a pre-performance routine: breath work, body scan, visualization, warm-up, and positive self-talk</button><button class="q-opt" onclick="selectOpt(this,'q5-5')">Drink something alcoholic to calm your nerves</button><button class="q-opt" onclick="selectOpt(this,'q5-5')">Only perform when you feel completely ready</button></div></div>
     <button class="q-submit" id="quizSubmit" onclick="submitQuiz()" disabled>Submit Answers</button>
-    
-    <div class="q-result" id="quizResult" style="display:none">
-      <div class="q-score" id="quizScore">0%</div>
-      <h3 id="quizTitle">Quiz Complete</h3>
-      <p id="quizMsg">Review the lessons and try again.</p>
-      <button class="q-retry" onclick="retryQuiz()">Try Again</button>
-    </div>
+    <div class="q-result" id="quizResult" style="display:none"><div class="q-score" id="quizScore">0%</div><h3 id="quizTitle">Quiz Complete</h3><p id="quizMsg">Review the lessons and try again.</p><button class="q-retry" onclick="retryQuiz()">Try Again</button></div>
   </div>
 
-  <!-- COMPLETION -->
   <div class="complete" id="modComplete" style="display:none">
-    <div class="complete-icon">✓</div>
-    <h2>Module 5 Complete!</h2>
-    <p>You now know how to access emotion, command dynamics, read any room, and turn nerves into fuel. You're not just a singer — you're a communicator.</p>
-    <div class="complete-xp">+65 XP Earned</div>
-    <br>
-    <a href="module-6.html" class="complete-btn" style="font-size:1rem;padding:16px 36px">Continue to Module 6 →</a>
-    <a href="#" onclick="showLesson(1);document.getElementById('modComplete').style.display='none';window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:block;margin-top:12px;color:var(--muted);font-size:.8rem;text-decoration:underline">← Review lessons</a>
+    <div class="complete-icon">✓</div><h2>Module 5 Complete!</h2><p>You're not just a singer anymore. You're a communicator. You move people.</p>
+    <div class="complete-xp">+65 XP Earned</div><br>
+    <a href="module-6.html" class="complete-btn">Continue to Module 6 →</a>
+    <a class="review-link" href="#" onclick="showLesson(1);document.getElementById('modComplete').style.display='none';window.scrollTo({top:0,behavior:'smooth'});return false;">← Review lessons</a>
   </div>
 
-  <div class="footer">
-    Vocal Mastery Academy · Sessions with Toby · © 2026
-  </div>
-
+  <div class="footer">Vocal Mastery Academy · Sessions with Toby · © 2026</div>
 </div>
 
 <script>
-const MODULE = 5;
-const STORAGE_KEY = 'vma_student';
-const TERMS_KEY = 'vma_terms_agreed';
-const CORRECT_ANSWERS = {
-  'q5-1': 1, 'q5-2': 1, 'q5-3': 1, 'q5-4': 1, 'q5-5': 2
-};
-
-if (localStorage.getItem(TERMS_KEY) !== 'true') {
-  window.location.href = 'terms.html';
-}
-
-function getStudent() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
-}
-function setStudent(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
-
-const s = getStudent();
-if (!s) { window.location.href = 'academy.html'; }
-
-let currentLesson = 1;
-const totalLessons = 6;
-
-function showLesson(n) {
-  for (let i = 1; i <= totalLessons; i++) {
-    const el = document.getElementById('lesson-5-' + i);
-    if (el) el.style.display = i === n ? '' : 'none';
-  }
-  currentLesson = n;
-  window.scrollTo({top:0,behavior:'smooth'});
-  
-  if (window.VMA) {
-    const st = window.VMA.getStudent();
-    if (st) {
-      st.lessons = st.lessons || {};
-      st.lessons['5-' + n] = true;
-      window.VMA.setStudent(st);
-      window.VMA.awardXP(10, 'Completed Lesson 5.' + n);
-    }
-  }
-  updateProgress();
-}
-
-function completeTask(taskId) {
-  const btn = document.getElementById('taskBtn-' + taskId);
-  if (!btn) return;
-  btn.textContent = '✓ Submitted';
-  btn.className = 'task-btn done';
-  btn.onclick = null;
-  
-  if (window.VMA) {
-    window.VMA.awardXP(25, 'Completed Task ' + taskId);
-    window.VMA.updateStreak();
-    window.VMA.showNotification('✓ Task complete! +25 XP');
-  }
-  
-  const lessonNum = parseInt(taskId.split('-')[1]);
-  if (lessonNum < totalLessons) {
-    setTimeout(() => showLesson(lessonNum + 1), 800);
-  } else {
-    setTimeout(() => showQuiz(), 800);
-  }
-  updateProgress();
-}
-
-let quizAnswers = {};
-let quizSubmitted = false;
-
-function selectOpt(btn, qId) {
-  if (quizSubmitted) return;
-  const parent = btn.parentElement;
-  parent.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  quizAnswers[qId] = Array.from(parent.querySelectorAll('.q-opt')).indexOf(btn);
-  const allAnswered = Object.keys(CORRECT_ANSWERS).every(q => quizAnswers[q] !== undefined);
-  document.getElementById('quizSubmit').disabled = !allAnswered;
-}
-
-function submitQuiz() {
-  if (quizSubmitted) return;
-  quizSubmitted = true;
-  let correct = 0;
-  const total = Object.keys(CORRECT_ANSWERS).length;
-  
-  for (const [qId, correctIdx] of Object.entries(CORRECT_ANSWERS)) {
-    const opts = document.querySelectorAll('#' + qId + ' .q-opt');
-    const selected = quizAnswers[qId];
-    opts.forEach((opt, i) => {
-      if (i === correctIdx) opt.classList.add('correct');
-      if (i === selected && i !== correctIdx) opt.classList.add('wrong');
-    });
-    if (selected === correctIdx) correct++;
-  }
-  
-  const pct = Math.round((correct / total) * 100);
-  document.getElementById('quizScore').textContent = pct + '%';
-  
-  if (pct >= 80) {
-    document.getElementById('quizTitle').textContent = '🎉 Passed!';
-    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You know how to move people!';
-    document.getElementById('quizSubmit').style.display = 'none';
-    
-    if (window.VMA) {
-      window.VMA.awardXP(15, 'Passed Module 5 Quiz (' + pct + '%)');
-      const st = window.VMA.getStudent();
-      if (st) {
-        st.quizzes = st.quizzes || {};
-        st.quizzes['5'] = pct;
-        st.modules[4] = 100;
-        window.VMA.setStudent(st);
-        window.VMA.awardBadge('emotion');
-        window.VMA.showNotification('🏆 Module 5 Complete! +15 XP + Emotion Badge');
-      }
-    }
-    setTimeout(() => {
-      document.getElementById('quiz-5').style.display = 'none';
-      document.getElementById('modComplete').style.display = '';
-      document.getElementById('modComplete').scrollIntoView({behavior:'smooth',block:'center'});
-    }, 2000);
-  } else {
-    document.getElementById('quizTitle').textContent = 'Not quite there';
-    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You need 80% to pass. Review and try again!';
-    document.getElementById('quizSubmit').style.display = 'none';
-    document.getElementById('quizResult').style.display = '';
-  }
-}
-
-function retryQuiz() {
-  quizAnswers = {};
-  quizSubmitted = false;
-  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected','correct','wrong'));
-  document.getElementById('quizSubmit').disabled = true;
-  document.getElementById('quizSubmit').style.display = '';
-  document.getElementById('quizResult').style.display = 'none';
-  document.getElementById('quizScore').textContent = '0%';
-  document.getElementById('quizTitle').textContent = 'Quiz Complete';
-  document.getElementById('quizMsg').textContent = 'Review the lessons and try again.';
-}
-
-function showQuiz() {
-  document.getElementById('quiz-5').style.display = '';
-  document.getElementById('modComplete').style.display = 'none';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function updateProgress() {
-  const st = getStudent();
-  if (!st) return;
-  let lessonsDone = 0;
-  for (let i = 1; i <= totalLessons; i++) {
-    if (st.lessons && st.lessons['5-' + i]) lessonsDone++;
-  }
-  const tasksDone = document.querySelectorAll('.task-btn.done').length;
-  const quizPassed = st.quizzes && st.quizzes['5'] >= 80;
-  const pct = Math.round(((lessonsDone + tasksDone + (quizPassed ? 2 : 0)) / (totalLessons + totalLessons + 2)) * 100);
-  document.getElementById('modProgress').style.width = pct + '%';
-}
-
-let startLesson = 1;
-for (let i = 1; i <= totalLessons; i++) {
-  if (!s.lessons || !s.lessons['5-' + i]) { startLesson = i; break; }
-  if (i === totalLessons) startLesson = totalLessons;
-}
-
-if (s.quizzes && s.quizzes['5'] >= 80) {
-  document.getElementById('modComplete').style.display = '';
-      document.getElementById('modComplete').scrollIntoView({behavior:'smooth',block:'center'});
-} else {
-  showLesson(startLesson);
-}
-updateProgress();
-document.getElementById('navAvatar').textContent = (s.name || 'S').charAt(0).toUpperCase();
-
-if (!window.VMA) window.VMA = {};
-window.VMA.getStudent = getStudent;
-window.VMA.setStudent = setStudent;
+(function(){
+  'use strict';
+  var MOD=5, TOTAL=6;
+  var CORRECT={'q5-1':1,'q5-2':1,'q5-3':1,'q5-4':1,'q5-5':1};
+  var s=VMA.getStudent();if(!s){window.location.href='academy.html';return;}
+  var cur=1;
+  window.showLesson=function(n){for(var i=1;i<=TOTAL;i++){var e=document.getElementById('lesson-'+MOD+'-'+i);if(e)e.style.display=i===n?'':'none';}cur=n;window.scrollTo({top:0,behavior:'smooth'});var st=VMA.getStudent();if(st){st.lessons=st.lessons||{};st.lessons[MOD+'-'+n]=true;VMA.setStudent(st);VMA.awardXP(10,'Lesson '+MOD+'.'+n);}upd();};
+  window.completeTask=function(tid){var b=document.getElementById('taskBtn-'+tid);if(!b)return;b.textContent='✓ Submitted';b.className='task-btn done';b.onclick=null;VMA.awardXP(25,'Task '+tid);VMA.updateStreak();VMA.showNotification('✓ Task complete! +25 XP');var ln=parseInt(tid.split('-')[1]);if(ln<TOTAL){setTimeout(function(){showLesson(ln+1);},800);}else{setTimeout(function(){showQuiz();},800);}upd();};
+  var qa={},qs=false;
+  window.selectOpt=function(b,qid){if(qs)return;var p=b.parentElement,os=p.querySelectorAll('.q-opt');for(var i=0;i<os.length;i++)os[i].classList.remove('selected');b.classList.add('selected');qa[qid]=Array.from(os).indexOf(b);var all=true;for(var k in CORRECT){if(qa[k]===undefined){all=false;break;}}document.getElementById('quizSubmit').disabled=!all;};
+  window.submitQuiz=function(){if(qs)return;qs=true;var c=0,tq=Object.keys(CORRECT).length;for(var qid in CORRECT){var ci=CORRECT[qid],os=document.querySelectorAll('#'+qid+' .q-opt'),sel=qa[qid];for(var j=0;j<os.length;j++){if(j===ci)os[j].classList.add('correct');if(j===sel&&j!==ci)os[j].classList.add('wrong');}if(sel===ci)c++;}var pct=Math.round((c/tq)*100);document.getElementById('quizScore').textContent=pct+'%';if(pct>=80){document.getElementById('quizTitle').textContent='🎉 Passed!';document.getElementById('quizMsg').textContent='You scored '+c+'/'+tq+'. You move people!';document.getElementById('quizSubmit').style.display='none';VMA.awardXP(15,'Module '+MOD+' Quiz ('+pct+'%)');var st=VMA.getStudent();if(st){st.quizzes=st.quizzes||{};st.quizzes[MOD]=pct;st.modules[MOD-1]=100;VMA.setStudent(st);VMA.showNotification('🏆 Module '+MOD+' Complete! +15 XP');}setTimeout(function(){document.getElementById('quiz-'+MOD).style.display='none';document.getElementById('modComplete').style.display='';document.getElementById('modComplete').scrollIntoView({behavior:'smooth',block:'center'});},2000);}else{document.getElementById('quizTitle').textContent='Not quite there';document.getElementById('quizMsg').textContent='You scored '+c+'/'+tq+'. You need 80% to pass. Review and try again!';document.getElementById('quizSubmit').style.display='none';document.getElementById('quizResult').style.display='';}};
+  window.retryQuiz=function(){qa={};qs=false;var os=document.querySelectorAll('.q-opt');for(var i=0;i<os.length;i++)os[i].classList.remove('selected','correct','wrong');document.getElementById('quizSubmit').disabled=true;document.getElementById('quizSubmit').style.display='';document.getElementById('quizResult').style.display='none';document.getElementById('quizScore').textContent='0%';document.getElementById('quizTitle').textContent='Quiz Complete';document.getElementById('quizMsg').textContent='Review the lessons and try again.';};
+  window.showQuiz=function(){document.getElementById('quiz-'+MOD).style.display='';document.getElementById('modComplete').style.display='none';window.scrollTo({top:0,behavior:'smooth'});};
+  function upd(){var st=VMA.getStudent();if(!st)return;var ld=0;for(var i=1;i<=TOTAL;i++){if(st.lessons&&st.lessons[MOD+'-'+i])ld++;}var td=document.querySelectorAll('.task-btn.done').length;var qp=st.quizzes&&st.quizzes[MOD]>=80;var p=Math.round(((ld+td+(qp?2:0))/(TOTAL+TOTAL+2))*100);document.getElementById('modProgress').style.width=p+'%';}
+  var sl=1;for(var i=1;i<=TOTAL;i++){if(!s.lessons||!s.lessons[MOD+'-'+i]){sl=i;break;}if(i===TOTAL)sl=TOTAL;}
+  if(s.quizzes&&s.quizzes[MOD]>=80){document.getElementById('modComplete').style.display='';document.getElementById('modComplete').scrollIntoView({behavior:'smooth',block:'center'});}else{showLesson(sl);}
+  upd();document.getElementById('navAvatar').textContent=(s.name||'S').charAt(0).toUpperCase();
+})();
 </script>
 
 </body>
