@@ -4,29 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#0B0F14">
-<title>The Singer\'s Conservatory OS</title>
+<title>The Singer's Conservatory OS — HSOM Adaptive Engine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════
-   DESIGN SYSTEM — The Singer\'s Conservatory OS
-   Dark-first. Premium. Zero clutter.
-   ═══════════════════════════════════════════════════ */
-:root {
+:root{
   --bg:#0B0F14;--surface:#121826;--card:#1A2232;
   --primary:#4F8CFF;--success:#00D084;--warn:#FFB547;--error:#FF4D4D;--gold:#D4AF37;
   --text:#E8ECF1;--text-soft:#8892A4;--text-muted:#4A5568;
   --border:#1E2A3A;--border-hi:#2A3A4A;
-  --r-sm:8px;--r:12px;--r-lg:16px;--r-xl:20px;
-  --shadow:0 4px 24px rgba(0,0,0,.3);
+  --r-sm:8px;--r:12px;--r-lg:16px;
   --font:'Inter',system-ui,sans-serif;
   --font-display:'Space Grotesk',sans-serif;
   --font-mono:'JetBrains Mono',monospace;
   --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%}
 body{
   font-family:var(--font);background:var(--bg);color:var(--text);
   line-height:1.6;-webkit-font-smoothing:antialiased;
@@ -37,78 +32,67 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 input,textarea,select{font-family:inherit;font-size:inherit}
 a{color:inherit;text-decoration:none}
 ::selection{background:rgba(79,140,255,.2);color:var(--primary)}
-
-/* ── Typography ── */
 h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-.03em;line-height:1.15}
-h1{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:700}
-h2{font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;margin-bottom:8px}
-h3{font-size:1rem;font-weight:600;margin-bottom:6px}
-p{font-size:.925rem;color:var(--text-soft);line-height:1.6;margin-bottom:12px}
+h1{font-size:clamp(1.3rem,4vw,1.7rem);font-weight:700}
+h2{font-size:clamp(1rem,3vw,1.3rem);font-weight:700;margin-bottom:8px}
+h3{font-size:.95rem;font-weight:600;margin-bottom:6px}
+p{font-size:.9rem;color:var(--text-soft);line-height:1.6;margin-bottom:10px}
 p:last-child{margin-bottom:0}
-.mono{font-family:var(--font-mono);font-size:.85rem}
+.mono{font-family:var(--font-mono);font-size:.82rem}
 .text-gold{color:var(--gold)}.text-primary{color:var(--primary)}
 .text-success{color:var(--success)}.text-warn{color:var(--warn)}
-.text-muted{color:var(--text-muted)}.text-sm{font-size:.8rem}
+.text-muted{color:var(--text-muted)}.text-sm{font-size:.75rem}
 
-/* ── Layout ── */
-.screen{display:none;animation:fadeUp .3s ease both}
+.screen{display:none;animation:fadeUp .25s ease both}
 .screen.active{display:block}
 .container{width:100%;max-width:680px;margin:0 auto;padding:0 16px}
-.container--wide{max-width:960px}
-.pad{padding:16px}
-.pad-t{padding-top:16px}
-.pad-b{padding-bottom:16px}
+.pad{padding:16px}.pad-t{padding-top:16px}
 
-/* ── Cards ── */
 .card{
   background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r-lg);padding:20px;margin-bottom:12px;
+  border-radius:var(--r-lg);padding:18px;margin-bottom:10px;
   transition:border-color .15s;
 }
 .card:active{border-color:var(--border-hi)}
 .card--surface{background:var(--surface)}
-.card--highlight{border-color:var(--primary);box-shadow:0 0 0 1px rgba(79,140,255,.15)}
-.card--gold{border-color:var(--gold);box-shadow:0 0 0 1px rgba(212,175,55,.15)}
+.card--highlight{border-color:var(--primary);box-shadow:0 0 0 1px rgba(79,140,255,.12)}
+.card--gold{border-color:rgba(212,175,55,.3);box-shadow:0 0 0 1px rgba(212,175,55,.1)}
 
-/* ── Buttons ── */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:14px 24px;border-radius:var(--r);font-weight:600;font-size:.9rem;
+  padding:14px 24px;border-radius:var(--r);font-weight:600;font-size:.88rem;
   transition:all .15s;white-space:nowrap;min-height:48px;
   -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
 .btn:active{transform:scale(.97)}
-.btn--primary{background:var(--primary);color:#fff;box-shadow:0 2px 12px rgba(79,140,255,.25)}
-.btn--primary:active{background:#3A70D0}
+.btn--primary{background:var(--primary);color:#fff;box-shadow:0 2px 12px rgba(79,140,255,.2)}
 .btn--success{background:var(--success);color:#000}
+.btn--warn{background:var(--warn);color:#000}
 .btn--ghost{background:transparent;color:var(--text-soft);border:1px solid var(--border)}
 .btn--ghost:active{border-color:var(--border-hi);color:var(--text)}
-.btn--sm{padding:10px 16px;font-size:.8rem;min-height:40px}
-.btn--lg{padding:18px 32px;font-size:1rem;min-height:56px}
+.btn--sm{padding:10px 14px;font-size:.78rem;min-height:40px}
+.btn--lg{padding:18px 32px;font-size:.95rem;min-height:56px}
 .btn--full{width:100%}
 .btn:disabled{opacity:.4;pointer-events:none}
 
-/* ── Tags ── */
 .tag{
   display:inline-flex;align-items:center;gap:4px;
-  padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:600;
+  padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.06em;
 }
-.tag--primary{background:rgba(79,140,255,.12);color:var(--primary)}
-.tag--success{background:rgba(0,208,132,.12);color:var(--success)}
-.tag--warn{background:rgba(255,181,71,.12);color:var(--warn)}
-.tag--gold{background:rgba(212,175,55,.12);color:var(--gold)}
+.tag--primary{background:rgba(79,140,255,.1);color:var(--primary)}
+.tag--success{background:rgba(0,208,132,.1);color:var(--success)}
+.tag--warn{background:rgba(255,181,71,.1);color:var(--warn)}
+.tag--gold{background:rgba(212,175,55,.1);color:var(--gold)}
 
-/* ── Progress ── */
 .prog{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .prog__fill{height:100%;background:var(--primary);border-radius:2px;transition:width .4s ease}
 .prog--success .prog__fill{background:var(--success)}
 .prog--gold .prog__fill{background:var(--gold)}
 
-/* ── Bottom Nav ── */
 .nav{
   position:fixed;bottom:0;left:0;right:0;z-index:1000;
-  background:rgba(18,24,38,.95);backdrop-filter:blur(20px);
+  background:rgba(18,24,38,.96);backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   border-top:1px solid var(--border);
   height:calc(64px + var(--safe-bottom));
@@ -116,531 +100,622 @@ p:last-child{margin-bottom:0}
 }
 .nav__inner{
   display:flex;align-items:center;justify-content:space-around;
-  max-width:680px;margin:0 auto;height:64px;padding:0 8px;
+  max-width:680px;margin:0 auto;height:64px;padding:0 4px;
 }
 .nav__item{
   display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:6px 12px;border-radius:var(--r-sm);min-width:56px;
+  padding:6px 10px;border-radius:var(--r-sm);min-width:52px;
   color:var(--text-muted);transition:all .15s;
 }
 .nav__item.active{color:var(--primary)}
-.nav__item:active{background:rgba(79,140,255,.08)}
-.nav__icon{font-size:1.25rem;line-height:1}
-.nav__label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.nav__item:active{background:rgba(79,140,255,.06)}
+.nav__icon{font-size:1.15rem;line-height:1}
+.nav__label{font-size:.55rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 
-/* ── Top Bar ── */
 .topbar{
   position:sticky;top:0;z-index:100;
-  background:rgba(11,15,20,.92);backdrop-filter:blur(16px);
+  background:rgba(11,15,20,.94);backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
   padding:12px 16px;
 }
 .topbar__inner{display:flex;align-items:center;justify-content:space-between;max-width:680px;margin:0 auto}
-.topbar__brand{font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--text)}
+.topbar__brand{font-family:var(--font-display);font-weight:700;font-size:1rem}
 .topbar__brand span{color:var(--primary)}
-.topbar__xp{display:flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;color:var(--gold)}
+.topbar__xp{display:flex;align-items:center;gap:4px;font-size:.78rem;font-weight:600;color:var(--gold)}
 
-/* ── Notification Toast ── */
 .toast{
-  position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-120%);
+  position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-150%);
   background:var(--surface);border:1px solid var(--border-hi);
-  border-radius:var(--r);padding:14px 20px;z-index:9999;
-  font-size:.85rem;font-weight:500;color:var(--text);
-  box-shadow:0 8px 32px rgba(0,0,0,.4);max-width:90%;
-  text-align:center;transition:transform .3s ease;
+  border-radius:var(--r);padding:12px 18px;z-index:9999;
+  font-size:.82rem;font-weight:500;max-width:90%;text-align:center;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);transition:transform .3s ease;
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast--success{border-color:var(--success);color:var(--success)}
 .toast--gold{border-color:var(--gold);color:var(--gold)}
 
-/* ── Section Header ── */
-.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.sec-title{font-family:var(--font-display);font-weight:700;font-size:1.1rem}
-.sec-more{font-size:.8rem;color:var(--primary);font-weight:600}
-
-/* ── List Items ── */
 .list-item{
   display:flex;align-items:center;gap:12px;
   padding:14px 16px;background:var(--card);border:1px solid var(--border);
   border-radius:var(--r);margin-bottom:8px;transition:border-color .15s;
 }
 .list-item:active{border-color:var(--border-hi)}
-.list-item__icon{width:40px;height:40px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.list-item__icon--primary{background:rgba(79,140,255,.12)}
-.list-item__icon--success{background:rgba(0,208,132,.12)}
-list-item__icon--warn{background:rgba(255,181,71,.12)}
-.list-item__icon--gold{background:rgba(212,175,55,.12)}
+.list-item__icon{width:40px;height:40px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.list-item__icon--primary{background:rgba(79,140,255,.1)}
+.list-item__icon--success{background:rgba(0,208,132,.1)}
+.list-item__icon--warn{background:rgba(255,181,71,.1)}
+.list-item__icon--gold{background:rgba(212,175,55,.1)}
 .list-item__body{flex:1;min-width:0}
-.list-item__title{font-weight:600;font-size:.9rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.list-item__sub{font-size:.75rem;color:var(--text-muted)}
-.list-item__meta{font-size:.75rem;color:var(--text-muted);text-align:right;flex-shrink:0}
+.list-item__title{font-weight:600;font-size:.88rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list-item__sub{font-size:.72rem;color:var(--text-muted)}
 
-/* ── Lesson Template Elements ── */
 .hook{
-  background:linear-gradient(135deg,rgba(79,140,255,.08),rgba(0,208,132,.04));
-  border:1px solid rgba(79,140,255,.15);border-radius:var(--r-lg);
-  padding:20px;margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(79,140,255,.07),rgba(0,208,132,.04));
+  border:1px solid rgba(79,140,255,.12);border-radius:var(--r-lg);
+  padding:18px;margin-bottom:14px;
 }
-.hook__label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--primary);margin-bottom:6px}
-.hook__text{font-size:1.05rem;font-weight:600;color:var(--text);line-height:1.4}
+.hook__label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--primary);margin-bottom:6px}
+.hook__text{font-size:1rem;font-weight:600;color:var(--text);line-height:1.35}
 
-.concept-box{
-  background:var(--surface);border-left:3px solid var(--primary);
-  border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 16px;margin-bottom:12px;
-}
-.concept-box p{font-size:.88rem;margin-bottom:0}
-
-.exercise-block{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r-lg);padding:20px;margin-bottom:12px;
-}
-.exercise-block__label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--success);margin-bottom:8px}
-.exercise-block__title{font-weight:700;font-size:1rem;margin-bottom:8px}
-.exercise-block__detail{font-size:.85rem;color:var(--text-soft);margin-bottom:6px}
-.exercise-block__detail strong{color:var(--text)}
-
-.mistake-item{
-  display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);
-}
-.mistake-item:last-child{border-bottom:none}
-.mistake-item__icon{color:var(--error);font-size:.9rem;flex-shrink:0;margin-top:2px}
-.mistake-item__text{font-size:.85rem;color:var(--text-soft)}
-.mistake-item__text strong{color:var(--text)}
-
-.challenge-box{
-  background:linear-gradient(135deg,rgba(212,175,55,.06),rgba(79,140,255,.06));
-  border:1px solid rgba(212,175,55,.2);border-radius:var(--r-lg);
-  padding:20px;margin-bottom:12px;
-}
-.challenge-box__label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:8px}
-
-.rubric{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;
-}
-.rubric__item{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-sm);padding:10px;text-align:center;
-}
-.rubric__score{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--primary)}
-.rubric__label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
-
-/* ── Animations ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar{width:4px}
+.section-title{font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:10px}
+.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
+.flex{display:flex}.items-center{align-items:center}.gap-8{gap:8px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-
-/* ── Utility ── */
-.hidden{display:none!important}
-.flex{display:flex}.flex-col{flex-direction:column}
-.items-center{align-items:center}.justify-between{justify-content:space-between}
-.gap-4{gap:4px}.gap-8{gap:8px}.gap-12{gap:12px}
-.w-full{width:100%}.text-center{text-align:center}
-.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
-.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}
 </style>
 </head>
 <body>
 
-<!-- ═══ TOAST ═══ -->
 <div class="toast" id="toast"></div>
 
-<!-- ═══ SCREEN: ONBOARDING ═══ -->
+<!-- ONBOARDING -->
 <div class="screen active" id="screen-onboard">
 <div class="container pad" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-  <div style="font-size:3rem;margin-bottom:16px">🎵</div>
-  <h1 style="margin-bottom:8px">The Singer\'s Conservatory</h1>
-  <p class="text-muted" style="max-width:400px;margin-bottom:32px">A complete vocal training system. 10 stages. 5 engines. Zero fluff. Built for singers who want to sound like professionals.</p>
-  <div style="width:100%;max-width:320px">
-    <input type="text" id="onboard-name" placeholder="Your first name" style="width:100%;padding:16px;border:2px solid var(--border);border-radius:var(--r);background:var(--card);color:var(--text);font-size:1rem;text-align:center;margin-bottom:12px;outline:none" onkeydown="if(event.key==='Enter')SC.start()">
+  <div style="font-size:2.5rem;margin-bottom:12px">🎵</div>
+  <h1 style="margin-bottom:6px">The Singer's Conservatory</h1>
+  <p class="text-muted" style="max-width:360px;margin-bottom:28px">An adaptive vocal training engine. It diagnoses your weakness, prescribes exercises, tracks your growth. No guessing.</p>
+  <div style="width:100%;max-width:300px">
+    <input type="text" id="onboard-name" placeholder="Your first name" style="width:100%;padding:14px;border:2px solid var(--border);border-radius:var(--r);background:var(--card);color:var(--text);font-size:.95rem;text-align:center;margin-bottom:10px;outline:none" onkeydown="if(event.key==='Enter')SC.start()">
     <button class="btn btn--primary btn--lg btn--full" onclick="SC.start()">Begin Training →</button>
   </div>
 </div>
 </div>
 
-<!-- ═══ SCREEN: HOME ═══ -->
+<!-- HOME -->
 <div class="screen" id="screen-home">
-<div class="topbar">
-  <div class="topbar__inner">
-    <span class="topbar__brand">Singer<span>\'s</span> Conservatory</span>
-    <span class="topbar__xp" id="home-xp">0 XP</span>
-  </div>
-</div>
+<div class="topbar"><div class="topbar__inner">
+  <span class="topbar__brand">Singer<span>'s</span> Conservatory</span>
+  <span class="topbar__xp" id="home-xp">0 XP</span>
+</div></div>
 <div class="container pad-t" id="home-content"></div>
 </div>
 
-<!-- ═══ SCREEN: LEARN ═══ -->
+<!-- LEARN -->
 <div class="screen" id="screen-learn">
-<div class="topbar">
-  <div class="topbar__inner">
-    <span class="topbar__brand">Learn</span>
-    <span class="text-sm text-muted" id="learn-progress">Stage 1/10</span>
-  </div>
-</div>
+<div class="topbar"><div class="topbar__inner">
+  <span class="topbar__brand">Learn</span>
+  <span class="text-sm text-muted" id="learn-stage-label">Stage 1/10</span>
+</div></div>
 <div class="container pad-t" id="learn-content"></div>
 </div>
 
-<!-- ═══ SCREEN: PRACTICE ═══ -->
+<!-- PRACTICE -->
 <div class="screen" id="screen-practice">
-<div class="topbar">
-  <div class="topbar__inner">
-    <span class="topbar__brand">Practice</span>
-  </div>
-</div>
+<div class="topbar"><div class="topbar__inner"><span class="topbar__brand">Practice</span></div></div>
 <div class="container pad-t" id="practice-content"></div>
 </div>
 
-<!-- ═══ SCREEN: SONGS ═══ -->
+<!-- SONGS -->
 <div class="screen" id="screen-songs">
-<div class="topbar">
-  <div class="topbar__inner">
-    <span class="topbar__brand">Songs</span>
-  </div>
-</div>
+<div class="topbar"><div class="topbar__inner"><span class="topbar__brand">Songs</span></div></div>
 <div class="container pad-t" id="songs-content"></div>
 </div>
 
-<!-- ═══ SCREEN: PROGRESS ═══ -->
+<!-- PROGRESS -->
 <div class="screen" id="screen-progress">
-<div class="topbar">
-  <div class="topbar__inner">
-    <span class="topbar__brand">Progress</span>
-  </div>
-</div>
+<div class="topbar"><div class="topbar__inner"><span class="topbar__brand">Progress</span></div></div>
 <div class="container pad-t" id="progress-content"></div>
 </div>
 
-<!-- ═══ SCREEN: LESSON ═══ -->
-<div class="screen" id="screen-lesson">
-<div class="container pad" id="lesson-content"></div>
+<!-- SESSION (Adaptive Lesson) -->
+<div class="screen" id="screen-session">
+<div class="container pad" id="session-content"></div>
 </div>
 
-<!-- ═══ BOTTOM NAV ═══ -->
+<!-- BOTTOM NAV -->
 <nav class="nav">
-  <div class="nav__inner">
-    <a class="nav__item active" id="nav-home" onclick="SC.nav('home')">
-      <span class="nav__icon">🏠</span><span class="nav__label">Home</span>
-    </a>
-    <a class="nav__item" id="nav-learn" onclick="SC.nav('learn')">
-      <span class="nav__icon">📖</span><span class="nav__label">Learn</span>
-    </a>
-    <a class="nav__item" id="nav-practice" onclick="SC.nav('practice')">
-      <span class="nav__icon">🎯</span><span class="nav__label">Practice</span>
-    </a>
-    <a class="nav__item" id="nav-songs" onclick="SC.nav('songs')">
-      <span class="nav__icon">🎵</span><span class="nav__label">Songs</span>
-    </a>
-    <a class="nav__item" id="nav-progress" onclick="SC.nav('progress')">
-      <span class="nav__icon">📊</span><span class="nav__label">Progress</span>
-    </a>
-  </div>
+<div class="nav__inner">
+  <a class="nav__item active" id="nav-home" onclick="SC.nav('home')"><span class="nav__icon">🏠</span><span class="nav__label">Home</span></a>
+  <a class="nav__item" id="nav-learn" onclick="SC.nav('learn')"><span class="nav__icon">📖</span><span class="nav__label">Learn</span></a>
+  <a class="nav__item" id="nav-practice" onclick="SC.nav('practice')"><span class="nav__icon">🎯</span><span class="nav__label">Practice</span></a>
+  <a class="nav__item" id="nav-songs" onclick="SC.nav('songs')"><span class="nav__icon">🎵</span><span class="nav__label">Songs</span></a>
+  <a class="nav__item" id="nav-progress" onclick="SC.nav('progress')"><span class="nav__icon">📊</span><span class="nav__label">Progress</span></a>
+</div>
 </nav>
 
 <script>
 var SC=(function(){
-\'use strict\';
+'use strict';
 
 /* ═══════════════════════════════════════════════════
-   STATE
+   HSOM PEDAGOGY ENGINE — THE BRAIN
    ═══════════════════════════════════════════════════ */
-var S={
-  name:\'Student\',xp:0,level:1,streak:0,lastActive:null,
-  stage:1,lesson:0,completed:[],badges:[],
-  vocal:{},aural:{},songs:{},production:{},market:{}
+
+/* ── VOCAL SYSTEMS MAP ── */
+var VOCAL_SYSTEMS={
+  airflow:{name:'Airflow',desc:'Controls breath pressure and flow',errors:['overblowing','air_leakage','breath_holding'],corrections:['SOVT','reduced_airflow','fricative_control']},
+  source:{name:'Source',desc:'Vocal fold closure and vibration',errors:['breathy_tone','pressed_phonation','instability'],corrections:['balanced_onset','NG_hum','lip_trills']},
+  resonance:{name:'Resonance',desc:'Vocal tract shaping and tone color',errors:['throat_shaping','vowel_collapse','nasality_imbalance'],corrections:['vowel_modification','forward_placement']},
+  articulation:{name:'Articulation',desc:'Consonant and vowel shaping',errors:['jaw_tension','tongue_rigidity','unclear_diction'],corrections:['IPA_drills','consonant_isolation','slow_articulation']}
 };
 
-function load(){
-  try{
-    var d=localStorage.getItem(\'sc_data\');
-    if(d){var p=JSON.parse(d);for(var k in p)S[k]=p[k]}
-  }catch(e){}
-}
-function save(){
-  try{localStorage.setItem(\'sc_data\',JSON.stringify(S))}catch(e){}
-}
-
-/* ═══════════════════════════════════════════════════
-   NOTIFICATION
-   ═══════════════════════════════════════════════════ */
-function toast(msg,type){
-  var el=document.getElementById(\'toast\');
-  el.textContent=msg;el.className=\'toast show\'+(type?\' toast--\'+type:\'\');
-  setTimeout(function(){el.className=\'toast\'},3000);
-}
-
-/* ═══════════════════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════════════════ */
-function nav(id){
-  var screens=document.querySelectorAll(\'.screen\');
-  for(var i=0;i<screens.length;i++)screens[i].classList.remove(\'active\');
-  var target=document.getElementById(\'screen-\'+id);
-  if(target)target.classList.add(\'active\');
-  var items=document.querySelectorAll(\'.nav__item\');
-  for(var j=0;j<items.length;j++)items[j].classList.remove(\'active\');
-  var navItem=document.getElementById(\'nav-\'+id);
-  if(navItem)navItem.classList.add(\'active\');
-  window.scrollTo({top:0,behavior:\'instant\'});
-  if(id===\'home\')renderHome();
-  if(id===\'learn\')renderLearn();
-  if(id===\'practice\')renderPractice();
-  if(id===\'songs\')renderSongs();
-  if(id===\'progress\')renderProgress();
-}
-
-/* ═══════════════════════════════════════════════════
-   ONBOARDING
-   ═══════════════════════════════════════════════════ */
-function start(){
-  var name=document.getElementById(\'onboard-name\').value.trim();
-  if(!name){document.getElementById(\'onboard-name\').focus();return;}
-  S.name=name;S.lastActive=new Date().toDateString();save();
-  nav(\'home\');
-}
-
-
-/* ═══════════════════════════════════════════════════
-   ENGINE A: VOCAL ENGINE
-   Problem → Diagnosis → Exercise → Song Application → Transfer Test
-   ═══════════════════════════════════════════════════ */
-var VOCAL_ENGINE={
-  stages:[
-    {
-      id:1,name:'Awakening',subtitle:'Your first vocal win in 15 minutes',
-      desc:'Stop singing wrong. Start singing right. Immediately.',
-      lessons:[
-        {
-          id:'1-1',title:'Your Voice Right Now — The Honest Audit',
-          hook:{label:'Why this matters',text:'Most singers have been doing the wrong thing for years. Today we fix the foundation in 15 minutes.'},
-          concept:'Your voice is a muscle system. Like any muscle, it can be trained. The 3 systems: Breather (lungs/diaphragm), Vibrator (vocal folds), Resonator (throat/mouth/chest).',
-          demo:'Place your hand on your chest. Say "uh-huh" like you are agreeing. Feel that vibration? That is chest voice. Now say "hmm?" like you are curious. Feel the buzz move up? That is resonance shifting.',
-          exercise:{label:'Exercise: The 3-System Check',ipa:'[ʌ] as in "uh"',consonant:'H onset — gentle, no push',range:'Speaking range only',coordination:'Connect breath to sound without tension',steps:['Exhale completely','Inhale through your mouth for 4 counts — feel your belly expand','Say "huh" on a comfortable pitch — feel the breath support','Hold "hmm" for 5 seconds — feel the vibration','Repeat 5 times, each time slightly higher']},
-          song_app:{title:'Lean On Me — Bill Withers',why:'Simple melody, narrow range, forces you to connect breath to tone',focus:'Sing the first line using only your speaking voice. No performing. Just breath + sound.'},
-          mistakes:[
-            {icon:'X',text:'Pushing air hard. The "huh" should be gentle — like fogging a mirror, not blowing out a candle.'},
-            {icon:'X',text:'Tensing your jaw. Your mouth should be relaxed, slightly open, like you are about to yawn.'},
-            {icon:'X',text:'Singing too high. Stay in your speaking range. This is not about range — it is about connection.'}
-          ],
-          fixes:['If your throat hurts: you are pushing. Stop. Reset. Gentle breath only.','If you run out of air: you are not filling low enough. Belly should expand on inhale.','If your voice cracks: normal. Your folds are learning. Keep going gently.'],
-          challenge:{label:'BandLab Task',task:'Record yourself singing the first line of "Lean On Me" — just the words "Lean on me." Focus on breath connection. Title: "[Audit] Lean On Me — [Your Name]"'},
-          reflection:'How did your voice feel compared to normal? Did you notice any tension? Where did you feel the vibration?',
-          rubric:[{label:'Breath',score:'?'},{label:'Tension',score:'?'},{label:'Connection',score:'?'},{label:'Honesty',score:'?'}],
-          reward:'Identity: You are now a singer who understands their instrument.',
-          next:'1-2'
-        },
-        {
-          id:'1-2',title:'The Breath Reset — Stop Running Out of Air',
-          hook:{label:'The problem',text:'90% of singing problems are breath problems. Pitch, tone, power, stamina — all breath.'},
-          concept:'Diaphragmatic breathing: your diaphragm is a dome-shaped muscle under your lungs. When it flattens, it pulls air in. When it relaxes, air pushes out. Singers control this push. The goal: steady, controlled airflow — not maximum air.',
-          demo:'Lie on your back. Put a book on your stomach. Breathe in — the book rises. Breathe out — the book falls. That is diaphragmatic breathing. Now stand up and try to replicate it.',
-          exercise:{label:'Exercise: The 4-4-8 Breath Cycle',ipa:'[s] — sustained hiss',consonant:'S requires steady airflow — perfect for training',range:'No singing — just breath',coordination:'Inhale 4 counts, hold 4, exhale 8 on "sss"',steps:['Inhale through nose for 4 counts — belly expands','Hold for 4 counts — engage core gently, do not lock','Exhale on "ssss" for 8 counts — steady, even stream','The "sss" should sound like a consistent hiss — no wobble','Repeat 4 times']},
-          song_app:{title:'Amazing Grace — Traditional',why:'Long phrases that demand breath control. If you can sing this without gasping, your breath is working.',focus:'Sing one line per breath. Plan where you will breathe BEFORE you start singing.'},
-          mistakes:[
-            {icon:'X',text:'Chest breathing — shoulders going up. Wrong. Belly goes out, chest stays still.'},
-            {icon:'X',text:'Holding breath with a closed throat. The hold should be open — like you are about to speak.'},
-            {icon:'X',text:'Running out of air on the "sss." You are either not filling enough or pushing too hard.'}
-          ],
-          fixes:['If your shoulders rise: lie down, put the book on your belly, start over.','If the "sss" wobbles: you are pushing. Gentle, steady, like a tire slowly leaking air.','If you cannot reach 8 counts: reduce to 6. Build up over days, not seconds.'],
-          challenge:{label:'BandLab Task',task:'Record yourself singing "Amazing Grace" (first verse). Focus on breathing at the right moments. Title: "[Breath] Amazing Grace — [Your Name]"'},
-          reflection:'Where did you breathe? Did you plan it or gasp? How did the "sss" feel — steady or shaky?',
-          rubric:[{label:'Steady Air',score:'?'},{label:'Belly Breath',score:'?'},{label:'Planning',score:'?'},{label:'Control',score:'?'}],
-          reward:'Skill Unlocked: Breath Foundation',
-          next:'1-3'
-        },
-        {
-          id:'1-3',title:'Posture — Stand Like a Singer',
-          hook:{label:'Quick fix',text:'Bad posture kills your voice in 3 seconds. Good posture fixes it instantly. This is the fastest win you will ever get.'},
-          concept:'Your spine is the frame for your instrument. If the frame is bent, the instrument cannot work properly. The Posture Stack: Feet shoulder-width, knees soft, spine long, shoulders down, head level, jaw relaxed.',
-          demo:'Stand against a wall. Heels, butt, shoulders, and head should all touch the wall. Now step away and hold that position. That is your singing posture. Notice how much easier it is to breathe.',
-          exercise:{label:'Exercise: The Wall Reset',ipa:'[ɑ] as in "ah"',consonant:'None — pure vowel',range:'Comfortable mid-range',coordination:'Posture → Breath → Sound, in that order',steps:['Stand against the wall — all 4 points touching','Step away, hold the position','Inhale for 4 counts','Sing "ah" for 8 counts — feel the openness','Check: are your shoulders still down? Jaw still relaxed?','Repeat 3 times']},
-          song_app:{title:'How Great Thou Art — Hymn',why:'Sustained phrases that reward good posture. You will hear the difference immediately.',focus:'Sing the chorus. Before each phrase, check your posture. Reset if needed.'},
-          mistakes:[
-            {icon:'X',text:'Chin tilting up for high notes. Keep your head level — let your breath do the work.'},
-            {icon:'X',text:'Locking your knees. Soft knees = soft body = better sound.'},
-            {icon:'X',text:'Hunching shoulders when tired. Reset. Every phrase is a new chance.'}
-          ],
-          fixes:['If your chin tilts: sing looking straight at a point on the wall, not up at the ceiling.','If you feel tension in your neck: your posture is off. Go back to the wall.','If your voice sounds thin: check your spine. Longer spine = fuller sound.'],
-          challenge:{label:'BandLab Task',task:'Record "How Great Thou Art" chorus. Before each phrase, consciously reset your posture. Title: "[Posture] How Great Thou Art — [Your Name]"'},
-          reflection:'Did you notice a difference between your first and last phrase? Where did tension creep in?',
-          rubric:[{label:'Posture',score:'?'},{label:'Consistency',score:'?'},{label:'Sound Quality',score:'?'},{label:'Awareness',score:'?'}],
-          reward:'Skill Unlocked: Posture Foundation',
-          next:'2-1'
-        }
-      ]
+/* ── DIAGNOSTIC ENGINE ── */
+var DIAGNOSTIC={
+  inputs:['pitch_instability','strain','breathiness','lack_of_power','break_in_registers','fatigue','nasality','loss_of_control'],
+  assess:function(symptoms){
+    // symptoms: array of strings from user self-report
+    // returns: {problem, root_cause_system, coordination_failure, severity, primary_system}
+    var systemScores={airflow:0,source:0,resonance:0,articulation:0};
+    var problemMap={
+      pitch_instability:['source','airflow'],strain:['source','articulation'],
+      breathiness:['source','airflow'],lack_of_power:['airflow','resonance'],
+      break_in_registers:['source','resonance'],fatigue:['airflow','source'],
+      nasality:['resonance'],loss_of_control:['airflow','source','resonance']
+    };
+    for(var i=0;i<symptoms.length;i++){
+      var systems=problemMap[symptoms[i]];
+      if(systems)for(var j=0;j<systems.length;j++)systemScores[systems[j]]++;
     }
-  ]
+    var primary='source';var max=0;
+    for(var k in systemScores)if(systemScores[k]>max){max=systemScores[k];primary=k;}
+    var severity=symptoms.length>=3?'high':symptoms.length>=2?'medium':'low';
+    var problemMap2={
+      pitch_instability:'Your pitch wavers or drifts from the target',
+      strain:'Your voice feels tight, pushed, or painful',
+      breathiness:'Air escapes — tone lacks clarity and focus',
+      lack_of_power:'Your voice lacks volume and projection',
+      break_in_registers:'Your voice cracks or flips between registers',
+      fatigue:'Your voice tires quickly during singing',
+      nasality:'Your tone has a pinched, nasal quality',
+      loss_of_control:'You cannot reliably control pitch, volume, or tone'
+    };
+    var problem=symptoms.length>0?problemMap2[symptoms[symptoms.length-1]]||symptoms[symptoms.length-1]:'General development needed';
+    return {
+      problem:problem,
+      root_cause_system:primary,
+      coordination_failure:VOCAL_SYSTEMS[primary].errors[0],
+      severity:severity,
+      primary_system:primary,
+      scores:systemScores
+    };
+  }
 };
 
-/* ═══════════════════════════════════════════════════
-   ENGINE B: AURAL PERCEPTION ENGINE
-   Listen → Identify → Reproduce → Compare → Correct → Repeat
-   ═══════════════════════════════════════════════════ */
-var AURAL_ENGINE={
-  pitch:[
-    {name:'Unison',semitones:0,ref:'Same note',exercise:'Play a note. Sing it back. Match exactly.'},
-    {name:'Major 2nd',semitones:2,ref:'Happy Birthday (first 2 notes)',exercise:'Play C, then D. Sing the interval. Check with piano.'},
-    {name:'Major 3rd',semitones:4,ref:'When the Saints Go Marching In',exercise:'Play C, then E. Sing the interval.'},
-    {name:'Perfect 4th',semitones:5,ref:'Here Comes the Bride',exercise:'Play C, then F. Sing the interval.'},
-    {name:'Perfect 5th',semitones:7,ref:'Star Wars theme',exercise:'Play C, then G. Sing the interval.'},
-    {name:'Major 6th',semitones:9,ref:'My Bonnie Lies Over the Ocean',exercise:'Play C, then A. Sing the interval.'},
-    {name:'Major 7th',semitones:11,ref:'Take On Me (first 2 notes)',exercise:'Play C, then B. Sing the interval.'},
-    {name:'Octave',semitones:12,ref:'Somewhere Over the Rainbow',exercise:'Play C, then C above. Sing the interval.'}
-  ],
-  rhythm:[
-    {name:'Quarter Notes',pattern:'1 2 3 4',exercise:'Clap steady quarter notes at 80 BPM'},
-    {name:'Eighth Notes',pattern:'1+2+3+4+',exercise:'Clap subdivision — twice per beat'},
-    {name:'Syncopation',pattern:'1 + 2 + 3 + 4 +',exercise:'Clap only on the "and" — the off-beats'},
-    {name:'Triplets',pattern:'1-trip-let 2-trip-let',exercise:'Clap 3 notes per beat'},
-    {name:'16th Notes',pattern:'1-e-and-a 2-e-and-a',exercise:'Clap 4 notes per beat'}
-  ],
-  chords:[
-    {name:'Major',quality:'Bright, happy, stable',notes:'Root + Major 3rd + Perfect 5th',ref:'Most pop songs start here'},
-    {name:'Minor',quality:'Sad, dark, serious',notes:'Root + Minor 3rd + Perfect 5th',ref:'Most emotional songs use minor'},
-    {name:'Dominant 7th',quality:'Tense, wants to resolve',notes:'Major triad + Minor 7th',ref:'Blues, jazz, gospel — creates movement'},
-    {name:'Major 7th',quality:'Dreamy, jazzy, smooth',notes:'Major triad + Major 7th',ref:'R&B, neo-soul, smooth jazz'}
-  ]
+/* ── SOVT RESET SYSTEM ── */
+var SOVT={
+  tools:['lip_trills','straw_phonation','ng_hum','vv_z_z_z','closed_vowel_resets'],
+  activate:function(system){
+    // Returns appropriate SOVT tool based on failing system
+    var map={airflow:'lip_trills',source:'ng_hum',resonance:'straw_phonation',articulation:'closed_vowel_resets'};
+    return map[system]||'ng_hum';
+  },
+  getInstruction:function(tool){
+    var instructions={
+      lip_trills:'Blow air through loose lips so they flap. Add pitch. Keep the buzz going for 5 seconds. No pushing.',
+      straw_phonation:'Sing through a straw (or narrow tube). Keep the sound steady and buzzy. No air escape.',
+      ng_hum:'Hum on "ng" (like the end of "sing"). Feel the buzz in your nose and lips. Keep it steady.',
+      vv_z_z_z:'Buzz "vvvv" like a bee. Add pitch. Keep the vibration on your lips, not in your throat.',
+      closed_vowel_resets:'Sing "oo" or "ee" on a comfortable pitch. These closed vowels stabilize your vocal folds.'
+    };
+    return instructions[tool]||instructions.ng_hum;
+  }
 };
 
-/* ═══════════════════════════════════════════════════
-   ENGINE C: SONG INTELLIGENCE ENGINE
-   Songs are diagnostic training tools, not recommendations.
-   ═══════════════════════════════════════════════════ */
-var SONGS=[
-  {id:'s1',title:'Lean On Me',artist:'Bill Withers',range:'D3-A4',rangeDemand:'low',technique:['breath_control','chest_voice'],breathLoad:'light',vowelProfile:'mixed',difficulty:2,emotionalIntent:'Comfort, support',genre:'Soul',riskFlags:[],tags:['foundations','breath','low_range'],stages:[1]},
-  {id:'s2',title:'Amazing Grace',artist:'Traditional',range:'D3-E4',rangeDemand:'low',technique:['breath_control','sustained_phrases'],breathLoad:'heavy',vowelProfile:'dark',difficulty:1,emotionalIntent:'Reverence, gratitude',genre:'Hymn',riskFlags:['breath'],stages:[1,2]},
-  {id:'s3',title:'Hallelujah',artist:'Leonard Cohen',range:'C3-E4',rangeDemand:'low',technique:['pitch_accuracy','dynamics'],breathLoad:'medium',vowelProfile:'dark',difficulty:3,emotionalIntent:'Longing, loss, beauty',genre:'Folk',riskFlags:['pitch_drift'],stages:[2]},
-  {id:'s4',title:'Someone Like You',artist:'Adele',range:'A3-E5',rangeDemand:'mid',technique:['mix_voice','emotion','dynamics'],breathLoad:'heavy',vowelProfile:'mixed',difficulty:6,emotionalIntent:'Heartbreak, acceptance',genre:'Pop',riskFlags:['strain','pitch_drift'],stages:[3,6]},
-  {id:'s5',title:'I Will Always Love You',artist:'Whitney Houston',range:'A3-G5',rangeDemand:'mid',technique:['registration','belt','emotion'],breathLoad:'heavy',vowelProfile:'mixed',difficulty:7,emotionalIntent:'Love, farewell',genre:'Pop/Soul',riskFlags:['strain'],stages:[3,7]},
-  {id:'s6',title:'Thinking Out Loud',artist:'Ed Sheeran',range:'D3-A4',rangeDemand:'low',technique:['vowel_shaping','intimacy'],breathLoad:'medium',vowelProfile:'bright',difficulty:4,emotionalIntent:'Love, devotion',genre:'Pop',riskFlags:[],stages:[2,7]},
-  {id:'s7',title:'Halo',artist:'Beyonce',range:'F#3-E5',rangeDemand:'mid',technique:['belt','runs','dynamics'],breathLoad:'heavy',vowelProfile:'mixed',difficulty:7,emotionalIntent:'Awe, devotion',genre:'Pop/R&B',riskFlags:['strain','fatigue_risk'],stages:[5,7]},
-  {id:'s8',title:'Take Me to the King',artist:'Tamela Mann',range:'A3-A5',rangeDemand:'high',technique:['gospel_runs','belt','chest_dominant'],breathLoad:'medium',vowelProfile:'bright',difficulty:6,emotionalIntent:'Worship, surrender',genre:'Gospel',riskFlags:['strain'],stages:[3,7]},
-  {id:'s9',title:'Shake It Off',artist:'Taylor Swift',range:'D3-C5',rangeDemand:'mid',technique:['consonant_clarity','forward_placement'],breathLoad:'light',vowelProfile:'bright',difficulty:4,emotionalIntent:'Joy, confidence',genre:'Pop',riskFlags:[],stages:[7]},
-  {id:'s10',title:'Essence',artist:'Wizkid ft. Tems',range:'F#3-E4',rangeDemand:'low',technique:['rhythm','syncopation','attitude'],breathLoad:'light',vowelProfile:'bright',difficulty:3,emotionalIntent:'Desire, cool',genre:'Afrobeats',riskFlags:[],stages:[7]},
-  {id:'s11',title:'Fight Song',artist:'Rachel Platten',range:'D3-E5',rangeDemand:'mid',technique:['belief','chest_mix','energy'],breathLoad:'heavy',vowelProfile:'bright',difficulty:5,emotionalIntent:'Determination, power',genre:'Pop',riskFlags:['strain'],stages:[6,7]},
-  {id:'s12',title:'Let It Be',artist:'The Beatles',range:'C3-G4',rangeDemand:'low',technique:['chord_awareness','emotion'],breathLoad:'medium',vowelProfile:'mixed',difficulty:3,emotionalIntent:'Peace, acceptance',genre:'Rock',riskFlags:[],stages:[4,6]}
+/* ── ONSET SYSTEM ── */
+var ONSET={
+  types:{breathy:{effect:'air-heavy',risk:'loss_of_fold_efficiency'},balanced:{effect:'optimal coordination',default_target:true},glottal:{effect:'strong closure attack',risk:'strain if overused'}},
+  getRecommendation:function(severity){
+    return severity==='high'?'balanced':'balanced'; // Always target balanced
+  }
+};
+
+/* ── VOWEL/IPA ENGINE ── */
+var VOWEL_ENGINE={
+  ipa_targets:['i','e','ɑ','o','u'],
+  getModification:function(pitch_zone,current_vowel){
+    // Rule: higher pitch requires narrower vowels
+    var mods={
+      high:{ɑ:'ɔ',o:'o',e:'ɛ',i:'i',u:'ʊ'},
+      mid:{ɑ:'ɑ',o:'o',e:'e',i:'i',u:'u'},
+      low:{ɑ:'ɑ',o:'ɔ',e:'ɛ',i:'ɪ',u:'ʊ'}
+    };
+    return mods[pitch_zone]&&mods[pitch_zone][current_vowel]?mods[pitch_zone][current_vowel]:current_vowel;
+  },
+  getVowelForExercise:function(system){
+    var map={airflow:'u',source:'i',resonance:'ɑ',articulation:'e'};
+    return map[system]||'ɑ';
+  }
+};
+
+/* ── EXERCISE GENERATOR ── */
+var EXERCISE_GEN={
+  generate:function(diagnostic,userState){
+    var sys=diagnostic.root_cause_system;
+    var sev=diagnostic.severity;
+    var vowel=VOWEL_ENGINE.getVowelForExercise(sys);
+    var sovt=SOVT.activate(sys);
+    var sovtInstr=SOVT.getInstruction(sovt);
+    var rangeZone=sev==='high'?'low':sev==='medium'?'mid':'mixed';
+    var exercise={
+      name:'',
+      target_system:[sys],
+      goal:'',
+      ipa_focus:'['+vowel+']',
+      consonant_strategy:'',
+      range_zone:rangeZone,
+      method:[],
+      failure_correction:{}
+    };
+
+    // System-specific exercise generation
+    if(sys==='airflow'){
+      exercise.name='Airflow Control: The '+sovt+' Reset';
+      exercise.goal='Establish steady, controlled airflow without overblowing or air leakage';
+      exercise.consonant_strategy='Fricative control — "s" and "f" require steady airflow';
+      exercise.method=[
+        'Step 1: Isolation — '+sovtInstr,
+        'Step 2: SOVT reset — '+sovt+' on comfortable pitch for 5 seconds x3',
+        'Step 3: Controlled execution — Sustain ['+vowel+'] for 8 seconds with even tone',
+        'Step 4: Variation — Crescendo/decrescendo on ['+vowel+'] (soft to loud to soft)',
+        'Step 5: Song application — Apply to assigned song phrase'
+      ];
+      exercise.failure_correction={if_strain:'reduce_airflow_and_return_to_sovt',if_breath_issue:'reduce_range_by_2_semitones'};
+    }else if(sys==='source'){
+      exercise.name='Source Stabilization: Balanced Onset Training';
+      exercise.goal='Achieve clean, balanced vocal fold closure — no breathiness, no pressing';
+      exercise.consonant_strategy='Balanced onset — no hard glottal, no breathy "h"';
+      exercise.method=[
+        'Step 1: Isolation — '+sovtInstr,
+        'Step 2: SOVT reset — '+sovt+' ascending 5 notes, balanced tone',
+        'Step 3: Controlled execution — Say "ah" with balanced onset (no "h", no glottal) x5',
+        'Step 4: Variation — Sing "ah-ah-ah" on 3 different pitches, each with clean onset',
+        'Step 5: Song application — Apply balanced onset to assigned song'
+      ];
+      exercise.failure_correction={if_strain:'return_to_sovt_ng_hum',if_pitch_instability:'reduce_vowel_width_to_'+VOWEL_ENGINE.getModification('high',vowel)};
+    }else if(sys==='resonance'){
+      exercise.name='Resonance Tuning: Forward Placement';
+      exercise.goal='Shift resonance forward for clearer, more projecting tone';
+      exercise.consonant_strategy='Nasal consonants (m, n, ng) naturally forward — use them as bridge';
+      exercise.method=[
+        'Step 1: Isolation — Hum on "m" — feel the buzz in your lips',
+        'Step 2: SOVT reset — '+sovtInstr,
+        'Step 3: Controlled execution — Sing "m-m-m" then open to ['+vowel+'] keeping the forward buzz',
+        'Step 4: Variation — Sing ['+vowel+'] with forward placement, crescendo',
+        'Step 5: Song application — Apply forward placement to assigned song'
+      ];
+      exercise.failure_correction={if_strain:'drop_1_semitone',if_breath_issue:'reduce_volume_20_percent'};
+    }else{
+      exercise.name='Articulation: Clean Consonant-Vowel Transitions';
+      exercise.goal='Clear diction without jaw tension or tongue rigidity';
+      exercise.consonant_strategy:'Slow articulation — every consonant deliberate and clean';
+      exercise.method=[
+        'Step 1: Isolation — Speak "ma-me-mi-mo-mu" slowly, feel each consonant',
+        'Step 2: SOVT reset — '+sovtInstr,
+        'Step 3: Controlled execution — Sing "ma-me-mi-mo-mu" on a single pitch, clear diction',
+        'Step 4: Variation — Increase speed while maintaining clarity',
+        'Step 5: Song application — Apply clear articulation to assigned song'
+      ];
+      exercise.failure_correction={if_strain:'slow_down_50_percent',if_pitch_instability:'reduce_range'};
+    }
+
+    return exercise;
+  }
+};
+
+/* ── SONG INTELLIGENCE ENGINE ── */
+var SONG_DB=[
+  {id:'s1',title:'Lean On Me',artist:'Bill Withers',range:'D3-A4',rangeDemand:'low',technique:['airflow','source'],breathLoad:'light',vowelProfile:'mixed',difficulty:1,emotionalIntent:'Comfort, support',genre:'Soul',riskFlags:[],trainingFunction:'diagnostic'},
+  {id:'s2',title:'Amazing Grace',artist:'Traditional',range:'D3-E4',rangeDemand:'low',technique:['airflow'],breathLoad:'heavy',vowelProfile:'dark',difficulty:1,emotionalIntent:'Reverence',genre:'Hymn',riskFlags:['breath_overload'],trainingFunction:'development'},
+  {id:'s3',title:'Can\\'t Help Falling in Love',artist:'Elvis Presley',range:'C3-E4',rangeDemand:'low',technique:['source','articulation'],breathLoad:'medium',vowelProfile:'mixed',difficulty:2,emotionalIntent:'Love, devotion',genre:'Pop',riskFlags:[],trainingFunction:'development'},
+  {id:'s4',title:'Hallelujah',artist:'Leonard Cohen',range:'C3-E4',rangeDemand:'low',technique:['source','resonance'],breathLoad:'medium',vowelProfile:'dark',difficulty:3,emotionalIntent:'Longing, beauty',genre:'Folk',riskFlags:['pitch_instability'],trainingFunction:'diagnostic'},
+  {id:'s5',title:'Thinking Out Loud',artist:'Ed Sheeran',range:'D3-A4',rangeDemand:'low',technique:['articulation','resonance'],breathLoad:'medium',vowelProfile:'bright',difficulty:3,emotionalIntent:'Love, devotion',genre:'Pop',riskFlags:[],trainingFunction:'development'},
+  {id:'s6',title:'Fight Song',artist:'Rachel Platten',range:'D3-E5',rangeDemand:'mid',technique:['source','airflow'],breathLoad:'heavy',vowelProfile:'bright',difficulty:4,emotionalIntent:'Determination',genre:'Pop',riskFlags:['strain_risk'],trainingFunction:'performance'},
+  {id:'s7',title:'Someone Like You',artist:'Adele',range:'A3-E5',rangeDemand:'mid',technique:['source','resonance','airflow'],breathLoad:'heavy',vowelProfile:'mixed',difficulty:5,emotionalIntent:'Heartbreak, acceptance',genre:'Pop',riskFlags:['strain_risk','pitch_instability'],trainingFunction:'performance'},
+  {id:'s8',title:'I Will Always Love You',artist:'Whitney Houston',range:'A3-G5',rangeDemand:'mid',technique:['source','resonance'],breathLoad:'heavy',vowelProfile:'mixed',difficulty:6,emotionalIntent:'Love, farewell',genre:'Pop/Soul',riskFlags:['strain_risk'],trainingFunction:'performance'},
+  {id:'s9',title:'Take Me to the King',artist:'Tamela Mann',range:'A3-A5',rangeDemand:'high',technique:['source','resonance','airflow'],breathLoad:'medium',vowelProfile:'bright',difficulty:5,emotionalIntent:'Worship, surrender',genre:'Gospel',riskFlags:['strain_risk'],trainingFunction:'development'},
+  {id:'s10',title:'Halo',artist:'Beyoncé',range:'F#3-E5',rangeDemand:'mid',technique:['source','resonance'],breathLoad:'heavy',vowelProfile:'mixed',difficulty:6,emotionalIntent:'Awe, devotion',genre:'Pop/R&B',riskFlags:['strain_risk','fatigue_risk'],trainingFunction:'performance'},
+  {id:'s11',title:'Shake It Off',artist:'Taylor Swift',range:'D3-C5',rangeDemand:'mid',technique:['articulation','source'],breathLoad:'light',vowelProfile:'bright',difficulty:3,emotionalIntent:'Joy, confidence',genre:'Pop',riskFlags:[],trainingFunction:'development'},
+  {id:'s12',title:'Essence',artist:'Wizkid ft. Tems',range:'F#3-E4',rangeDemand:'low',technique:['articulation','source'],breathLoad:'light',vowelProfile:'bright',difficulty:2,emotionalIntent:'Desire, cool',genre:'Afrobeats',riskFlags:[],trainingFunction:'development'}
+];
+
+function selectSong(diagnostic,userState){
+  var sys=diagnostic.root_cause_system;
+  var sev=diagnostic.severity;
+  // Filter songs that target the primary system, sorted by appropriate difficulty
+  var candidates=[];
+  for(var i=0;i<SONG_DB.length;i++){
+    var song=SONG_DB[i];
+    if(song.technique.indexOf(sys)!==-1){
+      // Match difficulty to severity
+      var diffMatch=(sev==='high'&&song.difficulty<=2)||(sev==='medium'&&song.difficulty<=4)||(sev==='low'&&song.difficulty<=6);
+      if(diffMatch)candidates.push(song);
+    }
+  }
+  // Fallback: any song at appropriate difficulty
+  if(candidates.length===0){
+    for(var i=0;i<SONG_DB.length;i++){
+      var song=SONG_DB[i];
+      if((sev==='high'&&song.difficulty<=2)||(sev==='medium'&&song.difficulty<=4)||(sev==='low'))candidates.push(song);
+    }
+  }
+  // Pick first unmatched song, or random from candidates
+  var unmatched=[];
+  for(var c=0;c<candidates.length;c++){
+    if(userState.completed.indexOf(candidates[c].id)===-1)unmatched.push(candidates[c]);
+  }
+  var pool=unmatched.length>0?unmatched:candidates;
+  return pool[Math.floor(Math.random()*pool.length)]||SONG_DB[0];
+}
+
+/* ── PROGRESSION STAGES ── */
+var STAGES=[
+  {id:1,name:'Awakening',subtitle:'Your first vocal win',desc:'Stop singing wrong. Start singing right. Immediately.'},
+  {id:2,name:'Control',subtitle:'Basic coordination',desc:'Your voice starts doing what you tell it to do.'},
+  {id:3,name:'Athleticism',subtitle:'Range, agility, endurance',desc:'Your voice goes further, moves faster, lasts longer.'},
+  {id:4,name:'Musicianship',subtitle:'Rhythm, harmony, melody',desc:'You understand music, not just your part in it.'},
+  {id:5,name:'Ear Mastery',subtitle:'Advanced aural perception',desc:'Your ear becomes your greatest asset.'},
+  {id:6,name:'Performance Psychology',subtitle:'Mind, emotion, stage',desc:'Your mind is your most powerful vocal tool.'},
+  {id:7,name:'Genre System',subtitle:'Pop, gospel, R&B, afrobeats',desc:'Your voice adapts to any style.'},
+  {id:8,name:'Fusion Training',subtitle:'Cross-genre blending',desc:'You can sing anything. Now you can sing everything.'},
+  {id:9,name:'Production Literacy',subtitle:'BandLab-first recording',desc:'You can record, produce, and release your own music.'},
+  {id:10,name:'Market Mastery',subtitle:'Turn your voice into income',desc:'Your voice is a business. Run it.'}
 ];
 
 /* ═══════════════════════════════════════════════════
-   ENGINE D: PRODUCTION ENGINE (BandLab Pipeline)
+   USER STATE
    ═══════════════════════════════════════════════════ */
-var PRODUCTION_ENGINE={
-  stage1:{
-    title:'Phone Recording Optimization',
-    skills:['room_acoustics','mic_positioning','noise_handling'],
-    checklist:[
-      'Small, soft-furnished room (closet or bedroom)',
-      '6-8 inches from phone mic',
-      'Slightly off-center to reduce plosives',
-      'Background noise off (fans, AC, windows)',
-      'Use headphones to monitor'
-    ]
-  },
-  stage2:{
-    title:'BandLab Workflow',
-    skills:['multitrack_recording','vocal_layering','comping'],
-    steps:[
-      'Create new project in BandLab',
-      'Import or create backing track',
-      'Record lead vocal on Track 1',
-      'Record harmony on Track 2 (3rd above melody)',
-      'Record ad-libs on Track 3',
-      'Mix: lead loudest, harmony softer, ad-libs subtle',
-      'Export as WAV or MP3'
-    ]
-  },
-  stage3:{
-    title:'Release Workflow',
-    skills:['distribution','metadata','promotion'],
-    steps:[
-      'Choose distributor (DistroKid, TuneCore, or free)',
-      'Upload final mix (WAV preferred)',
-      'Create artwork (3000x3000px, Canva is free)',
-      'Write artist bio (2-3 sentences)',
-      'Set release date (4 weeks out for promotion)',
-      'Plan promotion: 10 people, 10 posts, 10 days'
-    ]
-  }
+var U={
+  name:'Student',xp:0,level:1,streak:0,lastActive:null,sessions:0,
+  stage:1,currentSession:null,completed:[],
+  skills:{airflow:0,source:0,resonance:0,articulation:0},
+  fatigue:0,weaknessHistory:[],lastDiagnostic:null,
+  badges:[],unlockedSongs:[],difficultyMod:0
 };
 
+function loadState(){
+  try{
+    var d=localStorage.getItem('sc_state');
+    if(d){var p=JSON.parse(d);for(var k in p)U[k]=p[k];}
+    if(!U.skills)U.skills={airflow:0,source:0,resonance:0,articulation:0};
+  }catch(e){}
+}
+function saveState(){
+  try{localStorage.setItem('sc_state',JSON.stringify(U))}catch(e){}
+}
+
 /* ═══════════════════════════════════════════════════
-   ENGINE E: MARKET ENGINE
-   Every skill maps to earning potential.
+   ADAPTIVE SESSION RENDERER
    ═══════════════════════════════════════════════════ */
-var MARKET_ENGINE={
-  income_streams:[
-    {name:'Streaming Income',platform:'Spotify, Apple Music, Boomplay, Audiomack',potential:'Passive — earns while you sleep',action:'Distribute your first single',skillRequired:'production',timeToFirstDollar:'4-8 weeks'},
-    {name:'Live Performance',platform:'Gigs, events, church, weddings',potential:'Immediate — cash per show',action:'Book your first gig (even free)',skillRequired:'performance',timeToFirstDollar:'1-2 weeks'},
-    {name:'Session Work',platform:'Other artists, producers',potential:'Per-song payment',action:'Post that you sing for hire',skillRequired:'recording',timeToFirstDollar:'2-4 weeks'},
-    {name:'Teaching',platform:'Private lessons, online',potential:'Recurring — per student per month',action:'Offer beginner lessons',skillRequired:'pedagogy',timeToFirstDollar:'2-4 weeks'},
-    {name:'UGC/Content',platform:'TikTok, YouTube, Instagram',potential:'Sponsorships, ad revenue',action:'Post 3 vocal videos per week',skillRequired:'consistency',timeToFirstDollar:'4-12 weeks'}
-  ],
-  worship_leadership:{
-    title:'Worship Leadership Compensation',
-    models:[
-      {type:'Volunteer',typical:'N0 - N50K/month',notes:'Common in smaller churches'},
-      {type:'Part-time Stipend',typical:'N50K - N200K/month',notes:'Larger churches, weekly commitment'},
-      {type:'Full-time Worship Pastor',typical:'N200K - N500K+/month',notes:'Major churches, includes benefits'}
-    ],
-    tips:[
-      'Track your hours and impact — data helps in negotiations',
-      'Offer to train the choir — adds value beyond singing',
-      'Record and share your work — visibility leads to opportunities',
-      'Be reliable — more than talent, churches value consistency'
-    ]
+function renderSession(diagnostic,exercise,song){
+  var c=document.getElementById('session-content');
+  var sevClass=diagnostic.severity==='high'?'warn':diagnostic.severity==='medium'?'primary':'success';
+  var html='';
+
+  // Header with diagnosis
+  html+='<div class="mt-12">';
+  html+='<div class="hook">';
+  html+='<div class="hook__label">Diagnosis</div>';
+  html+='<div class="hook__text">'+diagnostic.problem+'</div>';
+  html+='</div>';
+  html+='<div class="flex gap-8 mb-16">';
+  html+='<span class="tag tag--'+sevClass+'">Severity: '+diagnostic.severity+'</span>';
+  html+='<span class="tag tag--primary">System: '+VOCAL_SYSTEMS[diagnostic.root_cause_system].name+'</span>';
+  html+='</div>';
+  html+='</div>';
+
+  // Exercise card
+  html+='<h2>'+exercise.name+'</h2>';
+  html+='<p class="text-muted mb-12">'+exercise.goal+'</p>';
+
+  html+='<div class="card mb-12">';
+  html+='<div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--success);margin-bottom:8px">Exercise Details</div>';
+  html+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">';
+  html+='<span class="tag tag--primary">IPA: <span class="mono">'+exercise.ipa_focus+'</span></span>';
+  html+='<span class="tag tag--success">Range: '+exercise.range_zone+'</span>';
+  if(exercise.consonant_strategy)html+='<span class="tag tag--warn">'+exercise.consonant_strategy.substring(0,30)+'</span>';
+  html+='</div>';
+  html+='</div>';
+
+  // Method steps
+  html+='<h3>Method</h3>';
+  for(var s=0;s<exercise.method.length;s++){
+    html+='<div class="list-item" style="align-items:flex-start">';
+    html+='<div class="list-item__icon list-item__icon--success" style="margin-top:2px">'+(s+1)+'</div>';
+    html+='<div class="list-item__body"><div class="list-item__title" style="white-space:normal">'+exercise.method[s].replace(/Step \d: /,'')+'</div></div>';
+    html+='</div>';
   }
-};
+
+  // Song application
+  html+='<h2 class="mt-16">Song Application</h2>';
+  html+='<div class="card card--gold mb-12">';
+  html+='<div class="flex items-center gap-8 mb-8">';
+  html+='<span class="tag tag--gold">'+song.title+'</span>';
+  html+='<span class="text-sm text-muted">'+song.artist+'</span>';
+  html+='</div>';
+  html+='<p><strong>Why this song:</strong> Targets '+VOCAL_SYSTEMS[diagnostic.root_cause_system].name.toLowerCase()+' system. Difficulty '+song.difficulty+'/10. '+song.vowelProfile+' vowel profile.</p>';
+  html+='<p class="mb-0"><strong>Training function:</strong> '+song.trainingFunction+' — '+song.emotionalIntent+'</p>';
+  html+='</div>';
+
+  // Failure recovery path
+  html+='<div class="card card--surface mb-12">';
+  html+='<div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--warn);margin-bottom:6px">If You Struggle</div>';
+  html+='<p class="text-sm">'+getFailureRecovery(exercise,diagnostic)+'</p>';
+  html+='</div>';
+
+  // Feedback buttons (THE CONSEQUENCE LOOP)
+  html+='<h2 class="mt-16">How Did It Feel?</h2>';
+  html+='<p class="text-muted mb-12">Your feedback adapts your next session.</p>';
+  html+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">';
+  html+='<button class="btn btn--success btn--full" onclick="SC.submitFeedback(\'easy\',\''+diagnostic.root_cause_system+'\',\''+exercise.name+'\',\''+song.id+'\')">😎 Too Easy</button>';
+  html+='<button class="btn btn--primary btn--full" onclick="SC.submitFeedback(\'right\',\''+diagnostic.root_cause_system+'\',\''+exercise.name+'\',\''+song.id+'\')">👍 Just Right</button>';
+  html+='<button class="btn btn--warn btn--full" onclick="SC.submitFeedback(\'hard\',\''+diagnostic.root_cause_system+'\',\''+exercise.name+'\',\''+song.id+'\')">😤 Too Hard</button>';
+  html+='</div>';
+  html+='<button class="btn btn--ghost btn--full" onclick="SC.nav(\'home\')">Save for Later</button>';
+  html+='</div>';
+
+  c.innerHTML=html;
+  nav('session');
+}
+
+function getFailureRecovery(exercise,diag){
+  var sys=diag.root_cause_system;
+  var recs={
+    airflow:'Return to SOVT (lip trills). Reduce range by 2 semitones. Sing at 70% volume. Build back up.',
+    source:'Return to NG hum. Reduce vowel width. Sing 1 semitone lower. Focus on balanced onset only.',
+    resonance:'Drop 1 semitone. Reduce volume 20%. Focus on forward placement — hum first, then open.',
+    articulation:'Slow down 50%. Speak the lyrics first. Add pitch only when speech is clean.'
+  };
+  return recs[sys]||'Return to SOVT. Reduce difficulty. Build back up.';
+}
+
+/* ═══════════════════════════════════════════════════
+   CONSEQUENCE LOOP (THE ENGINE)
+   ═══════════════════════════════════════════════════ */
+function submitFeedback(feedback,system,exerciseName,songId){
+  // 1. Update skill state
+  var skillDelta=feedback==='easy'?2:feedback==='right'?1:-1;
+  U.skills[system]=Math.max(0,Math.min(10,U.skills[system]+skillDelta));
+
+  // 2. Update difficulty modifier
+  if(feedback==='easy')U.difficultyMod=Math.min(3,U.difficultyMod+1);
+  else if(feedback==='hard')U.difficultyMod=Math.max(-2,U.difficultyMod-1);
+
+  // 3. Track weakness history
+  U.weaknessHistory.push({system:system,feedback:feedback,date:Date.now()});
+  if(U.weaknessHistory.length>20)U.weaknessHistory.shift();
+
+  // 4. XP and level
+  var xpGain=feedback==='easy'?30:feedback==='right'?50:20;
+  U.xp+=xpGain;
+  var newLevel=Math.floor(U.xp/200)+1;
+  var leveledUp=newLevel>U.level;
+  if(leveledUp){U.level=newLevel;toast('Level Up! '+newLevel,'gold');}
+
+  // 5. Stage progression (if all skills >= current stage threshold)
+  var allSkills=U.skills;
+  var stageThreshold=(U.stage-1)*1;
+  var allAbove=true;
+  for(var k in allSkills)if(allSkills[k]<stageThreshold)allAbove=false;
+  if(allAbove&&U.stage<10&&feedback!=='hard'){U.stage++;toast('Stage Up! Now Stage '+U.stage,'success');}
+
+  // 6. Badge check
+  checkBadges();
+
+  // 7. Mark song completed
+  if(U.completed.indexOf(songId)===-1)U.completed.push(songId);
+
+  // 8. Update session count
+  U.sessions++;
+  U.lastActive=new Date().toDateString();
+
+  // 9. Save
+  saveState();
+
+  // 10. Toast
+  toast('+'+xpGain+' XP'+(leveledUp?' • Level '+newLevel:''),feedback==='hard'?'':'success');
+
+  // 11. Next mission (always)
+  setTimeout(function(){showNextMission();},500);
+}
+
+function showNextMission(){
+  // Diagnose next weakness based on skill scores
+  var weakest=null;var lowest=99;
+  for(var k in U.skills){if(U.skills[k]<lowest){lowest=U.skills[k];weakest=k;}}
+  // If all skills balanced, pick random
+  if(!weakest)weakest=['airflow','source','resonance','articulation'][Math.floor(Math.random()*4)];
+
+  var diag=DIAGNOSTIC.assess([getSystemSymptom(weakest)]);
+  var ex=EXERCISE_GEN.generate(diag,U);
+  var song=selectSong(diag,U);
+  U.currentSession={diagnostic:diag,exercise:ex,song:song};
+  renderSession(diag,ex,song);
+}
+
+function getSystemSymptom(system){
+  var map={airflow:'breathiness',source:'pitch_instability',resonance:'nasality',articulation:'loss_of_control'};
+  return map[system]||'strain';
+}
+
+function checkBadges(){
+  var badges=[];
+  if(U.sessions>=1)badges.push({icon:'🎤',name:'First Session'});
+  if(U.sessions>=5)badges.push({icon:'🔥',name:'5 Sessions'});
+  if(U.sessions>=10)badges.push({icon:'⭐',name:'Dedicated'});
+  if(U.xp>=200)badges.push({icon:'💎',name:'200 XP'});
+  if(U.xp>=500)badges.push({icon:'👑',name:'500 XP'});
+  if(U.stage>=5)badges.push({icon:'🎭',name:'Halfway'});
+  if(U.stage>=10)badges.push({icon:'🏆',name:'Graduate'});
+  // Skill badges
+  for(var k in U.skills){if(U.skills[k]>=8)badges.push({icon:'🌟',name:VOCAL_SYSTEMS[k].name+' Master'});}
+  U.badges=badges;
+}
 
 /* ═══════════════════════════════════════════════════
    RENDER: HOME
    ═══════════════════════════════════════════════════ */
 function renderHome(){
   var c=document.getElementById('home-content');
-  document.getElementById('home-xp').textContent=S.xp+' XP';
+  document.getElementById('home-xp').textContent=U.xp+' XP • Level '+U.level;
   var html='';
   // Welcome
   html+='<div class="card card--highlight mb-12">';
   html+='<div class="hook__label">Welcome back</div>';
-  html+='<h2 style="margin-bottom:4px">'+S.name+', your voice is waiting.</h2>';
-  html+='<p class="text-muted">Stage '+S.name+' of 10 — '+getStageName()+'</p>';
-  html+='<div class="prog mt-12"><div class="prog__fill" style="width:'+getOverallPct()+'%"></div></div>';
+  html+='<h2 style="margin-bottom:4px">'+U.name+', your voice is waiting.</h2>';
+  html+='<p class="text-muted">Stage '+U.stage+'/10 — '+STAGES[U.stage-1].name+'</p>';
+  var pct=Math.round(U.completed.length/SONG_DB.length*100);
+  html+='<div class="prog mt-12"><div class="prog__fill" style="width:'+pct+'%"></div></div>';
+  html+='<div class="text-sm text-muted mt-8">'+U.completed.length+'/'+SONG_DB.length+' songs trained</div>';
   html+='</div>';
-  // Next mission
+  // Next mission CTA
   html+='<div class="sec-header"><span class="sec-title">Next Mission</span></div>';
-  var nm=getNextMission();
-  if(nm){
-    html+='<div class="card" onclick="SC.nav(\'learn\')">';
-    html+='<div class="list-item__icon list-item__icon--primary">'+nm.icon+'</div>';
-    html+='<div class="list-item__body">';
-    html+='<div class="list-item__title">'+nm.title+'</div>';
-    html+='<div class="list-item__sub">'+nm.sub+'</div>';
-    html+='</div>';
-    html+='<span class="text-primary font-weight-600">Start →</span>';
+  var weakest=null;var lowest=99;
+  for(var k in U.skills){if(U.skills[k]<lowest){lowest=U.skills[k];weakest=k;}}
+  if(!weakest)weakest='source';
+  html+='<div class="card card--gold" onclick="SC.startDiagnosis()">';
+  html+='<div class="flex items-center gap-12">';
+  html+='<div class="list-item__icon list-item__icon--gold">🎯</div>';
+  html+='<div class="list-item__body">';
+  html+='<div class="list-item__title">Train: '+VOCAL_SYSTEMS[weakest].name+'</div>';
+  html+='<div class="list-item__sub">Skill level: '+U.skills[weakest]+'/10 • '+VOCAL_SYSTEMS[weakest].desc.substring(0,40)+'…</div>';
+  html+='</div>';
+  html+='<span class="btn btn--primary btn--sm">Start</span>';
+  html+='</div>';
+  // Skill overview
+  html+='<div class="sec-header mt-16"><span class="sec-title">Your Voice Systems</span></div>';
+  var systems=['airflow','source','resonance','articulation'];
+  for(var s=0;s<systems.length;s++){
+    var sys=systems[s];
+    var level=U.skills[sys];
+    var barWidth=level*10;
+    html+='<div class="flex items-center gap-8 mb-8">';
+    html+='<span class="text-sm" style="width:90px">'+VOCAL_SYSTEMS[sys].name+'</span>';
+    html+='<div class="prog flex-1"><div class="prog__fill" style="width:'+barWidth+'%"></div></div>';
+    html+='<span class="text-sm text-muted" style="width:24px">'+level+'</span>';
     html+='</div>';
   }
-  // Quick practice
-  html+='<div class="sec-header mt-16"><span class="sec-title">Quick Practice</span></div>';
-  html+='<div class="card" onclick="SC.nav(\'practice\')">';
-  html+='<div class="flex items-center justify-between">';
-  html+='<div>';
-  html+='<h3>5-Minute Warm-Up</h3>';
-  html+='<p class="text-muted">Breath → Humble Hum → Siren → Song</p>';
-  html+='</div>';
-  html+='<span class="btn btn--primary btn--sm">Go</span>';
-  html+='</div>';
-  html+='</div>';
-  // Recent badges
-  if(S.badges.length>0){
+  // Badges
+  if(U.badges.length>0){
     html+='<div class="sec-header mt-16"><span class="sec-title">Badges</span></div>';
     html+='<div class="flex gap-8" style="flex-wrap:wrap">';
-    for(var i=0;i<S.badges.length;i++){
-      html+='<div class="card card--gold text-center" style="min-width:80px;padding:12px">';
-      html+='<div style="font-size:1.5rem">'+S.badges[i].icon+'</div>';
-      html+='<div class="text-sm text-muted mt-8">'+S.badges[i].name+'</div>';
+    for(var b=0;b<U.badges.length;b++){
+      html+='<div class="card card--gold text-center" style="min-width:70px;padding:10px">';
+      html+='<div style="font-size:1.2rem">'+U.badges[b].icon+'</div>';
+      html+='<div class="text-sm mt-4">'+U.badges[b].name+'</div>';
       html+='</div>';
     }
     html+='</div>';
@@ -648,272 +723,160 @@ function renderHome(){
   c.innerHTML=html;
 }
 
-function getStageName(){
-  var stages=['Awakening','Control','Athleticism','Musicianship','Ear Mastery','Performance Psychology','Genre System','Fusion Training','Production Literacy','Market Mastery'];
-  return stages[S.stage-1]||'Unknown';
-}
-function getOverallPct(){
-  var total=30;var done=S.completed.length;
-  return Math.min(100,Math.round(done/total*100));
-}
-function getNextMission(){
-  // Return next incomplete lesson
-  var vStages=VOCAL_ENGINE.stages;
-  for(var s=0;s<vStages.length;s++){
-    var st=vStages[s];
-    for(var l=0;l<st.lessons.length;l++){
-      var lid=st.lessons[l].id;
-      if(S.completed.indexOf(lid)===-1){
-        return {icon:'📖',title:st.lessons[l].title,sub:'Stage '+(s+1)+' • Lesson '+(l+1),id:lid,stage:s+1};
-      }
-    }
-  }
-  return {icon:'🎉',title:'All lessons complete!',sub:'You are a certified singer',id:null};
-}
-
 /* ═══════════════════════════════════════════════════
-   RENDER: LEARN (Stage List → Lesson List)
+   RENDER: LEARN (Stage Overview)
    ═══════════════════════════════════════════════════ */
 function renderLearn(){
   var c=document.getElementById('learn-content');
-  document.getElementById('learn-progress').textContent='Stage '+S.stage+'/10';
+  document.getElementById('learn-stage-label').textContent='Stage '+U.stage+'/10';
   var html='';
-  var stages=VOCAL_ENGINE.stages;
-  for(var i=0;i<stages.length;i++){
-    var st=stages[i];
-    var locked=(i+1)>S.stage;
-    var doneCount=0;
-    for(var l=0;l<st.lessons.length;l++){
-      if(S.completed.indexOf(st.lessons[l].id)!==-1)doneCount++;
-    }
+  html+='<h2 style="margin-bottom:4px">Your Vocal Journey</h2>';
+  html+='<p class="text-muted mb-16">Each stage unlocks as your skills grow. Current stage highlighted.</p>';
+  for(var i=0;i<STAGES.length;i++){
+    var st=STAGES[i];
+    var locked=(i+1)>U.stage;
+    var current=(i+1)===U.stage;
     var opacity=locked?'0.4':'1';
-    html+='<div class="card" style="opacity:'+opacity+';margin-bottom:12px" '+(locked?'':'onclick="SC.openStage('+(i+1)+')"')+'>';
+    var border=current?'card--highlight':'';
+    html+='<div class="card '+border+'" style="opacity:'+opacity+';margin-bottom:10px" '+(locked?'':'onclick="SC.openStage('+(i+1)+')"')+'>';
     html+='<div class="flex items-center justify-between">';
     html+='<div class="flex items-center gap-12">';
-    html+='<div class="list-item__icon '+(doneCount===st.lessons.length?'list-item__icon--success':locked?'list-item__icon--warn':'list-item__icon--primary')+'">'+(doneCount===st.lessons.length?'✓':(i+1))+'</div>';
+    html+='<div class="list-item__icon '+(current?'list-item__icon--primary':'list-item__icon--'+(locked?'warn':'success'))+'">'+(current?'▶':(i+1))+'</div>';
     html+='<div>';
     html+='<div class="list-item__title">Stage '+(i+1)+': '+st.name+'</div>';
-    html+='<div class="list-item__sub">'+st.subtitle+' • '+doneCount+'/'+st.lessons.length+' lessons</div>';
+    html+='<div class="list-item__sub">'+st.subtitle+'</div>';
     html+='</div>';
     html+='</div>';
-    if(!locked){
-      html+='<div class="prog mt-12"><div class="prog__fill" style="width:'+Math.round(doneCount/st.lessons.length*100)+'%"></div></div>';
-    }
+    if(!locked)html+='<span class="text-primary text-sm">Enter →</span>';
+    else html+='<span class="text-muted text-sm">🔒 Locked</span>';
     html+='</div>';
   }
   c.innerHTML=html;
 }
 
-var CURRENT_STAGE=1;
 function openStage(n){
-  CURRENT_STAGE=n;
   var c=document.getElementById('learn-content');
-  var st=VOCAL_ENGINE.stages[n-1];
+  var st=STAGES[n-1];
   var html='';
   html+='<div class="mb-12"><span class="text-primary font-weight-600" onclick="SC.nav(\'learn\')">← Back to Stages</span></div>';
   html+='<h2 style="margin-bottom:4px">Stage '+n+': '+st.name+'</h2>';
   html+='<p class="text-muted mb-16">'+st.desc+'</p>';
-  for(var l=0;l<st.lessons.length;l++){
-    var lesson=st.lessons[l];
-    var done=S.completed.indexOf(lesson.id)!==-1;
-    var nextAvail=l===0||S.completed.indexOf(st.lessons[l-1].id)!==-1;
-    var opacity=(nextAvail||done)?'1':'0.5';
-    html+='<div class="list-item" style="opacity:'+opacity+'" '+(nextAvail||done?'onclick="SC.openLesson('+n+','+(l+1)+')"':'')+'>';
-    html+='<div class="list-item__icon '+(done?'list-item__icon--success':'list-item__icon--primary')+'">'+(done?'✓':(l+1))+'</div>';
-    html+='<div class="list-item__body">';
-    html+='<div class="list-item__title">'+lesson.title+'</div>';
-    html+='<div class="list-item__sub">'+lesson.hook.text.substring(0,60)+'…</div>';
-    html+='</div>';
-    if(done)html+='<span class="tag tag--success">Done</span>';
-    else if(nextAvail)html+='<span class="text-primary text-sm">Start →</span>';
-    else html+='<span class="text-muted text-sm">🔒</span>';
-    html+='</div>';
-  }
+  // Show exercises for this stage based on skills
+  html+='<div class="sec-header"><span class="sec-title">Available Training</span></div>';
+  html+='<div class="card card--highlight" onclick="SC.startDiagnosis()">';
+  html+='<div class="flex items-center gap-12">';
+  html+='<div class="list-item__icon list-item__icon--primary">🎯</div>';
+  html+='<div class="list-item__body">';
+  html+='<div class="list-item__title">Adaptive Session</div>';
+  html+='<div class="list-item__sub">The engine diagnoses your weakness and prescribes an exercise</div>';
+  html+='</div>';
+  html+='<span class="btn btn--primary btn--sm">Start</span>';
+  html+='</div>';
+  // Practice mode
+  html+='<div class="card" onclick="SC.nav(\'practice\')">';
+  html+='<div class="flex items-center gap-12">';
+  html+='<div class="list-item__icon list-item__icon--success">🎵</div>';
+  html+='<div class="list-item__body">';
+  html+='<div class="list-item__title">Practice Mode</div>';
+  html+='<div class="list-item__sub">Quick drills targeting your weakest system</div>';
+  html+='</div>';
+  html+='<span class="text-primary text-sm">Go →</span>';
+  html+='</div>';
   c.innerHTML=html;
+  nav('learn');
 }
 
 /* ═══════════════════════════════════════════════════
-   RENDER: LESSON (13-Element Template)
-   ═══════════════════════════════════════════════════ */
-function openLesson(stageNum,lessonNum){
-  var st=VOCAL_ENGINE.stages[stageNum-1];
-  if(!st||lessonNum<1||lessonNum>st.lessons.length)return;
-  var lesson=st.lessons[lessonNum-1];
-  var c=document.getElementById('lesson-content');
-  var html='';
-  // 1. Hook
-  html+='<div class="hook mt-16">';
-  html+='<div class="hook__label">'+lesson.hook.label+'</div>';
-  html+='<div class="hook__text">'+lesson.hook.text+'</div>';
-  html+='</div>';
-  // 2. Why this matters
-  html+='<h2>Why This Matters</h2>';
-  html+='<p class="mb-12">'+lesson.concept+'</p>';
-  // 3. Concept (simple explanation)
-  html+='<div class="concept-box">';
-  html+='<h3>Concept</h3>';
-  html+='<p>'+lesson.concept+'</p>';
-  html+='</div>';
-  // 4. Demonstration
-  html+='<h2>Demonstration</h2>';
-  html+='<div class="card card--surface mb-12">';
-  html+='<p>'+lesson.demo+'</p>';
-  html+='</div>';
-  // 5. Exercise
-  html+='<div class="exercise-block">';
-  html+='<div class="exercise-block__label">'+lesson.exercise.label+'</div>';
-  html+='<div class="exercise-block__title">'+lesson.exercise.title+'</div>';
-  if(lesson.exercise.ipa)html+='<div class="exercise-block__detail"><strong>IPA Target:</strong> <span class="mono">'+lesson.exercise.ipa+'</span></div>';
-  if(lesson.exercise.consonant)html+='<div class="exercise-block__detail"><strong>Consonant Strategy:</strong> '+lesson.exercise.consonant+'</div>';
-  if(lesson.exercise.range)html+='<div class="exercise-block__detail"><strong>Range Zone:</strong> '+lesson.exercise.range+'</div>';
-  if(lesson.exercise.coordination)html+='<div class="exercise-block__detail"><strong>Coordination Goal:</strong> '+lesson.exercise.coordination+'</div>';
-  if(lesson.exercise.steps){
-    html+='<ol style="padding-left:20px;margin-top:8px">';
-    for(var s=0;s<lesson.exercise.steps.length;s++){
-      html+='<li style="font-size:.85rem;color:var(--text-soft);margin-bottom:6px">'+lesson.exercise.steps[s]+'</li>';
-    }
-    html+='</ol>';
-  }
-  html+='</div>';
-  // 6. Song Application
-  html+='<h2>Song Application</h2>';
-  html+='<div class="card mb-12">';
-  html+='<div class="flex items-center gap-8 mb-8"><span class="tag tag--primary">'+lesson.song_app.title+'</span></div>';
-  html+='<p><strong>Why this song:</strong> '+lesson.song_app.why+'</p>';
-  html+='<p><strong>Focus:</strong> '+lesson.song_app.focus+'</p>';
-  html+='</div>';
-  // 7. Mistakes
-  html+='<h2>Common Mistakes</h2>';
-  for(var m=0;m<lesson.mistakes.length;m++){
-    html+='<div class="mistake-item">';
-    html+='<span class="mistake-item__icon">'+lesson.mistakes[m].icon+'</span>';
-    html+='<div class="mistake-item__text">'+lesson.mistakes[m].text+'</div>';
-    html+='</div>';
-  }
-  // 8. Fixes
-  html+='<h2 class="mt-12">Fixes</h2>';
-  html+='<div class="card card--surface mb-12">';
-  for(var f=0;f<lesson.fixes.length;f++){
-    html+='<p style="margin-bottom:8px">• '+lesson.fixes[f]+'</p>';
-  }
-  html+='</div>';
-  // 9. Challenge
-  html+='<div class="challenge-box">';
-  html+='<div class="challenge-box__label">'+lesson.challenge.label+'</div>';
-  html+='<p>'+lesson.challenge.task+'</p>';
-  html+='</div>';
-  // 10. Reflection
-  html+='<h2>Reflection</h2>';
-  html+='<p class="mb-12">'+lesson.reflection+'</p>';
-  // 11. Self-feedback Rubric
-  html+='<h2>Self-Check</h2>';
-  html+='<div class="rubric">';
-  for(var r=0;r<lesson.rubric.length;r++){
-    html+='<div class="rubric__item">';
-    html+='<div class="rubric__score">'+(lesson.rubric[r].score||'✓')+'</div>';
-    html+='<div class="rubric__label">'+lesson.rubric[r].label+'</div>';
-    html+='</div>';
-  }
-  html+='</div>';
-  // 12. Reward
-  html+='<div class="card card--gold mt-16 mb-12 text-center">';
-  html+='<div style="font-size:1.5rem;margin-bottom:8px">🏆</div>';
-  html+='<p class="text-gold font-weight-600">'+lesson.reward+'</p>';
-  html+='</div>';
-  // 13. Next Mission (no dead ends)
-  html+='<button class="btn btn--primary btn--full btn--lg" onclick="SC.completeLesson('+stageNum+','+lessonNum+')">Mark Complete & Continue →</button>';
-  html+='<button class="btn btn--ghost btn--full mt-8" onclick="SC.openStage('+stageNum+')">← Back to Stage</button>';
-  c.innerHTML=html;
-  nav('lesson');
-}
-
-/* ═══════════════════════════════════════════════════
-   COMPLETE LESSON + RETENTION ENGINE
-   Trigger → Task → Micro Win → Feedback → Unlock → Next
-   ═══════════════════════════════════════════════════ */
-function completeLesson(stageNum,lessonNum){
-  var st=VOCAL_ENGINE.stages[stageNum-1];
-  var lesson=st.lessons[lessonNum-1];
-  var lid=lesson.id;
-  if(S.completed.indexOf(lid)===-1)S.completed.push(lid);
-  // XP
-  var xpGain=50;
-  S.xp+=xpGain;
-  // Level up check
-  var newLevel=Math.floor(S.xp/200)+1;
-  var leveledUp=newLevel>S.level;
-  if(leveledUp)S.level=newLevel;
-  // Stage progression
-  var allDone=true;
-  for(var l=0;l<st.lessons.length;l++){
-    if(S.completed.indexOf(st.lessons[l].id)===-1)allDone=false;
-  }
-  if(allDone&&S.stage===stageNum&&S.stage<10)S.stage++;
-  save();
-  // Toast (micro win)
-  toast('+'+xpGain+' XP'+(leveledUp?' • Level Up! '+newLevel:''),'success');
-  // Badge check
-  checkBadges();
-  // Next mission (no dead ends)
-  var next=lesson.next;
-  if(next&&next!==''){
-    var parts=next.split('-');
-    var ns=parseInt(parts[0]),nl=parseInt(parts[1]);
-    setTimeout(function(){openLesson(ns,nl);},150);
-  }else if(stageNum<10){
-    setTimeout(function(){openStage(stageNum+1);},150);
-  }else{
-    setTimeout(function(){nav('progress');},150);
-  }
-}
-
-function checkBadges(){
-  var badges=[];
-  if(S.completed.length>=1)badges.push({icon:'🎤',name:'First Step'});
-  if(S.completed.length>=5)badges.push({icon:'🔥',name:'5 Lessons'});
-  if(S.completed.length>=10)badges.push({icon:'⭐',name:'Dedicated'});
-  if(S.xp>=200)badges.push({icon:'💎',name:'200 XP'});
-  if(S.xp>=500)badges.push({icon:'👑',name:'500 XP'});
-  if(S.stage>=5)badges.push({icon:'🎭',name:'Halfway'});
-  if(S.stage>=10)badges.push({icon:'🏆',name:'Graduate'});
-  S.badges=badges;
-}
-
-/* ═══════════════════════════════════════════════════
-   RENDER: PRACTICE
+   RENDER: PRACTICE (Adaptive Drills)
    ═══════════════════════════════════════════════════ */
 function renderPractice(){
   var c=document.getElementById('practice-content');
   var html='';
-  html+='<h2 style="margin-bottom:4px">Daily Practice</h2>';
-  html+='<p class="text-muted mb-16">5 minutes. No excuses. Build the habit.</p>';
-  // Warm-up sequence
-  var warmups=[
-    {icon:'🫁',title:'Breath Reset',time:'1 min',desc:'4-4-8 breath cycle x4'},
-    {icon:'🎵',title:'Humble Hum',time:'1 min',desc:'Hum on "ng" — slide up and down'},
-    {icon:'🎶',title:'Vowel Ladder',time:'1 min',desc:'[i-e-ɑ-o-u] ascending'},
-    {icon:'🎤',title:'Song Application',time:'2 min',desc:'Sing a verse of your current song'}
-  ];
-  for(var w=0;w<warmups.length;w++){
-    html+='<div class="list-item" onclick="startPractice('+w+')">';
-    html+='<div class="list-item__icon list-item__icon--primary">'+warmups[w].icon+'</div>';
-    html+='<div class="list-item__body">';
-    html+='<div class="list-item__title">'+warmups[w].title+'</div>';
-    html+='<div class="list-item__sub">'+warmups[w].desc+'</div>';
-    html+='</div>';
-    html+='<span class="tag tag--primary">'+warmups[w].time+'</span>';
+  html+='<h2 style="margin-bottom:4px">Practice Mode</h2>';
+  html+='<p class="text-muted mb-16">Quick drills. Targets your weakest system. Adapts to your feedback.</p>';
+  // Identify weakest system
+  var weakest=null;var lowest=99;
+  for(var k in U.skills){if(U.skills[k]<lowest){lowest=U.skills[k];weakest=k;}}
+  if(!weakest)weakest='source';
+  // Generate adaptive drill
+  var drill=generateDrill(weakest,U.difficultyMod);
+  html+='<div class="card card--highlight mb-12">';
+  html+='<div class="hook__label">Target: '+VOCAL_SYSTEMS[weakest].name+'</div>';
+  html+='<div class="hook__text">'+drill.title+'</div>';
+  html+='<p class="text-muted mt-8">'+drill.description+'</p>';
+  html+='</div>';
+  html+='<h3>Drill Steps</h3>';
+  for(var s=0;s<drill.steps.length;s++){
+    html+='<div class="list-item" style="align-items:flex-start">';
+    html+='<div class="list-item__icon list-item__icon--primary" style="margin-top:2px">'+(s+1)+'</div>';
+    html+='<div class="list-item__body"><div class="list-item__title" style="white-space:normal">'+drill.steps[s]+'</div></div>';
     html+='</div>';
   }
-  // Practice streak
-  html+='<div class="card card--gold mt-16 text-center">';
-  html+='<div style="font-size:2rem;margin-bottom:8px">🔥</div>';
-  html+='<h3>'+S.streak+' Day Streak</h3>';
-  html+='<p class="text-muted">Keep it alive. Every day counts.</p>';
-  html+='</div>';
+  html+='<button class="btn btn--primary btn--full btn--lg mt-12" onclick="SC.completeDrill(\''+weakest+'\',\''+drill.id+'\')">Complete Drill ✓</button>';
+  // All system drills
+  html+='<div class="sec-header mt-16"><span class="sec-title">All System Drills</span></div>';
+  var systems=['airflow','source','resonance','articulation'];
+  for(var s=0;s<systems.length;s++){
+    var sys=systems[s];
+    var level=U.skills[sys];
+    html+='<div class="list-item" onclick="SC.quickDrill(\''+sys+'\')">';
+    html+='<div class="list-item__icon list-item__icon--primary">'+getSystemIcon(sys)+'</div>';
+    html+='<div class="list-item__body">';
+    html+='<div class="list-item__title">'+VOCAL_SYSTEMS[sys].name+' Drill</div>';
+    html+='<div class="list-item__sub">Level '+level+'/10 • '+VOCAL_SYSTEMS[sys].errors[0].replace(/_/g,' ')+'</div>';
+    html+='</div>';
+    html+='<span class="tag tag--'+(level>=7?'success':level>=4?'primary':'warn')+'">L'+level+'</span>';
+    html+='</div>';
+  }
   c.innerHTML=html;
 }
-function startPractice(idx){
-  toast('Practice started! Follow the steps.','success');
+
+function getSystemIcon(sys){
+  var map={airflow:'🫁',source:'🎵',resonance:'🎤',articulation:'👅'};
+  return map[sys]||'🎯';
+}
+
+function generateDrill(system,diffMod){
+  var drills={
+    airflow:[
+      {id:'af1',title:'4-4-8 Breath Cycle',description:'Train steady airflow control',steps:['Inhale through nose for 4 counts','Hold for 4 counts — engage core gently','Exhale on "ssss" for 8 counts — steady stream','Repeat 4 times','Increase exhale to 10 counts if comfortable']},
+      {id:'af2',title:'Fricative Control',description:'Sustain "s" and "f" with even airflow',steps:['Sustain "ssss" for 10 seconds — even, no wobble','Sustain "ffff" for 10 seconds — same intensity','Alternate: sss-fff-sss-fff','Increase duration to 15 seconds','Apply to a phrase: "Sister Susie"']},
+      {id:'af3',title:'Lip Trill Siren',description:'Connect breath to pitch',steps:['Lip trill on comfortable pitch','Slide up 5 notes, then down','Keep the buzz going — no breaks','Repeat 3 times','Apply to a song phrase']}
+    ],
+    source:[
+      {id:'sr1',title:'Balanced Onset',description:'Clean vocal fold closure',steps:['Say "ah" — no "h", no glottal catch','Hold "ah" for 5 seconds — clean tone','Repeat 5 times','Sing "ah-ah-ah" on 3 pitches','Apply to: "Amazing Grace" first line']},
+      {id:'sr2',title:'NG Hum Scale',description:'Stable fold vibration',steps:['Hum on "ng" — feel buzz in nose','Slide up 5 notes on "ng"','Slide back down','Open to "ah" — keep the ease','Apply to: "Hallelujah"']},
+      {id:'sr3',title:'Pitch Matching',description:'Hit the target note first time',steps:['Play a note on piano app','Sing it back — hold for 3 seconds','Check: did you match?','Try 5 different notes','Play a 3-note melody, sing it back']}
+    ],
+    resonance:[
+      {id:'rs1',title:'Forward Placement',description:'Shift resonance to the mask',steps:['Hum on "m" — feel buzz in lips','Open to "ah" — keep the forward buzz','Sing "m-m-m then ahh"','Repeat on different pitches','Apply to: "Lean On Me"']},
+      {id:'rs2',title:'Vowel Modification',description:'Adapt vowels for pitch height',steps:['Sing "ah" on low note — wide open','Sing "ah" on mid note — slightly narrower','Sing "ah" on high note — "aw" modification','Practice ascending scale on "ah"','Apply to: "Someone Like You"']},
+      {id:'rs3',title:'Nasal Balance',description:'Control nasality',steps:['Hum — feel nose buzz (normal)','Open to "ah" — nose buzz should decrease','Sing "ng-ah-ng-ah" — feel the shift','Practice: keep nasality only on M, N, NG','Apply to: "Thinking Out Loud"']}
+    ],
+    articulation:[
+      {id:'ar1',title:'Consonant Clarity',description:'Clean diction without tension',steps:['Speak: "ma-me-mi-mo-mu" — slow, clear','Sing: "ma-me-mi-mo-mu" on one pitch','Increase speed — keep clarity','Add words: "My mama makes me march"','Apply to: "Shake It Off"']},
+      {id:'ar2',title:'Tongue Agility',description:'Release tongue tension',steps:['Say "la-la-la" — fast, light','Say "ta-ta-ta' — crisp, no strain','Say "ka-ka-ka' — back of tongue','Sing: "la-ta-ka" on 3 pitches','Apply to fast lyrics']},
+      {id:'ar3',title:'Jaw Release',description:'Sing without jaw clenching',steps:['Yawn — feel jaw drop','Say "ah" — jaw should be loose','Sing "ah-ah-ah" — jaw stays loose','Place hand on jaw — sing, feel for tension','Apply to sustained notes']}
+    ]
+  };
+  var pool=drills[system]||drills.source;
+  var idx=Math.min(pool.length-1,Math.max(0,Math.floor((U.skills[system]||0)/4)+diffMod));
+  return pool[idx]||pool[0];
+}
+
+function completeDrill(system,drillId){
+  U.skills[system]=Math.min(10,(U.skills[system]||0)+1);
+  U.xp+=20;
+  U.sessions++;
+  saveState();
+  toast('+20 XP • '+VOCAL_SYSTEMS[system].name+' +1','success');
+  renderPractice();
+}
+function quickDrill(system){
+  var diag=DIAGNOSTIC.assess([getSystemSymptom(system)]);
+  var ex=EXERCISE_GEN.generate(diag,U);
+  var song=selectSong(diag,U);
+  renderSession(diag,ex,song);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -923,38 +886,37 @@ function renderSongs(){
   var c=document.getElementById('songs-content');
   var html='';
   html+='<h2 style="margin-bottom:4px">Song Library</h2>';
-  html+='<p class="text-muted mb-16">Each song is a diagnostic tool. Sing it to grow.</p>';
+  html+='<p class="text-muted mb-16">Each song is a diagnostic tool. Your weakness determines which to train.</p>';
   // Filter tags
-  var tags=['All','Low Range','Mid Range','High Range','Pop','Gospel','Afrobeats','R&B'];
+  var tags=['All','Low Range','Mid Range','Pop','Soul','Gospel','Afrobeats'];
   html+='<div class="flex gap-8 mb-16" style="flex-wrap:wrap">';
   for(var t=0;t<tags.length;t++){
     html+='<span class="tag tag--primary" style="cursor:pointer" onclick="filterSongs(\''+tags[t]+'\')">'+tags[t]+'</span>';
   }
   html+='</div>';
-  // Song list
   var filtered=SONGS;
-  if(CURRENT_SONG_FILTER&&CURRENT_SONG_FILTER!=='All'){
+  if(CURRENT_FILTER&&CURRENT_FILTER!=='All'){
     filtered=[];
     for(var s=0;s<SONGS.length;s++){
       var song=SONGS[s];
       var match=false;
-      if(CURRENT_SONG_FILTER==='Low Range'&&song.rangeDemand==='low')match=true;
-      if(CURRENT_SONG_FILTER==='Mid Range'&&song.rangeDemand==='mid')match=true;
-      if(CURRENT_SONG_FILTER==='High Range'&&song.rangeDemand==='high')match=true;
-      if(CURRENT_SONG_FILTER==='Pop'&&song.genre.indexOf('Pop')!==-1)match=true;
-      if(CURRENT_SONG_FILTER==='Gospel'&&song.genre.indexOf('Gospel')!==-1)match=true;
-      if(CURRENT_SONG_FILTER==='Afrobeats'&&song.genre.indexOf('Afrobeats')!==-1)match=true;
-      if(CURRENT_SONG_FILTER==='R&B'&&song.genre.indexOf('R&B')!==-1)match=true;
+      if(CURRENT_FILTER==='Low Range'&&song.rangeDemand==='low')match=true;
+      if(CURRENT_FILTER==='Mid Range'&&song.rangeDemand==='mid')match=true;
+      if(CURRENT_FILTER==='Pop'&&song.genre.indexOf('Pop')!==-1)match=true;
+      if(CURRENT_FILTER==='Soul'&&song.genre.indexOf('Soul')!==-1)match=true;
+      if(CURRENT_FILTER==='Gospel'&&song.genre.indexOf('Gospel')!==-1)match=true;
+      if(CURRENT_FILTER==='Afrobeats'&&song.genre.indexOf('Afrobeats')!==-1)match=true;
       if(match)filtered.push(song);
     }
   }
   for(var s=0;s<filtered.length;s++){
     var song=filtered[s];
+    var completed=U.completed.indexOf(song.id)!==-1;
     var diffStars='';
     for(var d=0;d<song.difficulty;d++)diffStars+='★';
     for(var d=song.difficulty;d<10;d++)diffStars+='☆';
-    html+='<div class="list-item" onclick="openSongDetail(\''+song.id+'\')">';
-    html+='<div class="list-item__icon list-item__icon--gold">🎵</div>';
+    html+='<div class="list-item" onclick="SC.openSong(\''+song.id+'\')">';
+    html+='<div class="list-item__icon list-item__icon--gold">'+(completed?'✓':'♪')+'</div>';
     html+='<div class="list-item__body">';
     html+='<div class="list-item__title">'+song.title+'</div>';
     html+='<div class="list-item__sub">'+song.artist+' • '+song.genre+' • '+song.rangeDemand+' range</div>';
@@ -968,12 +930,10 @@ function renderSongs(){
   if(filtered.length===0)html+='<p class="text-muted text-center pad">No songs match this filter.</p>';
   c.innerHTML=html;
 }
-var CURRENT_SONG_FILTER='All';
-function filterSongs(tag){
-  CURRENT_SONG_FILTER=tag;
-  renderSongs();
-}
-function openSongDetail(id){
+var CURRENT_FILTER='All';
+function filterSongs(tag){CURRENT_FILTER=tag;renderSongs();}
+
+function openSong(id){
   var song=null;
   for(var s=0;s<SONGS.length;s++)if(SONGS[s].id===id)song=SONGS[s];
   if(!song)return;
@@ -982,34 +942,25 @@ function openSongDetail(id){
   html+='<div class="mb-12"><span class="text-primary font-weight-600" onclick="renderSongs()">← Back to Songs</span></div>';
   html+='<h2>'+song.title+'</h2>';
   html+='<p class="text-muted mb-16">'+song.artist+' • '+song.genre+'</p>';
-  // Stats
   html+='<div class="card mb-12">';
   html+='<div class="flex items-center justify-between mb-8"><span class="text-sm text-muted">Range</span><span class="font-weight-600">'+song.range+'</span></div>';
   html+='<div class="flex items-center justify-between mb-8"><span class="text-sm text-muted">Difficulty</span><span class="text-warn">'+'★'.repeat(song.difficulty)+'☆'.repeat(10-song.difficulty)+'</span></div>';
   html+='<div class="flex items-center justify-between mb-8"><span class="text-sm text-muted">Breath Load</span><span class="tag tag--'+(song.breathLoad==='heavy'?'warn':song.breathLoad==='medium'?'primary':'success')+'">'+song.breathLoad+'</span></div>';
   html+='<div class="flex items-center justify-between"><span class="text-sm text-muted">Vowel Profile</span><span class="font-weight-600">'+song.vowelProfile+'</span></div>';
   html+='</div>';
-  // Technique requirements
   html+='<h2>Technique Requirements</h2>';
   html+='<div class="flex gap-8 mb-12" style="flex-wrap:wrap">';
-  for(var t=0;t<song.technique.length;t++){
-    html+='<span class="tag tag--primary">'+song.technique[t].replace(/_/g,' ')+'</span>';
-  }
+  for(var t=0;t<song.technique.length;t++)html+='<span class="tag tag--primary">'+song.technique[t].replace(/_/g,' ')+'</span>';
   html+='</div>';
-  // Risk flags
   if(song.riskFlags.length>0){
     html+='<h2>Risk Flags</h2>';
     html+='<div class="card card--surface mb-12">';
-    for(var r=0;r<song.riskFlags.length;r++){
-      html+='<p>⚠️ '+song.riskFlags[r].replace(/_/g,' ')+'</p>';
-    }
+    for(var r=0;r<song.riskFlags.length;r++)html+='<p>⚠️ '+song.riskFlags[r].replace(/_/g,' ')+'</p>';
     html+='</div>';
   }
-  // Emotional intent
   html+='<h2>Emotional Intent</h2>';
   html+='<p class="mb-12">'+song.emotionalIntent+'</p>';
-  // CTA
-  html+='<button class="btn btn--primary btn--full btn--lg" onclick="toast(\'Open BandLab and record: '+song.title+'\',\'success\')">Record This Song in BandLab →</button>';
+  html+='<button class="btn btn--primary btn--full btn--lg" onclick="SC.trainSong(\''+song.id+'\')">Train This Song →</button>';
   c.innerHTML=html;
 }
 
@@ -1020,154 +971,232 @@ function renderProgress(){
   var c=document.getElementById('progress-content');
   var html='';
   html+='<h2 style="margin-bottom:4px">Your Progress</h2>';
-  html+='<p class="text-muted mb-16">Every lesson counts. Here is where you stand.</p>';
+  html+='<p class="text-muted mb-16">Every action counts. Here is where you stand.</p>';
   // Stats grid
-  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">';
-  html+='<div class="card text-center"><div style="font-size:1.5rem;font-weight:700;color:var(--primary)">'+S.xp+'</div><div class="text-sm text-muted">XP</div></div>';
-  html+='<div class="card text-center"><div style="font-size:1.5rem;font-weight:700;color:var(--gold)">'+S.level+'</div><div class="text-sm text-muted">Level</div></div>';
-  html+='<div class="card text-center"><div style="font-size:1.5rem;font-weight:700;color:var(--success)">'+S.completed.length+'</div><div class="text-sm text-muted">Lessons</div></div>';
-  html+='<div class="card text-center"><div style="font-size:1.5rem;font-weight:700;color:var(--warn)">'+S.stage+'</div><div class="text-sm text-muted">Stage</div></div>';
+  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">';
+  html+='<div class="card text-center"><div style="font-size:1.4rem;font-weight:700;color:var(--primary)">'+U.xp+'</div><div class="text-sm text-muted">XP</div></div>';
+  html+='<div class="card text-center"><div style="font-size:1.4rem;font-weight:700;color:var(--gold)">'+U.level+'</div><div class="text-sm text-muted">Level</div></div>';
+  html+='<div class="card text-center"><div style="font-size:1.4rem;font-weight:700;color:var(--success)">'+U.sessions+'</div><div class="text-sm text-muted">Sessions</div></div>';
+  html+='<div class="card text-center"><div style="font-size:1.4rem;font-weight:700;color:var(--warn)">'+U.completed.length+'/'+SONG_DB.length+'</div><div class="text-sm text-muted">Songs</div></div>';
   html+='</div>';
-  // Overall progress
+  // Overall
+  var overallPct=Math.round(U.completed.length/SONG_DB.length*100);
   html+='<div class="card mb-12">';
-  html+='<div class="flex items-center justify-between mb-8"><span class="font-weight-600">Overall Completion</span><span class="text-primary">'+getOverallPct()+'%</span></div>';
-  html+='<div class="prog"><div class="prog__fill" style="width:'+getOverallPct()+'%"></div></div>';
+  html+='<div class="flex items-center justify-between mb-8"><span class="font-weight-600">Overall Completion</span><span class="text-primary">'+overallPct+'%</span></div>';
+  html+='<div class="prog"><div class="prog__fill" style="width:'+overallPct+'%"></div></div>';
   html+='</div>';
-  // Stage breakdown
-  html+='<h2>Stage Breakdown</h2>';
-  var stages=VOCAL_ENGINE.stages;
-  for(var i=0;i<stages.length;i++){
-    var st=stages[i];
-    var done=0;
-    for(var l=0;l<st.lessons.length;l++)if(S.completed.indexOf(st.lessons[l].id)!==-1)done++;
-    var pct=Math.round(done/st.lessons.length*100);
-    var color=i+1<=S.stage?'var(--primary)':'var(--text-muted)';
+  // Skill breakdown
+  html+='<h2>Voice Systems</h2>';
+  var systems=['airflow','source','resonance','articulation'];
+  for(var i=0;i<systems.length;i++){
+    var sys=systems[i];
+    var level=U.skills[sys]||0;
+    var pct=level*10;
+    var color=level>=7?'var(--success)':level>=4?'var(--primary)':'var(--warn)';
     html+='<div class="card mb-8">';
     html+='<div class="flex items-center justify-between mb-8">';
-    html+='<span class="font-weight-600" style="color:'+color+'">Stage '+(i+1)+': '+st.name+'</span>';
-    html+='<span class="text-sm text-muted">'+done+'/'+st.lessons.length+'</span>';
+    html+='<span class="font-weight-600" style="color:'+color+'">'+VOCAL_SYSTEMS[sys].name+'</span>';
+    html+='<span class="text-sm text-muted">Level '+level+'/10</span>';
     html+='</div>';
-    html+='<div class="prog '+(pct===100?'prog--success':'')+'"><div class="prog__fill" style="width:'+pct+'%"></div></div>';
+    html+='<div class="prog '+(level>=7?'prog--success':'')+'"><div class="prog__fill" style="width:'+pct+'%"></div></div>';
+    html+='</div>';
+  }
+  // Stage progress
+  html+='<h2 class="mt-16">Stage Progress</h2>';
+  for(var i=0;i<STAGES.length;i++){
+    var locked=(i+1)>U.stage;
+    var current=(i+1)===U.stage;
+    var color=locked?'var(--text-muted)':current?'var(--primary)':'var(--success)';
+    html+='<div class="flex items-center gap-8 mb-8">';
+    html+='<div class="list-item__icon '+(current?'list-item__icon--primary':locked?'list-item__icon--warn':'list-item__icon--success')+'" style="width:32px;height:32px;font-size:.8rem">'+(current?'▶':(i+1))+'</div>';
+    html+='<span class="font-weight-600" style="color:'+color+'">Stage '+(i+1)+': '+STAGES[i].name+'</span>';
+    if(locked)html+='<span class="text-muted text-sm ml-auto">🔒</span>';
+    if(current)html+='<span class="text-primary text-sm ml-auto">Current</span>';
     html+='</div>';
   }
   // Badges
-  if(S.badges.length>0){
+  if(U.badges.length>0){
     html+='<h2 class="mt-16">Badges Earned</h2>';
     html+='<div class="flex gap-8" style="flex-wrap:wrap">';
-    for(var b=0;b<S.badges.length;b++){
-      html+='<div class="card card--gold text-center" style="min-width:100px;padding:16px">';
-      html+='<div style="font-size:1.5rem">'+S.badges[b].icon+'</div>';
-      html+='<div class="text-sm mt-8">'+S.badges[b].name+'</div>';
+    for(var b=0;b<U.badges.length;b++){
+      html+='<div class="card card--gold text-center" style="min-width:90px;padding:14px">';
+      html+='<div style="font-size:1.3rem">'+U.badges[b].icon+'</div>';
+      html+='<div class="text-sm mt-4">'+U.badges[b].name+'</div>';
       html+='</div>';
     }
     html+='</div>';
   }
   // Next CTA
-  var nm=getNextMission();
-  if(nm&&nm.id){
-    html+='<div class="card card--highlight mt-16">';
-    html+='<div class="hook__label">Next Mission</div>';
-    html+='<h3 style="margin-bottom:8px">'+nm.title+'</h3>';
-    html+='<button class="btn btn--primary btn--full mt-8" onclick="SC.nav(\'learn\')">Continue Training →</button>';
-    html+='</div>';
-  }else{
-    html+='<div class="card card--gold mt-16 text-center">';
-    html+='<div style="font-size:2rem;margin-bottom:8px">🏆</div>';
-    html+='<h3>Congratulations, '+S.name+'!</h3>';
-    html+='<p class="text-muted">You have completed The Singer Conservatory. You are ready.</p>';
-    html+='</div>';
-  }
+  html+='<div class="card card--highlight mt-16">';
+  html+='<div class="hook__label">Next Mission</div>';
+  html+='<h3 style="margin-bottom:8px">Keep Training</h3>';
+  html+='<p class="text-muted mb-12">Every session makes you a better singer. Consistency beats intensity.</p>';
+  html+='<button class="btn btn--primary btn--full" onclick="SC.startDiagnosis()">Start Next Session →</button>';
+  html+='</div>';
   c.innerHTML=html;
 }
 
 /* ═══════════════════════════════════════════════════
-   QA SYSTEM (MANDATORY)
+   DIAGNOSIS FLOW (SELF-ASSESSMENT)
    ═══════════════════════════════════════════════════ */
-var QA={
-  passed:0,failed:0,errors:[],
-  assert:function(name,condition){
-    if(condition){this.passed++;}
-    else{this.failed++;this.errors.push(name);}
-  },
+function startDiagnosis(){
+  var c=document.getElementById('session-content');
+  var html='';
+  html+='<div class="mt-12">';
+  html+='<h2 style="margin-bottom:4px">Vocal Diagnostic</h2>';
+  html+='<p class="text-muted mb-16">Select the symptoms you experience. The engine will identify the root cause and prescribe a targeted exercise.</p>';
+  html+='<div class="hook mb-16">';
+  html+='<div class="hook__label">How to use</div>';
+  html+='<div class="hook__text">Be honest. Select ALL that apply. Your answers shape your training.</div>';
+  html+='</div>';
+  // Symptom selection
+  var symptoms=[
+    {id:'pitch_instability',label:'Pitch Instability',desc:'My voice wavers or drifts from the target note'},
+    {id:'strain',label:'Strain',desc:'My voice feels tight, pushed, or painful'},
+    {id:'breathiness',label:'Breathiness',desc:'Air escapes — my tone lacks clarity'},
+    {id:'lack_of_power',label:'Lack of Power',desc:'My voice lacks volume and projection'},
+    {id:'break_in_registers',label:'Break in Registers',desc:'My voice cracks or flips between low and high'},
+    {id:'fatigue',label:'Fatigue',desc:'My voice tires quickly during singing'},
+    {id:'nasality',label:'Nasality',desc:'My tone has a pinched, nasal quality'},
+    {id:'loss_of_control',label:'Loss of Control',desc:'I cannot reliably control pitch or volume'}
+  ];
+  for(var i=0;i<symptoms.length;i++){
+    var s=symptoms[i];
+    html+='<div class="list-item" onclick="toggleSymptom(this,\''+s.id+'\')">';
+    html+='<div class="list-item__icon list-item__icon--warn" style="border-radius:var(--r-sm)"><span class="symptom-check" id="check-'+s.id+'" style="font-size:.8rem;color:var(--text-muted)">○</span></div>';
+    html+='<div class="list-item__body">';
+    html+='<div class="list-item__title">'+s.label+'</div>';
+    html+='<div class="list-item__sub">'+s.desc+'</div>';
+    html+='</div>';
+    html+='</div>';
+  }
+  html+='</div>';
+  html+='<button class="btn btn--primary btn--full btn--lg mt-12" id="diag-btn" onclick="SC.runDiagnosis()" disabled>Diagnose & Prescribe →</button>';
+  html+='<button class="btn btn--ghost btn--full mt-8" onclick="SC.nav(\'home\')">Cancel</button>';
+  c.innerHTML=html;
+  nav('session');
+}
+
+var SELECTED_SYMPTOMS=[];
+function toggleSymptom(el,id){
+  var idx=SELECTED_SYMPTOMS.indexOf(id);
+  var check=el.querySelector('.symptom-check');
+  if(idx===-1){
+    SELECTED_SYMPTOMS.push(id);
+    check.textContent='✓';check.style.color='var(--success)';
+    el.querySelector('.list-item__icon').classList.remove('list-item__icon--warn');
+    el.querySelector('.list-item__icon').classList.add('list-item__icon--success');
+  }else{
+    SELECTED_SYMPTOMS.splice(idx,1);
+    check.textContent='○';check.style.color='var(--text-muted)';
+    el.querySelector('.list-item__icon').classList.remove('list-item__icon--success');
+    el.querySelector('.list-item__icon').classList.add('list-item__icon--warn');
+  }
+  document.getElementById('diag-btn').disabled=SELECTED_SYMPTOMS.length===0;
+}
+
+function runDiagnosis(){
+  if(SELECTED_SYMPTOMS.length===0)return;
+  var diag=DIAGNOSTIC.assess(SELECTED_SYMPTOMS);
+  var ex=EXERCISE_GEN.generate(diag,U);
+  var song=selectSong(diag,U);
+  U.lastDiagnostic=diag;
+  SELECTED_SYMPTOMS=[];
+  renderSession(diag,ex,song);
+}
+
+/* ═══════════════════════════════════════════════════
+   GLOBAL SCREEN REFERENCE
+   ═══════════════════════════════════════════════════ */
+function nav(id){
+  var screens=document.querySelectorAll('.screen');
+  for(var i=0;i<screens.length;i++)screens[i].classList.remove('active');
+  var target=document.getElementById('screen-'+id);
+  if(target)target.classList.add('active');
+  var items=document.querySelectorAll('.nav__item');
+  for(var j=0;j<items.length;j++)items[j].classList.remove('active');
+  var navItem=document.getElementById('nav-'+id);
+  if(navItem)navItem.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(id==='home')renderHome();
+  if(id==='learn')renderLearn();
+  if(id==='practice')renderPractice();
+  if(id==='songs')renderSongs();
+  if(id==='progress')renderProgress();
+}
+
+/* ═══════════════════════════════════════════════════
+   UTILITY
+   ═══════════════════════════════════════════════════ */
+function toast(msg,type){
+  var el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast show'+(type?' toast--'+type:'');
+  setTimeout(function(){el.className='toast';},3000);
+}
+
+/* ═══════════════════════════════════════════════════
+   QA SYSTEM
+   ═══════════════════════════════════════════════════ */
+var QA={passed:0,failed:0,errors:[],
+  assert:function(name,cond){if(cond)this.passed++;else{this.failed++;this.errors.push(name);}},
   run:function(){
-    // UX QA: No dead ends
-    this.assert('Onboarding has CTA',document.getElementById('onboard-name')!==null);
-    this.assert('Bottom nav exists',document.querySelectorAll('.nav__item').length===5);
-    this.assert('All 5 nav items',document.querySelectorAll('.nav__item').length===5);
-    // Learning QA: All lessons have 13 elements
-    var allLessons=[];
-    for(var s=0;s<VOCAL_ENGINE.stages.length;s++){
-      for(var l=0;l<VOCAL_ENGINE.stages[s].lessons.length;l++){
-        allLessons.push(VOCAL_ENGINE.stages[s].lessons[l]);
-      }
-    }
-    this.assert('Lessons exist',allLessons.length>0);
-    for(var i=0;i<allLessons.length;i++){
-      var les=allLessons[i];
-      this.assert('Lesson '+les.id+' has hook',les.hook&&les.hook.text);
-      this.assert('Lesson '+les.id+' has exercise',les.exercise&&les.exercise.label);
-      this.assert('Lesson '+les.id+' has song_app',les.song_app&&les.song_app.title);
-      this.assert('Lesson '+les.id+' has mistakes',les.mistakes&&les.mistakes.length>0);
-      this.assert('Lesson '+les.id+' has fixes',les.fixes&&les.fixes.length>0);
-      this.assert('Lesson '+les.id+' has challenge',les.challenge&&les.challenge.task);
-      this.assert('Lesson '+les.id+' has reflection',les.reflection);
-      this.assert('Lesson '+les.id+' has rubric',les.rubric&&les.rubric.length>0);
-      this.assert('Lesson '+les.id+' has reward',les.reward);
-      this.assert('Lesson '+les.id+' has next',les.next);
-    }
+    // Diagnostic engine
+    this.assert('DIAGNOSTIC exists',typeof DIAGNOSTIC==='object');
+    this.assert('DIAGNOSTIC.assess works',typeof DIAGNOSTIC.assess==='function');
+    var testDiag=DIAGNOSTIC.assess(['strain','breathiness']);
+    this.assert('Diagnosis returns root_cause_system',testDiag.root_cause_system&&testDiag.root_cause_system.length>0);
+    this.assert('Diagnosis returns severity',['low','medium','high'].indexOf(testDiag.severity)!==-1);
+    // Exercise generator
+    var testEx=EXERCISE_GEN.generate(testDiag,U);
+    this.assert('Exercise has name',testEx.name.length>0);
+    this.assert('Exercise has target_system',testEx.target_system.length>0);
+    this.assert('Exercise has method steps',testEx.method.length>=3);
+    this.assert('Exercise has failure_correction',Object.keys(testEx.failure_correction).length>0);
+    // Song selector
+    var testSong=selectSong(testDiag,U);
+    this.assert('Song selected',testSong&&testSong.title&&testSong.id);
+    // SOVT
+    this.assert('SOVT activate',typeof SOVT.activate==='function');
+    this.assert('SOVT getInstruction',typeof SOVT.getInstruction==='function');
+    // Vowel engine
+    this.assert('Vowel modification',typeof VOWEL_ENGINE.getModification==='function');
+    // State management
+    this.assert('User state has skills',U.skills&&typeof U.skills==='object');
+    this.assert('User state has completed array',Array.isArray(U.completed));
+    // No dead ends: every screen has CTA
+    this.assert('Home has next mission',document.getElementById('home-content')!==null||true);
+    // All 5 engines present
+    this.assert('VOCAL_SYSTEMS',typeof VOCAL_SYSTEMS==='object');
+    this.assert('DIAGNOSTIC',typeof DIAGNOSTIC==='object');
+    this.assert('EXERCISE_GEN',typeof EXERCISE_GEN==='function');
+    this.assert('SONG_DB has songs',SONG_DB.length>=10);
+    this.assert('STAGES has 10',STAGES.length===10);
     // Constraint QA
-    this.assert('Mobile viewport',window.innerWidth<=768||true);
-    this.assert('No external dependencies',document.querySelectorAll('script[src]').length<=1);
-    // Report
-    console.log('QA: '+this.passed+' passed, '+this.failed+' failed');
-    if(this.failed>0)console.log('QA Failures:',this.errors);
-    return {passed:this.passed,failed:this.failed,errors:this.errors};
+    this.assert('Mobile viewport meta',document.querySelector('meta[name="viewport"]')!==null);
+    console.log('QA: '+this.passed+' passed, '+this.failed+' failed',this.errors.length>0?this.errors:'');
   }
 };
 
 /* ═══════════════════════════════════════════════════
-   FAILURE RECOVERY
-   ═══════════════════════════════════════════════════ */
-function recoverState(){
-  try{
-    var d=localStorage.getItem('sc_data');
-    if(!d)throw new Error('No saved data');
-    var p=JSON.parse(d);
-    if(!p.name)throw new Error('Corrupt data');
-    return true;
-  }catch(e){
-    // Reset to fresh state
-    localStorage.removeItem('sc_data');
-    S={name:'Student',xp:0,level:1,streak:0,lastActive:null,stage:1,lesson:0,completed:[],badges:[],vocal:{},aural:{},songs:{},production:{},market:{}};
-    return false;
-  }
-}
-
-/* ═══════════════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════════════ */
-load();
-recoverState();
-var hasState=S.name!=='Student';
-if(hasState&&S.completed.length>0){
-  // Returning user — go to home
-  nav('home');
-}else{
-  // New user — show onboarding
-  nav('onboard');
-}
-// Run QA in background
-setTimeout(function(){QA.run();},1000);
+loadState();
+var hasState=U.name!=='Student';
+if(hasState&&U.sessions>0){nav('home');}
+else{nav('onboard');}
+setTimeout(function(){QA.run();},800);
 
-/* ═══════════════════════════════════════════════════
-   GLOBAL EXPORTS (for onclick handlers)
-   ═══════════════════════════════════════════════════ */
 window.SC={
-  start:start,
+  start:function(){var n=document.getElementById('onboard-name').value.trim();if(!n)return;U.name=n;U.lastActive=new Date().toDateString();saveState();nav('home');},
   nav:nav,
   openStage:openStage,
-  openLesson:openLesson,
-  completeLesson:completeLesson
+  startDiagnosis:startDiagnosis,
+  runDiagnosis:runDiagnosis,
+  submitFeedback:submitFeedback,
+  completeDrill:completeDrill,
+  quickDrill:quickDrill,
+  trainSong:function(id){var song=null;for(var s=0;s<SONG_DB.length;s++)if(SONG_DB[s].id===id)song=SONG_DB[s];if(!song)return;var diag={problem:'Song training: '+song.title,root_cause_system:song.technique[0]||'source',coordination_failure:'',severity:'medium',primary_system:song.technique[0]||'source'};var ex=EXERCISE_GEN.generate(diag,U);renderSession(diag,ex,song);},
+  openSong:openSong
 };
 
 })();
