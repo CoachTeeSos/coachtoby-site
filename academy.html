@@ -209,9 +209,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
     <h1>Master Your Voice.<br>Step by Step.</h1>
     <p>A structured vocal training program — from foundations to performance. Not random YouTube tips. A real curriculum.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-label">Modules</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">32</div><div class="hero-stat-label">Lessons</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">150+</div><div class="hero-stat-label">XP to earn</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-label">Modules</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">38</div><div class="hero-stat-label">Lessons</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">200+</div><div class="hero-stat-label">XP to earn</div></div>
     </div>
     <button class="hero-cta" onclick="showOnboard()">Start Learning →</button>
   </div>
@@ -349,6 +349,20 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
   <div class="module locked" id="mod6">
     <a class="module-head" href="module-6.html">
       <div class="module-num">6</div>
+      <div class="module-info">
+        <h3>Articulation & Language — Sing Clearly</h3>
+        <p>6 lessons · IPA system, pronunciation, any language</p>
+      </div>
+      <div class="module-right">
+        <div class="module-progress"><div class="module-progress-fill" style="width:0%"></div></div>
+        <span class="module-status locked">🔒</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="module locked" id="mod7">
+    <a class="module-head" href="module-7.html">
+      <div class="module-num">7</div>
       <div class="module-info">
         <h3>Advanced Craft — Find Your Voice</h3>
         <p>6 lessons · Identity, improvisation, longevity, leading</p>
@@ -532,7 +546,7 @@ function render() {
   document.getElementById('streakText').textContent = streakText;
   
   // Module progress
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 7; i++) {
     const el = document.getElementById('mod' + (i+1));
     if (!el) continue;
     const prog = s.modules[i] || 0;
