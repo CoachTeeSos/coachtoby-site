@@ -199,8 +199,14 @@
 <div class="audio-bar" id="audioBar" style="display:none;">
   <div class="audio-bar__inner">
     <div class="audio-bar__controls">
-      <button class="audio-bar__btn" id="btnPlay" onclick="toggleMetronome()" title="Metronome">⏱</button>
-      <button class="audio-bar__btn" onclick="toggleTone()" title="Reference Tone">🎵</button>
+      <button class="audio-bar__btn audio-bar__btn--play" id="btnPlayPause" onclick="togglePlayPause()" title="Play / Pause">▶</button>
+      <button class="audio-bar__btn" id="btnMetro" onclick="toggleMetronome()" title="Metronome (tap to start/stop)">⏱</button>
+      <button class="audio-bar__btn" id="btnTone" onclick="toggleTone()" title="Reference Tone (A440)">🎵</button>
+    </div>
+    <div class="audio-bar__transpose">
+      <div class="audio-bar__transpose-btn" onclick="transposeDown()" title="Transpose Down (−1 semitone)">♭</div>
+      <div class="audio-bar__transpose-label" id="currentKey">C</div>
+      <div class="audio-bar__transpose-btn" onclick="transposeUp()" title="Transpose Up (+1 semitone)">♯</div>
     </div>
     <div class="audio-bar__bpm">
       <span>BPM</span>
@@ -1307,7 +1313,7 @@ function initAudio() {
 
 function toggleMetronome() {
   initAudio();
-  var btn = document.getElementById('btnPlay');
+  var btn = document.getElementById('btnMetro');
   if (metronomeRunning) {
     clearInterval(metronomeInterval);
     metronomeRunning = false;
@@ -1367,6 +1373,63 @@ function updateBPM(val) {
 
 function updateVolume(val) {
   currentVolume = parseInt(val) / 100;
+}
+
+/* ── Play/Pause (backing track placeholder) ── */
+var isPlaying = false;
+function togglePlayPause() {
+  initAudio();
+  var btn = document.getElementById('btnPlayPause');
+  if (isPlaying) {
+    // Stop any sustained tone
+    if (toneOsc) { try { toneOsc.stop(); } catch(e) {} toneOsc = null; }
+    isPlaying = false;
+    btn.textContent = '▶';
+    btn.classList.remove('audio-bar__btn--active');
+  } else {
+    // Start a sustaining tone as a placeholder for backing track
+    toggleTone();
+    isPlaying = true;
+    btn.textContent = '⏸';
+    btn.classList.add('audio-bar__btn--active');
+  }
+}
+
+/* ── Pitch/Key Transposition ── */
+var currentKeyIndex = 0;
+var KEY_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+var KEY_FREQS = [261.63,277.18,293.66,311.13,329.63,349.23,369.99,392.00,415.30,440.00,466.16,493.88];
+
+function transposeUp() {
+  currentKeyIndex = (currentKeyIndex + 1) % 12;
+  updateKeyDisplay();
+  playKeyTone();
+}
+
+function transposeDown() {
+  currentKeyIndex = (currentKeyIndex - 1 + 12) % 12;
+  updateKeyDisplay();
+  playKeyTone();
+}
+
+function updateKeyDisplay() {
+  var el = document.getElementById('currentKey');
+  if (el) el.textContent = KEY_NAMES[currentKeyIndex];
+}
+
+function playKeyTone() {
+  initAudio();
+  if (toneOsc) { try { toneOsc.stop(); } catch(e) {} toneOsc = null; }
+  toneOsc = audioCtx.createOscillator();
+  var gain = audioCtx.createGain();
+  toneOsc.connect(gain);
+  gain.connect(audioCtx.destination);
+  toneOsc.frequency.value = KEY_FREQS[currentKeyIndex];
+  gain.gain.value = currentVolume * 0.25;
+  toneOsc.start();
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+  toneOsc.stop(audioCtx.currentTime + 0.8);
+  toneOsc = null;
 }
 
 /* ═══════════════════════════════════════════════════════════
