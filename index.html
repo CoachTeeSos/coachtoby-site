@@ -1126,6 +1126,378 @@ function renderProfile(){
   c.innerHTML=h;
 }
 
+
+// ═══════════════════════════════════════════════════
+// 1. FATIGUE + LOAD TRACKING SYSTEM
+// ═══════════════════════════════════════════════════
+var FATIGUE={
+  levels:[
+    {min:0,max:25,label:"Fresh",color:"ok",advice:"You are good to go. Full practice session available."},
+    {min:25,max:50,label:"Warming Up",color:"ok",advice:"Good to practice. Stay mindful of tension."},
+    {min:50,max:75,label:"Working",color:"warn",advice:"You have been at it. Consider wrapping up in 10 minutes."},
+    {min:75,max:90,label:"Fatigued",color:"warn",advice:"Vocal load is high. Do a gentle cooldown, then rest."},
+    {min:90,max:100,label:"Overload",color:"err",advice:"STOP. Rest your voice. No more singing today."}
+  ],
+  getLevel:function(){
+    var load=U.vocalLoad||0;
+    var max=U.maxLoad||100;
+    var pct=Math.min(100,Math.round(load/max*100));
+    for(var i=0;i<this.levels.length;i++){
+      if(pct>=this.levels[i].min&&pct<this.levels[i].max)return this.levels[i];
+    }
+    return this.levels[this.levels.length-1];
+  },
+  addLoad:function(minutes){
+    var intensity=1;
+    if(minutes>10)intensity=1.5;
+    if(minutes>20)intensity=2;
+    U.vocalLoad=Math.min(U.maxLoad,U.vocalLoad+minutes*intensity);
+    U.lastPractice=new Date().toISOString();
+    this.check();
+  },
+  check:function(){
+    var lvl=this.getLevel();
+    if(lvl.min>=75){
+      toast("Vocal load: "+lvl.label+". "+lvl.advice,lvl.color==="ok"?"s":"w");
+    }
+    if(lvl.min>=90){
+      WHATSAPP.handoff("stuck","vocal fatigue — need recovery guidance");
+    }
+  },
+  dailyReset:function(){
+    var last=U.lastPractice?new Date(U.lastPractice):null;
+    var now=new Date();
+    if(!last||now.getDate()!==last.getDate()){
+      U.vocalLoad=0;
+      save();
+    }
+  },
+  getRecoveryTime:function(){
+    var lvl=this.getLevel();
+    if(lvl.min<50)return 0;
+    if(lvl.min<75)return 2;
+    if(lvl.min<90)return 4;
+    return 12;
+  }
+};
+
+// ═══════════════════════════════════════════════════
+// 2. REAL-TIME CORRECTION LOGIC ENGINE
+// ═══════════════════════════════════════════════════
+var CORRECT={
+  // Maps detected problems to precise physiological corrections
+  rules:[
+    {
+      id:"breathy_onset",
+      detect:function(report){
+        return report.symptoms&&report.symptoms.indexOf("breathy")!==-1;
+      },
+      correct:function(){
+        return {
+          issue:"Breathy onset — air escaping before tone starts",
+          root:"Incomplete vocal fold closure at phonation start",
+          fix:[
+            "Hum on 'm' for 5 seconds — feel the buzz (this IS clean closure)",
+            "Keep that buzz, open to 'ah' — the tone should start instantly, no 'h' sound",
+            "Practice: say 'uh-oh' — the clean start of the second syllable is your target onset",
+            "Advanced: sing a phrase, but start every note with that 'uh-oh' clean attack",
+            "Self-check: record yourself. Can you hear air before the note? If yes, go back to humming."
+          ],
+          skill:"source",xp:15
+        };
+      }
+    },
+    {
+      id:"strained_belt",
+      detect:function(report){
+        return report.symptoms&&report.symptoms.indexOf("strain")!==-1;
+      },
+      correct:function(){
+        return {
+          issue:"Strained belt — too much subglottal pressure",
+          root:"Vocal folds over-closing under high pressure. CT muscles not engaging to thin folds.",
+          fix:[
+            "Stop singing the note. Hum on 'ng' — feel the easy buzz",
+            "The problem: you are pushing air THROUGH tightly-closed folds. The fix is NOT less air — it is thinner folds.",
+            "Sing the note on 'ee' instead of 'ah' — 'ee' naturally thins the folds",
+            "If 'ee' works but 'ah' does not: the issue is fold thickness, not breath support",
+            "Practice: slide from 'ee' to 'ah' on the same note — find where strain starts, back off",
+            "Long-term: this is a mix voice coordination issue. Work the 'Smoothing the Break' exercise daily."
+          ],
+          skill:"mix",xp:20
+        };
+      }
+    },
+    {
+      id:"pitch_drift",
+      detect:function(report){
+        return report.symptoms&&report.symptoms.indexOf("pitch")!==-1;
+      },
+      correct:function(){
+        return {
+          issue:"Pitch drifting — cannot hold steady pitch",
+          root:"Either: (a) breath pressure inconsistent, or (b) fold tension not stabilized",
+          fix:[
+            "Diagnosis test: hum a note. If pitch wavers = breath issue. If hum is stable but singing drags = fold issue.",
+            "If breath issue: practice sustained 'zzz' — the airflow must be perfectly even",
+            "If fold issue: the note is in your 'break zone' — sing it on 'ng' to keep folds connected",
+            "Practice: sing a 5-note scale, hold the top note for 8 seconds. Record. Is it steady?",
+            "If you drift sharp: you are pushing too much air. Reduce pressure.",
+            "If you drift flat: your folds are loosening. Add gentle forward placement (hum first)."
+          ],
+          skill:"source",xp:15
+        };
+      }
+    },
+    {
+      id:"register_break",
+      detect:function(report){
+        return report.symptoms&&report.symptoms.indexOf("crack")!==-1;
+      },
+      correct:function(){
+        return {
+          issue:"Voice cracking between registers",
+          root:"Sudden shift from TA-dominant (chest) to CT-dominant (head) coordination. The muscles are 'flipping' instead of 'sliding'.",
+          fix:[
+            "Find your break: slide up slowly from chest voice. Note where it flips.",
+            "That note is your transition zone. It is NOT a wall — it is a coordination you have not learned yet.",
+            "Sing that exact note on 'ng' — this keeps TA and CT both engaged",
+            "Slide up and down through the zone on 'ng' — smooth, no flip",
+            "Now try 'mee' through the zone — the 'ee' vowel helps thin the folds gradually",
+            "Practice daily: 5 minutes of sliding through your break zone. It will smooth out in 2-4 weeks."
+          ],
+          skill:"mix",xp:20
+        };
+      }
+    },
+    {
+      id:"nasality",
+      detect:function(report){
+        return report.symptoms&&report.symptoms.indexOf("nasal")!==-1;
+      },
+      correct:function(){
+        return {
+          issue:"Nasal tone — too much resonance in nasal cavity",
+          root:"Soft palate is lowered, allowing air into nasal cavity. Can be structural or habitual.",
+          fix:[
+            "Test: hum, then pinch your nose. If sound changes dramatically = too much nasal resonance",
+            "The fix: raise your soft palate (the back of the roof of your mouth). Imagine a yawn starting.",
+            "Practice: sing 'ah' while imagining the inside of your mouth is a tall, open dome",
+            "Try singing with a slight smile — this naturally raises the soft palate",
+            "If only some notes are nasal: those notes need more forward placement, less throat",
+            "Record: compare 'ah' with a yawn-feel vs. normal. Hear the difference?"
+          ],
+          skill:"resonance",xp:15
+        };
+      }
+    },
+    {
+      id:"jaw_tension",
+      detect:function(report){
+        return report.symptoms&&report.symptoms.indexOf("strain")!==-1&&report.area==="articulation";
+      },
+      correct:function(){
+        return {
+          issue:"Jaw tension — jaw clenching while singing",
+          root:"Jaw is compensating for weak tongue/lip articulation. Also common in singers who open too wide.",
+          fix:[
+            "Speak the lyrics with your hand gently holding your jaw — feel when it clenches",
+            "The rule: your jaw should open no more than two fingers width for most singing",
+            "Practice: sing a phrase while keeping your teeth slightly apart — lips and tongue do the work",
+            "Massage your jaw muscles (the big ones on the sides of your face) before and after singing",
+            "If you cannot sing without jaw tension: the note may be too high for your current mix. Work lower first."
+          ],
+          skill:"articulation",xp:15
+        };
+      }
+    }
+  ],
+  analyze:function(report){
+    var corrections=[];
+    for(var i=0;i<this.rules.length;i++){
+      if(this.rules[i].detect(report)){
+        corrections.push(this.rules[i].correct());
+      }
+    }
+    if(corrections.length===0){
+      corrections.push({
+        issue:"No specific issue detected",
+        root:"General development needed",
+        fix:["Continue with your current practice plan","Focus on the weakest skill area","Record yourself weekly to track progress"],
+        skill:"source",xp:10
+      });
+    }
+    return corrections;
+  },
+  generateReport:function(){
+    var dx=ADAPTIVE.diagnose();
+    var report={
+      weakest:dx.weakest,
+      skillName:dx.skillName,
+      level:U.skills[dx.weakest],
+      symptoms:U.diagnosticResults.length>0?U.diagnosticResults[U.diagnosticResults.length-1].symptoms:[],
+      vocalLoad:FATIGUE.getLevel(),
+      totalXP:U.xp,
+      sessions:U.sessions
+    };
+    var corrections=CORRECT.analyze(report);
+    return {report:report,corrections:corrections};
+  }
+};
+
+// ═══════════════════════════════════════════════════
+// 3. STYLE TRANSFORMATION MAPPING SYSTEM
+// ═══════════════════════════════════════════════════
+var STYLE={
+  profiles:{
+    pop:{
+      name:"Pop",icon:"🎤",
+      ratios:{airflow:0.6,source:0.8,resonance:0.9,articulation:0.8,mix:0.7},
+      description:"Clear, forward, conversational. The voice sits slightly forward in the mix. Pitch precision is non-negotiable.",
+      techniques:["Forward placement on every note","Clean onset, no breathiness","Controlled dynamics — verses intimate, chorus opens","Runs and riffs only when they serve the emotion"],
+      artists:["Adele","Ed Sheeran","Taylor Swift","Bruno Mars"],
+      practice:"Sing a pop verse. Record. Listen for: clarity, pitch accuracy, emotional directness. Is it conversational or performative?"
+    },
+    rnb:{
+      name:"R&B",icon:"🎵",
+      ratios:{airflow:0.7,source:0.9,resonance:0.7,articulation:0.6,mix:0.9},
+      description:"Agile, phrasing-heavy, breathy-to-full contrasts. The voice is an instrument of rhythm and emotion.",
+      techniques:["Melismatic runs (3-5 notes on one syllable)","Breathy onset into full tone","Rhythmic precision — the pocket matters more than perfect pitch","Vocal fry as a stylistic choice"],
+      artists:["Beyoncé","H.E.R.","Summer Walker","Tems"],
+      practice:"Sing an R&B phrase. Record. Listen for: agility, rhythmic feel, breath-to-full transitions. Does it groove?"
+    },
+    gospel:{
+      name:"Gospel/Worship",icon:"🙌",
+      ratios:{airflow:0.9,source:0.9,resonance:0.9,articulation:0.7,mix:0.8},
+      description:"Power with control. Long sustains. Emotional build from verse to climax. Belt and mix coordination is essential.",
+      techniques:["Sustained phrases on steady airflow","Belt-to-mix transitions without breaking","Emotional crescendo — each section builds","Vocal freedom — the voice should never sound trapped"],
+      artists:["Tamela Mann","Tasha Cobbs","Kirk Franklin","Whitney Houston"],
+      practice:"Sing a worship chorus. Record. Listen for: power without strain, sustain, emotional build. Does it lift?"
+    },
+    afrobeats:{
+      name:"Afrobeats",icon:"🌍",
+      ratios:{airflow:0.5,source:0.6,resonance:0.6,articulation:0.9,mix:0.5},
+      description:"Rhythmic precision, relaxed tone, pocket placement. The voice rides the groove. Less vibrato, more rhythmic clarity.",
+      techniques:["Rhythmic sync — the voice is part of the percussion","Relaxed, conversational tone","Clear diction at speed","Verse-to-chorus dynamic contrast"],
+      artists:["Wizkid","Tems","Burna Boy","Ayra Starr"],
+      practice:"Sing an Afrobeats verse. Record. Listen for: rhythmic precision, relaxed tone, clarity at speed. Does it sit in the pocket?"
+    },
+    jazz:{
+      name:"Jazz",icon:"🎷",
+      ratios:{airflow:0.6,source:0.7,resonance:0.8,articulation:0.7,mix:0.8},
+      description:"Swing phrasing, melodic improvisation, relaxed but present. The voice bends time and pitch intentionally.",
+      techniques:["Swing feel — notes land slightly behind the beat","Melodic embellishment — adding notes that are not in the written melody","Relaxed vibrato — used sparingly, not constantly","Scat-like phrasing even on lyrics"],
+      artists:["Ella Fitzgerald","Norah Jones","Gregory Porter","Lauryn Hill"],
+      practice:"Sing a jazz standard. Record. Listen for: swing feel, improvisational freedom, relaxed tone. Does it breathe?"
+    },
+    theatre:{
+      name:"Musical Theatre",icon:"🎭",
+      ratios:{airflow:0.9,source:0.9,resonance:1.0,articulation:1.0,mix:0.9},
+      description:"Maximum projection, crystal diction, character voice. The voice must fill a room without a microphone.",
+      techniques:["Maximum forward placement — the voice hits the back wall","Every consonant is precise — no lazy diction","Sustained belt — power for 8+ bars without fatigue","Character voice — the tone changes with the role"],
+      artists:["Idina Menzel","Lin-Manuel Miranda","Audra McDonald","Ben Platt"],
+      practice:"Sing a theatre piece. Record. Listen for: projection, diction, character. Can every word be understood?"
+    }
+  },
+  assess:function(){
+    // Compare user current skills to each style profile
+    var results=[];
+    var styles=STYLE.profiles;
+    for(var key in styles){
+      var s=styles[key];
+      var match=0,total=0;
+      for(var sk in s.ratios){
+        var userLevel=U.skills[sk]||0;
+        var required=s.ratios[sk]*10;
+        var diff=Math.abs(userLevel-required);
+        match+=Math.max(0,10-diff);
+        total+=10;
+      }
+      results.push({style:key,name:s.name,icon:s.icon,pct:Math.round(match/total*100),desc:s.description});
+    }
+    results.sort(function(a,b){return b.pct-a.pct;});
+    return results;
+  },
+  getTrainingPlan:function(targetStyle){
+    var s=STYLE.profiles[targetStyle];
+    if(!s)return null;
+    var gaps=[];
+    for(var sk in s.ratios){
+      var userLevel=U.skills[sk]||0;
+      var required=s.ratios[sk]*10;
+      if(userLevel<required-1){
+        gaps.push({skill:sk,current:userLevel,required:Math.round(required),gap:Math.round(required-userLevel)});
+      }
+    }
+    gaps.sort(function(a,b){return b.gap-a.gap;});
+    return {style:s,gaps:gaps,topPriority:gaps.length>0?gaps[0].skill:"balanced"};
+  }
+};
+
+// ═══════════════════════════════════════════════════
+// 4. PHYSIOLOGICAL FEEDBACK SIMULATION LAYER
+// ═══════════════════════════════════════════════════
+var PHYSIO={
+  // Simulates what a coach would observe and correct in real time
+  checkpoints:[
+    {id:"breath_before_phrase",label:"Breath intake before phrase",
+      check:function(){return U.skills.airflow>=3;},
+      fail:"You are not taking a proper appoggio breath before phrases. The breath should be low (belly/ribs), not high (chest/shoulders).",
+      fix:"Practice: before every phrase, take a 1-second low breath. Hands on ribs — they should expand. If your shoulders rise, start over."},
+    {id:"onset_cleanliness",label:"Clean onset (no breathiness)",
+      check:function(){return U.skills.source>=3;},
+      fail:"Your note starts are breathy. Air is escaping before the tone begins.",
+      fix:"Hum for 3 seconds before every phrase. That buzz = clean closure. Open to the vowel keeping that same easy feeling."},
+    {id:"resonance_forward",label:"Forward resonance placement",
+      check:function(){return U.skills.resonance>=3;},
+      fail:"Your resonance is sitting in your throat. The tone sounds swallowed or dark.",
+      fix:"Hum and feel the buzz in your lips. Every note should have that same forward feeling. If the buzz drops to your throat, stop and re-hum."},
+    {id:"jaw_relaxed",label:"Jaw relaxation during singing",
+      check:function(){return U.skills.articulation>=3;},
+      fail:"Your jaw is clenching. This limits range and creates tension.",
+      fix:"Sing with your hand gently touching your jaw. If it tightens, stop. Re-start with lips doing the work, jaw staying loose."},
+    {id:"mix_coordination",label:"Mix voice coordination",
+      check:function(){return U.skills.mix>=3;},
+      fail:"Your chest-to-head transition is flipping/cracking. The coordination is not smooth.",
+      fix:"Practice sliding through your break zone on 'ng' for 5 minutes daily. No words, just smooth slides. This builds the muscle memory."},
+    {id:"pitch_stability",label:"Pitch stability on sustained notes",
+      check:function(){return U.skills.source>=4;},
+      fail:"Your pitch wavers on sustained notes. Either breath pressure is uneven or fold tension is inconsistent.",
+      fix:"Sing one note, hold it for 10 seconds. Record. If it wavers: hum first (stabilizes folds), then open to the vowel."},
+    {id:"dynamic_control",label:"Dynamic control (loud/soft)",
+      check:function(){return U.skills.airflow>=5&&U.skills.source>=5;},
+      fail:"You cannot control dynamics without losing tone quality. Getting louder = getting strained. Getting softer = getting breathy.",
+      fix:"Practice crescendo on one note: 4 seconds soft → 4 seconds loud → 4 seconds soft. The tone should stay the same — only volume changes."},
+    {id:"vocal_stamina",label:"Vocal stamina (sustained singing)",
+      check:function(){return U.vocalLoad<70;},
+      fail:"Your vocal load is high. Continuing to sing now risks strain and fatigue.",
+      fix:"Stop singing. Rest for 2+ hours. Hydrate. Tomorrow your budget resets. Pushing through fatigue builds bad habits."}
+  ],
+  runCheck:function(){
+    var results={passed:[],failed:[]};
+    for(var i=0;i<this.checkpoints.length;i++){
+      var cp=this.checkpoints[i];
+      if(cp.check()){results.passed.push(cp.label);}
+      else{results.failed.push({label:cp.label,fail:cp.fail,fix:cp.fix});}
+    }
+    return results;
+  },
+  getReadinessScore:function(){
+    var passed=0;
+    for(var i=0;i<this.checkpoints.length;i++){
+      if(this.checkpoints[i].check())passed++;
+    }
+    return Math.round(passed/this.checkpoints.length*100);
+  },
+  getCoachingMoment:function(){
+    // Returns the single most important thing to work on right now
+    var results=this.runCheck();
+    if(results.failed.length===0)return {type:"success",msg:"All systems green. You are ready for a full practice session."};
+    var top=results.failed[0];
+    return {type:"correction",msg:top.fail,fix:top.fix};
+  }
+};
+
 // ═══════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════
