@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Module 6: Articulation & Language — Vocal Mastery Academy</title>
+<meta name="theme-color" content="#0a0a10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a10;--surface:#111118;--surface2:#181822;--border:#1e1e2c;--text:#e8e8f0;--text-soft:#a0a0b4;--muted:#5a5a70;--gold:#d4a843;--gold-light:#e8c46a;--mint:#00d4a0;--blue:#4a9eff;--purple:#a06eff;--orange:#ff8a4a;--red:#e05555;--radius:14px;--radius-sm:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding:0 16px}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim-up{animation:fadeInUp .4s ease both}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,16,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-link{font-size:.72rem;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--radius-sm);transition:all .15s}
+.nav-link:hover{color:var(--text);background:var(--surface)}
+.nav-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--bg);cursor:pointer}
+
+.mod-head{padding:32px 0 16px;animation:fadeInUp .4s ease}
+.mod-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:20px;font-size:.65rem;font-weight:600;color:var(--gold);margin-bottom:12px}
+.mod-head h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.4rem,4vw,1.8rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:6px}
+.mod-head p{color:var(--text-soft);font-size:.88rem}
+.mod-progress-bar{width:100%;height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:16px}
+.mod-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--mint));border-radius:4px;transition:width .5s ease}
+
+.genre-spotlight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;display:flex;align-items:center;gap:12px}
+.genre-icon{font-size:1.6rem}
+.genre-info h4{font-size:.82rem;font-weight:600;margin-bottom:2px}
+.genre-info p{font-size:.75rem;color:var(--muted)}
+.genre-tag{font-size:.62rem;padding:3px 8px;background:rgba(74,158,255,.08);border:1px solid rgba(74,158,255,.15);border-radius:6px;color:var(--blue);font-weight:600;flex-shrink:0}
+
+.content{padding:24px 0;animation:fadeInUp .3s ease}
+.content h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.02em;margin-bottom:12px}
+.content h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin:20px 0 8px;color:var(--gold)}
+.content p{color:var(--text);font-size:.88rem;line-height:1.75;margin-bottom:12px}
+.content p strong{color:var(--gold)}
+.content ul{margin:8px 0 16px;padding-left:20px}
+.content li{color:var(--text);font-size:.86rem;line-height:1.7;margin-bottom:6px}
+.content-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
+.content-box.tip{border-left:3px solid var(--mint)}
+.content-box.key{border-left:3px solid var(--gold)}
+.content-box.info{border-left:3px solid var(--blue)}
+.content-box p:last-child{margin-bottom:0}
+
+.ipa-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.85rem}
+.ipa-table th{background:var(--surface2);padding:10px 12px;text-align:left;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);border-bottom:1px solid var(--border)}
+.ipa-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text)}
+.ipa-table tr:last-child td{border-bottom:none}
+.ipa-char{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:var(--gold)}
+.ipa-word{color:var(--mint);font-weight:500}
+
+.task{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
+.task-label{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:6px}
+.task p{font-size:.85rem;color:var(--text);line-height:1.6}
+.task-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;background:rgba(0,212,160,.06);border:1px solid rgba(0,212,160,.15);border-radius:var(--radius-sm);font-size:.72rem;font-weight:600;color:var(--mint);cursor:pointer;transition:all .15s;font-family:inherit}
+.task-btn:hover{background:rgba(0,212,160,.12)}
+.task-btn.done{background:rgba(74,158,255,.06);border-color:rgba(74,158,255,.15);color:var(--blue);cursor:default}
+
+.bandlab-box{background:linear-gradient(135deg,rgba(74,158,255,.06),rgba(160,110,255,.06));border:1px solid rgba(74,158,255,.15);border-radius:var(--radius);padding:16px;margin:14px 0}
+.bandlab-box h4{font-size:.85rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.bandlab-box p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
+.bandlab-box ol{margin:8px 0 0;padding-left:18px}
+.bandlab-box li{font-size:.82rem;color:var(--text-soft);margin-bottom:4px;line-height:1.5}
+
+.quiz-section{padding:24px 0}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;animation:fadeInUp .3s ease}
+.q-num{font-size:.62rem;font-weight:600;color:var(--gold);margin-bottom:8px}
+.q-text{font-size:.88rem;font-weight:500;margin-bottom:14px;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:12px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.85rem;cursor:pointer;transition:all .15s;text-align:left;color:var(--text);font-family:inherit;line-height:1.5}
+.q-opt:hover{border-color:var(--gold);background:rgba(212,168,67,.03)}
+.q-opt.selected{border-color:var(--gold);background:rgba(212,168,67,.06)}
+.q-opt.correct{border-color:var(--mint);background:rgba(0,212,160,.08)}
+.q-opt.wrong{border-color:var(--red);background:rgba(224,85,85,.06)}
+.q-submit{margin-top:16px;padding:13px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius-sm);font-weight:600;font-size:.85rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.q-submit:hover{background:var(--gold-light)}
+.q-submit:disabled{opacity:.4;cursor:not-allowed}
+.q-result{text-align:center;padding:32px 20px;animation:fadeInUp .4s ease}
+.q-result h3{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;margin-bottom:8px}
+.q-result p{color:var(--text-soft);font-size:.9rem}
+.q-score{font-size:3rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+.q-retry{margin-top:16px;padding:12px 24px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-weight:500;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.q-retry:hover{border-color:var(--gold)}
+
+.complete{text-align:center;padding:40px 20px;animation:fadeInUp .5s ease}
+.complete-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;box-shadow:0 0 48px rgba(212,168,67,.15)}
+.complete h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:8px}
+.complete p{color:var(--text-soft);font-size:.9rem;margin-bottom:20px}
+.complete-xp{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(212,168,67,.08);border-radius:var(--radius-sm);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:20px}
+.complete-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:all .2s}
+.complete-btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 28px rgba(212,168,67,.22)}
+
+.footer{padding:32px 0;text-align:center;font-size:.68rem;color:var(--muted);border-top:1px solid var(--border);margin-top:32px}
+@media(max-width:480px){.mod-head{padding:24px 0 12px}.q-card{padding:16px}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="academy.html" class="nav-brand">Vocal<span>Mastery</span></a>
+  <div class="nav-links">
+    <a href="academy.html#modules" class="nav-link">Modules</a>
+    <a href="dashboard.html" class="nav-link">Progress</a>
+    <div class="nav-avatar" id="navAvatar" onclick="window.location.href='dashboard.html'">S</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="mod-head anim-up">
+    <div class="mod-badge">Module 6 of 7</div>
+    <h1>Articulation & Language — Sing Clearly in Any Tongue</h1>
+    <p>Your voice is an instrument. Your words are the message. This module ensures the message is heard — in any language.</p>
+    <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+  </div>
+
+  <!-- GENRE SPOTLIGHT -->
+  <div class="genre-spotlight">
+    <div class="genre-icon">🙏</div>
+    <div class="genre-info">
+      <h4>Genre Spotlight: Worship / Praise</h4>
+      <p>Multilingual singing is essential in Nigerian worship. Listen to how Sinach, Mercy Chinwo, and Nathaniel Bassey switch between English and indigenous languages mid-song.</p>
+    </div>
+    <div class="genre-tag">Listen</div>
+  </div>
+
+  <!-- LESSON 6.1 -->
+  <div class="content" id="lesson-6-1">
+    <h2>Lesson 6.1: Why Articulation Matters</h2>
+    
+    <p>You can have perfect pitch, beautiful tone, and stunning dynamics — but if the audience can't understand the words, <strong>the message is lost.</strong></p>
+    
+    <p>Articulation is the clarity of your pronunciation while singing. It's the difference between "singing notes" and "communicating words."</p>
+    
+    <h3>The 3 Pillars of Vocal Articulation</h3>
+    <ul>
+      <li><strong>Vowel clarity:</strong> Pure, consistent vowels that carry across your range</li>
+      <li><strong>Consonant precision:</strong> Clear consonants that define words without interrupting the tone</li>
+      <li><strong>Word connection:</strong> Smooth transitions between words that maintain the legato line</li>
+    </ul>
+    
+    <div class="content-box key">
+      <p><strong>The NYVC principle:</strong> In singing, vowels carry the emotion. Consonants carry the meaning. You need both. A singer with beautiful vowels but muddy consonants sounds like they're singing in a language no one understands. A singer with sharp consonants but weak vowels sounds like they're speaking, not singing.</p>
+    </div>
+    
+    <h3>Common Articulation Problems</h3>
+    <ul>
+      <li><strong>Swallowing endings:</strong> "Love" becomes "luh," "grace" becomes "gray." The final consonant disappears.</li>
+      <li><strong>Over-articulating:</strong> Every consonant is punched. Sounds choppy and unnatural.</li>
+      <li><strong>Vowel distortion:</strong> Singing "ee" with too much jaw tension, making it sound strained.</li>
+      <li><strong>Language mixing:</strong> Pronouncing words from one language with the accent of another unintentionally.</li>
+    </ul>
+  </div>
+
+  <!-- LESSON 6.2 -->
+  <div class="content" id="lesson-6-2" style="display:none">
+    <h2>Lesson 6.2: The International Phonetic Alphabet (IPA) — Vowels</h2>
+    
+    <p>The IPA is a system where each symbol represents exactly one sound, regardless of language. For singers, it's the difference between guessing and knowing exactly what vowel shape to make.</p>
+    
+    <h3>The 5 Pure Vowels</h3>
+    <p>These are the foundation. Every other vowel is a variation of these:</p>
+    
+    <table class="ipa-table">
+      <thead><tr><th>IPA</th><th>English Example</th><th>Mouth Shape</th><th>Tongue Position</th></tr></thead>
+      <tbody>
+        <tr><td class="ipa-char">[i]</td><td>"ee" in "see"</td><td>Lips spread, jaw nearly closed</td><td>High and forward</td></tr>
+        <tr><td class="ipa-char">[e]</td><td>"ay" in "day" (pure)</td><td>Lips slightly spread</td><td>Mid-high and forward</td></tr>
+        <tr><td class="ipa-char">[a]</td><td>"ah" in "father"</td><td>Mouth open, jaw relaxed</td><td>Low and flat</td></tr>
+        <tr><td class="ipa-char">[o]</td><td>"o" in "go" (pure)</td><td>Lips rounded</td><td>Mid-high and back</td></tr>
+        <tr><td class="ipa-char">[u]</td><td>"oo" in "food"</td><td>Lips tightly rounded</td><td>High and back</td></tr>
+      </tbody>
+    </table>
+    
+    <h3>The Vowel Ladder</h3>
+    <p>These vowels form a ladder from most closed [i] to most open [a] and back to most closed [u]:</p>
+    <p style="text-align:center;font-size:1.2rem;color:var(--gold);margin:12px 0">[i] → [e] → [a] → [o] → [u]</p>
+    <p>When you sing up in pitch, vowels naturally move toward [i] and [u] (more closed). When you sing down, they move toward [a] (more open). This is vowel modification — and IPA gives you precise control over it.</p>
+    
+    <div class="content-box tip">
+      <p><strong>Exercise:</strong> Sing the 5 pure vowels on one comfortable pitch: [i] [e] [a] [o] [u]. Hold each for 4 seconds. Notice how your mouth shape changes. Now do it ascending in pitch — notice how the vowels naturally get smaller/tighter as you go up.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 6.3 -->
+  <div class="content" id="lesson-6-3" style="display:none">
+    <h2>Lesson 6.3: IPA — Consonants and Consonant Clusters</h2>
+    
+    <p>Vowels carry the tone. Consonants carry the words. In singing, consonants need to be <strong>clear but not disruptive</strong> — they should define the words without breaking the legato line.</p>
+    
+    <h3>Consonant Categories for Singers</h3>
+    <table class="ipa-table">
+      <thead><tr><th>Type</th><th>Sounds</th><th>Singing Tip</th></tr></thead>
+      <tbody>
+        <tr><td>Plosives</td><td>[b], [p], [d], [t], [g], [k]</td><td>Don't over-punch. A gentle touch is enough.</td></tr>
+        <tr><td>Fricatives</td><td>[v], [f], [ð], [θ], [z], [s], [ʃ], [ʒ]</td><td>Maintain steady air. Don't let them overpower the vowel.</td></tr>
+        <tr><td>Nasals</td><td>[m], [n], [ŋ]</td><td>These actually help resonance. Let them buzz.</td></tr>
+        <tr><td>Approximants</td><td>[l], [ɹ], [j], [w]</td><td>Keep them smooth. They connect vowels to consonants.</td></tr>
+        <tr><td>Affricates</td><td>[tʃ] "ch", [dʒ] "j"</td><td>Give them a clean release. Don't rush.</td></tr>
+      </tbody>
+    </table>
+    
+    <h3>Consonant Clusters</h3>
+    <p>When consonants appear together ("str" in "strong," "sts" in "tests"), singers often either:</p>
+    <ul>
+      <li>Drop consonants (srong, tess)</li>
+      <li>Over-articulate (STRO-ONG, TEST-S)</li>
+    </ul>
+    <p><strong>The NYVC rule:</strong> In clusters, keep the first consonant clear and the last consonant clear. The middle ones can be softened. "Strong" → clear "s," clear "ng," soft "tr" in between.</p>
+    
+    <div class="task" id="task-6-3">
+      <div class="task-label">Task 6.3</div>
+      <p>Take the sentence: "The strength of the Lord is forever and ever." Write out each word in IPA (use the charts above). Then sing it slowly, focusing on clear articulation of each consonant cluster. Record in BandLab.</p>
+      <button class="task-btn" id="taskBtn-6-3" onclick="completeTask('6-3')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- LESSON 6.4 -->
+  <div class="content" id="lesson-6-4" style="display:none">
+    <h2>Lesson 6.4: Singing in English — Standard Pronunciation</h2>
+    
+    <p>English is the most common language in Nigerian worship and pop music. But "English" pronunciation varies wildly. For singing, we use a <strong>standard, clear English</strong> that's understood across regions.</p>
+    
+    <h3>Key English Vowel Sounds for Singers</h3>
+    <table class="ipa-table">
+      <thead><tr><th>IPA</th><th>Example Words</th><th>Common Mistake</th></tr></thead>
+      <tbody>
+        <tr><td class="ipa-char">[iː]</td><td>see, free, key</td><td>Saying "ih" [ɪ] instead of "ee" [iː]</td></tr>
+        <tr><td class="ipa-char">[ɪ]</td><td>sit, in, it</td><td>Making it too tense, like [iː]</td></tr>
+        <tr><td class="ipa-char">[æ]</td><td>cat, man, praise</td><td>Narrowing it to "eh" [ɛ]</td></tr>
+        <tr><td class="ipa-char">[ɑː]</td><td>father, heart, God</td><td>Rounding it to "aw" [ɔː]</td></tr>
+        <tr><td class="ipa-char">[ə]</td><td>the, a, about (unstressed)</td><td>Over-pronouncing unstressed syllables</td></tr>
+      </tbody>
+    </table>
+    
+    <h3>The Schwa [ə] — The Singer's Best Friend</h3>
+    <p>The schwa is the most common vowel in English. It's the neutral "uh" sound in unstressed syllables: "the" [ðə], "a" [ə], "about" [əˈbaʊt].</p>
+    <p><strong>Why it matters:</strong> Singers often over-pronounce unstressed syllables, which makes English sound unnatural. "The" should be [ðə], not [ði]. "And" should be [ənd], not [ænd]. The schwa keeps the rhythm flowing.</p>
+    
+    <div class="content-box key">
+      <p><strong>NYVC rule:</strong> Stressed syllables get full vowels. Unstressed syllables get schwa [ə]. This is what makes English singing sound natural, not forced.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 6.5 -->
+  <div class="content" id="lesson-6-5" style="display:none">
+    <h2>Lesson 6.5: Singing in Nigerian Languages</h2>
+    
+    <p>Nigeria has 500+ languages. Each has its own vowel and consonant system. Here's how to approach singing in the major ones:</p>
+    
+    <h3>Yoruba</h3>
+    <ul>
+      <li><strong>Vowels:</strong> 7 pure vowels — [i], [e], [ɛ], [a], [ɔ], [o], [u]. More than English!</li>
+      <li><strong>Tone:</strong> Yoruba is tonal — the same syllable with different tones means different things. Singing must respect the tone patterns of the language.</li>
+      <li><strong>Key tip:</strong> The open vowels [ɛ] and [ɔ] are crucial. Don't collapse them into [e] and [o].</li>
+    </ul>
+    
+    <h3>Igbo</h3>
+    <ul>
+      <li><strong>Vowels:</strong> 8 vowels — includes [ɪ], [ʊ], [ɛ], [ɔ] in addition to the standard 5.</li>
+      <li><strong>Consonants:</strong> Unique sounds like [gb] (implosive), [kp] (ejective). These are produced differently from English consonants.</li>
+      <li><strong>Tone:</strong> Also tonal. The melody of the song must align with the tone of the words.</li>
+    </ul>
+    
+    <h3>Hausa</h3>
+    <ul>
+      <li><strong>Vowels:</strong> 5 basic vowels, but with short and long distinctions that affect meaning.</li>
+      <li><strong>Consonants:</strong> Unique sounds like [ɓ] (implosive b), [ɗ] (implosive d), [ƙ] (ejective k).</li>
+      <li><strong>Key tip:</strong> Hausa has emphatic consonants that require more breath pressure. Don't soften them.</li>
+    </ul>
+    
+    <h3>Universal Rule for Nigerian Languages</h3>
+    <div class="content-box key">
+      <p><strong>Respect the tone.</strong> In tonal languages, the melody of your song MUST align with the natural tone of the words. If you sing a high tone on a low-tone syllable, you change the meaning. When in doubt, ask a native speaker to check your pronunciation.</p>
+    </div>
+    
+    <div class="task" id="task-6-5">
+      <div class="task-label">Task 6.5</div>
+      <p>Choose a Nigerian language you speak (or want to learn). Take a simple worship phrase — "Oluwa ogo" (Yoruba), "Chukwu ọma" (Igbo), or "Allah mai girma" (Hausa). Write it in IPA. Sing it slowly, focusing on correct vowel shapes and tones. Record in BandLab.</p>
+      <button class="task-btn" id="taskBtn-6-5" onclick="completeTask('6-5')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- LESSON 6.6 -->
+  <div class="content" id="lesson-6-6" style="display:none">
+    <h2>Lesson 6.6: Applying IPA to Song Lyrics — Practical Transcription</h2>
+    
+    <p>Now let's put it all together. Here's how to transcribe any song's lyrics into IPA for precise pronunciation.</p>
+    
+    <h3>The Transcription Process</h3>
+    <ol>
+      <li><strong>Write out the lyrics</strong> — one line at a time</li>
+      <li><strong>Identify each vowel sound</strong> — use the IPA chart</li>
+      <li><strong>Identify each consonant sound</strong> — especially clusters</li>
+      <li><strong>Mark stress patterns</strong> — which syllables are emphasized?</li>
+      <li><strong>Sing from the IPA</strong> — not from the English spelling</li>
+    </ol>
+    
+    <h3>Example: "Amazing Grace" (First Line)</h3>
+    <table class="ipa-table">
+      <thead><tr><th>Word</th><th>IPA</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Amazing</td><td>[əˈmeɪzɪŋ]</td><td>Schwa on first syllable, "z" not "s"</td></tr>
+        <tr><td>Grace</td><td>[ɡɹeɪs]</td><td>"r" is approximant [ɹ], not rolled</td></tr>
+        <tr><td>how</td><td>[haʊ]</td><td>Diphthong — starts at [a], ends at [ʊ]</td></tr>
+        <tr><td>sweet</td><td>[swiːt]</td><td>Long [iː], clear [t] at the end</td></tr>
+        <tr><td>the</td><td>[ðə]</td><td>Schwa [ə], not "thee" [ði]</td></tr>
+        <tr><td>sound</td><td>[saʊnd]</td><td>Diphthong [aʊ], clear [nd] cluster</td></tr>
+      </tbody>
+    </table>
+    
+    <div class="content-box tip">
+      <p><strong>Why this matters:</strong> When you sing "the" as [ðə] instead of [ði], it sounds more natural and keeps the rhythm flowing. When you sing "Amazing" as [əˈmeɪzɪŋ] instead of [ɑːˈmɑːzɪŋ], it sounds like standard English, not forced. IPA removes the guesswork.</p>
+    </div>
+    
+    <!-- BANDLAB PRACTICAL -->
+    <div class="bandlab-box">
+      <h4>🎹 BandLab Practical — Module 6</h4>
+      <p><strong>Assignment:</strong> Record the same worship phrase in English + one Nigerian language.</p>
+      <ol>
+        <li>Choose a phrase: "God is good" / "Oluwa daa" / "Allah kyau"</li>
+        <li>Transcribe both into IPA</li>
+        <li>Record the English version in BandLab — focus on clear articulation</li>
+        <li>Record the Nigerian language version — focus on correct vowels and tones</li>
+        <li>Share the project link and send to Coach Toby</li>
+      </ol>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Submit as:</strong> [Module 6] BandLab Practical - [Your Name]</p>
+    </div>
+    
+    <div class="task" id="task-6-6">
+      <div class="task-label">Task 6.6</div>
+      <p>Complete the BandLab practical above. Also: Transcribe the first verse of any worship song you know into IPA. Write it out and keep it as a reference for future singing.</p>
+      <button class="task-btn" id="taskBtn-6-6" onclick="completeTask('6-6')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-section" id="quiz-6" style="display:none">
+    <div class="section-title" style="margin-bottom:16px">Module 6 Quiz</div>
+    
+    <div class="q-card" id="q6-1">
+      <div class="q-num">Question 1 of 5</div>
+      <div class="q-text">What is the IPA symbol for the "ee" sound in "see"?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q6-1')">[e]</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-1')">[i]</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-1')">[a]</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-1')">[u]</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q6-2">
+      <div class="q-num">Question 2 of 5</div>
+      <div class="q-text">What is the schwa [ə]?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q6-2')">A stressed, open vowel</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-2')">The neutral "uh" sound in unstressed syllables</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-2')">A type of consonant</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-2')">The "oh" sound in "go"</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q6-3">
+      <div class="q-num">Question 3 of 5</div>
+      <div class="q-text">Why are tonal languages (like Yoruba) challenging for singers?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q6-3')">They have too many consonants</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-3')">The melody must align with the natural tone of the words or the meaning changes</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-3')">They require a different vocal technique</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-3')">They don't have vowels</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q6-4">
+      <div class="q-num">Question 4 of 5</div>
+      <div class="q-text">In consonant clusters like "str" in "strong," what's the NYVC approach?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q6-4')">Punch every consonant equally</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-4')">Drop all middle consonants</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-4')">Keep first and last consonants clear, soften the middle ones</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-4')">Sing only the vowels and skip consonants</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q6-5">
+      <div class="q-num">Question 5 of 5</div>
+      <div class="q-text">What's the IPA transcription of "the" in "the sound"?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q6-5')">[ði]</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-5')">[ðə]</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-5')">[θi]</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q6-5')">[də]</button>
+      </div>
+    </div>
+    
+    <button class="q-submit" id="quizSubmit" onclick="submitQuiz()" disabled>Submit Answers</button>
+    
+    <div class="q-result" id="quizResult" style="display:none">
+      <div class="q-score" id="quizScore">0%</div>
+      <h3 id="quizTitle">Quiz Complete</h3>
+      <p id="quizMsg">Review the lessons and try again.</p>
+      <button class="q-retry" onclick="retryQuiz()">Try Again</button>
+    </div>
+  </div>
+
+  <!-- COMPLETION -->
+  <div class="complete" id="modComplete" style="display:none">
+    <div class="complete-icon">✓</div>
+    <h2>Module 6 Complete!</h2>
+    <p>You can now sing clearly in any language. Your diction is precise, your vowels are pure, and your message is heard.</p>
+    <div class="complete-xp">+50 XP Earned</div>
+    <br>
+    <a href="module-7.html" class="complete-btn">Continue to Module 7 →</a>
+  </div>
+
+  <div class="footer">
+    Vocal Mastery Academy · Sessions with Toby · © 2026
+  </div>
+
+</div>
+
+<script>
+const MODULE = 6;
+const STORAGE_KEY = 'vma_student';
+const TERMS_KEY = 'vma_terms_agreed';
+const CORRECT_ANSWERS = {
+  'q6-1': 1, 'q6-2': 1, 'q6-3': 1, 'q6-4': 2, 'q6-5': 1
+};
+
+if (localStorage.getItem(TERMS_KEY) !== 'true') {
+  window.location.href = 'terms.html';
+}
+
+function getStudent() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
+}
+function setStudent(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+const s = getStudent();
+if (!s) { window.location.href = 'academy.html'; }
+
+let currentLesson = 1;
+const totalLessons = 6;
+
+function showLesson(n) {
+  for (let i = 1; i <= totalLessons; i++) {
+    const el = document.getElementById('lesson-6-' + i);
+    if (el) el.style.display = i === n ? '' : 'none';
+  }
+  currentLesson = n;
+  window.scrollTo({top:0,behavior:'smooth'});
+  
+  if (window.VMA) {
+    const st = window.VMA.getStudent();
+    if (st) {
+      st.lessons = st.lessons || {};
+      st.lessons['6-' + n] = true;
+      window.VMA.setStudent(st);
+      window.VMA.awardXP(10, 'Completed Lesson 6.' + n);
+    }
+  }
+  updateProgress();
+}
+
+function completeTask(taskId) {
+  const btn = document.getElementById('taskBtn-' + taskId);
+  if (!btn) return;
+  btn.textContent = '✓ Submitted';
+  btn.className = 'task-btn done';
+  btn.onclick = null;
+  
+  if (window.VMA) {
+    window.VMA.awardXP(25, 'Completed Task ' + taskId);
+    window.VMA.updateStreak();
+    window.VMA.showNotification('✓ Task complete! +25 XP');
+  }
+  
+  const lessonNum = parseInt(taskId.split('-')[1]);
+  if (lessonNum < totalLessons) {
+    setTimeout(() => showLesson(lessonNum + 1), 800);
+  } else {
+    setTimeout(() => showQuiz(), 800);
+  }
+  updateProgress();
+}
+
+let quizAnswers = {};
+let quizSubmitted = false;
+
+function selectOpt(btn, qId) {
+  if (quizSubmitted) return;
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  quizAnswers[qId] = Array.from(parent.querySelectorAll('.q-opt')).indexOf(btn);
+  const allAnswered = Object.keys(CORRECT_ANSWERS).every(q => quizAnswers[q] !== undefined);
+  document.getElementById('quizSubmit').disabled = !allAnswered;
+}
+
+function submitQuiz() {
+  if (quizSubmitted) return;
+  quizSubmitted = true;
+  let correct = 0;
+  const total = Object.keys(CORRECT_ANSWERS).length;
+  
+  for (const [qId, correctIdx] of Object.entries(CORRECT_ANSWERS)) {
+    const opts = document.querySelectorAll('#' + qId + ' .q-opt');
+    const selected = quizAnswers[qId];
+    opts.forEach((opt, i) => {
+      if (i === correctIdx) opt.classList.add('correct');
+      if (i === selected && i !== correctIdx) opt.classList.add('wrong');
+    });
+    if (selected === correctIdx) correct++;
+  }
+  
+  const pct = Math.round((correct / total) * 100);
+  document.getElementById('quizScore').textContent = pct + '%';
+  
+  if (pct >= 80) {
+    document.getElementById('quizTitle').textContent = '🎉 Passed!';
+    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. Your articulation is on point!';
+    document.getElementById('quizSubmit').style.display = 'none';
+    
+    if (window.VMA) {
+      window.VMA.awardXP(15, 'Passed Module 6 Quiz (' + pct + '%)');
+      const st = window.VMA.getStudent();
+      if (st) {
+        st.quizzes = st.quizzes || {};
+        st.quizzes['6'] = pct;
+        st.modules[5] = 100;
+        window.VMA.setStudent(st);
+        window.VMA.showNotification('🏆 Module 6 Complete! +15 XP');
+      }
+    }
+    setTimeout(() => {
+      document.getElementById('quiz-6').style.display = 'none';
+      document.getElementById('modComplete').style.display = '';
+    }, 2000);
+  } else {
+    document.getElementById('quizTitle').textContent = 'Not quite there';
+    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You need 80% to pass. Review and try again!';
+    document.getElementById('quizSubmit').style.display = 'none';
+    document.getElementById('quizResult').style.display = '';
+  }
+}
+
+function retryQuiz() {
+  quizAnswers = {};
+  quizSubmitted = false;
+  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected','correct','wrong'));
+  document.getElementById('quizSubmit').disabled = true;
+  document.getElementById('quizSubmit').style.display = '';
+  document.getElementById('quizResult').style.display = 'none';
+}
+
+function showQuiz() {
+  document.getElementById('quiz-6').style.display = '';
+  document.getElementById('modComplete').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress() {
+  const st = getStudent();
+  if (!st) return;
+  let lessonsDone = 0;
+  for (let i = 1; i <= totalLessons; i++) {
+    if (st.lessons && st.lessons['6-' + i]) lessonsDone++;
+  }
+  const tasksDone = document.querySelectorAll('.task-btn.done').length;
+  const quizPassed = st.quizzes && st.quizzes['6'] >= 80;
+  const pct = Math.round(((lessonsDone + tasksDone + (quizPassed ? 2 : 0)) / (totalLessons + totalLessons + 2)) * 100);
+  document.getElementById('modProgress').style.width = pct + '%';
+}
+
+let startLesson = 1;
+for (let i = 1; i <= totalLessons; i++) {
+  if (!s.lessons || !s.lessons['6-' + i]) { startLesson = i; break; }
+  if (i === totalLessons) startLesson = totalLessons;
+}
+
+if (s.quizzes && s.quizzes['6'] >= 80) {
+  document.getElementById('modComplete').style.display = '';
+} else {
+  showLesson(startLesson);
+}
+updateProgress();
+document.getElementById('navAvatar').textContent = (s.name || 'S').charAt(0).toUpperCase();
+
+if (!window.VMA) window.VMA = {};
+window.VMA.getStudent = getStudent;
+window.VMA.setStudent = setStudent;
+</script>
+
+</body>
+</html>
