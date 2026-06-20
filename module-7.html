@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Module 7: Advanced Craft — Vocal Mastery Academy</title>
+<meta name="theme-color" content="#0a0a10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a10;--surface:#111118;--surface2:#181822;--border:#1e1e2c;--text:#e8e8f0;--text-soft:#a0a0b4;--muted:#5a5a70;--gold:#d4a843;--gold-light:#e8c46a;--mint:#00d4a0;--blue:#4a9eff;--purple:#a06eff;--orange:#ff8a4a;--red:#e05555;--radius:14px;--radius-sm:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding:0 16px}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim-up{animation:fadeInUp .4s ease both}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,16,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-link{font-size:.72rem;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--radius-sm);transition:all .15s}
+.nav-link:hover{color:var(--text);background:var(--surface)}
+.nav-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--bg);cursor:pointer}
+
+.mod-head{padding:32px 0 16px;animation:fadeInUp .4s ease}
+.mod-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:20px;font-size:.65rem;font-weight:600;color:var(--gold);margin-bottom:12px}
+.mod-head h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.4rem,4vw,1.8rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:6px}
+.mod-head p{color:var(--text-soft);font-size:.88rem}
+.mod-progress-bar{width:100%;height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:16px}
+.mod-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--mint));border-radius:4px;transition:width .5s ease}
+
+.genre-spotlight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;display:flex;align-items:center;gap:12px}
+.genre-icon{font-size:1.6rem}
+.genre-info h4{font-size:.82rem;font-weight:600;margin-bottom:2px}
+.genre-info p{font-size:.75rem;color:var(--muted)}
+.genre-tag{font-size:.62rem;padding:3px 8px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:6px;color:var(--gold);font-weight:60;flex-shrink:0}
+
+.content{padding:24px 0;animation:fadeInUp .3s ease}
+.content h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.02em;margin-bottom:12px}
+.content h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin:20px 0 8px;color:var(--gold)}
+.content p{color:var(--text);font-size:.88rem;line-height:1.75;margin-bottom:12px}
+.content p strong{color:var(--gold)}
+.content ul{margin:8px 0 16px;padding-left:20px}
+.content li{color:var(--text);font-size:.86rem;line-height:1.7;margin-bottom:6px}
+.content-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
+.content-box.tip{border-left:3px solid var(--mint)}
+.content-box.key{border-left:3px solid var(--gold)}
+.content-box.info{border-left:3px solid var(--blue)}
+.content-box p:last-child{margin-bottom:0}
+
+.task{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
+.task-label{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:6px}
+.task p{font-size:.85rem;color:var(--text);line-height:1.6}
+.task-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;background:rgba(0,212,160,.06);border:1px solid rgba(0,212,160,.15);border-radius:var(--radius-sm);font-size:.72rem;font-weight:600;color:var(--mint);cursor:pointer;transition:all .15s;font-family:inherit}
+.task-btn:hover{background:rgba(0,212,160,.12)}
+.task-btn.done{background:rgba(74,158,255,.06);border-color:rgba(74,158,255,.15);color:var(--blue);cursor:default}
+
+.bandlab-box{background:linear-gradient(135deg,rgba(74,158,255,.06),rgba(160,110,255,.06));border:1px solid rgba(74,158,255,.15);border-radius:var(--radius);padding:16px;margin:14px 0}
+.bandlab-box h4{font-size:.85rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.bandlab-box p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
+.bandlab-box ol{margin:8px 0 0;padding-left:18px}
+.bandlab-box li{font-size:.82rem;color:var(--text-soft);margin-bottom:4px;line-height:1.5}
+
+.quiz-section{padding:24px 0}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;animation:fadeInUp .3s ease}
+.q-num{font-size:.62rem;font-weight:600;color:var(--gold);margin-bottom:8px}
+.q-text{font-size:.88rem;font-weight:500;margin-bottom:14px;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:12px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.85rem;cursor:pointer;transition:all .15s;text-align:left;color:var(--text);font-family:inherit;line-height:1.5}
+.q-opt:hover{border-color:var(--gold);background:rgba(212,168,67,.03)}
+.q-opt.selected{border-color:var(--gold);background:rgba(212,168,67,.06)}
+.q-opt.correct{border-color:var(--mint);background:rgba(0,212,160,.08)}
+.q-opt.wrong{border-color:var(--red);background:rgba(224,85,85,.06)}
+.q-submit{margin-top:16px;padding:13px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius-sm);font-weight:600;font-size:.85rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.q-submit:hover{background:var(--gold-light)}
+.q-submit:disabled{opacity:.4;cursor:not-allowed}
+.q-result{text-align:center;padding:32px 20px;animation:fadeInUp .4s ease}
+.q-result h3{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;margin-bottom:8px}
+.q-result p{color:var(--text-soft);font-size:.9rem}
+.q-score{font-size:3rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+.q-retry{margin-top:16px;padding:12px 24px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-weight:500;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.q-retry:hover{border-color:var(--gold)}
+
+.complete{text-align:center;padding:40px 20px;animation:fadeInUp .5s ease}
+.complete-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;box-shadow:0 0 48px rgba(212,168,67,.15)}
+.complete h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:8px}
+.complete p{color:var(--text-soft);font-size:.9rem;margin-bottom:20px}
+.complete-xp{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(212,168,67,.08);border-radius:var(--radius-sm);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:20px}
+.complete-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:all .2s}
+.complete-btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 28px rgba(212,168,67,.22)}
+
+.footer{padding:32px 0;text-align:center;font-size:.68rem;color:var(--muted);border-top:1px solid var(--border);margin-top:32px}
+@media(max-width:480px){.mod-head{padding:24px 0 12px}.q-card{padding:16px}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="academy.html" class="nav-brand">Vocal<span>Mastery</span></a>
+  <div class="nav-links">
+    <a href="academy.html#modules" class="nav-link">Modules</a>
+    <a href="dashboard.html" class="nav-link">Progress</a>
+    <div class="nav-avatar" id="navAvatar" onclick="window.location.href='dashboard.html'">S</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="mod-head anim-up">
+    <div class="mod-badge">Module 7 of 7</div>
+    <h1>Advanced Craft — Find Your Voice</h1>
+    <p>You've built technique, theory, and skill. Now it's time to find what makes you <em>you</em>. This is where singers become artists.</p>
+    <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+  </div>
+
+  <!-- GENRE SPOTLIGHT -->
+  <div class="genre-spotlight">
+    <div class="genre-icon">🌍</div>
+    <div class="genre-info">
+      <h4>Genre Spotlight: Pop / Global</h4>
+      <p>The art of versatility. Listen to how Tems, Burna Boy, and Wizkid blend Afrobeats with pop, R&B, and global sounds. Notice how they adapt their vocal style to each genre.</p>
+    </div>
+    <div class="genre-tag">Listen</div>
+  </div>
+
+  <!-- LESSON 7.1 -->
+  <div class="content" id="lesson-7-1">
+    <h2>Lesson 7.1: Vocal Identity — What Makes YOU Sound Like You</h2>
+    
+    <p>In a world of millions of singers, what makes someone recognize <em>your</em> voice in 3 seconds? That's your vocal identity — and it's not something you create. It's something you <strong>discover</strong>.</p>
+    
+    <h3>The 5 Elements of Vocal Identity</h3>
+    <ul>
+      <li><strong>Timbre:</strong> The natural color of your voice — bright, dark, warm, cool, airy, heavy. This is genetic and unchangeable. Embrace it.</li>
+      <li><strong>Tessitura:</strong> Where your voice sounds best. Your comfort zone is your identity zone.</li>
+      <li><strong>Phrasing:</strong> How you shape a melody — where you breathe, where you linger, where you rush. This is uniquely yours.</li>
+      <li><strong>Dynamic signature:</strong> Your natural dynamic range. Some singers live in the soft zone. Others are powerhouse belters. Both are valid.</li>
+      <li><strong>Emotional fingerprint:</strong> The emotions you access most naturally. Some singers naturally sound joyful. Others sound melancholic. This is your emotional home.</li>
+    </ul>
+    
+    <div class="content-box key">
+      <p><strong>The NYVC truth:</strong> You cannot manufacture an identity. You can only discover it. Stop trying to sound like your favorite singer. Instead, sing 100 songs and notice which ones feel most natural. That's your identity trying to emerge.</p>
+    </div>
+    
+    <h3>The Identity Discovery Exercise</h3>
+    <ol>
+      <li>Choose 5 songs in 5 different styles (gospel, Afrobeats, R&B, pop, ballad)</li>
+      <li>Sing each one in your natural voice — no imitation</li>
+      <li>Record all 5 in BandLab</li>
+      <li>Listen back and ask: "Which one felt most like ME?"</li>
+      <li>That's your identity pointing you home</li>
+    </ol>
+  </div>
+
+  <!-- LESSON 7.2 -->
+  <div class="content" id="lesson-7-2" style="display:none">
+    <h2>Lesson 7.2: Improvisation — Riffs, Runs, and Embellishments</h2>
+    
+    <p>Improvisation is the art of creating melody in the moment. It's what separates a singer from a <strong>performer</strong>. You don't need to be a jazz musician to improvise — every genre uses it.</p>
+    
+    <h3>The 5 Tools of Vocal Improvisation</h3>
+    <ul>
+      <li><strong>Riffs:</strong> Short melodic patterns, usually 2-4 notes, that decorate a phrase. Think of the vocal runs in gospel and R&B.</li>
+      <li><strong>Runs:</strong> Faster passages, often scale-based, that connect two notes. Common in gospel, Afrobeats, and pop.</li>
+      <li><strong>Bends:</strong> Sliding from one note to another, passing through the notes in between. Essential in blues, gospel, and Afrobeats.</li>
+      <li><strong>Vocal fry embellishments:</strong> Adding a growl or rasp to a note for emotional effect. Use sparingly.</li>
+      <li><strong>Call and response:</strong> Singing a phrase and "answering" yourself with a variation. Creates conversation in your performance.</li>
+    </ul>
+    
+    <h3>The NYVC Improvisation Method</h3>
+    <ol>
+      <li><strong>Start simple:</strong> Take a phrase you know. Sing it exactly as written.</li>
+      <li><strong>Add one note:</strong> Add one extra note somewhere — a neighbor tone, a passing tone.</li>
+      <li><strong>Add a rhythm change:</strong> Keep the notes but change the rhythm — syncopate it.</li>
+      <li><strong>Combine:</strong> Add notes AND change rhythm. Now you're improvising.</li>
+      <li><strong>Repeat and vary:</strong> Do the same improvisation twice, but change it slightly the second time.</li>
+    </ol>
+    
+    <div class="content-box tip">
+      <p><strong>Golden rule:</strong> Improvisation should serve the song, not your ego. If a riff doesn't enhance the emotion, skip it. The best improvisation is the audience doesn't notice it — they just feel something shift.</p>
+    </div>
+    
+    <div class="task" id="task-7-2">
+      <div class="task-label">Task 7.2</div>
+      <p>Take the phrase "I love you, Lord" (or any short phrase). Sing it 5 times: (1) as written, (2) add one note, (3) change the rhythm, (4) add a bend, (5) combine everything. Record all 5 in BandLab. Listen — which version felt most natural?</p>
+      <button class="task-btn" id="taskBtn-7-2" onclick="completeTask('7-2')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- LESSON 7.3 -->
+  <div class="content" id="lesson-7-3" style="display:none">
+    <h2>Lesson 7.3: Stylistic Versatility — Singing Across Genres</h2>
+    
+    <p>A great singer can move between genres without losing their identity. This doesn't mean singing every genre the same way — it means <strong>adapting your voice</strong> while staying true to who you are.</p>
+    
+    <h3>Genre Adaptation Guide</h3>
+    <table class="ipa-table">
+      <thead><tr><th>Genre</th><th>Vocal Approach</th><th>Key Technique</th></tr></thead>
+      <tbody>
+        <tr><td>Gospel</td><td>Powerful, emotional, belting</td><td>Breath support, mix voice, dynamics</td></tr>
+        <tr><td>Afrobeats</td><td>Rhythmic, conversational, groovy</td><td>Syncopation, relaxed tone, mic distance</td></tr>
+        <tr><td>R&B/Soul</td><td>Intimate, melismatic, vulnerable</td><td>Runs, falsetto, soft dynamics</td></tr>
+        <tr><td>Highlife</td><td>Melodic, bright, storytelling</td><td>Clear diction, smooth phrasing</td></tr>
+        <tr><td>Worship</td><td>Sustained, reverent, building</td><td>Long phrases, crescendo, emotional access</td></tr>
+        <tr><td>Pop</td><td>Clean, precise, hook-focused</td><td>Consistent tone, clear lyrics, energy</td></tr>
+        <tr><td>Fuji</td><td>Percussive, rhythmic, call-and-response</td><td>Vocal agility, rhythmic precision</td></tr>
+      </tbody>
+    </table>
+    
+    <div class="content-box key">
+      <p><strong>The secret:</strong> Versatility doesn't mean changing who you are. It means adjusting your <em>delivery</em> while keeping your <em>identity</em>. Your timbre stays the same. Your phrasing adapts. Your emotion shifts. But it's always you.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 7.4 -->
+  <div class="content" id="lesson-7-4" style="display:none">
+    <h2>Lesson 7.4: Recording Yourself — Self-Assessment and Improvement</h2>
+    
+    <p>Most singers have never truly listened to themselves. The voice you hear in your head is not the voice the world hears. Recording yourself is the fastest way to improve — but only if you know <strong>how to listen</strong>.</p>
+    
+    <h3>The Self-Assessment Framework</h3>
+    <p>When you listen to your recording, evaluate these 5 areas (in order):</p>
+    <ol>
+      <li><strong>Pitch:</strong> Are you in tune? Any notes consistently flat or sharp?</li>
+      <li><strong>Rhythm:</strong> Are you on the beat? Any rushing or dragging?</li>
+      <li><strong>Tone:</strong> Is your tone consistent? Any breathiness, strain, or weakness?</li>
+      <li><strong>Diction:</strong> Can you understand every word? Any mumbled consonants?</li>
+      <li><strong>Emotion:</strong> Does it move you? If it doesn't move you, it won't move anyone else.</li>
+    </ol>
+    
+    <h3>The 3-Listen Method</h3>
+    <ul>
+      <li><strong>Listen 1:</strong> Just listen. Don't judge. Feel the overall impression.</li>
+      <li><strong>Listen 2:</strong> Focus on one area (e.g., pitch). Take notes.</li>
+      <li><strong>Listen 3:</strong> Focus on a different area (e.g., emotion). Take notes.</li>
+    </ul>
+    
+    <div class="content-box tip">
+      <p><strong>NYVC tip:</strong> Record yourself daily. Even 30 seconds. Over a week, you'll hear patterns you never noticed. The voice that surprises you on Monday might sound completely different by Friday — because you're improving in real time.</p>
+    </div>
+    
+    <div class="task" id="task-7-4">
+      <div class="task-label">Task 7.4</div>
+      <p>Record yourself singing a full song in BandLab. Use the 3-Listen Method. Write down 3 things you liked and 3 things you want to improve. Be honest — this is for you, not for anyone else.</p>
+      <button class="task-btn" id="taskBtn-7-4" onclick="completeTask('7-4')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- LESSON 7.5 -->
+  <div class="content" id="lesson-7-5" style="display:none">
+    <h2>Lesson 7.5: Vocal Longevity — Protecting Your Voice for Life</h2>
+    
+    <p>Your voice is the only instrument you can't replace. Some singers burn out in their 30s. Others sing beautifully into their 80s. The difference? <strong>How they treat their voice</strong>.</p>
+    
+    <h3>The Daily Vocal Health Checklist</h3>
+    <ul>
+      <li><strong>Hydrate:</strong> 8+ glasses of water. Start hours before singing.</li>
+      <li><strong>Warm up:</strong> 5-10 minutes minimum before any serious singing.</li>
+      <li><strong>Rest:</strong> If your voice feels tired, rest it. No talking, no whispering.</li>
+      <li><strong>Cool down:</strong> Gentle humming and descending scales after singing.</li>
+      <li><strong>Avoid:</strong> Whispering (strains more than speaking), throat clearing (sip water instead), shouting.</li>
+    </ul>
+    
+    <h3>Warning Signs to Never Ignore</h3>
+    <div class="content-box" style="border-left:3px solid var(--red)">
+      <p><strong>Stop singing immediately if you experience:</strong></p>
+      <ul>
+        <li>Pain in your throat or neck</li>
+        <li>Persistent hoarseness (more than 2 days)</li>
+        <li>Loss of range (notes you could hit yesterday are gone today)</li>
+        <li>Blood in your saliva (rare but serious)</li>
+      </ul>
+      <p style="margin-top:8px"><strong>See a doctor (ENT/laryngologist) if any of these persist beyond 48 hours.</strong></p>
+    </div>
+    
+    <h3>The Long Game</h3>
+    <p>Your voice at 20 is not your voice at 40. It matures, deepens, and gains character. But only if you treat it well. The singers who last decades are the ones who:</p>
+    <ul>
+      <li>Never sing through pain</li>
+      <li>Stay hydrated as a lifestyle, not just before performances</li>
+      <li>Continue training (even 10 minutes daily)</li>
+      <li>Respect rest days</li>
+      <li>Avoid smoking and excessive alcohol</li>
+    </ul>
+  </div>
+
+  <!-- LESSON 7.6 -->
+  <div class="content" id="lesson-7-6" style="display:none">
+    <h2>Lesson 7.6: Leading Others — Worship Leading, Directing, Mentoring</h2>
+    
+    <p>At some point, you won't just sing — you'll lead others to sing. Whether it's worship leading, directing a choir, or mentoring a student, this requires a different set of skills.</p>
+    
+    <h3>The Worship Leader's Role</h3>
+    <p>You're not performing. You're <strong>facilitating an experience</strong> for others. Your job is to:</p>
+    <ul>
+      <li><strong>Set the tone:</strong> Your energy sets the room's energy. If you're nervous, they'll be nervous. If you're at peace, they'll follow.</li>
+      <li><strong>Lead by singing:</strong> Sing clearly and confidently. They're following your voice.</li>
+      <li><strong>Read the room:</strong> Is the Spirit moving? Do you extend the song or move on? This is discernment, not planning.</li>
+      <li><strong>Include, don't dominate:</strong> Step back sometimes. Let the congregation sing without you.</li>
+    </ul>
+    
+    <h3>The Mentor's Role</h3>
+    <p>When you teach someone to sing, you're not just passing on technique — you're passing on a <strong>legacy</strong>. The NYVC approach to mentoring:</p>
+    <ul>
+      <li><strong>Start with encouragement:</strong> Find what they do well. Lead with that.</li>
+      <li><strong>One correction at a time:</strong> Don't overwhelm. Fix one thing, master it, then move to the next.</li>
+      <li><strong>Model, don't just tell:</strong> Sing the phrase yourself. Let them hear what you mean.</li>
+      <li><strong>Be patient:</strong> Voices develop at different speeds. Some people take months to find their mix voice. That's normal.</li>
+      <li><strong>Protect their identity:</strong> Don't make them sound like you. Help them sound like the best version of themselves.</li>
+    </ul>
+    
+    <!-- BANDLAB PRACTICAL -->
+    <div class="bandlab-box">
+      <h4>🎹 BandLab Practical — Module 7 (Final)</h4>
+      <p><strong>Assignment:</strong> Record a 30-second original improvisation over a backing track.</p>
+      <ol>
+        <li>Open BandLab → New Project → Voice/Mic</li>
+        <li>Find a backing track (YouTube: "backing track in [your key]")</li>
+        <li>Import it or play it on another device while recording</li>
+        <li>Improvise — sing whatever comes naturally. No lyrics needed.</li>
+        <li>Use the techniques from this module: bends, runs, dynamics, emotion</li>
+        <li>Share the project link and send to Coach Toby</li>
+      </ol>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Submit as:</strong> [Module 7] BandLab Practical - [Your Name]</p>
+    </div>
+    
+    <div class="task" id="task-7-6">
+      <div class="task-label">Task 7.6</div>
+      <p>Complete the BandLab practical above. Also: Teach one exercise from this entire course to someone else (friend, family member, fellow singer). Record a short video of you teaching it. This is your final step toward becoming not just a singer, but a mentor.</p>
+      <button class="task-btn" id="taskBtn-7-6" onclick="completeTask('7-6')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-section" id="quiz-7" style="display:none">
+    <div class="section-title" style="margin-bottom:16px">Module 7 Quiz — Final</div>
+    
+    <div class="q-card" id="q7-1">
+      <div class="q-num">Question 1 of 5</div>
+      <div class="q-text">What is vocal identity?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q7-1')">Copying your favorite singer's style</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-1')">The unique combination of timbre, tessitura, phrasing, dynamics, and emotional fingerprint that makes you sound like you</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-1')">The genre you sing best</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-1')">Your vocal range</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q7-2">
+      <div class="q-num">Question 2 of 5</div>
+      <div class="q-text">What's the NYVC approach to improvisation?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q7-2')">Memorize complex runs and reproduce them exactly</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-2')">Start simple, add one note, change rhythm, combine, then repeat and vary</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-2')">Only improvise in jazz contexts</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-2')">Improvisation is a natural talent that can't be taught</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q7-3">
+      <div class="q-num">Question 3 of 5</div>
+      <div class="q-text">What's the 3-Listen Method for self-assessment?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q7-3')">Listen once and make all corrections</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-3')">Listen 1: feel the impression. Listen 2: focus on one area. Listen 3: focus on another area</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-3')">Listen to 3 different recordings of yourself</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-3')">Listen to 3 different singers for comparison</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q7-4">
+      <div class="q-num">Question 4 of 5</div>
+      <div class="q-text">When should you stop singing and see a doctor?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q7-4')">When you can't hit a high note</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-4')">When you experience pain, persistent hoarseness, loss of range, or blood — and it persists beyond 48 hours</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-4')">Every month for a checkup</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-4')">When your coach tells you to</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q7-5">
+      <div class="q-num">Question 5 of 5</div>
+      <div class="q-text">What's the most important quality of a good mentor?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q7-5')">Making students sound exactly like them</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-5')">Being patient, leading with encouragement, and helping students find their own identity</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-5')">Correcting every mistake immediately</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q7-5')">Only teaching advanced students</button>
+      </div>
+    </div>
+    
+    <button class="q-submit" id="quizSubmit" onclick="submitQuiz()" disabled>Submit Answers</button>
+    
+    <div class="q-result" id="quizResult" style="display:none">
+      <div class="q-score" id="quizScore">0%</div>
+      <h3 id="quizTitle">Quiz Complete</h3>
+      <p id="quizMsg">Review the lessons and try again.</p>
+      <button class="q-retry" onclick="retryQuiz()">Try Again</button>
+    </div>
+  </div>
+
+  <!-- COMPLETION -->
+  <div class="complete" id="modComplete" style="display:none">
+    <div class="complete-icon">🏆</div>
+    <h2>Module 7 Complete!</h2>
+    <p>You've found your voice — not just the notes, but the identity behind them. You're not just a singer anymore. You're an artist.</p>
+    <div class="complete-xp">+65 XP Earned</div>
+    <br>
+    <a href="certificate.html" class="complete-btn">Claim Your Certificate →</a>
+  </div>
+
+  <div class="footer">
+    Vocal Mastery Academy · Sessions with Toby · © 2026
+  </div>
+
+</div>
+
+<script>
+const MODULE = 7;
+const STORAGE_KEY = 'vma_student';
+const TERMS_KEY = 'vma_terms_agreed';
+const CORRECT_ANSWERS = {
+  'q7-1': 1, 'q7-2': 1, 'q7-3': 1, 'q7-4': 1, 'q7-5': 1
+};
+
+if (localStorage.getItem(TERMS_KEY) !== 'true') {
+  window.location.href = 'terms.html';
+}
+
+function getStudent() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
+}
+function setStudent(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+const s = getStudent();
+if (!s) { window.location.href = 'academy.html'; }
+
+let currentLesson = 1;
+const totalLessons = 6;
+
+function showLesson(n) {
+  for (let i = 1; i <= totalLessons; i++) {
+    const el = document.getElementById('lesson-7-' + i);
+    if (el) el.style.display = i === n ? '' : 'none';
+  }
+  currentLesson = n;
+  window.scrollTo({top:0,behavior:'smooth'});
+  
+  if (window.VMA) {
+    const st = window.VMA.getStudent();
+    if (st) {
+      st.lessons = st.lessons || {};
+      st.lessons['7-' + n] = true;
+      window.VMA.setStudent(st);
+      window.VMA.awardXP(10, 'Completed Lesson 7.' + n);
+    }
+  }
+  updateProgress();
+}
+
+function completeTask(taskId) {
+  const btn = document.getElementById('taskBtn-' + taskId);
+  if (!btn) return;
+  btn.textContent = '✓ Submitted';
+  btn.className = 'task-btn done';
+  btn.onclick = null;
+  
+  if (window.VMA) {
+    window.VMA.awardXP(25, 'Completed Task ' + taskId);
+    window.VMA.updateStreak();
+    window.VMA.showNotification('✓ Task complete! +25 XP');
+  }
+  
+  const lessonNum = parseInt(taskId.split('-')[1]);
+  if (lessonNum < totalLessons) {
+    setTimeout(() => showLesson(lessonNum + 1), 800);
+  } else {
+    setTimeout(() => showQuiz(), 800);
+  }
+  updateProgress();
+}
+
+let quizAnswers = {};
+let quizSubmitted = false;
+
+function selectOpt(btn, qId) {
+  if (quizSubmitted) return;
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  quizAnswers[qId] = Array.from(parent.querySelectorAll('.q-opt')).indexOf(btn);
+  const allAnswered = Object.keys(CORRECT_ANSWERS).every(q => quizAnswers[q] !== undefined);
+  document.getElementById('quizSubmit').disabled = !allAnswered;
+}
+
+function submitQuiz() {
+  if (quizSubmitted) return;
+  quizSubmitted = true;
+  let correct = 0;
+  const total = Object.keys(CORRECT_ANSWERS).length;
+  
+  for (const [qId, correctIdx] of Object.entries(CORRECT_ANSWERS)) {
+    const opts = document.querySelectorAll('#' + qId + ' .q-opt');
+    const selected = quizAnswers[qId];
+    opts.forEach((opt, i) => {
+      if (i === correctIdx) opt.classList.add('correct');
+      if (i === selected && i !== correctIdx) opt.classList.add('wrong');
+    });
+    if (selected === correctIdx) correct++;
+  }
+  
+  const pct = Math.round((correct / total) * 100);
+  document.getElementById('quizScore').textContent = pct + '%';
+  
+  if (pct >= 80) {
+    document.getElementById('quizTitle').textContent = '🎉 Passed!';
+    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You are a complete vocalist!';
+    document.getElementById('quizSubmit').style.display = 'none';
+    
+    if (window.VMA) {
+      window.VMA.awardXP(15, 'Passed Module 7 Quiz (' + pct + '%)');
+      const st = window.VMA.getStudent();
+      if (st) {
+        st.quizzes = st.quizzes || {};
+        st.quizzes['7'] = pct;
+        st.modules[6] = 100;
+        window.VMA.setStudent(st);
+        window.VMA.awardBadge('graduate');
+        window.VMA.showNotification('🏆 COURSE COMPLETE! +15 XP + Graduate Badge');
+      }
+    }
+    setTimeout(() => {
+      document.getElementById('quiz-7').style.display = 'none';
+      document.getElementById('modComplete').style.display = '';
+    }, 2000);
+  } else {
+    document.getElementById('quizTitle').textContent = 'Not quite there';
+    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You need 80% to pass. Review and try again!';
+    document.getElementById('quizSubmit').style.display = 'none';
+    document.getElementById('quizResult').style.display = '';
+  }
+}
+
+function retryQuiz() {
+  quizAnswers = {};
+  quizSubmitted = false;
+  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected','correct','wrong'));
+  document.getElementById('quizSubmit').disabled = true;
+  document.getElementById('quizSubmit').style.display = '';
+  document.getElementById('quizResult').style.display = 'none';
+}
+
+function showQuiz() {
+  document.getElementById('quiz-7').style.display = '';
+  document.getElementById('modComplete').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress() {
+  const st = getStudent();
+  if (!st) return;
+  let lessonsDone = 0;
+  for (let i = 1; i <= totalLessons; i++) {
+    if (st.lessons && st.lessons['7-' + i]) lessonsDone++;
+  }
+  const tasksDone = document.querySelectorAll('.task-btn.done').length;
+  const quizPassed = st.quizzes && st.quizzes['7'] >= 80;
+  const pct = Math.round(((lessonsDone + tasksDone + (quizPassed ? 2 : 0)) / (totalLessons + totalLessons + 2)) * 100);
+  document.getElementById('modProgress').style.width = pct + '%';
+}
+
+let startLesson = 1;
+for (let i = 1; i <= totalLessons; i++) {
+  if (!s.lessons || !s.lessons['7-' + i]) { startLesson = i; break; }
+  if (i === totalLessons) startLesson = totalLessons;
+}
+
+if (s.quizzes && s.quizzes['7'] >= 80) {
+  document.getElementById('modComplete').style.display = '';
+} else {
+  showLesson(startLesson);
+}
+updateProgress();
+document.getElementById('navAvatar').textContent = (s.name || 'S').charAt(0).toUpperCase();
+
+if (!window.VMA) window.VMA = {};
+window.VMA.getStudent = getStudent;
+window.VMA.setStudent = setStudent;
+</script>
+
+</body>
+</html>
