@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Module 4: Song Selection — Vocal Mastery Academy</title>
+<meta name="theme-color" content="#0a0a10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a10;--surface:#111118;--surface2:#181822;--border:#1e1e2c;--text:#e8e8f0;--text-soft:#a0a0b4;--muted:#5a5a70;--gold:#d4a843;--gold-light:#e8c46a;--mint:#00d4a0;--blue:#4a9eff;--purple:#a06eff;--orange:#ff8a4a;--red:#e05555;--radius:14px;--radius-sm:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding:0 16px}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim-up{animation:fadeInUp .4s ease both}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,16,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:var(--text);text-decoration:none;letter-spacing:-.02em}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-link{font-size:.72rem;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:var(--radius-sm);transition:all .15s}
+.nav-link:hover{color:var(--text);background:var(--surface)}
+.nav-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--bg);cursor:pointer}
+
+.mod-head{padding:32px 0 16px;animation:fadeInUp .4s ease}
+.mod-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:20px;font-size:.65rem;font-weight:600;color:var(--gold);margin-bottom:12px}
+.mod-head h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.4rem,4vw,1.8rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:6px}
+.mod-head p{color:var(--text-soft);font-size:.88rem}
+.mod-progress-bar{width:100%;height:4px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:16px}
+.mod-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--mint));border-radius:4px;transition:width .5s ease}
+
+.genre-spotlight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:16px 0;display:flex;align-items:center;gap:12px}
+.genre-icon{font-size:1.6rem}
+.genre-info h4{font-size:.82rem;font-weight:600;margin-bottom:2px}
+.genre-info p{font-size:.75rem;color:var(--muted)}
+.genre-tag{font-size:.62rem;padding:3px 8px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:6px;color:var(--gold);font-weight:600;flex-shrink:0}
+
+.content{padding:24px 0;animation:fadeInUp .3s ease}
+.content h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:-.02em;margin-bottom:12px}
+.content h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin:20px 0 8px;color:var(--gold)}
+.content p{color:var(--text);font-size:.88rem;line-height:1.75;margin-bottom:12px}
+.content p strong{color:var(--gold)}
+.content ul{margin:8px 0 16px;padding-left:20px}
+.content li{color:var(--text);font-size:.86rem;line-height:1.7;margin-bottom:6px}
+.content-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
+.content-box.tip{border-left:3px solid var(--mint)}
+.content-box.key{border-left:3px solid var(--gold)}
+.content-box.info{border-left:3px solid var(--blue)}
+.content-box p:last-child{margin-bottom:0}
+
+.task{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:14px 0}
+.task-label{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:6px}
+.task p{font-size:.85rem;color:var(--text);line-height:1.6}
+.task-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;background:rgba(0,212,160,.06);border:1px solid rgba(0,212,160,.15);border-radius:var(--radius-sm);font-size:.72rem;font-weight:600;color:var(--mint);cursor:pointer;transition:all .15s;font-family:inherit}
+.task-btn:hover{background:rgba(0,212,160,.12)}
+.task-btn.done{background:rgba(74,158,255,.06);border-color:rgba(74,158,255,.15);color:var(--blue);cursor:default}
+
+.bandlab-box{background:linear-gradient(135deg,rgba(74,158,255,.06),rgba(160,110,255,.06));border:1px solid rgba(74,158,255,.15);border-radius:var(--radius);padding:16px;margin:14px 0}
+.bandlab-box h4{font-size:.85rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.bandlab-box p{font-size:.82rem;color:var(--text-soft);line-height:1.6}
+.bandlab-box ol{margin:8px 0 0;padding-left:18px}
+.bandlab-box li{font-size:.82rem;color:var(--text-soft);margin-bottom:4px;line-height:1.5}
+
+.quiz-section{padding:24px 0}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;animation:fadeInUp .3s ease}
+.q-num{font-size:.62rem;font-weight:600;color:var(--gold);margin-bottom:8px}
+.q-text{font-size:.88rem;font-weight:500;margin-bottom:14px;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:12px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.85rem;cursor:pointer;transition:all .15s;text-align:left;color:var(--text);font-family:inherit;line-height:1.5}
+.q-opt:hover{border-color:var(--gold);background:rgba(212,168,67,.03)}
+.q-opt.selected{border-color:var(--gold);background:rgba(212,168,67,.06)}
+.q-opt.correct{border-color:var(--mint);background:rgba(0,212,160,.08)}
+.q-opt.wrong{border-color:var(--red);background:rgba(224,85,85,.06)}
+.q-submit{margin-top:16px;padding:13px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius-sm);font-weight:600;font-size:.85rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.q-submit:hover{background:var(--gold-light)}
+.q-submit:disabled{opacity:.4;cursor:not-allowed}
+.q-result{text-align:center;padding:32px 20px;animation:fadeInUp .4s ease}
+.q-result h3{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;margin-bottom:8px}
+.q-result p{color:var(--text-soft);font-size:.9rem}
+.q-score{font-size:3rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+.q-retry{margin-top:16px;padding:12px 24px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-weight:500;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .15s}
+.q-retry:hover{border-color:var(--gold)}
+
+.complete{text-align:center;padding:40px 20px;animation:fadeInUp .5s ease}
+.complete-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--mint));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;box-shadow:0 0 48px rgba(212,168,67,.15)}
+.complete h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:8px}
+.complete p{color:var(--text-soft);font-size:.9rem;margin-bottom:20px}
+.complete-xp{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(212,168,67,.08);border-radius:var(--radius-sm);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:20px}
+.complete-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gold);color:var(--bg);border:none;border-radius:var(--radius);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:all .2s}
+.complete-btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 28px rgba(212,168,67,.22)}
+
+.footer{padding:32px 0;text-align:center;font-size:.68rem;color:var(--muted);border-top:1px solid var(--border);margin-top:32px}
+@media(max-width:480px){.mod-head{padding:24px 0 12px}.q-card{padding:16px}}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="academy.html" class="nav-brand">Vocal<span>Mastery</span></a>
+  <div class="nav-links">
+    <a href="academy.html#modules" class="nav-link">Modules</a>
+    <a href="dashboard.html" class="nav-link">Progress</a>
+    <div class="nav-avatar" id="navAvatar" onclick="window.location.href='dashboard.html'">S</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="mod-head anim-up">
+    <div class="mod-badge">Module 4 of 7</div>
+    <h1>Song Selection — Choose What Serves You</h1>
+    <p>The right song in the right key can make a good singer sound great. The wrong song can make a great singer sound average. Learn to choose wisely.</p>
+    <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+  </div>
+
+  <!-- GENRE SPOTLIGHT -->
+  <div class="genre-spotlight">
+    <div class="genre-icon">🎵</div>
+    <div class="genre-info">
+      <h4>Genre Spotlight: Highlife & Fuji</h4>
+      <p>Nigerian genres with distinct vocal demands. Highlife needs smooth, melodic phrasing. Fuji needs rhythmic precision and vocal agility. Listen to King Sunny Ade and Wasiu Ayinde.</p>
+    </div>
+    <div class="genre-tag">Listen</div>
+  </div>
+
+  <!-- LESSON 4.1 -->
+  <div class="content" id="lesson-4-1">
+    <h2>Lesson 4.1: Voice Types and Vocal Weight</h2>
+    
+    <p>Not all voices are built the same. Understanding your voice type helps you choose songs that showcase your strengths instead of fighting your limitations.</p>
+    
+    <h3>The Classical Voice Types</h3>
+    <table class="ipa-table">
+      <thead><tr><th>Type</th><th>Range</th><th>Vocal Weight</th><th>Sound Character</th></tr></thead>
+      <tbody>
+        <tr><td>Bass</td><td>E2–E4</td><td>Heavy</td><td>Deep, rich, grounding</td></tr>
+        <tr><td>Baritone</td><td>A2–A4</td><td>Medium-Heavy</td><td>Warm, full, versatile</td></tr>
+        <tr><td>Tenor</td><td>C3–C5</td><td>Medium-Light</td><td>Bright, ringing, agile</td></tr>
+        <tr><td>Alto/Contralto</td><td>F3–F5</td><td>Heavy</td><td>Rich, dark, powerful</td></tr>
+        <tr><td>Mezzo-Soprano</td><td>A3–A5</td><td>Medium</td><td>Warm, flexible, strong middle</td></tr>
+        <tr><td>Soprano</td><td>C4–C5+</td><td>Light</td><td>Bright, light, soaring</td></tr>
+      </tbody>
+    </table>
+    
+    <h3>Vocal Weight — Light vs. Heavy</h3>
+    <p>Voice type is about range. <strong>Vocal weight</strong> is about the natural thickness and power of your voice:</p>
+    <ul>
+      <li><strong>Light voices</strong> (lyric): Agile, bright, easy in high register. May lack power in low range.</li>
+      <li><strong>Heavy voices</strong> (dramatic): Powerful, rich, resonant in low/middle. May struggle with very high notes.</li>
+      <li><strong>Medium voices</strong>: The most flexible — can go either direction with training.</li>
+    </ul>
+    
+    <div class="content-box key">
+      <p><strong>Why this matters for song selection:</strong> A light lyric soprano singing Adele's "Rolling in the Deep" will strain because that song sits in a heavy, low range. A dramatic baritone singing Bruno Mars' "When I Was Your Man" will struggle with the high notes. Match the song's weight to your weight.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 4.2 -->
+  <div class="content" id="lesson-4-2" style="display:none">
+    <h2>Lesson 4.2: Analyzing a Song Before You Sing It</h2>
+    
+    <p>Before you sing a song, analyze it. This saves you hours of frustration and helps you make intentional choices. Here's a framework:</p>
+    
+    <h3>The 5-Point Song Analysis</h3>
+    <ol>
+      <li><strong>Key:</strong> What key is it in? Does it fit your tessitura?</li>
+      <li><strong>Range:</strong> What's the lowest and highest note? Can you hit them comfortably?</li>
+      <li><strong>Vocal weight:</strong> Does the song sit in a heavy, medium, or light range?</li>
+      <li><strong>Style:</strong> What genre? What's the emotional tone?</li>
+      <li><strong>Climax:</strong> Where's the most intense moment? Is it in your strongest zone?</li>
+    </ol>
+    
+    <h3>Red Flags to Watch For</h3>
+    <ul>
+      <li>The highest note is at the very top of your range (not sustainable)</li>
+      <li>The song sits mostly in your passaggio (the transition zone — tiring)</li>
+      <li>The emotional climax requires a belt but you're a light voice</li>
+      <li>The song requires sustained notes longer than your breath support allows</li>
+    </ul>
+    
+    <div class="content-box tip">
+      <p><strong>Pro tip:</strong> If a song has 1-2 red flags, it might still work with transposition or arrangement changes. If it has 3+, choose a different song. There are thousands of songs — don't force one that doesn't fit.</p>
+    </div>
+    
+    <div class="task" id="task-4-2">
+      <div class="task-label">Task 4.2</div>
+      <p>Choose 3 songs you'd like to sing. Analyze each one using the 5-Point Framework above. For each song, write: Key, Range, Vocal Weight, Style, Climax note. Identify any red flags.</p>
+      <button class="task-btn" id="taskBtn-4-2" onclick="completeTask('4-2')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- LESSON 4.3 -->
+  <div class="content" id="lesson-4-3" style="display:none">
+    <h2>Lesson 4.3: Transposition — Making Any Song Fit Your Voice</h2>
+    
+    <p><strong>Transposition</strong> means changing the key of a song. This is not cheating — it's smart. Every professional singer transposes. The original key is not sacred.</p>
+    
+    <h3>When to Transpose</h3>
+    <ul>
+      <li>The highest note is above your comfortable range → transpose down</li>
+      <li>The lowest note is below your comfortable range → transpose up</li>
+      <li>The song sits in your passaggio → transpose up or down to move it to a more comfortable zone</li>
+      <li>The song doesn't match your vocal weight → transpose to a key that suits your voice</li>
+    </ul>
+    
+    <h3>How to Transpose</h3>
+    <ol>
+      <li>Identify the original key (use a piano app or search "[song name] key")</li>
+      <li>Find your ideal key based on your tessitura (from Module 1)</li>
+      <li>Calculate the interval difference (e.g., moving from C to D is up a Major 2nd)</li>
+      <li>Use a backing track in the new key, or play chords yourself</li>
+      <li>Sing and adjust — sometimes a half-step makes all the difference</li>
+    </ol>
+    
+    <div class="content-box key">
+      <p><strong>The NYVC rule:</strong> If you have to strain for more than 2 notes in a song, transpose it. No song is worth damaging your voice. And no audience has ever complained that a song was in a different key — they only remember how it made them feel.</p>
+    </div>
+    
+    <h3>Transposition Cheat Sheet</h3>
+    <table class="ipa-table">
+      <thead><tr><th>If the song is in...</th><th>And it's too high</th><th>And it's too low</th></tr></thead>
+      <tbody>
+        <tr><td>C major</td><td>Try Bb or B</td><td>Try D or Eb</td></tr>
+        <tr><td>D major</td><td>Try C or Db</td><td>Try E or F</td></tr>
+        <tr><td>G major</td><td>Try F or F#</td><td>Try A or Bb</td></tr>
+        <tr><td>A major</td><td>Try G or Ab</td><td>Try B or C</td></tr>
+        <tr><td>Eb major</td><td>Try D or Db</td><td>Try F or F#</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LESSON 4.4 -->
+  <div class="content" id="lesson-4-4" style="display:none">
+    <h2>Lesson 4.4: Building a Repertoire That Showcases Your Strengths</h2>
+    
+    <p>Your repertoire is your collection of songs you can sing well. A smart repertoire highlights your strengths and covers different contexts.</p>
+    
+    <h3>The Repertoire Framework</h3>
+    <p>Aim for at least one song in each category:</p>
+    <ul>
+      <li><strong>Your signature song:</strong> The one that sounds like it was written for you. Showcases your unique voice.</li>
+      <li><strong>The emotional ballad:</strong> Slow, intimate, shows your dynamics and control.</li>
+      <li><strong>The uptempo/energy song:</strong> Fast, rhythmic, shows your agility and groove.</li>
+      <li><strong>The worship/spiritual song:</strong> For church context. Shows your spiritual depth.</li>
+      <li><strong>The crowd favorite:</strong> A well-known song that gets people singing along.</li>
+      <li><strong>The wildcard:</strong> Something unexpected that shows range and versatility.</li>
+    </ul>
+    
+    <h3>Context Matters</h3>
+    <p>Different situations demand different songs:</p>
+    <ul>
+      <li><strong>Worship leading:</strong> Songs the congregation knows, in singable keys, with clear melodies</li>
+      <li><strong>Concert/stage:</strong> Songs that show range, dynamics, and emotional depth</li>
+      <li><strong>Social media:</strong> Short, catchy, visually engaging (think 30-60 second clips)</li>
+      <li><strong>Wedding/event:</strong> Romantic, appropriate, well-known</li>
+      <li><strong>Audition:</strong> Songs that showcase your unique voice, not just technical ability</li>
+    </ul>
+    
+    <div class="content-box tip">
+      <p><strong>Coach Toby's advice:</strong> Don't build a repertoire of songs you "can sing." Build a repertoire of songs you <strong>love to sing</strong>. Passion is audible. If you're not emotionally connected to a song, the audience won't be either.</p>
+    </div>
+    
+    <div class="task" id="task-4-4">
+      <div class="task-label">Task 4.4</div>
+      <p>Build your personal repertoire list. Write down 10 songs minimum, covering each category above. For each song, note: the key you'd sing it in, why it fits your voice, and what context it's for.</p>
+      <button class="task-btn" id="taskBtn-4-4" onclick="completeTask('4-4')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- LESSON 4.5 -->
+  <div class="content" id="lesson-4-5" style="display:none">
+    <h2>Lesson 4.5: Context Matters — Worship vs. Stage vs. Studio vs. Social Media</h2>
+    
+    <p>The same song sung in a church, on a stage, in a studio, and for social media requires different approaches. Understanding context makes you a versatile singer.</p>
+    
+    <h3>Worship Context</h3>
+    <ul>
+      <li><strong>Goal:</strong> Lead people into a spiritual experience, not perform</li>
+      <li><strong>Key consideration:</strong> Sing in keys the congregation can follow (not too high)</li>
+      <li><strong>Style:</strong> Clear diction, emotional sincerity, space for the Spirit to move</li>
+      <li><strong>Common mistake:</strong> Over-singing. Worship is about facilitating, not impressing.</li>
+    </ul>
+    
+    <h3>Stage/Concert Context</h3>
+    <ul>
+      <li><strong>Goal:</strong> Entertain, move, and connect with an audience</li>
+      <li><strong>Key consideration:</strong> Choose keys that let you perform with energy for the full set</li>
+      <li><strong>Style:</strong> Dynamics, stage presence, emotional peaks and valleys</li>
+      <li><strong>Common mistake:</strong> Singing everything at full voice. Contrast is what makes a performance memorable.</li>
+    </ul>
+    
+    <h3>Studio Context</h3>
+    <ul>
+      <li><strong>Goal:</strong> Capture a perfect (or emotionally perfect) take</li>
+      <li><strong>Key consideration:</strong> Studio singing is more intimate — every detail is heard</li>
+      <li><strong>Style:</strong> Nuance over power. Subtlety over spectacle.</li>
+      <li><strong>Common mistake:</strong> Performing for the mic like it's a stage. Studio singing is a conversation, not a proclamation.</li>
+    </ul>
+    
+    <h3>Social Media Context</h3>
+    <ul>
+      <li><strong>Goal:</strong> Grab attention in the first 3 seconds and hold it</li>
+      <li><strong>Key consideration:</strong> Short clips (15-60 seconds), visual engagement, trending sounds</li>
+      <li><strong>Style:</strong> Hook-first approach. Start with the most impactful part, not the intro.</li>
+      <li><strong>Common mistake:</strong> Posting full songs. Social media rewards the hook, not the whole journey.</li>
+    </ul>
+    
+    <!-- BANDLAB PRACTICAL -->
+    <div class="bandlab-box">
+      <h4>🎹 BandLab Practical — Module 4</h4>
+      <p><strong>Assignment:</strong> Record a song transposed to YOUR ideal key.</p>
+      <ol>
+        <li>Choose one song from your repertoire list (Task 4.4)</li>
+        <li>Identify the original key and your ideal key</li>
+        <li>Find a backing track in your key (YouTube: "[song name] backing track in [key]")</li>
+        <li>Record your vocals in BandLab over the backing track</li>
+        <li>Add subtle reverb and EQ (presence boost around 3kHz)</li>
+        <li>Share the project link and send to Coach Toby</li>
+      </ol>
+      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)"><strong>Submit as:</strong> [Module 4] BandLab Practical - [Your Name]</p>
+    </div>
+    
+    <div class="task" id="task-4-5">
+      <div class="task-label">Task 4.5</div>
+      <p>Complete the BandLab practical above. Also: Take one of your repertoire songs and write a short paragraph on how you'd sing it differently in worship vs. stage vs. studio context.</p>
+      <button class="task-btn" id="taskBtn-4-5" onclick="completeTask('4-5')">Mark as Done ✓</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-section" id="quiz-4" style="display:none">
+    <div class="section-title" style="margin-bottom:16px">Module 4 Quiz</div>
+    
+    <div class="q-card" id="q4-1">
+      <div class="q-num">Question 1 of 5</div>
+      <div class="q-text">What is vocal weight?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q4-1')">How loud you can sing</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-1')">The natural thickness and power of your voice</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-1')">The total number of notes you can sing</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-1')">How much you weigh as a singer</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q4-2">
+      <div class="q-num">Question 2 of 5</div>
+      <div class="q-text">When should you transpose a song?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q4-2')">Only when the original key is too difficult to play</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-2')">When more than 2 notes require strain or sit outside your tessitura</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-2')">Never — always sing in the original key</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-2')">Only for worship songs</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q4-3">
+      <div class="q-num">Question 3 of 5</div>
+      <div class="q-text">What's the most important factor in choosing a worship song?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q4-3')">It shows off your vocal range</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-3')">It's in a key the congregation can follow and has clear, singable melodies</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-3')">It's the most popular song on the radio</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-3')">It has the most emotional lyrics</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q4-4">
+      <div class="q-num">Question 4 of 5</div>
+      <div class="q-text">What's the "hook-first" approach for social media singing?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q4-4')">Start with the chorus or most impactful part to grab attention immediately</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-4')">Always start from the beginning of the song</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-4')">Use a catchy intro before the song starts</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-4')">Sing the loudest part first</button>
+      </div>
+    </div>
+    
+    <div class="q-card" id="q4-5">
+      <div class="q-num">Question 5 of 5</div>
+      <div class="q-text">How many categories should your personal repertoire cover at minimum?</div>
+      <div class="q-options">
+        <button class="q-opt" onclick="selectOpt(this, 'q4-5')">2 — one fast, one slow</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-5')">4 — worship, pop, ballad, and uptempo</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-5')">6 — signature, emotional ballad, uptempo, worship, crowd favorite, and wildcard</button>
+        <button class="q-opt" onclick="selectOpt(this, 'q4-5')">10 — as many as possible</button>
+      </div>
+    </div>
+    
+    <button class="q-submit" id="quizSubmit" onclick="submitQuiz()" disabled>Submit Answers</button>
+    
+    <div class="q-result" id="quizResult" style="display:none">
+      <div class="q-score" id="quizScore">0%</div>
+      <h3 id="quizTitle">Quiz Complete</h3>
+      <p id="quizMsg">Review the lessons and try again.</p>
+      <button class="q-retry" onclick="retryQuiz()">Try Again</button>
+    </div>
+  </div>
+
+  <!-- COMPLETION -->
+  <div class="complete" id="modComplete" style="display:none">
+    <div class="complete-icon">✓</div>
+    <h2>Module 4 Complete!</h2>
+    <p>You now know how to choose songs that serve you — not the other way around. Your voice, your key, your context.</p>
+    <div class="complete-xp">+50 XP Earned</div>
+    <br>
+    <a href="module-5.html" class="complete-btn">Continue to Module 5 →</a>
+  </div>
+
+  <div class="footer">
+    Vocal Mastery Academy · Sessions with Toby · © 2026
+  </div>
+
+</div>
+
+<script>
+const MODULE = 4;
+const STORAGE_KEY = 'vma_student';
+const TERMS_KEY = 'vma_terms_agreed';
+const CORRECT_ANSWERS = {
+  'q4-1': 1, 'q4-2': 1, 'q4-3': 1, 'q4-4': 0, 'q4-5': 2
+};
+
+if (localStorage.getItem(TERMS_KEY) !== 'true') {
+  window.location.href = 'terms.html';
+}
+
+function getStudent() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
+}
+function setStudent(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+const s = getStudent();
+if (!s) { window.location.href = 'academy.html'; }
+
+let currentLesson = 1;
+const totalLessons = 5;
+
+function showLesson(n) {
+  for (let i = 1; i <= totalLessons; i++) {
+    const el = document.getElementById('lesson-4-' + i);
+    if (el) el.style.display = i === n ? '' : 'none';
+  }
+  currentLesson = n;
+  window.scrollTo({top:0,behavior:'smooth'});
+  
+  if (window.VMA) {
+    const st = window.VMA.getStudent();
+    if (st) {
+      st.lessons = st.lessons || {};
+      st.lessons['4-' + n] = true;
+      window.VMA.setStudent(st);
+      window.VMA.awardXP(10, 'Completed Lesson 4.' + n);
+    }
+  }
+  updateProgress();
+}
+
+function completeTask(taskId) {
+  const btn = document.getElementById('taskBtn-' + taskId);
+  if (!btn) return;
+  btn.textContent = '✓ Submitted';
+  btn.className = 'task-btn done';
+  btn.onclick = null;
+  
+  if (window.VMA) {
+    window.VMA.awardXP(25, 'Completed Task ' + taskId);
+    window.VMA.updateStreak();
+    window.VMA.showNotification('✓ Task complete! +25 XP');
+  }
+  
+  const lessonNum = parseInt(taskId.split('-')[1]);
+  if (lessonNum < totalLessons) {
+    setTimeout(() => showLesson(lessonNum + 1), 800);
+  } else {
+    setTimeout(() => showQuiz(), 800);
+  }
+  updateProgress();
+}
+
+let quizAnswers = {};
+let quizSubmitted = false;
+
+function selectOpt(btn, qId) {
+  if (quizSubmitted) return;
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  quizAnswers[qId] = Array.from(parent.querySelectorAll('.q-opt')).indexOf(btn);
+  const allAnswered = Object.keys(CORRECT_ANSWERS).every(q => quizAnswers[q] !== undefined);
+  document.getElementById('quizSubmit').disabled = !allAnswered;
+}
+
+function submitQuiz() {
+  if (quizSubmitted) return;
+  quizSubmitted = true;
+  let correct = 0;
+  const total = Object.keys(CORRECT_ANSWERS).length;
+  
+  for (const [qId, correctIdx] of Object.entries(CORRECT_ANSWERS)) {
+    const opts = document.querySelectorAll('#' + qId + ' .q-opt');
+    const selected = quizAnswers[qId];
+    opts.forEach((opt, i) => {
+      if (i === correctIdx) opt.classList.add('correct');
+      if (i === selected && i !== correctIdx) opt.classList.add('wrong');
+    });
+    if (selected === correctIdx) correct++;
+  }
+  
+  const pct = Math.round((correct / total) * 100);
+  document.getElementById('quizScore').textContent = pct + '%';
+  
+  if (pct >= 80) {
+    document.getElementById('quizTitle').textContent = '🎉 Passed!';
+    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You know how to choose songs wisely!';
+    document.getElementById('quizSubmit').style.display = 'none';
+    
+    if (window.VMA) {
+      window.VMA.awardXP(15, 'Passed Module 4 Quiz (' + pct + '%)');
+      const st = window.VMA.getStudent();
+      if (st) {
+        st.quizzes = st.quizzes || {};
+        st.quizzes['4'] = pct;
+        st.modules[3] = 100;
+        window.VMA.setStudent(st);
+        window.VMA.showNotification('🏆 Module 4 Complete! +15 XP');
+      }
+    }
+    setTimeout(() => {
+      document.getElementById('quiz-4').style.display = 'none';
+      document.getElementById('modComplete').style.display = '';
+    }, 2000);
+  } else {
+    document.getElementById('quizTitle').textContent = 'Not quite there';
+    document.getElementById('quizMsg').textContent = 'You scored ' + correct + '/' + total + '. You need 80% to pass. Review and try again!';
+    document.getElementById('quizSubmit').style.display = 'none';
+    document.getElementById('quizResult').style.display = '';
+  }
+}
+
+function retryQuiz() {
+  quizAnswers = {};
+  quizSubmitted = false;
+  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected','correct','wrong'));
+  document.getElementById('quizSubmit').disabled = true;
+  document.getElementById('quizSubmit').style.display = '';
+  document.getElementById('quizResult').style.display = 'none';
+}
+
+function showQuiz() {
+  document.getElementById('quiz-4').style.display = '';
+  document.getElementById('modComplete').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress() {
+  const st = getStudent();
+  if (!st) return;
+  let lessonsDone = 0;
+  for (let i = 1; i <= totalLessons; i++) {
+    if (st.lessons && st.lessons['4-' + i]) lessonsDone++;
+  }
+  const tasksDone = document.querySelectorAll('.task-btn.done').length;
+  const quizPassed = st.quizzes && st.quizzes['4'] >= 80;
+  const pct = Math.round(((lessonsDone + tasksDone + (quizPassed ? 2 : 0)) / (totalLessons + totalLessons + 2)) * 100);
+  document.getElementById('modProgress').style.width = pct + '%';
+}
+
+let startLesson = 1;
+for (let i = 1; i <= totalLessons; i++) {
+  if (!s.lessons || !s.lessons['4-' + i]) { startLesson = i; break; }
+  if (i === totalLessons) startLesson = totalLessons;
+}
+
+if (s.quizzes && s.quizzes['4'] >= 80) {
+  document.getElementById('modComplete').style.display = '';
+} else {
+  showLesson(startLesson);
+}
+updateProgress();
+document.getElementById('navAvatar').textContent = (s.name || 'S').charAt(0).toUpperCase();
+
+if (!window.VMA) window.VMA = {};
+window.VMA.getStudent = getStudent;
+window.VMA.setStudent = setStudent;
+</script>
+
+</body>
+</html>
