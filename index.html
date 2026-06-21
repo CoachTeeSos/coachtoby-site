@@ -1639,6 +1639,48 @@ var CURRICULUM = {
       }
     ]
   },
+  instruments: {
+    title: 'Learn Any Instrument',
+    icon: 'I',
+    modules: [
+      {
+        id: 'i1', stage: 3,
+        outcome: 'Be able to read music on the staff and understand how notes map to piano keys',
+        title: 'The Staff & Piano — Your Visual Map of Music',
+        xp: 30,
+        content: '<p>Every instrument uses the same musical language. If you can read the staff and understand the piano keyboard, you can learn <b>any</b> instrument.</p><p><b>The Musical Staff</b> — 5 lines. Notes sit on lines or in spaces. Higher position = higher pitch.</p><p><b>Treble Clef Lines (bottom to top):</b> E-G-B-D-F (Every Good Boy Does Fine)</p><p><b>Treble Clef Spaces (bottom to top):</b> F-A-C-E (FACE)</p><p><b>Bass Clef Lines:</b> G-B-D-F-A (Good Boys Do Fine Always)</p><p><b>Bass Clef Spaces:</b> A-C-E-G (All Cows Eat Grass)</p><p><b>Middle C:</b> The anchor point. Sits on a ledger line below treble clef and above bass clef. Near the center of the piano.</p><div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:var(--s4);margin:var(--s3) 0;text-align:center"><svg viewBox="0 0 400 120" style="max-width:100%;height:auto"><line x1="40" y1="30" x2="360" y2="30" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="50" x2="360" y2="50" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="70" x2="360" y2="70" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="90" x2="360" y2="90" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="110" x2="360" y2="110" stroke="var(--border)" stroke-width="1"/><text x="50" y="75" fill="var(--pri)" font-size="40">G-clef</text><ellipse cx="120" cy="110" rx="7" ry="5" fill="var(--pri)"/><text x="120" y="25" fill="var(--tx)" font-size="8">E</text><ellipse cx="160" cy="90" rx="7" ry="5" fill="var(--ok)"/><text x="160" y="125" fill="var(--tx)" font-size="8">F</text><ellipse cx="200" cy="70" rx="7" ry="5" fill="var(--pri)"/><text x="200" y="25" fill="var(--tx)" font-size="8">G</text><ellipse cx="240" cy="50" rx="7" ry="5" fill="var(--ok)"/><text x="240" y="25" fill="var(--tx)" font-size="8">A</text><ellipse cx="280" cy="30" rx="7" ry="5" fill="var(--pri)"/><text x="280" y="25" fill="var(--tx)" font-size="8">B</text><ellipse cx="320" cy="110" rx="7" ry="5" fill="var(--gold)"/><text x="320" y="125" fill="var(--gold)" font-size="8">Middle C</text><line x1="300" y1="100" x2="340" y2="100" stroke="var(--border)" stroke-width="1"/></svg></div><p><b>The Piano Keyboard</b> — Each key = one note. The pattern of white and black keys repeats every octave. Find C: it is always to the LEFT of the 2 black keys.</p><p><b>Pattern:</b> 2 black keys, then 3 black keys, repeating. C-D-E-F-G-A-B-C (one octave).</p><div class="ref-box"><div class="ref-box-title">Go Deeper</div><p>YouTube: Search "piano for beginners music theory" — Piano Lessons on the Web, Andrew Furmanczyk.</p><p>App: Simply Piano (free trial). App: Perfect Piano (free).</p></div>',
+        exercise: {
+          name: 'Staff & Piano Bootcamp',
+          steps: ['Draw a treble clef staff. Label every line and space.', 'Find Middle C on a piano app. Play every C on the keyboard.', 'Play the C major scale: C-D-E-F-G-A-B-C. Say note names.', 'Play in solfege: Do-Re-Mi-Fa-Sol-La-Ti-Do.', 'Advanced: play G major: G-A-B-C-D-E-F#-G.'],
+          skill: 'theory', xp: 30
+        }
+      },
+      {
+        id: 'i2', stage: 3,
+        outcome: 'Be able to see intervals visually on the staff and piano',
+        title: 'Intervals — The Distance Between Notes',
+        xp: 30,
+        content: '<p>An interval is the <b>distance between two notes</b>. See it visually, hear it.</p><p><b>On the staff:</b> 2nd = line to space. 3rd = line to line. 4th = line to space. 5th = line to line.</p><p><b>On the piano:</b> 2nd = 2 keys. 3rd = 4 keys. 4th = 5 keys. 5th = 7 keys.</p><p><b>Half step:</b> Any key to the very next key. <b>Whole step:</b> 2 half steps.</p><p><b>Major scale pattern:</b> W-W-H-W-W-W-H. Creates the "do-re-mi" sound.</p><div class="ref-box"><div class="ref-box-title">Go Deeper</div><p>YouTube: Search "intervals on piano visual" — Andrew Huang, 12tone.</p><p>App: Tenuto — interval identification.</p></div>',
+        exercise: {
+          name: 'Interval Visualizer',
+          steps: ['Play C-D on piano. Count keys (2). That is a 2nd.', 'Play C-E. Count keys (4). That is a 3rd.', 'Play C-F. Count keys (5). That is a 4th.', 'Play C-G. Count keys (7). That is a 5th.', 'Do the same from G: G-A=2nd, G-B=3rd, G-C=4th, G-D=5th.'],
+          skill: 'theory', xp: 30
+        }
+      },
+      {
+        id: 'i3', stage: 4,
+        outcome: 'Be able to see scales and chords visually on staff, piano, and guitar fretboard',
+        title: 'Scales & Chords — Visual Patterns on Any Instrument',
+        xp: 35,
+        content: '<p>Scales and chords are <b>patterns</b>. Learn the pattern on one instrument, play it on any instrument.</p><p><b>Major Scale:</b> W-W-H-W-W-W-H. C major = all white keys on piano. On guitar = specific fret pattern. On staff = specific line/space pattern.</p><p><b>Chords:</b> Major = Root+M3+P5 (4+3 half steps). Minor = Root+m3+P5 (3+4). Dim = 3+3. Aug = 4+4.</p><p><b>On piano:</b> C major = C-E-G (skip one white key between each). A minor = A-C-E.</p><p><b>On guitar:</b> Chord shapes are movable. Learn one shape, slide it up the neck.</p><p><b>On staff:</b> Chords = stacked notes. C major = C, E, G written together.</p><div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:var(--s4);margin:var(--s3) 0;text-align:center"><svg viewBox="0 0 400 100" style="max-width:100%;height:auto"><text x="10" y="20" fill="var(--tx3)" font-size="9" font-weight="700">C MAJOR CHORD</text><line x1="40" y1="50" x2="120" y2="50" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="60" x2="120" y2="60" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="70" x2="120" y2="70" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="80" x2="120" y2="80" stroke="var(--border)" stroke-width="1"/><line x1="40" y1="90" x2="120" y2="90" stroke="var(--border)" stroke-width="1"/><ellipse cx="80" cy="90" rx="6" ry="4" fill="var(--pri)"/><text x="70" y="85" fill="var(--tx)" font-size="7">C</text><ellipse cx="80" cy="70" rx="6" ry="4" fill="var(--pri)"/><text x="90" y="73" fill="var(--tx)" font-size="7">E</text><ellipse cx="80" cy="50" rx="6" ry="4" fill="var(--pri)"/><text x="90" y="53" fill="var(--tx)" font-size="7">G</text><text x="80" y="40" fill="var(--pri)" font-size="8" text-anchor="middle">C Major</text><text x="80" y="30" fill="var(--tx3)" font-size="7" text-anchor="middle">Root-3rd-5th</text><text x="200" y="20" fill="var(--tx3)" font-size="9" font-weight="700">GUITAR FRETBOARD</text><rect x="200" y="35" width="180" height="8" rx="1" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/><rect x="200" y="45" width="180" height="8" rx="1" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/><rect x="200" y="55" width="180" height="8" rx="1" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/><rect x="200" y="65" width="180" height="8" rx="1" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/><rect x="200" y="75" width="180" height="8" rx="1" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/><rect x="200" y="85" width="180" height="8" rx="1" fill="var(--card2)" stroke="var(--border)" stroke-width="1"/><line x1="200" y1="35" x2="200" y2="93" stroke="var(--tx)" stroke-width="2"/><circle cx="230" cy="89" r="5" fill="var(--pri)"/><circle cx="260" cy="79" r="5" fill="var(--pri)"/><circle cx="290" cy="69" r="5" fill="var(--pri)"/><circle cx="230" cy="69" r="5" fill="var(--ok)"/><circle cx="260" cy="59" r="5" fill="var(--ok)"/><circle cx="290" cy="49" r="5" fill="var(--ok)"/><text x="260" y="30" fill="var(--tx3)" font-size="7" text-anchor="middle">C Major Scale pattern</text></svg></div><div class="ref-box"><div class="ref-box-title">Go Deeper</div><p>YouTube: Marty Music, JustinGuitar. App: Yousician. App: Ultimate Guitar.</p></div>',
+        exercise: {
+          name: 'Scale & Chord Visualizer',
+          steps: ['Play C major scale on piano. Say each note name.', 'Play C major chord (C-E-G). Hear "happy."', 'Play A minor chord (A-C-E). Hear "sad." Compare.', 'Draw the treble clef. Write C major scale (one octave).', 'Mark C major chord notes on staff (C-E-G).', 'Advanced: write G major scale. Notice F#.'],
+          skill: 'theory', xp: 35
+        }
+      }
+    ]
+  },
 
   
   // Autocorrelation pitch detection
