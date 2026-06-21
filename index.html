@@ -1754,6 +1754,432 @@ var GAME = {
   }
 };
 
+
+function renderHome() {
+  var c = document.getElementById('h-c');
+  document.getElementById('h-xp').textContent = U.xp + ' XP';
+  var h = '';
+  h += '<div class="hero"><h1>Welcome, ' + esc(U.name) + '</h1><p>' + COACH.say('greetings', {name: U.name}) + '</p></div>';
+
+  var loadPct = Math.round((U.vocalLoad / U.maxLoad) * 100);
+  var loadClass = loadPct > 80 ? 'danger' : loadPct > 50 ? 'warn' : 'ok';
+  h += '<div class="sec"><div class="sec-h"><span class="sec-t">Vocal Load Today</span><span class="text-xs text-muted">' + loadPct + '%</span></div>';
+  h += '<div class="vocal-load"><div class="vocal-load-f ' + loadClass + '" style="width:' + loadPct + '%"></div></div>';
+  if (loadPct > 80) h += '<p class="text-xs text-err mt-2">Your voice needs rest. Do light exercises only.</p>';
+  h += '</div>';
+
+  h += '<div class="sec"><div class="sec-h"><span class="sec-t">Quick Practice</span></div>';
+  h += '<div class="grid-2">';
+  var dp = [
+    {n: 'Breath', s: 'airflow', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 16V8"/><path d="M8 12l4-4 4 4"/></svg>'},
+    {n: 'Onset', s: 'source', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>'},
+    {n: 'Resonance', s: 'resonance', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4m14 0h-4m-7 7v-4m0-6V5"/></svg>'},
+    {n: 'Mix', s: 'mix', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><path d="M5.6 5.6l12.8 12.8"/><path d="M18.4 5.6L5.6 18.4"/></svg>'}
+  ];
+  for (var i = 0; i < dp.length; i++) {
+    var d = dp[i];
+    h += '<div class="c text-center" style="padding:var(--s4);cursor:pointer" onclick="quickDrill(\'' + d.s + '\')">';
+    h += '<div style="width:32px;height:32px;margin:0 auto var(--s2);color:var(--pri);display:flex;align-items:center;justify-content:center">' + d.icon + '</div>';
+    h += '<div class="text-sm text-bold">' + d.n + '</div></div>';
+  }
+  h += '</div></div>';
+
+  h += '<div class="sec"><div class="sec-h"><span class="sec-t">Continue Learning</span></div>';
+  h += '<div class="li" onclick="go(\'learn\')"><div class="li-ic">L</div><div class="li-b"><div class="li-t">Full Curriculum</div><div class="li-sub">17 modules across 6 categories</div></div><span class="li-r">Go</span></div>';
+  h += '<div class="li" onclick="go(\'theory\')"><div class="li-ic">T</div><div class="li-b"><div class="li-t">Music Theory</div><div class="li-sub">5 theory + 2 career modules</div></div><span class="li-r">Go</span></div>';
+  h += '</div>';
+
+  h += '<div class="sec"><div class="sec-h"><span class="sec-t">Test Yourself</span></div>';
+  h += '<div class="c c-g" onclick="go(\'quiz\')" style="cursor:pointer">';
+  h += '<div style="display:flex;justify-content:space-between;align-items:center">';
+  h += '<div><div class="text-bold">Who Wants to Be a Musician?</div><div class="text-xs text-muted">16 questions. Can you win ₦1,000,000?</div></div>';
+  h += '<span class="tag tag-g">HIGH SCORE: ₦' + U.quizHighScore.toLocaleString() + '</span></div>';
+  h += '</div></div>';
+
+  c.innerHTML = h;
+}
+
+function renderLearn() {
+  var c = document.getElementById('l-c');
+  var h = '';
+  h += '<div class="hero"><h1>Learn</h1><p>Complete each stage to unlock the next. Progressive overload — NYVC method.</p></div>';
+
+  // Stage definitions
+  var stages = [
+    { id: 1, title: 'Stage 1: Foundation', subtitle: 'Breath → Onset → Resonance → Pitch → Notes → Scale', color: 'ok' },
+    { id: 2, title: 'Stage 2: Coordination', subtitle: 'Articulation → Intervals → Chords → Keys → Triads', color: 'pri' },
+    { id: 3, title: 'Stage 3: Connection', subtitle: 'Mix Voice → Sight-Singing → Weight → Brightness → Harmonics', color: 'gold' },
+    { id: 4, title: 'Stage 4: Control', subtitle: 'Belt → Self-Diagnosis → Styles → Song Selection → Modes', color: 'warn' },
+    { id: 5, title: 'Stage 5: Expression', subtitle: 'Performance → Songwriting → Production → Career', color: 'err' }
+  ];
+
+  // Collect all modules by stage
+  var allSections = ['mechanics', 'ear', 'theory', 'vocalweight', 'bgvproject', 'performance', 'style', 'songselect', 'songwriting', 'production', 'career'];
+
+  for (var si = 0; si < stages.length; si++) {
+    var stage = stages[si];
+    var stageModules = [];
+
+    // Gather all modules for this stage
+    for (var s = 0; s < allSections.length; s++) {
+      var sec = CURRICULUM[allSections[s]];
+      if (!sec || !sec.modules) continue;
+      for (var i = 0; i < sec.modules.length; i++) {
+        if (sec.modules[i].stage === stage.id) {
+          stageModules.push({ module: sec.modules[i], section: allSections[s], index: i, secTitle: sec.title, secIcon: sec.icon });
+        }
+      }
+    }
+
+    if (stageModules.length === 0) continue;
+
+    // Check if stage is unlocked
+    var unlocked = true;
+    if (stage.id > 1) {
+      var prevModules = 0, prevDone = 0;
+      for (var s2 = 0; s2 < allSections.length; s2++) {
+        var sec2 = CURRICULUM[allSections[s2]];
+        if (!sec2 || !sec2.modules) continue;
+        for (var j = 0; j < sec2.modules.length; j++) {
+          if (sec2.modules[j].stage === stage.id - 1) {
+            prevModules++;
+            if (U.completed.indexOf(sec2.modules[j].id) !== -1) prevDone++;
+          }
+        }
+      }
+      unlocked = prevModules === 0 || (prevDone / prevModules) >= 0.8;
+    }
+
+    // Stage header with progress
+    var doneCount = 0;
+    for (var m = 0; m < stageModules.length; m++) {
+      if (U.completed.indexOf(stageModules[m].module.id) !== -1) doneCount++;
+    }
+    var pct = Math.round(doneCount / stageModules.length * 100);
+
+    h += '<div class="sec">';
+    h += '<div class="sec-h">';
+    h += '<span class="sec-t" style="color:var(--' + stage.color + ')">' + stage.title + '</span>';
+    if (!unlocked) {
+      h += '<span class="tag tag-g" style="font-size:0.55rem">🔒 Complete Stage ' + (stage.id - 1) + ' first</span>';
+    } else {
+      h += '<span class="text-xs text-muted">' + doneCount + '/' + stageModules.length + ' (' + pct + '%)</span>';
+    }
+    h += '</div>';
+    h += '<p class="text-xs text-muted mb-3">' + stage.subtitle + '</p>';
+
+    // Progress bar
+    if (unlocked) {
+      h += '<div class="pr mb-3"><div class="pr-f" style="width:' + pct + '%"></div></div>';
+    }
+
+    // Modules
+    for (var m2 = 0; m2 < stageModules.length; m2++) {
+      var item = stageModules[m2];
+      var mod = item.module;
+      var done = U.completed.indexOf(mod.id) !== -1;
+      var locked = !unlocked;
+
+      h += '<div class="li ' + (locked ? 'dis' : '') + '" ' + (locked ? '' : 'onclick="openModule(\'' + item.section + '\',' + item.index + ')"') + '>';
+      h += '<div class="li-ic" style="background:' + (done ? 'oklch(0.72 0.18 145 / 0.15)' : (locked ? 'var(--border)' : '')) + ';color:' + (done ? 'var(--ok)' : (locked ? 'var(--tx3)' : '')) + '">' + (done ? '✓' : (locked ? '🔒' : item.secIcon)) + '</div>';
+      h += '<div class="li-b"><div class="li-t">' + mod.outcome + '</div>';
+      h += '<div class="li-sub">' + mod.title + ' · ' + item.secTitle + '</div></div>';
+      h += '<span class="li-r">+' + mod.xp + '</span></div>';
+    }
+
+    h += '</div>';
+  }
+
+  c.innerHTML = h;
+}
+
+function renderTheory() {
+  var c = document.getElementById('t-c');
+  var h = '';
+  h += '<div class="hero"><h1>Music Theory</h1><p>Know the rules. Then break them with intention.</p></div>';
+
+  var sec = CURRICULUM.theory;
+  for (var i = 0; i < sec.modules.length; i++) {
+    var m = sec.modules[i];
+    var done = U.completed.indexOf(m.id) !== -1;
+    h += '<div class="li" onclick="openModule(\'theory\',' + i + ')">';
+    h += '<div class="li-ic" style="background:' + (done ? 'oklch(0.72 0.18 145 / 0.15)' : '') + ';color:' + (done ? 'var(--ok)' : '') + '">' + (done ? '✓' : sec.icon) + '</div>';
+    h += '<div class="li-b"><div class="li-t">' + m.outcome + '</div>';
+    h += '<div class="li-sub">' + m.title + '</div></div>';
+    h += '<span class="li-r">+' + m.xp + '</span></div>';
+  }
+
+  h += '<div class="sec" style="margin-top:var(--s6)"><div class="sec-h"><span class="sec-t">Music Career</span></div>';
+  var csec = CURRICULUM.career;
+  for (var j = 0; j < csec.modules.length; j++) {
+    var cm = csec.modules[j];
+    var cdone = U.completed.indexOf(cm.id) !== -1;
+    h += '<div class="li" onclick="openModule(\'career\',' + j + ')">';
+    h += '<div class="li-ic" style="background:' + (cdone ? 'oklch(0.72 0.18 145 / 0.15)' : '') + ';color:' + (cdone ? 'var(--ok)' : '') + '">' + (cdone ? '✓' : csec.icon) + '</div>';
+    h += '<div class="li-b"><div class="li-t">' + cm.outcome + '</div>';
+    h += '<div class="li-sub">' + cm.title + '</div></div>';
+    h += '<span class="li-r">+' + cm.xp + '</span></div>';
+  }
+  h += '</div>';
+  c.innerHTML = h;
+}
+
+function renderPractice() {
+  var c = document.getElementById('p-c');
+  var h = '';
+  h += '<div class="hero"><h1>Practice</h1><p>Repetition builds mastery. Do it daily.</p></div>';
+
+  var drills = [
+    {n: 'Breath Hold', s: 'airflow', desc: '20 sec hiss, ribs out'},
+    {n: 'Clean Onset', s: 'source', desc: 'Hum to vowel, no breathy h'},
+    {n: 'Forward Hum', s: 'resonance', desc: 'Buzz on lips, carry to vowel'},
+    {n: 'Lip Gymnastics', s: 'articulation', desc: 'Ma-me-mi-mo-mu on pitch'},
+    {n: 'Ng Slide', s: 'mix', desc: 'Smooth slide through break zone'},
+    {n: 'Pitch Match', s: 'ear', desc: 'Play note, sing it back'},
+    {n: 'Live Pitch Detector', s: 'pitch', desc: 'Sing and see your pitch in real-time — instant feedback'}
+  ];
+  for (var i = 0; i < drills.length; i++) {
+    var d = drills[i];
+    h += '<div class="li" onclick="quickDrill(\'' + d.s + '\')">';
+    h += '<div class="li-b"><div class="li-t">' + d.n + '</div>';
+    h += '<div class="li-sub">' + d.desc + '</div></div>';
+    h += '<span class="li-r">+10</span></div>';
+  }
+
+  h += '<div class="c c-a" onclick="startDiag()" style="cursor:pointer">';
+  h += '<div class="text-bold">Voice Diagnostic</div>';
+  h += '<div class="text-xs text-muted">Tell us what you are struggling with. We will prescribe the right exercise.</div></div>';
+  c.innerHTML = h;
+}
+
+// ============================================================
+// PITCH DETECTION ENGINE — Real-time pitch via Web Audio API
+// ============================================================
+var PitchEngine = {
+  audioCtx: null,
+  analyser: null,
+  stream: null,
+  isRunning: false,
+  targetNote: null,
+  
+  // Note frequencies (A4 = 440Hz standard tuning)
+  noteFreqs: {},
+  noteNames: ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],
+  
+  init: function() {
+    // Calculate frequencies for all notes (C0 to B8)
+    for (var oct = 0; oct < 9; oct++) {
+      for (var n = 0; n < 12; n++) {
+        var midi = (oct * 12) + n;
+        var freq = 440 * Math.pow(2, (midi - 69) / 12);
+        this.noteFreqs[midi] = freq;
+      }
+    }
+  },
+  
+  // Autocorrelation pitch detection
+  detectPitch: function(buffer, sampleRate) {
+    var bufLen = buffer.length;
+    var correlations = new Float32Array(bufLen);
+    
+    // RMS check — is there enough signal?
+    var rms = 0;
+    for (var i = 0; i < bufLen; i++) rms += buffer[i] * buffer[i];
+    rms = Math.sqrt(rms / bufLen);
+    if (rms < 0.01) return null; // Too quiet
+    
+    // Autocorrelation
+    for (var lag = 0; lag < bufLen; lag++) {
+      var sum = 0;
+      for (var j = 0; j < bufLen - lag; j++) {
+        sum += buffer[j] * buffer[j + lag];
+      }
+      correlations[lag] = sum;
+    }
+    
+    // Find first peak after initial decay
+    var found = false;
+    var firstPeak = 0;
+    for (var lag = 1; lag < bufLen - 1; lag++) {
+      if (correlations[lag] > correlations[lag - 1] && correlations[lag] > correlations[lag + 1]) {
+        if (!found) { firstPeak = lag; found = true; }
+        if (lag > firstPeak + 10) break;
+      }
+    }
+    
+    if (!found || firstPeak < 10) return null;
+    return sampleRate / firstPeak;
+  },
+  
+  // Convert frequency to note name + cents
+  freqToNote: function(freq) {
+    var midi = 12 * Math.log2(freq / 440) + 69;
+    var midiRound = Math.round(midi);
+    var cents = Math.round((midi - midiRound) * 100);
+    var octave = Math.floor(midiRound / 12);
+    var noteName = this.noteNames[midiRound % 12];
+    return { name: noteName, octave: octave, cents: cents, freq: freq, midi: midiRound };
+  },
+  
+  start: function(targetNoteName) {
+    if (this.isRunning) this.stop();
+    this.init();
+    this.targetNote = targetNoteName;
+    
+    var self = this;
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+      self.stream = stream;
+      self.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var source = self.audioCtx.createMediaStreamSource(stream);
+      self.analyser = self.audioCtx.createAnalyser();
+      self.analyser.fftSize = 2048;
+      source.connect(self.analyser);
+      self.isRunning = true;
+      self.loop();
+    }).catch(function(err) {
+      toast('Microphone access denied. Allow mic to use pitch detector.', 'err');
+    });
+  },
+  
+  loop: function() {
+    if (!this.isRunning) return;
+    var self = this;
+    var buffer = new Float32Array(this.analyser.fftSize);
+    this.analyser.getFloatTimeDomainData(buffer);
+    
+    var freq = this.detectPitch(buffer, this.audioCtx.sampleRate);
+    if (freq) {
+      var note = this.freqToNote(freq);
+      onPitchDetected(note);
+    }
+    
+    requestAnimationFrame(function() { self.loop(); });
+  },
+  
+  stop: function() {
+    this.isRunning = false;
+    if (this.stream) {
+      this.stream.getTracks().forEach(function(t) { t.stop(); });
+    }
+    if (this.audioCtx) {
+      this.audioCtx.close();
+    }
+    this.stream = null;
+    this.audioCtx = null;
+  }
+};
+
+// Global callback (set by pitch UI)
+var onPitchDetected = function(note) {};
+
+// ============================================================
+// SPACED REPETITION SYSTEM
+// ============================================================
+var SRS = {
+  // Intervals in hours: 1h, 4h, 12h, 1d, 3d, 7d, 14d, 30d
+  intervals: [1, 4, 12, 24, 72, 168, 336, 720],
+  
+  init: function() {
+    try {
+      var stored = localStorage.getItem('singerOS_srs');
+      if (stored) U.srsData = JSON.parse(stored);
+    } catch(e) {}
+    if (!U.srsData) U.srsData = {};
+  },
+  
+  // Record that a skill was practiced
+  record: function(skill) {
+    if (!U.srsData[skill]) U.srsData[skill] = { level: 0, nextReview: Date.now(), history: [] };
+    var item = U.srsData[skill];
+    item.level = Math.min(item.level + 1, this.intervals.length - 1);
+    item.nextReview = Date.now() + this.intervals[item.level] * 3600000;
+    item.history.push(Date.now());
+    this.save();
+  },
+  
+  // Get skills due for review
+  getDue: function() {
+    var now = Date.now();
+    var due = [];
+    for (var skill in U.srsData) {
+      if (U.srsData[skill].nextReview <= now) {
+        due.push(skill);
+      }
+    }
+    return due;
+  },
+  
+  // Get recommended next practice
+  getRecommendation: function() {
+    var due = this.getDue();
+    if (due.length === 0) return null;
+    // Prioritize lowest level (most urgent)
+    due.sort(function(a, b) {
+      return U.srsData[a].nextReview - U.srsData[b].nextReview;
+    });
+    return due[0];
+  },
+  
+  save: function() {
+    try { localStorage.setItem('singerOS_srs', JSON.stringify(U.srsData)); } catch(e) {}
+  }
+};
+
+// ============================================================
+// GAMIFICATION — Streaks, Leaderboard, XP Multipliers
+// ============================================================
+var GAME = {
+  init: function() {
+    // Check streak
+    var today = new Date().toDateString();
+    var last = U.lastPractice;
+    if (last) {
+      var lastDate = new Date(last).toDateString();
+      var yesterday = new Date(Date.now() - 86400000).toDateString();
+      if (lastDate !== today && lastDate !== yesterday) {
+        U.streak = 0; // Streak broken
+      }
+    }
+    U.lastPractice = Date.now();
+    if (!U.streak) U.streak = 0;
+    save();
+  },
+  
+  // XP multiplier based on streak
+  getMultiplier: function() {
+    if (U.streak >= 30) return 3.0;
+    if (U.streak >= 14) return 2.5;
+    if (U.streak >= 7) return 2.0;
+    if (U.streak >= 3) return 1.5;
+    return 1.0;
+  },
+  
+  // Add XP with multiplier
+  addXP: function(amount) {
+    var mult = this.getMultiplier();
+    var earned = Math.round(amount * mult);
+    U.xp += earned;
+    // Level up every 100 XP
+    U.level = Math.floor(U.xp / 100) + 1;
+    SRS.init();
+    return { earned: earned, mult: mult, total: U.xp, level: U.level };
+  },
+  
+  // Get leaderboard (local — would be server-based in production)
+  getLeaderboard: function() {
+    var board = [];
+    try {
+      var stored = localStorage.getItem('singerOS_leaderboard');
+      if (stored) board = JSON.parse(stored);
+    } catch(e) {}
+    // Add current user
+    board.push({ name: U.name, xp: U.xp, level: U.level, streak: U.streak });
+    board.sort(function(a, b) { return b.xp - a.xp; });
+    return board.slice(0, 10);
+  }
+};
+
+
 function renderSongs() {
   var c = document.getElementById('g-c');
   var h = '';
