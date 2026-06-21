@@ -814,6 +814,27 @@ label {
   .sp { padding: var(--s6) var(--s5) var(--s9); }
   .bn-in { max-width: 540px; }
 }
+
+/* SEARCH BAR */
+.srch-bar{position:fixed;top:0;left:0;right:0;z-index:100;padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--border);display:none;align-items:center;gap:8px}
+.srch-bar.on{display:flex}
+.srch-bar input{flex:1;background:var(--bg2);border:1px solid var(--border);color:var(--tx);padding:8px 12px;border-radius:var(--r);font-size:.85rem;outline:none;font-family:inherit}
+.srch-bar input::placeholder{color:var(--tx3)}
+.srch-bar input:focus{border-color:var(--pri)}
+.srch-bar .srch-cls{background:none;border:none;color:var(--tx3);cursor:pointer;font-size:1.2rem;padding:4px 8px;line-height:1}
+.srch-bar .srch-cls:hover{color:var(--tx)}
+.srch-res{position:fixed;top:49px;left:0;right:0;z-index:99;max-height:60vh;overflow-y:auto;background:var(--bg2);border-bottom:1px solid var(--border);display:none}
+.srch-res.on{display:block}
+.srch-res-item{padding:10px 16px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:10px;font-size:.82rem;transition:background .15s}
+.srch-res-item:hover{background:var(--bg)}
+.srch-res-item .srch-ic{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0}
+.srch-res-item .srch-ic.mod{background:var(--pri-glow);color:var(--pri)}
+.srch-res-item .srch-ic.song{background:oklch(0.30 0.02 200 / 0.3);color:var(--ok)}
+.srch-res-item .srch-info{flex:1;min-width:0}
+.srch-res-item .srch-title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srch-res-item .srch-meta{font-size:.72rem;color:var(--tx3);margin-top:2px}
+.srch-res-item .srch-hi{color:var(--pri);font-weight:700}
+.srch-no{padding:20px;text-align:center;color:var(--tx3);font-size:.82rem}
 </style>
 </head>
 <body>
@@ -2001,6 +2022,7 @@ function renderAuth() {
   h += '<div class="c"><label>WhatsApp Number</label><input class="input" id="auth-wa" type="tel" placeholder="e.g. 2348012345678"></div>';
 
   h += '<button class="btn btn-p" style="margin-top:var(--s4)" onclick="doAuth()">Start Training</button>';
+  h += '<button class="btn btn-s" style="margin-top:var(--s3);width:auto;padding:var(--s2) var(--s4);min-height:36px" onclick="openSearch()">&#128269; Search Modules &amp; Songs</button>';
 
   h += '<p class="text-xs text-muted text-center mt-4">Your email and WhatsApp are your ticket. No password needed. You can access your progress from any device using your unique link.</p>';
   h += '</div>';
@@ -3251,6 +3273,140 @@ if (!AUTH.init()) {
 } else {
   go('home');
 }
+
+// ============================================================
+// SEARCH
+// ============================================================
+function openSearch() {
+  var bar = document.getElementById('srchBar');
+  bar.classList.add('on');
+  document.getElementById('srchInput').focus();
+  doSearch();
+}
+
+function closeSearch() {
+  var bar = document.getElementById('srchBar');
+  bar.classList.remove('on');
+  document.getElementById('srchRes').classList.remove('on');
+  document.getElementById('srchInput').value = '';
+}
+
+function doSearch() {
+  var q = document.getElementById('srchInput').value.trim().toLowerCase();
+  var res = document.getElementById('srchRes');
+  if (!q) { res.classList.remove('on'); return; }
+
+  var results = [];
+
+  // Search CURRICULUM modules
+  for (var s in CURRICULUM) {
+    var section = CURRICULUM[s];
+    if (!section.modules) continue;
+    for (var i = 0; i < section.modules.length; i++) {
+      var m = section.modules[i];
+      var title = (m.title || '').toLowerCase();
+      var outcome = (m.outcome || '').toLowerCase();
+      var text = (m.content || '').replace(/<[^>]*>/g, '').toLowerCase();
+      if (title.indexOf(q) >= 0 || outcome.indexOf(q) >= 0 || text.indexOf(q) >= 0) {
+        var snippet = '';
+        var idx = text.indexOf(q);
+        if (idx >= 0) {
+          var start = Math.max(0, idx - 30);
+          var end = Math.min(text.length, idx + q.length + 40);
+          snippet = (start > 0 ? '...' : '') + text.substring(start, end) + (end < text.length ? '...' : '');
+        } else {
+          snippet = outcome.substring(0, 80);
+        }
+        results.push({
+          type: 'module', section: section.title, sectionId: s,
+          stage: m.stage, title: highlightMatch(m.title, q),
+          snippet: snippet, xp: m.xp
+        });
+      }
+    }
+  }
+
+  // Search SONGS
+  if (typeof SONGS !== 'undefined') {
+    for (var si = 0; si < SONGS.length; si++) {
+      var song = SONGS[si];
+      var title = (song.title || '').toLowerCase();
+      var artist = (song.artist || '').toLowerCase();
+      var tags = (song.tags || []).join(' ').toLowerCase();
+      var focus = (song.focus || '').toLowerCase();
+      if (title.indexOf(q) >= 0 || artist.indexOf(q) >= 0 || tags.indexOf(q) >= 0 || focus.indexOf(q) >= 0) {
+        results.push({
+          type: 'song', title: highlightMatch(song.title, q),
+          artist: highlightMatch(song.artist, q),
+          level: song.level, tags: song.tags || [],
+          focus: (song.focus || '').substring(0, 80), index: si
+        });
+      }
+    }
+  }
+
+  // Render
+  if (results.length === 0) {
+    res.innerHTML = '<div class="srch-no">No results for "' + esc(q) + '"</div>';
+  } else {
+    var h = '';
+    for (var r of results.slice(0, 15)) {
+      if (r.type === 'module') {
+        h += '<div class="srch-res-item" onclick="goModule(\'' + r.sectionId + '\')">';
+        h += '<span class="srch-ic mod">' + r.stage + '</span>';
+        h += '<div class="srch-info">';
+        h += '<div class="srch-title">' + r.title + '</div>';
+        h += '<div class="srch-meta">' + r.section + ' &middot; Stage ' + r.stage + ' &middot; ' + r.xp + ' XP</div>';
+        h += '<div class="srch-meta">' + esc(r.snippet) + '</div>';
+        h += '</div></div>';
+      } else {
+        h += '<div class="srch-res-item" onclick="goSong(' + r.index + ')">';
+        h += '<span class="srch-ic song">' + (r.level === 1 ? 'B' : r.level === 2 ? 'I' : 'A') + '</span>';
+        h += '<div class="srch-info">';
+        h += '<div class="srch-title">' + r.title + ' &mdash; ' + r.artist + '</div>';
+        h += '<div class="srch-meta">Level ' + r.level + ' &middot; ' + (r.tags || []).join(', ') + '</div>';
+        h += '<div class="srch-meta">' + esc(r.focus) + '</div>';
+        h += '</div></div>';
+      }
+    }
+    if (results.length > 15) {
+      h += '<div class="srch-no">Showing 15 of ' + results.length + ' results</div>';
+    }
+    res.innerHTML = h;
+  }
+  res.classList.add('on');
+}
+
+function highlightMatch(text, q) {
+  if (!q) return esc(text);
+  var lower = text.toLowerCase();
+  var idx = lower.indexOf(q);
+  if (idx < 0) return esc(text);
+  var before = text.substring(0, idx);
+  var match = text.substring(idx, idx + q.length);
+  var after = text.substring(idx + q.length);
+  return esc(before) + '<span class="srch-hi">' + esc(match) + '</span>' + esc(after);
+}
+
+function goModule(sectionId) {
+  closeSearch();
+  go(sectionId);
+}
+
+function goSong(index) {
+  closeSearch();
+  go('songs');
+}
+
+function goFirstResult() {
+  var items = document.querySelectorAll('.srch-res-item');
+  if (items.length > 0) items[0].click();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSearch();
+});
+
 </script>
 
 <!-- AUTH SCREEN -->
@@ -3313,8 +3469,19 @@ if (!AUTH.init()) {
 
 
 <!-- BOTTOM NAV -->
+<!-- SEARCH BAR -->
+<div class="srch-bar" id="srchBar">
+  <button class="srch-cls" onclick="closeSearch()">&times;</button>
+  <input type="text" id="srchInput" placeholder="Search modules, songs, lessons..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goFirstResult()">
+</div>
+<div class="srch-res" id="srchRes"></div>
+
 <nav class="bn">
   <div class="bn-in">
+    <button class="bn-i" id="n-search" onclick="openSearch()">
+      <span class="bn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+      Search
+    </button>
     <button class="bn-i on" id="n-home" onclick="go('home')">
       <span class="bn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
       Home
