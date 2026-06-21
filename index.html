@@ -1546,6 +1546,38 @@ var CURRICULUM = {
     ]
   },
 
+  // ===== BGV PROJECT: EAR TRAINING + BANDLAB =====
+  bgvproject: {
+    title: 'BGV Project',
+    icon: 'V',
+    modules: [
+      {
+        id: 'bgv1', stage: 4,
+        outcome: 'Be able to listen to a harmony line, replicate it, record it in Bandlab, and submit it',
+        title: 'Background Vocals Project',
+        xp: 50,
+        content: '<p>This is a <b>hands-on project</b>. You will use everything you have learned — ear training, pitch matching, vocal technique, and Bandlab production — to create background vocals for a real song.</p><p><b>The Project:</b></p><p>1. <b>Listen:</b> We give you a song with the lead vocal removed. Listen to the original first. Focus on the background vocal harmonies. Where do they enter? What notes do they sing? How do they blend?</p><p>2. <b>Learn:</b> Using solfege, figure out the harmony line. Sing along until you can match it exactly. Use the pitch detection tool (Practice tab) to check your accuracy.</p><p>3. <b>Record:</b> Open Bandlab. Import the backing track (we provide the link). Record your harmony line. Use the effects chain from the Bandlab module to make it sound professional.</p><p>4. <b>Submit:</b> Export your recording and send it to Coach Toby via WhatsApp with the subject: "BGV Project — [Your Name] — [Song Title]"</p><div class="ref-box"><div class="ref-box-title">Song Choices (Pick One)</div><p><b>Worship:</b> "Great Are You Lord" — harmonies on the chorus (Sol-Do-Mi-Do)</p><p><b>Pop:</b> "Someone Like You" — "Never mind, I\'ll find someone like you" (harmony on "someone like you")</p><p><b>Afro:</b> "Essence" — Tems\' ad-libs and harmonies</p><p><b>R&B:</b> "All of Me" — John Legend (harmonies on the bridge)</p><p><b>Jazz:</b> "Fly Me to the Moon" — classic jazz harmonies (3rds and 5ths)</p></div><div class="ref-box"><div class="ref-box-title">What Coach Toby Listens For</div><p>1. <b>Pitch accuracy:</b> Are you in tune? (Use the pitch detector to check before submitting)</p><p>2. <b>Blend:</b> Does your voice sit well in the mix? Not too loud, not too quiet.</p><p>3. <b>Timing:</b> Are you locked in with the lead vocal? No drifting.</p><p>4. <b>Tone:</b> Is your tone appropriate for the genre? (Warm for worship, bright for pop, smooth for R&B)</p><p>5. <b>Production:</b> Did you use Bandlab effects properly? (Compressor, EQ, Reverb — from the Bandlab module)</p></div>',
+        exercise: {
+          name: 'BGV Recording Project',
+          steps: [
+            'Pick a song from the list above',
+            'Listen to the original 5 times. Focus ONLY on the background vocals each time',
+            'Sing along with the background vocals. Record yourself on your phone. Listen back.',
+            'Open bandlab.com. Create a new project.',
+            'Import the backing track (search "[song name] backing track karaoke" on YouTube, download, import to Bandlab)',
+            'Record your harmony line. Do 5 takes. Pick the best one.',
+            'Apply effects: Compressor (3:1) → EQ (cut <100Hz, boost 3kHz) → Reverb (Plate, 20%)',
+            'Mix: Your vocal should sit BEHIND the lead. Turn your track down 3-6dB.',
+            'Export as MP3. Send to Coach Toby via WhatsApp: "BGV Project — [Name] — [Song]"',
+            'Coach Toby will give you feedback on pitch, blend, timing, tone, and production'
+          ],
+          skill: 'ear',
+          xp: 50
+        }
+      }
+    ]
+  },
+
   // ===== PERFORMANCE =====
   performance: {
     title: 'Performance',
@@ -2006,7 +2038,7 @@ function renderLearn() {
   ];
 
   // Collect all modules by stage
-  var allSections = ['mechanics', 'ear', 'theory', 'vocalweight', 'performance', 'style', 'songselect', 'songwriting', 'production', 'career'];
+  var allSections = ['mechanics', 'ear', 'theory', 'vocalweight', 'bgvproject', 'performance', 'style', 'songselect', 'songwriting', 'production', 'career'];
 
   for (var si = 0; si < stages.length; si++) {
     var stage = stages[si];
