@@ -1139,6 +1139,94 @@ var COACH = {
 // Content drawn from NYVC method, exercise science research, and practical pedagogy
 // ============================================================
 
+var SONGS = [
+  { id: 'sg1', title: 'Breathe On Me', artist: 'Worship', level: 1, tags: ['breath control', 'sustained notes'], focus: 'Sing each phrase on one breath. Feel the rib expansion.', ref: 'YouTube: search "Breathe On Me worship vocal tutorial"' },
+  { id: 'sg2', title: 'Great Are You Lord', artist: 'Worship', level: 1, tags: ['steady airflow', 'dynamics'], focus: 'Steady airflow on sustained notes. No pushing.', ref: 'YouTube: search "Great Are You Lord vocal tutorial"' },
+  { id: 'sg3', title: 'Amazing Grace', artist: 'Traditional', level: 1, tags: ['pitch', 'simplicity'], focus: 'Every note in tune. Simple melody, pure tone.', ref: 'YouTube: search "Amazing Grace singing lesson"' },
+  { id: 'sg4', title: 'Hallelujah', artist: 'Leonard Cohen', level: 2, tags: ['emotion', 'dynamics', 'storytelling'], focus: 'Tell the story. Soft verses, powerful chorus.', ref: 'YouTube: search "Hallelujah vocal analysis"' },
+  { id: 'sg5', title: 'Someone Like You', artist: 'Adele', level: 2, tags: ['belt', 'emotion', 'mix voice'], focus: 'Intimate verses, powerful chorus. Mix voice on the high notes.', ref: 'YouTube: search "Someone Like You vocal technique"' },
+  { id: 'sg6', title: 'Essence', artist: 'Wizkid ft. Tems', level: 2, tags: ['Afro', 'rhythm', 'style'], focus: 'Rhythmic precision. Speak the lyrics first, then sing them.', ref: 'YouTube: search "Essence vocal cover tutorial"' },
+  { id: 'sg7', title: 'Thinking Out Loud', artist: 'Ed Sheeran', level: 2, tags: ['soft tone', 'clarity', 'intimacy'], focus: 'Soft and clear. Every word matters. No shouting.', ref: 'YouTube: search "Thinking Out Loud singing tips"' },
+  { id: 'sg8', title: 'All I Ask', artist: 'Adele', level: 2, tags: ['belt', 'range', 'control'], focus: 'Massive range. Control the belt. Do not push.', ref: 'YouTube: search "All I Ask Adele vocal analysis"' },
+  { id: 'sg9', title: 'I Will Always Love You', artist: 'Whitney Houston', level: 3, tags: ['belt', 'mix', 'runs', 'dynamics'], focus: 'The ultimate test. Belt, mix, runs, and emotional dynamics.', ref: 'YouTube: search "I Will Always Love You vocal analysis"' },
+  { id: 'sg10', title: 'Listen', artist: 'Beyonce', level: 3, tags: ['belt', 'runs', 'power', 'control'], focus: 'Power with precision. Every run must be clean.', ref: 'YouTube: search "Listen Beyonce vocal tutorial"' },
+  { id: 'sg11', title: 'Gravity', artist: 'John Mayer', level: 3, tags: ['style', 'runs', 'soul', 'improvisation'], focus: 'Soul singing. Runs, improvisation, style. Make it yours.', ref: 'YouTube: search "Gravity John Mayer vocal cover"' },
+  { id: 'sg12', title: 'Jealous', artist: 'Labrinth', level: 3, tags: ['mix', 'emotion', 'breaks', 'control'], focus: 'Emotional breaks. Mix voice control. Raw and vulnerable.', ref: 'YouTube: search "Jealous Labrinth vocal analysis"' },
+  { id: 'sg13', title: "Runnin' (Lose It All)", artist: 'Naughty Boy ft. Beyonce', level: 3, tags: ['belt', 'breath', 'power', 'Afro-fusion'], focus: 'Breath control at speed. Belt over Afro beat.', ref: 'YouTube: search "Runnin vocal tutorial"' },
+  { id: 'sg14', title: 'Love on the Brain', artist: 'Rihanna', level: 3, tags: ['Doo-wop', 'style', 'runs', 'retro'], focus: 'Retro style. Doo-wop runs. Vibrato control.', ref: 'YouTube: search "Love on the Brain vocal analysis"' }
+];
+
+// ============================================================
+// MILLIONAIRE QUIZ
+// ============================================================
+var QUIZ_QUESTIONS = [
+  { q: 'What is the term for the space between two notes?', options: ['Interval', 'Chord', 'Scale', 'Octave'], answer: 0, prize: 100 },
+  { q: 'How many beats does a whole note get in 4/4 time?', options: ['1', '2', '3', '4'], answer: 3, prize: 200 },
+  { q: 'What does "forte" (f) mean in music?', options: ['Soft', 'Loud', 'Fast', 'Slow'], answer: 1, prize: 300 },
+  { q: 'What is the home key of a song called?', options: ['Dominant', 'Tonic', 'Subdominant', 'Modulation'], answer: 1, prize: 500 },
+  { q: 'What is the relative minor of C major?', options: ['A minor', 'E minor', 'G minor', 'D minor'], answer: 0, prize: 1000 },
+  { q: 'Which vocal register is the lowest for most singers?', options: ['Falsetto', 'Chest voice', 'Head voice', 'Whistle'], answer: 1, prize: 2000 },
+  { q: 'What is a "glottal stop"?', options: ['A type of breath', 'A vocal fold closure', 'A resonance technique', 'A singing style'], answer: 1, prize: 5000 },
+  { q: 'What does "appoggio" mean in singing?', options: ['Breath support', 'Vowel placement', 'Larynx control', 'Resonance'], answer: 0, prize: 10000 },
+  { q: 'What is the interval between C and G?', options: ['Major 3rd', 'Perfect 4th', 'Perfect 5th', 'Major 6th'], answer: 2, prize: 25000 },
+  { q: 'In solfege, what syllable represents the 5th scale degree?', options: ['Mi', 'Fa', 'Sol', 'La'], answer: 2, prize: 50000 },
+  { q: 'What is the term for singing multiple notes on one syllable?', options: ['Vibrato', 'Melisma', 'Staccato', 'Legato'], answer: 1, prize: 75000 },
+  { q: "What is the 'passaggio' in singing?", options: ['A song section', 'A register break', 'A breathing technique', 'A style'], answer: 1, prize: 100000 },
+  { q: 'What is the harmonic series?', options: ['A chord progression', 'Overtones above a fundamental', 'A scale pattern', 'A rhythm pattern'], answer: 1, prize: 250000 },
+  { q: 'Which form is AABA most associated with?', options: ['Sonata', '32-bar song form', 'Rondo', 'Theme and variations'], answer: 1, prize: 500000 },
+  { q: 'What is "formant tuning" in classical singing?', options: ['Matching resonance to vowel', 'Tuning the larynx', 'Adjusting breath pressure', 'Changing pitch'], answer: 0, prize: 750000 },
+  { q: 'Who is considered the father of modern vocal pedagogy?', options: ['Manuel Garcia II', 'Lamperti', 'Lilli Lehmann', 'Enrico Caruso'], answer: 0, prize: 1000000 }
+];
+
+var PRIZE_LADDER = [100, 200, 300, 500, 1000, 2000, 5000, 10000, 25000, 50000, 75000, 100000, 250000, 500000, 750000, 1000000];
+var SAFE_MILESTONES = [3, 7, 11];
+
+// ============================================================
+// AUTH SCREEN
+// ============================================================
+function renderAuth() {
+  var c = document.getElementById('s-auth');
+  if (!c) return;
+  var h = '';
+  h += '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:var(--s6);max-width:400px;margin:0 auto">';
+  h += '<div style="text-align:center;margin-bottom:var(--s7)">';
+  h += '<div style="font-size:3rem;margin-bottom:var(--s3)">🎤</div>';
+  h += '<h1 style="font-size:var(--2xl);font-weight:900;margin-bottom:var(--s2)">Singer OS</h1>';
+  h += '<p class="text-muted">Your complete vocal training system. Free forever.</p></div>';
+
+  h += '<div class="c"><label>Your Name</label><input class="input" id="auth-name" placeholder="What should we call you?"></div>';
+  h += '<div class="c"><label>Email Address</label><input class="input" id="auth-email" type="email" placeholder="your@email.com"></div>';
+  h += '<div class="c"><label>WhatsApp Number</label><input class="input" id="auth-wa" type="tel" placeholder="e.g. 2348012345678"></div>';
+
+  h += '<button class="btn btn-p" style="margin-top:var(--s4)" onclick="doAuth()">Start Training</button>';
+
+  h += '<p class="text-xs text-muted text-center mt-4">Your email and WhatsApp are your ticket. No password needed. You can access your progress from any device using your unique link.</p>';
+  h += '</div>';
+  c.innerHTML = h;
+}
+
+function doAuth() {
+  var name = document.getElementById('auth-name').value.trim();
+  var email = document.getElementById('auth-email').value.trim();
+  var wa = document.getElementById('auth-wa').value.trim();
+
+  if (!name) { toast('Enter your name', 'err'); return; }
+
+  if (AUTH.register(email, wa, name)) {
+    U.name = name;
+    U.email = email;
+    GAME.init();
+    SRS.init();
+    save();
+    toast('Welcome, ' + name + '!', 'ok');
+    go('home');
+  }
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
 var CURRICULUM = {
 
   // ===== VOCAL MECHANICS =====
@@ -2654,6 +2742,27 @@ function practiceSong(id) {
 // ============================================================
 // MILLIONAIRE QUIZ
 // ============================================================
+var QUIZ_QUESTIONS = [
+  { q: 'What is the term for the space between two notes?', options: ['Interval', 'Chord', 'Scale', 'Octave'], answer: 0, prize: 100 },
+  { q: 'How many beats does a whole note get in 4/4 time?', options: ['1', '2', '3', '4'], answer: 3, prize: 200 },
+  { q: 'What does "forte" (f) mean in music?', options: ['Soft', 'Loud', 'Fast', 'Slow'], answer: 1, prize: 300 },
+  { q: 'What is the home key of a song called?', options: ['Dominant', 'Tonic', 'Subdominant', 'Modulation'], answer: 1, prize: 500 },
+  { q: 'What is the relative minor of C major?', options: ['A minor', 'E minor', 'G minor', 'D minor'], answer: 0, prize: 1000 },
+  { q: 'Which vocal register is the lowest for most singers?', options: ['Falsetto', 'Chest voice', 'Head voice', 'Whistle'], answer: 1, prize: 2000 },
+  { q: 'What is a "glottal stop"?', options: ['A type of breath', 'A vocal fold closure', 'A resonance technique', 'A singing style'], answer: 1, prize: 5000 },
+  { q: 'What does "appoggio" mean in singing?', options: ['Breath support', 'Vowel placement', 'Larynx control', 'Resonance'], answer: 0, prize: 10000 },
+  { q: 'What is the interval between C and G?', options: ['Major 3rd', 'Perfect 4th', 'Perfect 5th', 'Major 6th'], answer: 2, prize: 25000 },
+  { q: 'In solfege, what syllable represents the 5th scale degree?', options: ['Mi', 'Fa', 'Sol', 'La'], answer: 2, prize: 50000 },
+  { q: 'What is the term for singing multiple notes on one syllable?', options: ['Vibrato', 'Melisma', 'Staccato', 'Legato'], answer: 1, prize: 75000 },
+  { q: "What is the 'passaggio' in singing?", options: ['A song section', 'A register break', 'A breathing technique', 'A style'], answer: 1, prize: 100000 },
+  { q: 'What is the harmonic series?', options: ['A chord progression', 'Overtones above a fundamental', 'A scale pattern', 'A rhythm pattern'], answer: 1, prize: 250000 },
+  { q: 'Which form is AABA most associated with?', options: ['Sonata', '32-bar song form', 'Rondo', 'Theme and variations'], answer: 1, prize: 500000 },
+  { q: 'What is "formant tuning" in classical singing?', options: ['Matching resonance to vowel', 'Tuning the larynx', 'Adjusting breath pressure', 'Changing pitch'], answer: 0, prize: 750000 },
+  { q: 'Who is considered the father of modern vocal pedagogy?', options: ['Manuel Garcia II', 'Lamperti', 'Lilli Lehmann', 'Enrico Caruso'], answer: 0, prize: 1000000 }
+];
+
+var PRIZE_LADDER = [100, 200, 300, 500, 1000, 2000, 5000, 10000, 25000, 50000, 75000, 100000, 250000, 500000, 750000, 1000000];
+
 var quizState = { q: 0, score: 0, lifelines: { fifty: true, skip: true, double: true }, over: false };
 
 function startMillionaire() {
