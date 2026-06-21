@@ -2450,6 +2450,8 @@ function renderProgress() {
   var h = '';
   h += '<div class="hero"><h1>Your Progress</h1><p>Track your growth as a musician.</p></div>';
 
+  // Streak + XP + Level banner
+  var mult = GAME.getMultiplier();
   h += '<div class="grid-2 mb-4">';
   h += '<div class="c text-center"><div style="font-size:1.5rem;font-weight:900;color:var(--pri)">' + U.xp + '</div><div class="text-xs text-muted">Total XP</div></div>';
   h += '<div class="c text-center"><div style="font-size:1.5rem;font-weight:900;color:var(--gold)">' + U.sessions + '</div><div class="text-xs text-muted">Sessions</div></div>';
@@ -2457,6 +2459,45 @@ function renderProgress() {
   h += '<div class="c text-center"><div style="font-size:1.5rem;font-weight:900">' + U.completedSongs.length + '</div><div class="text-xs text-muted">Songs Practiced</div></div>';
   h += '</div>';
 
+  // Streak + Level card
+  h += '<div class="grid-2 mb-4">';
+  h += '<div class="c text-center" style="border-color:var(--gold)">';
+  h += '<div style="font-size:2rem;font-weight:900;color:var(--gold)">🔥 ' + U.streak + '</div>';
+  h += '<div class="text-xs text-muted">Day Streak</div>';
+  if (mult > 1) h += '<div class="text-xs mt-1" style="color:var(--gold)">x' + mult + ' XP Bonus Active!</div>';
+  h += '</div>';
+  h += '<div class="c text-center" style="border-color:var(--pri)">';
+  h += '<div style="font-size:2rem;font-weight:900;color:var(--pri)">Lv.' + U.level + '</div>';
+  h += '<div class="text-xs text-muted">Level</div>';
+  var nextLevelXP = (U.level) * 100;
+  var pctToNext = Math.round((U.xp / nextLevelXP) * 100);
+  h += '<div class="pr mt-1" style="height:4px"><div class="pr-f" style="width:' + pctToNext + '%"></div></div>';
+  h += '<div class="text-xs mt-1" style="color:var(--tx3)">' + (nextLevelXP - U.xp) + ' XP to Level ' + (U.level + 1) + '</div>';
+  h += '</div>';
+  h += '</div>';
+
+  // SRS Review notification
+  var dueSkills = SRS.getDue();
+  if (dueSkills.length > 0) {
+    h += '<div class="c c-a mb-4" style="border-color:var(--warn)">';
+    h += '<div class="text-bold text-sm mb-1">📚 Skills Due for Review</div>';
+    var skillNamesMap = {airflow: 'Breath', source: 'Onset', resonance: 'Resonance', articulation: 'Articulation', ear: 'Ear', mix: 'Mix Voice', performance: 'Performance', theory: 'Theory', sight: 'Sight-Singing', style: 'Style'};
+    var dueNames = dueSkills.map(function(s) { return skillNamesMap[s] || s; }).join(', ');
+    h += '<div class="text-xs text-muted">' + dueNames + '</div>';
+    h += '<div class="text-xs mt-2">Reviewing locked skills boosts your retention and XP multiplier.</div>';
+    h += '</div>';
+  }
+
+  // Vocal Load Meter
+  h += '<div class="c mb-4">';
+  h += '<div class="text-sm text-bold mb-2">Vocal Load</div>';
+  var loadPct = Math.round(U.vocalLoad / U.maxLoad * 100);
+  var loadColor = loadPct > 80 ? 'var(--err)' : loadPct > 50 ? 'var(--warn)' : 'var(--ok)';
+  h += '<div class="pr"><div class="pr-f" style="width:' + loadPct + '%;background:' + loadColor + ' !important"></div></div>';
+  h += '<div class="text-xs text-muted mt-1">' + U.vocalLoad + '/' + U.maxLoad + ' (' + loadPct + '%) — ' + (loadPct > 80 ? 'Rest your voice!' : loadPct > 50 ? 'Moderate — take a break soon' : 'Fresh — let\'s work!') + '</div>';
+  h += '</div>';
+
+  // Skill Levels
   h += '<div class="sec"><div class="sec-h"><span class="sec-t">Skill Levels</span></div>';
   var skillNames = {airflow: 'Breath', source: 'Onset', resonance: 'Resonance', articulation: 'Articulation', ear: 'Ear', mix: 'Mix Voice', performance: 'Performance', theory: 'Theory', sight: 'Sight-Singing', style: 'Style'};
   var skillKeys = Object.keys(skillNames);
