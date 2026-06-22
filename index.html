@@ -2658,11 +2658,78 @@ var GAME = {
 };
 
 function renderRepertoire() {
+  var c = document.getElementById('r-c');
   var h = '';
   h += '<div class="hero"><h1>Repertoire</h1><p>Memorize lyrics permanently. Master syncopation. Own every song you sing.</p></div>';
-  h += renderSection('repertoire');
-  document.getElementById('r-c').innerHTML = h;
-  updateNav('repertoire');
+
+  var section = CURRICULUM['repertoire'];
+  if (section && section.modules) {
+    for (var i = 0; i < section.modules.length; i++) {
+      var m = section.modules[i];
+      var done = U.completedModules.indexOf(m.id) !== -1;
+      h += '<div class="card ' + (done ? 'done' : '') + '" style="margin-bottom:12px">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">';
+      h += '<div style="flex:1;min-width:0">';
+      h += '<div style="font-size:0.9rem;font-weight:700;margin-bottom:4px">' + m.title + '</div>';
+      h += '<div style="font-size:0.75rem;color:var(--tx3)">' + m.outcome + '</div>';
+      h += '</div>';
+      h += '<span style="font-size:0.7rem;color:var(--gold);font-weight:600;white-space:nowrap">' + m.xp + ' XP</span>';
+      h += '</div>';
+      if (!done) {
+        h += '<button class="btn btn-s" style="margin-top:8px;width:100%" onclick="openModule(\'repertoire\',' + i + ')">Start Module</button>';
+      } else {
+        h += '<div style="margin-top:8px;font-size:0.75rem;color:var(--ok)">&#10003; Completed</div>';
+      }
+      h += '</div>';
+    }
+  }
+  c.innerHTML = h;
+
+}
+
+function openModule(sectionId, index) {
+  var section = CURRICULUM[sectionId];
+  if (!section || !section.modules) return;
+  var m = section.modules[index];
+  if (!m) return;
+
+  var c = document.getElementById('r-c');
+  var h = '';
+  h += '<button class="btn btn-w" style="margin-bottom:12px;width:auto;padding:var(--s2) var(--s4);min-height:36px;font-size:var(--xs)" onclick="renderRepertoire()">&larr; Back to Repertoire</button>';
+
+  h += '<div style="font-size:0.7rem;color:var(--pri);font-weight:600;margin-bottom:4px">STAGE ' + m.stage + ' &middot; ' + section.title.toUpperCase() + '</div>';
+  h += '<h2 style="font-size:1.3rem;font-weight:800;margin-bottom:8px">' + m.title + '</h2>';
+  h += '<div style="font-size:0.8rem;color:var(--tx3);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)"><b>Outcome:</b> ' + m.outcome + '</div>';
+  h += '<div style="font-size:0.85rem;line-height:1.7">' + m.content + '</div>';
+
+  if (m.exercise) {
+    h += '<div style="margin-top:20px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r)">';
+    h += '<div style="font-weight:700;margin-bottom:8px;color:var(--gold)">&#9733; Exercise: ' + m.exercise.name + '</div>';
+    h += '<ol style="padding-left:16px;font-size:0.8rem;color:var(--tx2)">';
+    for (var j = 0; j < m.exercise.steps.length; j++) {
+      h += '<li style="margin-bottom:4px">' + m.exercise.steps[j] + '</li>';
+    }
+    h += '</ol></div>';
+
+    var isDone = U.completedModules.indexOf(m.id) !== -1;
+    if (!isDone) {
+      h += '<button class="btn btn-p" style="margin-top:16px;width:100%" onclick="completeModule(\'' + m.id + '\',' + m.xp + ')">Mark as Complete (+' + m.xp + ' XP)</button>';
+    } else {
+      h += '<div style="margin-top:16px;font-size:0.85rem;color:var(--ok);font-weight:600;text-align:center">&#10003; Module Completed &middot; +' + m.xp + ' XP earned</div>';
+    }
+  }
+
+  c.innerHTML = h;
+}
+
+function completeModule(id, xp) {
+  if (U.completedModules.indexOf(id) === -1) {
+    U.completedModules.push(id);
+    U.xp += xp;
+    saveUser();
+    updateXP();
+  }
+  openModule('repertoire', CURRICULUM['repertoire'].modules.findIndex(function(m){return m.id===id}));
 }
 
 function renderSongs() {
