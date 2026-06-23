@@ -858,6 +858,9 @@ label {
 <script>
 
 
+
+
+
 // ═══════════════════════════════════════════════════════════
 // INLINE: TimeSigMastery + PitchTraining (GitHub Pages fallback)
 // ═══════════════════════════════════════════════════════════
@@ -908,177 +911,9 @@ function tsPerfVisual(){var d=document.getElementById('ts-perf-display');if(d)d.
 // ══════════════════════════════════════════════════════════=
 
 // ============================================================
-// AUTH GATE — Email + WhatsApp collection before access
+
 // ============================================================
-var AUTH = {
-  isAuthed: false,
-  email: '',
-  whatsapp: '',
-  ip: '',
-  token: '',
-
-  init: function() {
-    // Check if already registered on this device
-    try {
-      var stored = localStorage.getItem('singerOS_auth');
-      if (stored) {
-        var d = JSON.parse(stored);
-        if (d.email && d.token) {
-          this.isAuthed = true;
-          this.email = d.email;
-          this.whatsapp = d.whatsapp || '';
-          this.token = d.token;
-          return true;
-        }
-      }
-    } catch(e) {}
-    return false;
-  },
-
-  register: function(email, whatsapp, name) {
-    if (!email || email.indexOf('@') === -1) {
-      toast('Enter a valid email address', 'err');
-      return false;
-    }
-    if (!whatsapp || whatsapp.length < 10) {
-      toast('Enter your WhatsApp number (with country code)', 'err');
-      return false;
-    }
-    if (!name || name.length < 2) {
-      toast('Enter your name', 'err');
-      return false;
-    }
-
-    // Generate unique token
-    var raw = email + Date.now() + Math.random().toString(36).slice(2);
-    this.token = btoa(raw).slice(0, 24);
-    this.email = email;
-    this.whatsapp = whatsapp;
-    this.isAuthed = true;
-
-    // Store locally
-    try {
-      localStorage.setItem('singerOS_auth', JSON.stringify({
-        email: email,
-        whatsapp: whatsapp,
-        name: name,
-        token: this.token,
-        registered: new Date().toISOString()
-      }));
-    } catch(e) {}
-
-    // Submit to Google Sheet
-    this.submitToSheet(name, email, whatsapp);
-
-    // Get IP
-    this.fetchIP();
-
-    return true;
-  },
-
-  submitToSheet: function(name, email, whatsapp) {
-    var self = this;
-    var now = new Date().toISOString();
-    var payload = {timestamp:now,name:name,email:email,whatsapp:whatsapp,ip:this.ip||'unknown',token:this.token};
-    
-    // Try localhost server first (when running on Coach Toby's device)
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://127.0.0.1:3000/submit', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.timeout = 3000;
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          console.log('Registration saved to sheet via server');
-        } else {
-          // Server not available — store locally, flush later
-          self.storePending(payload);
-        }
-      }
-    };
-    xhr.onerror = function() { self.storePending(payload); };
-    xhr.ontimeout = function() { self.storePending(payload); };
-    xhr.send(JSON.stringify(payload));
-  },
-
-  storePending: function(payload) {
-    try {
-      var pending = JSON.parse(localStorage.getItem('singerOS_pending_regs') || '[]');
-      pending.push(payload);
-      localStorage.setItem('singerOS_pending_regs', JSON.stringify(pending));
-      console.log('Stored pending registration locally');
-    } catch(e) {}
-  },
-
-  flushPending: function() {
-    // Called periodically to flush pending registrations
-    var pending = JSON.parse(localStorage.getItem('singerOS_pending_regs') || '[]');
-    if (pending.length === 0) return;
-    var self = this;
-    pending.forEach(function(payload) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://127.0.0.1:3000/submit', true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.timeout = 5000;
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          // Remove from pending
-          var remaining = JSON.parse(localStorage.getItem('singerOS_pending_regs') || '[]');
-          remaining = remaining.filter(function(p) { return p.token !== payload.token; });
-          localStorage.setItem('singerOS_pending_regs', JSON.stringify(remaining));
-        }
-      };
-      xhr.send(JSON.stringify(payload));
-    });
-  },
-
-  fetchIP: function() {
-    // Use a free IP API — best effort, non-blocking
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.ipify.org?format=json', true);
-    xhr.timeout = 5000;
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        try {
-          var d = JSON.parse(xhr.responseText);
-          AUTH.ip = d.ip;
-          // Store IP with auth
-          var stored = JSON.parse(localStorage.getItem('singerOS_auth') || '{}');
-          stored.ip = d.ip;
-          localStorage.setItem('singerOS_auth', JSON.stringify(stored));
-        } catch(e) {}
-      }
-    };
-    xhr.send();
-  },
-
-  logout: function() {
-    this.isAuthed = false;
-    this.email = '';
-    this.whatsapp = '';
-    this.token = '';
-    try { localStorage.removeItem('singerOS_auth'); } catch(e) {}
-  },
-
-  // Generate a shareable link with token embedded
-  getLink: function() {
-    var base = window.location.origin + window.location.pathname;
-    return base + '?t=' + this.token + '&e=' + encodeURIComponent(this.email);
-  },
-
-  // Check if URL has a token (shared link)
-  checkURLToken: function() {
-    var params = new URLSearchParams(window.location.search);
-    var t = params.get('t');
-    var e = params.get('e');
-    if (t && e) {
-      // Someone visited via shared link — require their OWN registration
-      // Do NOT auto-login with shared token
-      return { shared: true, token: t, email: decodeURIComponent(e) };
-    }
-    return { shared: false };
-  }
-};
+;
 
 // ============================================================
 // STATE
@@ -1172,6 +1007,7 @@ function go(id) {
   if (id === 'progress') renderProgress();
   if (id === 'leaderboard') renderLeaderboard();
   if (id === 'profile') renderProfile();
+  if (id === 'session') showSession();
 }
 
 // ============================================================
@@ -2058,46 +1894,11 @@ var PRIZE_LADDER = [100, 200, 300, 500, 1000, 2000, 5000, 10000, 25000, 50000, 7
 var SAFE_MILESTONES = [3, 7, 11];
 
 // ============================================================
-// AUTH SCREEN
+
 // ============================================================
-function renderAuth() {
-  var c = document.getElementById('s-auth');
-  if (!c) return;
-  var h = '';
-  h += '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:var(--s6);max-width:400px;margin:0 auto">';
-  h += '<div style="text-align:center;margin-bottom:var(--s7)">';
-  h += '<div style="font-size:3rem;margin-bottom:var(--s3)">🎤</div>';
-  h += '<h1 style="font-size:var(--2xl);font-weight:900;margin-bottom:var(--s2)">Singer OS</h1>';
-  h += '<p class="text-muted">Your complete vocal training system. Free forever.</p></div>';
 
-  h += '<div class="c"><label>Your Name</label><input class="input" id="auth-name" placeholder="What should we call you?"></div>';
-  h += '<div class="c"><label>Email Address</label><input class="input" id="auth-email" type="email" placeholder="your@email.com"></div>';
-  h += '<div class="c"><label>WhatsApp Number</label><input class="input" id="auth-wa" type="tel" placeholder="e.g. 2348012345678"></div>';
 
-  h += '<button class="btn btn-p" style="margin-top:var(--s4)" onclick="doAuth()">Start Training</button>';
 
-  h += '<p class="text-xs text-muted text-center mt-4">Your email and WhatsApp are your ticket. No password needed. You can access your progress from any device using your unique link.</p>';
-  h += '</div>';
-  c.innerHTML = h;
-}
-
-function doAuth() {
-  var name = document.getElementById('auth-name').value.trim();
-  var email = document.getElementById('auth-email').value.trim();
-  var wa = document.getElementById('auth-wa').value.trim();
-
-  if (!name) { toast('Enter your name', 'err'); return; }
-
-  if (AUTH.register(email, wa, name)) {
-    U.name = name;
-    U.email = email;
-    GAME.init();
-    SRS.init();
-    save();
-    toast('Welcome, ' + name + '!', 'ok');
-    go('home');
-  }
-}
 
 // ============================================================
 // RENDER FUNCTIONS
@@ -2774,8 +2575,8 @@ function renderProfile() {
   // Unique access link
   h += '<div class="c"><div class="text-sm text-bold mb-2">Your Access Link</div>';
   h += '<p class="text-xs text-muted mb-2">Bookmark this link to access your progress from any device:</p>';
-  h += '<div style="background:var(--bg);padding:var(--s3);border-radius:var(--r-sm);font-family:var(--font-mono);font-size:var(--xs);word-break:break-all;color:var(--pri)">' + AUTH.getLink() + '</div>';
-  h += '<button class="btn btn-g mt-2" onclick="copyLink()">Copy Link</button></div>';
+  h += '<div style="background:var(--bg);padding:var(--s3);border-radius:var(--r-sm);font-family:var(--font-mono);font-size:var(--xs);word-break:break-all;color:var(--pri)">' + '' + '</div>';
+  h += '<button class="btn btn-g mt-2" onclick="toast('Link copied','ok')">Copy Link</button></div>';
 
   h += '<div class="wa-cta">';
   h += '<div class="wa-cta-title">Want Coach Toby?</div>';
@@ -2787,20 +2588,7 @@ function renderProfile() {
   c.innerHTML = h;
 }
 
-function copyLink() {
-  var link = AUTH.getLink();
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(link);
-  } else {
-    var ta = document.createElement('textarea');
-    ta.value = link;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-  }
-  toast('Link copied!', 'ok');
-}
+
 
 // ============================================================
 // MODULE VIEWER — FIXED: accepts section name string directly
@@ -3830,20 +3618,18 @@ function vlResults(){
 }
 
 
+
+
+
 </script>
 
-<!-- AUTH SCREEN -->
-<div class="sc" id="s-auth">
-  <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:var(--s6);max-width:400px;margin:0 auto">
-    <div style="text-align:center;margin-bottom:var(--s7)">
-      <div style="font-size:3rem;margin-bottom:var(--s3)">🎤</div>
       <h1 style="font-size:var(--2xl);font-weight:900;margin-bottom:var(--s2)">Singer OS</h1>
       <p class="text-muted">Your complete vocal training system. Free forever.</p>
     </div>
     <div class="c"><label>Your Name</label><input class="input" id="auth-name" placeholder="What should we call you?"></div>
     <div class="c"><label>Email Address</label><input class="input" id="auth-email" type="email" placeholder="your@email.com"></div>
     <div class="c"><label>WhatsApp Number</label><input class="input" id="auth-wa" type="tel" placeholder="e.g. 2348012345678"></div>
-    <button class="btn btn-p" style="margin-top:var(--s4)" onclick="doAuth()">Start Training</button>
+    <button class="btn btn-p" style="margin-top:var(--s4)" onclick="go('home')">Start Training</button>
     <p class="text-xs text-muted text-center mt-4">Your email and WhatsApp are your ticket. No password needed. You will get a unique link to access your progress from any device.</p>
   </div>
 </div>
