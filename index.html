@@ -3593,8 +3593,8 @@ function vlResults(){
   c.innerHTML=h;
 }
 
-// Init — show home screen on load
-go('home');
+// Init — show home screen on load (wait for DOM)
+document.addEventListener('DOMContentLoaded', function() { go('home'); });
 </script>
 
 <div class="sc active" id="s-home">
