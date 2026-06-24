@@ -828,6 +828,31 @@ label {
   .bn-in { max-width: 540px; }
 }
 
+
+.pd-wrap{padding:20px 0;text-align:center}
+.pd-freq{font-size:3.5rem;font-weight:900;color:var(--pri);font-family:var(--font-mono);min-height:60px}
+.pd-note{font-size:1.5rem;font-weight:700;margin:8px 0}
+.pd-cents{width:100%;height:8px;background:var(--border);border-radius:99px;position:relative;margin:16px 0}
+.pd-cents-fill{position:absolute;top:-4px;left:50%;width:4px;height:16px;border-radius:2px;transform:translateX(-50%);transition:left .1s;background:var(--ok)}
+.pd-stab{font-size:.9rem;font-weight:600;margin:12px 0}
+.spectrum{width:100%;height:60px;background:var(--card);border:1px solid var(--border);border-radius:12px;display:flex;align-items:flex-end;gap:1px;padding:4px;overflow:hidden;margin:12px 0}
+.spectrum-bar{flex:1;background:var(--pri);border-radius:1px 1px 0 0;min-height:2px;transition:height .05s;opacity:.7}
+.bc-circle{width:200px;height:200px;border-radius:50%;margin:20px auto;position:relative;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.bc-phase{font-size:1.2rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.bc-count{font-size:2.5rem;font-weight:900;font-family:var(--font-mono);color:var(--pri)}
+.rf-display{font-size:3.5rem;font-weight:900;color:var(--pri);font-family:var(--font-mono);text-align:center;padding:20px 0}
+.rf-bar{width:100%;height:12px;background:var(--border);border-radius:99px;position:relative;margin:16px 0}
+.rf-bar-fill{position:absolute;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pri),var(--ok));transition:width .4s}
+.rf-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0}
+.rf-stat{text-align:center;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.rf-stat-val{font-size:1.2rem;font-weight:900;font-family:var(--font-mono)}
+.rf-stat-lbl{font-size:.7rem;color:var(--tx3);margin-top:4px}
+.et-result{padding:16px;border-radius:12px;text-align:center;font-weight:700;margin:12px 0}
+.et-ok{background:oklch(0.72 0.18 145/0.1);border:1px solid var(--ok);color:var(--ok)}
+.et-bad{background:oklch(0.65 0.20 25/0.1);border:1px solid var(--err);color:var(--err)}
+.et-streak{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:var(--card2);border-radius:99px;font-size:.85rem;font-weight:700}
+.xp-splash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.5rem;font-weight:900;color:var(--gold);pointer-events:none;z-index:9999;animation:xpFloat .8s ease-out both}
+@keyframes xpFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(1.5)}}
 </style>
 </head>
 <body>
@@ -985,6 +1010,10 @@ function go(id) {
   if (id === 'leaderboard') renderLeaderboard();
   if (id === 'profile') renderProfile();
   if (id === 'session') showSession();
+  if (id === 'pitch') renderPitchDetector();
+  if (id === 'ear') renderEarTraining();
+  if (id === 'breath') renderBreathCoach();
+  if (id === 'range') renderRangeFinder();
 }
 
 // ============================================================
@@ -3593,6 +3622,371 @@ function vlResults(){
   c.innerHTML=h;
 }
 
+// ============================================================
+// PITCH DETECTOR MODULE
+// ============================================================
+var PitchDetectorModule={
+  _active:false,_ctx:null,_analyser:null,_data:null,_stream:null,_running:false,
+  _freq:0,_note:'',_cents:0,_stab:0,_history:[],
+  render:function(){
+    return '<div class="pd-wrap">'+
+      '<div class="text-xs text-muted" style="margin-bottom:8px">Real-time pitch analysis</div>'+
+      '<div class="pd-freq" id="pd-freq">—</div>'+
+      '<div class="pd-note" id="pd-note">-</div>'+
+      '<div class="pd-cents"><div class="pd-cents-fill" id="pd-fill"></div></div>'+
+      '<div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--tx3)"><span>-50</span><span>Perfect</span><span>+50</span></div>'+
+      '<div class="pd-stab" id="pd-stab">Stability: —</div>'+
+      '<div class="spectrum" id="pd-spec">'+Array(32).fill('<div class="spectrum-bar"></div>').join('')+'</div>'+
+      '<div style="display:flex;gap:8px;justify-content:center;margin:12px 0;flex-wrap:wrap">'+
+      '<button class="btn btn-p" id="pd-start" onclick="PitchDetectorModule.init()">Start</button>'+
+      '<button class="btn btn-g" id="pd-stop" style="display:none" onclick="PitchDetectorModule.destroy()">Stop</button>'+
+      '</div></div>';
+  },
+  init:function(){
+    if(this._running)return;
+    try{
+      this._ctx=new(window.AudioContext||window.webkitAudioContext)();
+      this._analyser=this._ctx.createAnalyser();this._analyser.fftSize=2048;
+      this._data=new Float32Array(this._analyser.fftSize);
+      var self=this;
+      navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})
+      .then(function(stream){
+        self._stream=stream;self._ctx.createMediaStreamSource(stream).connect(self._analyser);
+        self._running=true;self._history=[];
+        document.getElementById('pd-start').style.display='none';
+        document.getElementById('pd-stop').style.display='';
+        self._loop();
+      }).catch(function(){toast('Mic access denied','err')});
+    }catch(e){toast('Audio not supported','err')}
+  },
+  _loop:function(){
+    if(!this._running)return;
+    var self=this;
+    this._analyser.getFloatTimeDomainData(this._data);
+    var freq=autocorrelate(this._data,this._ctx.sampleRate);
+    if(freq>0){
+      this._freq=freq;var n=freqToNote(freq);
+      this._note=n.name+n.octave;this._cents=Math.round(n.cents);
+      this._history.push(freq);if(this._history.length>10)this._history.shift();
+      if(this._history.length>=5){
+        var avg=this._history.reduce(function(a,b){return a+b},0)/this._history.length;
+        var v=this._history.reduce(function(s,x){return s+Math.pow(x-avg,2)},0)/this._history.length;
+        this._stab=Math.max(0,Math.min(100,Math.round(100-(Math.sqrt(v)/avg)*500)));
+      }
+      this._update(freq,n);
+    }
+    requestAnimationFrame(function(){self._loop()});
+  },
+  _update:function(freq,note){
+    var f=document.getElementById('pd-freq'),n=document.getElementById('pd-note');
+    var c=document.getElementById('pd-fill'),s=document.getElementById('pd-stab');
+    if(f)f.textContent=Math.round(freq)+' Hz';
+    if(n)n.textContent=note.name+note.octave;
+    if(c){var pct=Math.max(2,Math.min(98,50+(note.cents/50)*50));c.style.left=pct+'%';c.style.background=Math.abs(note.cents)<10?'var(--ok)':Math.abs(note.cents)<25?'var(--gold)':'var(--err)'}
+    if(s){s.textContent='Stability: '+this._stab+'%';s.style.color=this._stab>70?'var(--ok)':this._stab>40?'var(--gold)':'var(--err)'}
+    this._updateSpectrum();
+  },
+  _updateSpectrum:function(){
+    if(!this._analyser)return;
+    var d=new Uint8Array(this._analyser.frequencyBinCount);
+    this._analyser.getByteFrequencyData(d);
+    var bars=document.querySelectorAll('#pd-spec .spectrum-bar');
+    var step=Math.floor(d.length/bars.length);
+    for(var i=0;i<bars.length;i++)bars[i].style.height=Math.max(2,(d[i*step]/255)*100)+'%';
+  },
+  destroy:function(){
+    this._running=false;
+    if(this._stream){this._stream.getTracks().forEach(function(t){t.stop()});this._stream=null}
+    if(this._ctx){this._ctx.close();this._ctx=null}
+    document.getElementById('pd-start').style.display='';
+    document.getElementById('pd-stop').style.display='none';
+  }
+};
+
+// ============================================================
+// EAR TRAINING MODULE
+// ============================================================
+var EarModule={
+  _active:false,
+  _intervals:[{name:'Minor 2nd',st:1},{name:'Major 2nd',st:2},{name:'Minor 3rd',st:3},{name:'Major 3rd',st:4},{name:'Perfect 4th',st:5},{name:'Tritone',st:6},{name:'Perfect 5th',st:7},{name:'Minor 6th',st:8},{name:'Major 6th',st:9},{name:'Minor 7th',st:10},{name:'Major 7th',st:11},{name:'Octave',st:12}],
+  _chords:[{name:'Major',notes:[0,4,7],feel:'Bright'},{name:'Minor',notes:[0,3,7],feel:'Dark'},{name:'Dim',notes:[0,3,6],feel:'Tense'},{name:'Aug',notes:[0,4,8],feel:'Dreamy'},{name:'Dom7',notes:[0,4,7,10],feel:'Wants resolve'},{name:'Maj7',notes:[0,4,7,11],feel:'Warm'},{name:'Min7',notes:[0,3,7,10],feel:'Soulful'}],
+  _q:null,_active2:false,_score:0,_total:0,_type:'interval',
+  render:function(){
+    var h='<div class="hero"><h1>Ear Training</h1><p>+5 XP per correct answer</p></div>';
+    h+='<div class="sec"><div class="sec-h"><span class="sec-t">Intervals</span></div>';
+    h+='<div class="c c-a" onclick="EarModule.start(\'interval\')" style="cursor:pointer;text-align:center"><div class="text-bold">Interval Training</div><div class="text-xs text-muted">12 intervals</div></div></div>';
+    h+='<div class="sec"><div class="sec-h"><span class="sec-t">Chords</span></div>';
+    h+='<div class="c c-a" onclick="EarModule.start(\'chord\')" style="cursor:pointer;text-align:center"><div class="text-bold">Chord Training</div><div class="text-xs text-muted">7 chord qualities</div></div></div>';
+    h+='<div class="sec"><div class="sec-h"><span class="sec-t">Stats</span></div>';
+    h+='<div class="grid-2">';
+    h+='<div class="c text-center"><div style="font-size:1.5rem;font-weight:900;color:var(--gold)">'+U.earStreak+'</div><div class="text-xs text-muted">Streak</div></div>';
+    h+='<div class="c text-center"><div style="font-size:1.5rem;font-weight:900;color:var(--gold)">'+U.earBestStreak+'</div><div class="text-xs text-muted">Best</div></div>';
+    h+='</div></div>';
+    h+='<div id="et-content"></div>';
+    return h;
+  },
+  _initCtx:function(){if(!this._ctx)this._ctx=new(window.AudioContext||window.webkitAudioContext)()},
+  _playInterval:function(iv,cb){
+    this._initCtx();var base=261.63,f2=base*Math.pow(2,iv.st/12),now=this._ctx.currentTime;
+    var o1=this._ctx.createOscillator(),g1=this._ctx.createGain();o1.type='sine';o1.frequency.value=base;
+    g1.gain.setValueAtTime(0,now);g1.gain.linearRampToValueAtTime(0.3,now+.05);g1.gain.linearRampToValueAtTime(.001,now+.6);
+    o1.connect(g1);g1.connect(this._ctx.destination);o1.start(now);o1.stop(now+.65);
+    var o2=this._ctx.createOscillator(),g2=this._ctx.createGain();o2.type='sine';o2.frequency.value=f2;
+    var t2=now+.7;g2.gain.setValueAtTime(0,t2);g2.gain.linearRampToValueAtTime(.3,t2+.05);g2.gain.linearRampToValueAtTime(.001,t2+.8);
+    o2.connect(g2);g2.connect(this._ctx.destination);o2.start(t2);o2.stop(t2+.85);
+    if(cb)setTimeout(cb,1600);
+  },
+  _playChord:function(ch,cb){
+    this._initCtx();var base=261.63,now=this._ctx.currentTime;
+    for(var i=0;i<ch.notes.length;i++){
+      var f=base*Math.pow(2,ch.notes[i]/12);
+      var o=this._ctx.createOscillator(),g=this._ctx.createGain();o.type='sine';o.frequency.value=f;
+      g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.25,now+.05);g.gain.linearRampToValueAtTime(.001,now+1.2);
+      o.connect(g);g.connect(this._ctx.destination);o.start(now);o.stop(now+1.25);
+    }
+    if(cb)setTimeout(cb,1400);
+  },
+  start:function(type){
+    this._active2=true;this._score=0;this._total=0;this._type=type;
+    this._next();
+  },
+  _next:function(){
+    if(this._total>=10){this._showResults();return}
+    var pool=this._type==='interval'?this._intervals:this._chords;
+    var idx=Math.floor(Math.random()*pool.length);
+    this._q={type:this._type,data:pool[idx]};
+    if(this._type==='interval')this._playInterval(this._q.data);
+    else this._playChord(this._q.data);
+    this._renderQuestion(pool);
+  },
+  _renderQuestion:function(pool){
+    var c=document.getElementById('et-content');if(!c)return;
+    var q=this._q;
+    var h='<div class="et-streak">Streak: '+U.earStreak+' | Best: '+U.earBestStreak+'</div>';
+    h+='<div style="text-align:center;margin:16px 0"><div class="text-sm text-muted">Question '+(this._total+1)+'/10</div>';
+    h+='<button class="btn btn-g btn-sm" onclick="EarModule._replay()" style="margin:8px 0">Replay</button></div>';
+    h+='<h4 style="font-weight:700;margin:12px 0">';
+    if(q.type==='interval'){
+      h+='What interval did you hear?</h4>';
+      var opts=shuffleArr(pool.slice()).slice(0,4);
+      if(!opts.find(function(o){return o.name===q.data.name}))opts[0]=q.data;
+      opts=shuffleArr(opts);
+      for(var i=0;i<opts.length;i++)h+='<div class="qo" onclick="EarModule._answer(this,\''+opts[i].name+'\')"><span class="qr"></span>'+opts[i].name+'</div>';
+    }else{
+      h+='What chord quality did you hear?</h4>';
+      var opts2=shuffleArr(pool.slice()).slice(0,4);
+      if(!opts2.find(function(o){return o.name===q.data.name}))opts2[0]=q.data;
+      opts2=shuffleArr(opts2);
+      for(var j=0;j<opts2.length;j++)h+='<div class="qo" onclick="EarModule._answer(this,\''+opts2[j].name+'\')"><span class="qr"></span>'+opts2[j].name+'<div class="text-xs text-muted">'+opts2[j].feel+'</div></div>';
+    }
+    h+='<button class="btn btn-w" onclick="EarModule._end()">End</button>';
+    c.innerHTML=h;
+  },
+  _replay:function(){if(this._q){if(this._q.type==='interval')this._playInterval(this._q.data);else this._playChord(this._q.data)}},
+  _answer:function(el,ans){
+    var correct=ans===this._q.data.name;this._total++;
+    if(correct){this._score++;U.earStreak++;if(U.earStreak>U.earBestStreak)U.earBestStreak=U.earStreak;addXP(5);el.classList.add('ok')}
+    else{U.earStreak=0;el.classList.add('bad');var all=el.parentNode.querySelectorAll('.qo');for(var i=0;i<all.length;i++)if(all[i].textContent.indexOf(this._q.data.name)!==-1)all[i].classList.add('ok')}
+    save();var self=this;setTimeout(function(){self._next()},1500);
+  },
+  _showResults:function(){
+    this._active2=false;var pct=Math.round(this._score/this._total*100);
+    var c=document.getElementById('et-content');if(!c)return;
+    c.innerHTML='<div style="text-align:center;padding:24px 0"><div style="font-size:3rem">'+(pct>=80?'🏆':pct>=60?'💪':'📚')+'</div><h2>Done!</h2><div style="font-size:2rem;font-weight:900;color:'+(pct>=80?'var(--ok)':pct>=60?'var(--gold)':'var(--err)')+'">'+this._score+'/'+this._total+' ('+pct+'%)</div><div class="text-sm text-muted">Best streak: '+U.earBestStreak+'</div><button class="btn btn-p" style="margin-top:12px" onclick="go(\'ear\')">Back</button><button class="btn btn-s" onclick="EarModule.start(\''+this._type+'\')">Again</button></div>';
+    if(pct>=80&&!U.badges.includes('ear_pro')){U.badges.push('ear_pro');showAchieve('Ear Pro!','80%+ accuracy')}save();
+  },
+  _end:function(){this._active2=false;go('ear')}
+};
+
+// ============================================================
+// BREATH COACH MODULE
+// ============================================================
+var BreathModule={
+  _active:false,_ctx:null,_timer:null,_phase:'ready',_count:0,_pat:{inhale:4,hold1:4,exhale:4,hold2:4},
+  render:function(){
+    var h='<div class="hero"><h1>Breath Coach</h1><p>Box breathing. Train appoggio.</p></div>';
+    h+='<div class="bc-circle" id="bc-circle"><div><div class="bc-phase" id="bc-phase">Ready</div><div class="bc-count" id="bc-count">4</div></div></div>';
+    h+='<div style="display:flex;gap:8px;justify-content:center;margin:16px 0">';
+    h+='<button class="btn btn-p" onclick="BreathModule.init()">Start</button>';
+    h+='<button class="btn btn-g" onclick="BreathModule.destroy()">End</button>';
+    h+='</div>';
+    h+='<div class="sec"><div class="sec-h"><span class="sec-t">Custom Pattern</span></div>';
+    h+='<div class="grid-2">';
+    h+='<div><label>Inhale</label><input class="input" type="number" id="bc-i" value="4" min="2" max="12"></div>';
+    h+='<div><label>Hold</label><input class="input" type="number" id="bc-h1" value="4" min="2" max="12"></div>';
+    h+='<div><label>Exhale</label><input class="input" type="number" id="bc-e" value="4" min="2" max="12"></div>';
+    h+='<div><label>Hold</label><input class="input" type="number" id="bc-h2" value="4" min="2" max="12"></div>';
+    h+='</div><button class="btn btn-w" onclick="BreathModule._applyPat()">Apply</button></div>';
+    h+='<div class="ref-box"><div class="ref-box-title">NYVC</div><p>Inhale: ribs expand. Hold: ribs stay out. Exhale: slow release.</p></div>';
+    return h;
+  },
+  init:function(){
+    if(this._active)return;
+    if(!this._ctx)this._ctx=new(window.AudioContext||window.webkitAudioContext)();
+    this._active=true;this._phase='inhale';this._count=this._pat.inhale;
+    this._updateDisplay();
+    var self=this;
+    this._timer=setInterval(function(){self._count--;if(self._count<=0)self._advance();self._updateDisplay()},1000);
+    this._tone('start');
+  },
+  _advance:function(){
+    if(this._phase==='inhale'){this._phase='hold1';this._count=this._pat.hold1;this._tone('hold')}
+    else if(this._phase==='hold1'){this._phase='exhale';this._count=this._pat.exhale;this._tone('exhale')}
+    else if(this._phase==='exhale'){this._phase='hold2';this._count=this._pat.hold2;this._tone('hold')}
+    else{this._phase='inhale';this._count=this._pat.inhale;this._tone('inhale')}
+  },
+  _updateDisplay:function(){
+    var p=document.getElementById('bc-phase'),c=document.getElementById('bc-count'),el=document.getElementById('bc-circle');
+    if(p)p.textContent=this._phase==='inhale'?'Breathe In':this._phase==='exhale'?'Breathe Out':'Hold';
+    if(c)c.textContent=this._count;
+    if(el)el.style.transform='scale('+(this._phase==='inhale'?'1.08':this._phase==='exhale'?'.94':'1')+')';
+  },
+  _tone:function(type){
+    if(!this._ctx)return;
+    var o=this._ctx.createOscillator(),g=this._ctx.createGain();
+    o.type='sine';o.frequency.value=type==='inhale'?440:type==='exhale'?330:550;
+    g.gain.setValueAtTime(0,this._ctx.currentTime);g.gain.linearRampToValueAtTime(.15,this._ctx.currentTime+.1);
+    g.gain.linearRampToValueAtTime(.001,this._ctx.currentTime+.4);
+    o.connect(g);g.connect(this._ctx.destination);o.start();o.stop(this._ctx.currentTime+.45);
+  },
+  _applyPat:function(){
+    var i=parseInt(document.getElementById('bc-i').value)||4;
+    var h1=parseInt(document.getElementById('bc-h1').value)||4;
+    var e=parseInt(document.getElementById('bc-e').value)||4;
+    var h2=parseInt(document.getElementById('bc-h2').value)||4;
+    this._pat={inhale:i,hold1:h1,exhale:e,hold2:h2};toast('Pattern set','ok');
+  },
+  destroy:function(){
+    this._active=false;
+    if(this._timer){clearInterval(this._timer);this._timer=null}
+    if(this._ctx){this._ctx.close();this._ctx=null}
+    U.breathSessions++;addXP(10);save();
+    var el=document.getElementById('bc-circle');if(el)el.style.transform='scale(1)';
+    var p=document.getElementById('bc-phase');if(p)p.textContent='Ready';
+  }
+};
+
+// ============================================================
+// RANGE FINDER MODULE
+// ============================================================
+var RangeModule={
+  _active:false,_ctx:null,_analyser:null,_data:null,_stream:null,_freq:0,_low:null,_high:null,_lowNote:'-',_highNote:'-',
+  render:function(){
+    var h='<div class="hero"><h1>Range Finder</h1><p>Sing low and high notes to find your range.</p></div>';
+    h+='<div class="rf-display" id="rf-current">Sing...</div>';
+    h+='<div class="rf-bar"><div class="rf-bar-fill" id="rf-fill" style="width:0%"></div></div>';
+    h+='<div class="rf-stats">';
+    h+='<div class="rf-stat"><div class="rf-stat-val" id="rf-low">—</div><div class="rf-stat-lbl">Lowest</div></div>';
+    h+='<div class="rf-stat"><div class="rf-stat-val" id="rf-semi">0</div><div class="rf-stat-lbl">Semitones</div></div>';
+    h+='<div class="rf-stat"><div class="rf-stat-val" id="rf-high">—</div><div class="rf-stat-lbl">Highest</div></div>';
+    h+='</div>';
+    h+='<div style="text-align:center;margin:12px 0"><div class="text-xs text-muted" id="rf-oct">0 octaves</div></div>';
+    h+='<div style="display:flex;gap:8px;justify-content:center">';
+    h+='<button class="btn btn-p" id="rf-start" onclick="RangeModule.init()">Start</button>';
+    h+='<button class="btn btn-g" id="rf-stop" style="display:none" onclick="RangeModule.destroy()">Stop</button>';
+    h+='</div>';
+    h+='<div class="hr"></div>';
+    h+='<div class="sec"><div class="sec-h"><span class="sec-t">Saved Range</span></div>';
+    if(U.rangeLow){
+      h+='<div class="c"><div class="text-bold">'+U.rangeLow+' → '+U.rangeHigh+'</div><div class="text-xs text-muted">'+((U.rangeHighFreq-U.rangeLowFreq)/12).toFixed(1)+' octaves</div></div>';
+      h+='<button class="btn btn-s" onclick="RangeModule._sendWA()">Send to Coach</button>';
+    }else{
+      h+='<div class="text-sm text-muted">No range saved yet.</div>';
+    }
+    h+='</div>';
+    return h;
+  },
+  init:function(){
+    if(this._active)return;
+    try{
+      this._ctx=new(window.AudioContext||window.webkitAudioContext)();
+      this._analyser=this._ctx.createAnalyser();this._analyser.fftSize=2048;
+      this._data=new Float32Array(this._analyser.fftSize);
+      var self=this;
+      navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})
+      .then(function(stream){
+        self._stream=stream;self._ctx.createMediaStreamSource(stream).connect(self._analyser);
+        self._active=true;
+        document.getElementById('rf-start').style.display='none';
+        document.getElementById('rf-stop').style.display='';
+        self._loop();
+      }).catch(function(){toast('Mic denied','err')});
+    }catch(e){toast('Audio not supported','err')}
+  },
+  _loop:function(){
+    if(!this._active)return;
+    var self=this;
+    this._analyser.getFloatTimeDomainData(this._data);
+    var freq=autocorrelate(this._data,this._ctx.sampleRate);
+    if(freq>50&&freq<2000){
+      this._freq=freq;var note=freqToNote(freq),ns=note.name+note.octave;
+      var el=document.getElementById('rf-current');if(el)el.textContent=ns+' ('+Math.round(freq)+' Hz)';
+      if(note.midi>0){
+        if(!this._low||note.midi<this._low.midi){this._low=note;this._lowNote=ns;var lo=document.getElementById('rf-low');if(lo)lo.textContent=ns}
+        if(!this._high||note.midi>this._high.midi){this._high=note;this._highNote=ns;var hi=document.getElementById('rf-high');if(hi)hi.textContent=ns}
+        this._updateStats();
+      }
+    }
+    requestAnimationFrame(function(){self._loop()});
+  },
+  _updateStats:function(){
+    if(this._low&&this._high){
+      var semi=this._high.midi-this._low.midi,oct=(semi/12).toFixed(1);
+      var s=document.getElementById('rf-semi'),o=document.getElementById('rf-oct'),f=document.getElementById('rf-fill');
+      if(s)s.textContent=semi;if(o)o.textContent=oct+' octaves';
+      if(f)f.style.width=Math.min(100,Math.max(5,((this._high.midi-this._low.midi)/(84-36))*100))+'%';
+    }
+  },
+  destroy:function(){
+    this._active=false;
+    if(this._stream){this._stream.getTracks().forEach(function(t){t.stop()});this._stream=null}
+    if(this._ctx){this._ctx.close();this._ctx=null}
+    document.getElementById('rf-start').style.display='';
+    document.getElementById('rf-stop').style.display='none';
+    if(this._low&&this._high){
+      U.rangeLow=this._lowNote;U.rangeHigh=this._highNote;
+      U.rangeLowFreq=this._low.midi;U.rangeHighFreq=this._high.midi;
+      save();toast('Saved: '+this._lowNote+' to '+this._highNote,'ok');addXP(15);
+    }
+  },
+  _sendWA:function(){
+    if(!U.rangeLow){toast('Sing first','info');return}
+    var msg='Hi Coach Toby! My range: '+U.rangeLow+' to '+U.rangeHigh+' ('+((U.rangeHighFreq-U.rangeLowFreq)/12).toFixed(1)+' octaves). Help me expand it!';
+    window.open('https://wa.me/2349160106084?text='+encodeURIComponent(msg),'_blank');
+  }
+};
+
+// ============================================================
+// AUDIO HELPERS
+// ============================================================
+var NOTE_NAMES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function freqToNote(freq){
+  if(freq<=0)return{name:'-',octave:0,cents:0,midi:0};
+  var midi=69+12*Math.log2(freq/440),mr=Math.round(midi),cents=(midi-mr)*100;
+  var ni=((mr%12)+12)%12,oct=Math.floor(mr/12)-1;
+  return{name:NOTE_NAMES[ni],octave:oct,cents:cents,midi:mr};
+}
+function autocorrelate(buf,sr){
+  var len=buf.length,rms=0;
+  for(var i=0;i<len;i++)rms+=buf[i]*buf[i];
+  rms=Math.sqrt(rms/len);if(rms<0.01)return-1;
+  var maxO=Math.min(Math.floor(sr/50),len),minO=Math.floor(sr/800),bestC=0,bestO=-1;
+  for(var off=minO;off<maxO;off++){
+    var c=0;for(var j=0;j<len-off;j++)c+=Math.abs(buf[j]*buf[j+off]);
+    c/=(len-off);if(c>bestC){bestC=c;bestO=off}
+  }
+  return bestO===-1?-1:sr/bestO;
+}
+function shuffleArr(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+// ============================================================
+// MODULE RENDER BRIDGE + ROUTER UPDATE
+// ============================================================
+function renderPitchDetector(){var c=document.getElementById('pd-c');if(c)c.innerHTML=PitchDetectorModule.render()}
+function renderEarTraining(){var c=document.getElementById('et-c');if(c)c.innerHTML=EarModule.render()}
+function renderBreathCoach(){var c=document.getElementById('bc-c');if(c)c.innerHTML=BreathModule.render()}
+function renderRangeFinder(){var c=document.getElementById('rf-c');if(c)c.innerHTML=RangeModule.render()}
+
 // Init — show home screen on load (wait for DOM)
 document.addEventListener('DOMContentLoaded', function() { go('home'); });
 </script>
@@ -3634,6 +4028,26 @@ document.addEventListener('DOMContentLoaded', function() { go('home'); });
   <div class="tb"><div class="tb-t">🏆 Leaderboard</div>
 
 
+<div class="sc" id="s-pitch">
+  <div class="tb"><div class="tb-t">Voice Lab</div></div>
+  <div class="sp" id="pd-c"></div>
+</div>
+
+<div class="sc" id="s-ear">
+  <div class="tb"><div class="tb-t">Ear Training</div></div>
+  <div class="sp" id="et-c"></div>
+</div>
+
+<div class="sc" id="s-breath">
+  <div class="tb"><div class="tb-t">Breath Coach</div></div>
+  <div class="sp" id="bc-c"></div>
+</div>
+
+<div class="sc" id="s-range">
+  <div class="tb"><div class="tb-t">Range Finder</div></div>
+  <div class="sp" id="rf-c"></div>
+</div>
+
 <nav class="bn">
   <div class="bn-in">
     <button class="bn-i on" id="n-home" onclick="go('home')">
@@ -3663,6 +4077,13 @@ document.addEventListener('DOMContentLoaded', function() { go('home'); });
     <button class="bn-i" id="n-quiz" onclick="go('quiz')">
       <span class="bn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
       Quiz
+    </button>
+
+    <button class="bn-i" id="n-ear" onclick="go('ear')">
+      <span class="bn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>Ear
+    </button>
+    <button class="bn-i" id="n-pitch" onclick="go('pitch')">
+      <span class="bn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></span>Voice
     </button>
     <button class="bn-i" id="n-progress" onclick="go('progress')">
       <span class="bn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
