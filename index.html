@@ -923,6 +923,14 @@ textarea.form-input { min-height: 100px; resize: vertical; }
 .geo-bar{height:20px;border-radius:4px;background:var(--indigo);transition:width 0.6s var(--ease);min-width:4px}
 .geo-bar-count{font-family:var(--font-mono);font-size:0.75rem;font-weight:600;color:var(--gray-500)}
 @media (max-width:720px){.scroll-timeline::before{left:20px}.scroll-reveal,.scroll-reveal:nth-child(odd){flex-direction:column;align-items:flex-start;padding-left:50px}.scroll-reveal-visual{flex:none;margin-bottom:var(--space-2)}}
+.survey-step{animation:fadeSlideUp .3s var(--ease)}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.survey-q{font-family:var(--font-display);font-weight:700;font-size:1.15rem;margin-bottom:16px;text-align:center}
+.survey-options{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.survey-opt{padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--gray-200);background:var(--gray-50);text-align:left;font-size:0.9rem;font-weight:500;transition:all .2s;width:100%;cursor:pointer}
+.survey-opt:hover{background:rgba(212,175,55,0.06);border-color:var(--gold)}
+.survey-opt.sel{background:rgba(212,175,55,0.1);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.coach-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F59E0B);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--midnight);font-weight:700}
 </style>
 </head>
 <body>
@@ -1167,6 +1175,14 @@ textarea.form-input { min-height: 100px; resize: vertical; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       <span>AI Mentor</span>
     </a>
+    <a href="#" class="lms-sidebar-link" data-page="coach" onclick="app.lmsNav('coach');return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Coach Toby</span>
+    </a>
+    <a href="#" class="lms-sidebar-link" data-page="feedback" onclick="app.lmsNav('feedback');return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>Feedback</span>
+    </a>
     <a href="#" class="lms-sidebar-link" data-page="community" onclick="app.lmsNav('community');return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span>Community</span>
@@ -1208,7 +1224,7 @@ const S = {
   xp: parseInt(localStorage.getItem('swt_xp') || '0'),
   streak: parseInt(localStorage.getItem('swt_streak') || '0'),
   lastVisit: localStorage.getItem('swt_lastVisit'),
-  lessonsCompleted: JSON.parse(localStorage.getItem('swt_lessons') || '[]'),
+  lessonsCompleted: JSON.parse(localStorage.getItem('swt_lessons_v2') || '[]'),
   badges: JSON.parse(localStorage.getItem('swt_badges') || '[]'),
   voiceProfile: JSON.parse(localStorage.getItem('swt_voice') || 'null'),
   mentorHistory: JSON.parse(localStorage.getItem('swt_mentor') || '[]'),
@@ -1310,192 +1326,237 @@ const DATA = {
     { name:'Group Coaching', price:'₦20K', period:'/month', features:['Weekly group calls','Community access','Accountability partner','Certificate'], cta:'Join Group', featured:false },
   ],
   lessons: [
-    { id:1, title:'Your Voice Matters', course:'Foundations', duration:'8 min', content:'Your voice is your most personal instrument. No two voices are alike — and that is your power.',
+    { id:1, title:'Posture & Alignment', course:'Foundations', duration:'10 min', content:'NYVC: free voice needs free body. Stacked alignment.',
       steps:[
-        {type:'teach',title:'Why Your Voice Is Unique',body:'Your vocal cords are roughly the length of your thumbnail — shorter for higher voices, longer for lower ones. The shape of your throat, mouth, and nasal cavities creates a resonance fingerprint that nobody else on Earth has. This is why you can identify a friend by hearing just one word on the phone.'},
-        {type:'teach',title:'The Three Voice Systems',body:'Every voice uses three systems working together:\n\n1. **Source** — your vocal cords vibrate to create raw sound (like a guitar string)\n2. **Filter** — your throat, mouth, and tongue shape the raw sound into vowels and tone (like the guitar body)\n3. **Airflow** — your breath powers everything (like the pick plucking the string)\n\nMost singers focus only on the source. Great singers master all three.'},
-        {type:'exercise',title:'Discover Your Voice Print',body:'Speak these sentences out loud at your normal volume:\n\n1. "Hello, my name is [your name]"\n2. "One, two, three, four, five"\n3. "Aah, ay, ee, oh, oo"\n\nNotice how each vowel feels different in your mouth. The "ah" opens your jaw wide. The "ee" pushes your tongue forward and up. The "oo" rounds your lips. These shapes ARE your instrument.'},
-        {type:'tip',title:'Key Insight',body:'Stop comparing your voice to others. Your resonance fingerprint means you can make sounds nobody else can. That is not a limitation — it is your signature sound. The goal of training is not to sound like someone else, but to sound like the best version of yourself.'}
+        {type:'teach',title:'Stacked Alignment (NYVC)',body:'Singing is muscular - like a dart thrower. Misalignment = missed target.\n\n7-Point Check:\n1. Feet shoulder-width\n2. Knees soft not locked\n3. Hips over feet\n4. Chest tall not military\n5. Shoulders back and dropped\n6. Chin level\n7. Head tall string from crown\n\nRef: SAID Principle (PMC7156306) - your body adapts to what you demand.'},
+        {type:'exercise',title:'Wall Drill',body:'Back against wall: head shoulders hips touch. Hand behind lower back - small natural curve. Step away maintaining posture. Breathe: breath drops low without effort.'},
+        {type:'practice',title:'7-Day Ritual',body:'Every morning 7 days: Wall Drill then sing scale. Record. Day 7 vs Day 1 shows visible change.'},
+        {type:'tip',title:'Don\'t Force Chest Up',body:'Creates throat tension. Think tall spine not proud chest.'}
       ]},
-    { id:2, title:'Anatomy of Singing', course:'Foundations', duration:'12 min', content:'Understanding the parts of your voice lets you control them instead of guessing.',
+    { id:2, title:'Breath & Solar Plexus', course:'Foundations', duration:'15 min', content:'NYVC Step 2-3: Low breathing + solar plexus anchor.',
       steps:[
-        {type:'teach',title:'Your Vocal Cords',body:'Your vocal cords (also called vocal folds) sit side by side inside your larynx (voice box). When you breathe, they stay open. When you speak or sing, they close together and vibrate — hundreds of times per second.\n\nHigher notes = cords stretch thinner and vibrate faster\nLower notes = cords relax thicker and vibrate slower\n\nYou cannot feel this directly, but you CAN feel the result: that buzz in your throat when you hum.'},
-        {type:'teach',title:'Your Resonance Chambers',body:'Raw sound from your vocal cords is weak and thin — like a bare guitar string. The magic happens when that sound travels through your resonance chambers:\n\n- **Chest** — adds warmth and power to low notes\n- **Throat (pharynx)** — the main resonator, adjustable by relaxing or tightening\n- **Mouth** — shape it with your jaw, tongue, and lips to create vowels\n- **Nasal cavity** — adds brightness (too much = nasality, which we will fix later)\n\nThink of these as EQ sliders. You adjust them by how you position your jaw, tongue, and throat space.'},
-        {type:'exercise',title:'Feel Each Resonator',body:'Place your hand on your chest. Say "Mmmmm" in a low, comfortable pitch. Feel the vibration? That is chest resonance.\n\nNow move your hand to your throat. Slide your "Mmm" higher. Feel the buzz move upward? That is pharyngeal resonance.\n\nNow hum into your nose — "Nnnnn." Feel the vibration in your nasal bone? That is nasal resonance.\n\nYou just felt all three resonators. Training means learning to balance them on purpose.'},
-        {type:'tip',title:'Remember',body:'You cannot directly control your vocal cords — they respond to airflow and your intention. But you CAN control your breath, jaw, tongue, and throat space. These indirect controls are what technique is built on.'}
+        {type:'teach',title:'Low Breathing (NYVC)',body:'Vertical chest breathing uses accessory muscles that fatigue fast. NYVC uses low breathing: belly expands ribs open sideways.\n\nResearch: Intrinsic laryngeal muscles are Type II (fast-twitch fatigable). Low breathing uses Type I endurance fibers. Result: dramatically longer singing stamina.'},
+        {type:'exercise',title:'Solar Plexus Anchor',body:'Fingers below breastbone. Breathe in - area pushes outward. Hiss Ssss as long as you can. When push stops support dropped. Goal: 20 seconds steady.'},
+        {type:'practice',title:'Farinelli Cycle',body:'Inhale 4 Hold 4 Exhale Ssss 8. Progress: 6-6-12 then 8-8-16 then 10-10-20.'},
+        {type:'tip',title:'Shirt Test',body:'Fitted shirt: buttons pull at belly/ribs on inhale NOT shoulders.'}
       ]},
-    { id:3, title:'Posture & Alignment', course:'Foundations', duration:'10 min', content:'The way you stand either helps or blocks your voice. Fix posture first — everything else gets easier.',
+    { id:3, title:'Humming Warm-Ups', course:'Foundations', duration:'10 min', content:'NYVC: Never start cold. Humming wakes voice with minimal effort.',
       steps:[
-        {type:'teach',title:'Why Posture Controls Your Voice',body:'Your voice is an airflow instrument. If your chest is collapsed, your lungs cannot fill fully. If your neck is forward, your throat narrows and restricts sound. If your shoulders are tense, your breathing turns shallow.\n\nGood posture does not mean military stiff. It means aligned — stacked — so your body works as one efficient instrument without wasted tension.'},
-        {type:'teach',title:'The Stacked Alignment Check',body:'From the side, these points should line up vertically:\n\n- Ear\n- Shoulder\n- Hip\n- Knee\n- Ankle\n\nYour chin stays level — not poked forward (swan neck) or tucked down. Your chest is up but not puffed out. Shoulders sit back and drop down — relaxed, not rigid.'},
-        {type:'exercise',title:'The Wall Alignment Drill',body:'1. Stand with your back against a wall\n2. Your head, shoulder blades, and heels should all touch\n3. Slide one hand behind your lower back — there should be a small natural curve (your hand fits snugly)\n4. Step away from the wall maintaining this position\n5. Shake out your arms and shoulders — then reset to this alignment\n6. Speak or sing a note. Notice how much easier the sound flows.\n\nPractice this 3 times daily until aligned posture feels automatic.'},
-        {type:'exercise',title:'The String Exercise',body:'Imagine a string attached to the crown of your head (not your forehead — the very top). Someone is pulling that string gently upward.\n\nFeel your spine lengthen. Your chin drops slightly to level. Your chest lifts. Everything stacks.\n\nBreathe in this position. Notice how the breath drops low into your belly without effort.\n\nThis is your singing position. Use it every time.'}
+        {type:'teach',title:'3 Reasons to Hum First (NYVC)',body:'1. Gentle cord warm-up - closed lips = less air pressure\n2. Forward placement - buzz in lips IS mask resonance\n3. Breath-voice connection - you feel support drop when buzz fades\n\nNYVC: It is okay to fail. Humming is the safest possible start.'},
+        {type:'exercise',title:'5-Minute Hum Protocol',body:'Phase 1 (1 min): Low hum Mmm on comfortable low pitch.\nPhase 2 (2 min): Sliding hum - siren low to high to low.\nPhase 3 (2 min): Hum into vowels - Mmm...Ah Mmm...Ay Mmm...Ee.'},
+        {type:'practice',title:'Non-Negotiable Daily',body:'Every time you sing - even car or shower - do at least Phase 1 (1 min).'},
+        {type:'tip',title:'Lip Pressure Warning',body:'Lips lightly touching not pressed. Air escapes through nose. If squished back off.'}
       ]},
-    { id:4, title:'Breath Basics', course:'Foundations', duration:'15 min', content:'Breath is the engine of singing. No breath control = no vocal control. This lesson gives you the foundation.',
+    { id:4, title:'Vowel Shapes', course:'Foundations', duration:'12 min', content:'NYVC Step 6+7: Vowels shaped by jaw tongue lips.',
       steps:[
-        {type:'teach',title:'The 360-Degree Breath',body:'Most people breathe vertically — chest rises, shoulders go up. This is inefficient for singing because it uses accessory muscles that create throat tension.\n\nSingers breathe 360-degreely: the breath expands your lower ribs sideways, your belly moves outward, and your lower back expands too. Think of your torso as a cylinder that expands in all directions, not just up.\n\nWhen you watch a baby breathe, this is what they do naturally. We unlearn it by sitting at desks and wearing tight clothes. Now we relearn it.'},
-        {type:'exercise',title:'The Hand-Belly Drill',body:'1. Place one hand on your belly (below the navel), one on your lower ribs\n2. Breathe in slowly through your nose for 4 counts\n3. Feel your belly push OUT against your hand — this is correct\n4. Feel your ribs expand SIDEWAYS against your other hand\n5. Breathe out slowly through your mouth for 8 counts — belly comes back in naturally\n6. Your chest and shoulders should NOT move up\n\nRepeat 10 times. The goal: belly goes out on inhale, comes in on exhale. Chest stays still.'},
-        {type:'exercise',title:'The Straw Breath',body:'Breathe through an imaginary straw:\n\n1. Purse your lips like you are about to drink through a straw\n2. Inhale slowly — the narrow opening forces you to use your diaphragm\n3. Exhale slowly through the same straw shape\n4. Keep your throat open and relaxed — no gripping\n5. Time yourself: aim for 8-second exhales\n\nThis teaches your body to control the release of air — essential for sustaining notes and phrasing.'},
-        {type:'practice',title:'Daily Practice',body:'Do the Hand-Belly Drill (10 reps) and Straw Breath (5 reps) every morning before you speak or sing. Within a week, 360-degree breathing will start feeling natural. Within 2 weeks, you will notice your voice has more power and endurance.'}
+        {type:'teach',title:'Five Pure Vowels (NYVC)',body:'AH: jaw drops tongue low/flat\nAY: jaw medium tongue rises\nEE: jaw closed tongue arches high\nOH: jaw medium lips round\nOO: jaw small lips tight\n\nSecret: change vowels by moving jaw/tongue NOT throat space. Throat stays open.'},
+        {type:'exercise',title:'Vowel Sculpting',body:'On one pitch: AH 4 beats reshape to AY slide to EE open to OH round to OO reverse. Sound flows continuously. 5 times on 3 pitches.'},
+        {type:'practice',title:'Song Vowel Mapping',body:'Write out just vowels in a song. Sing through on just vowels.'},
+        {type:'tip',title:'Spacious Vowel Rule',body:'High notes need MORE space not less. Think dropped jaw tall vowel.'}
       ]},
-    { id:5, title:'Humming Warm-Ups', course:'Foundations', duration:'10 min', content:'Humming is the safest, most effective warm-up. It wakes up your voice without strain.',
+    { id:5, title:'Range Discovery', course:'Foundations', duration:'15 min', content:'Find your range safely. No pushing no strain.',
       steps:[
-        {type:'teach',title:'Why Hum First',body:'Humming does three critical things:\n\n1. **Warms up cords gently** — the closed-lip position means less air passes through, so your cords vibrate with minimal effort\n2. **Places resonance forward** — the buzz you feel in your lips is "forward placement," which gives you projection without pushing\n3. **Connects breath to voice** — humming requires steady airflow, training your breath support from the first second\n\nNever start a singing session cold. Always hum first.'},
-        {type:'exercise',title:'The 5-Minute Hum Warm-Up',body:'Phase 1 — Low humming (1 minute):\nHum "Mmmm" on a comfortable low pitch. Keep lips closed but relaxed. Feel the buzz in your lips and the front of your face.\n\nPhase 2 — Sliding hum (2 minutes):\nStart low, slide smoothly up to a comfortable high note, then slide back down. Like a siren. Keep the buzz consistent — if it fades, you are pushing too high.\n\nPhase 3 — Hum into vowels (2 minutes):\nHum "Mmm" for 2 seconds, then open to "Ah" — "Mmmm...Ah." Then "Mmmm...Ay." Then "Mmmm...Ee." The hum sets the placement; the vowel carries it.'},
-        {type:'tip',title:'Common Mistake',body:'Do NOT press your lips together hard when humming. Lips should be lightly touching — just closed enough that air escapes through your nose, not your mouth. If your lips feel squished, you are pushing. Back off and let the buzz happen naturally.'}
+        {type:'teach',title:'Voice Types (NYVC View)',body:'Soprano C4-C6+ Alto F3-F5 Tenor C3-C5 Baritone G2-G4 Bass E2-E4.\n\nNYVC: labels are starting points not boxes. Goal is unlocking YOUR full range.'},
+        {type:'exercise',title:'Gentle Range Map',body:'Start on comfortable speaking pitch. Slide DOWN semitones until strain = low note. Slide UP until throat tightness or voice flips = passaggio. Continue gently past bridge.'},
+        {type:'practice',title:'Weekly Tracking',body:'Map once a week. Expect 1-2 semitones/month growth.'},
+        {type:'tip',title:'Never Force Range',body:'Straining causes damage + bad habits. If tight/painful STOP.'}
       ]},
-    { id:6, title:'Vowel Shapes', course:'Foundations', duration:'12 min', content:'Vowels are shaped by your jaw, tongue, and lips. Master the shapes and your tone becomes consistent and clear.',
+    { id:6, title:'Your First Song', course:'Foundations', duration:'20 min', content:'Apply everything to one song. NYVC: separate the problems.',
       steps:[
-        {type:'teach',title:'The Five Pure Vowels',body:'Every language builds its vowels from five core shapes:\n\n- **AH** — jaw drops, tongue sits low and flat (father, hot)\n- **AY** — jaw medium, tongue rises slightly (gate, say)\n- **EE** — jaw nearly closed, tongue arches high forward (see, me)\n- **OH** — jaw medium, lips round (go, boat)\n- **OO** — jaw small, lips tightly rounded (you, blue)\n\nThe secret: change vowels by moving your jaw and tongue, NOT by changing the space in your throat. Throat space stays open and consistent. Only the front of your mouth moves.'},
-        {type:'exercise',title:'Vowel Sculpting Drill',body:'1. On one comfortable pitch, sing "AH" for 4 beats\n2. Without stopping the sound, reshape to "AY" — notice how your tongue moves\n3. Slide to "EE" — tongue goes up, jaw comes in slightly\n4. Open to "OH" — lips round, jaw drops back open\n5. Round to "OO" — lips narrow\n6. Reverse: OO → OH → EE → AY → AH\n\nThe key: keep the sound flowing continuously. Do not restart or reset between vowels. Make the shapes smoothly like water.\n\nRepeat 5 times on different comfortable pitches.'},
-        {type:'tip',title:'The Spacious Vowel Rule',body:'On high notes, vowels need MORE space, not less. This is why untrained singers squeeze on high notes — they tighten everything. Instead, think "dropped jaw, tall vowel" as you go higher. The AH and OH vowels are your friends on high notes because they naturally keep more space.'}
+        {type:'teach',title:'5-Step Song Method (NYVC)',body:'1. Listen 3x without singing\n2. Speak lyrics in rhythm\n3. Hum melody on Mmm\n4. Sing on AH\n5. Add actual lyrics\n\nEach step adds ONE new thing. Much faster than doing everything at once.'},
+        {type:'exercise',title:'Learn Your Song Now',body:'1. Pick simple song in range\n2. Speak lyrics in rhythm\n3. Hum entire melody\n4. Sing through on LA\n5. Sing actual song - isolate tricky parts'},
+        {type:'practice',title:'Daily Practice',body:'Daily 5-step method. Day 7 should feel effortless.'},
+        {type:'tip',title:'Song Selection',body:'First song = SIMPLE. Limited range repetitive melody lyrics you connect with.'}
       ]},
-    { id:7, title:'Range Discovery', course:'Foundations', duration:'15 min', content:'Find your true range safely — no pushing, no strain. This maps the territory you will explore in training.',
+    { id:7, title:'Pitch Matching', course:'Vocal Mechanics', duration:'10 min', content:'NYVC Step 5 begins with pitch.',
       steps:[
-        {type:'teach',title:'Voice Types and Ranges',body:'Every voice has a comfortable range (where you sound best) and an extended range (reachable with training). Basic categories:\n\n- **Soprano** — C4 to C6+ (highest female)\n- **Alto/Mezzo** — F3 to F5 (lower female)\n- **Tenor** — C3 to C5 (higher male)\n- **Baritone** — G2 to G4 (mid male)\n- **Bass** — E2 to E4 (lowest male)\n\nMany voices fall between categories. That is normal. Labels are starting points, not boxes.'},
-        {type:'exercise',title:'The Gentle Range Map',body:'1. Start on a comfortable note in your speaking voice. Hum it.\n2. Slide DOWN one semitone at a time. Stop when you feel strain or the sound cuts out. That is your low note.\n3. Return to your starting note.\n4. Slide UP one semitone at a time. Stop when you feel your throat tighten OR the sound flips to a lighter quality (that is your passaggio — the bridge between registers).\n5. Continue gently past the bridge into your upper voice. Stop when you cannot go higher comfortably.\n\nWrite down your lowest comfortable note and your highest comfortable note. The space between is your current range. Expect it to expand as you train.'},
-        {type:'tip',title:'Do Not Force Range',body:'Straining to hit notes outside your current range causes damage and builds bad habits. If a note feels tight, strained, or you feel pain — STOP. Come back to it in a few weeks after your technique improves. Range expands naturally when breath support, resonance, and vowel shapes improve. Forcing never works; skill always does.'}
+        {type:'teach',title:'Audiation (NYVC Term)',body:'Pitch = frequency (Hz). Most pitch problems are coordination not ear problems.\n\nAudiation = hearing music internally before producing it. Strong audiation = strong pitch accuracy.'},
+        {type:'exercise',title:'Pitch Match Drill',body:'Play note on piano app. Listen 3 seconds. Sing Ah. Am I above/below/matching? Slide to correct. When matched hold 5 sec. Repeat with 10 notes.'},
+        {type:'practice',title:'Daily 5-Minute Drill',body:'Random notes match them track accuracy. Aim for 80%+ within 2 weeks.'},
+        {type:'tip',title:'Hear Before You Sing',body:'The one habit that fixes 80% of pitch problems.'}
       ]},
-    { id:8, title:'Your First Song', course:'Foundations', duration:'20 min', content:'Apply everything you have learned to a complete song. This is where singing becomes real.',
+    { id:8, title:'Intonation Control', course:'Vocal Mechanics', duration:'12 min', content:'Why you go flat/sharp and how to fix it.',
       steps:[
-        {type:'teach',title:'How to Learn a Song',body:'Do NOT try to sing a song start to finish on day one. Use this method:\n\n1. **Listen** — hear the song 3 times without singing. Map the melody in your head.\n2. **Speak the lyrics** — say the words in rhythm, like poetry. This connects the text to your breath.\n3. **Hum the melody** — on "Mmm," learn the pitches without worrying about words.\n4. **Sing on one vowel** — replace all words with "AH." This focuses on pitch and tone.\n5. **Add the words** — now sing the actual lyrics. The melody is already in your body.\n\nThis method separates the problems. Each step adds ONE new thing. Much faster than trying to do everything at once.'},
-        {type:'exercise',title:'Learn Your Song Now',body:'1. Pick a simple song in your range and listen to it once more\n2. Speak the lyrics in rhythm — get the words flowing\n3. Hum through the entire melody on "Mmm"\n4. Sing through on "LA" — focus on clean pitch\n5. Sing the actual song — if a section is tricky, isolate it and repeat just that part\n\nDo not worry about perfection. Worry about getting through the whole song with supported breath, open vowels, and no strain.'},
-        {type:'practice',title:'This Week',body:'Practice your song daily using the 5-step method. Each day, it will feel easier. By day 7, you should be able to sing it start to finish without stopping. Record yourself on day 1 and day 7 — the difference will amaze you.'}
+        {type:'teach',title:'Why Flat Happens (NYVC)',body:'1. Weak breath support\n2. Mouth spreading lowers pitch\n3. Fatigue (Type II fiber fatigue)\n4. Confidence (holding back)\n\nMost common: #1. If support dips slightly pitch drops.\n\nRef: Phonation relies on anaerobic metabolism (bursts <3 sec).'},
+        {type:'exercise',title:'Long Tone Hold',body:'Sing Ah 10 seconds. Watch tuner:\n- Sharp: ease off air settle into pitch\n- Flat: add energy think up and over\n- Record and listen back. Do 5 daily.'},
+        {type:'practice',title:'20-Second Hold',body:'Hold within +/-10 cents for 20 seconds.'},
+        {type:'tip',title:'Use Tuner App',body:'Download chromatic tuner. Sing into it. Visual feedback accelerates learning.'}
       ]},
-    { id:9, title:'Pitch Matching Basics', course:'Pitch & Tone', duration:'10 min', content:'If you cannot match pitch, nothing else matters. This is the foundation of in-tune singing.',
+    { id:9, title:'Larynx Awareness', course:'Vocal Mechanics', duration:'14 min', content:'NYVC Step 4: The larynx is a style changer.',
       steps:[
-        {type:'teach',title:'What Is Pitch?',body:'Pitch is how high or low a sound is — measured in frequency (Hz). When a singer is "off pitch," they are singing at a slightly different frequency than the intended note.\n\nMost pitch problems are NOT ear problems — they are coordination problems. Your brain hears the correct pitch, but your vocal cords have not learned to land on it reliably. This is fixable with training.'},
-        {type:'exercise',title:'The Pitch Match Drill',body:'Use a piano app or pitch pipe. If you do not have one, search "online piano" on your phone.\n\n1. Play a note in your comfortable middle range\n2. Listen to it for 3 seconds — really hear it\n3. Sing "Ah" on that note\n4. Ask yourself: Am I above, below, or matching? Be honest.\n5. If above, slide down to the note. If below, slide up.\n6. When you match, hold the note for 5 seconds\n\nRepeat with 10 different notes across your range. Accuracy improves dramatically with just 5 minutes of this daily.'},
-        {type:'tip',title:'The Audiation Check',body:'Before singing a note, can you hear it clearly in your head? This internal hearing is called "audiation." If you cannot audiate the pitch, you will not sing it in tune.\n\nBefore every note you sing, hear it first in your mind. If the inner hearing is fuzzy, listen to the reference again. This one habit — hear before you sing — fixes 80% of pitch problems.'}
+        {type:'teach',title:'Larynx = Style Control (NYVC)',body:'High: bright tight (belt pop country)\nLow: dark warm (classical jazz)\nMedium: speech-like (contemporary R&B)\n\nNYVC: larynx position is a CHOICE not a fixed trait.'},
+        {type:'exercise',title:'High/Low/Medium',body:'High: witch cackle hold position sing Ah = bright tight\nLow: yawn hold position sing Ah = dark warm\nMedium: speak normally sing Ah from here'},
+        {type:'practice',title:'Style Matching',body:'Take one phrase. Sing 3 ways: high larynx (belt) low (classical) medium (conversational).'},
+        {type:'tip',title:'No Pain',body:'If moving larynx causes pain/strain stop. Weeks of small movements.'}
       ]},
-    { id:10, title:'Intonation Control', course:'Pitch & Tone', duration:'12 min', content:'Going flat or sharp is not a hearing problem — it is a support and coordination problem.',
+    { id:10, title:'Vocal Registration', course:'Vocal Mechanics', duration:'16 min', content:'NYVC Step 5: Chest head and the passaggio between.',
       steps:[
-        {type:'teach',title:'Why You Go Flat',body:'Singing flat (below pitch) is usually caused by:\n\n1. **Weak breath support** — air pressure drops, cords do not vibrate fast enough\n2. **Mouth too wide** — spreading vowels lowers pitch\n3. **Fatigue** — tired cords vibrate slower\n4. **Lack of confidence** — subconsciously holding back\n\nThe most common cause is #1. If your breath support dips even slightly, pitch drops. That is why breath training is so critical.'},
-        {type:'teach',title:'Why You Go Sharp',body:'Singing sharp (above pitch) is usually caused by:\n\n1. **Pushing too much air** — over-blowing the cords makes them vibrate too fast\n2. **Throat tension** — tight larynx pulls cords tighter\n3. **Anxiety** — adrenaline makes everything tighter\n\nSharp singing is less common but often harder to fix because the singer does not feel the tension causing it.'},
-        {type:'exercise',title:'The Intonation Fix Drill',body:'1. Sing a sustained "Ah" on a comfortable note for 10 seconds\n2. If you tend flat: Think "up and over" — imagine the pitch sitting slightly above where you naturally land. Add a bit more breath energy.\n3. If you tend sharp: Think "settle into" the pitch — imagine dropping into a comfortable seat. Ease off the air slightly.\n4. Record yourself and listen back. The phone does not lie.\n\nDo 5 long tones daily, checking pitch at start, middle, and end.'}
+        {type:'teach',title:'Chest & Head Voice (NYVC)',body:'Chest voice = lower range thick cord vibration powerful\nHead voice = upper range thinner vibration lighter\nPassaggio = bridge between = where voice wants to break\n\nNYVC: break is trainable. Mix voice = smooth transition creating unified sound.'},
+        {type:'exercise',title:'Find Your Passaggio',body:'Slide up on Ah from low. Where does quality shift from thick/powerful to thin/lighter = passaggio.\nSlide down from high on Ng. Where does light shift to thick = upper passaggio.'},
+        {type:'practice',title:'Lip Trill Glides',body:'Low to high and back on lip trill. Trill naturally smooths passaggio. Daily = trains registers to blend.'},
+        {type:'tip',title:'Yodel Exercise (NYVC Signature)',body:'Yodel chest to head on octave jump. Trains registration flexibility.'}
       ]},
-    { id:11, title:'Vibrato Development', course:'Pitch & Tone', duration:'15 min', content:'Natural vibrato makes your voice sound professional. Here is how to develop it without forcing.',
+    { id:11, title:'Resonance & Space', course:'Vocal Mechanics', duration:'14 min', content:'NYVC Step 6: Resonance chambers amplify and color raw sound.',
       steps:[
-        {type:'teach',title:'What Vibrato Actually Is',body:'Vibrato is a small, regular oscillation in pitch — usually 5-7 cycles per second. It happens when your larynx muscles reach a balanced tension where they naturally alternate between slightly above and below the main pitch.\n\nVibrato is NOT: jaw wobbling, belly pulsing, or shaking your voice intentionally. Those create "wobble" — a wide, slow oscillation that sounds amateur.\n\nTrue vibrato comes from balanced technique. It cannot be forced, but it CAN be cultivated.'},
-        {type:'exercise',title:'The Vibrato Seed Drill',body:'1. Sing a comfortable "Ah" with good breath support\n2. Sustain the note — steady, no wobble\n3. After holding 3 seconds, very slightly pulse your support muscles — like a tiny laugh\n4. You should feel a tiny bounce in the pitch. That is the vibrato seed.\n5. Let it happen — do not make it bigger. Let the technique grow it.\n6. If nothing happens, go back to steady long tones until your support is consistent, then try again.\n\nVibrato usually appears naturally once breath support, vowel shapes, and throat release are all balanced.'},
-        {type:'tip',title:'The Vibrato Test',body:'Place your hand on your larynx (Adams apple area). Sing a sustained note. If your larynx bounces, your vibrato is coming from the right place. If your jaw bounces, that is jaw vibrato — incorrect. If your belly pulses, that is diaphragmatic vibrato — also incorrect. The goal is laryngeal vibrato from balanced support.'}
+        {type:'teach',title:'Three Chambers (NYVC)',body:'1. Chest: warmth + power on low notes\n2. Pharynx (throat): main resonator adjustable\n3. Mouth + Nasal: shapes vowels + brightness\n\nMask resonance = buzz in face (chest nose bridge upper lip). NOT nasal singing.'},
+        {type:'exercise',title:'NG Resonance Finder',body:'Say Sing hold the NG. Feel buzz in nose/chest = mask resonance.\nMaintain buzz open to Ah - Nnnnn-GAH. Ah should carry same forward buzz.'},
+        {type:'practice',title:'Pinch Test',body:'Singing sustained note pinch nose 1 sec:\n- Sound stops = too nasal\n- Barely changes = perfect\n- Dims slightly = sweet spot'},
+        {type:'tip',title:'Tall Throat on High Notes',body:'Think tall cathedral pharynx. Prevents squeezing gives high notes room to resonate.'}
       ]},
-    { id:12, title:'Staccato & Legato', course:'Pitch & Tone', duration:'10 min', content:'How you connect or separate notes defines your style. Staccato equals precision; legato equals smoothness.',
+    { id:12, title:'Vowel Modification', course:'Vocal Mechanics', duration:'12 min', content:'NYVC Step 7 applied: on high notes vowels must narrow and round.',
       steps:[
-        {type:'teach',title:'Legato — The Smooth Line',body:'Legato means each note flows into the next with no gap. Think of a single unbroken line of sound.\n\nKey to legato: consonants are SHORT. Vowels are LONG. The consonant is just a quick interruption; the vowel carries the connection.\n\nExample: "I love you" becomes "I-lo-ve-you" where the vowels (I, oh, oo) all connect smoothly.'},
-        {type:'teach',title:'Staccato — The Crisp Hit',body:'Staccato means each note is short and separated — like dots, not a line. The sound starts and stops cleanly.\n\nKey to staccato: use quick, firm consonant attacks. Cut each note with your breath — "Hah! Hah! Hah!" — keeping the throat open between each hit.'},
-        {type:'exercise',title:'Legato-Staccato Drill',body:'Sing "Ah" on a 5-note scale (1-2-3-4-5-4-3-2-1):\n\n1. **Legato**: Slide smoothly between each note. Overlap — start the next note before fully leaving the last.\n2. **Staccato**: Bounce on each note — "Ah! Ah! Ah! Ah! Ah!" Short, crisp, clean gaps.\n3. **Mixed**: Legato going up, staccato coming down. Then reverse.'}
+        {type:'teach',title:'Why Modify Vowels (NYVC)',body:'Physics: wide open vowels on high notes = impossible. NYVC teaches vowel modification:\n- AH narrows toward AW\n- EE stays narrow relaxes\n- AY narrows toward EH\n\nNot changing word - adjusting shape to keep throat open + resonance forward.'},
+        {type:'exercise',title:'Narrow Vowel Scale',body:'5-note ascending scale on AH-AY-EE-OH-OO. Bottom notes = wide vowels. Ascending = gradually narrow. Goal: consistent tone quality bottom to top.'},
+        {type:'practice',title:'Song Modification',body:'High notes in a song = deliberately narrow vowel. Feels like saving space.'},
+        {type:'tip',title:'Smile Myth',body:'Don\'t smile for high notes - spreads vowel wide + creates tension. Think tall mouth with rounded lips.'}
       ]},
-    { id:13, title:'Resonance Tuning', course:'Pitch & Tone', duration:'14 min', content:'Finding your mask resonance — the buzz in your face — gives you projection without pushing.',
+    { id:13, title:'Interval Recognition', course:'Ear Training', duration:'12 min', content:'NYVC ear training: hear intervals before singing them.',
       steps:[
-        {type:'teach',title:'Forward Placement (Mask Resonance)',body:'Great singers all share one thing: their sound lives in the front of their face — the "mask." You feel it as vibration in your cheekbones, nose bridge, and upper lip.\n\nThis is NOT nasal singing. Nasal singing sends ALL the sound through the nose. Mask resonance has some nasal vibration but the sound still comes out your mouth — it just has a forward, focused quality.'},
-        {type:'exercise',title:'The NG Resonance Finder',body:'1. Say "Sing" and hold the "NG" — like the end of the word. Lips open, tongue touching the roof of your mouth.\n2. Feel the buzz in your nose and cheekbones? THAT is mask resonance.\n3. While maintaining that "NG" buzz, open to "Ah" — "Nnnnn-GAH"\n4. The "Ah" should carry the same forward buzz. If it falls back into your throat, go back to "NG" and try again.\n5. Practice: NG → AH, NG → OH, NG → EE. Always maintain the forward feeling.'},
-        {type:'tip',title:'The Pinch Test',body:'While singing, pinch your nose closed for a second. If the sound stops completely — you are too nasal. If the sound barely changes — you are not nasal at all. If the sound dims slightly but keeps going — you are in the sweet spot: some nasal resonance (mask) but mostly oral (mouth) sound.'}
+        {type:'teach',title:'Intervals (Music Theory + NYVC)',body:'Interval = distance between two pitches. Semitone = smallest unit.\n\nUnison (0) Major 2nd (2) Major 3rd (4) Perfect 4th (5) Perfect 5th (7) Major 6th (9) Major 7th (11) Octave (12)\n\nTheory: intervals form building blocks of scales chords melody.'},
+        {type:'exercise',title:'Interval Singing',body:'Play note. Play each interval above. Sing both. Internalize feel:\n- 2nd: tense wants resolve\n- 3rd: happy bright\n- 4th: strong stable\n- 5th: open hollow\n- 6th: warm nostalgic\n- 7th: yearning\n- Octave: same note bigger'},
+        {type:'practice',title:'Daily Recognition',body:'5 min daily: app plays intervals name them before singing. 90% accuracy in 3 weeks.'},
+        {type:'tip',title:'Reference Songs',body:'Associate each interval with familiar song. This is how pros train ears.'}
       ]},
-    { id:14, title:'Pitch in Performance', course:'Pitch & Tone', duration:'12 min', content:'Singing in tune in the practice room is one thing. Staying in tune under pressure is another.',
+    { id:14, title:'Sustained Phonation', course:'Ear Training', duration:'14 min', content:'NYVC + Science: pitch accuracy = trainable muscle.',
       steps:[
-        {type:'teach',title:'Performance Pitch Problems',body:'On stage, three things attack your pitch:\n\n1. **Adrenaline** — makes muscles tighter, larynx rises, pitch goes sharp\n2. **Monitoring difficulty** — you cannot hear yourself over instruments\n3. **Emotional intensity** — strong feeling can pull you sharp or flat\n\nSolutions: More performance experience, learn to feel pitch through bone conduction (face buzz), and train technique to automatic so emotion does not destabilize it.'},
-        {type:'exercise',title:'The Distraction Pitch Test',body:'1. Pick a song you can sing in tune\n2. Sing it while counting backward from 100 between phrases\n3. Sing it while doing jumping jacks\n4. Sing it while someone talks to you\n\nIf your pitch suffers under distraction, your technique is not automatic yet. More repetition will move it to muscle memory.'}
+        {type:'teach',title:'Science of Pitch (PMC7156306)',body:'Pitch accuracy depends on:\n1. Audiation (hear internally first)\n2. Laryngeal muscle coordination\n3. Breath pressure consistency\n\nResearch: Intrinsic laryngeal muscles = Type II (fast-twitch fatigable). NYVC: 3x5min > 1x30min.'},
+        {type:'exercise',title:'Sustained Phonation Drill',body:'Comfortable note sing Ah as long as possible on tuner:\n- First 5 sec: finding note\n- 5-15 sec: stabilize\n- 15+ sec: drift = support fading\n\nGoal: +/-10 cents for 20 sec. Rest 10 sec. Repeat 5x.'},
+        {type:'practice',title:'Glide Low-High-Low',body:'Slide lowest to highest to lowest on Ah. Pitch tracks smoothly no jumps/drops.'},
+        {type:'tip',title:'3-Second Rule',body:'Before every note: 3 seconds internal hearing. Audiation window = difference between hitting and missing.'}
       ]},
-    { id:15, title:'Diaphragmatic Power', course:'Breath & Support', duration:'12 min', content:'Build the core engine that sustains every phrase. Support equals control.',
+    { id:15, title:'Music Theory for Singers', course:'Ear Training', duration:'16 min', content:'University-level theory for singers.',
       steps:[
-        {type:'teach',title:'What "Support" Really Means',body:'Support is maintaining steady air pressure from your diaphragm while your vocal cords use that air.\n\nThink of a garden hose: the water pressure (breath) is steady. You put your thumb over the end (vocal cords) to create a controlled stream. The pressure stays constant; your thumb controls the flow.\n\nThe diaphragm is the main support muscle. After you inhale, it stays engaged (not collapsing) while you phonate.'},
-        {type:'exercise',title:'The Ssss-FFFF Drill',body:'1. Inhale with 360-degree breath\n2. Exhale on a sharp "Ssss" — like a snake hiss. Keep it loud and steady for 15 seconds.\n3. Rest, repeat 5 times.\n4. Now switch to "Ffff" — same thing, 15 seconds of steady fricative.\n5. Alternate: Ssss for 10 sec, Ffff for 10 sec, Ssss for 10 sec.\n\nThis builds the EXACT muscles you need for singing support.'},
-        {type:'exercise',title:'The Farinelli Exercise',body:'1. Inhale slowly for 4 counts\n2. Hold for 4 counts (glottis open, no sound — breath held by diaphragm alone)\n3. Exhale on a gentle "Ssss" for 8 counts\n4. Rest 4 counts\n\nProgress to: 6-6-12, then 8-8-16, then 10-10-20. When you can do 10-10-20, your support is strong enough for any phrase.'}
+        {type:'teach',title:'Scales & Keys (Theory)',body:'Major Scale: W-W-H-W-W-W-H\nC Major: C-D-E-F-G-A-B-C\nG Major: G-A-B-C-D-E-F#-G\n\nCircle of 5ths: up 5ths adds sharp (C-G-D-A-E-B-F#) down adds flat (C-F-Bb-Eb-Ab-Db-Gb).\n\nWhy singers need this: knowing key = knowing scale likely notes trouble spots.'},
+        {type:'exercise',title:'Solfege Scales',body:'Sing C Major: Do-Re-Mi-Fa-Sol-La-Ti-Do. Then G Major. Then D Major.\n\nSolfege trains ear for SCALE DEGREES = note function within key.'},
+        {type:'practice',title:'Key Signature Drill',body:'Daily: random key sing major scale name sharps/flats. 20 keys = mastery.'},
+        {type:'tip',title:'Home Note',body:'Do (1) is home. Every note has relationship: 2 wants 1 or 3 5 is stable 7 desperately wants 1.'}
       ]},
-    { id:16, title:'Breath Phrasing', course:'Breath & Support', duration:'10 min', content:'Where and when you breathe shapes the song. Plan your breaths and phrasing becomes musical.',
+    { id:16, title:'Harmony & Chords', course:'Ear Training', duration:'14 min', content:'University-level: harmony makes you better ensemble singer.',
       steps:[
-        {type:'teach',title:'Breath As Musical Punctuation',body:'Breaths are NOT interruptions — they are musical events. A breath before a chorus builds anticipation. A catch-breath mid-phrase keeps momentum.\n\nRule of thumb: breathe at punctuation marks. Commas = breath. Periods = breath. Between verses and choruses = breath. Mid-sentence = catch breath (very quick).\n\nMark your breaths on the lyric sheet BEFORE you sing.'},
-        {type:'exercise',title:'Mark and Sing',body:'1. Take a song you know\n2. Write out the lyrics\n3. Mark every breath with a "V" above the lyric\n4. Sing through following ONLY your marked breaths\n5. If you run out of air: add more breaths\n6. If you have extra air: try singing longer phrases\n\nBreath planning turns random gasping into intentional, musical phrasing.'}
+        {type:'teach',title:'Chords & Progressions (Theory)',body:'Triads: 3 notes stacked in thirds.\nMajor: Root + Major 3rd + 5th (C-E-G)\nMinor: Root + Minor 3rd + 5th (C-Eb-G)\n\nI-IV-V covers 90% of pop/country/gospel.\n\nKnowing progression = predicting melody. Pros learn songs in minutes.'},
+        {type:'exercise',title:'Chord Tone Singing',body:'Play C major (C-E-G). Sing each note. Sing melody over chord landing on chord tones on strong beats.\nPlay F major. Sing its notes. Feel center of gravity shift.'},
+        {type:'practice',title:'Progression Singing',body:'Sing Twinkle Twinkle while playing I-IV-V-I.'},
+        {type:'tip',title:'V Chord Tension',body:'V creates tension wanting to resolve to I. This is why most songs end on I = coming home.'}
       ]},
-    { id:17, title:'Sustained Notes Training', course:'Breath & Support', duration:'15 min', content:'Hold notes longer with less effort. The secret is efficiency, not force.',
+    { id:17, title:'Compression Control', course:'Vocal Technique', duration:'16 min', content:'NYVC Step 8: Compression = how firmly cords close.',
       steps:[
-        {type:'teach',title:'The Efficiency Principle',body:'Holding a long note is NOT about having huge lung capacity. It IS about how efficiently you use the air.\n\nTwo factors:\n1. **Leakage** — if your cords are not closing fully, air escapes unused\n2. **Over-blowing** — if you push too much air pressure, you waste air\n\nEfficiency means: just enough air, just enough cord closure, zero waste.'},
-        {type:'exercise',title:'Sustained Note Builder',body:'1. Inhale fully (360-degree)\n2. Sing "Ah" on a comfortable note. Use a stopwatch.\n3. Goal: 10 seconds on one breath. Then 15. Then 20.\n4. KEY: Do not get louder as you hold. Keep volume constant.\n5. If the note fades: your support weakened or cords lost closure.\n\nTrack your times daily. Most untrained singers start at 5-8 seconds and reach 15-20 within a month.'}
+        {type:'teach',title:'Compression Spectrum (NYVC)',body:'No compression: breathy whisper\nLight: soft intimate pop\nMedium: normal singing\nHeavy: belt rock powerful\n\nNYVC insight: compression INDEPENDENT of volume. Soft+heavy = intimate belt.'},
+        {type:'exercise',title:'Compression Ladder',body:'One note. Start breath only then vocal fry then light then medium then heavy. Go up/down on same note.'},
+        {type:'practice',title:'Messa di Voce (NYVC Signature)',body:'One note: soft (light compression) gradually louder (add compression) gradually softer. Pitch must not change.'},
+        {type:'tip',title:'Fatigue Management',body:'Heavy compression = Type II fibers fatigue fast. If tired switch lighter or rest.'}
       ]},
-    { id:18, title:'Support Under Range', course:'Breath & Support', duration:'12 min', content:'Maintaining breath support from your lowest to highest note is technically challenging.',
+    { id:18, title:'Riffs & Agility', course:'Vocal Technique', duration:'14 min', content:'NYVC Step 9: Runs leaps intervals. Agility = coordination not strength.',
       steps:[
-        {type:'teach',title:'The Support Trap on High Notes',body:'On high notes, most singers do one of two wrong things:\n\n1. **Push MORE air** — over-blows the cords, causing sharp pitch\n2. **Tighten the throat** — squeezes the larynx up\n\nThe correct approach: maintain the SAME support level as your mid-range. The cords adjust themselves. Your job is to keep the air steady.\n\nThink: "same energy, different shape." The vowel shape changes (more space) but the breath pressure stays constant.'},
-        {type:'exercise',title:'Range Support Tester',body:'1. Sing a 5-note scale on "Ah" starting low\n2. Move the scale up one step. Repeat. Keep going higher.\n3. As you ascend: drop jaw MORE, think "tall vowel," keep support STEADY\n4. The moment you feel the urge to push more air — STOP. That is where your support habit breaks.\n5. Go back to that note and sing it 5 times with deliberate steady support.'}
+        {type:'teach',title:'Agility Science (NYVC + Research)',body:'Riffs require rapid precise laryngeal adjustments.\n\nResearch: PCA = Type I (endurance). Intrinsic muscles (Type II) control pitch. Agility = training Type II to fire rapidly.\n\nNYVC fool the brain: use games to bypass mental blocks.'},
+        {type:'exercise',title:'Pigeon Exercise (NYVC Signature #1)',body:'Bird-like sounds free and soaring. Imitate pigeon coo rising/falling.\n- Releases tension\n- Bypasses mental blocks\n- Trains agility\n\nDo 2 min before riff practice.'},
+        {type:'practice',title:'Pentascale Riff Training',body:'5-note scale ascending/descending. Speed up gradually. When clean at fast tempo add patterns: 1-3-5-3-1.'},
+        {type:'tip',title:'Money Notes (NYVC Signature #2)',body:'Identify 2-3 money notes per song. Practice JUST those in isolation.'}
       ]},
-    { id:19, title:'Dynamic Control', course:'Breath & Support', duration:'14 min', content:'Crescendo and decrescendo — volume as an emotional tool. Dynamics make singing musical.',
+    { id:19, title:'Dynamic Control', course:'Vocal Technique', duration:'14 min', content:'NYVC Step 10: Crescendo/Decrescendo. Messa di voce = dynamic control.',
       steps:[
-        {type:'teach',title:'How Dynamics Work',body:'Volume in singing is controlled by:\n\n1. **Subglottic pressure** — air pressure against the cords. More pressure = louder.\n2. **Cord closure** — how firmly the cords close. More closure = louder, clearer tone.\n\nDynamics are BREATH control, not throat control. This is why dynamic control comes from breath training.'},
-        {type:'exercise',title:'The Messa Di Voce',body:'The classic vocal exercise — sing one note from piano to forte and back:\n\n1. Sing a comfortable "Ah" — start very softly (piano)\n2. Over 5 seconds, gradually get louder (crescendo) to comfortable full volume (forte)\n3. Over 5 seconds, gradually get softer (decrescendo) back to piano\n4. The pitch should not change. The tone quality should stay consistent.\n\nStart on lower notes. Move higher as you gain control.'}
+        {type:'teach',title:'Dynamics = Emotion (NYVC)',body:'pp: intimate vulnerable\nmp: conversational warm\nmf: confident present\nf: powerful declarative\nff: peak emotion\n\nNYVC: Acting while singing from day one. Dynamics are emotional tools.'},
+        {type:'exercise',title:'Messa di Voce',body:'Comfortable note: 8 sec crescendo pp to ff 8 sec decrescendo ff to pp.\nPitch must not waver. Tone consistent. Only volume changes.'},
+        {type:'practice',title:'Song Dynamic Mapping',body:'Mark every phrase pp/mp/mf/f. Sing with exact dynamics.'},
+        {type:'tip',title:'Whisper-to-Shout',body:'Phrase at volume 1-10. Where does technique break? That is your ceiling.'}
       ]},
-    { id:20, title:'Breath for Belting', course:'Breath & Support', duration:'16 min', content:'Safe belting requires MORE support, not more throat. Learn the difference before you belt.',
+    { id:20, title:'Acting While Singing', course:'Performance', duration:'14 min', content:'NYVC Step 12: Emotional connection from day one.',
       steps:[
-        {type:'teach',title:'What Belting Is (And Is Not)',body:'Belting is singing high, loud notes in your chest voice register. Used in musical theater, pop, rock, gospel.\n\nBelting is NOT yelling or pulling chest voice up without resonance adjustment.\n\nSafe belting requires: strong diaphragmatic support, thin cord closure, forward resonance, and modified vowels (AH becomes AA). Without ALL four, belting is dangerous.'},
-        {type:'exercise',title:'Safe Belt Builder',body:'1. Start in your comfortable mid-range on "Nay" — slightly bratty, forward tone\n2. Slide up a 5-note scale on "Nay" — keep it light and forward\n3. As you go higher, narrow the vowel: "Nay" becomes "Neh"\n4. Keep support FIRM and throat OPEN\n5. If you feel the throat squeeze, stop. Go back down.\n\nBuild up over weeks. Never belt a note you cannot first sing lightly and in tune.'},
-        {type:'tip',title:'The Belt Safety Check',body:'After belting, speak normally. If your speaking voice is hoarse, raspy, or lower than usual — you pushed too hard. Rest your voice for the day and reduce intensity next time.'}
+        {type:'teach',title:'NYVC Acting Framework',body:'1. What are they saying? - Understand lyrics\n2. Why saying it? - Emotional need\n3. What if they DON\'T sing? - Urgency = authenticity\n4. Who to? - Direct emotion to specific person\n\nEmotion IS technique. You don\'t wait for perfect technique.'},
+        {type:'exercise',title:'Emotional Color',body:'One phrase 5 ways: joy anger sadness fear tenderness.\nNotice: breath changes compression changes larynx changes vowels change.'},
+        {type:'practice',title:'Storyteller Lens',body:'Pick song. Write 2-3 sentences about character. Sing AS that character.'},
+        {type:'tip',title:'3-Second Rule',body:'Before singing: 3 seconds feeling the emotion. Breathe into it.'}
       ]},
-    { id:21, title:'Recovery & Health', course:'Breath & Support', duration:'10 min', content:'Your voice is part of your body. Treat it accordingly and it will last a lifetime.',
+    { id:21, title:'Overcoming Stage Fright', course:'Performance', duration:'15 min', content:'NYVC: It is okay to fail. Stage fright = fear of failure.',
       steps:[
-        {type:'teach',title:'Vocal Health Rules',body:'1. **Hydrate** — 2-3 liters of water daily. Dry cords are injured cords.\n2. **Warm up before singing** — always, no exceptions.\n3. **Cool down after singing** — gentle humming for 2 minutes.\n4. **Do not sing when sick** — especially with laryngitis.\n5. **Avoid clearing your throat** — sip water and swallow instead.\n6. **Sleep 7+ hours** — cords regenerate during sleep.\n7. **Manage reflux** — acid irritates cords. See a doctor for heartburn.'},
-        {type:'exercise',title:'Vocal First Aid',body:'When your voice feels tired:\n\n1. Stop singing immediately\n2. Hydrate — 500ml room-temperature water\n3. Hum gently for 1 minute (vocal massage)\n4. Inhale steam — hot water, towel, breathe through nose for 5 minutes\n5. Rest your voice for 30 minutes minimum\n6. If hoarseness lasts more than 2 weeks, see an ENT'}
+        {type:'teach',title:'NYVC Approach to Fear',body:'Stage fright = threat response: adrenaline cortisol shallow breath tension.\n\nNYVC reframing: I am not nervous I am excited. Same sensation different story.\n\nCure: progressive exposure. 1 person to 3 to 5 to 10.'},
+        {type:'exercise',title:'Exposure Ladder',body:'Week 1: sing for 1 person. Record.\nWeek 2: 3 people. Record.\nWeek 3: 5 people. Record.\nWeek 4: 10+ (open mic group stream).'},
+        {type:'practice',title:'Pre-Performance Protocol',body:'2h before: light meal hydrate\n30 min: arrive sound check walk stage\n10 min: warm-up\n5 min: 4 deep breaths I am ready\n1 min: scan audience find friendly face'},
+        {type:'tip',title:'Fear Reframe',body:'Say out loud: I am excited. My body is preparing me. Not positive thinking - neuroscience.'}
       ]},
-    { id:22, title:'Stage Presence 101', course:'Performance', duration:'12 min', content:'Own the stage from the moment you step on it. Presence is not talent — it is a learnable skill.',
+    { id:22, title:'Style Versatility', course:'Performance', duration:'16 min', content:'NYVC Step 11: Style through larynx height embouchure registration.',
       steps:[
-        {type:'teach',title:'The 3-Second Rule',body:'The audience decides who you are in the first 3 seconds. Before you sing a single note, your body has already communicated confidence or fear, authority or apology, ownership or hesitation.\n\nWalk on like you belong. Plant your feet. Look at the audience. Take one breath. Then sing.'},
-        {type:'exercise',title:'The Entrance Drill',body:'1. Walk to your singing spot with purpose\n2. Plant feet shoulder-width apart\n3. Scan the (imaginary) audience — look at 3 different spots slowly\n4. Take one visible breath\n5. Sing your first note\n\nFilm yourself. Adjust until your entrance says "I belong here."'}
+        {type:'teach',title:'NYVC Sound Palette',body:'Bright/Twangy: High larynx + nasal = Country belt pop\nDark/Warm: Low larynx + pharyngeal = Classical jazz\nBreathy: Medium + aspirate = Pop R&B\nTwang: High + epilaryngeal = Belt theatre\nOpera: Low + full pharyngeal = Classical\nSpeech-like: Neutral = Contemporary\nFry: Low + fry onset = Pop R&B\nCompressed: Medium + heavy = Belt rock\nMixed: Medium-neutral = All CCM\n\nThese are CHOICES not limitations.'},
+        {type:'exercise',title:'One Phrase Five Styles',body:'I love you in: Classical (low) Belt (high+heavy) R&B (breathy) Country (twang) Pop (conversational).'},
+        {type:'practice',title:'Genre Switching',body:'One verse switch genre mid-verse. Practice transition.'},
+        {type:'tip',title:'Larynx = Tone Knob',body:'Like guitarist\'s tone knob. You don\'t learn new voice you learn to turn the knob.'}
       ]},
-    { id:23, title:'Movement & Singing', course:'Performance', duration:'10 min', content:'Movement that helps vs movement that hurts your voice.',
+    { id:23, title:'Chest Voice Mastery', course:'Registration', duration:'14 min', content:'Deep dive chest voice. NYVC: not pulling up - maintaining chest registration ascending.',
       steps:[
-        {type:'teach',title:'The Movement Test',body:'Helpful: gentle swaying, stepping with phrases, hand gestures expressing lyrics\n\nHarmful: head tilting up on high notes, shoulder shrugging, locking knees\n\nRule: if movement restricts breathing or tenses your throat, it costs more than it gives.'},
-        {type:'exercise',title:'Sing While Moving',body:'1. Sing a verse standing still — baseline\n2. Same verse while gently swaying\n3. While walking slowly\n4. While doing gentle arm movements\n5. Video each version. Which movement looks natural AND sounds good?'}
+        {type:'teach',title:'Chest Mechanics (NYVC)',body:'Chest = thyroarytenoid dominant (short thick cord vibration). Your speaking voice extended up.\n\nChallenge: body WANTS to switch to head voice ascending. Keeping chest requires:\n1. Strong breath support\n2. Appropriate compression\n3. Vowel modification'},
+        {type:'exercise',title:'Chest Ascension',body:'Speak Hey listen to me - feel chest. Speak higher pitch keeping weight. Sing on that pitch.\nScale up: Hey each note higher. Maintain chest weight as high as possible WITHOUT strain.'},
+        {type:'practice',title:'Daily Ceiling Push',body:'Find ceiling (strain point). Back off 1 note. Sing 2 min. Over weeks push higher.'},
+        {type:'tip',title:'Pulling Warning',body:'Neck/throat strain = PULLING not belt. Stop reset less volume.'}
       ]},
-    { id:24, title:'Emotional Connection', course:'Performance', duration:'14 min', content:'Singing with feeling without losing technique. Emotion and technique are partners, not enemies.',
+    { id:24, title:'Head Voice & Falsetto', course:'Registration', duration:'14 min', content:'NYVC: head voice not weak chest. Different coordination.',
       steps:[
-        {type:'teach',title:'The Emotion-Technique Balance',body:'Technique without emotion = boring. Emotion without technique = unreliable. Technique + emotion = controlled, powerful, moving.\n\nThe more solid your technique, the more emotion you can pour in without falling apart.'},
-        {type:'exercise',title:'The Emotional Spectrum Drill',body:'Sing the same verse 4 ways:\n\n1. **Neutral** — just the notes\n2. **Joy** — like you just got great news\n3. **Sadness** — like telling a friend goodbye\n4. **Intensity** — the most important thing you ever said\n\nTechnique stays consistent. Musical choices change. This is how professionals do it.'}
+        {type:'teach',title:'Head Voice vs Falsetto (NYVC)',body:'Falsetto: breathy thin minimal cord closure\nHead voice: full cord closure upper register rich resonant\n\nMost untrained only have falsetto. NYVC trains head voice as BRIDGE to mix.\n\nSensation: head resonates in head/face chest resonates in chest.'},
+        {type:'exercise',title:'Octave Slide to Head',body:'Low note chest. Slide up octave on Oo. Past passaggio let voice flip to head. Don\'t fight.\nSlide back down. Note transition = passaggio. Do 5x daily.'},
+        {type:'practice',title:'Head Voice Strength',body:'Scales entirely in head voice (passaggio up). Weak at first like new muscle.'},
+        {type:'tip',title:'Ng Entry',body:'Sing Ng on high note. Tongue position naturally engages head voice.'}
       ]},
-    { id:25, title:'Microphone Technique', course:'Performance', duration:'12 min', content:'Proximity effect, positioning, and handling any mic. Mic technique is a performance skill.',
+    { id:25, title:'Mix Voice', course:'Registration', duration:'16 min', content:'NYVC crown jewel: blend chest + head. Power + range without strain.',
       steps:[
-        {type:'teach',title:'Distance Determines Tone',body:'Closer to mic = bass-heavy (proximity effect). Further = thinner, more natural.\n\n- 1-2 inches: intimate, boomy (R&B ballads)\n- 4-6 inches: balanced (most live singing)\n- 12+ inches: thin, roomy\n\nFor live: stay 4-6 inches away. Closer for soft moments, pull back for loud.'},
-        {type:'exercise',title:'Mic Distance Drill',body:'1. Sing at 1 inch — notice boomy bass\n2. Sing at 6 inches — balanced, clear\n3. Sing at 12 inches — thinner\n4. Practice "mic pull": start close, pull back as you get louder. Classic professional technique.'}
+        {type:'teach',title:'What Is Mix (NYVC)',body:'Mix = simultaneous thyroarytenoid (chest) + cricothyroid (head) engagement.\n\nChest-dominant: powerful belt-like on high notes\nHead-dominant: light floaty with substance\nBalanced: unified voice\n\nNYVC: mix is COORDINATION between two. Adjustable ratio.'},
+        {type:'exercise',title:'Yodel Octave (NYVC Signature #3)',body:'Yodel chest to head on octave: Yoo-HOO. Slow at first. Gradually smoother.\nMoment between chest and head IS mix.'},
+        {type:'practice',title:'Siren on Ng',body:'Slide lowest chest to highest head on Ng. Let transition happen naturally. 10x daily.'},
+        {type:'tip',title:'Cry Exercise',body:'Gentle cry Waaaah naturally engages mix (chest weight + head resonance).'}
       ]},
-    { id:26, title:'Audience Engagement', course:'Performance', duration:'10 min', content:'Connect with your audience eye-to-eye, heart-to-heart.',
+    { id:26, title:'Safe Belting', course:'Registration', duration:'16 min', content:'NYVC: chest-dominant mix. Belt without damage.',
       steps:[
-        {type:'teach',title:'The Eye Contact Rule',body:'Look at ONE person for one phrase (4-8 seconds), then shift to another. Cover left, center, right, back.\n\nIn intimate settings: more eye contact. Large venues: look at sections. Your eyes say "I am singing this for you."'},
-        {type:'exercise',title:'The Living Room Concert',body:'1. Set up practice space like a mini stage with chairs as "audience"\n2. Sing a full song, making eye contact with each "person" for one phrase\n3. Talk between songs — practice stage banter\n4. Notice how directing attention outward changes your performance energy'}
+        {type:'teach',title:'What Belt IS and IS NOT (NYVC)',body:'NOT: yelling pulling chest past limit throat squeeze\nIS: chest-dominant mix + heavy compression + forward resonance + strong support + modified vowels\n\nSafety rule: throat strain = not belt = yelling. True belt feels like chest not throat.'},
+        {type:'exercise',title:'Safe Belt Builder',body:'1. Mid-range Nay bratty forward\n2. Slide up 5-note on Nay light forward\n3. Higher = narrow vowel Nay to Neh\n4. Support FIRM throat OPEN\n5. Throat squeeze = STOP go back down'},
+        {type:'practice',title:'Belt Safety Check',body:'After belting speak normally. Hoarse/raspy/lower = pushed too hard. Rest day.'},
+        {type:'tip',title:'Forward Placement',body:'Belt without damage = forward resonance. Sound lives in face = safe.'}
       ]},
-    { id:27, title:'Overcoming Stage Fright', course:'Performance', duration:'15 min', content:'Fear is not the enemy — it is unused energy. Redirect it and stage fright becomes stage power.',
+    { id:27, title:'Vocal Fry & Glottal Control', course:'Advanced Technique', duration:'12 min', content:'NYVC: glottal = tool not enemy. Fry = lowest register.',
       steps:[
-        {type:'teach',title:'The Fear Reframe',body:'Your body cannot tell the difference between excitement and anxiety. Same symptoms: racing heart, sweating, shallow breathing.\n\nThe difference is the label. "I am afraid" makes symptoms worse. "I am excited" channels them into fuel.\n\nNerves mean you care. The day you feel nothing before performing is the day your performance is dead.'},
-        {type:'teach',title:'The Pre-Performance Protocol',body:'2 hours before: light meal, hydrate, review mentally\n30 min before: arrive, check sound, walk the stage\n10 min before: vocal warm-up (humming + resonance)\n5 min before: feet planted, 4 deep breaths (4 in, 8 out), say "I am ready"\n1 min before: scan audience, find one friendly face, smile'},
-        {type:'exercise',title:'Desensitization Training',body:'1. Sing to 1 person this week\n2. Next week: 3 people\n3. Week 3: 10 people\n4. Week 4: 20+ people\n\nEach level feels scary the first time. By the 3rd time, it feels normal. Progressive exposure is the ONLY proven cure for stage fright.'}
+        {type:'teach',title:'Vocal Fry (NYVC)',body:'Fry = lowest register minimal air + loose cord closure. Creaky door sound.\n\nNYVC: NOT bad - it is a tool:\n1. Rehabilitation: gentle closure for damaged voices\n2. Style: pop/R&B texture\n3. Range: fry + air = lowest notes\n\nRef: Glottal exercises VLTTW Ep.37.'},
+        {type:'exercise',title:'Fry to Tone',body:'Start fry low creaky. Gradually add air until fry becomes clear tone. Pitch doesn\'t change quality goes noisy to clean.'},
+        {type:'practice',title:'Fry-Full Slides',body:'Fry on lowest note slide to clear tone back down.'},
+        {type:'tip',title:'Don\'t Overdo',body:'Fry is gentle. Grinding = stop. Max 2-3 min/session.'}
       ]},
-    { id:28, title:'Setlist Building', course:'Performance', duration:'12 min', content:'Craft a journey through song selection and order. Your setlist is your story arc.',
+    { id:28, title:'Breathy Singing', course:'Advanced Technique', duration:'12 min', content:'NYVC: controlled breathiness for contemporary. Not bad technique - deliberate choice.',
       steps:[
-        {type:'teach',title:'The Setlist Arc',body:'1. **Opener** — energetic, shows strengths\n2. **Build** — 2-3 songs with variety\n3. **Centerpiece** — your best/most emotional song\n4. **Cool down** — 1-2 softer songs\n5. **Closer** — up-tempo, leaves them wanting more\n\nNever put your best song first or last.'},
-        {type:'exercise',title:'Build Your First Setlist',body:'1. List all songs you can perform confidently\n2. Rate each: tempo, mood, difficulty\n3. Select 5-7 songs for 25-35 min\n4. Arrange: Up-tempo opener → Build → Peak → Cool → Closer\n5. Time each song including transitions\n6. Practice the full set in order 3 times'}
+        {type:'teach',title:'Aspirate Phonation (NYVC)',body:'Breathy = air escapes during phonation = soft airy quality.\n\nUsed in: pop ballads R&B intimacy ASMR singing.\n\nNYVC: breathiness is SPECTRUM not on/off. Add or remove at will = precise compression control.'},
+        {type:'exercise',title:'Breathiness Spectrum',body:'One note: FULL compression (clear bright) gradually reduce almost whisper gradually increase back.'},
+        {type:'practice',title:'Song Texture Mapping',body:'Ballad: mark each phrase C(clear) B(breathy) M(mixed). Sing with exact textures.'},
+        {type:'tip',title:'Health Warning',body:'Constant breathiness irritates cords. Use as color not default.'}
       ]},
-    { id:29, title:'Rehearsal Strategy', course:'Performance', duration:'10 min', content:'How to rehearse efficiently and show up prepared. Smart practice beats long practice.',
+    { id:29, title:'Twang & Brightness', course:'Advanced Technique', duration:'12 min', content:'NYVC: epilaryngeal narrowing for brightness + projection.',
       steps:[
-        {type:'teach',title:'The Rehearsal Hierarchy',body:'1. **Problem spots** (60% of time) — sections that break\n2. **Run-throughs** (25% of time) — full performances for stamina\n3. **Fun playing** (15% of time) — keep loving music\n\nAmateurs practice what they already do well. Professionals practice what needs fixing.'},
-        {type:'exercise',title:'The 30-Minute Smart Rehearsal',body:'Minutes 1-5: Warm up (humming + resonance)\nMinutes 6-20: Problem spots (hardest section, loop 10x)\nMinutes 21-27: Full run-through\nMinutes 28-30: Cool down + notes\n\n30 focused minutes beats 2 hours of unfocused singing.'}
+        {type:'teach',title:'What Is Twang (NYVC)',body:'Twang = narrowing epilaryngeal tube above cords = bright cutting quality projecting without extra volume.\n\nSound Palette: Bright/Twangy = High larynx + Nasal = Country belt pop\n\nNYVC distinction: Nasality = too much nose sound (bad). Twang = epilaryngeal narrowing + some nasal (good projects).\n\nThink: duck quack or cat meow.'},
+        {type:'exercise',title:'Duck Quack to Singing',body:'Imitate duck Ack-ack-ack. Feel bright nasal-ish quality. Maintain brightness singing Ah on comfortable note.'},
+        {type:'practice',title:'Twang On/Off',body:'Phrase with twang (bright cutting). Same phrase without (warm round). Switch instantly.'},
+        {type:'tip',title:'Singer\'s Formant',body:'Twang creates singer\'s formant ~2800-3400 Hz allowing singers to be heard over orchestra.'}
       ]},
-    { id:30, title:'Performance Day Protocol', course:'Performance', duration:'14 min', content:'Your complete pre-show routine for peak performance.',
+    { id:30, title:'Gospel & Worship Style', course:'Song Application', duration:'16 min', content:'NYVC applied to gospel: power sustain emotional intensity improvisation.',
       steps:[
-        {type:'teach',title:'Performance Day Timeline',body:'Morning: Wake 3h before show. Hydrate 500ml. Light warm-up (5 min). Light breakfast (avoid dairy, spicy, cold water).\n\n2h before: Arrive. Walk stage. Soundcheck.\n\n1h before: Full warm-up (10-15 min). Hydrate. Get into outfit.\n\n15 min before: Privacy. Breathe. Visualize opening. 4 deep breaths. Say "I am prepared. I am ready. I am excited."'},
-        {type:'tip',title:'What NOT To Do',body:'- Do not do extreme warm-up (save voice for performance)\n- Do not talk a lot before performing (conserve voice)\n- Do not drink ice water (numbs cords)\n- Do not try new techniques on stage\n- Do not compare yourself to other performers\n- Do not skip warm-up because nervous'}
+        {type:'teach',title:'Gospel Demands (NYVC + Genre)',body:'1. Sustained power - long phrases (compression + support)\n2. Riffs and runs - embellishments (agility)\n3. Emotional authenticity - congregation must FEEL (Step 12)\n4. Dynamic range - whisper to shout (Step 10)\n5. Endurance - hours of singing (fatigue management)\n\nNYVC: technique serves the SPIRIT. Goal = authentic expression.'},
+        {type:'exercise',title:'Worship Sustain',body:'Sing Hallelujah one breath - as long as possible. Steady compression forward resonance narrow vowels high notes. Goal: 15 sec.'},
+        {type:'practice',title:'Gospel Riff Patterns',body:'3 common patterns:\n1. Turn: note up step back down step\n2. Run: 5-note scale on one syllable\n3. Jump: octave leap on emotional word'},
+        {type:'tip',title:'Prophetic Posture (NYVC)',body:'Listening more than performing. Technique ready but surrendered. Prepared spontaneity.'}
       ]},
-    { id:31, title:'Worship Leading Fundamentals', course:'Worship & Ministry', duration:'15 min', content:'The calling and craft of a worship leader. Technique serves the spirit.',
+    { id:31, title:'Afrobeats Vocal Style', course:'Song Application', duration:'14 min', content:'NYVC applied to Afrobeats: rhythm groove unique vocal colors.',
       steps:[
-        {type:'teach',title:'Worship Leading Is Not Just Singing',body:'A worship leader does three jobs simultaneously:\n\n1. **Musician** — sing in tune, in time, with good technique\n2. **Pastor** — pastorally responsible for the atmosphere\n3. **Facilitator** — create space where others encounter God\n\nThe tension: your voice must be excellent enough not to distract, but transparent enough that people see through you to God.'},
-        {type:'teach',title:'The Worship Set Flow',body:'1. **Call to worship** (upbeat, inviting)\n2. **Praise songs** (2-3, energetic)\n3. **Transition** — slow tempo, key change or spoken moment\n4. **Worship songs** (2-3, intimate)\n5. **Ministry moment** — spontaneous singing, prayer\n6. **Closing** — resolved, sending congregation out\n\nRead the room. If congregation is not engaging, transition sooner. If deep in worship, let the moment breathe.'},
-        {type:'exercise',title:'Plan a 20-Minute Worship Set',body:'1. Select 5-6 songs you know well\n2. Arrange: Call → Praise → Praise → Transition → Worship → Worship → Close\n3. Identify key changes needed\n4. Write transition notes\n5. Practice transitions as much as songs\n6. Practice the FULL set without stopping'}
+        {type:'teach',title:'Afrobeats Characteristics (NYVC + Genre)',body:'1. Rhythmic precision - voice as percussion\n2. Speech-like quality - medium larynx conversational\n3. Call and response - conversational structure\n4. Ad-libs - spontaneous fills (agility + improvisation)\n5. Energy + brightness - twang + compression\n\nNYVC: Afrobeats uses ALL 12 steps simultaneously.'},
+        {type:'exercise',title:'Rhythmic Voice Connection',body:'Clap Afrobeats rhythm. Sing scale ON the rhythm - each note on specific beat.\nThen: sing phrase + rhythmic ad-libs between words.'},
+        {type:'practice',title:'Afrobeats Phrasing',body:'Take Afrobeats song. Map phrasing: breaths? ad-libs? speech-like vs full singing?'},
+        {type:'tip',title:'Groove is Everything',body:'In Afrobeats on-groove matters more than pitch-perfect. Feel the pocket.'}
       ]},
-    { id:32, title:'Congregational Leading', course:'Worship & Ministry', duration:'12 min', content:'Leading a congregation without straining. Sing WITH them, not AT them.',
+    { id:32, title:'Pop & Contemporary Style', course:'Song Application', duration:'14 min', content:'NYVC applied to pop: intimacy texture vocal personality.',
       steps:[
-        {type:'teach',title:'The Congregational Key',body:'Most worship leaders sing in keys too high for the congregation. The leader sounds great, but nobody can sing along.\n\nCongregational range: C3-C5 roughly. If melody goes above E5, most people drop out.\n\nIf the congregation is listening instead of singing, the key is wrong or you are performing too much.'},
-        {type:'exercise',title:'The Congregation Range Test',body:'1. Take a worship song you lead\n2. Play it in 3 keys: original, one step down, two steps down\n3. Choose the key where melody sits in the most accessible range\n4. If it feels too low for you — good. That means it is right for them.\n\nLeading is sacrifice. Your comfort serves the room.'}
+        {type:'teach',title:'Pop Aesthetics (NYVC + Genre)',body:'1. Intimacy - close-mic breathiness soft dynamics\n2. Texture variety - clear/breathy/compressed in one song\n3. Personality - imperfections are features\n4. Melodic hooks - simple memorable\n5. Emotional authenticity - acting from day one\n\nNYVC: pop uses FULL sound palette. Most versatile genre.'},
+        {type:'exercise',title:'Texture Switch',body:'One line 4 ways:\n1. Fully breathy (intimate verse)\n2. Clear conversational (normal verse)\n3. Compressed bright (pre-chorus build)\n4. Full mix (chorus)'},
+        {type:'practice',title:'Pop Song Dissection',body:'For each section identify: larynx position compression breathiness vowel shapes.'},
+        {type:'tip',title:'Naked Test',body:'Sing pop song NO backing. Still sounds good = solid technique.'}
       ]},
-    { id:33, title:'Prophetic Voice', course:'Worship & Ministry', duration:'14 min', content:'Singing under the anointing — sensitivity and power.',
+    { id:33, title:'Vocal Health & Longevity', course:'Professional', duration:'14 min', content:'NYVC rehabilitation mindset: most damaged voices fixable.',
       steps:[
-        {type:'teach',title:'What Makes Singing Prophetic',body:'Prophetic singing is not a technique — it is a posture:\n\n1. **Listening more than performing** — sensitive to direction in the moment\n2. **Technique ready but surrendered** — skills available but not dominating\n3. **Following the spontaneous** — new melodies, unexpected changes\n4. **Serving the room** — addressing what the congregation needs\n\nPrepared spontaneity: practice technique, know songs deeply, prepare a set. Then release it all and follow the leading.'},
-        {type:'exercise',title:'Spontaneous Worship Practice',body:'1. Start singing a worship song you know well\n2. At the end, do not stop. Continue singing freely\n3. Follow wherever the melody goes\n4. If you feel a mood shift, let the music follow\n5. Continue for 3-5 minutes of spontaneous singing\n6. End naturally when the moment resolves\n\nThis trains ear, heart, and technique to work together in real-time ministry.'}
-      ]},
+        {type:'teach',title:'Vocal Health Science (NYVC + Research)',body:'Hydration: 2-3L daily. Dehydrated cords = injured cords.\n\nFatigue (PMC7156306): Type II fibers. SAID principle: overload + specificity + reversibility.\n\n50% Rule: never sing 100% effort >50% of practice time. Other 50% at 60-70%.\n\nWarning signs: hoarseness >2 weeks pain range loss = see ENT.'},
+        {type:'exercise',title:'Vocal First Aid',body:'1. Stop singing\n2. 500ml room-temp water\n3. Hum gently 1 min\n4. Steam 5 min (towel over hot water)\n5. Rest 30 min minimum'},
+        {type:'practice',title:'Health Checklist',body:'Daily: 2-3L water 5 min warm-up 50% practice at reduced effort cool down no singing sick 7+ hours sleep.\nWeekly: 1 rest day check persistent hoarseness.'},
+        {type:'tip',title:'Reflux Connection',body:'GERD silently damages cords. Frequent throat clearing morning hoarseness = see doctor.'}
+      ]}
   ],
   assessmentQuestions: [
     { q:'What is your primary singing goal?', options:['Lead worship','Record music','Perform live','Improve technique','Start from scratch'] },
@@ -1809,14 +1870,10 @@ const app = {
   captureEmail() {
     const input = document.getElementById('emailCaptureInput');
     if (!input || !input.value.includes('@')) { toast('Please enter a valid email'); return; }
-    const email = input.value.trim();
-    const voice = S.voiceProfile || {};
-    CRM.capture({ event:'email_captured', email, voice_type: voice.type, genre: voice.genre, weakness: voice.weakness, strength: voice.strength });
-    CRM.pushToSheet({ email, voice, lead_score: S.leadScore, ts: Date.now() });
+    this.capturedEmail = input.value.trim();
     EmailCapture.hide();
     localStorage.setItem('swt_email_captured', 'true');
-    this.track('email_submitted', { email });
-    toast('Check your email - your report is on the way!');
+    this.showSmartSurvey();
   },
   contactSubmit() {
     const name = document.getElementById('contactName').value;
@@ -1895,6 +1952,8 @@ const app = {
       case 'practice': c.innerHTML = this.lmsPractice(); break;
       case 'assessments': c.innerHTML = this.lmsAssessments(); break;
       case 'mentor': c.innerHTML = this.lmsMentor(); this.mentorInit(); break;
+      case 'coach': c.innerHTML = this.lmsCoach(); break;
+      case 'feedback': c.innerHTML = this.lmsFeedback(); break;
       case 'community': c.innerHTML = this.lmsCommunity(); break;
       case 'funnel': c.innerHTML = this.lmsFunnel(); break;
       case 'analytics': c.innerHTML = this.lmsAnalytics(); break;
@@ -2012,7 +2071,7 @@ const app = {
       S.lessonsCompleted.push(id);
       S.xp += 15;
       S.streak = Math.max(S.streak, 1);
-      localStorage.setItem('swt_lessons', JSON.stringify(S.lessonsCompleted));
+      localStorage.setItem('swt_lessons_v2', JSON.stringify(S.lessonsCompleted));
       localStorage.setItem('swt_xp', S.xp);
       Analytics.track('lesson_finished', { id });
       if (S.lessonsCompleted.length === 1) { S.badges.push('🌱 First Step'); localStorage.setItem('swt_badges', JSON.stringify(S.badges)); }
@@ -2620,6 +2679,177 @@ const app = {
     };
     const arr = responses[category] || responses.general;
     return arr[Math.floor(Math.random() * arr.length)];
+  },
+
+  // ─── SMART SURVEY ───
+  showSmartSurvey() {
+    const email = this.capturedEmail;
+    const surveyHtml = `
+      <div style="text-align:center;margin-bottom:var(--space-3)">
+        <div style="font-size:0.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">2-minute setup</div>
+        <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:8px">Personalize your experience</h3>
+        <p style="color:var(--gray-500);font-size:0.9rem;margin-bottom:20px">We will recommend the right lessons for your voice</p>
+      </div>
+      <div class="survey-step active" data-step="1">
+        <div class="survey-q">What do you want to achieve?</div class="survey-options">
+          <button class="survey-opt" onclick="app.surveySelect('goal','worship',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🙏</span> Lead worship or minister</button>
+          <button class="survey-opt" onclick="app.surveySelect('goal','record',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">�️</span> Record & release songs</button>
+          <button class="survey-opt" onclick="app.surveySelect('goal','perform',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">�</span> Perform live confidently</button>
+          <button class="survey-opt" onclick="app.surveySelect('goal','technique',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">�</span> Improve vocal technique</button>
+          <button class="survey-opt" onclick="app.surveySelect('goal','beginner',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🌱</span> Start from scratch</button>
+        </div>
+      </div>
+      <div class="survey-step" data-step="2" style="display:none">
+        <div class="survey-q">Your current level?</div>
+        <div class="survey-options">
+          <button class="survey-opt" onclick="app.surveySelect('level','beginner',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🌱</span> Complete beginner</button>
+          <button class="survey-opt" onclick="app.surveySelect('level','some',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🎵</span> Some experience</button>
+          <button class="survey-opt" onclick="app.surveySelect('level','intermediate',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">�</span> Intermediate (years)</button>
+          <button class="survey-opt" onclick="app.surveySelect('level','advanced',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">⭐</span> Advanced (performing)</button>
+        </div>
+      </div>
+      <div class="survey-step" data-step="3" style="display:none">
+        <div class="survey-q">Your primary genre?</div>
+        <div class="survey-options">
+          <button class="survey-opt" onclick="app.surveySelect('genre','gospel',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">✝️</span> Gospel / Worship</button>
+          <button class="survey-opt" onclick="app.surveySelect('genre','afrobeats',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🥁</span> Afrobeats</button>
+          <button class="survey-opt" onclick="app.surveySelect('genre','rnb',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">�</span> R&B / Soul</button>
+          <button class="survey-opt" onclick="app.surveySelect('genre','pop',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🎵</span> Pop</button>
+          <button class="survey-opt" onclick="app.surveySelect('genre','other',this)"><span style="font-size:1.1rem;margin-right:6px;display:inline-block;vertical-align:middle">🎸</span> Other / Multiple</button>
+        </div>
+      </div>
+      <div class="survey-step" data-step="4" style="display:none">
+        <div class="survey-q">Anything specific to fix?</div>
+        <textarea class="form-input" id="surveyWants" rows="3" placeholder="e.g., I go flat on high notes, I want more range..." style="resize:vertical;text-align:left;font-size:0.9rem"></textarea>
+        <button class="btn btn-gold btn-lg btn-block" onclick="app.submitSurvey()" style="margin-top:14px;text-align:center">Start My Journey →</button>
+        <button class="btn btn-secondary btn-sm btn-block" style="margin-top:8px;text-align:center" onclick="app.submitSurvey(true)">Skip →</button>
+      </div>
+    `;
+    const wrappedHtml = `<div class="survey-modal">${surveyHtml}</div>`;
+    const existing = document.getElementById('launch');
+    if (existing && existing.classList.contains('gone')) {
+      this.showModalInLMS(wrappedHtml);
+    } else {
+      modal(wrappedHtml);
+    }
+    this.surveyData = { email };
+  },
+
+  showModalInLMS(html) {
+    modal(html);
+  },
+
+  surveySelect(key, val, el) {
+    this.surveyData[key] = val;
+    const step = el.closest('.survey-step');
+    step.querySelectorAll('.survey-opt').forEach(o => o.classList.remove('sel'));
+    el.classList.add('sel');
+    setTimeout(() => {
+      step.style.display = 'none';
+      const next = step.nextElementSibling;
+      if (next && next.classList.contains('survey-step')) {
+        next.style.display = 'block';
+        next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
+  },
+
+  submitSurvey(skip) {
+    const wantsEl = document.getElementById('surveyWants');
+    if (wantsEl && wantsEl.value.trim()) this.surveyData.wants = wantsEl.value.trim();
+    localStorage.setItem('swt_survey', JSON.stringify(this.surveyData));
+    const { email, goal, level, genre, wants } = this.surveyData;
+    CRM.pushToSheet({ email, goal, level, genre: genre || 'other', wants: wants || '', type:'survey', ts: Date.now() });
+    S.user = { email, name: email.split('@')[0], goal, level, genre, wants, joined: new Date().toISOString() };
+    localStorage.setItem('swt_user', JSON.stringify(S.user));
+    CRM.capture({ event:'survey_completed', email, goal, level, genre, wants });
+    document.getElementById('modal').classList.remove('open');
+    if (document.getElementById('lmsApp').style.display === 'block') {
+      this.lmsNav('dashboard');
+    } else if (S.lmsPage) {
+      this.lmsNav(S.lmsPage);
+    }
+    toast('Profile saved');
+  },
+
+  // ─── COACH TOBY ───
+  lmsCoach() {
+    const msg = "Hi Coach Toby! I'd like to book a session.";
+    const waUrl = 'https://wa.me/2349160106084?text=' + encodeURIComponent(msg);
+    return `
+      <div class="dash-header"><h1>Coach Toby</h1><p>The human behind the method. Vocal coach, artist, and mentor.</p></div>
+      <div class="card" style="max-width:600px">
+        <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-4);flex-wrap:wrap">
+          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F59E0B);display:flex;align-items:center;justify-content:center;font-size:2.5rem;flex-shrink:0">🎤</div>
+          <div style="flex:1;min-width:200px">
+            <h3 style="font-family:var(--font-display);font-size:1.5rem;letter-spacing:-.02em;margin-bottom:4px">Toby — Coach & Founder</h3>
+            <p style="color:var(--gray-500);font-size:0.9rem">10+ years · 15 countries · 1000+ singers transformed</p>
+          </div>
+        </div>
+        <div style="margin-bottom:var(--space-3);padding:var(--space-3);background:rgba(212,175,55,0.05);border-radius:var(--radius-md);border:1px solid rgba(212,175,55,0.15)">
+          <h4 style="font-weight:600;margin-bottom:var(--space-1);color:var(--gold)">The NYVC Method</h4>
+          <p style="color:var(--gray-500);line-height:1.7;font-size:0.9rem">New York Vocal Coaching — built on what singers <em>actually feel</em>. No generic pedagogy. Every exercise targets a real sensation: jaw drops, tongue glides, throat opens, air flows steady, mask resonance buzzes. Your voice is an instrument you <strong>feel</strong>, not just hear.</p>
+        </div>
+        <div class="grid grid-3" style="margin-bottom:var(--space-3)">
+          <div style="text-align:center;padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-md)"><div style="font-size:1.5rem;font-family:var(--font-display);font-weight:700;color:var(--indigo)">9</div><div style="font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em">Courses</div></div>
+          <div style="text-align:center;padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-md)"><div style="font-size:1.5rem;font-family:var(--font-display);font-weight:700;color:var(--indigo)">33</div><div style="font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em">Lessons</div></div>
+          <div style="text-align:center;padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-md)"><div style="font-size:1.5rem;font-family:var(--font-display);font-weight:700;color:var(--emerald)">4</div><div style="font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em">Cert Levels</div></div>
+        </div>
+        <h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-2)">Book a 1-on-1 Session</h4>
+        <p style="color:var(--gray-500);line-height:1.6;margin-bottom:var(--space-2);font-size:0.9rem">Get your voice evaluated personally by Toby. Receive a custom training plan, specific exercises for your weaknesses, and expert feedback on a recording.</p>
+        <div class="grid grid-2" style="margin-bottom:var(--space-4)">
+          <div style="padding:var(--space-3);background:var(--gray-50);border-radius:var(--radius-md);border:1px solid var(--gray-200)">
+            <div style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-1)">Free Discovery</div>
+            <div style="font-family:var(--font-display);font-size:1.75rem;font-weight:800;color:var(--gold);margin-bottom:var(--space-1)">$0</div>
+            <ul style="font-size:0.85rem;color:var(--gray-500);line-height:1.8li>15-min voice evaluation</li><li>Your strengths & weaknesses</li><li>No commitment</li></ul>
+          </div>
+          <div style="padding:var(--space-3);background:linear-gradient(135deg,rgba(212,175,55,0.1),rgba(245,158,11,0.05));border-radius:var(--radius-md);border:1px solid rgba(212,175,55,0.3);position:relative">
+            <div style="position:absolute;top:-8px;right:var(--space-1);background:var(--gold);color:var(--midnight);font-size:0.65rem;font-weight:700;padding:2px 10px;border-radius:var(--radius-full);letter-spacing:.05em;text-transform:uppercase">Most Popular</div>
+            <div style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-1)">1-on-1 Coaching</div>
+            <div style="font-family:var(--font-display);font-size:1.75rem;font-weight:800;color:var(--gold);margin-bottom:var(--space-1)">$200<span style="font-size:0.8rem;font-weight:400;color:var(--gray-500)">/hour</span></div>
+            <ul style="font-size:0.85rem;color:var(--gray-500);line-height:1.8"><li>Full vocal assessment</li><li>Custom training plan</li><li>Recording feedback</li><li>WhatsApp follow-up</li></ul>
+          </div>
+        </div>
+        <a href="${waUrl}" target="_blank" class="btn btn-gold btn-lg btn-block" style="text-align:center">Book Session via WhatsApp →</a>
+        <p style="font-size:0.8rem;color:var(--gray-500);text-align:center;margin-top:var(--space-1)">Or email: <a href="mailto:coach@toby.vip" style="color:var(--gold);text-decoration:underline">coach@toby.vip</a></p>
+      </div>
+    `;
+  },
+
+  // ─── FEEDBACK ───
+  lmsFeedback() {
+    const existing = JSON.parse(localStorage.getItem('swt_feedback') || '[]');
+    return `
+      <div class="dash-header"><h1>Feedback</h1><p>Your voice shapes this platform. Tell us what to improve.</p></div>
+      <div class="card" style="max-width:600px;margin-bottom:var(--space-5)">
+        <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-3)">Share your thoughts</h3>
+        <div class="form-group"><label class="form-label">What do you want us to improve, add, or fix?</label><textarea class="form-input" id="fbText" rows="5" placeholder="Tell me anything — a bug, feature request, content feedback..." style="resize:vertical"></textarea></div>
+        <div class="form-group"><label class="form-label">Rate your experience</label>
+          <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap">
+            ${[1,2,3,4,5].map(n => '<button class="btn btn-secondary btn-sm" id="fbRate'+n+'" onclick="document.getElementById(\'fbRating\').value='+n+';[].forEach.call(document.querySelectorAll(\'[id^=fbRate]\'),function(e){e.style.borderColor=\'var(--gray-200)\';e.style.background=\'white\'});this.style.borderColor=\'var(--gold)\';this.style.background=\'rgba(212,175,55,0.1)\';return false">'+'⭐'.repeat(n)+'</button>').join('')}
+          </div>
+          <input type="hidden" id="fbRating" value="5">
+        </div>
+        <div class="form-group"><label class="form-label">Which page/lesson? (optional)</label><input class="form-input" id="fbRef" placeholder="e.g. Lesson 4, Dashboard..."></div>
+        <button class="btn btn-gold btn-lg btn-block" onclick="app.submitFeedback()" style="text-align:center">Send Feedback →</button>
+      </div>
+      ${existing.length > 0 ? '<div><h3 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-3);font-size:1.1rem">Your past feedback ('+existing.length+')</h3><div class="card" style="padding:0;overflow:hidden">'+existing.slice().reverse().slice(0,10).map(f => '<div style="padding:var(--space-3);border-bottom:1px solid var(--gray-100)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:0.7rem;color:var(--gray-500)">'+new Date(f.ts).toLocaleDateString()+(f.ref?' · '+f.ref:'')+'</span><span>'+'⭐'.repeat(f.rating)+'</span></div><div style="font-size:0.9rem;color:var(--gray-800)">'+f.text+'</div></div>').join('')+'</div></div>' : ''}
+    `;
+  },
+
+  submitFeedback() {
+    const text = document.getElementById('fbText').value.trim();
+    const ref = document.getElementById('fbRef').value.trim();
+    let rating = parseInt(document.getElementById('fbRating').value);
+    if (isNaN(rating)) rating = 5;
+    if (!text) { toast('Write something first'); return; }
+    const feedback = { text, rating, ref: ref || null, ts: Date.now() };
+    const existing = JSON.parse(localStorage.getItem('swt_feedback') || '[]');
+    existing.push(feedback);
+    localStorage.setItem('swt_feedback', JSON.stringify(existing));
+    CRM.pushToSheet({ ...feedback, email: S.user?.email, type:'feedback' });
+    toast('Thank you! Feedback logged.');
+    this.lmsNav('feedback');
   },
 
   // ─── ASSESSMENTS ───
