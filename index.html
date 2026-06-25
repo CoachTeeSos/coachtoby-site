@@ -1212,9 +1212,9 @@ const S = {
   badges: JSON.parse(localStorage.getItem('swt_badges') || '[]'),
   voiceProfile: JSON.parse(localStorage.getItem('swt_voice') || 'null'),
   mentorHistory: JSON.parse(localStorage.getItem('swt_mentor') || '[]'),
+  leadScore: parseInt(localStorage.getItem('swt_leadScore') || '0'),
   assessmentStep: 0,
   assessmentAnswers: [],
-  leadScore: parseInt(localStorage.getItem('swt_leadScore') || '0'),
   funnel: JSON.parse(localStorage.getItem('swt_funnel') || '{}'),
   emailCaptures: JSON.parse(localStorage.getItem('swt_emails') || '[]'),
   geoData: JSON.parse(localStorage.getItem('swt_geo') || '{}'),
@@ -1425,33 +1425,71 @@ const CRM = {
   },
   triggerEmail(data) {
     const triggers = [];
+    const voice = S.voiceProfile || {};
+    const weakness = voice.weakness || 'technique';
+    const strength = voice.strength || 'dedication';
     if (data.event === 'assessment_complete') {
-      triggers.push({ delay:0, subject:'Your Vocal DNA Report', type:'assessment_results' });
-      triggers.push({ delay:86400000, subject:'Ready to Start?', type:'followup_1' });
+      triggers.push({ delay:0, subject:'Your Vocal DNA Report', type:'assessment_results', body:'Your strongest area is ' + strength + '. Your biggest opportunity is ' + weakness + '. Here is your personalized roadmap.' });
+      triggers.push({ delay:86400000, subject:'Your ' + weakness + ' improvement plan is ready', type:'followup_1', body:'Most singers struggle with ' + weakness + '. Here is a free 5-minute exercise that helps.' });
+      triggers.push({ delay:172800000, subject:'How singers like you fixed ' + weakness, type:'followup_2' });
     }
     if (data.event === 'email_captured') {
-      triggers.push({ delay:0, subject:'Welcome to SessionswithToby', type:'welcome' });
+      triggers.push({ delay:0, subject:'Welcome to SessionswithToby', type:'welcome', body:'You are in. Every great singer started exactly where you are.' });
+    }
+    if (data.event === 'pricing_viewed') {
+      triggers.push({ delay:3600000, subject:'Questions about pricing?', type:'pricing_followup', body:'Choosing the right path depends on where you are. Reply and tell us.' });
     }
     localStorage.setItem('swt_email_triggers', JSON.stringify(triggers));
   },
   exportSheet() {
     return { leads: JSON.parse(localStorage.getItem('swt_leads')||'[]'), events: JSON.parse(localStorage.getItem('swt_events')||'[]'), user: S.user, xp: S.xp, voice: S.voiceProfile };
+  },
+  pushToSheet(data) {
+    const webhook = localStorage.getItem('swt_sheets_webhook');
+    if (!webhook) { console.warn('Sheets webhook not set.'); return false; }
+    fetch(webhook, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) })
+      .then(r => this.track('sheets_pushed', { ok: r.ok }))
+      .catch(e => console.warn('Sheets push failed:', e));
+    return true;
   }
 };
-const EmailTriggers = {
-  init() { setTimeout(() => this.showTrigger('5s_popup'), 7000); },
-  showTrigger(type) {
-    const trigger = DATA.emailTemplates.find(t => t.trigger === type);
-    if (!trigger) return;
-    document.getElementById('emailTriggerContent').innerHTML = '<div style="font-size:2rem;margin-bottom:var(--space-1)">🎁</div><h4 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-1)">' + trigger.subject + '</h4><p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:var(--space-2)">' + trigger.body.substring(0,100) + '...</p><div class="form-group"><input type="email" class="form-input" id="emailCaptureInput" placeholder="your@email.com"></div><button class="btn btn-gold btn-block" onclick="app.submitEmailCapture(\'' + type + '\')">Get My Report →</button>';
-    document.getElementById('emailTrigger').classList.add('show');
+
+// ─── EMAIL CAPTURE ENGINE ───
+const EmailCapture = {
+  shown: false,
+  init() {
+    setTimeout(() => {
+      if (!S.user && !this.shown && !localStorage.getItem('swt_email_captured')) {
+        this.show('Get Your Free Vocal DNA Report', 'Enter your email and we will send you a personalized singer roadmap based on your voice type.');
+      }
+    }, 8000);
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY < 0 && !S.user && !this.shown && !localStorage.getItem('swt_email_captured')) {
+        this.show('Before You Go...', 'Get Your Personalized Singer Roadmap - free. Takes 2 minutes.');
+      }
+    });
   },
-  personalizedTrigger() {
-    if (!S.voiceProfile) return;
-    const wMap = {'Pitch accuracy':'weakness_pitch','Breath control':'weakness_breath','Range expansion':'weakness_range','Stage confidence':'weakness_confidence','Tone quality':'weakness_tone'};
-    const gMap = {'Afrobeats':'genre_afrobeats'};
-    const t = wMap[S.voiceProfile.challenge] || gMap[S.voiceProfile.genre] || '5s_popup';
-    this.showTrigger(t);
+  show(title, desc) {
+    if (this.shown) return;
+    this.shown = true;
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);';
+    overlay.id = 'emailCaptureOverlay';
+    overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:32px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative">' +
+      '<button onclick="document.getElementById(\'emailCaptureOverlay\').remove()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;opacity:0.5">&times;</button>' +
+      '<div style="font-size:2.5rem;margin-bottom:12px">&#127908;</div>' +
+      '<h3 style="font-weight:700;margin-bottom:8px;font-size:1.25rem">' + title + '</h3>' +
+      '<p style="color:#666;margin-bottom:20px;font-size:0.9375rem">' + desc + '</p>' +
+      '<input type="email" id="emailCaptureInput" placeholder="your@email.com" style="width:100%;padding:12px 16px;border:2px solid #ddd;border-radius:8px;font-size:1rem;margin-bottom:12px;outline:none" />' +
+      '<button onclick="app.captureEmail()" style="width:100%;padding:12px;background:#D4AF37;color:#000;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">Send My Report</button>' +
+      '<p style="font-size:0.75rem;color:#999;margin-top:12px">No spam. Unsubscribe anytime.</p>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    overlay.querySelector('input').addEventListener('keydown', (e) => { if (e.key === 'Enter') app.captureEmail(); });
+  },
+  hide() {
+    const el = document.getElementById('emailCaptureOverlay');
+    if (el) el.remove();
   }
 };
 
@@ -1502,6 +1540,7 @@ const app = {
     this.renderAssessment();
     this.checkStreak();
     this.initScrollReveal();
+    EmailCapture.init();
     if (S.user) this.lmsNav('dashboard');
   },
   initScrollReveal() {
@@ -1613,6 +1652,19 @@ const app = {
     toast('Check your email! 📧');
   },
   // ─── CONTACT FORM ───
+
+  captureEmail() {
+    const input = document.getElementById('emailCaptureInput');
+    if (!input || !input.value.includes('@')) { toast('Please enter a valid email'); return; }
+    const email = input.value.trim();
+    const voice = S.voiceProfile || {};
+    CRM.capture({ event:'email_captured', email, voice_type: voice.type, genre: voice.genre, weakness: voice.weakness, strength: voice.strength });
+    CRM.pushToSheet({ email, voice, lead_score: S.leadScore, ts: Date.now() });
+    EmailCapture.hide();
+    localStorage.setItem('swt_email_captured', 'true');
+    this.track('email_submitted', { email });
+    toast('Check your email - your report is on the way!');
+  },
   contactSubmit() {
     const name = document.getElementById('contactName').value;
     const email = document.getElementById('contactEmail').value;
@@ -1717,8 +1769,8 @@ const app = {
     }
     return '<div class="dash-header"><h1>Welcome back, '+S.user.name+' 👋</h1><p>Level '+level+' · '+S.xp+' XP · '+S.streak+' day streak <span class="lead-score-badge '+sc+'">⚡ '+ls.score+'</span></p><div class="xp-bar" style="max-width:300px;margin-top:var(--space-2)"><div class="xp-bar-fill" style="width:'+progress+'%"></div></div><div style="font-size:0.75rem;color:var(--gray-500);margin-top:4px">'+(xpToNext-S.xp)+' XP to Level '+(level+1)+'</div></div>'+
     dailyRec+
-    '<div class="grid grid-4" style="margin-bottom:var(--space-5)"><div class="stat-card"><div class="stat-card-value">'+S.xp+'</div><div class="stat-card-label">Total XP</div></div><div class="stat-card"><div class="stat-card-value">'+S.streak+'</div><div class="stat-card-label">Day Streak</div></div><div class="stat-card"><div class="stat-card-value">'+S.lessonsCompleted.length+'</div><div class="stat-card-label">Lessons Done</div></div><div class="stat-card"><div class="stat-card-value">'+level+'</div><div class="stat-card-label">Level</div></div></div>'+
-    (S.voiceProfile ? '<div class="voice-avatar-card" style="margin-bottom:var(--space-5)"><div class="voice-avatar-inner"><div class="voice-avatar-icon">🎤</div><div class="voice-avatar-archetype">'+(S.voiceProfile.archetype||'The Rising Star')+'</div><div class="voice-avatar-range">'+(S.voiceProfile.genre||'Multi-genre')+' · '+(S.voiceProfile.experience||'Growing')+'</div><div class="voice-avatar-tags">'+(S.voiceProfile.strengths||[]).map(s => '<span class="voice-tag voice-tag-strength">✓ '+s+'</span>').join('')+(S.voiceProfile.weaknesses||[]).map(w => '<span class="voice-tag voice-tag-weakness">⚡ '+w+'</span>').join('')+'</div></div></div>' : '')
+    `'<div class="grid grid-4" style="margin-bottom:var(--space-5)"><div class="stat-card"><div class="stat-card-value">${S.xp}</div><div class="stat-card-label">Total XP</div></div><div class="stat-card"><div class="stat-card-value">${S.streak}</div><div class="stat-card-label">Day Streak</div></div><div class="stat-card"><div class="stat-card-value">${S.lessonsCompleted.length}</div><div class="stat-card-label">Lessons Done</div></div><div class="stat-card"><div class="stat-card-value">${level}</div><div class="stat-card-label">Level</div></div></div>'+
+    (${S.voiceProfile ? `<div class="voice-avatar-card" style="margin-bottom:var(--space-5)"><div class="voice-avatar-inner"><div class="voice-avatar-icon">🎤</div><div class="voice-avatar-archetype">'+(S.voiceProfile.archetype||'The Rising Star')+'</div><div class="voice-avatar-range">'+(S.voiceProfile.genre||'Multi-genre')+' · '+(S.voiceProfile.experience||'Growing')+'</div><div class="voice-avatar-tags">'+(S.voiceProfile.strengths||[]).map(s => '<span class="voice-tag voice-tag-strength">✓ '+s+'</span>').join('')+(S.voiceProfile.weaknesses||[]).map(w => '<span class="voice-tag voice-tag-weakness">⚡ '+w+'</span>').join('')+'</div></div></div>` : ''})
       <h3 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-3)">Progress Galaxy</h3>
       <div class="progress-galaxy" id="galaxy">
         ${['Pitch','Breath','Theory','Performance','Branding'].map((p, i) => {
