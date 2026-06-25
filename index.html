@@ -861,6 +861,68 @@ textarea.form-input { min-height: 100px; resize: vertical; }
 /* High contrast */
 @media (prefers-contrast: high) { .card { border-width: 2px; } .btn-ghost { border-width: 2px; } }
 
+.resource-card{background:white;border-radius:var(--radius-lg);padding:var(--space-3);border:1px solid var(--gray-200);text-align:center;transition:all var(--duration) var(--ease);cursor:pointer;-webkit-tap-highlight-color:transparent}
+[data-theme="dark"] .resource-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+.resource-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}.resource-card:active{transform:scale(0.97)}
+.resource-icon{width:clamp(48px,10vw,60px);height:clamp(48px,10vw,60px);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-2);font-size:clamp(1.3rem,3vw,1.6rem)}
+.booking-card{background:white;border-radius:var(--radius-xl);padding:var(--space-4);border:1px solid var(--gray-200);text-align:center;transition:all var(--duration) var(--ease);position:relative}
+[data-theme="dark"] .booking-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+.booking-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl)}
+.booking-card.featured{border-color:var(--gold);box-shadow:var(--shadow-gold)}
+.booking-card.featured::before{content:'Recommended';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--midnight);padding:4px 14px;border-radius:var(--radius-full);font-size:0.7rem;font-weight:600}
+.booking-price{font-family:var(--font-display);font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;margin:var(--space-2) 0}
+.booking-price span{font-size:0.85rem;font-weight:400;color:var(--gray-500)}
+.cert-track{display:flex;align-items:center;gap:0;margin:var(--space-4) 0;position:relative}
+.cert-track::before{content:'';position:absolute;top:50%;left:0;right:0;height:4px;background:var(--gray-200);transform:translateY(-50%);border-radius:2px;z-index:0}
+[data-theme="dark"] .cert-track::before{background:rgba(255,255,255,0.1)}
+.cert-progress{position:absolute;top:50%;left:0;height:4px;background:linear-gradient(90deg,var(--indigo),var(--gold));transform:translateY(-50%);border-radius:2px;z-index:1;transition:width 0.6s var(--ease)}
+.cert-level{flex:1;text-align:center;position:relative;z-index:2}
+.cert-dot{width:clamp(32px,6vw,44px);height:clamp(32px,6vw,44px);border-radius:50%;margin:0 auto var(--space-1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:clamp(0.7rem,1.5vw,0.85rem);transition:all var(--duration)}
+.cert-dot.earned{background:var(--indigo);color:white;box-shadow:0 0 0 3px rgba(79,70,229,0.2)}
+.cert-dot.current{background:var(--gold);color:var(--midnight);box-shadow:0 0 0 3px rgba(212,175,55,0.25);animation:pulse 2s infinite}
+.cert-dot.locked{background:var(--gray-200);color:var(--gray-500)}
+[data-theme="dark"] .cert-dot.locked{background:rgba(255,255,255,0.1);color:var(--gray-500)}
+.cert-level-name{font-size:clamp(0.65rem,1.2vw,0.8rem);font-weight:600;margin-top:4px}
+.cert-level-xp{font-family:var(--font-mono);font-size:clamp(0.6rem,1vw,0.7rem);color:var(--gray-500)}
+.scroll-timeline{position:relative;padding:var(--space-8) 0;overflow:hidden}
+.scroll-timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--indigo),var(--gold),transparent);transform:translateX(-50%)}
+.scroll-reveal{display:flex;align-items:center;margin:var(--space-6) 0;opacity:0;transform:translateY(40px);transition:all 0.7s var(--ease)}
+.scroll-reveal.visible{opacity:1;transform:translateY(0)}
+.scroll-reveal:nth-child(odd){flex-direction:row-reverse}
+.scroll-reveal-content{flex:1;padding:var(--space-4)}
+.scroll-reveal-visual{flex:0 0 clamp(120px,20vw,180px);display:flex;align-items:center;justify-content:center}
+.scroll-reveal-year{font-family:var(--font-mono);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;color:var(--gold);opacity:0.6;margin-bottom:var(--space-1)}
+.scroll-reveal-title{font-family:var(--font-display);font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;margin-bottom:var(--space-1)}
+.scroll-reveal-desc{color:var(--gray-500);line-height:1.7;font-size:clamp(0.85rem,1.5vw,0.95rem)}
+.newsroom-featured{background:linear-gradient(135deg,var(--indigo),#7c3aed);border-radius:var(--radius-xl);padding:var(--space-4);color:white;margin-bottom:var(--space-4);position:relative;overflow:hidden}
+.newsroom-featured::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:rgba(255,255,255,0.05);border-radius:50%}
+.newsroom-featured-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;opacity:0.8;margin-bottom:var(--space-1)}
+.newsroom-featured h3{font-family:var(--font-display);font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;position:relative;z-index:1}
+.newsroom-featured p{opacity:0.9;position:relative;z-index:1}
+.funnel-pipeline{display:flex;flex-direction:column;gap:var(--space-1);margin:var(--space-4) 0}
+.funnel-stage{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);border-radius:var(--radius-md)}
+.funnel-stage-bar{flex:1;height:8px;border-radius:4px;background:var(--gray-200);overflow:hidden}
+[data-theme="dark"] .funnel-stage-bar{background:rgba(255,255,255,0.08)}
+.funnel-stage-fill{height:100%;border-radius:4px;transition:width 0.6s var(--ease)}
+.funnel-stage-label{font-size:clamp(0.75rem,1.2vw,0.85rem);font-weight:600;min-width:110px}
+.funnel-stage-count{font-family:var(--font-mono);font-weight:700;font-size:clamp(0.8rem,1.5vw,1rem);min-width:40px;text-align:right}
+.lead-score-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--radius-full);font-family:var(--font-mono);font-weight:700;font-size:0.8rem}
+.lead-score-hot{background:rgba(239,68,68,0.1);color:var(--error)}
+.lead-score-warm{background:rgba(245,158,11,0.1);color:var(--warning)}
+.lead-score-cold{background:rgba(79,70,229,0.1);color:var(--indigo)}
+.email-trigger{position:fixed;bottom:var(--space-2);right:var(--space-2);max-width:360px;background:white;border-radius:var(--radius-xl);padding:var(--space-3);box-shadow:var(--shadow-xl);z-index:2500;transform:translateY(120%);opacity:0;transition:all 0.5s var(--ease);border:1px solid var(--gray-200)}
+[data-theme="dark"] .email-trigger{background:#1a1a1f;border-color:rgba(255,255,255,0.08)}
+.email-trigger.show{transform:translateY(0);opacity:1}
+.email-trigger-close{position:absolute;top:8px;right:12px;font-size:1.2rem;cursor:pointer;color:var(--gray-400)}
+.analytics-card{background:white;border-radius:var(--radius-lg);padding:var(--space-3);border:1px solid var(--gray-200)}
+[data-theme="dark"] .analytics-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+.analytics-stat{font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;letter-spacing:-0.02em}
+.analytics-label{font-size:0.8rem;color:var(--gray-500);margin-top:4px}
+.geo-bar-row{display:flex;align-items:center;gap:var(--space-1);font-size:0.8rem}
+.geo-bar-label{min-width:80px;font-weight:500}
+.geo-bar{height:20px;border-radius:4px;background:var(--indigo);transition:width 0.6s var(--ease);min-width:4px}
+.geo-bar-count{font-family:var(--font-mono);font-size:0.75rem;font-weight:600;color:var(--gray-500)}
+@media (max-width:720px){.scroll-timeline::before{left:20px}.scroll-reveal,.scroll-reveal:nth-child(odd){flex-direction:column;align-items:flex-start;padding-left:50px}.scroll-reveal-visual{flex:none;margin-bottom:var(--space-2)}}
 </style>
 </head>
 <body>
@@ -870,12 +932,13 @@ textarea.form-input { min-height: 100px; resize: vertical; }
     <a href="#home" class="nav-logo">Sessions<span>with</span>Toby</a>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#resources">Resources</a>
       <a href="#assessment">Vocal DNA</a>
       <a href="#courses">Courses</a>
       <a href="#pricing">Pricing</a>
       <a href="#journal">Journal</a>
-      <a href="#lms">LMS</a>
-      <a href="#contact" class="nav-cta">Start Free</a>
+      <a href="#lms">Dashboard</a>
+      <a href="#booking" class="nav-cta">Book Session</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -900,22 +963,21 @@ textarea.form-input { min-height: 100px; resize: vertical; }
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section" id="about">
+<!-- ABOUT — ENHANCED SCROLL TIMELINE -->
+<section class="section" id="about" style="background:var(--midnight);color:var(--ivory);overflow:hidden">
   <div class="container">
-    <div class="section-label">About</div>
-    <h2 class="section-title">From Struggling Singer<br>to World-Class Mentor</h2>
-    <p class="section-desc">Coach Toby's journey from failed auditions to transforming thousands of voices across 15 countries.</p>
-    <div class="timeline">
-      <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-title">The Beginning</div><div class="timeline-desc">Started vocal training in Lagos with zero resources but an unshakable belief that every voice matters.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2017</div><div class="timeline-title">Biggest Failure</div><div class="timeline-desc">Lost his voice completely during a 3-month period. Couldn't sing, couldn't teach. Hit rock bottom.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2019</div><div class="timeline-title">The Breakthrough</div><div class="timeline-desc">Developed the NYVC method combining vocal science with spiritual understanding. First student went from tone-deaf to worship leader in 6 months.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-title">Going Global</div><div class="timeline-desc">Launched SessionswithToby online. Within 12 months: 500+ students across Nigeria, UK, USA, and Cameroon.</div></div>
-      <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-title">The Mission</div><div class="timeline-desc">2,400+ students later, the mission remains the same: help every singer unlock the voice they were born with.</div></div>
-    </div>
+    <div class="section-label" style="color:var(--gold)">About</div>
+    <h2 class="section-title" style="color:var(--ivory)">From Struggling Singer<br>to World-Class Mentor</h2>
+    <p class="section-desc" style="color:var(--gray-400)">Coach Toby's journey from failed auditions to transforming thousands of voices across 15 countries.</p>
+  </div>
+  <div class="scroll-timeline">
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2015</div><div class="scroll-reveal-title">The Beginning</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Started vocal training in Lagos with zero resources but an unshakable belief that every voice matters. Borrowed a neighbor's keyboard to practice.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🎤</div></div></div>
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2017</div><div class="scroll-reveal-title">Biggest Failure</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Lost his voice completely during a 3-month period. Couldn't sing, couldn't teach. Hit rock bottom. This darkness became the seedbed for the NYVC method.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌑</div></div></div>
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2019</div><div class="scroll-reveal-title">The Breakthrough</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Developed the NYVC method combining vocal science with spiritual understanding. First student went from tone-deaf to worship leader in 6 months.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">💡</div></div></div>
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2021</div><div class="scroll-reveal-title">Going Global</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Launched SessionswithToby online. Within 12 months: 500+ students across Nigeria, UK, USA, and Cameroon. The mission went borderless.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(79,70,229,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌍</div></div></div>
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2024</div><div class="scroll-reveal-title">The Mission</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">2,400+ students later, the mission remains: help every singer unlock the voice they were born with. Now building the AI-first Artist Operating System.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">👑</div></div></div>
   </div>
 </section>
-
 <!-- VOCAL DNA ASSESSMENT -->
 <section class="section" id="assessment" style="background:var(--gray-50)">
   <div class="container">
@@ -973,15 +1035,43 @@ textarea.form-input { min-height: 100px; resize: vertical; }
   </div>
 </section>
 
-<!-- NEWS -->
-<section class="section" id="news">
+<!-- VOCAL NEWSROOM -->
+<section class="section" id="news" style="background:var(--gray-50)">
   <div class="container">
-    <div class="section-label">Vocal Newsroom™</div>
+    <div class="section-label">Vocal Newsroom&trade;</div>
     <h2 class="section-title">What's Happening In Voice</h2>
+    <div class="newsroom-featured" id="newsroomFeatured"></div>
     <div class="grid grid-3" id="newsGrid"></div>
   </div>
 </section>
-
+<!-- ARTIST RESOURCES -->
+<section class="section" id="resources">
+  <div class="container">
+    <div class="section-label">Resources</div>
+    <h2 class="section-title">Free Artist Toolkit</h2>
+    <p class="section-desc">Professional tools and guides to accelerate your vocal growth — all free.</p>
+    <div class="grid grid-4" id="resourcesGrid"></div>
+  </div>
+</section>
+<!-- BOOK A SESSION -->
+<section class="section" id="booking" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="section-label">Book</div>
+    <h2 class="section-title">Work With Coach Toby</h2>
+    <p class="section-desc">Choose the format that fits your goals and budget.</p>
+    <div class="grid grid-3" id="bookingGrid"></div>
+  </div>
+</section>
+<!-- CERTIFICATION -->
+<section class="section" id="certification">
+  <div class="container">
+    <div class="section-label">Certification</div>
+    <h2 class="section-title">Earn Your Credentials</h2>
+    <p class="section-desc">Get certified in the NYVC method. From Bronze to Platinum — prove your mastery.</p>
+    <div id="certTrack"></div>
+    <div class="grid grid-4" id="certLevels"></div>
+  </div>
+</section>
 <!-- LMS LOGIN -->
 <section class="section" id="lms" style="background:var(--midnight);color:var(--ivory)">
   <div class="container text-center">
@@ -1011,6 +1101,11 @@ textarea.form-input { min-height: 100px; resize: vertical; }
   </div>
 </section>
 
+
+<div class="email-trigger" id="emailTrigger">
+  <span class="email-trigger-close" onclick="document.getElementById('emailTrigger').classList.remove('show')">&times;</span>
+  <div id="emailTriggerContent"></div>
+</div>
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
@@ -1021,11 +1116,11 @@ textarea.form-input { min-height: 100px; resize: vertical; }
       </div>
       <div class="footer-col">
         <h4>Learn</h4>
-        <a href="#courses">Courses</a><a href="#assessment">Vocal DNA</a><a href="#journal">Journal</a><a href="#lms">LMS</a>
+        <a href="#courses">Courses</a><a href="#assessment">Vocal DNA</a><a href="#journal">Journal</a><a href="#news">News</a><a href="#lms">Dashboard</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="#about">About</a><a href="#stories">Success Stories</a><a href="#news">News</a><a href="#contact">Contact</a>
+        <a href="#about">About</a><a href="#resources">Resources</a><a href="#booking">Book Session</a><a href="#certification">Certification</a><a href="#contact">Contact</a>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
@@ -1076,6 +1171,18 @@ textarea.form-input { min-height: 100px; resize: vertical; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span>Community</span>
     </a>
+    <a href="#" class="lms-sidebar-link" data-page="funnel" onclick="app.lmsNav('funnel');return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <span>Funnel</span>
+    </a>
+    <a href="#" class="lms-sidebar-link" data-page="analytics" onclick="app.lmsNav('analytics');return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      <span>Analytics</span>
+    </a>
+    <a href="#" class="lms-sidebar-link" data-page="email" onclick="app.lmsNav('email');return false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>Email</span>
+    </a>
   </aside>
   <main class="lms-content" id="lmsContent"></main>
   <button onclick="app.toggleDarkMode()" style="position:fixed;bottom:70px;right:14px;z-index:300;width:40px;height:40px;border-radius:50%;background:var(--gray-900);color:white;border:none;box-shadow:var(--shadow-lg);cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
@@ -1108,6 +1215,11 @@ const S = {
   assessmentStep: 0,
   assessmentAnswers: [],
   leadScore: parseInt(localStorage.getItem('swt_leadScore') || '0'),
+  funnel: JSON.parse(localStorage.getItem('swt_funnel') || '{}'),
+  emailCaptures: JSON.parse(localStorage.getItem('swt_emails') || '[]'),
+  geoData: JSON.parse(localStorage.getItem('swt_geo') || '{}'),
+  pagesVisited: JSON.parse(localStorage.getItem('swt_pages') || '[]'),
+  sessionStart: Date.now(),
 };
 
 const DATA = {
@@ -1146,12 +1258,56 @@ const DATA = {
     { title:'Songwriting Formula', cat:'Songwriting', read:'9 min', icon:'✍️' },
   ],
   news: [
-    { title:'AI in Vocal Training: 2026 Report', date:'Jun 15', cat:'Industry' },
-    { title:'Grammy Vocal Analysis: Top Performers', date:'Jun 12', cat:'Analysis' },
-    { title:'Nigerian Idol Season 8 Vocal Breakdown', date:'Jun 10', cat:'Nigerian Idol' },
-    { title:'New Study: Singing & Mental Health', date:'Jun 8', cat:'Science' },
-    { title:'Trending: Afrobeats Vocal Techniques', date:'Jun 5', cat:'Trending' },
-    { title:'American Idol Finals Review', date:'Jun 3', cat:'American Idol' },
+    { title:'AI in Vocal Training: 2026 Report', date:'Jun 15', cat:'Industry', featured:true, desc:'How AI-powered tools are revolutionizing vocal coaching worldwide.' },
+    { title:'Grammy Vocal Analysis: Top Performers', date:'Jun 12', cat:'Analysis', desc:'Breaking down the vocal techniques of this year\'s Grammy nominees.' },
+    { title:'Nigerian Idol Season 8 Vocal Breakdown', date:'Jun 10', cat:'Nigerian Idol', desc:'Top 5 contestants analyzed — strengths and weaknesses.' },
+    { title:'New Study: Singing & Mental Health', date:'Jun 8', cat:'Science', desc:'University of Lagos study: regular singing reduces cortisol by 40%.' },
+    { title:'Trending: Afrobeats Vocal Techniques', date:'Jun 5', cat:'Trending', desc:'The distinct vocal patterns driving the global Afrobeats movement.' },
+    { title:'American Idol Finals Review', date:'Jun 3', cat:'American Idol', desc:'Technical analysis of the finale performances.' },
+    { title:'Voice Science: How Falsetto Works', date:'Jun 1', cat:'Science', desc:'The biomechanics of falsetto explained simply.' },
+    { title:'Burna Boy Vocal Analysis', date:'May 28', cat:'Analysis', desc:'How Burna Boy blends singing techniques across genres.' },
+  ],
+  resources: [
+    { title:'Vocal Health Guide', desc:'Science-backed habits to keep your voice in peak condition', icon:'🩺' },
+    { title:'Warm-Up Library', desc:'15 proven warm-up routines for every voice type', icon:'🔥' },
+    { title:'Songbook', desc:'50+ songs with vocal exercises and sheet music', icon:'📖' },
+    { title:'Gig Finder Toolkit', desc:'Find gigs, open mics, and opportunities nearby', icon:'🎪' },
+    { title:'Pitch Reference', desc:'Interactive pitch tool — hear every note', icon:'🎹' },
+    { title:'Metronome', desc:'Visual metronome with tempo training', icon:'⏱️' },
+    { title:'Tuner Tool', desc:'Real-time chromatic tuner with cents display', icon:'🎯' },
+    { title:'Vocal Recorder', desc:'Record, compare, and track your progress', icon:'🎙️' },
+  ],
+  certifications: [
+    { level:'Bronze', xpRequired:0, color:'#CD7F32', requirements:['Complete Vocal DNA Assessment','Finish 5 Lessons','Pass Bronze Quiz'] },
+    { level:'Silver', xpRequired:200, color:'#C0C0C0', requirements:['Complete 15 Lessons','Pass Silver Quiz','Submit 1 Recording','7-Day Streak'] },
+    { level:'Gold', xpRequired:500, color:'#FFD700', requirements:['Complete 25 Lessons','Pass Gold Quiz','Submit 3 Recordings','14-Day Streak','Community Contribution'] },
+    { level:'Platinum', xpRequired:1000, color:'#E5E4E2', requirements:['Complete All 33 Lessons','Pass All Quizzes','Submit 5 Recordings','30-Day Streak','Mentor 1 Student'] },
+  ],
+  emailTemplates: [
+    { trigger:'5s_popup', subject:'Want Your Free Vocal DNA Report?', body:'Take our 2-minute assessment and get a personalized report about your voice.', delay:7000 },
+    { trigger:'exit_intent', subject:'Your Personalized Singer Roadmap', body:'Tell us your email and we will send you a step-by-step plan to transform your voice in 30 days.', delay:0 },
+    { trigger:'assessment_complete', subject:'Save Your Vocal DNA Results', body:'Your Vocal DNA is unique to you. Save your results and start your personalized path.', delay:0 },
+    { trigger:'weakness_pitch', subject:'Fix Your Pitch in 10 Minutes/Day', body:'Based on your assessment, pitch accuracy is your focus. Here is a daily exercise to transform your pitch.', delay:86400000 },
+    { trigger:'weakness_breath', subject:'Master Your Breath Support', body:'Your assessment shows breath control as key. Try this: 4-count in, 4-hold, 8-count out. Daily.', delay:86400000 },
+    { trigger:'weakness_range', subject:'Expand Your Range Safely', body:'Lip trills sliding up and down your comfortable range, one semitone per week.', delay:86400000 },
+    { trigger:'weakness_confidence', subject:'Conquer Stage Fright', body:'Record yourself daily, perform for 1 person, then 3, then 5. Build your exposure ladder.', delay:86400000 },
+    { trigger:'weakness_tone', subject:'Transform Your Tone Quality', body:'Sing "ng" on a comfortable note for 5 min daily. Feel the buzz in your mask.', delay:86400000 },
+    { trigger:'genre_afrobeats', subject:'Master Afrobeats Vocal Style', body:'Daily practice routine for authentic Afrobeats flow — rhythm, phrasing, pitch bends.', delay:86400000 },
+  ],
+  funnelStages: [
+    { name:'Traffic', count:0, color:'#6B7280', description:'Visitors landing on the site' },
+    { name:'Identity Detection', count:0, color:'#4F46E5', description:'Vocal DNA assessment completed' },
+    { name:'Behavior Tracking', count:0, color:'#10B981', description:'Lessons, practice sessions' },
+    { name:'Personalization', count:0, color:'#F59E0B', description:'Profile built, recommendations active' },
+    { name:'Lead Nurture', count:0, color:'#EC4899', description:'Email sequence engaged' },
+    { name:'Transformation', count:0, color:'#8B5CF6', description:'Visible progress, streaks building' },
+    { name:'Monetization', count:0, color:'#D4AF37', description:'Purchase or booking completed' },
+    { name:'Advocacy', count:0, color:'#EF4444', description:'Sharing, referring, reviewing' },
+  ],
+  bookingOptions: [
+    { name:'Free Discovery Call', price:'$0', period:'', features:['15-min voice evaluation','Hear your strengths','No commitment'], cta:'Book Free Call', featured:false },
+    { name:'1-on-1 Coaching', price:'$200', period:'/hour', features:['Full vocal assessment','Custom training plan','Recording feedback','WhatsApp support'], cta:'Book Session', featured:true },
+    { name:'Group Coaching', price:'₦20K', period:'/month', features:['Weekly group calls','Community access','Accountability partner','Certificate'], cta:'Join Group', featured:false },
   ],
   lessons: [
     { id:1, title:'Your Voice Matters', course:'Foundations', duration:'8 min', content:'Welcome to your vocal journey. In this lesson, we explore why your voice is unique.' },
@@ -1206,6 +1362,15 @@ const Analytics = {
     this.track('page_view', { path: location.hash || 'home' });
     this.geo();
     this.startTime();
+    this.detectDevice();
+  },
+  detectDevice() {
+    const ua = navigator.userAgent;
+    const device = /Mobile|Android|iPhone/i.test(ua) ? 'mobile' : /Tablet|iPad/i.test(ua) ? 'tablet' : 'desktop';
+    const lang = navigator.language || 'en';
+    const geo = JSON.parse(localStorage.getItem('swt_geo') || '{}');
+    geo.device = device; geo.language = lang;
+    localStorage.setItem('swt_geo', JSON.stringify(geo));
   },
   geo() {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -1228,12 +1393,20 @@ const Analytics = {
     const events = JSON.parse(localStorage.getItem('swt_events') || '[]');
     events.push({ event, ...data, ts: Date.now() });
     localStorage.setItem('swt_events', JSON.stringify(events.slice(-500)));
-    if (event === 'assessment_started') S.leadScore += 10;
-    if (event === 'assessment_finished') S.leadScore += 25;
-    if (event === 'pricing_viewed') S.leadScore += 30;
-    if (event === 'email_submitted') S.leadScore += 50;
-    if (event === 'purchase_started') S.leadScore += 100;
-    localStorage.setItem('swt_leadScore', S.leadScore);
+    const scoring = { page_view:1, assessment_started:10, assessment_finished:25, lesson_started:5, lesson_finished:15, quiz_completed:10, email_submitted:50, audio_uploaded:50, challenge_joined:20, pricing_viewed:30, purchase_started:100, purchase_completed:200, certificate_earned:150, voice_type_detected:15, range_identified:15, genre_selected:10, weakness_detected:10, strength_detected:5, booked_session:100, resource_downloaded:10, article_opened:5 };
+    if (scoring[event]) { S.leadScore = parseInt(localStorage.getItem('swt_leadScore')||'0') + scoring[event]; localStorage.setItem('swt_leadScore', S.leadScore); }
+    if (event === 'page_view') { const p = JSON.parse(localStorage.getItem('swt_pages')||'[]'); p.push({path:data.path,ts:Date.now()}); localStorage.setItem('swt_pages', JSON.stringify(p.slice(-100))); }
+    const funnelMap = { page_view:'Traffic', assessment_finished:'Identity Detection', lesson_started:'Behavior Tracking', voice_type_detected:'Personalization', email_submitted:'Lead Nurture', lesson_finished:'Transformation', purchase_started:'Monetization', purchase_completed:'Advocacy' };
+    if (funnelMap[event]) { const f = JSON.parse(localStorage.getItem('swt_funnel')||'{}'); f[funnelMap[event]] = (f[funnelMap[event]]||0)+1; localStorage.setItem('swt_funnel', JSON.stringify(f)); }
+  },
+  leadScore() { const s = parseInt(localStorage.getItem('swt_leadScore')||'0'); return { score:s, tier:s>=250?'hot':s>=100?'warm':'cold' }; },
+  exportCSV() {
+    const u = JSON.parse(localStorage.getItem('swt_user')||'null');
+    const v = JSON.parse(localStorage.getItem('swt_voice')||'null');
+    const g = JSON.parse(localStorage.getItem('swt_geo')||'{}');
+    const row = { email:u?.email||'',name:u?.name||'',country:g.country||'',device:g.device||'',voice_type:v?.voiceType||'',genre:v?.genre||'',level:v?.experience||'',weakness:v?.challenge||'',xp:parseInt(localStorage.getItem('swt_xp')||'0'),lead_score:parseInt(localStorage.getItem('swt_leadScore')||'0'),last_activity:new Date().toISOString() };
+    const leads = JSON.parse(localStorage.getItem('swt_leads')||'[]'); leads.push(row); localStorage.setItem('swt_leads',JSON.stringify(leads));
+    return row;
   },
   funnel() {
     const events = JSON.parse(localStorage.getItem('swt_events') || '[]');
@@ -1262,11 +1435,23 @@ const CRM = {
     localStorage.setItem('swt_email_triggers', JSON.stringify(triggers));
   },
   exportSheet() {
-    return {
-      leads: JSON.parse(localStorage.getItem('swt_leads') || '[]'),
-      events: JSON.parse(localStorage.getItem('swt_events') || '[]'),
-      user: S.user, xp: S.xp, voice: S.voiceProfile
-    };
+    return { leads: JSON.parse(localStorage.getItem('swt_leads')||'[]'), events: JSON.parse(localStorage.getItem('swt_events')||'[]'), user: S.user, xp: S.xp, voice: S.voiceProfile };
+  }
+};
+const EmailTriggers = {
+  init() { setTimeout(() => this.showTrigger('5s_popup'), 7000); },
+  showTrigger(type) {
+    const trigger = DATA.emailTemplates.find(t => t.trigger === type);
+    if (!trigger) return;
+    document.getElementById('emailTriggerContent').innerHTML = '<div style="font-size:2rem;margin-bottom:var(--space-1)">🎁</div><h4 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-1)">' + trigger.subject + '</h4><p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:var(--space-2)">' + trigger.body.substring(0,100) + '...</p><div class="form-group"><input type="email" class="form-input" id="emailCaptureInput" placeholder="your@email.com"></div><button class="btn btn-gold btn-block" onclick="app.submitEmailCapture(\'' + type + '\')">Get My Report →</button>';
+    document.getElementById('emailTrigger').classList.add('show');
+  },
+  personalizedTrigger() {
+    if (!S.voiceProfile) return;
+    const wMap = {'Pitch accuracy':'weakness_pitch','Breath control':'weakness_breath','Range expansion':'weakness_range','Stage confidence':'weakness_confidence','Tone quality':'weakness_tone'};
+    const gMap = {'Afrobeats':'genre_afrobeats'};
+    const t = wMap[S.voiceProfile.challenge] || gMap[S.voiceProfile.genre] || '5s_popup';
+    this.showTrigger(t);
   }
 };
 
@@ -1305,14 +1490,23 @@ document.querySelectorAll('section').forEach(s => { s.classList.add('fade-in'); 
 const app = {
   init() {
     Analytics.init();
+    EmailTriggers.init();
     this.renderCourses();
     this.renderPricing();
     this.renderStories();
     this.renderJournal();
     this.renderNews();
+    this.renderResources();
+    this.renderBooking();
+    this.renderCertification();
     this.renderAssessment();
     this.checkStreak();
+    this.initScrollReveal();
     if (S.user) this.lmsNav('dashboard');
+  },
+  initScrollReveal() {
+    const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
+    document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
   },
 
   checkStreak() {
@@ -1376,23 +1570,48 @@ const app = {
     `).join('');
   },
 
-  renderNews() {
-    document.getElementById('newsGrid').innerHTML = DATA.news.map(n => `
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)">
-          <span style="font-size:0.7rem;color:var(--indigo);font-weight:600;text-transform:uppercase">${n.cat}</span>
-          <span style="font-size:0.7rem;color:var(--gray-400)">${n.date}</span>
-        </div>
-        <h4 style="font-weight:600;font-size:1rem">${n.title}</h4>
-      </div>
-    `).join('');
-  },
+  renderNews() { this.renderNewsroom(); },
 
   openArticle(title) {
     Analytics.track('article_opened', { title });
     modal(`<h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-2)">${title}</h3><p style="color:var(--gray-600);line-height:1.7">This article is available in the LMS. Sign up to read the full content, get the audio version, and share with your study group.</p><button class="btn btn-accent" style="margin-top:var(--space-3);width:100%" onclick="document.getElementById('modal').classList.remove('open');app.lmsNavigate()">Read in LMS →</button>`);
   },
 
+  // ─── RESOURCES ───
+  renderResources() {
+    document.getElementById('resourcesGrid').innerHTML = DATA.resources.map(r => '<div class="resource-card" onclick="Analytics.track(\'resource_downloaded\',{title:\''+r.title+'\'})"><div class="resource-icon" style="background:rgba(79,70,229,0.1);color:var(--indigo)">'+r.icon+'</div><h4 style="font-weight:600;margin-bottom:var(--space-1);font-size:0.9rem">'+r.title+'</h4><p style="font-size:0.8rem;color:var(--gray-500);line-height:1.5">'+r.desc+'</p></div>').join('');
+  },
+  // ─── BOOKING ───
+  renderBooking() {
+    document.getElementById('bookingGrid').innerHTML = DATA.bookingOptions.map(b => '<div class="booking-card '+ (b.featured?'featured':'') +'"><div class="pricing-name">'+b.name+'</div><div class="booking-price">'+b.price+'<span>'+b.period+'</span></div><ul class="pricing-features">'+b.features.map(f => '<li>'+f+'</li>').join('')+'</ul><button class="btn '+ (b.featured?'btn-gold':'btn-primary') +'" style="width:100%" onclick="Analytics.track(\'booked_session\',{type:\''+b.name+'\'});toast(\'Booking request sent!\')">'+b.cta+'</button></div>').join('');
+  },
+  // ─── CERTIFICATION ───
+  renderCertification() {
+    const cl = S.xp < 200 ? 0 : S.xp < 500 ? 1 : S.xp < 1000 ? 2 : 3;
+    const pct = Math.min(100, (S.xp / 1000) * 100);
+    document.getElementById('certTrack').innerHTML = '<div class="cert-track"><div class="cert-progress" style="width:'+pct+'%"></div>'+DATA.certifications.map((c,i) => '<div class="cert-level"><div class="cert-dot '+ (i<cl?'earned':i===cl?'current':'locked') +'">'+ (i<cl?'✓':(i+1)) +'</div><div class="cert-level-name">'+c.level+'</div><div class="cert-level-xp">'+c.xpRequired+' XP</div></div>').join('')+'</div>';
+    document.getElementById('certLevels').innerHTML = DATA.certifications.map((c,i) => '<div class="card" style="'+(i===cl?'border-color:var(--indigo);box-shadow:var(--shadow-glow)':'')+'"><div style="font-size:2rem;margin-bottom:var(--space-1)">'+['🥉','🥈','🥇','💎'][i]+'</div><h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-1)">'+c.level+'</h4><p style="font-size:0.75rem;color:var(--gray-500);margin-bottom:var(--space-1)">'+c.xpRequired+' XP required</p><ul style="font-size:0.75rem;color:var(--gray-600);text-align:left;padding-left:var(--space-3)">'+c.requirements.map(r => '<li style="margin-bottom:4px">'+(i<cl?'✓':'○')+' '+r+'</li>').join('')+'</ul></div>').join('');
+  },
+  // ─── NEWSROOM ───
+  renderNewsroom() {
+    const featured = DATA.news.find(n => n.featured) || DATA.news[0];
+    document.getElementById('newsroomFeatured').innerHTML = '<div style="position:relative;z-index:1"><div class="newsroom-featured-label">'+featured.cat+'</div><h3>'+featured.title+'</h3><p>'+featured.desc+'</p><button class="btn btn-gold btn-sm" style="margin-top:var(--space-2)" onclick="Analytics.track(\'article_opened\',{title:\''+featured.title+'\'})">Read Full Story →</button></div>';
+    const others = DATA.news.filter(n => n.title !== featured.title);
+    document.getElementById('newsGrid').innerHTML = others.map(n => '<div class="card" onclick="Analytics.track(\'article_opened\',{title:\''+n.title+'\'})"><div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span style="font-size:0.7rem;color:var(--indigo);font-weight:600;text-transform:uppercase">'+n.cat+'</span><span style="font-size:0.7rem;color:var(--gray-400)">'+n.date+'</span></div><h4 style="font-weight:600;font-size:1rem">'+n.title+'</h4>'+(n.desc ? '<p style="font-size:0.8rem;color:var(--gray-500);margin-top:var(--space-1);line-height:1.5">'+n.desc.substring(0,80)+'...</p>' : '')+'</div>').join('');
+  },
+  // ─── EMAIL CAPTURE ───
+  submitEmailCapture(trigger) {
+    const email = document.getElementById('emailCaptureInput').value;
+    if (!email || !email.includes('@')) { toast('Enter a valid email'); return; }
+    const emails = JSON.parse(localStorage.getItem('swt_emails')||'[]');
+    emails.push({email,trigger,ts:Date.now()});
+    localStorage.setItem('swt_emails',JSON.stringify(emails));
+    CRM.capture({event:'email_captured',email,trigger});
+    Analytics.track('email_submitted',{email,trigger});
+    document.getElementById('emailTrigger').classList.remove('show');
+    document.getElementById('emailCaptureInput').value = '';
+    toast('Check your email! 📧');
+  },
   // ─── CONTACT FORM ───
   contactSubmit() {
     const name = document.getElementById('contactName').value;
@@ -1472,6 +1691,9 @@ const app = {
       case 'assessments': c.innerHTML = this.lmsAssessments(); break;
       case 'mentor': c.innerHTML = this.lmsMentor(); this.mentorInit(); break;
       case 'community': c.innerHTML = this.lmsCommunity(); break;
+      case 'funnel': c.innerHTML = this.lmsFunnel(); break;
+      case 'analytics': c.innerHTML = this.lmsAnalytics(); break;
+      case 'email': c.innerHTML = this.lmsEmail(); break;
     }
   },
 
@@ -1482,19 +1704,21 @@ const app = {
     const level = Math.floor(S.xp / 100) + 1;
     const badges = ['🌱 First Step', '🔥 7-Day Streak', '🎯 Pitch Pro', '🫁 Breath Master', '⭐ 500 XP', '👑 1000 XP'];
     const earnedBadges = badges.slice(0, Math.min(badges.length, Math.floor(S.xp / 100) + 1));
-    return `
-      <div class="dash-header">
-        <h1>Welcome back, ${S.user.name} 👋</h1>
-        <p>Level ${level} · ${S.xp} XP · ${S.streak} day streak</p>
-        <div class="xp-bar" style="max-width:300px;margin-top:var(--space-2)"><div class="xp-bar-fill" style="width:${progress}%"></div></div>
-        <div style="font-size:0.75rem;color:var(--gray-500);margin-top:4px">${xpToNext - S.xp} XP to Level ${level + 1}</div>
-      </div>
-      <div class="grid grid-4" style="margin-bottom:var(--space-5)">
-        <div class="stat-card"><div class="stat-card-value">${S.xp}</div><div class="stat-card-label">Total XP</div></div>
-        <div class="stat-card"><div class="stat-card-value">${S.streak}</div><div class="stat-card-label">Day Streak</div></div>
-        <div class="stat-card"><div class="stat-card-value">${S.lessonsCompleted.length}</div><div class="stat-card-label">Lessons Done</div></div>
-        <div class="stat-card"><div class="stat-card-value">${level}</div><div class="stat-card-label">Level</div></div>
-      </div>
+    const ls = Analytics.leadScore();
+    const sc = ls.tier==='hot'?'lead-score-hot':ls.tier==='warm'?'lead-score-warm':'lead-score-cold';
+    let dailyRec = '';
+    if (S.voiceProfile) {
+      const w = S.voiceProfile.challenge || 'general technique';
+      const recs = {'Pitch accuracy':{title:'Pitch Matching Drill',desc:'5 min interval training — your pitch sharpens fast.'},'Breath control':{title:'4-7-8 Breathing',desc:'Inhale 4s, hold 7s, exhale 8s. Repeat 4x.'},'Range expansion':{title:'Lip Trill Sirens',desc:'Slide up and down your range on lip trills.'},'Stage confidence':{title:'Mirror Performance',desc:'Sing to yourself for 3 minutes.'},'Tone quality':{title:'NG Resonance Drill',desc:'Sing "ng" on a comfortable note.'}};
+      const rec = recs[w] || {title:'Vocal Warm-Up',desc:'5-minute full warm-up to start your day.'};
+      dailyRec = '<div class="daily-rec"><div class="daily-rec-inner"><div class="daily-rec-label">Today\'s Focus: '+(S.voiceProfile.challenge||'General')+'</div><div class="daily-rec-title">'+rec.title+'</div><div class="daily-rec-insight">'+rec.desc+'</div></div></div>';
+    } else {
+      dailyRec = '<div class="daily-rec"><div class="daily-rec-inner"><div class="daily-rec-label">Recommended</div><div class="daily-rec-title">Take Your Vocal DNA Assessment</div><div class="daily-rec-insight">Get your personalized learning path.</div></div></div>';
+    }
+    return '<div class="dash-header"><h1>Welcome back, '+S.user.name+' 👋</h1><p>Level '+level+' · '+S.xp+' XP · '+S.streak+' day streak <span class="lead-score-badge '+sc+'">⚡ '+ls.score+'</span></p><div class="xp-bar" style="max-width:300px;margin-top:var(--space-2)"><div class="xp-bar-fill" style="width:'+progress+'%"></div></div><div style="font-size:0.75rem;color:var(--gray-500);margin-top:4px">'+(xpToNext-S.xp)+' XP to Level '+(level+1)+'</div></div>'+
+    dailyRec+
+    '<div class="grid grid-4" style="margin-bottom:var(--space-5)"><div class="stat-card"><div class="stat-card-value">'+S.xp+'</div><div class="stat-card-label">Total XP</div></div><div class="stat-card"><div class="stat-card-value">'+S.streak+'</div><div class="stat-card-label">Day Streak</div></div><div class="stat-card"><div class="stat-card-value">'+S.lessonsCompleted.length+'</div><div class="stat-card-label">Lessons Done</div></div><div class="stat-card"><div class="stat-card-value">'+level+'</div><div class="stat-card-label">Level</div></div></div>'+
+    (S.voiceProfile ? '<div class="voice-avatar-card" style="margin-bottom:var(--space-5)"><div class="voice-avatar-inner"><div class="voice-avatar-icon">🎤</div><div class="voice-avatar-archetype">'+(S.voiceProfile.archetype||'The Rising Star')+'</div><div class="voice-avatar-range">'+(S.voiceProfile.genre||'Multi-genre')+' · '+(S.voiceProfile.experience||'Growing')+'</div><div class="voice-avatar-tags">'+(S.voiceProfile.strengths||[]).map(s => '<span class="voice-tag voice-tag-strength">✓ '+s+'</span>').join('')+(S.voiceProfile.weaknesses||[]).map(w => '<span class="voice-tag voice-tag-weakness">⚡ '+w+'</span>').join('')+'</div></div></div>' : '')
       <h3 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-3)">Progress Galaxy</h3>
       <div class="progress-galaxy" id="galaxy">
         ${['Pitch','Breath','Theory','Performance','Branding'].map((p, i) => {
@@ -1510,6 +1734,9 @@ const app = {
         <div class="skill-tree">
           <div class="skill-branch">${earnedBadges.map(b => `<div class="skill-node unlocked">${b}</div>`).join('')}</div>
         </div>
+      </div>
+      <div style="margin-top:var(--space-5);padding-top:var(--space-3);border-top:1px solid var(--gray-200)">
+        <button class="btn btn-sm btn-secondary" onclick="Analytics.exportCSV();toast('Data exported')">📊 Export Data (CSV)</button>
       </div>
     `;
   },
@@ -1999,6 +2226,62 @@ const app = {
     this.renderAssessment();
   },
 
+  // ─── LEAD FUNNEL ───
+  lmsFunnel() {
+    const funnel = JSON.parse(localStorage.getItem('swt_funnel')||'{}');
+    const total = funnel['Traffic'] || 1;
+    return '<div class="dash-header"><h1>Lead Funnel</h1><p>Traffic to Advocacy pipeline.</p></div>'+
+    '<div style="margin-bottom:var(--space-5)">'+
+    DATA.funnelStages.map(s => {
+      const c = funnel[s.name] || 0;
+      const p = total > 0 ? Math.round((c/total)*100) : 0;
+      return '<div class="funnel-stage"><span class="funnel-stage-label">'+s.name+'</span><div class="funnel-stage-bar"><div class="funnel-stage-fill" style="width:'+p+'%;background:'+s.color+'"></div></div><span class="funnel-stage-count">'+c+'</span></div>';
+    }).join('')+'</div>';
+  },
+  // ─── ANALYTICS ───
+  lmsAnalytics() {
+    const events = JSON.parse(localStorage.getItem('swt_events')||'[]');
+    const geo = JSON.parse(localStorage.getItem('swt_geo')||'{}');
+    const pages = JSON.parse(localStorage.getItem('swt_pages')||'[]');
+    const ls = Analytics.leadScore();
+    const ec = {};
+    events.forEach(e => { ec[e.event] = (ec[e.event]||0)+1; });
+    const top = Object.entries(ec).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    const pc = {};
+    pages.forEach(p => { pc[p.path] = (pc[p.path]||0)+1; });
+    return '<div class="dash-header"><h1>Analytics</h1><p>Real-time event tracking.</p></div>'+
+    '<div class="grid grid-4" style="margin-bottom:var(--space-5)">'+
+    '<div class="analytics-card"><div class="analytics-stat">'+events.length+'</div><div class="analytics-label">Total Events</div></div>'+
+    '<div class="analytics-card"><div class="analytics-stat">'+pages.length+'</div><div class="analytics-label">Page Views</div></div>'+
+    '<div class="analytics-card"><div class="analytics-stat">'+S.xp+'</div><div class="analytics-label">Total XP</div></div>'+
+    '<div class="analytics-card"><span class="lead-score-badge '+ (ls.tier==='hot'?'lead-score-hot':ls.tier==='warm'?'lead-score-warm':'lead-score-cold') +'">⚡ '+ls.score+' pts</span><div class="analytics-label">Lead Score</div></div>'+
+    '</div><div class="grid grid-2" style="margin-bottom:var(--space-5)">'+
+    '<div class="analytics-card"><h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-2)">Top Events</h4>'+
+    (top.length ? top.map(([n,c]) => '<div class="geo-bar-row"><span class="geo-bar-label">'+n.replace(/_/g,' ')+'</span><div class="geo-bar" style="width:'+Math.min(100,c*5)+'%"></div><span class="geo-bar-count">'+c+'</span></div>').join('') : '<p style="color:var(--gray-500);font-size:0.85rem">No events yet</p>')+'</div>'+
+    '<div class="analytics-card"><h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-2)">Geo & Device</h4>'+
+    '<div class="geo-bar-row"><span class="geo-bar-label">Country</span><span class="geo-bar-count">'+(geo.country||'Unknown')+'</span></div>'+
+    '<div class="geo-bar-row"><span class="geo-bar-label">Device</span><span class="geo-bar-count">'+(geo.device||'Unknown')+'</span></div>'+
+    '<div class="geo-bar-row"><span class="geo-bar-label">Language</span><span class="geo-bar-count">'+(geo.language||'en')+'</span></div>'+
+    '<h4 style="font-family:var(--font-display);font-weight:600;margin:var(--space-3) 0 var(--space-2)">Pages Visited</h4>'+
+    (Object.entries(pc).length ? Object.entries(pc).map(([p,c]) => '<div class="geo-bar-row"><span class="geo-bar-label">'+(p||'home')+'</span><div class="geo-bar" style="width:'+Math.min(100,c*10)+'%;background:var(--emerald)"></div><span class="geo-bar-count">'+c+'</span></div>').join('') : '<p style="color:var(--gray-500);font-size:0.85rem">No page data</p>')+'</div>'+
+    '</div>';
+  },
+  // ─── EMAIL AUTOMATION ───
+  lmsEmail() {
+    const captured = JSON.parse(localStorage.getItem('swt_emails')||'[]');
+    return '<div class="dash-header"><h1>Email Automation</h1><p>AI-personalized sequences.</p></div>'+
+    '<div class="grid grid-2" style="margin-bottom:var(--space-5)">'+
+    '<div class="analytics-card"><h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-2)">Capture Triggers</h4>'+
+    '<div style="padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-sm);margin-bottom:var(--space-1)"><strong style="color:var(--indigo)">Trigger 1:</strong> 7s delay → Vocal DNA popup</div>'+
+    '<div style="padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-sm);margin-bottom:var(--space-1)"><strong style="color:var(--indigo)">Trigger 2:</strong> Exit intent → Singer Roadmap</div>'+
+    '<div style="padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-sm)"><strong style="color:var(--indigo)">Trigger 3:</strong> Assessment done → Save Results</div></div>'+
+    '<div class="analytics-card"><h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-2)">Captured Emails</h4>'+
+    (captured.length ? '<div style="max-height:200px;overflow-y:auto">'+captured.map(e => '<div style="padding:8px 0;border-bottom:1px solid var(--gray-200);display:flex;justify-content:space-between"><span style="font-weight:500">'+e.email+'</span><span style="font-size:0.75rem;color:var(--gray-500)">'+e.trigger+'</span></div>').join('')+'</div>' : '<p style="color:var(--gray-500);font-size:0.85rem">No emails yet</p>')+
+    '<div style="margin-top:var(--space-2);font-size:0.8rem;color:var(--gray-500)">Total: '+captured.length+' emails</div></div>'+
+    '</div>'+
+    '<div class="analytics-card"><h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:var(--space-2)">AI Personalization Rules</h4>'+
+    '<div style="font-size:0.85rem;color:var(--gray-600);line-height:2"><strong>Weakness-based:</strong> pitch, breath, range, confidence, tone → targeted emails<br><br><strong>Genre-based:</strong> Afrobeats → Afrobeats techniques<br><br><strong>Lead Score:</strong> Hot (250+) → priority offers | Warm (100+) → nurture</div></div>';
+  },
   // ─── AI MENTOR ───
   lmsMentor() {
     const lastMsg = S.mentorHistory.length > 0 ? S.mentorHistory[S.mentorHistory.length - 1] : null;
