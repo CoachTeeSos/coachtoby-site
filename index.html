@@ -1955,9 +1955,8 @@ const CRM = {
     return { leads: JSON.parse(localStorage.getItem('swt_leads')||'[]'), events: JSON.parse(localStorage.getItem('swt_events')||'[]'), user: S.user, xp: S.xp, voice: S.voiceProfile };
   },
   pushToSheet(data) {
-    const webhook = localStorage.getItem('swt_sheets_webhook');
-    if (!webhook) { console.warn('Sheets webhook not set.'); return false; }
-    fetch(webhook, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) })
+    const webhook = 'http://localhost:8081/api/email';
+    fetch(webhook, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) })
       .then(r => this.track('sheets_pushed', { ok: r.ok }))
       .catch(e => console.warn('Sheets push failed:', e));
     return true;
@@ -2160,6 +2159,7 @@ const app = {
     emails.push({email,trigger,ts:Date.now()});
     localStorage.setItem('swt_emails',JSON.stringify(emails));
     CRM.capture({event:'email_captured',email,trigger});
+    CRM.pushToSheet({email, name: email.split('@')[0], type:'lead', trigger, ts:Date.now()});
     Analytics.track('email_submitted',{email,trigger});
     document.getElementById('emailTrigger').classList.remove('show');
     document.getElementById('emailCaptureInput').value = '';
@@ -2181,6 +2181,7 @@ const app = {
     const msg = document.getElementById('contactMsg').value;
     if (!name || !email) { toast('Please fill in your name and email'); return; }
     CRM.capture({ event:'email_captured', name, email, msg });
+    CRM.pushToSheet({email, name, type:'contact', trigger:'contact_form', ts:Date.now()});
     Analytics.track('email_submitted', { name, email });
     toast('Message sent! We will be in touch.');
     document.getElementById('contactName').value = '';
@@ -2243,7 +2244,7 @@ const app = {
     document.getElementById('emailGate').style.display = 'flex';
     document.getElementById('gateEmail').value = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  },
 
   showLMS() {
     document.querySelector('.nav').style.display = 'none';
@@ -2253,7 +2254,7 @@ const app = {
     window.scrollTo({ top: 0 });
     Analytics.track('dashboard_viewed');
     this.lmsNav('dashboard');
-  }
+  },
 
   lmsNavigate() {
     document.getElementById('lmsApp').style.display = 'none';
