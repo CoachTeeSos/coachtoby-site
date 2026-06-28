@@ -2410,8 +2410,8 @@ var CRM = {
     const leads = JSON.parse(localStorage.getItem('swt_leads') || '[]');
     leads.push({ ...data, ts: Date.now() });
     localStorage.setItem('swt_leads', JSON.stringify(leads));
-    // Sync to Brevo via proxy (key stored server-side, silent fail if not deployed)
-    fetch('https://brevo-proxy.sessionswithtoby.workers.dev/add-contact', {
+    // Sync to Brevo via local proxy server (runs on your device)
+    fetch('http://localhost:8081/add-contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
