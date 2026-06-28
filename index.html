@@ -414,7 +414,7 @@ input, textarea, select { font-family: inherit; }
 }
 .lms-nav-user {
   display: flex; align-items: center; gap: var(--space-1);
-  font-size: clamp(0.75rem, 1.5vw, 0.85rem); font-weight: 500;
+  font-size: 0.95rem; font-weight: 500;
 }
 .lms-nav-avatar {
   width: 28px; height: 28px; border-radius: 50%;
@@ -435,8 +435,8 @@ input, textarea, select { font-family: inherit; }
 
 .lms-sidebar-link {
   display: flex; align-items: center; gap: var(--space-1);
-  padding: 10px 14px; border-radius: var(--radius-md);
-  font-size: clamp(0.75rem, 1.5vw, 0.85rem); font-weight: 500; color: var(--gray-600);
+  padding: 14px 18px; border-radius: var(--radius-md); min-height: 48px;
+  font-size: 0.95rem; font-weight: 500; color: var(--gray-600);
   transition: all var(--duration); margin-bottom: 2px;
   -webkit-tap-highlight-color: transparent;
 }
@@ -616,7 +616,7 @@ input, textarea, select { font-family: inherit; }
   box-shadow: 0 6px 24px rgba(79,70,229,0.25);
 }
 .voice-avatar-archetype { font-family: var(--font-display); font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; margin-bottom: 6px; }
-.voice-avatar-range { font-family: var(--font-mono); font-size: clamp(0.75rem, 1.5vw, 0.85rem); color: var(--indigo); margin-bottom: var(--space-2); letter-spacing: 0.02em; }
+.voice-avatar-range { font-family: var(--font-mono); font-size: 0.95rem; color: var(--indigo); margin-bottom: var(--space-2); letter-spacing: 0.02em; }
 .voice-avatar-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .voice-tag { padding: 3px 10px; border-radius: var(--radius-full); font-size: clamp(0.65rem, 1vw, 0.7rem); font-weight: 600; }
 .voice-tag-strength { background: rgba(16,185,129,0.1); color: var(--success); }
@@ -938,6 +938,9 @@ textarea.form-input { min-height: 100px; resize: vertical; }
 .survey-opt:hover{background:rgba(212,175,55,0.06);border-color:var(--gold)}
 .survey-opt.sel{background:rgba(212,175,55,0.1);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .coach-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F59E0B);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--midnight);font-weight:700}
+
+[data-page="mentor"], [data-page="community"] { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -1212,10 +1215,7 @@ textarea.form-input { min-height: 100px; resize: vertical; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       <span>Feedback</span>
     </a>\n    <a href="#" class="lms-sidebar-link" data-page="insights" onclick="app.lmsNav('insights');return false">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>\n      <span>Insights</span>\n    </a>
-    <a href="#" class="lms-sidebar-link" data-page="insights" onclick="app.lmsNav('insights');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-      <span>Insights</span>
-    </a>
+    
     <a href="#" class="lms-sidebar-link" data-page="community" onclick="app.lmsNav('community');return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span>Community</span>
@@ -2180,13 +2180,10 @@ var app = {
       case 'coach': c.innerHTML = this.lmsCoach(); break;
       case 'feedback': c.innerHTML = this.lmsFeedback(); break;
       case 'insights': c.innerHTML = this.lmsCoachDashboard(); break;
-      case 'insights': c.innerHTML = this.lmsCoachDashboard(); break;
       case 'community': c.innerHTML = this.lmsCommunity(); break;
       case 'funnel': c.innerHTML = this.lmsFunnel(); break;
       case 'analytics': c.innerHTML = this.lmsAnalytics(); break;
-      case 'email': c.innerHTML = this.lmsEmail(); break;
-      case 'learn': c.innerHTML = this.lmsLearn(); break;
-    }
+      case 'email': c.innerHTML = this.lmsEmail(); break;    }
   },
 
   // ─── DASHBOARD ───
