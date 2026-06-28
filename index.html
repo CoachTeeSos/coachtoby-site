@@ -2410,17 +2410,26 @@ var CRM = {
     const leads = JSON.parse(localStorage.getItem('swt_leads') || '[]');
     leads.push({ ...data, ts: Date.now() });
     localStorage.setItem('swt_leads', JSON.stringify(leads));
-    // Sync to Brevo via local proxy server (runs on your device)
-    fetch('http://localhost:8081/add-contact', {
+    // Sync to Airtable (write-only, 24/7, no server needed)
+    fetch('https://api.airtable.com/v0/app3N2MFPvfDSuYxk/Students', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': 'Bearer patmLD03CfCJta2sb.d8de1e7e9b2edd49cefa524b166504e856b0248c9ebf8d57f2a574e602e88d92',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        email: data.email,
-        name: data.name || data.email?.split('@')[0] || '',
-        source: data.trigger || 'lms',
-        type: data.type || 'lead'
+        fields: {
+          Name: data.name || data.email?.split('@')[0] || '',
+          Source: 'Website',
+          Status: 'Active',
+          Email: data.email,
+          Phone: '',
+          'Weekly Check-in': `Registered via LMS on ${new Date().toLocaleDateString()}`
+        }
       })
-    }).catch(() => {});
+    })
+    .then(r => { if (!r.ok) console.warn('Airtable sync failed:', r.status); })
+    .catch(e => console.warn('Airtable sync error:', e));
     return true;
   }
 };
