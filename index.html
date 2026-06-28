@@ -2220,6 +2220,7 @@ var app = {
       '</div>';
     }
     let _vocalProof = VocalProof.isPracticeDay() ? '<span style="color:var(--success);font-weight:600"> 🎤 practiced today</span>' : '';
+    return '<div class="dash-header"><h1>Welcome back, '+S.user.name+' 👋</h1><p>Level '+level+' · '+S.xp+' XP · '+S.streak+' day streak'+_vocalProof+' <span class="lead-score-badge '+sc+'">⚡ '+ls.score+'</span></p><div class="xp-bar" style="max-width:300px;margin-top:var(--space-2)"><div class="xp-bar-fill" style="width:'+progress+'%"></div></div>' +
     _srsBanner +
     '<div style="font-size:0.75rem;color:var(--gray-500);margin-top:4px">'+(xpToNext-S.xp)+' XP to Level '+(level+1)+'</div></div>'+
     dailyRec+
