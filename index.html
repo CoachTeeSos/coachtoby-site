@@ -1238,7 +1238,7 @@ textarea.form-input { min-height: 100px; resize: vertical; }
     </a>
   </aside>
   <main class="lms-content" id="lmsContent"></main>
-  <button onclick="app.toggleDarkMode()" style="position:fixed;bottom:70px;right:14px;z-index:300;width:40px;height:40px;border-radius:50%;background:var(--gray-900);color:white;border:none;box-shadow:var(--shadow-lg);cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+  <button onclick="app.toggleDarkMode()" style="position:fixed;top:14px;right:14px;z-index:9999;width:44px;height:44px;border-radius:50%;background:var(--gray-900);color:white;border:2px solid rgba(212,175,55,0.3);box-shadow:var(--shadow-lg);cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .3s" id="darkToggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">🌙</button>
 </div>
 
 <!-- TOAST -->
@@ -2519,6 +2519,7 @@ var app = {
     this.renderAssessment();
     this.checkStreak();
     this.initScrollReveal();
+    this.initTheme();
     if (S.user) {
       document.getElementById('emailGate').style.display = 'none';
       this.showLMS();
@@ -2724,6 +2725,35 @@ var app = {
     window.scrollTo({ top: 0 });
     Analytics.track('dashboard_viewed');
     this.lmsNav('dashboard');
+  },
+
+  toggleDarkMode() {
+    const html = document.documentElement;
+    const btn = document.getElementById('darkToggle');
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      btn.textContent = '🌙';
+      btn.style.background = 'var(--gray-900)';
+      localStorage.setItem('swt_theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      btn.textContent = '☀️';
+      btn.style.background = '#fff';
+      localStorage.setItem('swt_theme', 'dark');
+    }
+  },
+
+  initTheme() {
+    const saved = localStorage.getItem('swt_theme');
+    const btn = document.getElementById('darkToggle');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (btn) { btn.textContent = '☀️'; btn.style.background = '#fff'; }
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      if (btn) { btn.textContent = '🌙'; btn.style.background = 'var(--gray-900)'; }
+    }
   },
 
   lmsNavigate() {
