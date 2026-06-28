@@ -1307,9 +1307,14 @@ var DATA = {
     { id:9, title:'Music Business', desc:'Monetize your gift the right way', level:'Advanced', lessons:8, duration:'4 weeks', icon:'📈', color:'#14B8A6' },
   ],
   pricing: [
-    { name:'Starter', price:'$50', period:'/one-time', features:['Foundations Course','Vocal DNA Assessment','Community Access','Email Support'], cta:'Start Free', featured:false },
-    { name:'Pro Monthly', price:'$200', period:'/month', features:['All 9 Courses','AI Mentor','Practice Tools','Priority Support','Progress Tracking'], cta:'Go Pro', featured:true },
-    { name:'Group', price:'₦20K', period:'/month', features:['All Courses','Group Coaching Calls','Community','Accountability Partner','Certificate'], cta:'Join Group', featured:false },
+    { name:'Quick Start', price:'₦1,500', period:'/one-time', features:['Vocal DNA Assessment','Foundations Course','Community Access','Email Support'], cta:'Get Started →', featured:false, payment:'https://flutterwave.com/pay/singeros-quickstart' },
+    { name:'Pro Monthly', price:'₦15,000', period:'/month', features:['All Courses','AI Mentor','Practice Tools','Priority Support','Progress Tracking','BandLab Mastery'], cta:'Go Pro →', featured:true, payment:'https://flutterwave.com/pay/singeros-pro' },
+    { name:'Group Coaching', price:'₦20,000', period:'/month', features:['Everything in Pro','Weekly Group Calls','Accountability Partner','Certificate','WhatsApp Support'], cta:'Join Group →', featured:false, payment:'https://flutterwave.com/pay/singeros-group' },
+  ],
+  bookingOptions: [
+    { name:'Free Discovery Call', price:'Free', period:'15 min', features:['Voice evaluation','Hear your strengths','No commitment'], cta:'Book Free →', featured:false, payment:'wa' },
+    { name:'1-on-1 Coaching', price:'$200', period:'/hour', features:['Full vocal assessment','Custom training plan','Recording feedback','WhatsApp support'], cta:'WhatsApp →', featured:true, payment:'wa' },
+    { name:'Group Plan (3 months)', price:'₦50,000', period:'/3 months', features:['Save ₦10K vs monthly','All Pro features','Group calls included','Priority booking'], cta:'Pay ₦50K →', featured:false, payment:'https://flutterwave.com/pay/singeros-3month' },
   ],
   stories: [
     { name:'Chidinma', location:'Lagos', before:'Could not hit high notes', after:'Lead worship leader', avatar:'👩🏾' },
@@ -1375,11 +1380,6 @@ var DATA = {
     { name:'Transformation', count:0, color:'#8B5CF6', description:'Visible progress, streaks building' },
     { name:'Monetization', count:0, color:'#D4AF37', description:'Purchase or booking completed' },
     { name:'Advocacy', count:0, color:'#EF4444', description:'Sharing, referring, reviewing' },
-  ],
-  bookingOptions: [
-    { name:'Free Discovery Call', price:'$0', period:'', features:['15-min voice evaluation','Hear your strengths','No commitment'], cta:'Book Free Call', featured:false },
-    { name:'1-on-1 Coaching', price:'$200', period:'/hour', features:['Full vocal assessment','Custom training plan','Recording feedback','WhatsApp support'], cta:'Book Session', featured:true },
-    { name:'Group Coaching', price:'₦20K', period:'/month', features:['Weekly group calls','Community access','Accountability partner','Certificate'], cta:'Join Group', featured:false },
   ],
   lessons: [
     { id:1, title:'Posture & Alignment', course:'Technique', duration:'10 min', content:'Your body is the instrument. Free sound needs free structure. This lesson teaches the alignment stack — the physical foundation every great singer uses.',
@@ -2565,7 +2565,7 @@ var app = {
         <div class="pricing-name">${p.name}</div>
         <div class="pricing-price">${p.price}<span>${p.period}</span></div>
         <ul class="pricing-features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
-        <button class="btn ${p.featured ? 'btn-accent' : 'btn-primary'}" style="width:100%">${p.cta}</button>
+        <button class="btn ${p.featured ? 'btn-accent' : 'btn-primary'}" style="width:100%" onclick="Analytics.track('pricing_clicked',{tier:'${p.name}'});window.open('${p.payment}','_blank')">${p.cta}</button>
       </div>
     `).join('');
   },
@@ -2605,7 +2605,12 @@ var app = {
   },
   // ─── BOOKING ───
   renderBooking() {
-    document.getElementById('bookingGrid').innerHTML = DATA.bookingOptions.map(b => '<div class="booking-card '+ (b.featured?'featured':'') +'"><div class="pricing-name">'+b.name+'</div><div class="booking-price">'+b.price+'<span>'+b.period+'</span></div><ul class="pricing-features">'+b.features.map(f => '<li>'+f+'</li>').join('')+'</ul><button class="btn '+ (b.featured?'btn-gold':'btn-primary') +'" style="width:100%" onclick="Analytics.track(\'booked_session\',{type:\''+b.name+'\'});toast(\'Booking request sent!\')">'+b.cta+'</button></div>').join('');
+    document.getElementById('bookingGrid').innerHTML = DATA.bookingOptions.map(b => {
+      const clickAction = b.payment === 'wa'
+        ? `Analytics.track('booked_session',{type:'${b.name}'});window.open('https://wa.me/2349160106084?text=Hi%20Toby%2C%20I%20want%20to%20book%20${encodeURIComponent(b.name)}','_blank')`
+        : `Analytics.track('booked_session',{type:'${b.name}'});window.open('${b.payment}','_blank')`;
+      return `<div class="booking-card ${b.featured?'featured':''}"><div class="pricing-name">${b.name}</div><div class="booking-price">${b.price}<span>${b.period}</span></div><ul class="pricing-features">${b.features.map(f => '<li>'+f+'</li>').join('')}</ul><button class="btn ${b.featured?'btn-gold':'btn-primary'}" style="width:100%" onclick="${clickAction}">${b.cta}</button></div>`;
+    }).join('');
   },
   // ─── CERTIFICATION ───
   renderCertification() {
