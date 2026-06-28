@@ -1211,7 +1211,7 @@ textarea.form-input { min-height: 100px; resize: vertical; }
     <a href="#" class="lms-sidebar-link" data-page="feedback" onclick="app.lmsNav('feedback');return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       <span>Feedback</span>
-    </a>
+    </a>\n    <a href="#" class="lms-sidebar-link" data-page="insights" onclick="app.lmsNav('insights');return false">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>\n      <span>Insights</span>\n    </a>
     <a href="#" class="lms-sidebar-link" data-page="insights" onclick="app.lmsNav('insights');return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
       <span>Insights</span>
@@ -1262,6 +1262,7 @@ var S = {
   xp: parseInt(localStorage.getItem('swt_xp') || '0'),
   streak: parseInt(localStorage.getItem('swt_streak') || '0'),
   lastVisit: localStorage.getItem('swt_lastVisit'),
+  srsData: JSON.parse(localStorage.getItem('swt_srs') || '{}'),
   srsData: JSON.parse(localStorage.getItem('swt_srs') || '{}'),
   lessonsCompleted: JSON.parse(localStorage.getItem('swt_lessons') || '[]'),
   badges: JSON.parse(localStorage.getItem('swt_badges') || '[]'),
@@ -1376,505 +1377,205 @@ var DATA = {
   ],
   lessons: [
     { id:1, title:'Posture & Alignment', course:'Technique', duration:'10 min', content:'NYVC: free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.',
-      steps:[
-        {type:'teach',title:'Posture & Alignment',body:'NYVC: free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.'},
-        {type:'practice',title:'Practical Assignment',body:'Wall Drill: Back against wall, head/shoulders/hips touch. Step away maintaining posture. Sing a scale daily for 7 days.'}
-      ]},
+      steps:[{type:'teach',title:'Posture & Alignment',body:'NYVC: free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.'},{type:'practice',title:'Practical Assignment',body:'Wall Drill: Back against wall, head/shoulders/hips touch. Step away maintaining posture. Sing a scale daily for 7 days.'}]},
     { id:2, title:'Breath & Appoggio', course:'Technique', duration:'15 min', content:'Low breathing + solar plexus anchor. The engine behind every great voice. NYVC uses low breathing: belly expands, ribs open sideways.',
-      steps:[
-        {type:'teach',title:'Breath & Appoggio',body:'Low breathing + solar plexus anchor. The engine behind every great voice. NYVC uses low breathing: belly expands, ribs open sideways.'},
-        {type:'practice',title:'Practical Assignment',body:'Farinelli Cycle: Inhale 4, Hold 4, Exhale Ssss 8. Progress to 10-10-20.'}
-      ]},
+      steps:[{type:'teach',title:'Breath & Appoggio',body:'Low breathing + solar plexus anchor. The engine behind every great voice. NYVC uses low breathing: belly expands, ribs open sideways.'},{type:'practice',title:'Practical Assignment',body:'Farinelli Cycle: Inhale 4, Hold 4, Exhale Ssss 8. Progress to 10-10-20.'}]},
     { id:3, title:'Sustained Notes & Breath Control', course:'Technique', duration:'12 min', content:'Holding a single note steadily trains your appoggio. The goal is even tone from start to finish — no wavering, no breathiness.',
-      steps:[
-        {type:'teach',title:'Sustained Notes & Breath Control',body:'Holding a single note steadily trains your appoggio. The goal is even tone from start to finish — no wavering, no breathiness.'},
-        {type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note for 20 seconds. Record and listen for wobble or breathiness.'}
-      ]},
+      steps:[{type:'teach',title:'Sustained Notes & Breath Control',body:'Holding a single note steadily trains your appoggio. The goal is even tone from start to finish — no wavering, no breathiness.'},{type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note for 20 seconds. Record and listen for wobble or breathiness.'}]},
     { id:4, title:'Vocal Onset: Clean Note Starts', course:'Technique', duration:'10 min', content:'How you start a note determines everything. Glottal, aspirate, or balanced — learn the cleanest onset for singing.',
-      steps:[
-        {type:'teach',title:'Vocal Onset: Clean Note Starts',body:'How you start a note determines everything. Glottal, aspirate, or balanced — learn the cleanest onset for singing.'},
-        {type:'practice',title:'Practical Assignment',body:'Practice starting notes on a soft \'ah\' — no hard glottal attack, no breathy escape. Aim for a clean, instant tone.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Onset: Clean Note Starts',body:'How you start a note determines everything. Glottal, aspirate, or balanced — learn the cleanest onset for singing.'}]},
     { id:5, title:'Vocal Health & Hydration', course:'Technique', duration:'8 min', content:'Your vocal folds need hydration, rest, and smart usage. Learn the habits that keep your voice healthy for life.',
-      steps:[
-        {type:'teach',title:'Vocal Health & Hydration',body:'Your vocal folds need hydration, rest, and smart usage. Learn the habits that keep your voice healthy for life.'},
-        {type:'practice',title:'Practical Assignment',body:'Track your water intake for 3 days. Note how your voice feels when hydrated vs. dehydrated.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Health & Hydration',body:'Your vocal folds need hydration, rest, and smart usage. Learn the habits that keep your voice healthy for life.'},{type:'practice',title:'Practical Assignment',body:'Track your water intake for 3 days. Note how your voice feels when hydrated vs. dehydrated.'}]},
     { id:6, title:'The Daily Warm-Up Routine', course:'Technique', duration:'15 min', content:'A proper warm-up prepares your voice for singing. Lip trills, humming, and gentle sirens wake up your instrument safely.',
-      steps:[
-        {type:'teach',title:'The Daily Warm-Up Routine',body:'A proper warm-up prepares your voice for singing. Lip trills, humming, and gentle sirens wake up your instrument safely.'},
-        {type:'practice',title:'Practical Assignment',body:'Perform a 5-minute warm-up: 2 min lip trills, 2 min humming, 1 min gentle sirens. Sing before and after to feel the difference.'}
-      ]},
+      steps:[{type:'teach',title:'The Daily Warm-Up Routine',body:'A proper warm-up prepares your voice for singing. Lip trills, humming, and gentle sirens wake up your instrument safely.'},{type:'practice',title:'Practical Assignment',body:'Perform a 5-minute warm-up: 2 min lip trills, 2 min humming, 1 min gentle sirens. Sing before and after to feel the difference.'}]},
     { id:7, title:'SOVT Exercises (Semi-Occluded Vocal Tract)', course:'Technique', duration:'12 min', content:'SOVT exercises like straw phonation and lip trills create back-pressure that helps your vocal folds vibrate efficiently.',
-      steps:[
-        {type:'teach',title:'SOVT Exercises (Semi-Occluded Vocal Tract)',body:'SOVT exercises like straw phonation and lip trills create back-pressure that helps your vocal folds vibrate efficiently.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing through a straw into water for 3 minutes. Then sing the same phrase without the straw — feel the ease.'}
-      ]},
-    { id:8, title:'Note Names & the Musical Alphabet', course:'Theory', duration:'10 min', content:'The 7 letters of the musical alphabet (A-G) are the foundation of all Western music. Learn to name any note on your instrument.',
-      steps:[
-        {type:'teach',title:'Note Names & the Musical Alphabet',body:'The 7 letters of the musical alphabet (A-G) are the foundation of all Western music. Learn to name any note on your instrument.'},
-        {type:'practice',title:'Practical Assignment',body:'Say the note names of the C major scale ascending and descending. Do this daily until it is instant.'}
-      ]},
-    { id:9, title:'The Major Scale', course:'Theory', duration:'12 min', content:'The major scale is the mother of all scales. Its pattern of whole steps and half steps (W-W-H-W-W-W-H) creates the bright, happy sound we know.',
-      steps:[
-        {type:'teach',title:'The Major Scale',body:'The major scale is the mother of all scales. Its pattern of whole steps and half steps (W-W-H-W-W-W-H) creates the bright, happy sound we know.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a major scale starting on 3 different notes. Use a piano app to check your accuracy.'}
-      ]},
-    { id:10, title:'Intervals: Unison & Octave', course:'Theory', duration:'10 min', content:'An interval is the distance between two notes. Unison (same note) and octave (same note, higher/lower) are the most fundamental.',
-      steps:[
-        {type:'teach',title:'Intervals: Unison & Octave',body:'An interval is the distance between two notes. Unison (same note) and octave (same note, higher/lower) are the most fundamental.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a note on a piano app. Sing the same note, then the octave above. Record and check.'}
-      ]},
-    { id:11, title:'Time Signatures & Meter', course:'Theory', duration:'12 min', content:'Time signatures tell you how many beats are in each measure and what note gets the beat. 4/4, 3/4, 6/8 — each creates a different feel.',
-      steps:[
-        {type:'teach',title:'Time Signatures & Meter',body:'Time signatures tell you how many beats are in each measure and what note gets the beat. 4/4, 3/4, 6/8 — each creates a different feel.'},
-        {type:'practice',title:'Practical Assignment',body:'Clap along to 3 songs in different time signatures. Count aloud: 1-2-3-4 for 4/4, 1-2-3 for 3/4.'}
-      ]},
-    { id:12, title:'Rhythm & Note Values', course:'Theory', duration:'15 min', content:'Whole notes, half notes, quarter notes, eighth notes — each has a specific duration. Reading rhythm is like reading a language.',
-      steps:[
-        {type:'teach',title:'Rhythm & Note Values',body:'Whole notes, half notes, quarter notes, eighth notes — each has a specific duration. Reading rhythm is like reading a language.'},
-        {type:'practice',title:'Practical Assignment',body:'Clap and count a rhythm pattern: quarter-quarter-half. Then sing it on a single note.'}
-      ]},
+      steps:[{type:'teach',title:'SOVT Exercises (Semi-Occluded Vocal Tract)',body:'SOVT exercises like straw phonation and lip trills create back-pressure that helps your vocal folds vibrate efficiently.'},{type:'practice',title:'Practical Assignment',body:'Sing through a straw into water for 3 minutes. Then sing the same phrase without the straw — feel the ease.'}]},
+    { id:8, title:'Note Names & the Musical Alphabet', course:'Theory', duration:'10 min', content:'The musical alphabet uses 7 letters: A B C D E F G, repeating endlessly. Every note on the piano is named with one of these letters. Understanding note names is the foundation of reading music, communicating with other musicians, and navigating your instrument. Berklee ear training professors expect you to name any note within 1 second.',
+      steps:[{type:'teach',title:'The Musical Alphabet',body:'The musical alphabet has 7 letters: A, B, C, D, E, F, G. After G, it starts over at A. On the piano, the white keys follow this pattern. The black keys are sharps (#) and flats (b).\n\nC is the anchor. Find C on any keyboard — it is the white key immediately left of the group of two black keys. From C, count up: C-D-E-F-G-A-B and back to C.'},{type:'teach',title:'Sharps, Flats, and Semitones',body:'A semitone is the smallest distance in Western music — adjacent keys on the piano (including black). A sharp (#) raises a note by one semitone. A flat (b) lowers it by one semitone.\n\nC# = Db (same key). F# = Gb. There is NO sharp or flat between E-F or B-C.\n\nThis is why the black keys have two names — they are enharmonic equivalents. Context determines which name you use.'},{type:'exercise',title:'Name That Note',body:'On a piano app (or mental piano), identify these notes:\n1. The white key between the group of 2 black keys = C\n2. Two white keys up from C = E\n3. The black key right of G = G# or Ab\n4. The black key left of Bb = A#\n\nSing each note as you name it. Connect the symbol to the sound.'},{type:'practice',title:'Practical Assignment',body:'1. Write the musical alphabet forward 3 times, then backward 3 times.\n2. On a piano app, play and sing every C on the piano (there are 8 on a full keyboard).\n3. Name all 12 semitones starting from C: C, C#, D, D#, E, F, F#, G, G#, A, A#, B.\n4. Time yourself: name 20 random notes in under 60 seconds.'},{type:'tip',title:'Pro Tip',body:'Professional musicians communicate in note names instantly. "The melody goes E, G#, B" means something specific. Drill this until it is automatic — it will serve you in every rehearsal for the rest of your career.'}]},
+    { id:9, title:'The Major Scale', course:'Theory', duration:'12 min', content:'The major scale is the foundation of Western music. It is a pattern of whole steps and half steps that creates the familiar "Do Re Mi" sound. Every key in music is built from this pattern. Berklee students must write any major scale from memory in under 10 seconds.',
+      steps:[{type:'teach',title:'The Major Scale Pattern',body:'A major scale has 8 notes (the octave). The step pattern is:\n\nWhole - Whole - Half - Whole - Whole - Whole - Half\n\nOr in semitones: 2 - 2 - 1 - 2 - 2 - 2 - 1\n\nC Major uses only white keys: C D E F G A B C. This is why C Major is the starting point.\n\nThe distance from C to D is a whole step (C# is between). E to F is a half step (no note between).'},{type:'teach',title:'Scale Degrees and Solfege',body:'Each note in the major scale has a number and a solfege syllable:\n\n1 - Do (tonic, home)\n2 - Re\n3 - Mi\n4 - Fa\n5 - Sol\n6 - La\n7 - Ti\n8 - Do (octave)\n\nThe 1st, 4th, and 5th degrees are "stable" — they feel at rest. The 7th (Ti) wants to resolve up to Do. The 2nd and 6th want to move to nearby stable tones. This tension and release is the engine of melody.'},{type:'exercise',title:'Build a Scale',body:'Using the W-W-H-W-W-W-H pattern, build these scales:\n\n1. G Major: G A B C D E F# G (1 sharp)\n2. F Major: F G A Bb C D E F (1 flat)\n3. D Major: D E F# G A B C# D (2 sharps)\n\nRule: Each letter name appears exactly once. You cannot have G and G# in the same scale — it would be Ab.'},{type:'practice',title:'Practical Assignment',body:'1. Sing C Major scale up and down, using solfege syllables. Use a piano to check.\n2. Play and sing G Major and F Major scales. Notice the same interval pattern.\n3. Write out B Major from memory (hint: 5 sharps). Check your work.\n4. Sing "Do Re Mi" from The Sound of Music — it outlines the major scale.'},{type:'tip',title:'Berklee Connection',body:'At Berklee, you hear "What key is this in?" constantly. The major scale pattern is how you answer. If a song uses F#, C#, and G#, it is likely D Major. Train your ear to hear the tonic — the note that feels like home.'}]},
+    { id:10, title:'Intervals: Unison & Octave', course:'Theory', duration:'10 min', content:'An interval measures the distance between two notes. Unison (same pitch) and octave (same note, 12 semitones apart) are the most fundamental. The octave is the most consonant — it sounds almost like the same note. Berklee ear training requires instant identification of all intervals within 3 months.',
+      steps:[{type:'teach',title:'What Is an Interval?',body:'An interval is the distance between two notes, measured in semitones or interval names. Intervals are the DNA of melody and harmony.\n\nMelodic interval: notes played one after another (in a melody).\nHarmonic interval: notes played simultaneously (in a chord).\n\nThe smallest interval in Western music is the semitone (half step). Two semitones = one whole tone (whole step).'},{type:'teach',title:'Unison and Octave',body:'Unison (P1): Same note, same pitch. Two singers singing the same note.\nOctave (P8): Same note name, 12 semitones apart. Middle C and the C above it.\n\nThe octave is so consonant that notes an octave apart are considered "the same note" in theory. This is why we give them the same letter name. The frequency ratio is exactly 2:1 — if A4 = 440Hz, A5 = 880Hz.'},{type:'exercise',title:'Hear the Octave',body:'1. Play middle C on a piano app. Then play the C above it. Sing both.\n2. Have someone play random notes. Sing the octave above or below. Check with a piano.\n3. Listen to Mariah Carey\'s "Emotions" — the chorus features octave jumps.'},{type:'practice',title:'Practical Assignment',body:'1. On a piano, play every note from C3 to C4. Sing the octave above each one.\n2. Write: if the bottom note is F#4, the octave above is F#5.\n3. Identify octaves in songs: Whitney Houston\'s "I Will Always Love You" ("and I-iiiiii") — the "I" jumps an octave.\n4. Sing a unison with a recording of yourself, then an octave apart.'},{type:'tip',title:'Pro Tip',body:'Octave equivalence is why vocal ranges are described by where your octaves sit. A soprano\'s octaves are higher than a alto\'s. Understanding this helps you transpose songs into your range.'}]},
+    { id:11, title:'Time Signatures & Meter', course:'Theory', duration:'12 min', content:'Time signatures define the pulse of music — how many beats per measure and what note gets the beat. They are the grid on which rhythm lives. 4/4, 3/4, 6/8 — each creates a completely different feel. Berklee ear training spends weeks on meter identification.',
+      steps:[{type:'teach',title:'Reading Time Signatures',body:'A time signature has two numbers:\n\nTop number = how many beats per measure\nBottom number = what note gets one beat (4 = quarter note, 8 = eighth note)\n\n4/4: Four beats per measure, quarter note gets the beat. Also called "common time" (C).\n3/4: Three beats per measure — waltz feel.\n6/8: Six eighth notes per measure — feels like 2 big beats, each divided into 3.'},{type:'teach',title:'Simple vs Compound Meter',body:'Simple meter: beats divide into TWO (4/4, 3/4, 2/4). Each beat naturally splits in half.\nCompound meter: beats divide into THREE (6/8, 9/8, 12/8). Each beat splits into three parts.\n\nThis is the single most important distinction in rhythm. 6/8 is NOT the same as 3/4:\n- 3/4 = 3 beats, each divides into 2 eighths\n- 6/8 = 2 beats, each divides into 3 eighths\n\nFeel it: clap 1-2-3-4 (3/4) vs 1-2-3-4-5-6 (6/8).'},{type:'exercise',title:'Identify the Meter',body:'Listen to these songs and identify the time signature:\n1. "Happy Birthday" — 3/4 (waltz)\n2. "We Are the Champions" — 4/4\n3. "The Blue Danube" — 3/4\n4. "House of the Rising Sun" — 6/8\n5. Afrobeat (Burna Boy) — 4/4 with layered compound rhythms\n\nClap the beat while listening. Where does the emphasis fall?'},{type:'practice',title:'Practical Assignment',body:'1. Tap a steady pulse. Count "1-2-3-4" repeatedly. On beats 1 and 3, clap louder.\n2. Switch to 3/4: "1-2-3" with beat 1 strongest.\n3. Try 6/8: "1-2-3-4-5-6" with beats 1 and 4 strongest.\n4. Write 4 measures of rhythm in 4/4 using quarter and eighth notes. Clap it back.'},{type:'tip',title:'Berklee Connection',body:'Berklee ear training professors use this secret: feel where the DOWNBEAT is. Every measure has a strongest beat (usually beat 1). Once you find the downbeat, the meter reveals itself instantly.'}]},
+    { id:12, title:'Rhythm & Note Values', course:'Theory', duration:'15 min', content:'Note values define how long each sound lasts. Whole notes, half notes, quarter notes, eighth notes, sixteenth notes — each is a subdivision of the beat. Reading rhythm is reading a language. Berklee uses the Takadimi system for instant rhythm literacy.',
+      steps:[{type:'teach',title:'The Note Value Tree',body:'In 4/4 time (4 beats per measure):\n\nWhole note = 4 beats (holds the whole measure)\nHalf note = 2 beats (two per measure)\nQuarter note = 1 beat (four per measure)\nEighth note = 1/2 beat (eight per measure)\nSixteenth note = 1/4 beat (sixteen per measure)\n\nEach level divides the one above by 2. A whole note = 2 halves = 4 quarters = 8 eighths = 16 sixteenths.\n\nRests follow the same pattern: whole rest, half rest, quarter rest — silence of equal duration.'},{type:'teach',title:'Ties, Dots, and Triplets',body:'Tie: connects two notes into one sustained sound. A quarter tied to another quarter = 2 beats.\nDot: adds half the value. A dotted half note = 3 beats (2 + 1). A dotted quarter = 1.5 beats.\nTriplet: divides a beat into 3 equal parts instead of 2. Eighth-note triplets = 3 notes per beat.\n\nThese create the rhythmic variety in real music. Without them, everything sounds mechanical.'},{type:'exercise',title:'Rhythm Reading',body:'Clap these patterns (each line = one measure of 4/4):\n\n1. Quarter, Quarter, Quarter, Quarter (ta ta ta ta)\n2. Half, Quarter, Quarter (ta-ah ta ta)\n3. Quarter, Two Eighths, Quarter, Two Eighths (ta ta-a ta ta-a)\n4. Four Eighths, Four Eighths (ta-ta-ta-ta ta-ta-ta-ta)\n5. Half, Two Eighths, Two Eighths (ta-ah ta-a ta-a)\n\nUse a metronome at 60 BPM. Quarter note = one click.'},{type:'practice',title:'Practical Assignment',body:'1. Write a 4-measure rhythm using only quarter and eighth notes. Clap it.\n2. Write a 4-measure rhythm using half notes and quarter notes.\n3. Add one dotted note to each. Notice how it changes the feel.\n4. Listen to Adele\'s "Rolling in the Deep" — tap the rhythm of the chorus. Write it down.'},{type:'tip',title:'Takadimi System',body:'Berklee uses the Takadimi system:\nQuarter notes: "Ta"\nEighth pairs: "Ta-di"\nSixteenth groups: "Ta-ka-di-mi"\n\nThis connects syllables to rhythms. Use it — it makes complex rhythms readable instantly.'}]},
     { id:13, title:'Ear Training: Call & Response', course:'Ear Training', duration:'12 min', content:'Call and response trains your ear and your musical memory. Hear a phrase, sing it back. This is how musicians learn by ear.',
-      steps:[
-        {type:'teach',title:'Ear Training: Call & Response',body:'Call and response trains your ear and your musical memory. Hear a phrase, sing it back. This is how musicians learn by ear.'},
-        {type:'practice',title:'Practical Assignment',body:'Have a friend play 3-note phrases. Sing them back accurately. Start simple, increase complexity.'}
-      ]},
+      steps:[{type:'teach',title:'Ear Training: Call & Response',body:'Call and response trains your ear and your musical memory. Hear a phrase, sing it back. This is how musicians learn by ear.'},{type:'practice',title:'Practical Assignment',body:'Have a friend play 3-note phrases. Sing them back accurately. Start simple, increase complexity.'}]},
     { id:14, title:'Pitch Drift & Intonation Awareness', course:'Ear Training', duration:'10 min', content:'Pitch drift is when you slowly go flat or sharp without realizing. Developing intonation awareness keeps you locked on pitch.',
-      steps:[
-        {type:'teach',title:'Pitch Drift & Intonation Awareness',body:'Pitch drift is when you slowly go flat or sharp without realizing. Developing intonation awareness keeps you locked on pitch.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing along with a drone note. Record yourself. Listen back for moments where you drift off pitch.'}
-      ]},
+      steps:[{type:'teach',title:'Pitch Drift & Intonation Awareness',body:'Pitch drift is when you slowly go flat or sharp without realizing. Developing intonation awareness keeps you locked on pitch.'},{type:'practice',title:'Practical Assignment',body:'Sing along with a drone note. Record yourself. Listen back for moments where you drift off pitch.'}]},
     { id:15, title:'Microphone Technique Fundamentals', course:'Performance', duration:'10 min', content:'How you use a microphone affects your tone, volume, and stage presence. Proximity effect, angle, and distance — master these.',
-      steps:[
-        {type:'teach',title:'Microphone Technique Fundamentals',body:'How you use a microphone affects your tone, volume, and stage presence. Proximity effect, angle, and distance — master these.'},
-        {type:'practice',title:'Practical Assignment',body:'Practice singing into a mic (or pretend mic). Try 1 inch, 6 inches, and 12 inches away. Hear the difference in tone.'}
-      ]},
+      steps:[{type:'teach',title:'Microphone Technique Fundamentals',body:'How you use a microphone affects your tone, volume, and stage presence. Proximity effect, angle, and distance — master these.'},{type:'practice',title:'Practical Assignment',body:'Practice singing into a mic (or pretend mic). Try 1 inch, 6 inches, and 12 inches away. Hear the difference in tone.'}]},
     { id:16, title:'Overcoming Stage Fright', course:'Performance', duration:'12 min', content:'Stage fright is normal — even pros get it. The key is channeling that energy into your performance instead of letting it paralyze you.',
-      steps:[
-        {type:'teach',title:'Overcoming Stage Fright',body:'Stage fright is normal — even pros get it. The key is channeling that energy into your performance instead of letting it paralyze you.'},
-        {type:'practice',title:'Practical Assignment',body:'Record a video of yourself singing. Watch it back. Do this 3 times in one week and note your comfort level increasing.'}
-      ]},
+      steps:[{type:'teach',title:'Overcoming Stage Fright',body:'Stage fright is normal — even pros get it. The key is channeling that energy into your performance instead of letting it paralyze you.'},{type:'practice',title:'Practical Assignment',body:'Record a video of yourself singing. Watch it back. Do this 3 times in one week and note your comfort level increasing.'}]},
     { id:17, title:'Song Structure: Verse, Chorus, Bridge', course:'Theory', duration:'10 min', content:'Most popular songs follow predictable structures. Understanding verse-chorus-bridge helps you learn songs faster and perform them better.',
-      steps:[
-        {type:'teach',title:'Song Structure: Verse, Chorus, Bridge',body:'Most popular songs follow predictable structures. Understanding verse-chorus-bridge helps you learn songs faster and perform them better.'},
-        {type:'practice',title:'Practical Assignment',body:'Pick a song you know. Map out its structure: where is the verse, chorus, bridge, intro, outro?'}
-      ]},
+      steps:[{type:'teach',title:'Song Structure: Verse, Chorus, Bridge',body:'Most popular songs follow predictable structures. Understanding verse-chorus-bridge helps you learn songs faster and perform them better.'},{type:'practice',title:'Practical Assignment',body:'Pick a song you know. Map out its structure: where is the verse, chorus, bridge, intro, outro?'}]},
     { id:18, title:'The Discipline of Daily Practice', course:'Mindset', duration:'8 min', content:'Talent gets you nowhere without discipline. A daily practice habit — even 15 minutes — transforms your voice faster than occasional long sessions.',
-      steps:[
-        {type:'teach',title:'The Discipline of Daily Practice',body:'Talent gets you nowhere without discipline. A daily practice habit — even 15 minutes — transforms your voice faster than occasional long sessions.'},
-        {type:'practice',title:'Practical Assignment',body:'Set a daily 15-minute practice alarm. Do it for 14 days straight. Track your streak.'}
-      ]},
+      steps:[{type:'teach',title:'The Discipline of Daily Practice',body:'Talent gets you nowhere without discipline. A daily practice habit — even 15 minutes — transforms your voice faster than occasional long sessions.'},{type:'practice',title:'Practical Assignment',body:'Set a daily 15-minute practice alarm. Do it for 14 days straight. Track your streak.'}]},
     { id:19, title:'SOVT Advanced: Straw Phonation', course:'Technique', duration:'15 min', content:'Advanced straw phonation exercises target specific vocal challenges — range extension, register blending, and breath efficiency.',
-      steps:[
-        {type:'teach',title:'SOVT Advanced: Straw Phonation',body:'Advanced straw phonation exercises target specific vocal challenges — range extension, register blending, and breath efficiency.'},
-        {type:'practice',title:'Practical Assignment',body:'Use a straw to sing arpeggios across your entire range. Notice how the back-pressure helps in your passaggio.'}
-      ]},
+      steps:[{type:'teach',title:'SOVT Advanced: Straw Phonation',body:'Advanced straw phonation exercises target specific vocal challenges — range extension, register blending, and breath efficiency.'},{type:'practice',title:'Practical Assignment',body:'Use a straw to sing arpeggios across your entire range. Notice how the back-pressure helps in your passaggio.'}]},
     { id:20, title:'Chest Voice: Your Power Register', course:'Technique', duration:'12 min', content:'Chest voice is your lower, powerful register. It is where your speaking voice lives and where most pop/soul singing happens.',
-      steps:[
-        {type:'teach',title:'Chest Voice: Your Power Register',body:'Chest voice is your lower, powerful register. It is where your speaking voice lives and where most pop/soul singing happens.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a comfortable descending scale on \'ah\' — feel the vibration in your chest. Go as low as is comfortable.'}
-      ]},
+      steps:[{type:'teach',title:'Chest Voice: Your Power Register',body:'Chest voice is your lower, powerful register. It is where your speaking voice lives and where most pop/soul singing happens.'}]},
     { id:21, title:'Head Voice: Your Upper Register', course:'Technique', duration:'12 min', content:'Head voice is your lighter, upper register. It feels like the sound resonates in your head rather than your chest.',
-      steps:[
-        {type:'teach',title:'Head Voice: Your Upper Register',body:'Head voice is your lighter, upper register. It feels like the sound resonates in your head rather than your chest.'},
-        {type:'practice',title:'Practical Assignment',body:'Siren from your chest voice up into head voice on \'oo\'. Feel the shift in resonance from chest to head.'}
-      ]},
+      steps:[{type:'teach',title:'Head Voice: Your Upper Register',body:'Head voice is your lighter, upper register. It feels like the sound resonates in your head rather than your chest.'}]},
     { id:22, title:'Mixed Voice: Blending Registers', course:'Technique', duration:'15 min', content:'Mixed voice blends chest and head voice so you can sing powerfully through your entire range without breaking.',
-      steps:[
-        {type:'teach',title:'Mixed Voice: Blending Registers',body:'Mixed voice blends chest and head voice so you can sing powerfully through your entire range without breaking.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a scale from low to high on \'ng\'. Keep the same light coordination as you ascend.'}
-      ]},
+      steps:[{type:'teach',title:'Mixed Voice: Blending Registers',body:'Mixed voice blends chest and head voice so you can sing powerfully through your entire range without breaking.'}]},
     { id:23, title:'Vowel Modification (Vowel Migration)', course:'Technique', duration:'12 min', content:'As you sing higher, vowels need to modify (close) to maintain resonance and avoid strain. \'Ah\' becomes \'uh\', \'ee\' becomes \'ih\'.',
-      steps:[
-        {type:'teach',title:'Vowel Modification (Vowel Migration)',body:'As you sing higher, vowels need to modify (close) to maintain resonance and avoid strain. \'Ah\' becomes \'uh\', \'ee\' becomes \'ih\'.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a 5-tone scale on \'ah\' ascending. Notice when you need to slightly close the vowel to keep it strain-free.'}
-      ]},
+      steps:[]},
     { id:24, title:'Resonance & Placement', course:'Technique', duration:'12 min', content:'Resonance is where your sound vibrates. Forward placement (mask/nasal) cuts through a mix; back placement creates warmth.',
-      steps:[
-        {type:'teach',title:'Resonance & Placement',body:'Resonance is where your sound vibrates. Forward placement (mask/nasal) cuts through a mix; back placement creates warmth.'},
-        {type:'practice',title:'Practical Assignment',body:'Hum and feel the buzz in your lips/nose (mask). Then sing \'ah\' and try to maintain that same forward sensation.'}
-      ]},
+      steps:[{type:'teach',title:'Resonance & Placement',body:'Resonance is where your sound vibrates. Forward placement (mask/nasal) cuts through a mix; back placement creates warmth.'}]},
     { id:25, title:'Nasality: When It Helps, When It Hurts', course:'Technique', duration:'10 min', content:'A little nasal resonance adds brightness and cuts through a mix. Too much sounds pinched. Learn to control it.',
-      steps:[
-        {type:'teach',title:'Nasality: When It Helps, When It Hurts',body:'A little nasal resonance adds brightness and cuts through a mix. Too much sounds pinched. Learn to control it.'},
-        {type:'practice',title:'Practical Assignment',body:'Pinch your nose and sing. If the tone changes drastically, you are too nasal. Practice reducing nasal pull.'}
-      ]},
+      steps:[{type:'teach',title:'Nasality: When It Helps, When It Hurts',body:'A little nasal resonance adds brightness and cuts through a mix. Too much sounds pinched. Learn to control it.'},{type:'practice',title:'Practical Assignment',body:'Pinch your nose and sing. If the tone changes drastically, you are too nasal. Practice reducing nasal pull.'}]},
     { id:26, title:'Vibrato: Natural Oscillation', course:'Technique', duration:'10 min', content:'Vibrato is a natural pitch oscillation that happens when your voice is free and well-supported. Forced vibrato sounds fake.',
-      steps:[
-        {type:'teach',title:'Vibrato: Natural Oscillation',body:'Vibrato is a natural pitch oscillation that happens when your voice is free and well-supported. Forced vibrato sounds fake.'},
-        {type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note with good support. Do not try to create vibrato — let it happen naturally. Record and listen.'}
-      ]},
+      steps:[{type:'teach',title:'Vibrato: Natural Oscillation',body:'Vibrato is a natural pitch oscillation that happens when your voice is free and well-supported. Forced vibrato sounds fake.'},{type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note with good support. Do not try to create vibrato — let it happen naturally. Record and listen.'}]},
     { id:27, title:'Articulation: Consonants & Diction', course:'Technique', duration:'10 min', content:'Clear diction makes your singing intelligible. Consonants (T, K, D, B) need to be crisp without disrupting the airflow.',
-      steps:[
-        {type:'teach',title:'Articulation: Consonants & Diction',body:'Clear diction makes your singing intelligible. Consonants (T, K, D, B) need to be crisp without disrupting the airflow.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a phrase focusing on clear consonants. Record and ask a friend: can you understand every word?'}
-      ]},
-    { id:28, title:'Intervals: 2nds & 3rds', course:'Theory', duration:'12 min', content:'Seconds (adjacent notes) and thirds (every other note) are the building blocks of melody and harmony.',
-      steps:[
-        {type:'teach',title:'Intervals: 2nds & 3rds',body:'Seconds (adjacent notes) and thirds (every other note) are the building blocks of melody and harmony.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a note, then sing a major 3rd above. Check with a piano. Repeat for minor 3rd.'}
-      ]},
-    { id:29, title:'Triads: Major, Minor, Diminished', course:'Theory', duration:'15 min', content:'A triad is 3 notes stacked in thirds. Major (bright), minor (dark), diminished (tense) — these are the building blocks of chords.',
-      steps:[
-        {type:'teach',title:'Triads: Major, Minor, Diminished',body:'A triad is 3 notes stacked in thirds. Major (bright), minor (dark), diminished (tense) — these are the building blocks of chords.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a C major triad (C-E-G) ascending and descending. Then try C minor (C-Eb-G). Hear the difference.'}
-      ]},
-    { id:30, title:'Rhythm: 16th Notes & Syncopation', course:'Theory', duration:'15 min', content:'Sixteenth notes divide the beat into 4 parts. Syncopation puts emphasis on unexpected beats — the heart of groove.',
-      steps:[
-        {type:'teach',title:'Rhythm: 16th Notes & Syncopation',body:'Sixteenth notes divide the beat into 4 parts. Syncopation puts emphasis on unexpected beats — the heart of groove.'},
-        {type:'practice',title:'Practical Assignment',body:'Clap a syncopated pattern: 1-ee-and-uh-2-ee-and-uh. Use a metronome at 60 BPM.'}
-      ]},
-    { id:31, title:'Circle of Fifths', course:'Theory', duration:'15 min', content:'The Circle of Fifths shows the relationship between all 12 keys. It is the master map of music theory.',
-      steps:[
-        {type:'teach',title:'Circle of Fifths',body:'The Circle of Fifths shows the relationship between all 12 keys. It is the master map of music theory.'},
-        {type:'practice',title:'Practical Assignment',body:'Draw the Circle of Fifths from memory. Start at C and go clockwise: C-G-D-A-E-B-F#-Db-Ab-Eb-Bb-F.'}
-      ]},
+      steps:[{type:'teach',title:'Articulation: Consonants & Diction',body:'Clear diction makes your singing intelligible. Consonants (T, K, D, B) need to be crisp without disrupting the airflow.'},{type:'practice',title:'Practical Assignment',body:'Sing a phrase focusing on clear consonants. Record and ask a friend: can you understand every word?'}]},
+    { id:28, title:'Intervals: 2nds & 3rds', course:'Theory', duration:'12 min', content:'Seconds and thirds are the building blocks of melody. A second connects adjacent notes; a third skips one. These intervals define every melody you have ever sung. Berklee interval training uses flashcards — name any interval in under 2 seconds.',
+      steps:[{type:'teach',title:'Seconds (M2, m2)',body:'A second connects two adjacent notes in the scale.\n\nMajor 2nd (M2) = 1 whole step (2 semitones). C to D, E to F#, G to A.\nminor 2nd (m2) = 1/2 step (1 semitone). E to F, B to C, C to Db.\n\nThe minor 2nd has a tense, dissonant sound — think the Jaws theme (dun-dun, dun-dun). The major 2nd is brighter and more open.\n\nIn melody, seconds create smooth, stepwise motion. Most popular melodies move mostly by seconds.'},{type:'teach',title:'Thirds (M3, m3)',body:'A third spans three letter names, skipping one note in between.\n\nMajor 3rd (M3) = 4 semitones. C to E, F to A, G to B. Sounds bright, happy.\nminor 3rd (m3) = 3 semitones. C to Eb, F to Ab, D to F. Sounds dark, sad.\n\nThe major 3rd vs minor 3rd is THE most important distinction in music. It is what makes a chord major or minor. Train your ear obsessively.\n\nSing: C-E (major 3rd, bright). C-Eb (minor 3rd, dark). Feel the difference in your throat.'},{type:'exercise',title:'Identify These Intervals',body:'Sing and identify (use a piano to check):\n1. C to D = Major 2nd\n2. C to Db = minor 2nd\n3. C to E = Major 3rd\n4. C to Eb = minor 3rd\n5. "When You Believe" opening = minor 2nd\n6. "Mary Had a Little Lamb" opening = Major 3rd\n7. "Twinkle Twinkle" opening = Perfect 5th (preview)'},{type:'practice',title:'Practical Assignment',body:'1. Sing a major 3rd from C, then from F, then from G, then from A.\n2. Sing a minor 3rd from the same roots.\n3. Alternate: M3, m3, M3, m3 from random starting notes.\n4. Write a 4-note melody using only seconds and thirds. Sing it back.'},{type:'tip',title:'Berklee Drill',body:'Berklee interval training uses flashcards. A professor plays an interval, you name it in under 2 seconds. The goal: hear a major 3rd and KNOW it instantly, the way you know the color blue. This takes 10 minutes a day for 3 months.'}]},
+    { id:29, title:'Triads: Major, Minor, Diminished', course:'Theory', duration:'15 min', content:'A triad is three notes stacked in thirds. Major, minor, diminished — these are the building blocks of every chord in Western music. Understanding triads is understanding harmony itself. Berklee harmony courses expect you to build any triad from any root in under 3 seconds.',
+      steps:[{type:'teach',title:'Building Triads from the Scale',body:'A triad = root + third + fifth, stacked in thirds.\n\nMajor triad: Root + Major 3rd + Perfect 5th. C-E-G = C major.\nminor triad: Root + minor 3rd + Perfect 5th. C-Eb-G = Cm.\nDiminished triad: Root + minor 3rd + diminished 5th. C-Eb-Gb = Cdim.\n\nEvery note in the major scale can generate a triad. In C Major:\n- C (I) = major\n- D (ii) = minor\n- E (iii) = minor\n- F (IV) = major\n- G (V) = major\n- A (vi) = minor\n- B (vii°) = diminished\n\nThis is the harmonic DNA of every song.'},{type:'teach',title:'Hear the Quality',body:'Major triad: bright, stable, "happy." Think of resolution, home, rest.\nminor triad: dark, contemplative, "sad." Think of longing, depth.\nDiminished triad: tense, unstable, "wants to move." Think of suspense.\n\nPlay all three on a piano. Sing the root of each. Then the third. Then the fifth. Internalize the SOUND of each quality.'},{type:'exercise',title:'Build These Triads',body:'Build each triad from the root up (name every note):\n1. D Major: D-F#-A\n2. E minor: E-G-B\n3. F Major: F-A-C\n4. G diminished: G-Bb-Db\n5. A Major: A-C#-E\n6. B diminished: B-D-F\n\nSing the root, then arpeggiate up (root-3rd-5th-root). Use a piano to verify.'},{type:'practice',title:'Practical Assignment',body:'1. Play C major, C minor, and C diminished triads. Sing each note.\n2. Write the triads for G Major (I, IV, V) and Bb Major (I, IV, V).\n3. Listen to "Let It Be" — the chords are I-V-vi-IV in C (C-G-Am-F). Sing the root of each chord.\n4. Identify: is the chord at the start of "Hallelujah" (Jeff Buckley) major or minor?'},{type:'tip',title:'Berklee Insight',body:'At Berklee, you analyze songs by their chord function (I, IV, V, vi). You do not need to hear every note — just the bass movement. The bass tells you the chord; the melody tells you the color.'}]},
+    { id:30, title:'Rhythm: 16th Notes & Syncopation', course:'Theory', duration:'15 min', content:'Sixteenth notes divide the beat into four parts. Syncopation places emphasis on unexpected beats — the "and" of the beat, or between beats. Together, they create the rhythmic sophistication of professional music. Berklee rhythm classes spend weeks on syncopation alone.',
+      steps:[{type:'teach',title:'Sixteenth Note Subdivision',body:'One quarter note = 4 sixteenth notes.\n\nCounted: "1 e & a" (four subdivisions per beat)\n- 1 = downbeat\n- e = second sixteenth\n- & = the "and" (beat midpoint)\n- a = fourth sixteenth\n\nIn tempo: if quarter = 120 BPM, sixteenth notes fire at 480 per minute.\n\nSyncopation: emphasizing the "e" or "a" instead of the "1" or "&". This creates rhythmic tension and groove.'},{type:'teach',title:'Syncopation Patterns',body:'Common syncopated patterns:\n\n1. Anticipation: hitting the next beat early (on the "a" of 4 instead of beat 1)\n2. Backbeat: emphasizing beats 2 and 4 (in 4/4)\n3. Offbeat: emphasizing the "&" between main beats\n\nMost pop, R&B, Afrobeats, and gospel use heavy syncopation. The melody often starts BEFORE the chord change.\n\nListen to Bruno Mars\'s "24K Magic" — the vocal rhythm is heavily syncopated against a straight drum beat.'},{type:'exercise',title:'Clap Syncopated Rhythms',body:'Clap these patterns (metronome at 80 BPM):\n\n1. "1 & 2 & 3 & 4 &" — clap only on the "&"s (offbeats)\n2. "1 e & a 2 e & a" — clap on 1, the "a" of 1, and the "&" of 2\n3. "1 e & a 2 e & a 3 e & a 4 e & a" — clap on every "e" and "a"\n4. Rest on beat 1, clap everything else\n\nStart slow. Speed up only when clean.'},{type:'practice',title:'Practical Assignment',body:'1. Write a 2-measure rhythm using 8th and 16th notes with at least 2 syncopated moments.\n2. Clap it until clean at 90 BPM.\n3. Listen to any Burna Boy song. Tap the syncopated rhythm of the vocal. Write it down.\n4. Sing a simple melody but syncopate the rhythm — push some notes early, pull others back.'},{type:'tip',title:'Berklee Drill',body:'Berklee rhythm classes use a technique: clap the subdivision (16ths) while tapping the pulse (quarters) with your foot. This "polyrhythmic" body coordination is how pros internalize groove. Practice 5 minutes daily.'}]},
+    { id:31, title:'Circle of Fifths', course:'Theory', duration:'15 min', content:'The Circle of Fifths is the master map of music theory. It shows the relationship between all 12 keys, their key signatures, and their relative majors and minors. Once you understand it, music theory becomes predictable. Berklee students draw the circle from memory in under 30 seconds.',
+      steps:[{type:'teach',title:'The Structure of the Circle',body:'Imagine a clock face. At 12 o\'clock: C Major (0 sharps/flats).\n\nMoving clockwise (up a fifth): G Major (1 sharp), D Major (2 sharps), A Major (3 sharps), E Major (4 sharps), B Major (5 sharps), F# Major (6 sharps).\n\nMoving counterclockwise (up a fourth): F Major (1 flat), Bb Major (2 flats), Eb Major (3 flats), Ab Major (4 flats), Db Major (5 flats), Gb Major (6 flats).\n\nThe circle closes: F# Major = Gb Major (enharmonic equivalent). At 6 o\'clock, the circle flips from sharps to flats.'},{type:'teach',title:'The Inner Circle (Relative Minors)',body:'Every major key has a relative minor key that shares the same key signature. It sits a minor 3rd below.\n\nC Major → A minor (no sharps/flats)\nG Major → E minor (1 sharp)\nD Major → B minor (2 sharps)\nF Major → D minor (1 flat)\n\nThe Circle has TWO rings: outer = major, inner = minor.\n\nThis means: if a song is in E minor, you know it has 1 sharp (F#). The relative major is G Major.'},{type:'exercise',title:'Build the Circle from Memory',body:'Draw the Circle of Fifths from memory:\n1. Start with C at 12 o\'clock\n2. Clockwise: G, D, A, E, B, F#\n3. Counterclockwise: F, Bb, Eb, Ab, Db, Gb\n4. Inner ring: Am, Em, Bm, F#m, C#m, G#m, Dm, Gm, Cm, Fm, Bbm, Ebm\n5. Key signature counts: 0, 1, 2, 3, 4, 5, 6 sharps/flats\n\nDo this 3 times. It should take under 60 seconds when mastered.'},{type:'practice',title:'Practical Assignment',body:'1. Name the key signature for: D Major, Bb Major, A Major, Eb Major.\n2. What is the relative minor of F Major? (D minor)\n3. A song has 3 flats. What key? (Eb Major or C minor)\n4. Write the Circle from memory. Check. Repeat until perfect.\n5. Listen to a song, find the tonic, use the circle to guess the key. Verify with a piano.'},{type:'tip',title:'Berklee Insight',body:'The Circle is not just theory — it is a practical tool. Modulating to the key a fifth away (C→G) sounds natural because they share most notes. Songwriters use the circle to plan key changes. Gospel modulations often move in fourths (counterclockwise).'}]},
     { id:32, title:'Chord Quality Recognition by Ear', course:'Ear Training', duration:'12 min', content:'Train your ear to instantly recognize major, minor, diminished, and augmented chords. This skill makes you a better singer and musician.',
-      steps:[
-        {type:'teach',title:'Chord Quality Recognition by Ear',body:'Train your ear to instantly recognize major, minor, diminished, and augmented chords. This skill makes you a better singer and musician.'},
-        {type:'practice',title:'Practical Assignment',body:'Have a friend play random chords. Identify if they are major or minor. Aim for 80% accuracy.'}
-      ]},
+      steps:[{type:'teach',title:'Chord Quality Recognition by Ear',body:'Train your ear to instantly recognize major, minor, diminished, and augmented chords. This skill makes you a better singer and musician.'},{type:'practice',title:'Practical Assignment',body:'Have a friend play random chords. Identify if they are major or minor. Aim for 80% accuracy.'}]},
     { id:33, title:'Harmonic Listening: Hearing the Chords', course:'Ear Training', duration:'15 min', content:'When you can hear the chord changes in a song, you can anticipate melody and harmony. This is how pros learn songs instantly.',
-      steps:[
-        {type:'teach',title:'Harmonic Listening: Hearing the Chords',body:'When you can hear the chord changes in a song, you can anticipate melody and harmony. This is how pros learn songs instantly.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a I-V-vi-IV progression. Sing along with each chord change. Try to hear when the chord shifts.'}
-      ]},
+      steps:[{type:'teach',title:'Harmonic Listening: Hearing the Chords',body:'When you can hear the chord changes in a song, you can anticipate melody and harmony. This is how pros learn songs instantly.'},{type:'practice',title:'Practical Assignment',body:'Play a I-V-vi-IV progression. Sing along with each chord change. Try to hear when the chord shifts.'}]},
     { id:34, title:'Stage Presence & Body Language', course:'Performance', duration:'12 min', content:'Your body speaks as loudly as your voice. Confident posture, intentional movement, and eye contact make your performance memorable.',
-      steps:[
-        {type:'teach',title:'Stage Presence & Body Language',body:'Your body speaks as loudly as your voice. Confident posture, intentional movement, and eye contact make your performance memorable.'},
-        {type:'practice',title:'Practical Assignment',body:'Record a full performance video. Watch it muted — does your body language convey confidence and emotion?'}
-      ]},
+      steps:[{type:'teach',title:'Stage Presence & Body Language',body:'Your body speaks as loudly as your voice. Confident posture, intentional movement, and eye contact make your performance memorable.'},{type:'practice',title:'Practical Assignment',body:'Record a full performance video. Watch it muted — does your body language convey confidence and emotion?'}]},
     { id:35, title:'Emotional Connection to Lyrics', course:'Performance', duration:'10 min', content:'Singing notes is easy. Singing with genuine emotion is what moves people. Connect every lyric to a real feeling or memory.',
-      steps:[
-        {type:'teach',title:'Emotional Connection to Lyrics',body:'Singing notes is easy. Singing with genuine emotion is what moves people. Connect every lyric to a real feeling or memory.'},
-        {type:'practice',title:'Practical Assignment',body:'Pick a song. Before singing each line, ask: \'When have I felt this way?\' Sing from that place.'}
-      ]},
+      steps:[{type:'teach',title:'Emotional Connection to Lyrics',body:'Singing notes is easy. Singing with genuine emotion is what moves people. Connect every lyric to a real feeling or memory.'}]},
     { id:36, title:'Worship Leading: Shepherding a Room', course:'Performance', duration:'15 min', content:'Worship leading is about serving the room, not performing. It requires sensitivity, spontaneity, and deep musical knowledge.',
-      steps:[
-        {type:'teach',title:'Worship Leading: Shepherding a Room',body:'Worship leading is about serving the room, not performing. It requires sensitivity, spontaneity, and deep musical knowledge.'},
-        {type:'practice',title:'Practical Assignment',body:'Practice leading a 3-song set with smooth transitions. Record it and evaluate your flow and sensitivity.'}
-      ]},
+      steps:[{type:'teach',title:'Worship Leading: Shepherding a Room',body:'Worship leading is about serving the room, not performing. It requires sensitivity, spontaneity, and deep musical knowledge.'},{type:'practice',title:'Practical Assignment',body:'Practice leading a 3-song set with smooth transitions. Record it and evaluate your flow and sensitivity.'}]},
     { id:37, title:'Afrobeats Vocal Style', course:'Style-Specific', duration:'15 min', content:'Afrobeats vocals are rhythmic, percussive, and groove-driven. Pitch bends, call-and-response, and syncopation define the style.',
-      steps:[
-        {type:'teach',title:'Afrobeats Vocal Style',body:'Afrobeats vocals are rhythmic, percussive, and groove-driven. Pitch bends, call-and-response, and syncopation define the style.'},
-        {type:'practice',title:'Practical Assignment',body:'Listen to a Burna Boy or Wizkid track. Mimic the vocal rhythm and pitch bends. Record your version.'}
-      ]},
+      steps:[{type:'teach',title:'Afrobeats Vocal Style',body:'Afrobeats vocals are rhythmic, percussive, and groove-driven. Pitch bends, call-and-response, and syncopation define the style.'},{type:'practice',title:'Practical Assignment',body:'Listen to a Burna Boy or Wizkid track. Mimic the vocal rhythm and pitch bends. Record your version.'}]},
     { id:38, title:'Praise & Worship Vocal Delivery', course:'Style-Specific', duration:'12 min', content:'Praise and worship vocals range from intimate and tender to powerful and anointed. Dynamic control is essential.',
-      steps:[
-        {type:'teach',title:'Praise & Worship Vocal Delivery',body:'Praise and worship vocals range from intimate and tender to powerful and anointed. Dynamic control is essential.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing the same worship chorus in 3 dynamics: whisper-soft, conversational, and full praise. Feel the emotional shift.'}
-      ]},
+      steps:[{type:'teach',title:'Praise & Worship Vocal Delivery',body:'Praise and worship vocals range from intimate and tender to powerful and anointed. Dynamic control is essential.'},{type:'practice',title:'Practical Assignment',body:'Sing the same worship chorus in 3 dynamics: whisper-soft, conversational, and full praise. Feel the emotional shift.'}]},
     { id:39, title:'Building Your Personal Brand', course:'Business', duration:'12 min', content:'Your brand is what people say about you when you are not in the room. Define your unique voice, look, and message.',
-      steps:[
-        {type:'teach',title:'Building Your Personal Brand',body:'Your brand is what people say about you when you are not in the room. Define your unique voice, look, and message.'},
-        {type:'practice',title:'Practical Assignment',body:'Write a 3-sentence artist statement: Who are you as an artist? What makes you different?'}
-      ]},
+      steps:[{type:'teach',title:'Building Your Personal Brand',body:'Your brand is what people say about you when you are not in the room. Define your unique voice, look, and message.'},{type:'practice',title:'Practical Assignment',body:'Write a 3-sentence artist statement: Who are you as an artist? What makes you different?'}]},
     { id:40, title:'Advanced SOVT: Pressure Exercises', course:'Technique', duration:'15 min', content:'Advanced semi-occluded vocal tract exercises target specific technical challenges — high range, power, and register transitions.',
-      steps:[
-        {type:'teach',title:'Advanced SOVT: Pressure Exercises',body:'Advanced semi-occluded vocal tract exercises target specific technical challenges — high range, power, and register transitions.'},
-        {type:'practice',title:'Practical Assignment',body:'Use a straw to sing arpeggios across your full range. Notice how the back-pressure supports your passaggio.'}
-      ]},
+      steps:[{type:'teach',title:'Advanced SOVT: Pressure Exercises',body:'Advanced semi-occluded vocal tract exercises target specific technical challenges — high range, power, and register transitions.'},{type:'practice',title:'Practical Assignment',body:'Use a straw to sing arpeggios across your full range. Notice how the back-pressure supports your passaggio.'}]},
     { id:41, title:'Belting: Power Without Pain', course:'Technique', duration:'15 min', content:'Belting is powerful high singing done safely. It requires strong appoggio, twang, and vowel modification — never throat pushing.',
-      steps:[
-        {type:'teach',title:'Belting: Power Without Pain',body:'Belting is powerful high singing done safely. It requires strong appoggio, twang, and vowel modification — never throat pushing.'},
-        {type:'practice',title:'Practical Assignment',body:'Belt a comfortable high note on \'eh\'. Feel the engagement in your body, not your throat.'}
-      ]},
+      steps:[{type:'teach',title:'Belting: Power Without Pain',body:'Belting is powerful high singing done safely. It requires strong appoggio, twang, and vowel modification — never throat pushing.'}]},
     { id:42, title:'Pharyngeal Voice (Twang)', course:'Technique', duration:'12 min', content:'Pharyngeal voice narrows the space above the larynx, creating a bright, cutting tone. Essential for belting and cutting through a mix.',
-      steps:[
-        {type:'teach',title:'Pharyngeal Voice (Twang)',body:'Pharyngeal voice narrows the space above the larynx, creating a bright, cutting tone. Essential for belting and cutting through a mix.'},
-        {type:'practice',title:'Practical Assignment',body:'Imitate a cat meow — feel the bright, narrow sensation. Apply that same brightness to an open \'ah\' vowel.'}
-      ]},
+      steps:[{type:'teach',title:'Pharyngeal Voice (Twang)',body:'Pharyngeal voice narrows the space above the larynx, creating a bright, cutting tone. Essential for belting and cutting through a mix.'}]},
     { id:43, title:'Vocal Agility: Scales & Arpeggios', course:'Technique', duration:'15 min', content:'Agility is the ability to move quickly and accurately between notes. Fast scales and arpeggios build this skill.',
-      steps:[
-        {type:'teach',title:'Vocal Agility: Scales & Arpeggios',body:'Agility is the ability to move quickly and accurately between notes. Fast scales and arpeggios build this skill.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a major scale on \'ee\' at 80 BPM. Increase tempo by 5 BPM each day.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Agility: Scales & Arpeggios',body:'Agility is the ability to move quickly and accurately between notes. Fast scales and arpeggios build this skill.'}]},
     { id:44, title:'Registration: Understanding Your Passaggio', course:'Technique', duration:'12 min', content:'Your passaggio is the transition zone between registers. Knowing where it is helps you blend smoothly instead of breaking.',
-      steps:[
-        {type:'teach',title:'Registration: Understanding Your Passaggio',body:'Your passaggio is the transition zone between registers. Knowing where it is helps you blend smoothly instead of breaking.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a slow siren from low to high. Note where the shift happens. Practice smoothing it.'}
-      ]},
+      steps:[{type:'teach',title:'Registration: Understanding Your Passaggio',body:'Your passaggio is the transition zone between registers. Knowing where it is helps you blend smoothly instead of breaking.'},{type:'practice',title:'Practical Assignment',body:'Sing a slow siren from low to high. Note where the shift happens. Practice smoothing it.'}]},
     { id:45, title:'Messa di Voce: Dynamic Control', course:'Technique', duration:'12 min', content:'Messa di voce means \'placing the voice\' — singing one note from soft to loud and back. It builds incredible breath control.',
-      steps:[
-        {type:'teach',title:'Messa di Voce: Dynamic Control',body:'Messa di voce means \'placing the voice\' — singing one note from soft to loud and back. It builds incredible breath control.'},
-        {type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note. Start pianissimo, grow to forte, then back to pianissimo. One breath.'}
-      ]},
+      steps:[{type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note. Start pianissimo, grow to forte, then back to pianissimo. One breath.'}]},
     { id:46, title:'Riffs & Runs: Melismatic Singing', course:'Technique', duration:'15 min', content:'Riffs and runs are fast, decorative note sequences. They require agility, accuracy, and breath support — not just speed.',
-      steps:[
-        {type:'teach',title:'Riffs & Runs: Melismatic Singing',body:'Riffs and runs are fast, decorative note sequences. They require agility, accuracy, and breath support — not just speed.'},
-        {type:'practice',title:'Practical Assignment',body:'Learn a simple 5-note riff slowly with a metronome. Gradually increase speed while maintaining accuracy.'}
-      ]},
-    { id:47, title:'Minor Scales: Natural, Harmonic, Melodic', course:'Theory', duration:'15 min', content:'Minor scales have a darker, sadder quality. Natural minor, harmonic minor, and melodic minor each have unique sounds.',
-      steps:[
-        {type:'teach',title:'Minor Scales: Natural, Harmonic, Melodic',body:'Minor scales have a darker, sadder quality. Natural minor, harmonic minor, and melodic minor each have unique sounds.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a natural minor scale. Then sing a harmonic minor (raised 7th). Hear the different tension.'}
-      ]},
-    { id:48, title:'7th Chords: Maj7, min7, Dom7', course:'Theory', duration:'15 min', content:'7th chords add a 4th note to a triad, creating richer harmony. Major 7 (dreamy), minor 7 (jazzy), dominant 7 (tense).',
-      steps:[
-        {type:'teach',title:'7th Chords: Maj7, min7, Dom7',body:'7th chords add a 4th note to a triad, creating richer harmony. Major 7 (dreamy), minor 7 (jazzy), dominant 7 (tense).'},
-        {type:'practice',title:'Practical Assignment',body:'Play a Cmaj7 chord. Sing each note: C-E-G-B. Then try C7 (C-E-G-Bb). Hear the difference.'}
-      ]},
-    { id:49, title:'Compound Time: 6/8, 9/8, 12/8', course:'Theory', duration:'12 min', content:'Compound time divides beats into groups of 3. 6/8 feels like 2 big beats (each divided into 3). Common in gospel and ballads.',
-      steps:[
-        {type:'teach',title:'Compound Time: 6/8, 9/8, 12/8',body:'Compound time divides beats into groups of 3. 6/8 feels like 2 big beats (each divided into 3). Common in gospel and ballads.'},
-        {type:'practice',title:'Practical Assignment',body:'Clap along to a 6/8 song. Count: 1-2-3-4-5-6 with emphasis on 1 and 4. Feel the rolling groove.'}
-      ]},
-    { id:50, title:'Modulation: Changing Keys Mid-Song', course:'Theory', duration:'12 min', content:'Modulation is shifting to a new key within a song. It creates excitement and emotional lift — common in gospel final choruses.',
-      steps:[
-        {type:'teach',title:'Modulation: Changing Keys Mid-Song',body:'Modulation is shifting to a new key within a song. It creates excitement and emotional lift — common in gospel final choruses.'},
-        {type:'practice',title:'Practical Assignment',body:'Find a song that modulates. Identify exactly where it happens and what the new key is.'}
-      ]},
-    { id:51, title:'Intervals: 4ths, 5ths & 6ths', course:'Theory', duration:'15 min', content:'Perfect 4ths and 5ths are the most consonant intervals. 6ths are the foundation of harmony singing.',
-      steps:[
-        {type:'teach',title:'Intervals: 4ths, 5ths & 6ths',body:'Perfect 4ths and 5ths are the most consonant intervals. 6ths are the foundation of harmony singing.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a note, sing a perfect 5th above. Check accuracy. Repeat for 4th and 6th.'}
-      ]},
+      steps:[{type:'teach',title:'Riffs & Runs: Melismatic Singing',body:'Riffs and runs are fast, decorative note sequences. They require agility, accuracy, and breath support — not just speed.'},{type:'practice',title:'Practical Assignment',body:'Learn a simple 5-note riff slowly with a metronome. Gradually increase speed while maintaining accuracy.'}]},
+    { id:47, title:'Minor Scales: Natural, Harmonic, Melodic', course:'Theory', duration:'15 min', content:'Minor scales are not just "sad major." They are three distinct scales with unique sounds: natural, harmonic, and melodic. Understanding all three is essential for jazz, classical, and any music outside basic pop. Berklee students must write all three forms from memory for any key.',
+      steps:[{type:'teach',title:'Natural Minor Scale',body:'The natural minor scale follows: W-H-W-W-H-W-W (2-1-2-2-1-2-2 semitones).\n\nA natural minor (all white keys): A B C D E F G A.\n\nRelative to C Major (starting on the 6th degree). Same notes, different tonic.\n\nThe natural minor has a "modal" sound — less directional than major. The 7th degree (G) is a whole step below the tonic, so it lacks the leading tone tension of major.'},{type:'teach',title:'Harmonic Minor Scale',body:'Problem: natural minor lacks a leading tone (7th is a whole step below tonic). Solution: raise the 7th degree.\n\nA harmonic minor: A B C D E F G# A.\n\nThe G# creates a strong pull to A — the dominant function. But it creates an augmented 2nd between F and G# (3 semitones). This exotic interval sounds Middle Eastern, dramatic, or classical.\n\nUsed in: classical cadences, metal, flamenco, dramatic pop.'},{type:'teach',title:'Melodic Minor Scale',body:'Problem: harmonic minor\'s augmented 2nd is too exotic for smooth melodies. Solution: raise both 6th AND 7th when ascending.\n\nA melodic minor ascending: A B C D E F# G# A.\nA melodic minor descending: A G F E D C B A (back to natural minor).\n\nThis is the scale of jazz. Jazz musicians think of melodic minor as one scale that changes direction.'},{type:'exercise',title:'Sing All Three',body:'Sing A minor in all three forms (use a piano):\n1. Natural: A B C D E F G A\n2. Harmonic: A B C D E F G# A (hear the G#)\n3. Melodic: A B C D E F# G# A ascending, A G F E D C B A descending\n\nNotice how each version has a different emotional quality.'},{type:'practice',title:'Practical Assignment',body:'1. Write D natural minor, D harmonic minor, and D melodic minor from memory.\n2. Sing each one. The difference between F and F# is the key.\n3. Listen to "Losing My Religion" (R.E.M.) — the melody uses natural minor.\n4. Listen to any classical piece in minor — identify harmonic or melodic minor.'},{type:'tip',title:'Berklee Insight',body:'At Berklee, minor scales are taught as ONE system with variable 6th and 7th degrees. You choose which to use based on the melodic context. The "rule" of raising 7th for dominant function is the starting point, not the endpoint.'}]},
+    { id:48, title:'7th Chords: Maj7, min7, Dom7', course:'Theory', duration:'15 min', content:'7th chords add a fourth note to a triad, creating richer harmony. Major 7, minor 7, and dominant 7 are the most common. They define the sound of jazz, R&B, gospel, and sophisticated pop. Berklee harmony students learn 7th chords as the DEFAULT, not the exception.',
+      steps:[{type:'teach',title:'Building 7th Chords',body:'A 7th chord = triad + the 7th degree above the root (stacked in thirds).\n\nMajor 7 (Maj7): Major triad + Major 7th. C-E-G-B. Dreamy, jazzy, sophisticated.\nminor 7 (m7): minor triad + minor 7th. C-Eb-G-Bb. Smooth, mellow, soulful.\nDominant 7 (Dom7): Major triad + minor 7th. C-E-G-Bb. Tense, wants to resolve to F.\n\nThe dominant 7th is the most important chord in Western music. It creates tension that demands resolution. Every V7 chord in any key is a dominant 7th.'},{type:'teach',title:'Hear the Quality',body:'Maj7: "Lush," "dreamy," "floating." Think of Sade, neo-soul, film scores.\nm7: "Smooth," "warm," "grounded." Think of Robert Glasper, D\'Angelo.\nDom7: "Tense," "needs to move," "bluesy." Think of gospel, blues, jazz turnarounds.\n\nPlay Cmaj7, Cm7, and C7 on a piano. Sing the root, 3rd, 5th, and 7th of each. The 7th is what gives each chord its character.'},{type:'exercise',title:'Build These 7th Chords',body:'Name every note:\n1. Dmaj7: D-F#-A-C#\n2. Gm7: G-Bb-D-F\n3. A7: A-C#-E-G (dominant)\n4. Fmaj7: F-A-C-E\n5. Em7: E-G-B-D\n6. B7: B-D#-F#-A (resolves to E)\n\nSing each chord arpeggiating up. Use a piano to verify.'},{type:'practice',title:'Practical Assignment',body:'1. In C Major, I = Cmaj7, V = G7. Play both. Hear how G7 resolves to Cmaj7.\n2. The ii-V-I (Dm7-G7-Cmaj7) is the most common in jazz. Play and sing it.\n3. Listen to "Let It Be" — verse uses I-V-vi-IV. Imagine with 7ths: Imaj7-V7-vi7-IVmaj7.\n4. Write a 4-chord progression using at least two different 7th chord types.'},{type:'tip',title:'Berklee Insight',body:'Berklee students learn 7th chords as the DEFAULT. Triads are the skeleton; 7th chords are the flesh. When you hear a chord, you should tell if it has a 7th — and what kind — within 1 second.'}]},
+    { id:49, title:'Compound Time: 6/8, 9/8, 12/8', course:'Theory', duration:'12 min', content:'Compound time divides beats into groups of 3, creating a flowing, circular feel. 6/8, 9/8, 12/8 — these are the time signatures of gospel ballads, classical minuets, and Afrobeat grooves. Berklee ear training distinguishes 6/8 from 3/4 by feel alone.',
+      steps:[{type:'teach',title:'Compound Meter Explained',body:'In simple meter (4/4, 3/4), beats divide into 2. In compound meter, beats divide into 3.\n\n6/8: Two big beats, each divided into 3 eighth notes.\nCount: "1-2-3-4-5-6" with emphasis on 1 and 4.\nFeel: ONE-two-three-FOUR-five-six (two groups of three).\n\n9/8: Three big beats, each divided into 3.\n12/8: Four big beats, each divided into 3. Common in blues and gospel.'},{type:'teach',title:'6/8 vs 3/4 — The Critical Difference',body:'3/4: 3 beats, each divides into 2 eighths. ONE-and TWO-and THREE-and.\n6/8: 2 big beats, each divides into 3 eighths. ONE-two-three-FOUR-five-six.\n\nSame number of eighth notes, COMPLETELY different feel.\n\n3/4 = waltz (even, marching)\n6/8 = rolling, circular, flowing\n\nTest: "Amazing Grace" in 3/4 vs 6/8. The 6/8 version feels like a gentle sway; 3/4 feels like a march.'},{type:'exercise',title:'Feel the Difference',body:'Clap and count:\n1. 3/4: Clap-2-3, Clap-2-3 (3 beats, 2 subdivisions each)\n2. 6/8: Clap-2-3-4-5-6 (2 beats, 3 subdivisions each)\n3. Alternate: 3/4 for 4 measures, then 6/8 for 4 measures\n4. Listen to "House of the Rising Sun" — it is in 6/8. Feel the two big beats.'},{type:'practice',title:'Practical Assignment',body:'1. Write 4 measures of rhythm in 6/8 using dotted quarter and eighth notes.\n2. Write 4 measures in 3/4 using quarter and eighth notes.\n3. Clap both. The 6/8 should feel like a circle; 3/4 should feel like a triangle.\n4. Listen to Afrobeat (Burna Boy, Wizkid) — many use 12/8 feel. Count the groups of 3.'},{type:'tip',title:'Berklee Insight',body:'In compound meter, the BEAT is the dotted quarter note, not the eighth note. When someone says "quarter note = 120" in 6/8, they mean dotted quarter = 120. This trips up many students — do not let it be you.'}]},
+    { id:50, title:'Modulation: Changing Keys Mid-Song', course:'Theory', duration:'12 min', content:'Modulation is changing keys within a song. It creates excitement, emotional lift, and structural contrast. Gospel music modulates up a half step for the final chorus — that is modulation in action. Berklee composers learn to modulate to ANY key from ANY key.',
+      steps:[{type:'teach',title:'Why Modulate?',body:'Staying in one key for an entire song can feel static. Modulation creates:\n- Energy lift (going up feels like "rising")\n- Emotional shift (new key = new feeling)\n- Structural contrast (verse in one key, chorus in another)\n\nCommon modulation distances:\n- Up a whole step (C→D): bright, energetic. Common in pop/gospel final choruses.\n- Up a half step (C→Db): dramatic, intense. Common in gospel.\n- To the relative major/minor (C→Am): subtle, smooth.'},{type:'teach',title:'Pivot Chord Modulation',body:'The smoothest modulation uses a chord that exists in BOTH keys as a "pivot."\n\nExample: C Major to G Major.\n- C Major chords: C, Dm, Em, F, G, Am, Bdim\n- G Major chords: G, Am, Bm, C, D, Em, F#dim\n- Shared: Am, Em, C, D\n\nPlay: C → Am → D7 → G. The Am is the pivot — it is vi in C Major AND ii in G Major. The D7 confirms the new key.\n\nThis is how professionals modulate — smoothly, without jarring transitions.'},{type:'exercise',title:'Identify Modulations',body:'Listen and identify the modulation point:\n1. "I Will Always Love You" (Whitney Houston) — final chorus modulates up a whole step\n2. "Man in the Mirror" (Michael Jackson) — modulates up a half step\n3. "Love on Top" (Beyoncé) — modulates up multiple times (4 times!)\n4. Any gospel song — listen for the key change in the final chorus\n\nWhere does the key change? How does it make you feel?'},{type:'practice',title:'Practical Assignment',body:'1. Write a 4-chord progression in C Major that modulates to G Major using a pivot chord.\n2. Write a 4-chord progression in G Major that modulates to D Major.\n3. Play "Man in the Mirror" — identify exactly where the modulation happens.\n4. Compose a 4-bar verse in one key, then a 4-bar chorus in a different key.'},{type:'tip',title:'Berklee Insight',body:'Berklee composers learn three modulation methods: (1) Pivot chord (smoothest), (2) Direct (most dramatic — just jump), (3) Chromatic (use a secondary dominant). Master pivot chords first.'}]},
+    { id:51, title:'Intervals: 4ths, 5ths & 6ths', course:'Theory', duration:'15 min', content:'Fourths, fifths, and sixths are the intervals of harmony. The perfect fifth is the most consonant interval after the octave. Fourths and sixths create the rich textures of vocal harmony and jazz voicings. Berklee voice students learn to sing in parallel 6ths as a foundational skill.',
+      steps:[{type:'teach',title:'Perfect 4th (P4)',body:'A perfect 4th = 5 semitones. C to F, G to C, D to G.\n\nIn medieval times, the 4th was considered dissonant and was banned in sacred music. Today it is consonant but has an "open" quality — it sounds like it wants to resolve (the 4th wants to fall to the 3rd).\n\nThe 4th is the foundation of quartal harmony (chords built in 4ths instead of 3rds). Think of McCoy Tyner, Herbie Hancock, modern jazz.\n\nSing: C-F (down a 4th = up a 5th). "Here Comes the Bride" starts with a 4th leap up.'},{type:'teach',title:'Perfect 5th (P5)',body:'A perfect 5th = 7 semitones. C to G, F to C, G to D.\n\nThe perfect 5th is the most stable, most consonant interval. It is the basis of the Circle of Fifths and of dominant-tonic resolution.\n\nPower chords in rock are just root + 5th. The 5th gives the chord its "power" without specifying major or minor.\n\nSing: C-G (up a 5th). "Twinkle Twinkle" starts with a 5th. The 5th feels like home — stable, resolved.'},{type:'teach',title:'6ths (M6, m6)',body:'Major 6th = 9 semitones. C to A. Warm, open, consonant.\nminor 6th = 8 semitones. C to Ab. Darker, more complex.\n\n6ths are the foundation of vocal harmony. When a tenor sings a 6th above the melody, it creates that rich gospel/R&B sound.\n\nSing: C-A (major 6th). "My Bonnie Lies Over the Ocean" starts with a major 6th leap.\nC-Ab (minor 6th). "Close Every Door" (Joseph) starts with a minor 6th.'},{type:'exercise',title:'Identify These Intervals',body:'Sing and identify (use piano to check):\n1. C to F = Perfect 4th\n2. C to G = Perfect 5th\n3. C to A = Major 6th\n4. C to Ab = minor 6th\n5. "Somewhere Over the Rainbow" opening = Major 6th\n6. "Star Wars" main theme opening = Perfect 5th\n7. "Hallelujah" (Cohen) "secret chord" = Major 6th'},{type:'practice',title:'Practical Assignment',body:'1. Sing a perfect 5th from every note in C Major scale.\n2. Sing a perfect 4th from every scale degree.\n3. Sing a major 6th from C, D, E, F, G, A, B.\n4. Write a 4-note melody using only 4ths, 5ths, and octaves (no 3rds). Hear the "open" sound.'},{type:'tip',title:'Berklee Insight',body:'Berklee voice students learn to sing in parallel 5ths and 6ths with other singers. The 6th is preferred because it creates less tension. Practice singing a 6th above a melody — this is the secret of professional backing vocalists.'}]},
     { id:52, title:'Transcription: Writing Down What You Hear', course:'Ear Training', duration:'15 min', content:'Transcription is writing out a melody or chord progression by ear. It is one of the most powerful ear training exercises.',
-      steps:[
-        {type:'teach',title:'Transcription: Writing Down What You Hear',body:'Transcription is writing out a melody or chord progression by ear. It is one of the most powerful ear training exercises.'},
-        {type:'practice',title:'Practical Assignment',body:'Pick a simple 4-bar melody. Figure out the notes and write them down. Check with a piano.'}
-      ]},
+      steps:[{type:'teach',title:'Transcription: Writing Down What You Hear',body:'Transcription is writing out a melody or chord progression by ear. It is one of the most powerful ear training exercises.'},{type:'practice',title:'Practical Assignment',body:'Pick a simple 4-bar melody. Figure out the notes and write them down. Check with a piano.'}]},
     { id:53, title:'Relative Pitch Development', course:'Ear Training', duration:'15 min', content:'Relative pitch is the ability to identify intervals and notes in relation to a reference. It is trainable and essential for singers.',
-      steps:[
-        {type:'teach',title:'Relative Pitch Development',body:'Relative pitch is the ability to identify intervals and notes in relation to a reference. It is trainable and essential for singers.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a reference note. Then play a random note. Identify the interval. Do this for 10 minutes daily.'}
-      ]},
+      steps:[{type:'teach',title:'Relative Pitch Development',body:'Relative pitch is the ability to identify intervals and notes in relation to a reference. It is trainable and essential for singers.'},{type:'practice',title:'Practical Assignment',body:'Play a reference note. Then play a random note. Identify the interval. Do this for 10 minutes daily.'}]},
     { id:54, title:'In-Ear Monitors: Live Performance Setup', course:'Performance', duration:'12 min', content:'In-ear monitors (IEMs) give you a personal mix on stage. Proper setup protects your hearing and improves your performance.',
-      steps:[
-        {type:'teach',title:'In-Ear Monitors: Live Performance Setup',body:'In-ear monitors (IEMs) give you a personal mix on stage. Proper setup protects your hearing and improves your performance.'},
-        {type:'practice',title:'Practical Assignment',body:'If you have IEMs, set up a mix with your voice slightly louder than the band. Practice singing with them.'}
-      ]},
+      steps:[{type:'teach',title:'In-Ear Monitors: Live Performance Setup',body:'In-ear monitors (IEMs) give you a personal mix on stage. Proper setup protects your hearing and improves your performance.'},{type:'practice',title:'Practical Assignment',body:'If you have IEMs, set up a mix with your voice slightly louder than the band. Practice singing with them.'}]},
     { id:55, title:'Visual Storytelling in Performance', course:'Performance', duration:'12 min', content:'Your face and body tell the story of the song. Every expression should be intentional and connected to the lyrics.',
-      steps:[
-        {type:'teach',title:'Visual Storytelling in Performance',body:'Your face and body tell the story of the song. Every expression should be intentional and connected to the lyrics.'},
-        {type:'practice',title:'Practical Assignment',body:'Record a close-up video of yourself singing. Watch muted — do your expressions match the emotion of the lyrics?'}
-      ]},
+      steps:[{type:'teach',title:'Visual Storytelling in Performance',body:'Your face and body tell the story of the song. Every expression should be intentional and connected to the lyrics.'},{type:'practice',title:'Practical Assignment',body:'Record a close-up video of yourself singing. Watch muted — do your expressions match the emotion of the lyrics?'}]},
     { id:56, title:'Setlist Design: Crafting a Journey', course:'Performance', duration:'12 min', content:'A great setlist takes the audience on a journey. Energy, key, tempo, and emotional arc all matter.',
-      steps:[
-        {type:'teach',title:'Setlist Design: Crafting a Journey',body:'A great setlist takes the audience on a journey. Energy, key, tempo, and emotional arc all matter.'},
-        {type:'practice',title:'Practical Assignment',body:'Design a 5-song setlist. Map the energy curve: where is the peak? Where is the rest?'}
-      ]},
+      steps:[{type:'teach',title:'Setlist Design: Crafting a Journey',body:'A great setlist takes the audience on a journey. Energy, key, tempo, and emotional arc all matter.'},{type:'practice',title:'Practical Assignment',body:'Design a 5-song setlist. Map the energy curve: where is the peak? Where is the rest?'}]},
     { id:57, title:'R&B Vocal Styling: Runs & Soul', course:'Style-Specific', duration:'15 min', content:'R&B vocals are smooth, soulful, and melismatic. Runs, bends, and emotional delivery define the genre.',
-      steps:[
-        {type:'teach',title:'R&B Vocal Styling: Runs & Soul',body:'R&B vocals are smooth, soulful, and melismatic. Runs, bends, and emotional delivery define the genre.'},
-        {type:'practice',title:'Practical Assignment',body:'Listen to a Beyonce or H.E.R. track. Mimic a 10-second phrase, matching every run and bend exactly.'}
-      ]},
+      steps:[{type:'teach',title:'R&B Vocal Styling: Runs & Soul',body:'R&B vocals are smooth, soulful, and melismatic. Runs, bends, and emotional delivery define the genre.'},{type:'practice',title:'Practical Assignment',body:'Listen to a Beyonce or H.E.R. track. Mimic a 10-second phrase, matching every run and bend exactly.'}]},
     { id:58, title:'Gospel Vocal Techniques', course:'Style-Specific', duration:'15 min', content:'Gospel vocals are powerful, emotional, and technically demanding. Growls, shouts, runs, and dynamic extremes are hallmarks.',
-      steps:[
-        {type:'teach',title:'Gospel Vocal Techniques',body:'Gospel vocals are powerful, emotional, and technically demanding. Growls, shouts, runs, and dynamic extremes are hallmarks.'},
-        {type:'practice',title:'Practical Assignment',body:'Practice a gospel run: start on a note, descend 5 notes quickly with precision.'}
-      ]},
+      steps:[{type:'teach',title:'Gospel Vocal Techniques',body:'Gospel vocals are powerful, emotional, and technically demanding. Growls, shouts, runs, and dynamic extremes are hallmarks.'},{type:'practice',title:'Practical Assignment',body:'Practice a gospel run: start on a note, descend 5 notes quickly with precision.'}]},
     { id:59, title:'Building a Digital Portfolio', course:'Business', duration:'12 min', content:'Your digital portfolio is your online resume. Best recordings, photos, bio, and press — all in one place.',
-      steps:[
-        {type:'teach',title:'Building a Digital Portfolio',body:'Your digital portfolio is your online resume. Best recordings, photos, bio, and press — all in one place.'},
-        {type:'practice',title:'Practical Assignment',body:'Choose your 3 best recordings. Write a 1-page bio. Create a simple portfolio page or Linktree.'}
-      ]},
+      steps:[{type:'teach',title:'Building a Digital Portfolio',body:'Your digital portfolio is your online resume. Best recordings, photos, bio, and press — all in one place.'},{type:'practice',title:'Practical Assignment',body:'Choose your 3 best recordings. Write a 1-page bio. Create a simple portfolio page or Linktree.'}]},
     { id:60, title:'Advanced Melisma: Complex Runs', course:'Technique', duration:'15 min', content:'Advanced melisma involves multi-octave runs with precise pitch control. Speed comes from accuracy first.',
-      steps:[
-        {type:'teach',title:'Advanced Melisma: Complex Runs',body:'Advanced melisma involves multi-octave runs with precise pitch control. Speed comes from accuracy first.'},
-        {type:'practice',title:'Practical Assignment',body:'Learn a complex run from a pro singer. Break it into 3-note chunks. Master each chunk, then connect them.'}
-      ]},
+      steps:[{type:'teach',title:'Advanced Melisma: Complex Runs',body:'Advanced melisma involves multi-octave runs with precise pitch control. Speed comes from accuracy first.'},{type:'practice',title:'Practical Assignment',body:'Learn a complex run from a pro singer. Break it into 3-note chunks. Master each chunk, then connect them.'}]},
     { id:61, title:'Vocal Distortion: Grit & Rasp Safely', course:'Technique', duration:'12 min', content:'Vocal distortion (grit/rasp) adds edge to your sound. Done correctly, it is safe. Done wrong, it damages your voice.',
-      steps:[
-        {type:'teach',title:'Vocal Distortion: Grit & Rasp Safely',body:'Vocal distortion (grit/rasp) adds edge to your sound. Done correctly, it is safe. Done wrong, it damages your voice.'},
-        {type:'practice',title:'Practical Assignment',body:'Practice a light growl on a comfortable note. Add just enough texture without pain. Stop if it hurts.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Distortion: Grit & Rasp Safely',body:'Vocal distortion (grit/rasp) adds edge to your sound. Done correctly, it is safe. Done wrong, it damages your voice.'},{type:'practice',title:'Practical Assignment',body:'Practice a light growl on a comfortable note. Add just enough texture without pain. Stop if it hurts.'}]},
     { id:62, title:'Whistle Register', course:'Technique', duration:'10 min', content:'Whistle register is the highest female register — piercing and flute-like. Not everyone accesses it, but it can be developed.',
-      steps:[
-        {type:'teach',title:'Whistle Register',body:'Whistle register is the highest female register — piercing and flute-like. Not everyone accesses it, but it can be developed.'},
-        {type:'practice',title:'Practical Assignment',body:'Try imitating a whistle on a high \'oo\'. Slide up gently. Do not push.'}
-      ]},
+      steps:[{type:'teach',title:'Whistle Register',body:'Whistle register is the highest female register — piercing and flute-like. Not everyone accesses it, but it can be developed.'}]},
     { id:63, title:'Vocal Stamina & Endurance', course:'Technique', duration:'12 min', content:'Singing for a full set without fatigue requires stamina. Build it gradually with consistent practice and proper technique.',
-      steps:[
-        {type:'teach',title:'Vocal Stamina & Endurance',body:'Singing for a full set without fatigue requires stamina. Build it gradually with consistent practice and proper technique.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a full 20-minute set. Note when your voice tires. Extend by 2 minutes each week.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Stamina & Endurance',body:'Singing for a full set without fatigue requires stamina. Build it gradually with consistent practice and proper technique.'},{type:'practice',title:'Practical Assignment',body:'Sing a full 20-minute set. Note when your voice tires. Extend by 2 minutes each week.'}]},
     { id:64, title:'Acoustic Tuning: Singing in Tune with Instruments', course:'Ear Training', duration:'12 min', content:'Singing in tune with a piano, guitar, or band requires constant micro-adjustments. Your ear must be faster than your voice.',
-      steps:[
-        {type:'teach',title:'Acoustic Tuning: Singing in Tune with Instruments',body:'Singing in tune with a piano, guitar, or band requires constant micro-adjustments. Your ear must be faster than your voice.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a chord on piano. Sing each note of the chord in tune. Listen for the lock when you are perfectly centered.'}
-      ]},
+      steps:[{type:'teach',title:'Acoustic Tuning: Singing in Tune with Instruments',body:'Singing in tune with a piano, guitar, or band requires constant micro-adjustments. Your ear must be faster than your voice.'},{type:'practice',title:'Practical Assignment',body:'Play a chord on piano. Sing each note of the chord in tune. Listen for the lock when you are perfectly centered.'}]},
     { id:65, title:'Dynamic Tapering: Ending Songs with Control', course:'Technique', duration:'10 min', content:'How you end a song matters as much as how you start. A controlled, emotional ending leaves a lasting impression.',
-      steps:[
-        {type:'teach',title:'Dynamic Tapering: Ending Songs with Control',body:'How you end a song matters as much as how you start. A controlled, emotional ending leaves a lasting impression.'},
-        {type:'practice',title:'Practical Assignment',body:'Practice ending a song on a long, fading note. Start mezzo-forte, taper to pianissimo. Keep the pitch steady.'}
-      ]},
+      steps:[{type:'teach',title:'Dynamic Tapering: Ending Songs with Control',body:'How you end a song matters as much as how you start. A controlled, emotional ending leaves a lasting impression.'},{type:'practice',title:'Practical Assignment',body:'Practice ending a song on a long, fading note. Start mezzo-forte, taper to pianissimo. Keep the pitch steady.'}]},
     { id:66, title:'Vocal Rehabilitation: Recovering from Strain', course:'Technique', duration:'15 min', content:'If you have strained your voice, recovery requires rest, gentle exercises, and patience. Never push through pain.',
-      steps:[
-        {type:'teach',title:'Vocal Rehabilitation: Recovering from Strain',body:'If you have strained your voice, recovery requires rest, gentle exercises, and patience. Never push through pain.'},
-        {type:'practice',title:'Practical Assignment',body:'Do 10 minutes of gentle humming and lip trills. If your voice feels tired, stop. Rest is part of training.'}
-      ]},
-    { id:67, title:'Modal Concepts: Mixolydian, Dorian, Phrygian', course:'Theory', duration:'15 min', content:'Modes are variations of the major scale that create different moods. Mixolydian (bluesy), Dorian (jazzy), Phrygian (dark).',
-      steps:[
-        {type:'teach',title:'Modal Concepts: Mixolydian, Dorian, Phrygian',body:'Modes are variations of the major scale that create different moods. Mixolydian (bluesy), Dorian (jazzy), Phrygian (dark).'},
-        {type:'practice',title:'Practical Assignment',body:'Play a C mixolydian scale. Sing it. Hear how the flat 7th gives it a bluesy feel.'}
-      ]},
-    { id:68, title:'Polyrhythms & African Rhythmic Concepts', course:'Theory', duration:'15 min', content:'Polyrhythms layer different rhythms simultaneously. African music is built on these complex, interlocking patterns.',
-      steps:[
-        {type:'teach',title:'Polyrhythms & African Rhythmic Concepts',body:'Polyrhythms layer different rhythms simultaneously. African music is built on these complex, interlocking patterns.'},
-        {type:'practice',title:'Practical Assignment',body:'Clap a 3-against-2 pattern: one hand claps 2 beats, the other claps 3 beats in the same time.'}
-      ]},
-    { id:69, title:'Extended Chords: 9ths, 11ths, 13ths', course:'Theory', duration:'15 min', content:'Extended chords add color and sophistication. 9ths, 11ths, and 13ths are common in jazz, neo-soul, and gospel.',
-      steps:[
-        {type:'teach',title:'Extended Chords: 9ths, 11ths, 13ths',body:'Extended chords add color and sophistication. 9ths, 11ths, and 13ths are common in jazz, neo-soul, and gospel.'},
-        {type:'practice',title:'Practical Assignment',body:'Play a Cmaj9 chord. Sing each note: C-E-G-B-D. Hear how the 9th adds a dreamy quality.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Rehabilitation: Recovering from Strain',body:'If you have strained your voice, recovery requires rest, gentle exercises, and patience. Never push through pain.'},{type:'practice',title:'Practical Assignment',body:'Do 10 minutes of gentle humming and lip trills. If your voice feels tired, stop. Rest is part of training.'}]},
+    { id:67, title:'Modal Concepts: Mixolydian, Dorian, Phrygian', course:'Theory', duration:'15 min', content:'Modes are variations of the major scale that start on different scale degrees. Mixolydian, Dorian, Phrygian — these are not just theory. They are the sounds of jazz, Afrobeat, rock, and film music. Berklee jazz students must improvise in all 7 modes fluently.',
+      steps:[{type:'teach',title:'What Are Modes?',body:'Modes are scales derived from the major scale, starting on different degrees.\n\nC Major (Ionian): C D E F G A B C — the "default" major sound.\nD Dorian: D E F G A B C D — minor with a raised 6th. Jazzy, soulful.\nE Phrygian: E F G A B C D E — minor with a lowered 2nd. Dark, Spanish, metal.\nF Lydian: F G A B C D E F — major with a raised 4th. Dreamy, floating.\nG Mixolydian: G A B C D E F G — major with a lowered 7th. Bluesy, rock, dominant.\nA Aeolian: A B C D E F G A — natural minor.\nB Locrian: B C D E F G A B — diminished, unstable.'},{type:'teach',title:'Mixolydian — The Dominant Scale',body:'Mixolydian = major scale with a flat 7. G Mixolydian: G A B C D E F G.\n\nThis is the scale of the V7 chord. When you play G7 in C Major, G Mixolydian is the scale.\n\nSound: bluesy, grounded, "almost major but not quite." Think of:\n- "Sweet Child O\' Mine" verse\n- Fleetwood Mac\n- Afrobeat grooves\n- Gospel piano comping\n\nThe flat 7 is what gives it that "not fully resolved" quality.'},{type:'teach',title:'Dorian — The Jazz Minor',body:'Dorian = natural minor with a raised 6th. D Dorian: D E F G A B C D.\n\nCompare to D natural minor (D E F G A Bb C D). The B natural is the difference.\n\nSound: minor but hopeful, sophisticated. Think of:\n- "So What" (Miles Davis) — entirely in Dorian\n- "Scarborough Fair"\n- "Wicked Game" (Chris Isaak)\n- Most of Santana\n\nDorian is the most used mode in jazz improvisation.'},{type:'exercise',title:'Hear the Modes',body:'Sing each mode starting on the same note (C) to hear the difference:\n1. C Ionian: C D E F G A B C (bright, "normal")\n2. C Dorian: C D Eb F G A Bb C (minor with a lift)\n3. C Phrygian: C Db Eb F G Ab Bb C (dark, exotic)\n4. C Lydian: C D E F# G A B C (floating, dreamy)\n5. C Mixolydian: C D E F G A Bb C (bluesy, grounded)\n\nWhich mode fits: a gospel song? (Mixolydian). A jazz standard? (Dorian). A film score? (Lydian or Phrygian).'},{type:'practice',title:'Practical Assignment',body:'1. Write out D Dorian, E Phrygian, and G Mixolydian from memory.\n2. Play "So What" by Miles Davis. The two chords are Dm7 and Ebm7 — that is Dorian.\n3. Write a 4-bar melody in C Mixolydian. Emphasize the flat 7 (Bb).\n4. Listen to any Burna Boy song — identify where Mixolydian appears.'},{type:'tip',title:'Berklee Insight',body:'Berklee jazz students learn to hear modes as "colors" not "scales." Each mode has an emotional palette. Dorian = cool blue. Phrygian = dark red. Lydian = golden light. When you hear a solo, identify which mode within 4 bars.'}]},
+    { id:68, title:'Polyrhythms & African Rhythmic Concepts', course:'Theory', duration:'15 min', content:'Polyrhythms layer different rhythms simultaneously — 3 against 2, 4 against 3. African music is built on these interlocking patterns, and they form the rhythmic foundation of all Afrobeat, gospel, and contemporary Black music. Berklee percussion department teaches this through ensemble playing.',
+      steps:[{type:'teach',title:'The Foundation: 3 Against 2',body:'The simplest polyrhythm: one hand plays 3 evenly-spaced notes while the other plays 2, in the same time span.\n\nTry it: Tap 3 with your left hand, 2 with your right, in the same measure.\n- L: 1 - - 2 - - 3 - -\n- R: 1 - - - 2 - - -\n\nThis creates a "hemiola" — the feeling of two different meters overlapping. This is the heartbeat of African rhythm.\n\nIn Afrobeat: the guitar plays a 12/8 pattern (4 groups of 3) while the drums play 4/4 (4 groups of 2).'},{type:'teach',title:'African Time-Lines',body:'African rhythm uses a "time-line" — a repeating rhythmic pattern that serves as the clock for the ensemble.\n\nThe standard bell pattern:\nX . . X . . X . . . X . X . . .\n(1 . . 2 . . 3 . . . 4 . 5 . . .)\n\nThis 12-note pattern in a 12/8 measure is the skeleton. Every other instrument weaves around it.\n\nListen to any traditional Ghanaian or Nigerian drumming. The bell never stops. Everything else relates to it.'},{type:'exercise',title:'Feel the Polyrhythm',body:'1. Tap your left knee in groups of 3. Tap your right knee in groups of 2. Start slow.\n2. Once comfortable, add a metronome at 60 BPM.\n3. Now: left hand = 3, right hand = 2, feet = 4 (tap your foot on the pulse).\n4. Listen to Fela Kuti\'s "Water No Get Enemy." Identify the repeating guitar pattern.'},{type:'practice',title:'Practical Assignment',body:'1. Learn the standard bell pattern by clapping. It is 12 eighth notes long.\n2. Once memorized, clap it while tapping the main pulse (1-2-3-4) with your foot.\n3. Listen to any Wizkid or Davido song. The hi-hat pattern is usually a variation of 3:2.\n4. Sing a melody while clapping the bell pattern. This is how African musicians develop rhythmic independence.'},{type:'tip',title:'Berklee Insight',body:'Berklee percussion department teaches African rhythm by having students PLAY in an ensemble, not just clap. The body learns faster than the brain. If you can, find a djembe class — the physical experience changes your feel permanently.'}]},
+    { id:69, title:'Extended Chords: 9ths, 11ths, 13ths', course:'Theory', duration:'15 min', content:'Extended chords (9ths, 11ths, 13ths) add color and sophistication beyond the 7th. They are the vocabulary of jazz, neo-soul, gospel, and R&B. Understanding them opens up the sound of D\'Angelo, Erykah Badu, and Robert Glasper. Berklee pianists learn these as standard vocabulary from day one.',
+      steps:[{type:'teach',title:'Building Extended Chords',body:'Extended chords continue stacking thirds beyond the 7th:\n\n9th chord = 7th chord + 9th (2nd, an octave up). Cmaj9 = C-E-G-B-D.\n11th chord = 9th + 11th (4th, an octave up). Cmaj11 = C-E-G-B-D-F.\n13th chord = 11th + 13th (6th, an octave up). Cmaj13 = C-E-G-B-D-F-A.\n\nIn practice, the root is often played by the bass player, and the 5th is often omitted. The essential notes are: 3rd, 7th, and the extension.'},{type:'teach',title:'Common Extended Chords in Context',body:'Dominant 9 (G9 = G-B-D-F-A): The "jazzy dominant." Resolves to Cmaj7.\nMinor 11 (Dm11 = D-F-A-C-E-G): The "soul chord." Think of D\'Angelo, Erykah Badu.\nMajor 9 (Cmaj9 = C-E-G-B-D): The "dreamy major." Think of Sade, neo-soul.\nDominant 13 (G13 = G-B-D-F-A-E): Rich, full dominant. Resolves to Cmaj9.\n\nThese chords are not just "more notes" — each extension adds a specific emotional color.'},{type:'exercise',title:'Hear Extensions',body:'On a piano (or app), play these chord pairs:\n1. Cmaj7 vs Cmaj9 (add the D) — hear the "open" quality\n2. G7 vs G9 (add the A) — hear the "bluesy" tension\n3. Dm7 vs Dm11 (add the E and G) — hear the "soul" quality\n4. Play: Cmaj9 → Am11 → Dm9 → G13 → Cmaj9. This is a neo-soul progression.'},{type:'practice',title:'Practical Assignment',body:'1. Write the notes of Cmaj9, Dm11, G13, and Fmaj9#11 from memory.\n2. Listen to D\'Angelo\'s "Untitled (How Does It Feel)" — mostly minor 11ths.\n3. Listen to Erykah Badu\'s "On & On" — extended chords throughout.\n4. Write a 4-chord progression using at least 2 extended chords.'},{type:'tip',title:'Berklee Insight',body:'Berklee pianists learn to voice extended chords efficiently. You do not need all 6 notes in one hand. The bass plays root and 5th. The piano plays 3rd, 7th, and extension. This "shell voicing" technique is the secret of professional comping.'}]},
     { id:70, title:'Microtonal Singing: Blue Notes & Pitch Bends', course:'Technique', duration:'12 min', content:'Microtonal singing uses notes between the piano keys. Blue notes, pitch bends, and scoops are essential in blues, gospel, and African music.',
-      steps:[
-        {type:'teach',title:'Microtonal Singing: Blue Notes & Pitch Bends',body:'Microtonal singing uses notes between the piano keys. Blue notes, pitch bends, and scoops are essential in blues, gospel, and African music.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a note, then bend down a quarter-tone (blue note). Practice scooping up to notes from below.'}
-      ]},
-    { id:71, title:'Advanced Modulation: Modulation Types', course:'Theory', duration:'12 min', content:'Different modulation types (pivot chord, direct, chromatic) create different emotional effects. Pros choose intentionally.',
-      steps:[
-        {type:'teach',title:'Advanced Modulation: Modulation Types',body:'Different modulation types (pivot chord, direct, chromatic) create different emotional effects. Pros choose intentionally.'},
-        {type:'practice',title:'Practical Assignment',body:'Find 3 songs with key changes. Identify the modulation type: pivot chord or direct shift?'}
-      ]},
+      steps:[{type:'teach',title:'Microtonal Singing: Blue Notes & Pitch Bends',body:'Microtonal singing uses notes between the piano keys. Blue notes, pitch bends, and scoops are essential in blues, gospel, and African music.'},{type:'practice',title:'Practical Assignment',body:'Sing a note, then bend down a quarter-tone (blue note). Practice scooping up to notes from below.'}]},
+    { id:71, title:'Advanced Modulation: Modulation Types', course:'Theory', duration:'12 min', content:'Advanced modulation techniques allow you to move between any two keys smoothly. Pivot chord, direct, chromatic, and common-tone modulation — each has its place and emotional effect. Berklee composers learn to modulate to ANY key from ANY key within 4 beats.',
+      steps:[{type:'teach',title:'Four Modulation Methods',body:'1. PIVOT CHORD: Use a chord shared by both keys (covered in Lesson 50). Smoothest.\n\n2. DIRECT MODULATION: Jump to the new key with no transition. Dramatic, surprising. Common in pop (key change for final chorus with no preparation).\n\n3. CHROMATIC MODULATION: Use a chromatic chord (like a secondary dominant or diminished 7th) to slide into the new key. Example: C → E7 → Am (E7 is V7/Am, not in C Major).\n\n4. COMMON-TONE MODULATION: Hold one note constant while the harmony changes beneath it. Example: Cmaj7 → C7 → Fmaj7 (the C is common to all three).'},{type:'teach',title:'Secondary Dominants',body:'A secondary dominant is the V7 of any chord in the key (not just the tonic).\n\nIn C Major: V7/vi = A7 (resolves to Am). V7/ii = E7 (resolves to Dm). V7/V = D7 (resolves to G).\n\nThese create chromatic movement and forward motion. They are the "passing chords" that make professional music sound sophisticated.\n\nListen to any Bach chorale — secondary dominants everywhere. Listen to Stevie Wonder — same technique, different genre.'},{type:'exercise',title:'Identify the Method',body:'Analyze these progressions:\n1. C → Am → D7 → G (pivot chord: Am is vi in C, ii in G)\n2. C → G7 → C → A7 → Dm (secondary dominant: A7 = V7/ii in C)\n3. C → F → G → C → Ab (direct modulation to Ab — no preparation)\n4. Cmaj7 → Ebmaj7 (common tone: C is in both chords)\n\nWhich method is smoothest? (1). Which is most dramatic? (3).'},{type:'practice',title:'Practical Assignment',body:'1. Write a progression in C Major that modulates to Eb Major using a secondary dominant.\n2. Write a progression that modulates from G Major to D minor using a pivot chord.\n3. Write a direct modulation from any key to any other key.\n4. Analyze "Bridge Over Troubled Water" — identify all secondary dominants.'},{type:'tip',title:'Berklee Insight',body:'Berklee composers learn that modulation is about EMOTIONAL JOURNEY, not just technique. A direct modulation feels like a revelation. A pivot chord modulation feels like a gentle turn. Choose based on what the song needs.'}]},
     { id:72, title:'Aural Polyphony: Hearing Multiple Lines', course:'Ear Training', duration:'15 min', content:'Aural polyphony is hearing multiple musical lines simultaneously — melody, harmony, bass. It is advanced ear training.',
-      steps:[
-        {type:'teach',title:'Aural Polyphony: Hearing Multiple Lines',body:'Aural polyphony is hearing multiple musical lines simultaneously — melody, harmony, bass. It is advanced ear training.'},
-        {type:'practice',title:'Practical Assignment',body:'Listen to a 3-part harmony. Focus on one part at a time. Then try to hear all 3 simultaneously.'}
-      ]},
+      steps:[{type:'teach',title:'Aural Polyphony: Hearing Multiple Lines',body:'Aural polyphony is hearing multiple musical lines simultaneously — melody, harmony, bass. It is advanced ear training.'},{type:'practice',title:'Practical Assignment',body:'Listen to a 3-part harmony. Focus on one part at a time. Then try to hear all 3 simultaneously.'}]},
     { id:73, title:'Chord Progression Dictation', course:'Ear Training', duration:'15 min', content:'Charting a live band\'s chord progression by ear is a master-level skill. Identify bass movement and chord qualities.',
-      steps:[
-        {type:'teach',title:'Chord Progression Dictation',body:'Charting a live band\'s chord progression by ear is a master-level skill. Identify bass movement and chord qualities.'},
-        {type:'practice',title:'Practical Assignment',body:'Listen to a new song. Write the chord progression using Roman numerals. Sing the roots to check.'}
-      ]},
+      steps:[{type:'practice',title:'Practical Assignment',body:'Listen to a new song. Write the chord progression using Roman numerals. Sing the roots to check.'}]},
     { id:74, title:'Microphone Artistry: Condenser vs Dynamic', course:'Performance', duration:'12 min', content:'Studio condensers capture every nuance; live dynamics handle high volumes. Understanding both makes you versatile.',
-      steps:[
-        {type:'teach',title:'Microphone Artistry: Condenser vs Dynamic',body:'Studio condensers capture every nuance; live dynamics handle high volumes. Understanding both makes you versatile.'},
-        {type:'practice',title:'Practical Assignment',body:'Record the same phrase on different mics. Compare the tone and adjust your distance.'}
-      ]},
+      steps:[{type:'teach',title:'Microphone Artistry: Condenser vs Dynamic',body:'Studio condensers capture every nuance; live dynamics handle high volumes. Understanding both makes you versatile.'},{type:'practice',title:'Practical Assignment',body:'Record the same phrase on different mics. Compare the tone and adjust your distance.'}]},
     { id:75, title:'Camera Artistry: Live-Stream & TV Performance', course:'Performance', duration:'12 min', content:'On camera, every expression is amplified. Subtle, controlled performance reads better than broad stage movements.',
-      steps:[
-        {type:'teach',title:'Camera Artistry: Live-Stream & TV Performance',body:'On camera, every expression is amplified. Subtle, controlled performance reads better than broad stage movements.'},
-        {type:'practice',title:'Practical Assignment',body:'Record a close-up performance video. Watch muted — do your eyes and face tell the story?'}
-      ]},
+      steps:[{type:'teach',title:'Camera Artistry: Live-Stream & TV Performance',body:'On camera, every expression is amplified. Subtle, controlled performance reads better than broad stage movements.'},{type:'practice',title:'Practical Assignment',body:'Record a close-up performance video. Watch muted — do your eyes and face tell the story?'}]},
     { id:76, title:'Spontaneous Flow: Prophetic Song Leading', course:'Performance', duration:'15 min', content:'Leading spontaneous worship requires technical control, sharp listening, and the confidence to follow the room\'s energy.',
-      steps:[
-        {type:'teach',title:'Spontaneous Flow: Prophetic Song Leading',body:'Leading spontaneous worship requires technical control, sharp listening, and the confidence to follow the room\'s energy.'},
-        {type:'practice',title:'Practical Assignment',body:'Loop a 2-chord progression. Ad-lib melody and lyrics for 5 minutes straight. Build a clear story arc.'}
-      ]},
+      steps:[{type:'practice',title:'Practical Assignment',body:'Loop a 2-chord progression. Ad-lib melody and lyrics for 5 minutes straight. Build a clear story arc.'}]},
     { id:77, title:'Audience Engagement Psychology', course:'Performance', duration:'12 min', content:'Great performance is a two-way conversation. Read the room, break barriers with call-and-response, and invite participation.',
-      steps:[
-        {type:'teach',title:'Audience Engagement Psychology',body:'Great performance is a two-way conversation. Read the room, break barriers with call-and-response, and invite participation.'},
-        {type:'practice',title:'Practical Assignment',body:'Design a 2-minute interactive segment with call-and-response before the final chorus.'}
-      ]},
+      steps:[{type:'teach',title:'Audience Engagement Psychology',body:'Great performance is a two-way conversation. Read the room, break barriers with call-and-response, and invite participation.'},{type:'practice',title:'Practical Assignment',body:'Design a 2-minute interactive segment with call-and-response before the final chorus.'}]},
     { id:78, title:'Vocal Arranging for Ensembles (SATB)', course:'Performance', duration:'15 min', content:'Vocal arranging spreads chords across Soprano, Alto, Tenor, Bass. Voice-leading and comfortable voicings are key.',
-      steps:[
-        {type:'teach',title:'Vocal Arranging for Ensembles (SATB)',body:'Vocal arranging spreads chords across Soprano, Alto, Tenor, Bass. Voice-leading and comfortable voicings are key.'},
-        {type:'practice',title:'Practical Assignment',body:'Write a 3-part harmony arrangement for a 4-bar melody. Record yourself singing all 3 parts.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Arranging for Ensembles (SATB)',body:'Vocal arranging spreads chords across Soprano, Alto, Tenor, Bass. Voice-leading and comfortable voicings are key.'},{type:'practice',title:'Practical Assignment',body:'Write a 3-part harmony arrangement for a 4-bar melody. Record yourself singing all 3 parts.'}]},
     { id:79, title:'Hybrid Styling: Classical Tone Meets CCM Belt', course:'Style-Specific', duration:'15 min', content:'Modern music often requires blending classical richness with commercial belt power. Cross-genre coordination is essential.',
-      steps:[
-        {type:'teach',title:'Hybrid Styling: Classical Tone Meets CCM Belt',body:'Modern music often requires blending classical richness with commercial belt power. Cross-genre coordination is essential.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a phrase with operatic classical tone. On the next phrase, transition into a bright commercial belt.'}
-      ]},
+      steps:[{type:'teach',title:'Hybrid Styling: Classical Tone Meets CCM Belt',body:'Modern music often requires blending classical richness with commercial belt power. Cross-genre coordination is essential.'},{type:'practice',title:'Practical Assignment',body:'Sing a phrase with operatic classical tone. On the next phrase, transition into a bright commercial belt.'}]},
     { id:80, title:'Neo-Soul Styling: Microtonal Drifts & Lazy Phrasing', course:'Style-Specific', duration:'15 min', content:'Neo-soul vocals use \'lazy time\' — singing behind the beat — and microtonal pitch drifts for emotional effect.',
-      steps:[
-        {type:'teach',title:'Neo-Soul Styling: Microtonal Drifts & Lazy Phrasing',body:'Neo-soul vocals use \'lazy time\' — singing behind the beat — and microtonal pitch drifts for emotional effect.'},
-        {type:'practice',title:'Practical Assignment',body:'Loop a neo-soul groove. Sing a melody, deliberately delaying phrases by an eighth note.'}
-      ]},
+      steps:[{type:'practice',title:'Practical Assignment',body:'Loop a neo-soul groove. Sing a melody, deliberately delaying phrases by an eighth note.'}]},
     { id:81, title:'Cinematic & Theatrical Belting', course:'Style-Specific', duration:'15 min', content:'Epic pop and musical theatre belting requires sustained dramatic delivery with stable larynx and wide acoustic space.',
-      steps:[
-        {type:'teach',title:'Cinematic & Theatrical Belting',body:'Epic pop and musical theatre belting requires sustained dramatic delivery with stable larynx and wide acoustic space.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a dramatic high belt on a modified open vowel. Hold for 8 counts without vibrato wobble.'}
-      ]},
+      steps:[{type:'teach',title:'Cinematic & Theatrical Belting',body:'Epic pop and musical theatre belting requires sustained dramatic delivery with stable larynx and wide acoustic space.'},{type:'practice',title:'Practical Assignment',body:'Sing a dramatic high belt on a modified open vowel. Hold for 8 counts without vibrato wobble.'}]},
     { id:82, title:'Vocal Healing: Somatic Pedagogy', course:'Technique', duration:'12 min', content:'The voice mirrors the nervous system. Emotional trauma locks the body. Low-frequency toning stimulates the vagus nerve.',
-      steps:[
-        {type:'teach',title:'Vocal Healing: Somatic Pedagogy',body:'The voice mirrors the nervous system. Emotional trauma locks the body. Low-frequency toning stimulates the vagus nerve.'},
-        {type:'practice',title:'Practical Assignment',body:'Close your eyes. Spend 5 minutes vocalizing a low \'OM\' or \'AH\'. Send vibration into your chest.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Healing: Somatic Pedagogy',body:'The voice mirrors the nervous system. Emotional trauma locks the body. Low-frequency toning stimulates the vagus nerve.'}]},
     { id:83, title:'Vocal Psychodynamics: Overcoming Passaggio Fear', course:'Technique', duration:'12 min', content:'Fear of high notes causes laryngeal constriction. Reframing the upper range as ease rewires your neuromuscular response.',
-      steps:[
-        {type:'teach',title:'Vocal Psychodynamics: Overcoming Passaggio Fear',body:'Fear of high notes causes laryngeal constriction. Reframing the upper range as ease rewires your neuromuscular response.'},
-        {type:'practice',title:'Practical Assignment',body:'Before a difficult high phrase, speak it in a goofy cartoon voice. Transition that same coordination into singing.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Psychodynamics: Overcoming Passaggio Fear',body:'Fear of high notes causes laryngeal constriction. Reframing the upper range as ease rewires your neuromuscular response.'},{type:'practice',title:'Practical Assignment',body:'Before a difficult high phrase, speak it in a goofy cartoon voice. Transition that same coordination into singing.'}]},
     { id:84, title:'Anatomy of the Voice: Advanced Laryngeal Physiology', course:'Technique', duration:'15 min', content:'The larynx has cartilages (thyroid, cricoid, arytenoid) and muscles. Understanding thyroarytenoid vs cricothyroid empowers targeted practice.',
-      steps:[
-        {type:'teach',title:'Anatomy of the Voice: Advanced Laryngeal Physiology',body:'The larynx has cartilages (thyroid, cricoid, arytenoid) and muscles. Understanding thyroarytenoid vs cricothyroid empowers targeted practice.'},
-        {type:'practice',title:'Practical Assignment',body:'Study a 3D larynx diagram. Label the thyroid cartilage, cricoid, and vocal ligaments.'}
-      ]},
+      steps:[{type:'teach',title:'Anatomy of the Voice: Advanced Laryngeal Physiology',body:'The larynx has cartilages (thyroid, cricoid, arytenoid) and muscles. Understanding thyroarytenoid vs cricothyroid empowers targeted practice.'},{type:'practice',title:'Practical Assignment',body:'Study a 3D larynx diagram. Label the thyroid cartilage, cricoid, and vocal ligaments.'}]},
     { id:85, title:'Acoustics & Formants: The Science of Resonance', course:'Technique', duration:'15 min', content:'Sound starts at the vocal folds (source) and is filtered by the vocal tract (filter). Formants (F1, F2) are acoustic peaks you can tune.',
-      steps:[
-        {type:'teach',title:'Acoustics & Formants: The Science of Resonance',body:'Sound starts at the vocal folds (source) and is filtered by the vocal tract (filter). Formants (F1, F2) are acoustic peaks you can tune.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a sustained \'EE\', then slowly drop jaw to \'AH\' keeping pitch identical. Use an analyzer app.'}
-      ]},
+      steps:[{type:'teach',title:'Acoustics & Formants: The Science of Resonance',body:'Sound starts at the vocal folds (source) and is filtered by the vocal tract (filter). Formants (F1, F2) are acoustic peaks you can tune.'}]},
     { id:86, title:'Aerodynamics: Subglottic Pressure vs Glottal Resistance', course:'Technique', duration:'12 min', content:'Healthy singing balances air pressure below the folds with muscular resistance keeping them together.',
-      steps:[
-        {type:'teach',title:'Aerodynamics: Subglottic Pressure vs Glottal Resistance',body:'Healthy singing balances air pressure below the folds with muscular resistance keeping them together.'},
-        {type:'practice',title:'Practical Assignment',body:'Sing a 5-tone scale using puffed-cheek blowfish technique. Feel the pressure balance.'}
-      ]},
+      steps:[{type:'teach',title:'Aerodynamics: Subglottic Pressure vs Glottal Resistance',body:'Healthy singing balances air pressure below the folds with muscular resistance keeping them together.'},{type:'practice',title:'Practical Assignment',body:'Sing a 5-tone scale using puffed-cheek blowfish technique. Feel the pressure balance.'}]},
     { id:87, title:'Contract Law: Splitting Royalties', course:'Business', duration:'12 min', content:'Protect your intellectual property. Establish clear agreements on master rights, publishing splits, and mechanical royalties.',
-      steps:[
-        {type:'teach',title:'Contract Law: Splitting Royalties',body:'Protect your intellectual property. Establish clear agreements on master rights, publishing splits, and mechanical royalties.'},
-        {type:'practice',title:'Practical Assignment',body:'Draft a 1-page split sheet template with creator names, signatures, date, and ownership percentages.'}
-      ]},
+      steps:[{type:'teach',title:'Contract Law: Splitting Royalties',body:'Protect your intellectual property. Establish clear agreements on master rights, publishing splits, and mechanical royalties.'},{type:'practice',title:'Practical Assignment',body:'Draft a 1-page split sheet template with creator names, signatures, date, and ownership percentages.'}]},
     { id:88, title:'Studio Business: Session Vocalist Workflow', course:'Business', duration:'12 min', content:'Top session vocalists are fast and professional. Memorize lyrics, understand audio terms, and deliver clean harmonies on take one.',
-      steps:[
-        {type:'teach',title:'Studio Business: Session Vocalist Workflow',body:'Top session vocalists are fast and professional. Memorize lyrics, understand audio terms, and deliver clean harmonies on take one.'},
-        {type:'practice',title:'Practical Assignment',body:'Record a lead vocal, then 3 harmony tracks. Focus on identical cutoffs and timing.'}
-      ]},
+      steps:[{type:'teach',title:'Studio Business: Session Vocalist Workflow',body:'Top session vocalists are fast and professional. Memorize lyrics, understand audio terms, and deliver clean harmonies on take one.'},{type:'practice',title:'Practical Assignment',body:'Record a lead vocal, then 3 harmony tracks. Focus on identical cutoffs and timing.'}]},
     { id:89, title:'Structuring High-End Coaching Programs', course:'Business', duration:'15 min', content:'Premium coaching programs bundle custom curricula, vocal tracking reviews, and branding mentorship.',
-      steps:[
-        {type:'teach',title:'Structuring High-End Coaching Programs',body:'Premium coaching programs bundle custom curricula, vocal tracking reviews, and branding mentorship.'},
-        {type:'practice',title:'Practical Assignment',body:'Design a 12-week vocal coaching package with transformation goal and premium pricing.'}
-      ]},
+      steps:[{type:'teach',title:'Structuring High-End Coaching Programs',body:'Premium coaching programs bundle custom curricula, vocal tracking reviews, and branding mentorship.'},{type:'practice',title:'Practical Assignment',body:'Design a 12-week vocal coaching package with transformation goal and premium pricing.'}]},
     { id:90, title:'Digital Distribution & Independent Monetization', course:'Business', duration:'12 min', content:'Use digital distributors, fan-funding platforms, vocal sample packs, and sync licensing for multiple revenue streams.',
-      steps:[
-        {type:'teach',title:'Digital Distribution & Independent Monetization',body:'Use digital distributors, fan-funding platforms, vocal sample packs, and sync licensing for multiple revenue streams.'},
-        {type:'practice',title:'Practical Assignment',body:'Research a sync licensing platform. Outline a submission strategy for 3 original tracks.'}
-      ]},
+      steps:[{type:'teach',title:'Digital Distribution & Independent Monetization',body:'Use digital distributors, fan-funding platforms, vocal sample packs, and sync licensing for multiple revenue streams.'},{type:'practice',title:'Practical Assignment',body:'Research a sync licensing platform. Outline a submission strategy for 3 original tracks.'}]},
     { id:91, title:'Advanced Studio Tech: Vocal Production & Mixing', course:'Business', duration:'15 min', content:'Vocalists who produce their own voice have an edge. EQ, compression, and pitch correction create radio-ready stems.',
-      steps:[
-        {type:'teach',title:'Advanced Studio Tech: Vocal Production & Mixing',body:'Vocalists who produce their own voice have an edge. EQ, compression, and pitch correction create radio-ready stems.'},
-        {type:'practice',title:'Practical Assignment',body:'Take a raw vocal. Apply high-pass filter, compressor (4:1), and de-esser. Export the clean track.'}
-      ]},
+      steps:[{type:'teach',title:'Advanced Studio Tech: Vocal Production & Mixing',body:'Vocalists who produce their own voice have an edge. EQ, compression, and pitch correction create radio-ready stems.'},{type:'practice',title:'Practical Assignment',body:'Take a raw vocal. Apply high-pass filter, compressor (4:1), and de-esser. Export the clean track.'}]},
     { id:92, title:'Sustainable Artist Ecosystem: Longevity Strategy', course:'Business', duration:'12 min', content:'A lifelong career requires balancing performance with rest and diversification. Digital assets keep you profitable during vocal rest.',
-      steps:[
-        {type:'teach',title:'Sustainable Artist Ecosystem: Longevity Strategy',body:'A lifelong career requires balancing performance with rest and diversification. Digital assets keep you profitable during vocal rest.'},
-        {type:'practice',title:'Practical Assignment',body:'Map a 3-year career strategy with rest blocks and a digital asset launch.'}
-      ]},
+      steps:[{type:'teach',title:'Sustainable Artist Ecosystem: Longevity Strategy',body:'A lifelong career requires balancing performance with rest and diversification. Digital assets keep you profitable during vocal rest.'},{type:'practice',title:'Practical Assignment',body:'Map a 3-year career strategy with rest blocks and a digital asset launch.'}]},
     { id:93, title:'Vocal Pedagogy: The Art of Diagnosis', course:'Technique', duration:'15 min', content:'A great coach diagnoses by ear — structural, aerodynamic, or register-based — and provides the exact exercise to fix it.',
-      steps:[
-        {type:'teach',title:'Vocal Pedagogy: The Art of Diagnosis',body:'A great coach diagnoses by ear — structural, aerodynamic, or register-based — and provides the exact exercise to fix it.'},
-        {type:'practice',title:'Practical Assignment',body:'Listen to an amateur singer. Write a 3-point diagnosis: bottleneck, cause, and 2 targeted drills.'}
-      ]},
+      steps:[{type:'teach',title:'Vocal Pedagogy: The Art of Diagnosis',body:'A great coach diagnoses by ear — structural, aerodynamic, or register-based — and provides the exact exercise to fix it.'},{type:'practice',title:'Practical Assignment',body:'Listen to an amateur singer. Write a 3-point diagnosis: bottleneck, cause, and 2 targeted drills.'}]},
     { id:94, title:'Designing Custom Curricula for Diverse Students', course:'Technique', duration:'15 min', content:'Every student has unique goals. A master coach designs custom technical maps for each individual.',
-      steps:[
-        {type:'teach',title:'Designing Custom Curricula for Diverse Students',body:'Every student has unique goals. A master coach designs custom technical maps for each individual.'},
-        {type:'practice',title:'Practical Assignment',body:'Create two 4-week lesson plans: one for an Afrobeats artist, one for an acoustic singer-songwriter.'}
-      ]},
+      steps:[{type:'teach',title:'Designing Custom Curricula for Diverse Students',body:'Every student has unique goals. A master coach designs custom technical maps for each individual.'},{type:'practice',title:'Practical Assignment',body:'Create two 4-week lesson plans: one for an Afrobeats artist, one for an acoustic singer-songwriter.'}]},
     { id:95, title:'Ethics in Vocal Coaching', course:'Mindset', duration:'12 min', content:'The voice is tied to identity. Coaches must create safe spaces, respect boundaries, and support authentic journeys.',
-      steps:[
-        {type:'teach',title:'Ethics in Vocal Coaching',body:'The voice is tied to identity. Coaches must create safe spaces, respect boundaries, and support authentic journeys.'},
-        {type:'practice',title:'Practical Assignment',body:'Write a 1-page coaching philosophy with boundaries and feedback delivery approach.'}
-      ]},
+      steps:[{type:'teach',title:'Ethics in Vocal Coaching',body:'The voice is tied to identity. Coaches must create safe spaces, respect boundaries, and support authentic journeys.'},{type:'practice',title:'Practical Assignment',body:'Write a 1-page coaching philosophy with boundaries and feedback delivery approach.'}]},
     { id:96, title:'Masterclass Blueprint: Teaching Groups Effectively', course:'Technique', duration:'12 min', content:'Group teaching requires universal concepts that apply to everyone while engaging individual volunteers.',
-      steps:[
-        {type:'teach',title:'Masterclass Blueprint: Teaching Groups Effectively',body:'Group teaching requires universal concepts that apply to everyone while engaging individual volunteers.'},
-        {type:'practice',title:'Practical Assignment',body:'Draft a 60-minute masterclass outline with warm-up, lecture, hot-seat coaching, and Q&A blocks.'}
-      ]},
+      steps:[{type:'teach',title:'Masterclass Blueprint: Teaching Groups Effectively',body:'Group teaching requires universal concepts that apply to everyone while engaging individual volunteers.'},{type:'practice',title:'Practical Assignment',body:'Draft a 60-minute masterclass outline with warm-up, lecture, hot-seat coaching, and Q&A blocks.'}]},
     { id:97, title:'Advanced Lesson Management & Client Tracking', course:'Business', duration:'12 min', content:'Long-term retention requires organized progress tracking. Log audio benchmarks, assign homework, and celebrate milestones.',
-      steps:[
-        {type:'teach',title:'Advanced Lesson Management & Client Tracking',body:'Long-term retention requires organized progress tracking. Log audio benchmarks, assign homework, and celebrate milestones.'},
-        {type:'practice',title:'Practical Assignment',body:'Build a student tracking database template with goals, lesson date, focus, exercises, and recordings.'}
-      ]},
+      steps:[{type:'teach',title:'Advanced Lesson Management & Client Tracking',body:'Long-term retention requires organized progress tracking. Log audio benchmarks, assign homework, and celebrate milestones.'},{type:'practice',title:'Practical Assignment',body:'Build a student tracking database template with goals, lesson date, focus, exercises, and recordings.'}]},
     { id:98, title:'Capstone Project: Selecting Your Masterpiece Track', course:'Performance', duration:'15 min', content:'The capstone project is your ultimate test. Choose a track that demands everything — technique, theory, emotion, and style.',
-      steps:[
-        {type:'teach',title:'Capstone Project: Selecting Your Masterpiece Track',body:'The capstone project is your ultimate test. Choose a track that demands everything — technique, theory, emotion, and style.'},
-        {type:'practice',title:'Practical Assignment',body:'Select your capstone song. Write a structural analysis: key, registers, vowel modifications.'}
-      ]},
+      steps:[{type:'teach',title:'Capstone Project: Selecting Your Masterpiece Track',body:'The capstone project is your ultimate test. Choose a track that demands everything — technique, theory, emotion, and style.'},{type:'practice',title:'Practical Assignment',body:'Select your capstone song. Write a structural analysis: key, registers, vowel modifications.'}]},
     { id:99, title:'The Final Capstone Performance', course:'Performance', duration:'20 min', content:'Lesson 100 is the peak — integration of vocal science, theory, performance, style, and business mindset.',
-      steps:[
-        {type:'teach',title:'The Final Capstone Performance',body:'Lesson 100 is the peak — integration of vocal science, theory, performance, style, and business mindset.'},
-        {type:'practice',title:'Practical Assignment',body:'Record your final capstone performance. Self-evaluate: technical accuracy, emotional delivery, and polish.'}
-      ]},
+      steps:[{type:'teach',title:'The Final Capstone Performance',body:'Lesson 100 is the peak — integration of vocal science, theory, performance, style, and business mindset.'},{type:'practice',title:'Practical Assignment',body:'Record your final capstone performance. Self-evaluate: technical accuracy, emotional delivery, and polish.'}]},
     { id:100, title:'Graduation & Beyond: Your Artist Roadmap', course:'Business', duration:'15 min', content:'You have completed 100 lessons. Now build your future: continued practice, community, coaching, and career strategy.',
-      steps:[
-        {type:'teach',title:'Graduation & Beyond: Your Artist Roadmap',body:'You have completed 100 lessons. Now build your future: continued practice, community, coaching, and career strategy.'},
-        {type:'practice',title:'Practical Assignment',body:'Write your 1-year artist development plan with practice schedule, performance goals, and income targets.'}
-      ]},
+      steps:[{type:'teach',title:'Graduation & Beyond: Your Artist Roadmap',body:'You have completed 100 lessons. Now build your future: continued practice, community, coaching, and career strategy.'},{type:'practice',title:'Practical Assignment',body:'Write your 1-year artist development plan with practice schedule, performance goals, and income targets.'}]}
   ],
   assessmentQuestions: [
     { q:'What is your primary singing goal?', options:['Lead worship','Record music','Perform live','Improve technique','Start from scratch'] },
@@ -1887,6 +1588,94 @@ var DATA = {
     { q:'Where are you based?', options:['Nigeria','Other Africa','UK/Europe','USA/Canada','Other'] },
   ]
 };
+
+// ─── MASTERY SYSTEM ───
+var MASTERY = {
+  checks: {
+    2: {type:'pitch_match',note:'C4',tolerance:50,desc:'Match this note (C4) — steady and clear. Use the mic.'},
+    3: {type:'breath_count',seconds:20,desc:'Sustain an "sss" for 20 seconds — no wobble, controlled airflow'},
+    4: {type:'sustain',seconds:15,desc:'Hold a comfortable note for 15 seconds — stable pitch, no drift'},
+    5: {type:'interval_id',desc:'Identify this interval when played twice'},
+    9: {type:'pitch_match',note:'A3',tolerance:50,desc:'Match A3 precisely — check with the pitch detector'},
+    14: {type:'breath_count',seconds:15,desc:'Farinelli cycle: inhale 4, hold 4, hiss 8 — complete 3 rounds'},
+    20: {type:'sustain',seconds:20,desc:'Sustain a mixed vowel passage for 20 seconds — smooth transitions'},
+    27: {type:'recording',desc:'Record yourself — listen back and confirm clarity and pitch accuracy'},
+    35: {type:'pitch_match',note:'G4',tolerance:40,desc:'Match G4 — verify with the pitch detector'},
+    40: {type:'interval_id',desc:'Identify the interval in this exercise'},
+    50: {type:'sustain',seconds:25,desc:'Sustain a belt phrase for 25 seconds — no strain, consistent volume'},
+  },
+  getCheck(lessonId) { return this.checks[lessonId] || null; },
+  defaultCheck(stepBody) {
+    if (stepBody.includes('pitch') || stepBody.includes('note') || stepBody.includes('match'))
+      return {type:'pitch_match',note:'C4',tolerance:50,desc:'Match the target note — steady and on pitch'};
+    if (stepBody.includes('sustain') || stepBody.includes('hold') || stepBody.includes('seconds'))
+      return {type:'sustain',seconds:15,desc:'Hold the note — stable and consistent'};
+    if (stepBody.includes('breath') || stepBody.includes('hiss') || stepBody.includes('cycle'))
+      return {type:'breath_count',seconds:15,desc:'Complete the breath exercise — controlled airflow'};
+    if (stepBody.includes('interval') || stepBody.includes('play'))
+      return {type:'interval_id',desc:'Identify the interval'};
+    return null;
+  }
+};
+
+// ─── SPACED REPETITION (SRS) ───
+var SRS = {
+  intervals: [0.04, 0.25, 0.5, 1, 3, 7, 14, 30],
+  init() { if (!S.srsData) S.srsData = {}; },
+  scheduleReview(lessonId, score) {
+    const current = S.srsData[lessonId] || {level:0};
+    if (score >= 80) current.level = Math.min(current.level + 1, this.intervals.length - 1);
+    else if (score < 50) current.level = Math.max(0, current.level - 1);
+    const hours = this.intervals[current.level];
+    current.nextReview = Date.now() + (hours * 3600000);
+    current.lastScore = score;
+    S.srsData[lessonId] = current;
+    localStorage.setItem('swt_srs', JSON.stringify(S.srsData));
+  },
+  getDueReviews() {
+    const now = Date.now();
+    return S.lessonsCompleted.filter(id => { const d = S.srsData[id]; return d && d.nextReview && d.nextReview <= now; })
+      .sort((a, b) => (S.srsData[a].nextReview||0) - (S.srsData[b].nextReview||0));
+  },
+  hasDueReviews() { return this.getDueReviews().length > 0; }
+};
+
+// ─── VOCAL PROOF STREAK ───
+var VocalProof = {
+  todayKey() { return new Date().toDateString(); },
+  logPractice(seconds) {
+    const today = this.todayKey();
+    const data = JSON.parse(localStorage.getItem('swt_vocal_proof') || '{}');
+    data[today] = (data[today] || 0) + seconds;
+    localStorage.setItem('swt_vocal_proof', JSON.stringify(data));
+    if (data[today] >= 60) this.updateStreak();
+  },
+  isPracticeDay() {
+    const data = JSON.parse(localStorage.getItem('swt_vocal_proof') || '{}');
+    return (data[this.todayKey()] || 0) >= 60;
+  },
+  getTodaySeconds() {
+    const data = JSON.parse(localStorage.getItem('swt_vocal_proof') || '{}');
+    return data[this.todayKey()] || 0;
+  },
+  updateStreak() {
+    const today = this.todayKey();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    const data = JSON.parse(localStorage.getItem('swt_vocal_proof') || '{}');
+    if ((data[yesterday]||0) >= 60) { S.streak = parseInt(localStorage.getItem('swt_streak')||'0') + 1; }
+    else if ((data[today]||0) >= 60) { S.streak = Math.max(S.streak, 1); }
+    localStorage.setItem('swt_streak', S.streak);
+  }
+};
+
+function noteToHz(note) {
+  const notes = { 'C':0,'C#':1,'D':2,'D#':3,'E':4,'F':5,'F#':6,'G':7,'G#':8,'A':9,'A#':10,'B':11 };
+  const name = note.replace(/\d+/g,'');
+  const octave = parseInt(note.replace(/\D/g,''));
+  return 440 * Math.pow(2, (12 * (octave + 1) + notes[name] - 69) / 12);
+}
+
+
 
 // ─── MASTERY SYSTEM ───
 var MASTERY = {
@@ -2391,6 +2180,7 @@ var app = {
       case 'coach': c.innerHTML = this.lmsCoach(); break;
       case 'feedback': c.innerHTML = this.lmsFeedback(); break;
       case 'insights': c.innerHTML = this.lmsCoachDashboard(); break;
+      case 'insights': c.innerHTML = this.lmsCoachDashboard(); break;
       case 'community': c.innerHTML = this.lmsCommunity(); break;
       case 'funnel': c.innerHTML = this.lmsFunnel(); break;
       case 'analytics': c.innerHTML = this.lmsAnalytics(); break;
@@ -2430,7 +2220,6 @@ var app = {
       '</div>';
     }
     let _vocalProof = VocalProof.isPracticeDay() ? '<span style="color:var(--success);font-weight:600"> 🎤 practiced today</span>' : '';
-    return '<div class="dash-header"><h1>Welcome back, '+S.user.name+' 👋</h1><p>Level '+level+' · '+S.xp+' XP · '+S.streak+' day streak'+_vocalProof+' <span class="lead-score-badge '+sc+'">⚡ '+ls.score+'</span></p><div class="xp-bar" style="max-width:300px;margin-top:var(--space-2)"><div class="xp-bar-fill" style="width:'+progress+'%"></div></div>' +
     _srsBanner +
     '<div style="font-size:0.75rem;color:var(--gray-500);margin-top:4px">'+(xpToNext-S.xp)+' XP to Level '+(level+1)+'</div></div>'+
     dailyRec+
@@ -2657,6 +2446,7 @@ var app = {
       if (S.lessonsCompleted.length === 50) { xpEarned += 100; S.badges.push('💎 Halfway Hero'); }
       if (S.lessonsCompleted.length === 100) { xpEarned += 250; S.badges.push('👑 Voice Master'); }
 
+      VocalProof.logPractice(60);
       VocalProof.logPractice(60);
       S.xp += xpEarned;
       S.streak = Math.max(S.streak, 1);
@@ -3059,6 +2849,319 @@ var app = {
       html += '</div>';
     }
     html += '<div style="font-size:0.85rem;color:var(--gray-500)">Data from local student profiles. Connect Airtable/Sheet for full analytics.</div>';
+    return html;  },
+
+
+  // ─── MASTERY// ─── MASTERY CHECKS ───
+  startLessonMastery(lessonId) {
+    const lesson = DATA.lessons.find(l => l.id === lessonId);
+    if (!lesson) return;
+    const lastStep = lesson.steps[lesson.steps.length - 1];
+    const check = MASTERY.getCheck(lessonId) || MASTERY.defaultCheck(lastStep?.body || '');
+    if (!check) { this.completeLesson(lessonId, 100); return; }
+    const modalHtml = `<div style="text-align:center">
+      <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-2)">Mastery Check</h3>
+      <p style="color:var(--gray-400);margin-bottom:var(--space-4)">${check.desc}</p>
+      <div id="masteryCheckArea"></div>
+      <div id="masteryResult" style="margin-top:16px;font-weight:600;font-size:1.1rem"></div>
+      <button class="btn btn-secondary" style="margin-top:12px" onclick="app.completeLesson(${lessonId}, 0)">Skip (0 XP)</button>
+    </div>`;
+    modal(modalHtml);
+    this._renderMasteryCheck(lessonId, check);
+  },
+
+  _renderMasteryCheck(lessonId, check) {
+    const area = document.getElementById('masteryCheckArea');
+    if (!area) return;
+    if (check.type === 'pitch_match') {
+      const freq = noteToHz(check.note);
+      area.innerHTML = `<div style="margin-bottom:12px">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--indigo);margin-bottom:4px">${check.note}</div>
+        <div style="font-size:0.8rem;color:var(--gray-500);margin-bottom:16px">Target: ${freq.toFixed(1)} Hz ±${check.tolerance} cents</div>
+        <button class="btn btn-primary" id="masteryMicBtn" onclick="app._runPitchMastery('${check.note}',${check.tolerance},${lessonId})">Start Pitch Check</button>
+        <div id="masteryLivePitch" style="font-size:1.2rem;margin-top:12px;color:var(--gray-400)"></div>
+      </div>`;
+    } else if (check.type === 'sustain') {
+      area.innerHTML = `<div style="margin-bottom:12px">
+        <div style="margin-bottom:8px">Sustain a steady note for <strong>${check.seconds} seconds</strong></div>
+        <div style="font-size:0.8rem;color:var(--gray-500);margin-bottom:16px">Keep pitch stable — wobble or drift = fail</div>
+        <button class="btn btn-primary" id="masteryMicBtn" onclick="app._runSustainMastery(${check.seconds},${lessonId})">Start (${check.seconds}s)</button>
+        <div id="masteryTimer" style="font-size:2.5rem;font-weight:700;margin-top:12px;color:var(--indigo)">${check.seconds}</div>
+        <div id="masteryLivePitch" style="font-size:0.9rem;margin-top:4px;color:var(--gray-400)"></div>
+      </div>`;
+    } else if (check.type === 'breath_count') {
+      area.innerHTML = `<div style="margin-bottom:12px">
+        <div style="margin-bottom:8px">Controlled exhale on "sss" for <strong>${check.seconds} seconds</strong></div>
+        <div style="font-size:0.8rem;color:var(--gray-500);margin-bottom:16px">Steady airflow — no sudden bursts</div>
+        <button class="btn btn-primary" id="masteryMicBtn" onclick="app._runBreathMastery(${check.seconds},${lessonId})">Start Breath Check</button>
+        <div id="masteryTimer" style="font-size:2.5rem;font-weight:700;margin-top:12px;color:var(--indigo)">${check.seconds}</div>
+      </div>`;
+    } else if (check.type === 'interval_id') {
+      area.innerHTML = `<div style="margin-bottom:12px">
+        <div style="margin-bottom:8px">Listen to the interval, then identify it</div>
+        <button class="btn btn-primary" onclick="app._runIntervalMastery(${lessonId})">Play Interval</button>
+        <div id="masteryOpts" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;justify-content:center"></div>
+      </div>`;
+    } else {
+      area.innerHTML = `<div style="margin-bottom:12px">
+        <div style="margin-bottom:8px">Record yourself performing the exercise</div>
+        <div style="font-size:0.8rem;color:var(--gray-500);margin-bottom:16px">Listen back — clarity, pitch accuracy, no strain</div>
+        <button class="btn btn-primary" id="masteryMicBtn" onclick="app._runRecordingMastery(${lessonId})">Record (10s)</button>
+      </div>`;
+    }
+  },
+
+  _runPitchMastery(targetNote, tolerance, lessonId) {
+    const btn = document.getElementById('masteryMicBtn');
+    const live = document.getElementById('masteryLivePitch');
+    const result = document.getElementById('masteryResult');
+    if (!btn || !live) return;
+    btn.disabled = true; btn.textContent = 'Listening...';
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    const buf = new Float32Array(analyser.fftSize);
+    const targetHz = noteToHz(targetNote);
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
+      const source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+      let scores = [], lastNote = '';
+      const startTime = Date.now();
+      const detect = () => {
+        analyser.getFloatTimeDomainData(buf);
+        let bestOffset = -1, bestCorrelation = 0, rms = 0;
+        for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+        rms = Math.sqrt(rms / buf.length);
+        if (rms > 0.01) {
+          for (let offset = 20; offset < 1000; offset++) {
+            let correlation = 0;
+            for (let j = 0; j < 1000; j++) correlation += Math.abs(buf[j] - buf[j + offset]);
+            correlation = 1 - correlation / 1000;
+            if (correlation > bestCorrelation) { bestCorrelation = correlation; bestOffset = offset; }
+          }
+        }
+        const pitch = bestCorrelation > 0.3 ? audioCtx.sampleRate / bestOffset : -1;
+        if (pitch > 50 && pitch < 2000) {
+          const notes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+          const semitones = 12 * Math.log2(pitch / 440);
+          const midi = Math.round(semitones) + 69;
+          lastNote = notes[midi % 12] + (Math.floor(midi / 12) - 1);
+          const cents = Math.round((pitch - targetHz) / targetHz * 1731);
+          live.textContent = lastNote + ' ' + Math.round(pitch) + 'Hz ' + (cents >= 0 ? '+' : '') + cents + '¢';
+          scores.push(Math.abs(cents) <= tolerance ? 100 : Math.max(0, 100 - Math.abs(cents) + tolerance));
+        }
+        if (Date.now() - startTime < 3000 && scores.length < 5) { requestAnimationFrame(detect); }
+        else {
+          const avgScore = scores.length > 0 ? Math.round(scores.reduce((a,b)=>a+b)/scores.length) : 0;
+          if (avgScore >= 70) {
+            result.innerHTML = '<span style="color:var(--success)">Pass! ' + avgScore + '% — ' + lastNote + ' locked in</span>';
+            setTimeout(() => this.completeLesson(lessonId, avgScore), 1500);
+          } else {
+            result.innerHTML = '<span style="color:var(--error)">' + avgScore + '% — try again. Target: ' + targetNote + '</span>';
+            btn.disabled = false; btn.textContent = 'Try Again';
+          }
+          audioCtx.close();
+        }
+      };
+      detect();
+    }).catch(() => { live.textContent = 'Mic needed'; btn.disabled = false; btn.textContent = 'Retry'; });
+  },
+
+  _runSustainMastery(seconds, lessonId) {
+    const btn = document.getElementById('masteryMicBtn');
+    const timer = document.getElementById('masteryTimer');
+    const live = document.getElementById('masteryLivePitch');
+    const result = document.getElementById('masteryResult');
+    if (!btn || !timer) return;
+    btn.disabled = true; btn.textContent = 'Listening...';
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    const buf = new Float32Array(analyser.fftSize);
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
+      const source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+      let remaining = seconds, stability = 100, lastPitch = 0;
+      const startTime = Date.now();
+      const detect = () => {
+        analyser.getFloatTimeDomainData(buf);
+        let bestOffset = -1, bestCorrelation = 0, rms = 0;
+        for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+        rms = Math.sqrt(rms / buf.length);
+        if (rms > 0.01) {
+          for (let offset = 20; offset < 1000; offset++) {
+            let correlation = 0;
+            for (let j = 0; j < 1000; j++) correlation += Math.abs(buf[j] - buf[j + offset]);
+            correlation = 1 - correlation / 1000;
+            if (correlation > bestCorrelation) { bestCorrelation = correlation; bestOffset = offset; }
+          }
+        }
+        const pitch = bestCorrelation > 0.3 ? audioCtx.sampleRate / bestOffset : -1;
+        if (pitch > 50 && pitch < 2000) {
+          const notes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+          const semitones = 12 * Math.log2(pitch / 440);
+          const midi = Math.round(semitones) + 69;
+          const noteName = notes[midi % 12] + (Math.floor(midi / 12) - 1);
+          if (lastPitch > 0) stability -= Math.abs(pitch - lastPitch) / lastPitch * 100;
+          lastPitch = pitch;
+          live.textContent = noteName + ' ' + Math.round(pitch) + 'Hz stability: ' + Math.round(Math.max(0,stability)) + '%';
+        }
+        remaining = Math.max(0, seconds - Math.floor((Date.now() - startTime) / 1000));
+        timer.textContent = remaining;
+        if (remaining > 0) requestAnimationFrame(detect);
+        else {
+          const score = Math.round(Math.max(0, stability));
+          if (score >= 60) {
+            result.innerHTML = '<span style="color:var(--success)">Pass! ' + score + '% stability</span>';
+            setTimeout(() => this.completeLesson(lessonId, score), 1500);
+          } else {
+            result.innerHTML = '<span style="color:var(--error)">' + score + '% — too much wobble</span>';
+            btn.disabled = false; btn.textContent = 'Try Again';
+          }
+          audioCtx.close();
+        }
+      };
+      detect();
+    }).catch(() => { if (result) result.textContent = 'Mic needed'; btn.disabled = false; btn.textContent = 'Retry'; });
+  },
+
+  _runBreathMastery(seconds, lessonId) {
+    const btn = document.getElementById('masteryMicBtn');
+    const timer = document.getElementById('masteryTimer');
+    const result = document.getElementById('masteryResult');
+    if (!btn || !timer) return;
+    btn.disabled = true; btn.textContent = 'Listening...';
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    const buf = new Float32Array(analyser.fftSize);
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
+      const source = audioCtx.createMediaStreamSource(stream);
+      source.connect(analyser);
+      let remaining = seconds, steadyFrames = 0, totalFrames = 0;
+      const startTime = Date.now();
+      const detect = () => {
+        analyser.getFloatTimeDomainData(buf);
+        let rms = 0;
+        for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
+        rms = Math.sqrt(rms / buf.length);
+        totalFrames++;
+        if (rms > 0.005 && rms < 0.5) steadyFrames++;
+        remaining = Math.max(0, seconds - Math.floor((Date.now() - startTime) / 1000));
+        timer.textContent = remaining;
+        if (remaining > 0) requestAnimationFrame(detect);
+        else {
+          const score = totalFrames > 0 ? Math.round(steadyFrames / totalFrames * 100) : 0;
+          if (score >= 60) {
+            result.innerHTML = '<span style="color:var(--success)">Pass! ' + score + '% steady airflow</span>';
+            setTimeout(() => this.completeLesson(lessonId, score), 1500);
+          } else {
+            result.innerHTML = '<span style="color:var(--error)">' + score + '% — uneven airflow</span>';
+            btn.disabled = false; btn.textContent = 'Try Again';
+          }
+          audioCtx.close();
+        }
+      };
+      detect();
+    }).catch(() => { if (result) result.textContent = 'Mic needed'; btn.disabled = false; btn.textContent = 'Retry'; });
+  },
+
+  _runIntervalMastery(lessonId) {
+    const opts = document.getElementById('masteryOpts');
+    const result = document.getElementById('masteryResult');
+    if (!opts) return;
+    const intervals = ['Unison','Major 2nd','Major 3rd','Perfect 4th','Perfect 5th','Major 6th','Major 7th','Octave'];
+    const intervalHz = [1, 9/8, 5/4, 4/3, 3/2, 5/3, 15/8, 2];
+    const correctIdx = Math.floor(Math.random() * intervals.length);
+    this._masteryEarCorrect = correctIdx;
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const base = 220;
+    [0, 1].forEach((_, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.frequency.value = base * intervalHz[correctIdx];
+      gain.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.8);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.8 + 0.7);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i * 0.8);
+      osc.stop(ctx.currentTime + i * 0.8 + 0.7);
+    });
+    const shuffled = intervals.map((name, i) => ({name, idx: i})).sort(() => Math.random() - 0.5);
+    opts.innerHTML = shuffled.map(o => '<button class="btn btn-secondary" onclick="app._checkMasteryEar(' + o.idx + ',' + lessonId + ')" style="min-width:80px">' + o.name + '</button>').join('');
+  },
+
+  _checkMasteryEar(selectedIdx, lessonId) {
+    const result = document.getElementById('masteryResult');
+    if (!result) return;
+    const correct = selectedIdx === this._masteryEarCorrect;
+    if (correct) {
+      result.innerHTML = '<span style="color:var(--success)">Correct! +10 XP</span>';
+      S.xp += 10; localStorage.setItem('swt_xp', S.xp);
+      setTimeout(() => this.completeLesson(lessonId, 90), 1200);
+    } else {
+      const intervals = ['Unison','Major 2nd','Major 3rd','Perfect 4th','Perfect 5th','Major 6th','Major 7th','Octave'];
+      result.innerHTML = '<span style="color:var(--error)">It was ' + intervals[this._masteryEarCorrect] + '</span>';
+    }
+  },
+
+  _runRecordingMastery(lessonId) {
+    const btn = document.getElementById('masteryMicBtn');
+    const live = document.getElementById('masteryLivePitch');
+    const result = document.getElementById('masteryResult');
+    if (!btn || !live) return;
+    btn.disabled = true; btn.textContent = 'Recording...';
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
+      const mediaRecorder = new MediaRecorder(stream);
+      const chunks = [];
+      mediaRecorder.ondataavailable = e => chunks.push(e.data);
+      mediaRecorder.onstop = () => {
+        stream.getTracks().forEach(t => t.stop());
+        const blob = new Blob(chunks, {type:'audio/webm'});
+        const url = URL.createObjectURL(blob);
+        live.innerHTML = '<audio controls src="' + url + '" style="width:100%;margin-top:8px"></audio>';
+        result.innerHTML = '<div style="margin-top:12px"><button class="btn btn-primary" onclick="app.completeLesson(' + lessonId + ', 80)">Sounded Good</button> <button class="btn btn-secondary" onclick="app._runRecordingMastery(' + lessonId + ')" style="margin-left:8px">Re-record</button></div>';
+      };
+      mediaRecorder.start();
+      live.textContent = 'Recording... (10 seconds)';
+      setTimeout(() => { if (mediaRecorder.state === 'recording') mediaRecorder.stop(); }, 10000);
+    }).catch(() => { live.textContent = 'Mic needed'; btn.disabled = false; btn.textContent = 'Retry'; });
+  },
+
+  // ─── REVIEW SESSION (SRS) ───
+  startReviewSession() {
+    const due = SRS.getDueReviews();
+    if (due.length === 0) { toast('No reviews due!'); return; }
+    const lessonId = due[0];
+    const lesson = DATA.lessons.find(l => l.id === lessonId);
+    if (!lesson) return;
+    const lastStep = lesson.steps[lesson.steps.length - 1];
+    const check = MASTERY.getCheck(lessonId) || MASTERY.defaultCheck(lastStep?.body || '');
+    const modalHtml = '<div style="text-align:center"><div style="font-size:0.75rem;color:var(--gray-500);text-transform:uppercase;margin-bottom:8px">Review</div><h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--space-2)">' + lesson.title + '</h3><p style="color:var(--gray-400);margin-bottom:var(--space-4)">' + (check ? check.desc : 'Test your recall') + '</p><div id="masteryCheckArea"></div><div id="masteryResult" style="margin-top:16px;font-weight:600"></div></div>';
+    modal(modalHtml);
+    if (check) this._renderMasteryCheck(lessonId, check);
+    else this.startLessonMastery(lessonId);
+  },
+
+  // ─── COACH DASHBOARD ───
+  lmsCoachDashboard() {
+    const students = JSON.parse(localStorage.getItem('swt_coach_students') || '[]');
+    const today = new Date().toDateString();
+    const active = students.filter(s => s.lastPractice >= today);
+    const struggling = students.filter(s => s.streak === 0 && s.lessonsCompleted > 0);
+    let html = '<div class="dash-header"><h1>Coach Dashboard</h1><p>Student activity overview</p></div>';
+    html += '<div class="grid grid-3" style="margin-bottom:var(--space-5)">';
+    html += '<div class="stat-card"><div class="stat-card-value">' + active.length + '</div><div class="stat-card-label">Practiced Today</div></div>';
+    html += '<div class="stat-card"><div class="stat-card-value">' + struggling.length + '</div><div class="stat-card-label">Need Attention</div></div>';
+    html += '<div class="stat-card"><div class="stat-card-value">' + students.length + '</div><div class="stat-card-label">Total Students</div></div>';
+    html += '</div>';
+    if (struggling.length > 0) {
+      html += '<div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:16px;margin-bottom:var(--space-4)">';
+      html += '<div style="font-weight:600;margin-bottom:8px;color:var(--error)">Students who lost their streak</div>';
+      struggling.slice(0,5).forEach(s => {
+        html += '<div style="font-size:0.85rem;color:var(--gray-400);padding:4px 0">' + s.name + ' — ' + s.lessonsCompleted + ' lessons</div>';
+      });
+      html += '</div>';
+    }
     return html;
   },
 
