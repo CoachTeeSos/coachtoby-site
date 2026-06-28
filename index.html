@@ -953,7 +953,6 @@ textarea.form-input { min-height: 100px; resize: vertical; }
     <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;backdrop-filter:blur(10px);">
       <input type="email" id="gateEmail" placeholder="Enter your email address" style="width:100%;padding:14px 18px;border:2px solid rgba(212,175,55,0.3);border-radius:10px;font-size:1rem;background:rgba(255,255,255,0.07);color:#fff;outline:none;margin-bottom:12px;box-sizing:border-box;" onkeypress="if(event.key==='Enter')app.submitGateEmail()">
       <button onclick="app.submitGateEmail()" style="width:100%;padding:14px;background:linear-gradient(135deg,#D4AF37,#F5D76E);color:#000;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;">Start Learning Free →</button>
-      <button onclick="app.skipGate()" style="width:100%;padding:12px;margin-top:10px;background:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.15);border-radius:10px;font-size:0.85rem;cursor:pointer;">Skip for now →</button>
     </div>
     <p style="color:rgba(255,255,255,0.35);font-size:0.75rem;margin-top:16px;">Free forever plan · No credit card · Join 2,400+ singers</p>
     <div style="display:flex;justify-content:center;gap:16px;margin-top:24px;color:rgba(255,255,255,0.4);font-size:0.7rem;">
@@ -2669,11 +2668,6 @@ var app = {
     localStorage.setItem('swt_email_captured', 'true');
     CRM.capture({ event:'email_captured', email, trigger:'gate' });
     CRM.pushToSheet({ email, name: S.user.name, type:'lead', trigger:'gate', ts: Date.now() });
-    document.getElementById('emailGate').style.display = 'none';
-    this.showLMS();
-  },
-
-  skipGate() {
     document.getElementById('emailGate').style.display = 'none';
     this.showLMS();
   },
