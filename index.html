@@ -939,7 +939,7 @@ textarea.form-input { min-height: 100px; resize: vertical; }
 .survey-opt.sel{background:rgba(212,175,55,0.1);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .coach-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F59E0B);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--midnight);font-weight:700}
 
-[data-page="mentor"], [data-page="community"] { display: none !important; }
+[data-page="mentor"], [data-page="community"], [data-page="insights"], [data-page="email"] { display: none !important; }
 
 </style>
 </head>
@@ -1011,8 +1011,8 @@ textarea.form-input { min-height: 100px; resize: vertical; }
   </div>
   <div class="scroll-timeline">
     <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2015</div><div class="scroll-reveal-title">The Beginning</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Started vocal training in Lagos with zero resources but an unshakable belief that every voice matters. Borrowed a neighbor's keyboard to practice.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🎤</div></div></div>
-    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2017</div><div class="scroll-reveal-title">Biggest Failure</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Lost his voice completely during a 3-month period. Couldn't sing, couldn't teach. Hit rock bottom. This darkness became the seedbed for the NYVC method.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌑</div></div></div>
-    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2019</div><div class="scroll-reveal-title">The Breakthrough</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Developed the NYVC method combining vocal science with spiritual understanding. First student went from tone-deaf to worship leader in 6 months.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">💡</div></div></div>
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2017</div><div class="scroll-reveal-title">Biggest Failure</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Lost his voice completely during a 3-month period. Couldn't sing, couldn't teach. Hit rock bottom. This darkness became the seedbed for the vocal training method.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌑</div></div></div>
+    <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2019</div><div class="scroll-reveal-title">The Breakthrough</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Developed a vocal training method combining vocal science with spiritual understanding.erstanding. First student went from tone-deaf to worship leader in 6 months.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">💡</div></div></div>
     <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2021</div><div class="scroll-reveal-title">Going Global</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">Launched SessionswithToby online. Within 12 months: 500+ students across Nigeria, UK, USA, and Cameroon. The mission went borderless.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(79,70,229,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌍</div></div></div>
     <div class="scroll-reveal"><div class="scroll-reveal-content"><div class="scroll-reveal-year">2024</div><div class="scroll-reveal-title">The Mission</div><div class="scroll-reveal-desc" style="color:var(--gray-400)">2,400+ students later, the mission remains: help every singer unlock the voice they were born with. Now building the AI-first Artist Operating System.</div></div><div class="scroll-reveal-visual"><div style="width:80px;height:80px;border-radius:50%;background:rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem">👑</div></div></div>
   </div>
@@ -1106,7 +1106,7 @@ textarea.form-input { min-height: 100px; resize: vertical; }
   <div class="container">
     <div class="section-label">Certification</div>
     <h2 class="section-title">Earn Your Credentials</h2>
-    <p class="section-desc">Get certified in the NYVC method. From Bronze to Platinum — prove your mastery.</p>
+    <p class="section-desc">Get certified. From Bronze to Platinum — prove your mastery.ery.</p>
     <div id="certTrack"></div>
     <div class="grid grid-4" id="certLevels"></div>
   </div>
@@ -1376,10 +1376,10 @@ var DATA = {
     { name:'Group Coaching', price:'₦20K', period:'/month', features:['Weekly group calls','Community access','Accountability partner','Certificate'], cta:'Join Group', featured:false },
   ],
   lessons: [
-    { id:1, title:'Posture & Alignment', course:'Technique', duration:'10 min', content:'NYVC: free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.',
-      steps:[{type:'teach',title:'Posture & Alignment',body:'NYVC: free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.'},{type:'practice',title:'Practical Assignment',body:'Wall Drill: Back against wall, head/shoulders/hips touch. Step away maintaining posture. Sing a scale daily for 7 days.'}]},
-    { id:2, title:'Breath & Appoggio', course:'Technique', duration:'15 min', content:'Low breathing + solar plexus anchor. The engine behind every great voice. NYVC uses low breathing: belly expands, ribs open sideways.',
-      steps:[{type:'teach',title:'Breath & Appoggio',body:'Low breathing + solar plexus anchor. The engine behind every great voice. NYVC uses low breathing: belly expands, ribs open sideways.'},{type:'practice',title:'Practical Assignment',body:'Farinelli Cycle: Inhale 4, Hold 4, Exhale Ssss 8. Progress to 10-10-20.'}]},
+    { id:1, title:'Posture & Alignment', course:'Technique', duration:'10 min', content:'Free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.',
+      steps:[{type:'teach',title:'Posture & Alignment',body:'Free voice needs free body. Stacked alignment. Your instrument is your body — align it for free, effortless sound.'},{type:'practice',title:'Practical Assignment',body:'Wall Drill: Back against wall, head/shoulders/hips touch. Step away maintaining posture. Sing a scale daily for 7 days.'}]},
+    { id:2, title:'Breath & Appoggio', course:'Technique', duration:'15 min', content:'Low breathing + solar plexus anchor. The engine behind every great voice. This method uses low breathing: belly expands, ribs open sideways.',
+      steps:[{type:'teach',title:'Breath & Appoggio',body:'Low breathing + solar plexus anchor. The engine behind every great voice. This method uses low breathing: belly expands, ribs open sideways.'},{type:'practice',title:'Practical Assignment',body:'Farinelli Cycle: Inhale 4, Hold 4, Exhale Ssss 8. Progress to 10-10-20.'}]},
     { id:3, title:'Sustained Notes & Breath Control', course:'Technique', duration:'12 min', content:'Holding a single note steadily trains your appoggio. The goal is even tone from start to finish — no wavering, no breathiness.',
       steps:[{type:'teach',title:'Sustained Notes & Breath Control',body:'Holding a single note steadily trains your appoggio. The goal is even tone from start to finish — no wavering, no breathiness.'},{type:'practice',title:'Practical Assignment',body:'Sustain a comfortable note for 20 seconds. Record and listen for wobble or breathiness.'}]},
     { id:4, title:'Vocal Onset: Clean Note Starts', course:'Technique', duration:'10 min', content:'How you start a note determines everything. Glottal, aspirate, or balanced — learn the cleanest onset for singing.',
@@ -3867,8 +3867,8 @@ var app = {
           </div>
         </div>
         <div style="margin-bottom:var(--space-3);padding:var(--space-3);background:rgba(212,175,55,0.05);border-radius:var(--radius-md);border:1px solid rgba(212,175,55,0.15)">
-          <h4 style="font-weight:600;margin-bottom:var(--space-1);color:var(--gold)">The NYVC Method</h4>
-          <p style="color:var(--gray-500);line-height:1.7;font-size:0.9rem">New York Vocal Coaching — built on what singers <em>actually feel</em>. No generic pedagogy. Every exercise targets a real sensation: jaw drops, tongue glides, throat opens, air flows steady, mask resonance buzzes. Your voice is an instrument you <strong>feel</strong>, not just hear.</p>
+          <h4 style="font-weight:600;margin-bottom:var(--space-1);color:var(--gold)">The Method</h4>
+          <p style="color:var(--gray-500);line-height:1.7;font-size:0.9rem">Built on what singers <em>actually feel</em>. No generic pedagogy. Every exercise targets a real sensation: jaw drops, tongue glides, throat opens, air flows steady, mask resonance buzzes. Your voice is an instrument you <strong>feel</strong>, not just hear.</p>
         </div>
         <div class="grid grid-3" style="margin-bottom:var(--space-3)">
           <div style="text-align:center;padding:var(--space-2);background:var(--gray-50);border-radius:var(--radius-md)"><div style="font-size:1.5rem;font-family:var(--font-display);font-weight:700;color:var(--indigo)">9</div><div style="font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em">Courses</div></div>
