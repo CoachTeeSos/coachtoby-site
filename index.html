@@ -435,9 +435,10 @@ input, textarea, select { font-family: inherit; }
 
 .lms-sidebar-link {
   display: flex; align-items: center; gap: var(--space-1);
-  padding: 10px 14px; border-radius: var(--radius-md);
-  font-size: clamp(0.75rem, 1.5vw, 0.85rem); font-weight: 500; color: var(--gray-600);
+  padding: 14px 18px; border-radius: var(--radius-md);
+  font-size: 0.95rem; font-weight: 500; color: var(--gray-600);
   transition: all var(--duration); margin-bottom: 2px;
+  min-height: 48px;
   -webkit-tap-highlight-color: transparent;
 }
 [data-theme="dark"] .lms-sidebar-link { color: var(--gray-400); }
@@ -938,6 +939,17 @@ textarea.form-input { min-height: 100px; resize: vertical; }
 .survey-opt:hover{background:rgba(212,175,55,0.06);border-color:var(--gold)}
 .survey-opt.sel{background:rgba(212,175,55,0.1);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .coach-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F59E0B);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--midnight);font-weight:700}
+
+.lms-dropdown-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  font-size: 0.9rem; font-weight: 500; color: var(--gray-600);
+  transition: background var(--duration); cursor: pointer;
+}
+.lms-dropdown-link:hover { background: var(--gray-100); color: var(--text); }
+[data-theme="dark"] .lms-dropdown-link:hover { background: rgba(255,255,255,0.08); }
+.lms-dropdown-link:active { transform: scale(0.98); }
+#lmsMoreMenu.show { display: block !important; }
 </style>
 </head>
 <body>
@@ -1172,18 +1184,7 @@ textarea.form-input { min-height: 100px; resize: vertical; }
 </div><!-- /publicSite -->
 
 <!-- LMS APP OVERLAY -->
-<div class="lms" id="lmsApp" style="display:none">
-  <nav class="lms-nav">
-    <div class="lms-nav-inner">
-      <a href="#" class="nav-logo" onclick="app.lmsLogout();return false" style="font-size:clamp(0.85rem,2vw,1.05rem)">Sessions<span>with</span>Toby</a>
-      <div class="lms-nav-user">
-        <div class="lms-nav-avatar" id="lmsAvatar"></div>
-        <span id="lmsUserName"></span>
-        <button class="btn btn-sm btn-secondary" onclick="app.lmsLogout()">Logout</button>
-      </div>
-    </div>
-  </nav>
-  <aside class="lms-sidebar" id="lmsSidebar">
+<di<aside class="lms-sidebar" id="lmsSidebar">
     <a href="#" class="lms-sidebar-link active" data-page="dashboard" onclick="app.lmsNav('dashboard');return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       <span>Dashboard</span>
@@ -1196,36 +1197,39 @@ textarea.form-input { min-height: 100px; resize: vertical; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
       <span>Practice</span>
     </a>
-    <a href="#" class="lms-sidebar-link" data-page="assessments" onclick="app.lmsNav('assessments');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      <span>Assessments</span>
-    </a>
-    <a href="#" class="lms-sidebar-link" data-page="mentor" onclick="app.lmsNav('mentor');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span>AI Mentor</span>
-    </a>
+    
+    
     <a href="#" class="lms-sidebar-link" data-page="coach" onclick="app.lmsNav('coach');return false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span>Coach Toby</span>
     </a>
-    <a href="#" class="lms-sidebar-link" data-page="feedback" onclick="app.lmsNav('feedback');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      <span>Feedback</span>
-    </a>\n    <a href="#" class="lms-sidebar-link" data-page="insights" onclick="app.lmsNav('insights');return false">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>\n      <span>Insights</span>\n    </a>
-    <a href="#" class="lms-sidebar-link" data-page="insights" onclick="app.lmsNav('insights');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-      <span>Insights</span>
-    </a>
-    <a href="#" class="lms-sidebar-link" data-page="community" onclick="app.lmsNav('community');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      <span>Community</span>
-    </a>
-    <a href="#" class="lms-sidebar-link" data-page="funnel" onclick="app.lmsNav('funnel');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      <span>Funnel</span>
-    </a>
-    <a href="#" class="lms-sidebar-link" data-page="analytics" onclick="app.lmsNav('analytics');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+    
+    
+    
+    
+    
+    
+  
+    <div class="lms-dropdown" id="lmsMoreDropdown" style="position:relative">
+      <a href="#" class="lms-sidebar-link" onclick="event.stopPropagation();document.getElementById('lmsMoreMenu').classList.toggle('show');return false" style="justify-content:space-between">
+        <span style="display:flex;align-items:center;gap:var(--space-1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+          More
+        </span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" id="lmsMoreChevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div id="lmsMoreMenu" style="position:absolute;left:100%;top:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:8px;min-width:180px;box-shadow:var(--shadow-lg);z-index:999;display:none">
+        <a href="#" class="lms-dropdown-link" onclick="app.lmsNav('assessments');document.getElementById('lmsMoreMenu').classList.remove('show');return false">📋 Assessments</a>
+        <a href="#" class="lms-dropdown-link" onclick="app.lmsNav('feedback');document.getElementById('lmsMoreMenu').classList.remove('show');return false">💬 Feedback</a>
+        <a href="#" class="lms-dropdown-link" onclick="app.lmsNav('insights');document.getElementById('lmsMoreMenu').classList.remove('show');return false">📊 Insights</a>
+        <div style="height:1px;background:var(--border);margin:4px 0"></div>
+        <a href="#" class="lms-dropdown-link" onclick="app.lmsNav('funnel');document.getElementById('lmsMoreMenu').classList.remove('show');return false" style="color:var(--gray-500)">Funnel</a>
+        <a href="#" class="lms-dropdown-link" onclick="app.lmsNav('analytics');document.getElementById('lmsMoreMenu').classList.remove('show');return false" style="color:var(--gray-500)">Analytics</a>
+        <a href="#" class="lms-dropdown-link" onclick="app.lmsNav('email');document.getElementById('lmsMoreMenu').classList.remove('show');return false" style="color:var(--gray-500)">Email</a>
+      </div>
+    </div>
+
+</aside>ll="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
       <span>Analytics</span>
     </a>
     <a href="#" class="lms-sidebar-link" data-page="email" onclick="app.lmsNav('email');return false">
