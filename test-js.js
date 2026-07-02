@@ -977,17 +977,65 @@ const app = {
   },
 
   autocorrelate(buf, sr) {
-    let bestOffset = -1, bestCorrelation = 0, rms = 0;
-    for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
-    rms = Math.sqrt(rms / buf.length);
-    if (rms < 0.01) return -1;
-    for (let offset = 20; i < 1000; i++) {
-      let correlation = 0;
-      for (let j = 0; j < 1000; j++) correlation += Math.abs(buf[j] - buf[j + offset]);
-      correlation = 1 - correlation / 1000;
-      if (correlation > bestCorrelation) { bestCorrelation = correlation; bestOffset = offset; }
+    const n = 1000;
+    const minOffset = Math.max(20, Math.floor(sr / 2000));  // ~22 at 44.1kHz
+    const maxOffset = Math.min(n - 1, Math.floor(sr / 50));  // ~882 at 44.1kHz
+    
+    // Normalized autocorrelation
+    let bestOffset = -1, bestCorr = 0;
+    
+    // Compute energy of reference window
+    let refEnergy = 0;
+    for (let j = 0; j < n; j++) refEnergy += buf[j] * buf[j];
+    if (refEnergy < 0.0001) return -1;
+    
+    // First pass: compute normalized correlation for all offsets
+    const corrs = new Array(maxOffset + 1).fill(0);
+    for (let offset = minOffset; offset <= maxOffset; offset++) {
+      let corr = 0, testEnergy = 0;
+      for (let j = 0; j < n; j++) {
+        corr += buf[j] * buf[j + offset];
+        testEnergy += buf[j + offset] * buf[j + offset];
+      }
+      const norm = Math.sqrt(refEnergy * testEnergy);
+      if (norm > 0) corrs[offset] = corr / norm;
     }
-    return bestCorrelation > 0.3 ? sr / bestOffset : -1;
+    
+    // Find local maxima (peaks) above threshold
+    const peaks = [];
+    for (let offset = minOffset + 1; offset < maxOffset; offset++) {
+      const c = corrs[offset];
+      if (c > 0.2 && c > corrs[offset - 1] && c >= corrs[offset + 1]) {
+        peaks.push({ offset, corr: c });
+      }
+    }
+    
+    if (peaks.length === 0) return -1;
+    
+    // Sort by correlation strength
+    peaks.sort((a, b) => b.corr - a.corr);
+    
+    // Prefer the shortest period (highest frequency) among strong peaks
+    // This avoids subharmonics - the fundamental has the shortest period
+    const topCorr = peaks[0].corr;
+    const candidates = peaks.filter(p => p.corr > topCorr * 0.8);
+    bestOffset = Math.min(...candidates.map(p => p.offset));
+    bestCorr = candidates.find(p => p.offset === bestOffset).corr;
+    
+    // Parabolic interpolation for sub-sample accuracy
+    if (bestOffset > minOffset && bestOffset < maxOffset && bestCorr > 0.2) {
+      const c1 = bestCorr;
+      const cPrev = corrs[bestOffset - 1];
+      const cNext = corrs[bestOffset + 1];
+      
+      const denom = 2 * (2 * c1 - cPrev - cNext);
+      if (denom !== 0) {
+        const delta = (cNext - cPrev) / denom;
+        if (Math.abs(delta) < 1) bestOffset += delta;
+      }
+    }
+    
+    return bestOffset > 0 && bestCorr > 0.2 ? sr / bestOffset : -1;
   },
 
   hzToNote(hz) {
